@@ -20,10 +20,18 @@ public static class DialogPhaser
         "linkto",
         "mood",
     };
-    public static void PhaseTree(string text)
+    public static List<string> prioritizedSemantics = new List<string>()
     {
+        "enter",
+        "linkfrom"
+    };
 
-    }
+    public static List<string> declareSemantics = new List<string>()
+    {
+        "name",
+        "sbranch",
+        "cbranch"
+    };
     public static void PhaseNode(Node<Dialog> node, string text)
     {
         if (text == "\n")
@@ -33,12 +41,12 @@ public static class DialogPhaser
         }
 
         DialogTree tree = (node.Tree as DialogTree);
-        tree.AddFromLast(node);
+
         string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value;
         // string streamSetting = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value;
         string dialogInfo = text.Split(']').LastOrDefault();
-        string speaker = dialogInfo.Split('：').FirstOrDefault();
-        string contents = dialogInfo.Split('：').LastOrDefault();
+        string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
+        string contents = dialogInfo.Split('：').LastOrDefault().Trim();
 
         node.nodeEntity.speaker = speaker;
         node.nodeEntity.contents = contents;
@@ -46,15 +54,16 @@ public static class DialogPhaser
         if (nodeInfo != "")
         {
             string[] parameters = nodeInfo.Split(',');
+
             for (int i = 0; i < parameters.Length; i++)
             {
                 string semantic = parameters[i].Split('-').FirstOrDefault().Trim();
                 string value = parameters[i].Split('-').LastOrDefault().Trim();
+                if (!prioritizedSemantics.Contains(semantic))
+                    tree.AddFromLast(node);
 
                 if (!semantics.Contains(semantic))
-                {
                     Debug.LogWarning(string.Format("Invalid semantic {0} is used.", semantic));
-                }
 
                 if (semantic == "pos")
                 {
@@ -76,23 +85,27 @@ public static class DialogPhaser
 
                 if (semantic == "select")
                 {
-                    tree.LinkFromDeclared(node, value);
+                    tree.CachedLinkFromDeclared(node, value);
                 }
                 else if (semantic == "end")
                 {
-                    if (value != "$quit" || semantic == value)
-                        tree.LinkToDeclared(node, value);
+                    tree.CachedLinkToDeclared(node, value);
                 }
 
                 if (semantic == "linkfrom")
                 {
-                    tree.LinkFromDeclared(node, value);
+                    tree.CachedLinkFromDeclared(node, value);
                 }
                 else if (semantic == "linkto")
                 {
-                    tree.LinkToDeclared(node, value);
+                    tree.CachedLinkToDeclared(node, value);
                 }
             }
         }
+        else
+        {
+            tree.AddFromLast(node);
+        }
+        tree.currentNode = node;
     }
 }

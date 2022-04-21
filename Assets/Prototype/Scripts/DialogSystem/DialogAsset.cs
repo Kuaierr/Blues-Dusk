@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogAsset", menuName = "GameMain/DialogAsset", order = 0)]
 public class DialogAsset : ScriptableObject
 {
-    [TextArea]public string contents;
+    [TextArea(100,5000)]public string contents;
 }

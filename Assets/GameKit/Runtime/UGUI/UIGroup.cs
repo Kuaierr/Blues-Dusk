@@ -15,14 +15,13 @@ namespace GameKit
         protected override void Awake()
         {
             UIManager.instance.RegisterUI(this as UIGroup);
-            
             FindChildrenByType<Button>();
             FindChildrenByType<Image>();
             FindChildrenByType<Text>();
             FindChildrenByType<Toggle>();
             FindChildrenByType<Slider>();
             FindChildrenByType<UIForm>();
-            FindChildrenByType<LayoutGroup>(); 
+            FindChildrenByType<LayoutGroup>();
         }
         protected override void Start()
         {
@@ -53,6 +52,14 @@ namespace GameKit
             T[] components = this.GetComponentsInChildren<T>(true);
             for (int i = 0; i < components.Length; ++i)
             {
+                if (components[i].transform.parent != this)
+                    continue;
+
+                if (components[i].GetType() == typeof(UIForm))
+                {
+                    (components[i] as UIForm).Group = this;
+                }
+
                 string objName = components[i].gameObject.name;
                 if (uiComponet.ContainsKey(objName))
                     uiComponet[objName].Add(components[i]);
