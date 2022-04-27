@@ -9,7 +9,21 @@ namespace GameKit
 {
     public class UIForm : UIBehaviour
     {
+        protected UIGroup group;
+        public UIGroup Group
+        {
+            get
+            {
+                return group;
+            }
+            set
+            {
+                group = value;
+            }
+        }
 
+        public virtual void OnTick() { }
+        public virtual void OnStart() { }
     }
 }
 

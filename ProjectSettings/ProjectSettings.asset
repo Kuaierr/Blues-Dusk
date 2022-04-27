@@ -599,8 +599,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: USE_ARTICY
-    13: USE_ARTICY
+    1: USE_ARTICY;TMP_PRESENT;USE_CINEMACHINE;USE_TIMELINE;USE_TWINE
+    13: USE_ARTICY;TMP_PRESENT;USE_CINEMACHINE;USE_TIMELINE;USE_TWINE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
