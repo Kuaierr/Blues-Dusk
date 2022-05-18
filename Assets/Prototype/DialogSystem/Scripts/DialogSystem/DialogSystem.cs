@@ -12,50 +12,63 @@ public class DialogSystem : MonoBehaviour
     public UI_DialogSystem uI_DialogSystem;
     public EntitiesPool entitiesPool;
     public bool isActive = false;
+    private bool isPaused = false;
     private void Start()
     {
-        // Tree tree = new Tree();
-        // tree.ShowCurrentNode();
-        // tree.AddToCurrent(new Node<HubNode>());
-        // tree.Test();
-        // DialogPhaser.Phase(testString);
-        // dialogTree = new DialogTree();
-        // BuildTree();
-        // VisitTree();
         isActive = true;
         dialogTree = DialogManager.instance.CreateTree(dialogAsset.contents);
-
-        // Node<Dialog> node = dialogTree.startNode as Node<Dialog>;
-        // uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
-        // uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        // uI_DialogSystem.avatar.sprite = entitiesPool.FindCharacter(node.nodeEntity.speaker).moods.FirstOrDefault().avatar;
+        VisitTree();
+        dialogTree.Reset();
     }
 
     private void Update()
     {
         if (isActive == false)
             return;
-        // VisitTree();
+
+        if (isPaused)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isPaused = false;
+                int choiceIndex = uI_DialogSystem.GetSelection();
+                Node<Dialog> node = dialogTree.PhaseNext(choiceIndex);
+                uI_DialogSystem.HideResponse();
+                UpdateUI(node);
+                return;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(dialogTree.currentNode.IsBranch)
+            if (dialogTree.currentNode.IsBranch)
             {
                 List<Option> options = dialogTree.TryGetOption();
-                if(options!=null)
+                if (options != null)
                 {
-                    // uI_DialogSystem.UpdateOptions(options);
+                    uI_DialogSystem.UpdateOptions(options);
+                    uI_DialogSystem.ShowResponse();
+                    isPaused = true;
                 }
             }
-
-            Node<Dialog> node = dialogTree.PhaseNext();
-            if (node == null)
-                return;
-            uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
-            uI_DialogSystem.contents.text = node.nodeEntity.contents;
-            uI_DialogSystem.avatar.sprite = entitiesPool.FindCharacter(node.nodeEntity.speaker).moods.FirstOrDefault().avatar;
+            else
+            {
+                Node<Dialog> node = dialogTree.PhaseNext();
+                UpdateUI(node);
+            }
         }
     }
+
+
+    private void UpdateUI(Node<Dialog> node)
+    {
+        if (node == null)
+            return;
+        uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
+        uI_DialogSystem.contents.text = node.nodeEntity.contents;
+        uI_DialogSystem.avatar.sprite = entitiesPool.FindCharacter(node.nodeEntity.speaker).moods.FirstOrDefault().avatar;
+    }
+
     private void BuildTree()
     {
         lines = new List<string>(dialogAsset.contents.Split('\n'));
@@ -86,7 +99,14 @@ public class DialogSystem : MonoBehaviour
 
             if (dialogTree.currentNode.IsLeaf)
                 return;
-            Debug.Log(dialogTree.currentNode);
+            Debug.Log(dialogTree.currentNode + " and son counts: " + dialogTree.currentNode.Sons.Count);
+            if(dialogTree.currentNode.Sons.Count>1)
+            {
+                foreach (var son in dialogTree.currentNode.Sons)
+                {
+                    Debug.Log("----The son: " + son);   
+                }
+            }
             dialogTree.currentNode = dialogTree.currentNode.Sons.FirstOrDefault();
         }
     }

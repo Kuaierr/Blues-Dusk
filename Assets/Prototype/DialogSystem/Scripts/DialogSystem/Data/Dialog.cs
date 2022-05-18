@@ -9,7 +9,7 @@ public enum SpritePos
     Left,
     Right
 }
-public sealed class Dialog : NodeEntity
+public sealed class Dialog : NodeType
 {
     public Sprite sprite;
     public SpritePos pos;

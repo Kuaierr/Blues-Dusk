@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using GameKit.DataStructure;
 using DialogNode = GameKit.DataStructure.Node<Dialog>;
-public delegate void PosteriorLink<T>(Node<T> nodeA, string nodeB) where T : NodeEntity;
-public class LinkCommand<T> : Command where T : NodeEntity
+public delegate void PosteriorLink<T>(Node<T> nodeA, string nodeB) where T : NodeType;
+public class LinkCommand<T> : Command where T : NodeType
 {
     public Node<T> nodeA;
     public string targetNode;
@@ -53,43 +53,18 @@ public class DialogTree : ITree
         linkBuffer = new Queue<Command>();
     }
 
-    public void AddFromLast<T>(Node<T> node) where T : NodeEntity
+    public void AddFromLast<T>(Node<T> node) where T : NodeType
     {
         AddFrom(node, currentNode as Node<T>);
     }
 
-    public void AddFrom<T>(Node<T> target, Node<T> parent) where T : NodeEntity
-    {
-        if (parent.Sons.Count > 0)
-        {
-            foreach (Node<T> sibling in parent.Sons)
-            {
-                sibling.Siblings.Add(target);
-            }
-        }
-        parent.Sons.Add(target);
-    }
-
-    public void AddTo<T>(Node<T> target, Node<T> son) where T : NodeEntity
-    {
-        if (target.Sons.Count > 0)
-        {
-            foreach (Node<T> sibling in target.Sons)
-            {
-                sibling.Siblings.Add(son);
-            }
-        }
-        // Debug.Log(son.ToString() + " Add to " + target.ToString());
-        target.Sons.Add(son);
-    }
-
-    public void RecordBranch<T>(Node<T> node) where T : NodeEntity
+    public void RecordBranch<T>(Node<T> node) where T : NodeType
     {
         if (!branchNodes.Contains(node))
             branchNodes.Add(node);
     }
 
-    public void RecordDeclaredNode<T>(Node<T> node) where T : NodeEntity
+    public void RecordDeclaredNode<T>(Node<T> node) where T : NodeType
     {
         if (!declaredNodes.Contains(node))
             declaredNodes.Add(node);
@@ -105,19 +80,19 @@ public class DialogTree : ITree
         return false;
     }
 
-    public void CachedLinkToDeclared<T>(Node<T> srcnode, string name) where T : NodeEntity
+    public void CachedLinkToDeclared<T>(Node<T> srcnode, string name) where T : NodeType
     {
         LinkCommand<T> command = new LinkCommand<T>(srcnode, name, LinkToDeclared);
         linkBuffer.Enqueue(command);
     }
 
-    public void CachedLinkFromDeclared<T>(Node<T> srcnode, string name) where T : NodeEntity
+    public void CachedLinkFromDeclared<T>(Node<T> srcnode, string name) where T : NodeType
     {
         LinkCommand<T> command = new LinkCommand<T>(srcnode, name, LinkFromDeclared);
         linkBuffer.Enqueue(command);
     }
 
-    public void LinkToDeclared<T>(Node<T> srcnode, string name) where T : NodeEntity
+    public void LinkToDeclared<T>(Node<T> srcnode, string name) where T : NodeType
     {
         foreach (var node in declaredNodes)
         {
@@ -129,7 +104,7 @@ public class DialogTree : ITree
         }
     }
 
-    public void LinkFromDeclared<T>(Node<T> srcnode, string name) where T : NodeEntity
+    public void LinkFromDeclared<T>(Node<T> srcnode, string name) where T : NodeType
     {
         foreach (var node in declaredNodes)
         {
@@ -141,7 +116,32 @@ public class DialogTree : ITree
         }
     }
 
-    public void ExcuteAllBufferCommand<T>() where T : NodeEntity
+    
+    public void AddFrom<T>(Node<T> target, Node<T> parent) where T : NodeType
+    {
+        if (parent.Sons.Count > 0)
+        {
+            foreach (Node<T> sibling in parent.Sons)
+            {
+                sibling.Siblings.Add(target);
+            }
+        }
+        parent.Sons.Add(target);
+    }
+
+    public void AddTo<T>(Node<T> target, Node<T> son) where T : NodeType
+    {
+        if (target.Sons.Count > 0)
+        {
+            foreach (Node<T> sibling in target.Sons)
+            {
+                sibling.Siblings.Add(son);
+            }
+        }
+        target.Sons.Add(son);
+    }
+
+    public void ExcuteAllBufferCommand<T>() where T : NodeType
     {
         foreach (var command in linkBuffer)
         {
@@ -170,21 +170,13 @@ public class DialogTree : ITree
         return null;
     }
 
-    public Node<Dialog> PhaseNext(int index = -1)
+    public Node<Dialog> PhaseNext(int index = 0)
     {
-        Debug.Log(currentNode);
-        if(currentNode.Sons.Count == 0)
+        Debug.Log(currentNode + ", and Son Counts: " + currentNode.Sons.Count);
+        if (currentNode.Sons.Count == 0 || index < 0 || index > currentNode.Sons.Count)
             return null;
-        
-        if (index >= 0 && index < currentNode.Sons.Count)
-        {
-            currentNode = currentNode.Sons[index] as Node<Dialog>;
-            return currentNode as Node<Dialog>;
-        }
-        else
-        {
-            currentNode = currentNode.Next as Node<Dialog>;
-            return currentNode as Node<Dialog>;
-        }
+
+        currentNode = currentNode.Sons[index] as Node<Dialog>;
+        return currentNode as Node<Dialog>;        
     }
 }

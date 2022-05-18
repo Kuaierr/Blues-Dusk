@@ -31,4 +31,9 @@ public class UI_DialogSystem : UIGroup
         uI_DialogResponse.isActive = true;
         uI_DialogResponse.gameObject.SetActive(false);
     }
+
+    public int GetSelection()
+    {
+        return uI_DialogResponse.CurIndex;
+    }
 }

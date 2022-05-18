@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace GameKit.DataStructure
 {
-    public class Node<T> : INode where T : NodeEntity
+    public class Node<T> : INode where T : NodeType
     {
         private string id;
         private INode parent;
         private List<INode> sons;
+        private List<INode> siblings;
         private ITree tree;
 
         public T nodeEntity;
@@ -70,11 +71,11 @@ namespace GameKit.DataStructure
         {
             get
             {
-                return parent.Sons;
+                return siblings;
             }
             set
             {
-                parent.Sons = value;
+                siblings = value;
             }
         }
 
@@ -107,18 +108,17 @@ namespace GameKit.DataStructure
         {
             this.Id = id;
             this.sons = new List<INode>();
+            this.siblings = new List<INode>();
             this.tree = tree;
- 
             parent = this;
         }
         public Node(ITree tree = null, bool isRoot = false)
         {
             this.Id = Utilities.GetRandomID();
             this.sons = new List<INode>();
+            this.siblings = new List<INode>();
             this.tree = tree;
-
             parent = this;
-
         }
         public void OnStart()
         {

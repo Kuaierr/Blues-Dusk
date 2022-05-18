@@ -9,6 +9,7 @@ namespace GameKit
 {
     public class UIForm : UIBehaviour
     {
+        public RectTransform rectTransform;
         protected UIGroup group;
         public UIGroup Group
         {
@@ -21,7 +22,11 @@ namespace GameKit
                 group = value;
             }
         }
-
+        protected override void Start()
+        {
+            rectTransform = GetComponent<RectTransform>();
+            OnStart();
+        }
         public virtual void OnTick() { }
         public virtual void OnStart() { }
     }

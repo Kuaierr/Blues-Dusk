@@ -83,14 +83,14 @@ public static class DialogPhaser
                     tree.RecordDeclaredNode(node);
                 }
 
-                if (semantic == "select")
-                {
-                    tree.CachedLinkFromDeclared(node, value);
-                }
-                else if (semantic == "end")
-                {
-                    tree.CachedLinkToDeclared(node, value);
-                }
+                // if (semantic == "select")
+                // {
+                //     tree.CachedLinkFromDeclared(node, value);
+                // }
+                // else if (semantic == "end")
+                // {
+                //     tree.CachedLinkToDeclared(node, value);
+                // }
 
                 if (semantic == "linkfrom")
                 {

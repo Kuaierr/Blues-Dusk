@@ -1,6 +1,6 @@
 namespace GameKit.DataStructure
 {
-    public abstract class NodeEntity
+    public abstract class NodeType
     {
         public abstract void OnEnter();
         public abstract void OnUpdate();
