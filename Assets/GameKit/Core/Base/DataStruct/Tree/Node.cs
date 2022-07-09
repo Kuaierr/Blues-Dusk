@@ -103,7 +103,6 @@ namespace GameKit.DataStructure
             }
         }
 
-
         public Node(string id, ITree tree = null, bool isRoot = false)
         {
             this.Id = id;
@@ -112,6 +111,7 @@ namespace GameKit.DataStructure
             this.tree = tree;
             parent = this;
         }
+
         public Node(ITree tree = null, bool isRoot = false)
         {
             this.Id = Utilities.GetRandomID();
@@ -120,6 +120,7 @@ namespace GameKit.DataStructure
             this.tree = tree;
             parent = this;
         }
+        
         public void OnStart()
         {
             nodeEntity.OnEnter();
@@ -131,10 +132,6 @@ namespace GameKit.DataStructure
         public void OnFinish()
         {
             nodeEntity.OnFinish();
-        }
-        public void OnExit()
-        {
-            nodeEntity.OnExit();
         }
 
         public override string ToString()

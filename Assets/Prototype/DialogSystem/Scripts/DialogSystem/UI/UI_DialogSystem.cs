@@ -2,12 +2,15 @@ using TMPro;
 using UnityEngine.UI;
 using GameKit;
 using System.Collections.Generic;
+using Febucci.UI;
 
 public class UI_DialogSystem : UIGroup
 {
     public Image avatar;
     public TextMeshProUGUI speakerName;
     public TextMeshProUGUI contents;
+    public TextAnimatorPlayer textAnimatorPlayer;
+    
     public UI_DialogResponse uI_DialogResponse;
     private void Update()
     {

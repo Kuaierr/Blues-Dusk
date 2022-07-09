@@ -22,6 +22,11 @@ public class LinkCommand<T> : Command where T : NodeType
     {
         command.Invoke(nodeA, targetNode);
     }
+
+    public override string ToString()
+    {
+        return "链接命令: "+ nodeA.ToString() + " to " + targetNode;
+    }
 }
 
 public class DialogTree : ITree
@@ -55,6 +60,7 @@ public class DialogTree : ITree
 
     public void AddFromLast<T>(Node<T> node) where T : NodeType
     {
+        // Debug.Log("自动上链节点: " + node);
         AddFrom(node, currentNode as Node<T>);
     }
 
@@ -98,8 +104,9 @@ public class DialogTree : ITree
         {
             if (node.Id == name)
             {
+                
                 AddTo(srcnode, (node as Node<T>));
-                return;
+                break;
             }
         }
     }
@@ -111,7 +118,7 @@ public class DialogTree : ITree
             if (node.Id == name)
             {
                 AddFrom(srcnode, (node as Node<T>));
-                return;
+                break;
             }
         }
     }
@@ -119,25 +126,26 @@ public class DialogTree : ITree
     
     public void AddFrom<T>(Node<T> target, Node<T> parent) where T : NodeType
     {
-        if (parent.Sons.Count > 0)
-        {
-            foreach (Node<T> sibling in parent.Sons)
-            {
-                sibling.Siblings.Add(target);
-            }
-        }
+        // if (parent.Sons.Count > 0)
+        // {
+        //     foreach (Node<T> sibling in parent.Sons)
+        //     {
+        //         sibling.Siblings.Add(target);
+        //     }
+        // }
         parent.Sons.Add(target);
     }
 
     public void AddTo<T>(Node<T> target, Node<T> son) where T : NodeType
     {
-        if (target.Sons.Count > 0)
-        {
-            foreach (Node<T> sibling in target.Sons)
-            {
-                sibling.Siblings.Add(son);
-            }
-        }
+        // if (target.Sons.Count > 0)
+        // {
+        //     foreach (Node<T> sibling in target.Sons)
+        //     {
+        //         sibling.Siblings.Add(son);
+        //     }
+        // }
+        // Debug.Log(son);
         target.Sons.Add(son);
     }
 
@@ -146,6 +154,7 @@ public class DialogTree : ITree
         foreach (var command in linkBuffer)
         {
             (command as LinkCommand<T>).Excute();
+            // Debug.Log(command.ToString());
         }
         linkBuffer.Clear();
     }
@@ -172,7 +181,14 @@ public class DialogTree : ITree
 
     public Node<Dialog> PhaseNext(int index = 0)
     {
-        Debug.Log(currentNode + ", and Son Counts: " + currentNode.Sons.Count);
+        Debug.Log(currentNode + " and Son Counts: " + currentNode.Sons.Count);
+        if(currentNode.Sons.Count > 1)
+        {
+            foreach (var son in currentNode.Sons)
+            {
+                Debug.Log("------ " + son);
+            }
+        }
         if (currentNode.Sons.Count == 0 || index < 0 || index > currentNode.Sons.Count)
             return null;
 

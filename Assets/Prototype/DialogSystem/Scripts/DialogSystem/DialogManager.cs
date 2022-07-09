@@ -7,7 +7,6 @@ using GameKit.DataStructure;
 public class DialogManager : SingletonBase<DialogManager>
 {
     private Queue<DialogTree> dialogTrees = new Queue<DialogTree>();
-
     public void EnqueueTree(DialogTree tree)
     {
         if (!dialogTrees.Contains(tree))
@@ -31,19 +30,18 @@ public class DialogManager : SingletonBase<DialogManager>
         return null;
     }
 
-    public DialogTree CreateTree(string text)
+    public DialogTree CreateTree(string text, out List<string> slice)
     {
+        Debug.Log($"Create Tree");
         DialogTree dialogTree = new DialogTree();
-        List<string> lines = new List<string>(text.Split('\n'));
-        lines = lines.Distinct().ToList();
-        lines.RemoveAt(0);
-
+        List<string> lines = new List<string>(text.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries));
         foreach (var line in lines)
         {
             Node<Dialog> node = new Node<Dialog>(dialogTree);
             node.nodeEntity = new Dialog();
             DialogPhaser.PhaseNode(node, line);
         }
+        slice = lines;
         dialogTree.ExcuteAllBufferCommand<Dialog>();
         dialogTree.OnBuildEnd();
         EnqueueTree(dialogTree);
@@ -74,7 +72,7 @@ public class DialogManager : SingletonBase<DialogManager>
 
             if (dialogTree.currentNode.Sons.Count > 1)
             {
-                
+
             }
             else if (dialogTree.currentNode.Sons.Count == 1)
             {
@@ -100,7 +98,4 @@ public class DialogManager : SingletonBase<DialogManager>
 
         }
     }
-
-
-
 }

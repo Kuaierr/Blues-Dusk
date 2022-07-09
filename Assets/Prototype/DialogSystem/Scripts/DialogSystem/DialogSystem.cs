@@ -2,28 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Febucci.UI;
 using GameKit.DataStructure;
+using UnityEngine.Events;
 
 public class DialogSystem : MonoBehaviour
 {
+    public static bool IsActive = false;
     public DialogAsset dialogAsset;
     public DialogTree dialogTree;
-    public List<string> lines;
     public UI_DialogSystem uI_DialogSystem;
     public EntitiesPool entitiesPool;
-    public bool isActive = false;
+
     private bool isPaused = false;
+    private TextAnimatorPlayer textAnimatorPlayer;
+    private bool isTextShowing = false;
+
+    [Space]
+    [Header("Debug")]
+    public List<string> lines = new List<string>();
     private void Start()
     {
-        isActive = true;
-        dialogTree = DialogManager.instance.CreateTree(dialogAsset.contents);
-        VisitTree();
+        IsActive = true;
+        isTextShowing = false;
+        textAnimatorPlayer = uI_DialogSystem.textAnimatorPlayer;
+
+        dialogTree = DialogManager.instance.CreateTree(dialogAsset.contents, out List<string> slice);
+        lines = slice;
         dialogTree.Reset();
+        ExcuteTextDisplay();
     }
 
     private void Update()
     {
-        if (isActive == false)
+        if (IsActive == false)
             return;
 
         if (isPaused)
@@ -32,82 +44,100 @@ public class DialogSystem : MonoBehaviour
             {
                 isPaused = false;
                 int choiceIndex = uI_DialogSystem.GetSelection();
-                Node<Dialog> node = dialogTree.PhaseNext(choiceIndex);
+                ExcuteTextDisplay(choiceIndex);
                 uI_DialogSystem.HideResponse();
-                UpdateUI(node);
                 return;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (dialogTree.currentNode.IsBranch)
+            if (isTextShowing == false)
             {
-                List<Option> options = dialogTree.TryGetOption();
-                if (options != null)
-                {
-                    uI_DialogSystem.UpdateOptions(options);
-                    uI_DialogSystem.ShowResponse();
-                    isPaused = true;
-                }
+                ExcuteTextDisplay();
             }
             else
-            {
-                Node<Dialog> node = dialogTree.PhaseNext();
-                UpdateUI(node);
-            }
+                InterruptTextDisplay();
         }
     }
 
+    private void UpdateChoiceUI()
+    {
+
+        Debug.Log($"Call UpdateChoiceUI");
+        List<Option> options = dialogTree.TryGetOption();
+        if (options != null)
+        {
+            Debug.Log($"Show Choice UI");
+            uI_DialogSystem.UpdateOptions(options);
+            isPaused = true;
+            uI_DialogSystem.ShowResponse();
+        }
+    }
 
     private void UpdateUI(Node<Dialog> node)
     {
-        if (node == null)
+        if (node == null || node.nodeEntity.speaker == "Default")
             return;
         uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
         uI_DialogSystem.avatar.sprite = entitiesPool.FindCharacter(node.nodeEntity.speaker).moods.FirstOrDefault().avatar;
     }
 
-    private void BuildTree()
+    private void PhaseNode(Node<Dialog> dialogNode, UnityAction onTextShowed = null)
     {
-        lines = new List<string>(dialogAsset.contents.Split('\n'));
-        lines = lines.Distinct().ToList();
-        lines.RemoveAt(0);
-
-        foreach (var line in lines)
+        UpdateUI(dialogNode);
+        textAnimatorPlayer.onTypewriterStart.AddListener(() =>
         {
-            Node<Dialog> node = new Node<Dialog>(dialogTree);
-            node.nodeEntity = new Dialog();
-            DialogPhaser.PhaseNode(node, line);
-        }
-        dialogTree.ExcuteAllBufferCommand<Dialog>();
-        dialogTree.OnBuildEnd();
+            isTextShowing = true;
+        });
+        textAnimatorPlayer.onTextShowed.AddListener(() =>
+        {
+            isTextShowing = false;
+        });
+
+        if (onTextShowed != null)
+            textAnimatorPlayer.onTextShowed.AddListener(onTextShowed);
+
+        textAnimatorPlayer.StartShowingText();
     }
 
-    private void VisitTree()
+    private Node<Dialog> GetNode(int index = 0)
     {
-        int deadloopPreventer = 0;
-        while (true)
-        {
-            if (deadloopPreventer >= 1000)
-            {
-                Debug.Log("reach deadloop");
-                break;
-            }
-            deadloopPreventer++;
+        if (dialogTree.currentNode.IsLeaf || index < 0 || index > dialogTree.currentNode.Sons.Count)
+            return null;
+        dialogTree.currentNode = dialogTree.currentNode.Sons[index];
+        return dialogTree.currentNode as Node<Dialog>;
+    }
 
-            if (dialogTree.currentNode.IsLeaf)
-                return;
-            Debug.Log(dialogTree.currentNode + " and son counts: " + dialogTree.currentNode.Sons.Count);
-            if(dialogTree.currentNode.Sons.Count>1)
-            {
-                foreach (var son in dialogTree.currentNode.Sons)
-                {
-                    Debug.Log("----The son: " + son);   
-                }
-            }
-            dialogTree.currentNode = dialogTree.currentNode.Sons.FirstOrDefault();
+    private void ExcuteTextDisplay(int index = 0)
+    {
+        Node<Dialog> nextNode = GetNode(index);
+        if (nextNode == null)
+        {
+            ReachTheEndOfConversation();
+            return;
         }
+
+        if (nextNode.IsBranch)
+        {
+            Debug.Log($"Branch Point");
+            PhaseNode(nextNode, UpdateChoiceUI);
+        }
+        else
+        {
+            PhaseNode(nextNode);
+        }
+    }
+
+    private void InterruptTextDisplay()
+    {
+        textAnimatorPlayer.SkipTypewriter();
+        isTextShowing = false;
+    }
+
+    private void ReachTheEndOfConversation()
+    {
+        Debug.Log("Reach the end of conversation.");
     }
 }

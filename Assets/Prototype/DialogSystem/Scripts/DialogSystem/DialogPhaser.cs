@@ -12,6 +12,7 @@ public static class DialogPhaser
         "name",
         "sbranch",
         "cbranch",
+        "ebranch",
         "condition",
         "select",
         "end",
@@ -20,36 +21,38 @@ public static class DialogPhaser
         "linkto",
         "mood",
     };
-    public static List<string> prioritizedSemantics = new List<string>()
+    public static List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
     {
         "enter",
+        "ebranch",
         "linkfrom"
     };
 
-    public static List<string> declareSemantics = new List<string>()
+    public static List<string> declareSemantics = new List<string>() // 该语法集合声明节点名称
     {
         "name",
         "sbranch",
+        "ebranch",
         "cbranch"
     };
     public static void PhaseNode(Node<Dialog> node, string text)
     {
-        if (text == "\n")
+        if (text == "\n" || text == "")
         {
-            Debug.Log("SKIP");
+            Debug.LogWarning("Skip invalid node syntax.");
             return;
         }
 
         DialogTree tree = (node.Tree as DialogTree);
-
-        string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value;
-        // string streamSetting = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value;
+        string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value.Trim();
         string dialogInfo = text.Split(']').LastOrDefault();
         string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
         string contents = dialogInfo.Split('：').LastOrDefault().Trim();
 
         node.nodeEntity.speaker = speaker;
         node.nodeEntity.contents = contents;
+
+        bool customLinking = true;
 
         if (nodeInfo != "")
         {
@@ -59,8 +62,9 @@ public static class DialogPhaser
             {
                 string semantic = parameters[i].Split('-').FirstOrDefault().Trim();
                 string value = parameters[i].Split('-').LastOrDefault().Trim();
-                if (!prioritizedSemantics.Contains(semantic))
-                    tree.AddFromLast(node);
+
+                if (prioritizedSemantics.Contains(semantic))
+                    customLinking = false;
 
                 if (!semantics.Contains(semantic))
                     Debug.LogWarning(string.Format("Invalid semantic {0} is used.", semantic));
@@ -77,21 +81,16 @@ public static class DialogPhaser
                     node.Id = value;
                     tree.RecordDeclaredNode(node);
                 }
+                else if (semantic == "ebranch")
+                {
+                    node.Id = value;
+                    tree.RecordDeclaredNode(node);
+                }
                 else if (semantic == "name")
                 {
                     node.Id = value;
                     tree.RecordDeclaredNode(node);
                 }
-
-                // if (semantic == "select")
-                // {
-                //     tree.CachedLinkFromDeclared(node, value);
-                // }
-                // else if (semantic == "end")
-                // {
-                //     tree.CachedLinkToDeclared(node, value);
-                // }
-
                 if (semantic == "linkfrom")
                 {
                     tree.CachedLinkFromDeclared(node, value);
@@ -101,6 +100,9 @@ public static class DialogPhaser
                     tree.CachedLinkToDeclared(node, value);
                 }
             }
+
+            if (customLinking)
+                tree.AddFromLast(node);
         }
         else
         {

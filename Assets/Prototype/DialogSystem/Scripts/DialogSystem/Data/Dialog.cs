@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using GameKit.DataStructure;
 public delegate void NodeEvent<in T>(T obj);
 public delegate void NodeEvent();
@@ -51,20 +52,8 @@ public sealed class Dialog : NodeType
         onFinish?.Invoke();
     }
 
-    public override void OnWait()
-    {
-        onWait?.Invoke();
-    }
-
-    public override void OnExit()
-    {
-        onExit?.Invoke();
-    }
-
     public override string ToString()
     {
         return speaker + ": " + contents;
     }
-
-
 }
