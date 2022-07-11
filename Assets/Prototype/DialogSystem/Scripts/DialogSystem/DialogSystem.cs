@@ -14,6 +14,7 @@ public class DialogSystem : MonoBehaviour
     public UI_DialogSystem uI_DialogSystem;
     public EntitiesPool entitiesPool;
 
+    [SerializeField] private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
     private bool isPaused = false;
     private TextAnimatorPlayer textAnimatorPlayer;
     private bool isTextShowing = false;
@@ -24,18 +25,24 @@ public class DialogSystem : MonoBehaviour
     private void Start()
     {
         IsActive = true;
-        isTextShowing = false;
         textAnimatorPlayer = uI_DialogSystem.textAnimatorPlayer;
-
-        dialogTree = DialogManager.instance.CreateTree(dialogAsset.contents, out List<string> slice);
+        // StartDialog(dialogAsset.contents);
+        LoadAnimator();
+    }
+    public void StartDialog(string dialogText)
+    {
+        Debug.Log($"Start Dialog");
+        isTextShowing = false;
+        dialogTree = DialogManager.instance.CreateTree(dialogText, out List<string> slice);
         lines = slice;
         dialogTree.Reset();
+        uI_DialogSystem.Show();
         ExcuteTextDisplay();
     }
 
     private void Update()
     {
-        if (IsActive == false)
+        if (IsActive == false || dialogTree == null)
             return;
 
         if (isPaused)
@@ -59,6 +66,7 @@ public class DialogSystem : MonoBehaviour
             else
                 InterruptTextDisplay();
         }
+        uI_DialogSystem.indicator.SetActive(isTextShowing);
     }
 
     private void UpdateChoiceUI()
@@ -77,11 +85,15 @@ public class DialogSystem : MonoBehaviour
 
     private void UpdateUI(Node<Dialog> node)
     {
+        Debug.Log($"Update Character UI");
         if (node == null || node.nodeEntity.speaker == "Default")
             return;
         uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        uI_DialogSystem.avatar.sprite = entitiesPool.FindCharacter(node.nodeEntity.speaker).moods.FirstOrDefault().avatar;
+        Character character = entitiesPool.FindCharacter(node.nodeEntity.speaker);
+        RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
+        uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
+        uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
     }
 
     private void PhaseNode(Node<Dialog> dialogNode, UnityAction onTextShowed = null)
@@ -139,5 +151,32 @@ public class DialogSystem : MonoBehaviour
     private void ReachTheEndOfConversation()
     {
         Debug.Log("Reach the end of conversation.");
+        dialogTree.Clear();
+        dialogTree = null;
+        uI_DialogSystem.Hide();
+    }
+
+    private void LoadAnimator()
+    {
+        if (charaAnimators == null || charaAnimators.Count == 0)
+        {
+            AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "CharacterAnimator" }, callback: (IList<RuntimeAnimatorController> assets) =>
+            {
+                Debug.Log($"Load Animator");
+                charaAnimators = new List<RuntimeAnimatorController>(assets);
+            });
+        }
+    }
+
+    private RuntimeAnimatorController FindAnimator(string name)
+    {
+        for (int i = 0; i < charaAnimators.Count; i++)
+        {
+            if (charaAnimators[i].name == "AC_" + name)
+            {
+                return charaAnimators[i];
+            }
+        }
+        return null;
     }
 }

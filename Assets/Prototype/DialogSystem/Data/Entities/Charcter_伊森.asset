@@ -18,7 +18,7 @@ MonoBehaviour:
   moods:
   - Name: Default
     avatar: {fileID: 21300000, guid: 290811f705388a64da6509a8e329a45a, type: 3}
-    half: {fileID: 0}
+    half: {fileID: 21300000, guid: 4081ff07d26598240acef65abebce5be, type: 3}
   - Name: Happy
     avatar: {fileID: 21300000, guid: 58cf90199be1ae5458c2d840d5e0d5cc, type: 3}
-    half: {fileID: 0}
+    half: {fileID: 21300000, guid: 3c5adb8f623dae04182819b749007a3a, type: 3}

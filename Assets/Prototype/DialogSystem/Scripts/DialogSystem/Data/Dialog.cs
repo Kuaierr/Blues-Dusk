@@ -18,19 +18,22 @@ public sealed class Dialog : NodeType
     public string contents;
     public string nodeName;
     public string conditionaName;
-    public string branchOrder;
+    public string moodName;
+    private string animTriggerName = "GoDefault";
 
     public NodeEvent onEnter, onUpdate, onFinish, onWait, onExit;
     public Dialog()
     {
         this.speaker = "Default";
         this.contents = "Default";
+        this.moodName = "Default";
     }
 
-    public Dialog(string speaker, string contents)
+    public Dialog(string speaker, string contents, string moodName = "Default")
     {
         this.speaker = speaker;
         this.contents = contents;
+        this.moodName = moodName;
     }
 
     public void ClearEvents()

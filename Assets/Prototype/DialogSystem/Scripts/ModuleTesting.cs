@@ -1,7 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class ModuleTesting : MonoBehaviour
 {
+    public DebugButton debugButtonPrototype;
+    public DialogSystem dialogSystem;
+    public List<DebugButton> moduleButtons;
+    [SerializeField] private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
     private bool isShown = false;
     private void Start()
@@ -25,5 +35,76 @@ public class ModuleTesting : MonoBehaviour
         canvasGroup.interactable = state;
         canvasGroup.blocksRaycasts = state;
         isShown = state;
+        if (state)
+        {
+            ClearModuleUnits();
+            ShowAllModules();
+        }
+    }
+
+    public void DialogTest()
+    {
+        if (dialogAssets == null || dialogAssets.Count == 0)
+        {
+            AddressableManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
+            {
+                dialogAssets = new List<DialogAsset>(assets);
+                HideAllModules();
+                for (int i = 0; i < dialogAssets.Count; i++)
+                {
+                    int index = i;
+                    CreateModuleUnits(dialogAssets[index].title, () =>
+                    {
+                        dialogSystem.StartDialog(dialogText: dialogAssets[index].contents);
+                        ChangeDisplay(false);
+                    });
+                }
+            });
+        }
+        else
+        {
+            HideAllModules();
+            for (int i = 0; i < dialogAssets.Count; i++)
+            {
+                int index = i;
+                CreateModuleUnits(dialogAssets[index].title, () =>
+                {
+                    dialogSystem.StartDialog(dialogText: dialogAssets[index].contents);
+                    ChangeDisplay(false);
+                });
+            }
+        }
+    }
+    private void HideAllModules()
+    {
+        for (int i = 0; i < moduleButtons.Count; i++)
+        {
+            moduleButtons[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowAllModules()
+    {
+        for (int i = 0; i < moduleButtons.Count; i++)
+        {
+            moduleButtons[i].gameObject.SetActive(true);
+        }
+    }
+
+    private void ClearModuleUnits()
+    {
+        Button[] buttons = GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            Destroy(buttons[i].gameObject);
+        }
+    }
+
+    private void CreateModuleUnits(string name, UnityAction action)
+    {
+        Debug.Log($"Create Modules Units");
+        DebugButton dButton = GameObject.Instantiate<DebugButton>(debugButtonPrototype, Vector3.zero, Quaternion.identity, this.transform);
+        dButton.text.text = name;
+        dButton.AddListener(action);
     }
 }

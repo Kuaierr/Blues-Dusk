@@ -8,15 +8,10 @@ using GameKit.DataStructure;
 public static class DialogPhaser
 {
     public static List<string> semantics = new List<string>(){
-        "pos",
         "name",
         "sbranch",
         "cbranch",
         "ebranch",
-        "condition",
-        "select",
-        "end",
-        "copy",
         "linkfrom",
         "linkto",
         "mood",
@@ -40,6 +35,12 @@ public static class DialogPhaser
         if (text == "\n" || text == "")
         {
             Debug.LogWarning("Skip invalid node syntax.");
+            return;
+        }
+
+        if (text.Substring(0, 2).Equals("//"))
+        {
+            Debug.Log($"Detect comments.");
             return;
         }
 
@@ -74,6 +75,11 @@ public static class DialogPhaser
                     node.nodeEntity.pos = value == "left" ? SpritePos.Left : SpritePos.Right;
                 }
 
+                if (semantic == "mood")
+                {
+                    node.nodeEntity.moodName = value;
+                }
+
                 if (semantic == "sbranch")
                 {
                     node.IsSBranch = true;
@@ -91,6 +97,7 @@ public static class DialogPhaser
                     node.Id = value;
                     tree.RecordDeclaredNode(node);
                 }
+                
                 if (semantic == "linkfrom")
                 {
                     tree.CachedLinkFromDeclared(node, value);

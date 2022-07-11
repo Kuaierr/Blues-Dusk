@@ -195,4 +195,11 @@ public class DialogTree : ITree
         currentNode = currentNode.Sons[index] as Node<Dialog>;
         return currentNode as Node<Dialog>;        
     }
+
+    public void Clear()
+    {
+        declaredNodes.Clear();
+        branchNodes.Clear();
+        linkBuffer.Clear();
+    }
 }
