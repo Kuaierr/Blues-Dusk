@@ -10,12 +10,8 @@ using GameKit;
 
 public class AddressableManager : SingletonBase<AddressableManager>
 {
-    private List<AssetReference> assetList;
-    public AddressableManager()
-    {
-
-    }
-
+    private List<AssetReference> assetReferences;
+    private Dictionary<AssetReference, List<GameObject>> gameobjs;
     IEnumerator GetAsynProcess<T>(string keyName, UnityAction<T> callback) where T : Object
     {
         AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(keyName);

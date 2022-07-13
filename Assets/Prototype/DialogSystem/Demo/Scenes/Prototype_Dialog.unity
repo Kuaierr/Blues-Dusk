@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609233204791152137, guid: 639b3b6afeab93b4f8b59891a64aa2a4, type: 3}
       propertyPath: m_text
-      value: "\u4F0A\u68EE"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5609233204791152137, guid: 639b3b6afeab93b4f8b59891a64aa2a4, type: 3}
       propertyPath: m_fontAsset
@@ -345,7 +345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &217359115
 Transform:
   m_ObjectHideFlags: 0
@@ -1557,7 +1557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174644420774183198, guid: 6ad8783bbe612484599e3efb1410e3dd, type: 3}
       propertyPath: m_text
-      value: "\u4E00\u65F6\u6CA1\u6709\u868C\u4F4F\u3002"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6174644420774183198, guid: 6ad8783bbe612484599e3efb1410e3dd, type: 3}
       propertyPath: m_fontSize
@@ -1853,6 +1853,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d452feb7261a841898dd7a762150d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1586569485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586569486}
+  - component: {fileID: 1586569487}
+  m_Layer: 0
+  m_Name: ReferencePoolTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1586569486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586569485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1089.6262, y: 463.88773, z: -19.494526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1586569487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586569485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3e76d8e02d9b647b6c837652c8f9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1596272230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +2001,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596272230}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
