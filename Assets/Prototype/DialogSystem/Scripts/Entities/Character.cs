@@ -16,6 +16,7 @@ public class Character : ScriptableObject
 {
     public string idName;
     public string displayName;
+    public Color iconicColor;
     [TextArea] public string introduction;
     public List<Mood> moods;
 
