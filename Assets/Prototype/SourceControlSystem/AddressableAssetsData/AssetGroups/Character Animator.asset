@@ -22,11 +22,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - CharacterAnimator
+    - Character Animator
   - m_GUID: 7c72ec158a1d3e84598f4accd6055231
     m_Address: Assets/Prototype/DialogSystem/Demo/Animation/AC_Zora.controller
     m_ReadOnly: 0
     m_SerializedLabels:
     - CharacterAnimator
+    - Character Animator
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:
