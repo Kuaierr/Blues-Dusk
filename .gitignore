@@ -66,3 +66,4 @@ sysinfo.txt
 *.unitypackage
 
 # Crashlytics generated file
+*.psd
