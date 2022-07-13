@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - DialogPack
+  - m_GUID: 09312e70070a591448bde0f1844d5042
+    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u6587\u5B57\u6548\u679C\u6D4B\u8BD5.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

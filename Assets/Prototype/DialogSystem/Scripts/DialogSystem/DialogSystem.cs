@@ -66,13 +66,11 @@ public class DialogSystem : MonoBehaviour
             else
                 InterruptTextDisplay();
         }
-        uI_DialogSystem.indicator.SetActive(isTextShowing);
+        uI_DialogSystem.indicator.SetActive(!isTextShowing);
     }
 
     private void UpdateChoiceUI()
     {
-
-        Debug.Log($"Call UpdateChoiceUI");
         List<Option> options = dialogTree.TryGetOption();
         if (options != null)
         {
