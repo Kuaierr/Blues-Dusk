@@ -138,7 +138,7 @@ public static class DialogPhaser
                     string[] cparams = GetParams(value);
                     if (cparams.Length < 3)
                     {
-                        Debug.LogError($"cjudge command require at least 3 parameters");
+                        Debug.LogError($"cdivider command require at least 3 parameters");
                         return;
                     }
                     
