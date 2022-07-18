@@ -15,7 +15,6 @@ namespace GameKit.DataStructure
         public T nodeEntity;
         public bool IsSBranch = false;
         public bool IsCBranch = false;
-
         public string Id
         {
             get

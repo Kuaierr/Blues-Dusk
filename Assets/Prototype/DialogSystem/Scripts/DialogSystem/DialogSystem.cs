@@ -13,9 +13,8 @@ public class DialogSystem : MonoBehaviour
     public DialogTree dialogTree;
     public UI_DialogSystem uI_DialogSystem;
     public EntitiesPool entitiesPool;
-
     [SerializeField] private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
-    private bool isPaused = false;
+    private bool isOptionShowing = false;
     private TextAnimatorPlayer textAnimatorPlayer;
     private bool isTextShowing = false;
 
@@ -45,11 +44,11 @@ public class DialogSystem : MonoBehaviour
         if (IsActive == false || dialogTree == null)
             return;
 
-        if (isPaused)
+        if (isOptionShowing)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isPaused = false;
+                isOptionShowing = false;
                 int choiceIndex = uI_DialogSystem.GetSelection();
                 ExcuteTextDisplay(choiceIndex);
                 uI_DialogSystem.HideResponse();
@@ -76,7 +75,7 @@ public class DialogSystem : MonoBehaviour
         {
             Debug.Log($"Show Choice UI");
             uI_DialogSystem.UpdateOptions(options);
-            isPaused = true;
+            isOptionShowing = true;
             uI_DialogSystem.ShowResponse();
         }
     }
@@ -88,7 +87,8 @@ public class DialogSystem : MonoBehaviour
             return;
         uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        Character character = entitiesPool.FindCharacter(node.nodeEntity.speaker);
+        Character character = entitiesPool.FindCharacter(node.nodeEntity.speaker.Correction());
+
         RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
         uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
         uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
@@ -129,15 +129,51 @@ public class DialogSystem : MonoBehaviour
             return;
         }
 
-        if (nextNode.IsBranch)
+        if (nextNode.nodeEntity.IsFunctional)
         {
-            Debug.Log($"Branch Point");
-            PhaseNode(nextNode, UpdateChoiceUI);
+            if (nextNode.nodeEntity.IsCompleter)
+            {
+                for (int j = 0; j < nextNode.nodeEntity.completeConditons.Count; j++)
+                {
+                    dialogTree.LocalConditions[nextNode.nodeEntity.completeConditons[j]] = true;
+                }
+            }
+
+            if (nextNode.nodeEntity.IsDivider)
+            {
+                bool isComplete = true;
+                for (int j = 0; j < nextNode.nodeEntity.dividerConditions.Count; j++)
+                {
+                    if (!dialogTree.LocalConditions[nextNode.nodeEntity.dividerConditions[j]])
+                    {
+                        isComplete = false;
+                        break;
+                    }
+                }
+                
+                if (isComplete)
+                {
+                    PhaseNode(GetNode(0));
+                }
+                else
+                {
+                    PhaseNode(GetNode(1));
+                }
+            }
         }
         else
         {
-            PhaseNode(nextNode);
+            if (nextNode.IsBranch)
+            {
+                PhaseNode(nextNode, UpdateChoiceUI);
+            }
+            else
+            {
+                PhaseNode(nextNode);
+            }
         }
+
+
     }
 
     private void InterruptTextDisplay()

@@ -19,6 +19,11 @@ public sealed class Dialog : NodeType
     public string nodeName;
     public string conditionaName;
     public string moodName;
+    public bool IsFunctional = false;
+    public bool IsDivider = false;
+    public bool IsCompleter = false;
+    public List<string> completeConditons;
+    public List<string> dividerConditions;
     private string animTriggerName = "GoDefault";
 
     public NodeEvent onEnter, onUpdate, onFinish, onWait, onExit;
@@ -27,6 +32,8 @@ public sealed class Dialog : NodeType
         this.speaker = "Default";
         this.contents = "Default";
         this.moodName = "Default";
+        this.dividerConditions = new List<string>();
+        this.completeConditons = new List<string>();
     }
 
     public Dialog(string speaker, string contents, string moodName = "Default")
@@ -34,6 +41,8 @@ public sealed class Dialog : NodeType
         this.speaker = speaker;
         this.contents = contents;
         this.moodName = moodName;
+        this.dividerConditions = new List<string>();
+        this.completeConditons = new List<string>();
     }
 
     public void ClearEvents()

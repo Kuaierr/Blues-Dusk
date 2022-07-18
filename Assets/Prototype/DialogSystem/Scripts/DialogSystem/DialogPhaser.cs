@@ -7,7 +7,8 @@ using GameKit.DataStructure;
 
 public static class DialogPhaser
 {
-    public static List<string> semantics = new List<string>(){
+    public static List<string> semantics = new List<string>()
+    {
         "name",
         "sbranch",
         "cbranch",
@@ -15,6 +16,8 @@ public static class DialogPhaser
         "linkfrom",
         "linkto",
         "mood",
+        "cdivider",
+        "ccomplete"
     };
     public static List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
     {
@@ -30,15 +33,17 @@ public static class DialogPhaser
         "ebranch",
         "cbranch"
     };
+
+    static Regex smallBracketRegex = new Regex(@"\(\S+\)", RegexOptions.IgnoreCase);
     public static void PhaseNode(Node<Dialog> node, string text)
     {
-        if (text == "\n" || text == "")
+        if (text.Correction() == "\n" || text.Correction() == "")
         {
             Debug.LogWarning("Skip invalid node syntax.");
             return;
         }
 
-        if (text.Substring(0, 2).Equals("//"))
+        if (text.Substring(0, 2).Correction() == "//")
         {
             Debug.Log($"Detect comments.");
             return;
@@ -47,11 +52,18 @@ public static class DialogPhaser
         DialogTree tree = (node.Tree as DialogTree);
         string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value.Trim();
         string dialogInfo = text.Split(']').LastOrDefault();
-        string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
-        string contents = dialogInfo.Split('：').LastOrDefault().Trim();
 
-        node.nodeEntity.speaker = speaker;
-        node.nodeEntity.contents = contents;
+        if (dialogInfo.Split('：').Length == 2)
+        {
+            string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
+            string contents = dialogInfo.Split('：').LastOrDefault().Trim();
+            node.nodeEntity.speaker = speaker;
+            node.nodeEntity.contents = contents;
+        }
+        else
+        {
+            node.nodeEntity.IsFunctional = true;
+        }
 
         bool customLinking = true;
 
@@ -61,8 +73,8 @@ public static class DialogPhaser
 
             for (int i = 0; i < parameters.Length; i++)
             {
-                string semantic = parameters[i].Split('-').FirstOrDefault().Trim();
-                string value = parameters[i].Split('-').LastOrDefault().Trim();
+                string semantic = parameters[i].Split('-').FirstOrDefault().Correction();
+                string value = parameters[i].Split('-').LastOrDefault().Correction();
 
                 if (prioritizedSemantics.Contains(semantic))
                     customLinking = false;
@@ -97,7 +109,7 @@ public static class DialogPhaser
                     node.Id = value;
                     tree.RecordDeclaredNode(node);
                 }
-                
+
                 if (semantic == "linkfrom")
                 {
                     tree.CachedLinkFromDeclared(node, value);
@@ -105,6 +117,35 @@ public static class DialogPhaser
                 else if (semantic == "linkto")
                 {
                     tree.CachedLinkToDeclared(node, value);
+                }
+
+                if (semantic == "ccomplete")
+                {
+                    node.nodeEntity.IsCompleter = true;
+                    // Debug.Log(smallBracketRegex.Match(value));
+                    node.nodeEntity.completeConditons = value.Trim().RemoveBracket().Split('&').ToList();
+                    foreach (var condition in node.nodeEntity.completeConditons)
+                    {
+                        if (!tree.LocalConditions.ContainsKey(condition))
+                            tree.LocalConditions.Add(condition, false);
+                    }
+                }
+
+                if (semantic == "cdivider")
+                {
+                    node.nodeEntity.IsDivider = true;
+                    node.nodeEntity.IsFunctional = true;
+                    string[] cparams = GetParams(value);
+                    if (cparams.Length < 3)
+                    {
+                        Debug.LogError($"cjudge command require at least 3 parameters");
+                        return;
+                    }
+                    
+                    node.nodeEntity.dividerConditions = cparams[0].Trim().RemoveBracket().Split('&').ToList();
+                    // Debug.Log(smallBracketRegex.Match(cparams[0]));
+                    tree.CachedLinkToDeclared(node, cparams[1]);
+                    tree.CachedLinkToDeclared(node, cparams[2]);
                 }
             }
 
@@ -116,5 +157,10 @@ public static class DialogPhaser
             tree.AddFromLast(node);
         }
         tree.currentNode = node;
+    }
+
+    private static string[] GetParams(string value)
+    {
+        return value.Split(' ');
     }
 }

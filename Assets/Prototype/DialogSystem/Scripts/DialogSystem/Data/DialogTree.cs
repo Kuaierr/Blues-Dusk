@@ -37,6 +37,7 @@ public class DialogTree : ITree
     public INode rootNode;
     public INode currentNode;
     public INode startNode;
+    public Dictionary<string, bool> LocalConditions;
     public DialogTree(INode rootNode)
     {
         this.rootNode = rootNode;
@@ -45,6 +46,7 @@ public class DialogTree : ITree
         branchNodes = new List<INode>();
         declaredNodes = new List<INode>();
         linkBuffer = new Queue<Command>();
+        LocalConditions = new Dictionary<string, bool>();
     }
 
     public DialogTree()
@@ -56,6 +58,7 @@ public class DialogTree : ITree
         branchNodes = new List<INode>();
         declaredNodes = new List<INode>();
         linkBuffer = new Queue<Command>();
+        LocalConditions = new Dictionary<string, bool>();
     }
 
     public void AddFromLast<T>(Node<T> node) where T : NodeType

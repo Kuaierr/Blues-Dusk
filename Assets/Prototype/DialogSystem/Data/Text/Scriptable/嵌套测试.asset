@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd72dcfa5d28cac40a3be446a5ab8f87, type: 3}
-  m_Name: "\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5"
+  m_Name: "\u5D4C\u5957\u6D4B\u8BD5"
   m_EditorClassIdentifier: 
   title: "\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5"
   contents: "\r[mood-Happy]\u5353\u62C9\uFF1A\u5F00\u59CB\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5\r\n\r\n[sbranch-A]\u5353\u62C9\uFF1A\u5206\u652F\u70B9A\r\n\n\t//

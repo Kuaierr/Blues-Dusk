@@ -6,5 +6,5 @@ using UnityEngine;
 public class DialogAsset : ScriptableObject
 {
     public string title;
-    [TextArea(100,5000)]public string contents;
+    [TextArea(1000,5000)]public string contents;
 }
