@@ -67,3 +67,5 @@ sysinfo.txt
 
 # Crashlytics generated file
 *.psd
+
+Assets/GameKit/Externals/Protobuf/protobuf-unity
