@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idName: Zora
   displayName: "\u5353\u62C9"
+  iconicColor: {r: 0, g: 0, b: 0, a: 0}
   introduction: "\u8FD9\u4E2A\u4EBA\u662F\u5353\u62C9"
   moods:
   - Name: Default
-    avatar: {fileID: 21300000, guid: 19d8774186f017a43ae4244a21e6983a, type: 3}
-    half: {fileID: 21300000, guid: 4081ff07d26598240acef65abebce5be, type: 3}
+    avatar: {fileID: 21300000, guid: 7683c00b7da28c940bf5945adc031d72, type: 3}
+    half: {fileID: 21300000, guid: 7683c00b7da28c940bf5945adc031d72, type: 3}
   - Name: Happy
-    avatar: {fileID: 21300000, guid: 9e3d4b3fa57abae4494f5a813fb057aa, type: 3}
-    half: {fileID: 21300000, guid: 3c5adb8f623dae04182819b749007a3a, type: 3}
+    avatar: {fileID: 21300000, guid: a2f68fae447388047940cfac2eee4cf0, type: 3}
+    half: {fileID: 21300000, guid: a2f68fae447388047940cfac2eee4cf0, type: 3}

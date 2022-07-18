@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idName: David
   displayName: "\u5927\u536B"
+  iconicColor: {r: 0, g: 0, b: 0, a: 0}
   introduction: "\u8FD9\u4E2A\u4EBA\u662F\u5927\u536B"
   moods:
   - Name: Default
-    avatar: {fileID: 21300000, guid: e447bc2dc3ed4f14392d794b3b000985, type: 3}
-    half: {fileID: 0}
+    avatar: {fileID: 21300000, guid: 28e5d38246362744f9f1d502cbb23010, type: 3}
+    half: {fileID: 21300000, guid: 28e5d38246362744f9f1d502cbb23010, type: 3}
   - Name: Happy
-    avatar: {fileID: 21300000, guid: dd6a4f1b48fdfa24795480dd2bce1661, type: 3}
-    half: {fileID: 0}
+    avatar: {fileID: 21300000, guid: c8dc56cb670667545a6e64c71f0fe4e3, type: 3}
+    half: {fileID: 21300000, guid: c8dc56cb670667545a6e64c71f0fe4e3, type: 3}
