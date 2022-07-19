@@ -14,10 +14,15 @@ public class UI_DialogSystem : UIGroup
     public TextAnimatorPlayer textAnimatorPlayer;
     public UI_DialogResponse uI_DialogResponse;
     public GameObject indicator;
+    public Animator speakerAnimator;
+    private Animator animator;
+    
     protected override void OnStart()
     {
         base.OnStart();
-        this.Hide();
+        // panelCanvasGroup.alpha = 0;
+        // this.gameObject.SetActive(false);
+        animator = GetComponent<Animator>();
     }
 
     public void UpdateOptions(List<Option> options)
@@ -25,18 +30,14 @@ public class UI_DialogSystem : UIGroup
         uI_DialogResponse.UpdateOptions(options);
     }
 
-    public void ShowResponse()
+    public void ShowResponse(UnityAction callback = null)
     {
-        uI_DialogResponse.gameObject.SetActive(true);
-        uI_DialogResponse.isActive = true;
-        uI_DialogResponse.Show();
+        uI_DialogResponse.Show(callback);
     }
 
-    public void HideResponse()
+    public void HideResponse(UnityAction callback = null)
     {
-        uI_DialogResponse.Hide();
-        uI_DialogResponse.isActive = false;
-        uI_DialogResponse.gameObject.SetActive(false);
+        uI_DialogResponse.Hide(callback);
     }
 
     public int GetSelection()
@@ -46,13 +47,16 @@ public class UI_DialogSystem : UIGroup
 
     public override void Hide(UnityAction callback = null)
     {
-        panelCanvasGroup.alpha = 0;
-        this.gameObject.SetActive(false);
+        // panelCanvasGroup.alpha = 0;
+        // this.gameObject.SetActive(false);
+        animator.SetTrigger("FadeOut");
+        speakerAnimator.SetTrigger("FadeOut");
     }
 
     public override void Show(UnityAction callback = null)
     {
-        panelCanvasGroup.alpha = 1;
-        this.gameObject.SetActive(true);
+        // panelCanvasGroup.alpha = 1;
+        // this.gameObject.SetActive(true);
+        animator.SetTrigger("FadeIn");
     }
 }

@@ -21,7 +21,7 @@ namespace GameKit
             controller.AddUpdateListener(func);
         }
 
-        public void RomoveUpdateListener(UnityAction func)
+        public void RemoveUpdateListener(UnityAction func)
         {
             controller.RemoveUpdateListener(func);
         }

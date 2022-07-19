@@ -6,10 +6,12 @@ using GameKit;
 
 namespace GameKit
 {
+    public delegate void MonoAction<T>(T param);
+    public delegate void MonoAction<T0, T1>(T0 param1, T1 param2);
+    
     public class MonoController : MonoBehaviour
     {
         private event UnityAction updateEvent;
-
         void Start()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -30,7 +32,5 @@ namespace GameKit
         {
             updateEvent -= func;
         }
-
-
     }
 }

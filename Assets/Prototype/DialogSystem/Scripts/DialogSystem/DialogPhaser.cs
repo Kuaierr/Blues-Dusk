@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GameKit.DataStructure;
+using GameKit.Utilities;
 
 public static class DialogPhaser
 {
@@ -39,13 +40,13 @@ public static class DialogPhaser
     {
         if (text.Correction() == "\n" || text.Correction() == "")
         {
-            Debug.LogWarning("Skip invalid node syntax.");
+            Debug.LogWarning("[Phaser] Skip invalid node syntax.");
             return;
         }
 
         if (text.Substring(0, 2).Correction() == "//")
         {
-            Debug.Log($"Detect comments.");
+            Debug.Log($"[Phaser] Detect comments.");
             return;
         }
 
@@ -138,7 +139,7 @@ public static class DialogPhaser
                     string[] cparams = GetParams(value);
                     if (cparams.Length < 3)
                     {
-                        Debug.LogError($"cdivider command require at least 3 parameters");
+                        Debug.LogError($"[Phaser] cdivider command require at least 3 parameters");
                         return;
                     }
                     

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using GameKit;
+using GameKit.Utilities;
 using System.Linq;
 using UnityEngine.Events;
 
@@ -11,13 +12,14 @@ public class UI_DialogResponse : UIGroup
 {
     public UI_DialogSelector selector;
     public List<UI_DialogOption> ui_options = new List<UI_DialogOption>();
-    [SerializeField] private List<Option> currentOptions = new List<Option>();
+    public bool isActive = false;
+    private List<Option> currentOptions = new List<Option>();
     private VerticalLayoutGroup verticalLayoutGroup;
     private Sequence selectorSeq;
-    public bool isActive = false;
-    [SerializeField] private int currentIndex = 0;
+    private int currentIndex = 0;
     private float animDistance = 0;
     private Vector2 selectorInitPos = Vector2.zero;
+    private Animator animator;
 
     public int CurIndex
     {
@@ -28,6 +30,7 @@ public class UI_DialogResponse : UIGroup
     }
     protected override void Start()
     {
+        animator = GetComponent<Animator>();
         verticalLayoutGroup = GetComponentInChildren<VerticalLayoutGroup>();
         ui_options = GetComponentsInChildren<UI_DialogOption>(true).ToList();
         selectorSeq = DOTween.Sequence();
@@ -61,6 +64,8 @@ public class UI_DialogResponse : UIGroup
     public override void Show(UnityAction callback = null)
     {
         base.Show(callback);
+        animator.SetTrigger("FadeIn");
+        animator.OnComplete(callback: callback);
         currentIndex = 0;
         selectorInitPos = selector.rectTransform.anchoredPosition = ui_options.First().rectTransform.anchoredPosition;
         for (int i = 0; i < currentOptions.Count; i++)
@@ -79,6 +84,8 @@ public class UI_DialogResponse : UIGroup
     public override void Hide(UnityAction callback = null)
     {
         base.Hide(callback);
+        animator.SetTrigger("FadeOut");
+        animator.OnComplete(callback: callback);
         currentOptions.Clear();
         foreach (var ui_option in ui_options)
         {
@@ -110,7 +117,12 @@ public class UI_DialogResponse : UIGroup
 
     private void Select(int index)
     {
-        
+
+    }
+
+    public void FinishShowing()
+    {
+
     }
 
     public void UpdateOptions(List<Option> options) => currentOptions = options;

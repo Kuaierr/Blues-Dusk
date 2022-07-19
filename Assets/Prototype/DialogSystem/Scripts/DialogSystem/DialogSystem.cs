@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Febucci.UI;
 using GameKit.DataStructure;
+using GameKit.Utilities;
 using UnityEngine.Events;
 
 public class DialogSystem : MonoBehaviour
@@ -14,10 +15,11 @@ public class DialogSystem : MonoBehaviour
     public UI_DialogSystem uI_DialogSystem;
     public EntitiesPool entitiesPool;
     [SerializeField] private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
-    private bool isOptionShowing = false;
     private TextAnimatorPlayer textAnimatorPlayer;
+    [SerializeField] private bool isOptionShowing = false;
+    private bool isInSelection = false;
     private bool isTextShowing = false;
-
+    private Character currentCharacter;
     [Space]
     [Header("Debug")]
     public List<string> lines = new List<string>();
@@ -44,27 +46,35 @@ public class DialogSystem : MonoBehaviour
         if (IsActive == false || dialogTree == null)
             return;
 
-        if (isOptionShowing)
+        if (!isOptionShowing && isInSelection)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isOptionShowing = false;
                 int choiceIndex = uI_DialogSystem.GetSelection();
+                isInSelection = false;
                 ExcuteTextDisplay(choiceIndex);
-                uI_DialogSystem.HideResponse();
+                uI_DialogSystem.HideResponse(() =>
+                {
+                    uI_DialogSystem.uI_DialogResponse.isActive = false;
+                    uI_DialogSystem.uI_DialogResponse.gameObject.SetActive(false);
+                });
                 return;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isInSelection)
         {
-            if (isTextShowing == false)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                ExcuteTextDisplay();
+                if (isTextShowing == false)
+                {
+                    ExcuteTextDisplay();
+                }
+                else
+                    InterruptTextDisplay();
             }
-            else
-                InterruptTextDisplay();
         }
+
         uI_DialogSystem.indicator.SetActive(!isTextShowing);
     }
 
@@ -75,8 +85,15 @@ public class DialogSystem : MonoBehaviour
         {
             Debug.Log($"Show Choice UI");
             uI_DialogSystem.UpdateOptions(options);
+            uI_DialogSystem.uI_DialogResponse.isActive = true;
+            uI_DialogSystem.uI_DialogResponse.gameObject.SetActive(true);
             isOptionShowing = true;
-            uI_DialogSystem.ShowResponse();
+            isInSelection = true;
+            uI_DialogSystem.ShowResponse(() =>
+            {
+                isOptionShowing = false;
+            });
+
         }
     }
 
@@ -88,7 +105,11 @@ public class DialogSystem : MonoBehaviour
         uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
         Character character = entitiesPool.FindCharacter(node.nodeEntity.speaker.Correction());
-
+        if (currentCharacter != character)
+        {
+            currentCharacter = character;
+            uI_DialogSystem.speakerAnimator.SetTrigger("FadeIn");
+        }
         RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
         uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
         uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
@@ -114,7 +135,7 @@ public class DialogSystem : MonoBehaviour
 
     private Node<Dialog> GetNode(int index = 0)
     {
-        if (dialogTree.currentNode.IsLeaf || index < 0 || index > dialogTree.currentNode.Sons.Count)
+        if (dialogTree.currentNode.IsLeaf || index < 0 || index >= dialogTree.currentNode.Sons.Count)
             return null;
         dialogTree.currentNode = dialogTree.currentNode.Sons[index];
         return dialogTree.currentNode as Node<Dialog>;
@@ -150,7 +171,7 @@ public class DialogSystem : MonoBehaviour
                         break;
                     }
                 }
-                
+
                 if (isComplete)
                 {
                     PhaseNode(GetNode(0));

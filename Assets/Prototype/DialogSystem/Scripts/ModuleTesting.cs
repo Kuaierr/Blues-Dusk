@@ -40,6 +40,8 @@ public class ModuleTesting : MonoBehaviour
             ClearModuleUnits();
             ShowAllModules();
         }
+        else
+            HideAllModules();
     }
 
     public void DialogTest()
@@ -93,7 +95,7 @@ public class ModuleTesting : MonoBehaviour
 
     private void ClearModuleUnits()
     {
-        Button[] buttons = GetComponentsInChildren<Button>();
+        Button[] buttons = GetComponentsInChildren<Button>(false);
         for (int i = 0; i < buttons.Length; i++)
         {
             Destroy(buttons[i].gameObject);
