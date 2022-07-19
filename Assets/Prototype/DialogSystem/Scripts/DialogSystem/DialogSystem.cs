@@ -52,7 +52,8 @@ public class DialogSystem : MonoBehaviour
             {
                 int choiceIndex = uI_DialogSystem.GetSelection();
                 isInSelection = false;
-                ExcuteTextDisplay(choiceIndex);
+                Node<Dialog> nextNode = GetNextNode(choiceIndex);
+                ExcuteTextDisplay();
                 uI_DialogSystem.HideResponse(() =>
                 {
                     uI_DialogSystem.uI_DialogResponse.isActive = false;
@@ -133,17 +134,15 @@ public class DialogSystem : MonoBehaviour
         textAnimatorPlayer.StartShowingText();
     }
 
-    private Node<Dialog> GetNode(int index = 0)
+    private Node<Dialog> GetNextNode(int index = 0)
     {
         if (dialogTree.currentNode.IsLeaf || index < 0 || index >= dialogTree.currentNode.Sons.Count)
             return null;
         dialogTree.currentNode = dialogTree.currentNode.Sons[index];
         return dialogTree.currentNode as Node<Dialog>;
     }
-
-    private void ExcuteTextDisplay(int index = 0)
+    private void ExcuteTextDisplay(Node<Dialog> nextNode)
     {
-        Node<Dialog> nextNode = GetNode(index);
         if (nextNode == null)
         {
             ReachTheEndOfConversation();
@@ -174,11 +173,11 @@ public class DialogSystem : MonoBehaviour
 
                 if (isComplete)
                 {
-                    PhaseNode(GetNode(0));
+                    PhaseNode(GetNextNode(0));
                 }
                 else
                 {
-                    PhaseNode(GetNode(1));
+                    PhaseNode(GetNextNode(1));
                 }
             }
         }
@@ -193,8 +192,11 @@ public class DialogSystem : MonoBehaviour
                 PhaseNode(nextNode);
             }
         }
-
-
+    }
+    private void ExcuteTextDisplay(int index = 0)
+    {
+        Node<Dialog> nextNode = GetNextNode(index);
+        ExcuteTextDisplay(nextNode);
     }
 
     private void InterruptTextDisplay()

@@ -54,14 +54,19 @@ public static class DialogPhaser
         string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value.Trim();
         string dialogInfo = text.Split(']').LastOrDefault();
 
-        if (dialogInfo.Split('：').Length == 2)
+        if (dialogInfo.Split('：').Length == 2) // 普通节点
         {
             string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
             string contents = dialogInfo.Split('：').LastOrDefault().Trim();
             node.nodeEntity.speaker = speaker;
             node.nodeEntity.contents = contents;
         }
-        else
+        else if (dialogInfo.Split('：').Length == 1)    // 对话选项节点
+        {
+            node.nodeEntity.IsFunctional = true;
+            node.nodeEntity.contents = dialogInfo;
+        }
+        else // 功能性节点
         {
             node.nodeEntity.IsFunctional = true;
         }
