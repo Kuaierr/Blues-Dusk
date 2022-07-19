@@ -15,6 +15,7 @@ public class UI_DialogSystem : UIGroup
     public UI_DialogResponse uI_DialogResponse;
     public GameObject indicator;
     public Animator speakerAnimator;
+    public Animator edgeAnimator;
     private Animator animator;
     
     protected override void OnStart()
@@ -50,6 +51,7 @@ public class UI_DialogSystem : UIGroup
         // panelCanvasGroup.alpha = 0;
         // this.gameObject.SetActive(false);
         animator.SetTrigger("FadeOut");
+        edgeAnimator.SetTrigger("FadeOut");
         speakerAnimator.SetTrigger("FadeOut");
     }
 
@@ -58,5 +60,6 @@ public class UI_DialogSystem : UIGroup
         // panelCanvasGroup.alpha = 1;
         // this.gameObject.SetActive(true);
         animator.SetTrigger("FadeIn");
+        edgeAnimator.SetTrigger("FadeIn");
     }
 }
