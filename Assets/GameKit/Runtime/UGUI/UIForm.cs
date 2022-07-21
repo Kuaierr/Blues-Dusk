@@ -9,7 +9,7 @@ namespace GameKit
 {
     public class UIForm : UIBehaviour
     {
-        public RectTransform rectTransform;
+        [HideInInspector] public RectTransform rectTransform;
         protected UIGroup group;
         public UIGroup Group
         {
@@ -22,9 +22,16 @@ namespace GameKit
                 group = value;
             }
         }
-        protected override void Start()
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// </summary>
+        protected override void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
+        }
+        protected override void Start()
+        {
+
             OnStart();
         }
         public virtual void OnTick() { }

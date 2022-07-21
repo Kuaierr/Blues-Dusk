@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Febucci.UI;
 using GameKit.DataStructure;
-using GameKit.Utilities;
+using GameKit;
 using UnityEngine.Events;
 
 public class DialogSystem : MonoBehaviour

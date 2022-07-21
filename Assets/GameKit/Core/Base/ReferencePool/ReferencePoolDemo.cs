@@ -12,6 +12,7 @@ public class ReferencePoolDemo : MonoBehaviour
     private void Start()
     {
         StartCoroutine(AcquirePerSec(1));
+        Debug.Log("12345".Split('/').Length);
     }
 
     IEnumerator AcquirePerSec(float time)

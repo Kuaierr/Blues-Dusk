@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GameKit.DataStructure;
-using GameKit.Utilities;
+using GameKit;
 
 public static class DialogPhaser
 {

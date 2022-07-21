@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit;
 
 namespace GameKit
 {
@@ -49,11 +48,6 @@ namespace GameKit
                 globalObjects.Add(name, obj);
             }
             Object = globalObjects[name];
-        }
-
-        public Dictionary<string, GameObject> GetObjs()
-        {
-            return globalObjects;
         }
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using GameKit;
-using GameKit.Utilities;
 using System.Linq;
 using UnityEngine.Events;
 
 public class UI_DialogResponse : UIGroup
 {
-    public UI_DialogSelector selector;
+    public UI_Selector selector;
     public List<UI_DialogOption> ui_options = new List<UI_DialogOption>();
     public bool isActive = false;
     private List<Option> currentOptions = new List<Option>();
@@ -113,16 +112,6 @@ public class UI_DialogResponse : UIGroup
     {
         selectorSeq.Kill();
         selectorSeq.Append(selector.rectTransform.DOAnchorPosY(selectorInitPos.y - animDistance * index, 0.1f));
-    }
-
-    private void Select(int index)
-    {
-
-    }
-
-    public void FinishShowing()
-    {
-
     }
 
     public void UpdateOptions(List<Option> options) => currentOptions = options;
