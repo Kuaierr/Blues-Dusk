@@ -73,7 +73,7 @@ namespace GameKit
             classSource.Append("using System.Linq;\n");
             classSource.Append("using System.IO;\n");
             classSource.Append("using UnityEditor;\n");
-            classSource.Append("using EditorTool;\n");
+            classSource.Append("using GameKit;\n");
             classSource.Append("\n");
             classSource.Append(GeneratePoolClass(poolName, dataName));
             classSource.Append("\n");

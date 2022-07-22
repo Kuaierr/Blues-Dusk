@@ -32,8 +32,6 @@ public class UI_DiceRollSystem : UIGroup
             newDiceRoll.transform.position = new Vector3(newDiceRoll.transform.position.x, newDiceRoll.transform.position.y, diceForRoll_Prototype.transform.position.z);
             newDiceRoll.OnInit(new Dice());
             newDiceRoll.gameObject.SetActive(true);
-            // rollPanel.TransformPoint
         }
-
     }
 }
