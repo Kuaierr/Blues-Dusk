@@ -36,7 +36,6 @@ namespace GameKit
         {
             ResourceRequest res = Resources.LoadAsync<T>(name);
             yield return res;
-
             if (res.asset is GameObject)
                 callback.Invoke(GameObject.Instantiate(res.asset) as T);
             else

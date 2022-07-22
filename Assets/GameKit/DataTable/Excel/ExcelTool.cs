@@ -69,6 +69,7 @@ namespace GameKit
                         break;
                     }
                 }
+                // Debug.Log(type);
                 if (type != null)
                 {
                     //反射获取方法
