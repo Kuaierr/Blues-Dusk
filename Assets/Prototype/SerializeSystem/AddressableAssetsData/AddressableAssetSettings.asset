@@ -40,6 +40,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82e8b06c5447e2a4aaefa6fc5951202a, type: 2}
   - {fileID: 11400000, guid: 2ea106780190c5d4fad5a57105c2f6dd, type: 2}
   - {fileID: 11400000, guid: 14b3b52084b49c346af304c5a9426ad9, type: 2}
+  - {fileID: 11400000, guid: 7b72ddaec876a224d84c20b5b19916fe, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -81,9 +82,10 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - Capsule
     - Character Animator
+    - Character Data
     - DialogPack
+    - Pool
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 75620d94099a2724780662f2dd670daf, type: 2}

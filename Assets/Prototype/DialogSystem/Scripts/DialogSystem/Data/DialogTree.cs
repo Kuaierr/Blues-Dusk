@@ -1,39 +1,14 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using GameKit;
 using GameKit.DataStructure;
 using DialogNode = GameKit.DataStructure.Node<Dialog>;
-public delegate void PosteriorLink<T>(Node<T> nodeA, string nodeB) where T : NodeType;
-public class LinkCommand<T> : Command where T : NodeType
-{
-    public Node<T> nodeA;
-    public string targetNode;
-    public PosteriorLink<T> command;
 
-    public LinkCommand(Node<T> nodeA, string targetNode, PosteriorLink<T> command)
-    {
-        this.command = command;
-        this.nodeA = nodeA;
-        this.targetNode = targetNode;
-    }
-
-    public void Excute()
-    {
-        command.Invoke(nodeA, targetNode);
-    }
-
-    public override string ToString()
-    {
-        return "链接命令: "+ nodeA.ToString() + " to " + targetNode;
-    }
-}
-
-public class DialogTree : ITree
+public partial class DialogTree : ITree
 {
     public List<INode> declaredNodes;
     public List<INode> branchNodes;
-    public Queue<Command> linkBuffer;
+    public Queue<CommandBase> linkBuffer;
     public INode rootNode;
     public INode currentNode;
     public INode startNode;
@@ -41,29 +16,28 @@ public class DialogTree : ITree
     public DialogTree(INode rootNode)
     {
         this.rootNode = rootNode;
-        (rootNode as Node<Dialog>).nodeEntity = new Dialog();
+        (rootNode as DialogNode).nodeEntity = new Dialog();
         currentNode = this.rootNode;
         branchNodes = new List<INode>();
         declaredNodes = new List<INode>();
-        linkBuffer = new Queue<Command>();
+        linkBuffer = new Queue<CommandBase>();
         LocalConditions = new Dictionary<string, bool>();
     }
 
     public DialogTree()
     {
-        this.rootNode = new Node<Dialog>(this, true);
-        (rootNode as Node<Dialog>).nodeEntity = new Dialog();
+        this.rootNode = new DialogNode(this, true);
+        (rootNode as DialogNode).nodeEntity = new Dialog();
         startNode = this.rootNode;
         currentNode = this.rootNode;
         branchNodes = new List<INode>();
         declaredNodes = new List<INode>();
-        linkBuffer = new Queue<Command>();
+        linkBuffer = new Queue<CommandBase>();
         LocalConditions = new Dictionary<string, bool>();
     }
 
     public void AddFromLast<T>(Node<T> node) where T : NodeType
     {
-        // Debug.Log("自动上链节点: " + node);
         AddFrom(node, currentNode as Node<T>);
     }
 
@@ -107,7 +81,7 @@ public class DialogTree : ITree
         {
             if (node.Id == name)
             {
-                
+
                 AddTo(srcnode, (node as Node<T>));
                 break;
             }
@@ -126,7 +100,7 @@ public class DialogTree : ITree
         }
     }
 
-    
+
     public void AddFrom<T>(Node<T> target, Node<T> parent) where T : NodeType
     {
         // if (parent.Sons.Count > 0)
@@ -148,7 +122,6 @@ public class DialogTree : ITree
         //         sibling.Siblings.Add(son);
         //     }
         // }
-        // Debug.Log(son);
         target.Sons.Add(son);
     }
 
@@ -157,7 +130,6 @@ public class DialogTree : ITree
         foreach (var command in linkBuffer)
         {
             (command as LinkCommand<T>).Excute();
-            // Debug.Log(command.ToString());
         }
         linkBuffer.Clear();
     }
@@ -172,7 +144,7 @@ public class DialogTree : ITree
         currentNode = startNode;
     }
 
-    public List<Option> TryGetOption()
+    public List<Option> GetOptions()
     {
         if (currentNode.Sons.Count > 1)
         {
@@ -182,21 +154,21 @@ public class DialogTree : ITree
         return null;
     }
 
-    public Node<Dialog> PhaseNext(int index = 0)
+    public DialogNode TryPhaseNext(int index = 0)
     {
-        Debug.Log(currentNode + " and Son Counts: " + currentNode.Sons.Count);
-        if(currentNode.Sons.Count > 1)
+        Debug.Log("[Debug]" + currentNode + ", Son Counts: " + currentNode.Sons.Count);
+        if (currentNode.Sons.Count > 1)
         {
             foreach (var son in currentNode.Sons)
             {
-                Debug.Log("------ " + son);
+                Debug.Log("[Debug]----" + son);
             }
         }
         if (currentNode.Sons.Count == 0 || index < 0 || index > currentNode.Sons.Count)
             return null;
 
-        currentNode = currentNode.Sons[index] as Node<Dialog>;
-        return currentNode as Node<Dialog>;        
+        currentNode = currentNode.Sons[index] as DialogNode;
+        return currentNode as DialogNode;
     }
 
     public void Clear()

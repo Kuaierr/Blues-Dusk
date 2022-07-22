@@ -5,11 +5,11 @@ using GameKit;
 using System.Collections.Generic;
 using Febucci.UI;
 
-public class UI_Character : MonoBehaviour
+public class UI_Character : UIForm
 {
     public Animator animator;
     public Image avatar;
-    private void Start()
+    public override void OnStart()
     {
         animator = GetComponent<Animator>();
         avatar = GetComponent<Image>();

@@ -16,15 +16,12 @@ public sealed class Dialog : NodeType
     public SpritePos pos;
     public string speaker;
     public string contents;
-    public string nodeName;
-    public string conditionaName;
     public string moodName;
     public bool IsFunctional = false;
     public bool IsDivider = false;
     public bool IsCompleter = false;
     public List<string> completeConditons;
     public List<string> dividerConditions;
-    private string animTriggerName = "GoDefault";
 
     public NodeEvent onEnter, onUpdate, onFinish, onWait, onExit;
     public Dialog()

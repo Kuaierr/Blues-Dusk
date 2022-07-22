@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using Febucci.UI;
 using GameKit.DataStructure;
 using GameKit;
@@ -10,24 +8,25 @@ using UnityEngine.Events;
 public class DialogSystem : MonoBehaviour
 {
     public static bool IsActive = false;
-    public DialogAsset dialogAsset;
     public DialogTree dialogTree;
-    public UI_DialogSystem uI_DialogSystem;
-    public EntitiesPool entitiesPool;
-    [SerializeField] private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
+    private UI_DialogSystem uI_DialogSystem;
+    private CharacterPool characterPool;
+    private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
     private TextAnimatorPlayer textAnimatorPlayer;
-    [SerializeField] private bool isOptionShowing = false;
+    private bool isOptionShowing = false;
     private bool isInSelection = false;
     private bool isTextShowing = false;
     private Character currentCharacter;
-    [Space]
-    [Header("Debug")]
     public List<string> lines = new List<string>();
     private void Start()
     {
         IsActive = true;
+        uI_DialogSystem = UIManager.instance.GetUI<UI_DialogSystem>("UI_DialogSystem");
         textAnimatorPlayer = uI_DialogSystem.textAnimatorPlayer;
-        // StartDialog(dialogAsset.contents);
+        AddressableManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
+        {
+            this.characterPool = characterPool;
+        });
         LoadAnimator();
     }
     public void StartDialog(string dialogText)
@@ -81,7 +80,7 @@ public class DialogSystem : MonoBehaviour
 
     private void UpdateChoiceUI()
     {
-        List<Option> options = dialogTree.TryGetOption();
+        List<Option> options = dialogTree.GetOptions();
         if (options != null)
         {
             Debug.Log($"Show Choice UI");
@@ -105,7 +104,7 @@ public class DialogSystem : MonoBehaviour
             return;
         uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        Character character = entitiesPool.FindCharacter(node.nodeEntity.speaker.Correction());
+        Character character = characterPool.FindCharacter(node.nodeEntity.speaker.Correction());
         if (currentCharacter != character)
         {
             currentCharacter = character;
@@ -217,7 +216,7 @@ public class DialogSystem : MonoBehaviour
     {
         if (charaAnimators == null || charaAnimators.Count == 0)
         {
-            AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "CharacterAnimator" }, callback: (IList<RuntimeAnimatorController> assets) =>
+            AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
             {
                 Debug.Log($"Load Animator");
                 charaAnimators = new List<RuntimeAnimatorController>(assets);
