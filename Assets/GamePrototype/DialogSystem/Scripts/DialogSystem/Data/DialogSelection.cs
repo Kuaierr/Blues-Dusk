@@ -24,6 +24,7 @@ public class Option
         callback?.Invoke();
     }
 }
+
 public class DialogSelection
 {
     private static List<Option> options;

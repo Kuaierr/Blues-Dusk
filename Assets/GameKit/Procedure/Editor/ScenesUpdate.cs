@@ -9,12 +9,12 @@ using UnityEngine;
 
 public static class ScenesUpdate
 {
-    static readonly string scriptPath = "GameKit/Editor/Procedure/ScenesList.cs";
+    
 
-    [MenuItem(ScenesConfig.EditorTitle + "ScenesUpdate-All")]
+    [MenuItem(ScenesConfig.EDITOR_TITLE + "ScenesUpdate-All")]
     public static void UpdateScenesAll()
     {
-        string scenesMenuPath = Path.Combine(Application.dataPath, scriptPath);
+        string scenesMenuPath = Path.Combine(Application.dataPath, ScenesConfig.SCRIPT_PATH);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("#if UNITY_EDITOR");
         stringBuilder.AppendLine("using UnityEditor;");
@@ -22,7 +22,7 @@ public static class ScenesUpdate
         stringBuilder.AppendLine("public static class ScenesList");
         stringBuilder.AppendLine("{");
 
-        foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { ScenesConfig.RootPath }))
+        foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { ScenesConfig.ROOT_PATH }))
         {
             string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
             string sceneName = Path.GetFileNameWithoutExtension(scenePath);
@@ -32,15 +32,15 @@ public static class ScenesUpdate
         }
         stringBuilder.AppendLine("}");
         stringBuilder.AppendLine("#endif");
-        Directory.CreateDirectory(Path.GetDirectoryName(scriptPath));
+        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.SCRIPT_PATH));
         File.WriteAllText(scenesMenuPath, stringBuilder.ToString());
         AssetDatabase.Refresh();
     }
 
-    [MenuItem(ScenesConfig.EditorTitle + "ScenesUpdate-Main")]
+    [MenuItem(ScenesConfig.EDITOR_TITLE + "ScenesUpdate-Main")]
     public static void UpdateScenesMain()
     {
-        string scenesMenuPath = Path.Combine(Application.dataPath, scriptPath);
+        string scenesMenuPath = Path.Combine(Application.dataPath, ScenesConfig.SCRIPT_PATH);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("#if UNITY_EDITOR");
         stringBuilder.AppendLine("using UnityEditor;");
@@ -48,7 +48,7 @@ public static class ScenesUpdate
         stringBuilder.AppendLine("public static class ScenesList");
         stringBuilder.AppendLine("{");
 
-        foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { ScenesConfig.MainPath }))
+        foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { ScenesConfig.GAMEMAIN_PATH }))
         {
             string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
             string sceneName = Path.GetFileNameWithoutExtension(scenePath);
@@ -58,7 +58,7 @@ public static class ScenesUpdate
         }
         stringBuilder.AppendLine("}");
         stringBuilder.AppendLine("#endif");
-        Directory.CreateDirectory(Path.GetDirectoryName(scriptPath));
+        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.SCRIPT_PATH));
         File.WriteAllText(scenesMenuPath, stringBuilder.ToString());
         AssetDatabase.Refresh();
     }
@@ -75,7 +75,7 @@ public static class ScenesUpdate
                     EditorSceneManager.UnloadSceneAsync(EditorSceneManager.GetSceneAt(i));
                 }
             }
-            EditorSceneManager.OpenScene(ScenesConfig.KitPath_Procedure + ScenesConfig.ProcedureScene + ".unity", OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(ScenesConfig.LAUNCHER_PATH + ScenesConfig.LAUNCHER_NAME + ".unity", OpenSceneMode.Single);
             EditorSceneManager.OpenScene(filename, OpenSceneMode.Additive);
         }
 

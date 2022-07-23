@@ -17,13 +17,13 @@ namespace GameKit
         //Excel第x行及以后对应字段值
         public const int excelDataRow = 4;
         // 存放Excel表
-        public static readonly string excelPath = Path.Combine("Assets", "GameKit/DataTable/Excel/Excels");
+        public static readonly string excelPath = Path.Combine("Assets", "GameKit/DataTable/Excel/Demo/Excels");
         // 存放自动生成cs模板
-        public static readonly string excelCodePath = Path.Combine("Assets", "GameKit/DataTable/Excel/ExcelData/ExcelScripts");
+        public static readonly string excelCodePath = Path.Combine("Assets", "GameKit/DataTable/Excel/Demo/ExcelData/ExcelScripts");
         // 存放Excel生成的Asset池
-        public static readonly string excelPoolPath = Path.Combine("Assets", "GameKit/DataTable/Excel/ExcelData/ExcelAssets");
+        public static readonly string excelPoolPath = Path.Combine("Assets", "GameKit/DataTable/Excel/Demo/ExcelData/ExcelAssets");
         // 存放Excel生成的独立Asset
-        public static readonly string excelAssetPath = Path.Combine("Assets", "GameKit/DataTable/Excel/ExcelData/ExcelAssets");
+        public static readonly string excelAssetPath = Path.Combine("Assets", "GameKit/DataTable/Excel/Demo/ExcelData/ExcelAssets");
 
     }
 }

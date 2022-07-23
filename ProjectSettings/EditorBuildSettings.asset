@@ -6,37 +6,37 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GameKit/QuickDev/Procedure/Scnes/S_Procedure.unity
+    path: Assets/GameKit/QuickDev/Procedure/Scenes/S_Launcher.unity
     guid: 6d652a1357b896648a2614563c4ddace
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/00 - Welcome.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/00 - Welcome.unity
     guid: 6eaf322d703d50146afecde586026f57
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 1A - Effects.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 1A - Effects.unity
     guid: 33f73b8875f94f64b867105f5c7d4747
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 1B - Stacks.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 1B - Stacks.unity
     guid: 82a6944f7c7c3fa47856f534f7482122
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 1C - Attributes.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 1C - Attributes.unity
     guid: 85ee4ca1f3a508347b883d20385a5eac
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 1D - Presets.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 1D - Presets.unity
     guid: 585d90bd4d87ee5498dddb354b211cd5
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 2 - Events.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 2 - Events.unity
     guid: 4ce09929bf78a444788036d3a2884dd9
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 3 - Actions.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 3 - Actions.unity
     guid: ba92474cac6c572459cd8fb75148ea94
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Example 4 - TextOnEnable.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Example 4 - TextOnEnable.unity
     guid: d1cf7179fb110fa4fa0e6793ec6c3be8
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Extra 1 - Testing Texts.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Extra 1 - Testing Texts.unity
     guid: 8a739a68962d0224da3c3f8585c34cb3
   - enabled: 1
-    path: Assets/GameKit/Core/Externals/Text Animator/Example/Extra 2 - Testing Effects.unity
+    path: Assets/GameKit/Externals/Text Animator/Example/Extra 2 - Testing Effects.unity
     guid: ddbbb90dae04d6142bc21831a714c928
   - enabled: 1
     path: Assets/GameKit/QuickDev/Attributes/Attributes.unity
@@ -48,13 +48,13 @@ EditorBuildSettings:
     path: Assets/GameKit/QuickDev/MyDotween/MyDotween.unity
     guid: 9643525deaaf5a94f877d46d998128c1
   - enabled: 1
-    path: Assets/GameKit/QuickDev/Procedure/Scnes/S_Menu.unity
+    path: Assets/GameKit/QuickDev/Procedure/Scenes/S_Menu.unity
     guid: b9374986be6e4c8488c8121429dceaee
   - enabled: 1
     path: Assets/AnimeGirls/Casual1/Demo.unity
     guid: 2cae45722582e78408f2ad67a6e95179
   - enabled: 1
-    path: Assets/GameKit/QuickDev/Procedure/Scnes/S_Select.unity
+    path: Assets/GameKit/QuickDev/Procedure/Scenes/S_Select.unity
     guid: bcdda5d18c5adb4479cd62d5099139c2
   - enabled: 1
     path: Assets/GameKit/QuickDev/UGUI/TabGroup/Demo/Demo_UI.unity

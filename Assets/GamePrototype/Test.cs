@@ -18,11 +18,10 @@ public class Test : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        listObjs.Add(new CustomObj());
-        listObjs.Add(new CustomObj());
-        listObjs.Add(new CustomObj());
-        CustomObj obj = new CustomObj();
-        SerializeManager.instance.SaveJson<List<CustomObj>>("Test.json", listObjs);
-        // Debug.Log(JsonMapper.ToJson(obj));
+        // listObjs.Add(new CustomObj());
+        // listObjs.Add(new CustomObj());
+        // listObjs.Add(new CustomObj());
+        // CustomObj obj = new CustomObj();
+        // SerializeManager.instance.SaveJson<List<CustomObj>>("Test.json", listObjs);
     }
 }
