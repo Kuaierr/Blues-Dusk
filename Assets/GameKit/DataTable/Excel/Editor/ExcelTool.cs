@@ -38,12 +38,12 @@ namespace GameKit
                     if (WriteCodeStrToSave(ExcelConfig.excelCodePath, excelMediumData.excelName + "Data", dataCodeStr) &&
                         WriteCodeStrToSave(ExcelConfig.excelCodePath, excelMediumData.excelName + "Pool", poolCodeStr))
                     {
-                        Utility.Debug.Log("<color=green>Auto Create Excel Scripts Success : </color>" + excelMediumData.excelName);
+                        Utility.Debugger.Log("<color=green>Auto Create Excel Scripts Success : </color>" + excelMediumData.excelName);
                         return;
                     }
                 }
             }
-            Utility.Debug.LogError("Auto Create Excel Scripts Fail : " + (excelMediumData == null ? "" : excelMediumData.excelName));
+            Utility.Debugger.LogError("Auto Create Excel Scripts Fail : " + (excelMediumData == null ? "" : excelMediumData.excelName));
         }
 
         public static void CreateAsset(string excelFileFullPath)
@@ -68,7 +68,7 @@ namespace GameKit
                         break;
                     }
                 }
-                // Utility.Debug.Log(type);
+                // Utility.Debugger.Log(type);
                 if (type != null)
                 {
                     //反射获取方法
@@ -77,19 +77,19 @@ namespace GameKit
                     if (methodInfo != null)
                     {
                         methodInfo.Invoke(null, new object[] { excelMediumData.dataEachLine, ExcelConfig.excelPoolPath });
-                        Utility.Debug.Log("<color=green>Auto Create Excel Asset Success : </color>" + excelMediumData.excelName);
+                        Utility.Debugger.Log("<color=green>Auto Create Excel Asset Success : </color>" + excelMediumData.excelName);
                         return;
                     }
                 }
             }
-            Utility.Debug.LogError("Auto Create Excel Asset Fail : " + (excelMediumData == null ? "" : excelMediumData.excelName));
+            Utility.Debugger.LogError("Auto Create Excel Asset Fail : " + (excelMediumData == null ? "" : excelMediumData.excelName));
         }
         public static void CreateCodeAll()
         {
             string[] excelFileFullPaths = Directory.GetFiles(Utility.IO.AdaptivePath(ExcelConfig.excelPath), "*.xlsx");
             if (excelFileFullPaths == null || excelFileFullPaths.Length == 0)
             {
-                Utility.Debug.Log("Excel file count == 0");
+                Utility.Debugger.Log("Excel file count == 0");
                 return;
             }
             for (int i = 0; i < excelFileFullPaths.Length; i++)
@@ -102,7 +102,7 @@ namespace GameKit
             string[] excelFileFullPaths = Directory.GetFiles(Utility.IO.AdaptivePath(ExcelConfig.excelPath), "*.xlsx");
             if (excelFileFullPaths == null || excelFileFullPaths.Length == 0)
             {
-                Utility.Debug.Log("Excel file count == 0");
+                Utility.Debugger.Log("Excel file count == 0");
                 return;
             }
             for (int i = 0; i < excelFileFullPaths.Length; i++)
@@ -143,7 +143,7 @@ namespace GameKit
             IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
             if (excelReader == null || !excelReader.IsValid)
             {
-                Utility.Debug.Log("Invalid excel ： " + excelFileFullPath);
+                Utility.Debugger.Log("Invalid excel ： " + excelFileFullPath);
                 return null;
             }
 
@@ -229,7 +229,7 @@ namespace GameKit
             //类名
             // excelMediumData.excelName = excelReader.Name;
             excelMediumData.excelName = excelFileFullPath.Split('/').LastOrDefault().Split('.')[0];
-            Utility.Debug.Log(excelMediumData.excelName);
+            Utility.Debugger.Log(excelMediumData.excelName);
             //Dictionary<数据名称,数据类型>
             excelMediumData.propertyType = new Dictionary<string, string>();
             //转换存储格式

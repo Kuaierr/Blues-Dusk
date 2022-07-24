@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GameKit;
 
 
-namespace GameKit.UnityEngine
+namespace GameKit
 {
     public static class GameKitComponentCenter
     {

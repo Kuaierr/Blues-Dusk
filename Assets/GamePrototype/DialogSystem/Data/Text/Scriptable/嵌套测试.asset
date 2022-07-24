@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd72dcfa5d28cac40a3be446a5ab8f87, type: 3}
   m_Name: "\u5D4C\u5957\u6D4B\u8BD5"
   m_EditorClassIdentifier: 
-  title: "\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5"
+  title: "\u5D4C\u5957\u6D4B\u8BD5"
   contents: "\r[mood-Happy]\u5353\u62C9\uFF1A\u5F00\u59CB\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5\r\n\r\n[sbranch-A]\u5353\u62C9\uFF1A\u5206\u652F\u70B9A\r\n\n\t//
     \u7B2C\u4E00\u4E2A\u5206\u652F\u9009A1\n\r\n\t[name-A1, linkfrom-A]\u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA1\r\n\r\n\t\u5927\u536B\uFF1A\u5206\u652F\u7EBFA1\u540E\u7EED\r\n\r\n\t[sbranch-A1_B]
     \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA-1\u5185\u7684\u5206\u652F\u70B9B\r\n\r\n\t\t[name-A1_B1,

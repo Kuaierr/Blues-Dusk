@@ -23,5 +23,7 @@ public class Test : MonoBehaviour
         // listObjs.Add(new CustomObj());
         // CustomObj obj = new CustomObj();
         // SerializeManager.instance.SaveJson<List<CustomObj>>("Test.json", listObjs);
+        Utility.Debugger.LogSuccess("Test Success");
+        Utility.Debugger.LogFail("Test Fail");
     }
 }

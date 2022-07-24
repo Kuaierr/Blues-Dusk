@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scheduler
       objectReference: {fileID: 0}
+    - target: {fileID: 8386063208308035330, guid: b59d7fa8d461a17429908972341c75f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8386063208308035331, guid: b59d7fa8d461a17429908972341c75f7, type: 3}
       propertyPath: m_RootOrder
       value: 0

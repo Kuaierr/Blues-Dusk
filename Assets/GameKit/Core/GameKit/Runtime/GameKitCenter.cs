@@ -14,8 +14,8 @@ namespace GameKit.UnityEngine
 
         private static void InitComponents()
         {
-            Core = GameKit.UnityEngine.GameKitComponentCenter.GetComponent<GameKitCoreComponent>();
-            Fsm = GameKit.UnityEngine.GameKitComponentCenter.GetComponent<FsmComponent>();
+            Core = GameKit.GameKitComponentCenter.GetComponent<GameKitCoreComponent>();
+            Fsm = GameKit.GameKitComponentCenter.GetComponent<FsmComponent>();
         }
     }
 }

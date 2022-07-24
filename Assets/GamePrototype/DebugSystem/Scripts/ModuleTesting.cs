@@ -7,13 +7,14 @@ using GameKit;
 public class ModuleTesting : MonoBehaviour
 {
     public DebugButton debugButtonPrototype;
-    public DialogSystem dialogSystem;
+    private DialogSystem dialogSystem;
     public List<DebugButton> moduleButtons;
     [SerializeField] private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
     private bool isShown = false;
     private void Start()
     {
+        dialogSystem = GameKitComponentCenter.GetComponent<DialogSystem>();
         canvasGroup = GetComponent<CanvasGroup>();
         ChangeDisplay(isShown);
     }
@@ -44,11 +45,14 @@ public class ModuleTesting : MonoBehaviour
 
     public void DialogTest()
     {
+
         if (dialogAssets == null || dialogAssets.Count == 0)
         {
+
             AddressableManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
             {
                 dialogAssets = new List<DialogAsset>(assets);
+                Debug.Log($"CreateModuleUnits");
                 HideAllModules();
                 for (int i = 0; i < dialogAssets.Count; i++)
                 {

@@ -324,7 +324,7 @@ MonoBehaviour:
   m_ZipHelperTypeName: UnityGameFramework.Runtime.DefaultZipHelper
   m_JsonHelperTypeName: UnityGameFramework.Runtime.DefaultJsonHelper
   m_FrameRate: 30
-  m_GameSpeed: 1
+  m_GameSpeed: 0
   m_RunInBackground: 1
   m_NeverSleep: 1
 --- !u!114 &11463816
