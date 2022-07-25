@@ -9,12 +9,12 @@ using UnityEngine;
 
 public static class ScenesUpdate
 {
-    
+
 
     [MenuItem(ScenesConfig.EDITOR_TITLE + "ScenesUpdate-All")]
     public static void UpdateScenesAll()
     {
-        string scenesMenuPath = Path.Combine(Application.dataPath, ScenesConfig.SCRIPT_PATH);
+        string scenesMenuPath = Path.Combine(ScenesConfig.ROOT_PATH, ScenesConfig.SCRIPT_PATH);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("#if UNITY_EDITOR");
         stringBuilder.AppendLine("using UnityEditor;");
@@ -32,7 +32,7 @@ public static class ScenesUpdate
         }
         stringBuilder.AppendLine("}");
         stringBuilder.AppendLine("#endif");
-        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.SCRIPT_PATH));
+        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.ROOT_PATH + ScenesConfig.SCRIPT_PATH));
         File.WriteAllText(scenesMenuPath, stringBuilder.ToString());
         AssetDatabase.Refresh();
     }
@@ -40,7 +40,7 @@ public static class ScenesUpdate
     [MenuItem(ScenesConfig.EDITOR_TITLE + "ScenesUpdate-Main")]
     public static void UpdateScenesMain()
     {
-        string scenesMenuPath = Path.Combine(Application.dataPath, ScenesConfig.SCRIPT_PATH);
+        string scenesMenuPath = Path.Combine(ScenesConfig.ROOT_PATH, ScenesConfig.SCRIPT_PATH);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.AppendLine("#if UNITY_EDITOR");
         stringBuilder.AppendLine("using UnityEditor;");
@@ -58,7 +58,7 @@ public static class ScenesUpdate
         }
         stringBuilder.AppendLine("}");
         stringBuilder.AppendLine("#endif");
-        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.SCRIPT_PATH));
+        Directory.CreateDirectory(Path.GetDirectoryName(ScenesConfig.ROOT_PATH + ScenesConfig.SCRIPT_PATH));
         File.WriteAllText(scenesMenuPath, stringBuilder.ToString());
         AssetDatabase.Refresh();
     }
@@ -67,7 +67,7 @@ public static class ScenesUpdate
     {
         if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
-            Debug.Log(filename);
+            Debug.Log("Open Scene: " + filename);
             if (EditorSceneManager.sceneCount > 0)
             {
                 for (int i = 0; i < EditorSceneManager.sceneCount; i++)

@@ -1,12 +1,6 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://gameframework.cn/
-// Feedback: mailto:ellan@gameframework.cn
-//------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using GameKit.DataStructure;
 
 namespace GameKit
 {
@@ -18,7 +12,7 @@ namespace GameKit
         /// <typeparam name="T">对象类型。</typeparam>
         private sealed class ObjectPool<T> : ObjectPoolBase, IObjectPool<T> where T : ObjectBase
         {
-            private readonly Dictionary<string, Object<T>> m_Objects;
+            private readonly MultiDictionary<string, Object<T>> m_Objects;
             private readonly Dictionary<object, Object<T>> m_ObjectMap;
             private readonly ReleaseObjectFilterCallback<T> m_DefaultReleaseObjectFilterCallback;
             private readonly List<T> m_CachedCanReleaseObjects;
@@ -42,7 +36,7 @@ namespace GameKit
             public ObjectPool(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority)
                 : base(name)
             {
-                m_Objects = new Dictionary<string, Object<T>>();
+                m_Objects = new MultiDictionary<string, Object<T>>();
                 m_ObjectMap = new Dictionary<object, Object<T>>();
                 m_DefaultReleaseObjectFilterCallback = DefaultReleaseObjectFilterCallback;
                 m_CachedCanReleaseObjects = new List<T>();
@@ -221,12 +215,20 @@ namespace GameKit
             /// <returns>要检查的对象是否存在。</returns>
             public bool CanSpawn(string name)
             {
-                Object<T> internalObject = default(Object<T>);
-                if (m_Objects.TryGetValue(name, out internalObject))
+                if (name == null)
                 {
-                    if (m_AllowMultiSpawn || !internalObject.IsInUse)
+                    throw new GameKitException("Name is invalid.");
+                }
+
+                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
+                if (m_Objects.TryGetValue(name, out objectRange))
+                {
+                    foreach (Object<T> internalObject in objectRange)
                     {
-                        return true;
+                        if (m_AllowMultiSpawn || !internalObject.IsInUse)
+                        {
+                            return true;
+                        }
                     }
                 }
 
@@ -249,12 +251,20 @@ namespace GameKit
             /// <returns>要获取的对象。</returns>
             public T Spawn(string name)
             {
-                Object<T> internalObject = default(Object<T>);
-                if (m_Objects.TryGetValue(name, out internalObject))
+                if (name == null)
                 {
-                    if (m_AllowMultiSpawn || !internalObject.IsInUse)
+                    throw new GameKitException("Name is invalid.");
+                }
+
+                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
+                if (m_Objects.TryGetValue(name, out objectRange))
+                {
+                    foreach (Object<T> internalObject in objectRange)
                     {
-                        return internalObject.Spawn();
+                        if (m_AllowMultiSpawn || !internalObject.IsInUse)
+                        {
+                            return internalObject.Spawn();
+                        }
                     }
                 }
 
@@ -297,7 +307,7 @@ namespace GameKit
                 }
                 else
                 {
-                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name).ToString(), target.GetType().FullName, target.ToString()));
+                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -335,7 +345,7 @@ namespace GameKit
                 }
                 else
                 {
-                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name).ToString(), target.GetType().FullName, target.ToString()));
+                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -373,7 +383,7 @@ namespace GameKit
                 }
                 else
                 {
-                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name).ToString(), target.GetType().FullName, target.ToString()));
+                    throw new GameKitException(Utility.Text.Format("Can not find target in object pool '{0}', target type is '{1}', target value is '{2}'.", new TypeNamePair(typeof(T), Name), target.GetType().FullName, target));
                 }
             }
 
@@ -415,7 +425,7 @@ namespace GameKit
                     return false;
                 }
 
-                m_Objects.Remove(internalObject.Name);
+                m_Objects.Remove(internalObject.Name, internalObject);
                 m_ObjectMap.Remove(internalObject.Peek().Target);
 
                 internalObject.Release(false);
@@ -506,10 +516,12 @@ namespace GameKit
             public override ObjectInfo[] GetAllObjectInfos()
             {
                 List<ObjectInfo> results = new List<ObjectInfo>();
-                foreach (KeyValuePair<string, Object<T>> internalObjects in m_Objects)
+                foreach (KeyValuePair<string, LinkedListRange<Object<T>>> objectRanges in m_Objects)
                 {
-                    Object<T> internalObject = internalObjects.Value;
-                    results.Add(new ObjectInfo(internalObject.Name, internalObject.Locked, internalObject.CustomCanReleaseFlag, internalObject.Priority, internalObject.LastUseTime, internalObject.SpawnCount));
+                    foreach (Object<T> internalObject in objectRanges.Value)
+                    {
+                        results.Add(new ObjectInfo(internalObject.Name, internalObject.Locked, internalObject.CustomCanReleaseFlag, internalObject.Priority, internalObject.LastUseTime, internalObject.SpawnCount));
+                    }
                 }
 
                 return results.ToArray();

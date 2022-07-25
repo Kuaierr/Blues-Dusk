@@ -9,7 +9,7 @@ namespace Unity.Editor.Example {
    {
        static AddRequest Request;
 
-       [MenuItem("Window/Add Package Example")]
+       [MenuItem("GameKit/Add Package Example")]
        static void Add()
        {
            // Add a package to the project

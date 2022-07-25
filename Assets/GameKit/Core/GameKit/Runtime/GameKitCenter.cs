@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameKit.UnityEngine
+namespace GameKit
 {
     public class GameKitCenter : MonoBehaviour
     {
