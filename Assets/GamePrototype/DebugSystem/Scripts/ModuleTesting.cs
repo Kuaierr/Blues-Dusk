@@ -9,7 +9,7 @@ public class ModuleTesting : MonoBehaviour
     public DebugButton debugButtonPrototype;
     private DialogSystem dialogSystem;
     public List<DebugButton> moduleButtons;
-    [SerializeField] private List<DialogAsset> dialogAssets;
+    private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
     private bool isShown = false;
     private void Start()
@@ -59,7 +59,7 @@ public class ModuleTesting : MonoBehaviour
                     int index = i;
                     CreateModuleUnits(dialogAssets[index].title, () =>
                     {
-                        dialogSystem.StartDialog(dialogText: dialogAssets[index].contents);
+                        dialogSystem.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
                         ChangeDisplay(false);
                     });
                 }
@@ -73,7 +73,7 @@ public class ModuleTesting : MonoBehaviour
                 int index = i;
                 CreateModuleUnits(dialogAssets[index].title, () =>
                 {
-                    dialogSystem.StartDialog(dialogText: dialogAssets[index].contents);
+                    dialogSystem.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
                     ChangeDisplay(false);
                 });
             }

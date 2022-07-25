@@ -4,7 +4,8 @@ using Febucci.UI;
 using GameKit.DataStructure;
 using GameKit;
 using UnityEngine.Events;
-
+[DisallowMultipleComponent]
+[AddComponentMenu("GameKit/Dialog System")]
 public class DialogSystem : GameKitComponent
 {
     public static bool IsActive = true;
@@ -13,7 +14,6 @@ public class DialogSystem : GameKitComponent
     private TextAnimatorPlayer textAnimatorPlayer;
     private Character currentCharacter;
     private CharacterPool characterPool;
-    [SerializeField] private List<string> lines = new List<string>();
     private List<RuntimeAnimatorController> charaAnimators = new List<RuntimeAnimatorController>();
     private bool isOptionShowing = false;
     private bool isInSelection = false;
@@ -30,12 +30,11 @@ public class DialogSystem : GameKitComponent
         });
         LoadAnimator();
     }
-    public void StartDialog(string dialogText)
+    public void StartDialog(string title, string dialogText)
     {
         Debug.Log($"Start Dialog");
         isTextShowing = false;
-        dialogTree = DialogManager.instance.CreateTree(dialogText, out List<string> slice);
-        lines = slice;
+        dialogTree = DialogManager.instance.CreateTree(title, dialogText);
         dialogTree.Reset();
         uI_DialogSystem.Show();
         ExcuteTextDisplay();

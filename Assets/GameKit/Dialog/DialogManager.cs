@@ -23,17 +23,40 @@ public class DialogManager : SingletonBase<DialogManager>
         }
     }
 
-    public DialogTree GetActiveTree()
+    public DialogTree AcquireActiveTree()
     {
         if (dialogTrees.Count > 0)
             return dialogTrees.Peek();
         return null;
     }
 
-    public DialogTree CreateTree(string text, out List<string> slice)
+    public DialogTree AcquireTree(string title)
+    {
+        if (dialogTrees.Count > 0)
+        {
+            foreach (var tree in dialogTrees)
+            {
+                if (tree.title == title)
+                {
+                    return tree;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void ClearTree()
+    {
+        if (dialogTrees.Count > 0)
+        {
+            dialogTrees.Clear();
+        }
+    }
+
+    public DialogTree CreateTree(string title, string text)
     {
         Debug.Log($"Create Tree");
-        DialogTree dialogTree = new DialogTree();
+        DialogTree dialogTree = new DialogTree(title);
         List<string> lines = new List<string>(text.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries));
         foreach (var line in lines)
         {
@@ -41,7 +64,6 @@ public class DialogManager : SingletonBase<DialogManager>
             node.nodeEntity = new Dialog();
             DialogPhaser.PhaseNode(node, line);
         }
-        slice = lines;
         dialogTree.ExcuteAllBufferCommand<Dialog>();
         dialogTree.OnBuildEnd();
         EnqueueTree(dialogTree);
@@ -50,7 +72,7 @@ public class DialogManager : SingletonBase<DialogManager>
 
     public void TraverseTree()
     {
-        DialogTree dialogTree = GetActiveTree();
+        DialogTree dialogTree = AcquireActiveTree();
         if (dialogTree == null)
         {
             Debug.LogWarning("Traverse failed, no active tree in queue.");
@@ -82,9 +104,9 @@ public class DialogManager : SingletonBase<DialogManager>
         }
     }
 
-    public void PhaseNext1()
+    public void PhaseNext()
     {
-        DialogTree currentTree = GetActiveTree();
+        DialogTree currentTree = AcquireActiveTree();
         if (currentTree == null)
             return;
 

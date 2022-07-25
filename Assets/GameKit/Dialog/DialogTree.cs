@@ -6,6 +6,7 @@ using DialogNode = GameKit.DataStructure.Node<Dialog>;
 
 public partial class DialogTree : ITree
 {
+    public string title;
     public List<INode> declaredNodes;
     public List<INode> branchNodes;
     public Queue<CommandBase> linkBuffer;
@@ -13,7 +14,7 @@ public partial class DialogTree : ITree
     public INode currentNode;
     public INode startNode;
     public Dictionary<string, bool> LocalConditions;
-    public DialogTree(INode rootNode)
+    public DialogTree(string title, INode rootNode)
     {
         this.rootNode = rootNode;
         (rootNode as DialogNode).nodeEntity = new Dialog();
@@ -24,9 +25,9 @@ public partial class DialogTree : ITree
         LocalConditions = new Dictionary<string, bool>();
     }
 
-    public DialogTree()
+    public DialogTree(string title)
     {
-        this.rootNode = new DialogNode(this, true);
+        this.rootNode = new DialogNode(title, this, true);
         (rootNode as DialogNode).nodeEntity = new Dialog();
         startNode = this.rootNode;
         currentNode = this.rootNode;
