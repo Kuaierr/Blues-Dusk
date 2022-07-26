@@ -6,25 +6,30 @@ using UnityEngine.Events;
 
 namespace GameKit
 {
-    public class Regulator<T> : MonoBehaviour where T : Regulator<T>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameKit/GameKit Regulator")]
+    public class Regulator : MonoSingletonBase<Regulator>
     {
-        public static T current;
-        private void Awake()
-        {
-            current = this as T;
-        }
-
-        public void Quit() => Application.Quit();
         public UIGroup GetUI(string name) => UIManager.instance.GetUI(name);
         public void ShowUI(string name) => GetUI(name).Show();
         public void HideUI(string name) => GetUI(name).Hide();
-        public void SwitchSceneSwipe(string name) => Scheduler.instance.SwitchSceneSwipe(name);
-        public void SwitchScene(string name) => Scheduler.instance.SwitchScene(name);
-        public void ReloadCurrentSceneSwipe() => Scheduler.instance.ReloadCurrentSceneSwipe();
+        public void SwitchSceneByDefault(string name) => Scheduler.current.SwitchSceneByDefault(name);
+        public void SwitchSceneBySwipe(string name) => Scheduler.current.SwitchSceneBySwipe(name);
+        public void SwitchSceneImmediately(string name) => Scheduler.current.SwitchScene(name);
+        public void ReloadCurrentSceneSwipe() => Scheduler.current.ReloadCurrentSceneSwipe();
         protected IEnumerator DelayedExcute(UnityAction action, float t)
         {
             yield return new WaitForSeconds(t);
             action?.Invoke();
+        }
+
+        public void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }

@@ -102,7 +102,13 @@ public class DialogSystem : GameKitComponent
         // Debug.Log($"Update Character UI");
         if (node == null || node.nodeEntity.speaker == "Default")
             return;
-        uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
+
+        if(node.nodeEntity.speaker == ">>")
+            uI_DialogSystem.speakerName.text = "";
+        else if(node.nodeEntity.speaker == "??")
+            uI_DialogSystem.speakerName.text = "未知";
+        else
+            uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
         Character character = characterPool.FindCharacter(node.nodeEntity.speaker.Correction());
         if (currentCharacter != character)

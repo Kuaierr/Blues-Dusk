@@ -1,51 +1,110 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using DG.Tweening;
-
 namespace GameKit
 {
-    public class Scheduler : MonoBehaviour
+    public enum SceneSwitchType
     {
-        public enum SceneSwitchType
+        Swipe,
+        Fade,
+        Animation,
+        LoadingScene,
+        Immediately
+    }
+    public delegate void SceneAction();
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameKit/GameKit Scheduler")]
+    public class Scheduler : MonoSingletonBase<Scheduler>
+    {
+        public SceneSwitchType defaultSwitchType = SceneSwitchType.Swipe;
+        public string StartScene = "GameKit_Main";
+        public string LoadingScene = "GameKit_Loading";
+        private Switcher switcher;
+        public string CurrentScene
         {
-            Swipe,
-            Switch,
-            LoadingBar
-        }
-        public static Scheduler instance;
-        public string startScene = "S_Menu";
-        public Animator animator;
-        private string loadingScene = "S_Loading";
-        public string currentScene { get; private set; }
-        private Transform swipePanel;
-        private void Awake()
-        {
-            instance = this;
-            if (SceneManager.sceneCount > 1)
-                currentScene = SceneManager.GetSceneAt(1).name;
-            else
-                LoadSceneAsyn(startScene, callback: () => { currentScene = startScene; });
-            swipePanel = GameObject.Find("SwipePanel").transform;
+            get;
+            private set;
         }
 
-        public void SwitchSceneSwipe(string name, UnityAction callback = null)
+        protected override void OnAwake()
         {
-            animator.SetTrigger("Move");
-            swipePanel.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+            if (SceneManager.sceneCount > 1)
+                CurrentScene = SceneManager.GetSceneAt(1).name;
+            else
+                LoadSceneAsyn(StartScene, callback: () => { CurrentScene = StartScene; });
+            switcher = GetComponentInChildren<Switcher>();
+        }
+        public void SwitchSceneByDefault(string name)
+        {
+            if (defaultSwitchType == SceneSwitchType.Swipe)
+                SwitchSceneBySwipe(name);
+            else if (defaultSwitchType == SceneSwitchType.LoadingScene)
+                SwitchSceneByLoadingScene(name);
+            else if (defaultSwitchType == SceneSwitchType.Fade)
+                SwitchSceneByFade(name);
+            else if (defaultSwitchType == SceneSwitchType.Animation)
+                SwitchSceneByAnimation(name);
+            else if (defaultSwitchType == SceneSwitchType.Immediately)
+                SwitchScene(name);
+        }
+        public void SwitchSceneByAnimation(string name)
+        {
+            switcher.animator.gameObject.SetActive(true);
+            switcher.animator.SetTrigger("Swicth");
+            switcher.animator.OnComplete(1f, () =>
             {
-                LoadSceneAsyn(name, () =>
+                UnloadSceneAsyn(CurrentScene, () =>
                 {
-                    string tmpScene = currentScene;
-                    currentScene = name;
-                    UnloadSceneAsyn(tmpScene, () =>
+                    LoadSceneAsyn(name, () =>
                     {
-                        swipePanel.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
+                        CurrentScene = name;
+                        switcher.animator.SetTrigger("UnSwicth");
+                        switcher.animator.OnComplete(1f, () =>
                         {
-                            animator.SetTrigger("DeMove");
-                            swipePanel.localPosition = new Vector3(2420f, swipePanel.localPosition.y, swipePanel.localPosition.z);
+                            switcher.animator.gameObject.SetActive(false);
+                        });
+                    });
+                });
+            });
+        }
+
+        public void SwitchSceneBySwipe(string name)
+        {
+            switcher.swiper.gameObject.SetActive(true);
+            switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+            {
+                UnloadSceneAsyn(CurrentScene, () =>
+                {
+                    LoadSceneAsyn(name, () =>
+                    {
+                        CurrentScene = name;
+                        switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
+                        {
+                            switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
+                            switcher.swiper.gameObject.SetActive(false);
+                        });
+                    });
+                });
+            });
+        }
+
+        public void SwitchSceneByFade(string name)
+        {
+            switcher.gradienter.gameObject.SetActive(true);
+            switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+            {
+                UnloadSceneAsyn(CurrentScene, () =>
+                {
+                    LoadSceneAsyn(name, () =>
+                    {
+                        CurrentScene = name;
+                        switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
+                        {
+                            switcher.gradienter.gameObject.SetActive(false);
                         });
                     });
                 });
@@ -54,41 +113,43 @@ namespace GameKit
 
         public void SwitchScene(string name, UnityAction callback = null)
         {
-            LoadSceneAsyn(name, () =>
+            UnloadSceneAsyn(CurrentScene, () =>
             {
-                currentScene = name;
-                UnloadSceneAsyn(currentScene);
+                LoadSceneAsyn(name, () =>
+                {
+                    CurrentScene = name;
+                });
             });
         }
 
         public void ReloadCurrentSceneSwipe()
         {
-            animator.SetTrigger("Move");
-            swipePanel.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+            switcher.swiper.gameObject.SetActive(true);
+            switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
             {
-                UnloadSceneAsyn(currentScene, () =>
+                UnloadSceneAsyn(CurrentScene, () =>
                 {
-                    LoadSceneAsyn(currentScene, () =>
+                    LoadSceneAsyn(CurrentScene, () =>
                     {
-                        animator.SetTrigger("DeMove");
-                        swipePanel.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
+                        switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
                         {
-                            swipePanel.localPosition = new Vector3(2420f, swipePanel.localPosition.y, swipePanel.localPosition.z);
+                            switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
+                            switcher.swiper.gameObject.SetActive(false);
                         });
                     });
                 });
             });
         }
 
-        public void SwitchSceneLoadingBar(string name, UnityAction callback = null)
+        public void SwitchSceneByLoadingScene(string name, UnityAction callback = null)
         {
             ScenesManager.instance.TryGetScene(name, out Scene scene);
             if (scene == null)
             {
-                Debug.LogWarning("No such scene in build settings.");
+                Debug.LogError("No such scene in build settings.");
                 return;
             }
-            SwitchScene(loadingScene, callback);
+            SwitchScene(LoadingScene, callback);
         }
 
         private void LoadSceneAsyn(string name, UnityAction callback = null)

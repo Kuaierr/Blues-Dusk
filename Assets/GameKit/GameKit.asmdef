@@ -2,10 +2,11 @@
     "name": "GameKit",
     "rootNamespace": "",
     "references": [
+        "GameKit.Externals",
+        "DOTween.Modules",
         "Unity.Addressables",
         "Unity.Addressables.Editor",
-        "Unity.ResourceManager",
-        "GameKit.Externals"
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
