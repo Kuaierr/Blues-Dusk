@@ -24,7 +24,7 @@ public class DialogSystem : GameKitComponent
     {
         uI_DialogSystem = UIManager.instance.GetUI<UI_DialogSystem>("UI_DialogSystem");
         textAnimatorPlayer = uI_DialogSystem.textAnimatorPlayer;
-        AddressableManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
+        ResourceManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
         {
             this.characterPool = characterPool;
         });
@@ -103,22 +103,27 @@ public class DialogSystem : GameKitComponent
         if (node == null || node.nodeEntity.speaker == "Default")
             return;
 
-        if(node.nodeEntity.speaker == ">>")
+        if (node.nodeEntity.speaker == ">>")
             uI_DialogSystem.speakerName.text = "";
-        else if(node.nodeEntity.speaker == "??")
+        else if (node.nodeEntity.speaker == "??")
             uI_DialogSystem.speakerName.text = "未知";
         else
             uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        Character character = characterPool.FindCharacter(node.nodeEntity.speaker.Correction());
-        if (currentCharacter != character)
+        
+        if (node.nodeEntity.speaker != ">>")
         {
-            currentCharacter = character;
-            uI_DialogSystem.speakerAnimator.SetTrigger("FadeIn");
+            Character character = characterPool.FindCharacter(node.nodeEntity.speaker.Correction());
+            if (currentCharacter != character)
+            {
+                currentCharacter = character;
+                uI_DialogSystem.speakerAnimator.SetTrigger("FadeIn");
+            }
+            RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
+            uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
+            uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
         }
-        RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
-        uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
-        uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
+
     }
 
     private void PhaseNode(Node<Dialog> dialogNode, UnityAction onTextShowed = null)
@@ -222,7 +227,7 @@ public class DialogSystem : GameKitComponent
     {
         if (charaAnimators == null || charaAnimators.Count == 0)
         {
-            AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
+            ResourceManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
             {
                 charaAnimators = new List<RuntimeAnimatorController>(assets);
             });

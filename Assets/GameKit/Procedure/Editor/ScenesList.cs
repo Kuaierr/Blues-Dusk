@@ -43,12 +43,6 @@ public static class ScenesList
     public static void Assets_GameKit_ReferencePool_Demo_GameKitDemo_ReferencePool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/ReferencePool/Demo/GameKitDemo_ReferencePool.unity"); }
     [MenuItem("Scenes/GameMain")]
     public static void Assets_GameMain_Scenes_GameMain_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/GameMain.unity"); }
-    [MenuItem("Scenes/Demo")]
-    public static void Assets_GamePrototype_AssetPacks_40_Simple_Icons_Free_Scenes_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/AssetPacks/40-Simple Icons-Free/Scenes/Demo.unity"); }
-    [MenuItem("Scenes/Demo")]
-    public static void Assets_GamePrototype_AssetPacks_Modern_UI_Pack_Scenes_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/AssetPacks/Modern UI Pack/Scenes/Demo.unity"); }
-    [MenuItem("Scenes/Demo")]
-    public static void Assets_GamePrototype_AssetPacks_Prototype_Kit_1_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/AssetPacks/Prototype Kit 1/Demo.unity"); }
     [MenuItem("Scenes/Prototype_Dialog")]
     public static void Assets_GamePrototype_DialogSystem_Demo_Scenes_Prototype_Dialog_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/DialogSystem/Demo/Scenes/Prototype_Dialog.unity"); }
     [MenuItem("Scenes/Prototype_Dialog_UI")]
@@ -56,11 +50,15 @@ public static class ScenesList
     [MenuItem("Scenes/Prototype_Dialog_UIandDice")]
     public static void Assets_GamePrototype_DiceSystem_Scenes_Prototype_Dialog_UIandDice_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/DiceSystem/Scenes/Prototype_Dialog_UIandDice.unity"); }
     [MenuItem("Scenes/Prototype_Interact")]
-    public static void Assets_GamePrototype_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/Prototype_Interact.unity"); }
+    public static void Assets_GamePrototype_MovementSystem_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/MovementSystem/Prototype_Interact.unity"); }
     [MenuItem("Scenes/Addressable")]
     public static void Assets_GamePrototype_SerializeSystem_Addressable_Scenes_Addressable_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/SerializeSystem/Addressable/Scenes/Addressable.unity"); }
     [MenuItem("Scenes/SerializationTest")]
     public static void Assets_GamePrototype_SerializeSystem_Protobuf_SerializationTest_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/SerializeSystem/Protobuf/SerializationTest.unity"); }
+    [MenuItem("Scenes/Demo")]
+    public static void Assets_GamePrototype_Universal_Arts_40_Simple_Icons_Free_Scenes_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/Universal/Arts/40-Simple Icons-Free/Scenes/Demo.unity"); }
+    [MenuItem("Scenes/Demo")]
+    public static void Assets_GamePrototype_Universal_Arts_Prototype_Kit_1_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/Universal/Arts/Prototype Kit 1/Demo.unity"); }
     [MenuItem("Scenes/Demo")]
     public static void Assets_Resources_Model_AnimeGirls_Casual1_Demo_unity() { ScenesUpdate.OpenScene("Assets/Resources/Model/AnimeGirls/Casual1/Demo.unity"); }
     [MenuItem("Scenes/S_heya_parlor")]

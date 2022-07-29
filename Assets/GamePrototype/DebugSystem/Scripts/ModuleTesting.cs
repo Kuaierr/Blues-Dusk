@@ -49,7 +49,7 @@ public class ModuleTesting : MonoBehaviour
         if (dialogAssets == null || dialogAssets.Count == 0)
         {
 
-            AddressableManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
+            ResourceManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
             {
                 dialogAssets = new List<DialogAsset>(assets);
                 Debug.Log($"CreateModuleUnits");
