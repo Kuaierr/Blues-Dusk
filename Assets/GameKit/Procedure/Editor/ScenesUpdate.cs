@@ -53,7 +53,10 @@ public static class ScenesUpdate
             string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
             string sceneName = Path.GetFileNameWithoutExtension(scenePath);
             string methodName = scenePath.Replace('/', '_').Replace('\\', '_').Replace('.', '_').Replace('-', '_').Replace(' ', '_');
-            stringBuilder.AppendLine(string.Format("    [MenuItem(\"Scenes/{0}\")]", sceneName));
+            if (sceneName.Equals(ScenesConfig.LAUNCHER_NAME))
+                stringBuilder.AppendLine(string.Format("    [MenuItem(\"Scenes/{0}\", false, 0)]", sceneName));
+            else
+                stringBuilder.AppendLine(string.Format("    [MenuItem(\"Scenes/{0}\")]", sceneName));
             stringBuilder.AppendLine(string.Format("    public static void {0}() {{ ScenesUpdate.OpenScene(\"{1}\"); }}", methodName, scenePath));
         }
         stringBuilder.AppendLine("}");
