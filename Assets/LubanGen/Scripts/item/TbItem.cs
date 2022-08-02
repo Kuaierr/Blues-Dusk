@@ -35,7 +35,6 @@ public sealed partial class TbItem
 
     public Dictionary<int, item.Item> DataMap => _dataMap;
     public List<item.Item> DataList => _dataList;
-
     public item.Item GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
     public item.Item Get(int key) => _dataMap[key];
     public item.Item this[int key] => _dataMap[key];
