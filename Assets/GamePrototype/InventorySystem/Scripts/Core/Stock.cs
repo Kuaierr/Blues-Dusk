@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameKit;
+
+[System.Serializable]
 public class Stock : IStock
 {
     // 约定：id==-1代表该Stock为EmptyStock
@@ -13,6 +16,7 @@ public class Stock : IStock
     private IInventory m_inventory;
     private int m_overlap;
     private int m_maxOverlap;
+    private static int s_currentSerialId = 0;
     public int Id
     {
         get
@@ -85,24 +89,32 @@ public class Stock : IStock
         m_serialId = serialId;
         m_name = name;
         m_data = data;
-    }
-
-    public void OnInit(string name, object data)
-    {
-
+        m_avalible = true;
     }
 
     public void OnChunkSlot(int index)
     {
         m_index = index;
     }
+
+    public void OnHelperInit(int overlap, int maxOverlap)
+    {
+        m_overlap = overlap;
+        m_maxOverlap = maxOverlap;
+    }
+
     public void AddOverlap(int count = 1)
     {
-
+        m_overlap += count;
     }
-    public void OnInteract()
+    public virtual void OnInteract()
     {
+        Utility.Debugger.Log("Interact Stock {0}", Name);
+    }
 
+    public static int GetStockSerialId()
+    {
+        return ++s_currentSerialId;
     }
 
 }

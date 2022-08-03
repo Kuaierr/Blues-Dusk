@@ -7,11 +7,13 @@ using UnityEngine.EventSystems;
 
 namespace GameKit
 {
-    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(CanvasGroup), typeof(Animator))]
     public class UIGroup : UIBehaviour
     {
         private Dictionary<string, List<UIBehaviour>> uiComponet = new Dictionary<string, List<UIBehaviour>>();
         protected CanvasGroup panelCanvasGroup;
+        protected Animator animator;
+        protected RectTransform functionalPanel;
         protected override void Awake()
         {
             UIManager.instance.RegisterUI(this as UIGroup);
@@ -30,8 +32,34 @@ namespace GameKit
         }
 
         protected virtual void OnStart() { }
-        public virtual void Show(UnityAction callback = null) { }
-        public virtual void Hide(UnityAction callback = null) { }
+        public virtual void Show(UnityAction callback = null)
+        {
+            if (animator.runtimeAnimatorController != null)
+            {
+                animator.SetTrigger("FadeIn");
+                animator.OnComplete(1f, () =>
+                {
+                    callback?.Invoke();
+                });
+                return;
+            }
+            functionalPanel?.gameObject.SetActive(true);
+            callback?.Invoke();
+        }
+        public virtual void Hide(UnityAction callback = null)
+        {
+            if (animator.runtimeAnimatorController != null)
+            {
+                animator.SetTrigger("FadeOut");
+                animator.OnComplete(1f, () =>
+                {
+                    callback?.Invoke();
+                });
+                return;
+            }
+            functionalPanel?.gameObject.SetActive(false);
+            callback?.Invoke();
+        }
         public T GetUIComponent<T>(string name) where T : UIBehaviour
         {
             if (uiComponet.ContainsKey(name))
@@ -59,7 +87,6 @@ namespace GameKit
                 {
                     (components[i] as UIForm).Group = this;
                 }
-
                 string objName = components[i].gameObject.name;
                 if (uiComponet.ContainsKey(objName))
                     uiComponet[objName].Add(components[i]);

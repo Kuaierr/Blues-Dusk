@@ -5,18 +5,19 @@ using UnityEngine;
 using GameKit.DataStructure;
 using GameKit;
 
+[System.Serializable]
 public partial class Inventory : IInventory
 {
     private string m_name;
     private int m_size;
     private int m_serialId;
-    private int m_serialStockId;
     private IStock m_cachedStock;
     private int m_cachedStockIndex;
     private int m_cachedChunkIndex;
     private IInventoryHelper m_helper;
     private readonly List<IStock> m_stocks;
     private readonly Dictionary<int, IInventoryChunk> m_cachedChunks;
+    private static int s_currentSerialId = 0;
 
     public int Id
     {
@@ -54,12 +55,11 @@ public partial class Inventory : IInventory
         }
     }
 
-    public Inventory(string name, int size)
+    public Inventory(string name, int size, int serialId)
     {
         m_name = name;
         m_size = size;
-        m_serialId = 0;
-        m_serialStockId = 0;
+        m_serialId = serialId;
         m_stocks = new List<IStock>();
         m_cachedChunks = new Dictionary<int, IInventoryChunk>(m_size);
         m_cachedStock = null;
@@ -69,8 +69,8 @@ public partial class Inventory : IInventory
 
     public IStock CreateStock<T>(int id, string name, T data = default(T)) where T : class
     {
-        Stock newStock = new Stock(id, GetStockSerialId(), name, data);
-        m_helper.InitStock(newStock, data);
+        IStock newStock = new Stock(id, Stock.GetStockSerialId(), name, data);
+        m_helper.InitStock<T>(newStock, data);
         return null;
     }
 
@@ -117,6 +117,33 @@ public partial class Inventory : IInventory
             m_cachedStockIndex = -1;
         }
         return false;
+    }
+
+    public bool AddStock(IStock stock, int count)
+    {
+        bool isStockExist = CachesHasStock(stock, useCache: true);
+        bool isFull = HasFull(stock, true);
+
+        if (isFull)
+        {
+            Utility.Debugger.LogWarning("The chunks of inventory {0} has been filled.", this.Name);
+            return false;
+        }
+
+        if (stock.MaxOverlap < 1)
+        {
+            Utility.Debugger.LogError("The Max overlap settings for {0} is incorrect", stock.Name);
+            return false;
+        }
+
+        // 无论库存物是否存在，都将添加stock的人物交给下层Chunks
+        AddStockToChunk(stock, useCache: true);
+
+        // 如果库存不存在，或者这个物最大堆叠为1，则添加到Stocks
+        if (!isStockExist || stock.MaxOverlap == 1)
+            m_stocks.Add(stock);
+
+        return true;
     }
 
     public bool AddStock(IStock stock)
@@ -224,9 +251,9 @@ public partial class Inventory : IInventory
         return false;
     }
 
-    public int GetStockSerialId()
+    public static int GetInventorySerialId()
     {
-        return ++m_serialStockId;
+        return ++s_currentSerialId;
     }
 
     public void Clear()

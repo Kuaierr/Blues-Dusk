@@ -18,7 +18,6 @@ public class UI_DialogResponse : UIGroup
     private int currentIndex = 0;
     private float animDistance = 0;
     private Vector2 selectorInitPos = Vector2.zero;
-    private Animator animator;
 
     public int CurIndex
     {

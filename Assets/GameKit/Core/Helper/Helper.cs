@@ -3,9 +3,6 @@ using Debugger = GameKit.Utility.Debugger;
 
 namespace GameKit
 {
-    /// <summary>
-    /// 辅助器创建器相关的实用函数。
-    /// </summary>
     public static class Helper
     {
         public static T CreateHelper<T>(string helperTypeName, T customHelper) where T : MonoBehaviour

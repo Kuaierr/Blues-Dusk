@@ -498,11 +498,11 @@ namespace GameKit
                 // m_ResourceManager.LoadAsset(entityAssetName, priority, m_LoadAssetCallbacks, EntityInfo.Create(serialId, entityId, entityGroup, userData));
                 ResourceManager.instance.GetAssetAsyn(entityAssetName, (UnityEngine.Object obj) =>
                 {
-                    LoadAssetSuccessCallback(entityAssetName, obj, 0f, userData);
+                    LoadAssetSuccessCallback(entityAssetName, obj, 0f, EntityInfo.Create(serialId, entityId, entityGroup, userData));
                 },
                 () =>
                 {
-                    LoadAssetFailureCallback(entityAssetName, "Load Fail", userData);
+                    LoadAssetFailureCallback(entityAssetName, "Load Fail", EntityInfo.Create(serialId, entityId, entityGroup, userData));
                 });
                 return;
             }

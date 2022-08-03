@@ -1,4 +1,4 @@
 public interface IInventoryHelper
 {
-    IStock InitStock(IStock stock, object data);
+    IStock InitStock<T>(IStock stock, T data) where T : class;
 }

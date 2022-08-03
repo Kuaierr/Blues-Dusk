@@ -9,7 +9,7 @@ public enum PanelAdjustType
 [ExecuteInEditMode]
 public class AdaptiveSize_UI : MonoBehaviour
 {
-    private GridLayoutGroup gridLayout;
+    [SerializeField] private GridLayoutGroup gridLayout;
     private RectTransform myRectTrans;
     private float perModSize;
     public PanelAdjustType adjustType;
@@ -24,8 +24,9 @@ public class AdaptiveSize_UI : MonoBehaviour
         perModSize = gridLayout.cellSize.x + gridLayout.spacing.x;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        Debug.Log(perModSize);
         if (adjustType == PanelAdjustType.Horizontal)
         {
             if (gridLayout.padding.left + gridLayout.padding.right + gridLayout.transform.childCount * perModSize != myRectTrans.rect.width)
@@ -40,9 +41,8 @@ public class AdaptiveSize_UI : MonoBehaviour
             {
                 myRectTrans.sizeDelta = new Vector2(gridLayout.padding.left + gridLayout.padding.right + perModSize * Mathf.CeilToInt(gridLayout.transform.childCount / maxWidth),
                                                     gridLayout.padding.top + gridLayout.padding.bottom + perModSize * Mathf.Clamp(gridLayout.transform.childCount, 1, maxHeight));
+                
             }
         }
-
     }
-
 }

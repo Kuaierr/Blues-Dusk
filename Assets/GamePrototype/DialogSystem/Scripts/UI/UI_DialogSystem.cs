@@ -16,7 +16,6 @@ public class UI_DialogSystem : UIGroup
     public GameObject indicator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
-    private Animator animator;
     
     protected override void OnStart()
     {

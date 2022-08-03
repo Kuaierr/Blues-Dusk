@@ -45,7 +45,11 @@ public partial class Inventory
         }
         public void SetStock(IStock stock)
         {
-            m_stock = stock;
+            if (IsEmpty)
+                m_stock = stock;
+
+            if (m_stock.GetType().Equals(stock.GetType()))
+                m_stock.AddOverlap(stock.Overlap);
         }
 
         public bool ModifyStock<T>(InventoryCallback<T> callback) where T : class

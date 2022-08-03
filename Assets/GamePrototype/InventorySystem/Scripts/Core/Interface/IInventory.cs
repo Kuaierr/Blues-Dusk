@@ -10,6 +10,7 @@ public interface IInventory
     bool HasStock(string name, bool useCache = true);
     bool HasStock(int index, bool useCache = true);
     bool AddStock(IStock stock);
+    bool AddStock(IStock stock, int count);
     IStock GetStock(string name);
     bool RemoveStock(string name);
     bool SetStock(string name, IStock stock);
@@ -18,7 +19,6 @@ public interface IInventory
     bool RemoveStock(int index);
     bool SetStock(int index, IStock stock);
     bool ModifyStock<T>(int index, InventoryCallback<T> callback) where T : class;
-    int GetStockSerialId();
     void Clear();
     void SetHelper(IInventoryHelper helper);
 }

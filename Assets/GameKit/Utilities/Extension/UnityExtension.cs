@@ -134,6 +134,19 @@ namespace GameKit
                 parent = parent.parent;
             return parent;
         }
+
+        public static string GetPathName(this Transform trans, Transform endParent)
+        {
+            Transform parent = trans.parent;
+            string pathName = trans.gameObject.name;
+            while (parent != null && parent != endParent)
+            {
+                pathName = pathName.Insert(0, parent.gameObject.name + "/");
+                parent = parent.parent;
+            }
+            return pathName;
+        }
+
         public static void SetPositionX(this Transform transform, float newValue)
         {
             Vector3 v = transform.position;

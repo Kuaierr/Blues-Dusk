@@ -9,8 +9,8 @@ public interface IStock
     IInventory Inventory { get; }
     int Overlap { get; }
     int MaxOverlap { get; }
-    void OnInit(string name, object data);
     void OnChunkSlot(int index);
+    void OnHelperInit(int overlap, int maxOverlap);
     void AddOverlap(int count = 1);
     void OnInteract();
 }

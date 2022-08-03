@@ -3,6 +3,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 public static class ScenesList
 {
+    [MenuItem("Scenes/GameKitDemo_Entity")]
+    public static void Assets_GameKit_Entity_Demo_Scenes_GameKitDemo_Entity_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Entity/Demo/Scenes/GameKitDemo_Entity.unity"); }
     [MenuItem("Scenes/GameKitDemo_Fsm")]
     public static void Assets_GameKit_Fsm_Demo_GameKitDemo_Fsm_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Fsm/Demo/GameKitDemo_Fsm.unity"); }
     [MenuItem("Scenes/GameKitDemo_ObjectPool")]
@@ -25,12 +27,14 @@ public static class ScenesList
     public static void Assets_GamePrototype_DialogSystem_Demo_Scenes_Prototype_Dialog_UI_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/DialogSystem/Demo/Scenes/Prototype_Dialog_UI.unity"); }
     [MenuItem("Scenes/Prototype_Dialog_UIandDice")]
     public static void Assets_GamePrototype_DiceSystem_Scenes_Prototype_Dialog_UIandDice_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/DiceSystem/Scenes/Prototype_Dialog_UIandDice.unity"); }
+    [MenuItem("Scenes/Prototype_Inventory")]
+    public static void Assets_GamePrototype_InventorySystem_Demo_Scenes_Prototype_Inventory_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/InventorySystem/Demo/Scenes/Prototype_Inventory.unity"); }
     [MenuItem("Scenes/Prototype_Interact")]
     public static void Assets_GamePrototype_MovementSystem_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/MovementSystem/Prototype_Interact.unity"); }
     [MenuItem("Scenes/Addressable")]
     public static void Assets_GamePrototype_SerializeSystem_Addressable_Scenes_Addressable_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/SerializeSystem/Addressable/Scenes/Addressable.unity"); }
-    [MenuItem("Scenes/SerializationTest")]
-    public static void Assets_GamePrototype_SerializeSystem_Protobuf_SerializationTest_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/SerializeSystem/Protobuf/SerializationTest.unity"); }
+    [MenuItem("Scenes/Testing")]
+    public static void Assets_GamePrototype_Testing_Testing_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/Testing/Testing.unity"); }
     [MenuItem("Scenes/Demo")]
     public static void Assets_GamePrototype_Universal_Arts_40_Simple_Icons_Free_Scenes_Demo_unity() { ScenesUpdate.OpenScene("Assets/GamePrototype/Universal/Arts/40-Simple Icons-Free/Scenes/Demo.unity"); }
     [MenuItem("Scenes/Demo")]

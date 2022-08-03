@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/GameKit/Procedure/Demo/GameKit_Launcher.unity
     guid: 6d652a1357b896648a2614563c4ddace
   - enabled: 1
+    path: Assets/GameKit/Fsm/Demo/GameKitDemo_Fsm.unity
+    guid: ae7d938e3adca114189e79418ebba3c9
+  - enabled: 1
     path: Assets/GameKit/ObjectPool/Demo/GameKitDemo_ObjectPool.unity
     guid: 3273610c439890840869ea802c644948
   - enabled: 1
-    path: Assets/GameKit/Fsm/Demo/GameKitDemo_Fsm.unity
-    guid: ae7d938e3adca114189e79418ebba3c9
+    path: Assets/GameKit/Entity/Demo/Scenes/GameKitDemo_Entity.unity
+    guid: 9799b15dad5bceb4d884a56dea0a0033
   - enabled: 1
     path: Assets/GameKit/Procedure/Demo/GameKitDemo_Loading.unity
     guid: 4c32bf410cdaddf47a30a2cea5a300bc
@@ -39,14 +42,17 @@ EditorBuildSettings:
     path: Assets/GamePrototype/DiceSystem/Scenes/Prototype_Dialog_UIandDice.unity
     guid: c1785b9931242724ab1f12523b9b2134
   - enabled: 1
+    path: Assets/GamePrototype/InventorySystem/Demo/Scenes/Prototype_Inventory.unity
+    guid: 8e4e33a6464c7a444a78bcc3a3bec880
+  - enabled: 1
     path: Assets/GamePrototype/MovementSystem/Prototype_Interact.unity
     guid: 820d23f4e0af54e4094da59d1e543f11
   - enabled: 1
     path: Assets/GamePrototype/SerializeSystem/Addressable/Scenes/Addressable.unity
     guid: bd9f99d6e85ba00458d8b4171241cb8d
   - enabled: 1
-    path: Assets/GamePrototype/SerializeSystem/Protobuf/SerializationTest.unity
-    guid: 13a7799e66a66f04bace0b3a47ebd00f
+    path: Assets/GamePrototype/Testing/Testing.unity
+    guid: 007a7bade03631b4982b001543a18cdf
   - enabled: 1
     path: Assets/GamePrototype/Universal/Arts/40-Simple Icons-Free/Scenes/Demo.unity
     guid: 2cda990e2423bbf4892e6590ba056729

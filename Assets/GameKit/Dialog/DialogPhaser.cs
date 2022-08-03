@@ -49,29 +49,32 @@ public static class DialogPhaser
             Debug.Log($"[Phaser] Detect comments.");
             return;
         }
-
         DialogTree tree = (node.Tree as DialogTree);
+
+
         string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value.Trim();
         string dialogInfo = text.Split(']').LastOrDefault();
-
-        if (dialogInfo.Split('：').Length == 2) // 普通节点
+        string[] split = dialogInfo.SafeSplit('：');
+        if (split.Length == 2) // 普通节点
         {
             string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
             string contents = dialogInfo.Split('：').LastOrDefault().Trim();
             node.nodeEntity.speaker = speaker;
             node.nodeEntity.contents = contents;
         }
-        else if (dialogInfo.Split('：').Length == 1)    // 对话选项节点
+        else if (split.Length == 1)    // 对话选项节点
         {
             node.nodeEntity.IsFunctional = true;
             node.nodeEntity.contents = dialogInfo;
         }
-        else if (dialogInfo.Split('：').Length == 0) // 功能性节点
+        else if (split.Length == 0) // 功能性节点
         {
             node.nodeEntity.IsFunctional = true;
         }
         else
+        {
             Utility.Debugger.LogFail("Unsupport content symbol \':\', please replace it.");
+        }
 
         bool customLinking = true;
 
@@ -149,7 +152,7 @@ public static class DialogPhaser
                         Debug.LogError($"[Phaser] cdivider command require at least 3 parameters");
                         return;
                     }
-                    
+
                     node.nodeEntity.dividerConditions = cparams[0].Trim().RemoveBracket().Split('&').ToList();
                     // Debug.Log(smallBracketRegex.Match(cparams[0]));
                     tree.CachedLinkToDeclared(node, cparams[1]);
@@ -171,4 +174,9 @@ public static class DialogPhaser
     {
         return value.Split(' ');
     }
+
+    // private static string ProcessEscapeCharacter(string text)
+    // {
+    //     text.IndexOfAny
+    // }
 }

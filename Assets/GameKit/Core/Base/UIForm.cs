@@ -36,6 +36,7 @@ namespace GameKit
         }
         public virtual void OnTick() { }
         public virtual void OnStart() { }
+        public virtual void OnUpdate() { }
     }
 }
 
