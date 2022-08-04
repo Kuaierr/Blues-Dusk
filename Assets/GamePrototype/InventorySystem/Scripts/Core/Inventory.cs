@@ -16,7 +16,7 @@ public partial class Inventory : IInventory
     private int m_cachedChunkIndex;
     private IInventoryHelper m_helper;
     private readonly List<IStock> m_stocks;
-    private readonly Dictionary<int, IInventoryChunk> m_cachedChunks;
+    private readonly List<IInventoryChunk> m_cachedChunks;
     private static int s_currentSerialId = 0;
 
     public int Id
@@ -55,16 +55,29 @@ public partial class Inventory : IInventory
         }
     }
 
+    public IStock[] StockMap
+    {
+        get
+        {
+            List<IStock> tmpStocks = new List<IStock>();
+            for (int i = 0; i < m_cachedChunks.Count; i++)
+            {
+                tmpStocks.Add(m_cachedChunks[i].GetStock());
+            }
+            return tmpStocks.ToArray();
+        }
+    }
+
     public Inventory(string name, int size, int serialId)
     {
         m_name = name;
         m_size = size;
         m_serialId = serialId;
         m_stocks = new List<IStock>();
-        m_cachedChunks = new Dictionary<int, IInventoryChunk>();
+        m_cachedChunks = new List<IInventoryChunk>();
         for (int i = 0; i < size; i++)
         {
-            m_cachedChunks.Add(i, new InventoryChunk(i));
+            m_cachedChunks.Add(new InventoryChunk(i));
         }
 
         m_cachedStock = null;
@@ -190,7 +203,7 @@ public partial class Inventory : IInventory
         if (m_cachedStock != null || HasStock(name))
         {
             m_stocks.Remove(m_cachedStock);
-            m_cachedChunks.Remove(m_cachedStock.SlotIndex);
+            m_cachedChunks.RemoveAt(m_cachedStock.SlotIndex);
             return true;
         }
         return false;
@@ -266,7 +279,7 @@ public partial class Inventory : IInventory
     {
         m_stocks.Clear();
         foreach (var chunk in m_cachedChunks)
-            chunk.Value.Clear();
+            chunk.Clear();
     }
 
     public void SetHelper(IInventoryHelper helper)

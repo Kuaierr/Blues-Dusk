@@ -56,5 +56,10 @@ namespace GameKit
         {
             GameKitModuleCenter.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
+
+        public void Shutdown()
+        {
+            
+        }
     }
 }

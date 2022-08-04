@@ -5,17 +5,19 @@ using GameKit;
 
 public class InventorySystem : GameKitComponent
 {
-    [SerializeField]
-    private string m_InventoryHelperTypeName = "GameKit.DefaultInventoryHelper";
-    [SerializeField]
-    private InventoryHelperBase m_CustomInventoryHelper = null;
+    [SerializeField] private string m_InventoryHelperTypeName = "GameKit.DefaultInventoryHelper";
+    [SerializeField] private InventoryHelperBase m_CustomInventoryHelper = null;
     [SerializeField] private InventoryHelperBase helper;
-    protected override void Awake()
+
+    private void Start()
     {
-        base.Awake();
         helper = Helper.CreateHelper(m_InventoryHelperTypeName, m_CustomInventoryHelper);
         helper.gameObject.transform.SetParent(this.gameObject.transform);
         helper.name = "InventoryHelper";
+    }
+    public IStock GetStockFromInventory(string inventoryName, string stockName)
+    {
+        return InventoryManager.instance.GetStockFromInventory(inventoryName, stockName);
     }
 
     public T GetFromInventory<T>(string inventoryName, string stockName) where T : class

@@ -13,20 +13,20 @@ namespace LubanConfig
    
 public sealed partial class Tables
 {
-    public Stock.TbItem TbItem {get; }
-    public Stock.TbDice TbDice {get; }
-    public Stock.TbCard TbCard {get; }
+    public DataTable.TbItem TbItem {get; }
+    public DataTable.TbDice TbDice {get; }
+    public DataTable.TbCard TbCard {get; }
     public Global.TbGlobal TbGlobal {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
-        TbItem = new Stock.TbItem(loader("stock_tbitem")); 
-        tables.Add("Stock.TbItem", TbItem);
-        TbDice = new Stock.TbDice(loader("stock_tbdice")); 
-        tables.Add("Stock.TbDice", TbDice);
-        TbCard = new Stock.TbCard(loader("stock_tbcard")); 
-        tables.Add("Stock.TbCard", TbCard);
+        TbItem = new DataTable.TbItem(loader("datatable_tbitem")); 
+        tables.Add("DataTable.TbItem", TbItem);
+        TbDice = new DataTable.TbDice(loader("datatable_tbdice")); 
+        tables.Add("DataTable.TbDice", TbDice);
+        TbCard = new DataTable.TbCard(loader("datatable_tbcard")); 
+        tables.Add("DataTable.TbCard", TbCard);
         TbGlobal = new Global.TbGlobal(loader("global_tbglobal")); 
         tables.Add("Global.TbGlobal", TbGlobal);
         PostInit();

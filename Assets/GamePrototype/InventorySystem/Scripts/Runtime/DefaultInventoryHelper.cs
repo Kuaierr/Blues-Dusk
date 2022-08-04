@@ -1,5 +1,5 @@
 using LubanConfig;
-using LubanConfig.Stock;
+using LubanConfig.DataTable;
 namespace GameKit
 {
     public sealed class DefaultInventoryHelper : InventoryHelperBase

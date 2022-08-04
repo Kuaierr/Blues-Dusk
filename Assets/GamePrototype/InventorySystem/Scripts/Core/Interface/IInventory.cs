@@ -5,6 +5,7 @@ public interface IInventory
     int Count { get; }
     int OverlapCount { get; }
     string Name { get; }
+    IStock[] StockMap { get; }
     IStock CreateStock<T>(int id, string name, T data = default(T)) where T : class;
     bool HasFull(IStock stock, bool useCache = true);
     bool HasStock(string name, bool useCache = true);

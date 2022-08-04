@@ -179,5 +179,10 @@ namespace GameKit
 #endif
         }
 
+        public void TryGetAsset<T>(string keyName, UnityAction<T> action) where T : Object
+        {
+            GetAsset(keyName, action);
+        }
+
     }
 }

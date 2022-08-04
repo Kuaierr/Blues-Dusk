@@ -14,6 +14,15 @@ public class InventoryManager : SingletonBase<InventoryManager>
         currentCachedInventory = null;
     }
 
+    public IStock GetStockFromInventory(string inventoryName, string stockName)
+    {
+        if (HasInventory(inventoryName))
+        {
+            return inventories[inventoryName].GetStock(stockName);
+        }
+        return null;
+    }
+
     public T GetFromInventory<T>(string inventoryName, string stockName) where T : class
     {
         if (HasInventory(inventoryName))

@@ -4,20 +4,38 @@ using UnityEngine;
 using GameKit;
 using UnityEngine.EventSystems;
 
+
 public sealed class CursorSystem : MonoSingletonBase<CursorSystem>
 {
+    public enum RaycastType
+    {
+        Raycast3D,
+        Raycast2D
+    }
     public static Vector3 MAGIC_VECTOR = Vector3.zero;
-    public RaycastHit hitInfo;
+    public RaycastType raycastType = RaycastType.Raycast3D;
     public LayerMask navigationLayer;
+    private RaycastHit hitInfo;
+    private RaycastHit2D hitInfo2d;
+    private Vector3 originPos, diretcion;
 
     private void Update()
     {
         if (IsActive)
         {
-            Vector3 originPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-            Vector3 diretcion = Camera.main.transform.forward;
-            if (Physics.Raycast(originPos, diretcion, out RaycastHit hitInfo, 20, navigationLayer))
-                this.hitInfo = hitInfo;
+            if (raycastType == RaycastType.Raycast3D)
+            {
+                originPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                diretcion = Camera.main.transform.forward;
+                if (Physics.Raycast(originPos, diretcion, out RaycastHit hitInfo, 20, navigationLayer))
+                    this.hitInfo = hitInfo;
+            }
+            else if (raycastType == RaycastType.Raycast2D)
+            {
+                originPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                diretcion = Camera.main.transform.forward;
+                hitInfo2d = Physics2D.Raycast(originPos, diretcion, 20, navigationLayer);
+            }
         }
     }
 

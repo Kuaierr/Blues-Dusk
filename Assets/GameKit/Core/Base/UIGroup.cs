@@ -23,7 +23,9 @@ namespace GameKit
             FindChildrenByType<Toggle>();
             FindChildrenByType<Slider>();
             FindChildrenByType<UIForm>();
+            FindChildrenByType<UIGroup>();
             FindChildrenByType<LayoutGroup>();
+            animator = GetComponent<Animator>();
         }
         protected override void Start()
         {
@@ -34,7 +36,7 @@ namespace GameKit
         protected virtual void OnStart() { }
         public virtual void Show(UnityAction callback = null)
         {
-            if (animator.runtimeAnimatorController != null)
+            if (animator!=null && animator.runtimeAnimatorController != null)
             {
                 animator.SetTrigger("FadeIn");
                 animator.OnComplete(1f, () =>

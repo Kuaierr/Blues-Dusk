@@ -11,9 +11,9 @@ namespace LubanConfig.ItemEnum
     public enum ItemType
     {
         /// <summary>
-        /// 获取卡片的卡包
+        /// 默认未分类
         /// </summary>
-        CARDBAG = 1,
+        OTHER = 1,
         /// <summary>
         /// 消耗品
         /// </summary>
@@ -27,8 +27,8 @@ namespace LubanConfig.ItemEnum
         /// </summary>
         BOOK = 4,
         /// <summary>
-        /// 其他
+        /// 获取卡片的卡包
         /// </summary>
-        OTHER = 5,
+        CARDBAG = 5,
     }
 }
