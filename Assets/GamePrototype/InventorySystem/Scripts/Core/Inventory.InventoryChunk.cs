@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class Inventory
 {
-    public sealed class InventoryChunk
+    public sealed class InventoryChunk : IInventoryChunk
     {
         private int m_index;
         private IStock m_stock;

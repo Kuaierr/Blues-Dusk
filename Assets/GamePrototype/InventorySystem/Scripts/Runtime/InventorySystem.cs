@@ -5,44 +5,45 @@ using GameKit;
 
 public class InventorySystem : GameKitComponent
 {
-    private InventoryManager inventoryManager;
     [SerializeField]
     private string m_InventoryHelperTypeName = "GameKit.DefaultInventoryHelper";
     [SerializeField]
     private InventoryHelperBase m_CustomInventoryHelper = null;
     [SerializeField] private InventoryHelperBase helper;
-    private void Start()
+    protected override void Awake()
     {
-        inventoryManager = InventoryManager.instance;
+        base.Awake();
         helper = Helper.CreateHelper(m_InventoryHelperTypeName, m_CustomInventoryHelper);
+        helper.gameObject.transform.SetParent(this.gameObject.transform);
+        helper.name = "InventoryHelper";
     }
 
-    public T GetFromInventory<T>(string name, string stockName) where T : class
+    public T GetFromInventory<T>(string inventoryName, string stockName) where T : class
     {
-        return inventoryManager.GetFromInventory<T>(name, stockName);
+        return InventoryManager.instance.GetFromInventory<T>(inventoryName, stockName);
     }
 
-    public bool AddToInventory<T>(int id, string name, T data) where T : class
+    public bool AddToInventory<T>(string inventoryName, int id, string stockName, T data) where T : class
     {
-        return inventoryManager.AddToInventory<T>(id, name, data);
+        return InventoryManager.instance.AddToInventory<T>(inventoryName, id, stockName, data);
     }
-    public IInventory GetInventory(string name)
+    public IInventory GetInventory(string inventoryName)
     {
-        return inventoryManager.GetInventory(name);
-    }
-
-    public bool CreateInventory(string name, int size)
-    {
-        return inventoryManager.CreateInventory(name, size, helper);
+        return InventoryManager.instance.GetInventory(inventoryName);
     }
 
-    public bool RemoveInventory(string name)
+    public bool CreateInventory(string inventoryName, int size)
     {
-        return inventoryManager.RemoveInventory(name);
+        return InventoryManager.instance.CreateInventory(inventoryName, size, helper);
     }
 
-    public bool HasInventory(string name)
+    public bool RemoveInventory(string inventoryName)
     {
-        return inventoryManager.HasInventory(name);
+        return InventoryManager.instance.RemoveInventory(inventoryName);
+    }
+
+    public bool HasInventory(string inventoryName)
+    {
+        return InventoryManager.instance.HasInventory(inventoryName);
     }
 }

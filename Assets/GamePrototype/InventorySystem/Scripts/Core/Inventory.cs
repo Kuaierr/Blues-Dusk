@@ -61,7 +61,12 @@ public partial class Inventory : IInventory
         m_size = size;
         m_serialId = serialId;
         m_stocks = new List<IStock>();
-        m_cachedChunks = new Dictionary<int, IInventoryChunk>(m_size);
+        m_cachedChunks = new Dictionary<int, IInventoryChunk>();
+        for (int i = 0; i < size; i++)
+        {
+            m_cachedChunks.Add(i, new InventoryChunk(i));
+        }
+
         m_cachedStock = null;
         m_cachedStockIndex = -1;
         m_cachedChunkIndex = -1;
@@ -70,8 +75,8 @@ public partial class Inventory : IInventory
     public IStock CreateStock<T>(int id, string name, T data = default(T)) where T : class
     {
         IStock newStock = new Stock(id, Stock.GetStockSerialId(), name, data);
-        m_helper.InitStock<T>(newStock, data);
-        return null;
+        m_helper.InitStock(newStock, data);
+        return newStock;
     }
 
     public bool HasFull(IStock stock, bool cache = true)
@@ -92,6 +97,7 @@ public partial class Inventory : IInventory
 
     public bool HasStock(string name, bool useCache = true)
     {
+
         if (useCache)
         {
             if (m_cachedStock != null && m_cachedStockIndex != -1)

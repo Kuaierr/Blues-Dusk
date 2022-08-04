@@ -14,61 +14,60 @@ public class InventoryManager : SingletonBase<InventoryManager>
         currentCachedInventory = null;
     }
 
-    public T GetFromInventory<T>(string name, string stockName) where T : class
+    public T GetFromInventory<T>(string inventoryName, string stockName) where T : class
     {
-        if (HasInventory(name))
+        if (HasInventory(inventoryName))
         {
-            return inventories[name].GetStock(stockName) as T;
+            return inventories[inventoryName].GetStock(stockName).Data as T;
         }
         return null;
     }
 
-    public bool AddToInventory<T>(int id, string name, T data) where T : class
+    public bool AddToInventory<T>(string inventoryName, int id, string stockName, T data) where T : class
     {
-        if (HasInventory(name))
+        if (HasInventory(inventoryName))
         {
-            IStock stock = inventories[name].CreateStock<T>(id, name, data);
-            inventories[name].AddStock(stock);
+            IStock stock = inventories[inventoryName].CreateStock<T>(id, stockName, data);
+            inventories[inventoryName].AddStock(stock);
             return true;
         }
         return false;
     }
-    public IInventory GetInventory(string name)
+    public IInventory GetInventory(string inventoryName)
     {
-        if (HasInventory(name))
-            return inventories[name];
-        Utility.Debugger.LogFail("Can not get inventory, no inventory named {0}.", name);
+        if (HasInventory(inventoryName))
+            return inventories[inventoryName];
+        Utility.Debugger.LogFail("Can not get inventory, no inventory named {0}.", inventoryName);
         return null;
     }
 
-    public bool CreateInventory(string name, int size, IInventoryHelper helper)
+    public bool CreateInventory(string inventoryName, int size, IInventoryHelper helper)
     {
-        if (HasInventory(name))
+        if (HasInventory(inventoryName))
         {
-            Utility.Debugger.LogFail("Can not create inventory, inventory named {0} has exist.", name);
+            Utility.Debugger.LogFail("Can not create inventory, inventory named {0} has exist.", inventoryName);
             return false;
         }
-        Inventory inventory = new Inventory(name, size, Inventory.GetInventorySerialId());
+        Inventory inventory = new Inventory(inventoryName, size, Inventory.GetInventorySerialId());
         inventory.SetHelper(helper);
-        inventories.Add(name, inventory);
-
+        inventories.Add(inventoryName, inventory);
         return true;
     }
 
-    public bool RemoveInventory(string name)
+    public bool RemoveInventory(string inventoryName)
     {
-        if (!HasInventory(name))
+        if (!HasInventory(inventoryName))
         {
-            Utility.Debugger.LogFail("Can not remove inventory, no inventory named {0}", name);
+            Utility.Debugger.LogFail("Can not remove inventory, no inventory named {0}", inventoryName);
             return false;
         }
-        inventories.Remove(name);
+        inventories.Remove(inventoryName);
         return true;
     }
 
-    public bool HasInventory(string name)
+    public bool HasInventory(string inventoryName)
     {
-        if (!inventories.ContainsKey(name))
+        if (!inventories.ContainsKey(inventoryName))
             return false;
         return true;
     }

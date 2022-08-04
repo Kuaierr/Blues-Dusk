@@ -8,27 +8,42 @@
 using Bright.Serialization;
 using SimpleJSON;
 
-namespace cfg
+namespace LubanConfig
 {
    
 public sealed partial class Tables
 {
-    public item.TbItem TbItem {get; }
+    public Stock.TbItem TbItem {get; }
+    public Stock.TbDice TbDice {get; }
+    public Stock.TbCard TbCard {get; }
+    public Global.TbGlobal TbGlobal {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
-        TbItem = new item.TbItem(loader("item_tbitem")); 
-        tables.Add("item.TbItem", TbItem);
+        TbItem = new Stock.TbItem(loader("stock_tbitem")); 
+        tables.Add("Stock.TbItem", TbItem);
+        TbDice = new Stock.TbDice(loader("stock_tbdice")); 
+        tables.Add("Stock.TbDice", TbDice);
+        TbCard = new Stock.TbCard(loader("stock_tbcard")); 
+        tables.Add("Stock.TbCard", TbCard);
+        TbGlobal = new Global.TbGlobal(loader("global_tbglobal")); 
+        tables.Add("Global.TbGlobal", TbGlobal);
         PostInit();
 
         TbItem.Resolve(tables); 
+        TbDice.Resolve(tables); 
+        TbCard.Resolve(tables); 
+        TbGlobal.Resolve(tables); 
         PostResolve();
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
         TbItem.TranslateText(translator); 
+        TbDice.TranslateText(translator); 
+        TbCard.TranslateText(translator); 
+        TbGlobal.TranslateText(translator); 
     }
     
     partial void PostInit();
