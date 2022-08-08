@@ -70,54 +70,5 @@ public class DialogManager : SingletonBase<DialogManager>
         return dialogTree;
     }
 
-    public void TraverseTree()
-    {
-        DialogTree dialogTree = AcquireActiveTree();
-        if (dialogTree == null)
-        {
-            Debug.LogWarning("Traverse failed, no active tree in queue.");
-            return;
-        }
-        int deadloopPreventer = 0;
-        while (true)
-        {
-            if (deadloopPreventer >= 1000)
-            {
-                Debug.Log("reach deadloop");
-                break;
-            }
-            deadloopPreventer++;
-
-            if (dialogTree.currentNode.IsLeaf)
-                return;
-            Debug.Log(dialogTree.currentNode);
-
-            if (dialogTree.currentNode.Sons.Count > 1)
-            {
-
-            }
-            else if (dialogTree.currentNode.Sons.Count == 1)
-            {
-                dialogTree.currentNode = dialogTree.currentNode.Sons.FirstOrDefault();
-                // dialogTree.currentNode.OnEnter();
-            }
-        }
-    }
-
-    public void PhaseNext()
-    {
-        DialogTree currentTree = AcquireActiveTree();
-        if (currentTree == null)
-            return;
-
-        if (currentTree.currentNode.Sons.Count > 1)
-        {
-            List<Option> options = DialogSelection.CreateSelection(currentTree.currentNode.Sons);
-        }
-        else
-        {
-            Node<Dialog> nextNode = currentTree.currentNode.Next as Node<Dialog>;
-
-        }
-    }
+    
 }

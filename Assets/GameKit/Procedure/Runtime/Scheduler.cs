@@ -30,8 +30,9 @@ namespace GameKit
             private set;
         }
 
-        protected override void OnAwake()
+        protected override void Awake()
         {
+            base.Awake();
             if (SceneManager.sceneCount > 1)
                 CurrentScene = SceneManager.GetSceneAt(1).name;
             else

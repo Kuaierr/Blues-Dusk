@@ -14,7 +14,7 @@ public class ModuleTesting : MonoBehaviour
     private bool isShown = false;
     private void Start()
     {
-        dialogSystem = GameKitComponentCenter.GetComponent<DialogSystem>();
+        dialogSystem = DialogSystem.current;
         canvasGroup = GetComponent<CanvasGroup>();
         ChangeDisplay(isShown);
     }

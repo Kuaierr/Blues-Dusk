@@ -5,7 +5,7 @@ C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/bytes/datatable_tbtestex
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/bytes/global_tbglobal.bytes,EBC675486CCE5F22592E604DC1C4DFD6,11,1659534035967
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/json/datatable_tbcard.json,AF9A9FB8B2492CFCA311A39CD6E073,132,1659580104852
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/json/datatable_tbdice.json,763C1F79EB15F1F3C65667D450726BA0,147,1659580104852
-C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/json/datatable_tbitem.json,E3B5A6F1D81BB81E0C3E4F615D35360,4439,1659603398136
+C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/json/datatable_tbitem.json,988917A068C87FDFD7AB7538E2C2F3C1,4350,1659668141440
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Datas/json/global_tbglobal.json,C3EFA26BC65540D3A7EB3DF34F24B35D,152,1659520784022
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/DataTable/Card.cs,34D6A1F41728FD7365A6541943AC5,2298,1659588654613
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/DataTable/Dice.cs,BA29C0ECE7A587E37CF6AB9E4C60A239,2298,1659588654613
@@ -20,11 +20,11 @@ C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/ItemEnum/HighLightColo
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/ItemEnum/InteractCallbackType.cs,ED392C50A7CB9F17B6E911C487A9CD,988,1659594630343
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/ItemEnum/ItemType.cs,EDE0CE10A7E8571ED678B5E8255AC4F,912,1659579924296
 C:/Luty/Unity-Projects/Blues Dusk/Assets/LubanGen/Scripts/Tables.cs,9780AFD21AD8994FA4D66DCAC8734F7C,1769,1659594630343
-C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/__beans__.xlsx,EE52331ECF387BE36F993687112088DC,9472,1659594844183
-C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/__enums__.xlsx,8E5F8E5623933C5BCF3B06C293027BD,10178,1659593331314
+C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/__beans__.xlsx,CA61CB7757E4F3024F9E6785541093,9448,1659668298652
+C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/__enums__.xlsx,4BF2A42E6B66B7494A7BF678E8E512D,10179,1659616833718
 C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/__tables__.xlsx,6BD9A852BC963C9FB7DC582B8B67E51,9692,1659588505653
 C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/Card.xlsx,213E3A3DEBE8B8DF0F33727730AB,10568,1659519796092
 C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/Dice.xlsx,9C4E2182A0E64683DB6441A39E8D37EA,10700,1659519797972
 C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/Global.xlsx,79EC492AB047E56E20377AAB6C6CB57B,10480,1659519792588
-C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/Item.xlsx,EDC1D0CF3533727F1F26888282B03B80,11216,1659603379088
+C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Datas/Item.xlsx,B706E84714063B067461D4C24203B65,11265,1659668093153
 C:/Luty/Unity-Projects/Blues Dusk/Luban/Config/Defines/datatable.xml,F24339DE2DEEDDDD7DFB40685749AA9,577,1659590674046

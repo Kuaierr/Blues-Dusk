@@ -15,6 +15,6 @@ public class MainTest : MonoBehaviour
     {
         yield return null;
         entityComponent = GameKitComponentCenter.GetComponent<EntityComponent>();
-        entityComponent.ShowEntity(typeof(EntityTest), "Cube", "Geometry", 30, new EntityTestData(2022, 0727));
+        entityComponent.ShowEntityDemo(typeof(EntityTest), "Cube", "Geometry", 30, new EntityTestData(2022, 0727));
     }
 }

@@ -16,7 +16,7 @@ public class UI_DialogSystem : UIGroup
     public GameObject indicator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
-    
+
     protected override void OnStart()
     {
         base.OnStart();
@@ -32,12 +32,16 @@ public class UI_DialogSystem : UIGroup
 
     public void ShowResponse(UnityAction callback = null)
     {
+        uI_DialogResponse.isActive = true;
+        uI_DialogResponse.gameObject.SetActive(true);
         uI_DialogResponse.Show(callback);
     }
 
     public void HideResponse(UnityAction callback = null)
     {
-        uI_DialogResponse.Hide(callback);
+        UnityAction hideCallback = CloseResponseUI;
+        hideCallback += callback;
+        uI_DialogResponse.Hide(hideCallback);
     }
 
     public int GetSelection()
@@ -60,5 +64,11 @@ public class UI_DialogSystem : UIGroup
         // this.gameObject.SetActive(true);
         animator.SetTrigger("FadeIn");
         edgeAnimator.SetTrigger("FadeIn");
+    }
+
+    private void CloseResponseUI()
+    {
+        uI_DialogResponse.isActive = false;
+        uI_DialogResponse.gameObject.SetActive(false);
     }
 }

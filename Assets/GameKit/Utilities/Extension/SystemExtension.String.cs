@@ -6,7 +6,7 @@ namespace GameKit
     {
         public static string Correction(this string str)
         {
-            return str.Trim().Replace('\u200B'.ToString(), "");
+            return str.Trim().Replace(((char)13).ToString(), "").Replace('\u200B'.ToString(), "");
         }
 
         public static string RemoveBracket(this string str)

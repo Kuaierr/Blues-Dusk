@@ -21,7 +21,7 @@ namespace GameKit
         /// <returns>实例化后的实体。</returns>
         public override object InstantiateEntity(object entityAsset)
         {
-            return Instantiate((Object)entityAsset);
+            return (Object)entityAsset;
         }
 
         /// <summary>

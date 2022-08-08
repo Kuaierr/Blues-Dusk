@@ -27,13 +27,11 @@ namespace GameKit
             }
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (Current == null)
                 Current = this as T;
-            OnAwake();
         }
-        protected virtual void OnAwake() { }
         public virtual void Enable() => isActive = true;
         public virtual void Disable() => isActive = false;
         public virtual void ShutDown()

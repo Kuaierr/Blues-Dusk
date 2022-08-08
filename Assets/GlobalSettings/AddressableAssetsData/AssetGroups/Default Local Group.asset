@@ -17,8 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e9c9b66524b441e40927a6ba03da6140
   m_SerializeEntries:
+  - m_GUID: 0053bb6305e8a0743baac9cc7e3eead8
+    m_Address: Assets/LubanGen/Datas/json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: 2981c93a161a18f4c912aa5a30ad1994
-    m_Address: Assets/GameKit/Entity/Demo/Prefab/Cube.prefab
+    m_Address: Assets/GameKit/Entity/Demo/Reousrce/Prefab/CubeDemo.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

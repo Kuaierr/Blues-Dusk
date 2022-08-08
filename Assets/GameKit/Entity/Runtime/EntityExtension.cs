@@ -4,8 +4,8 @@ namespace GameKit
 {
     public static class EntityExtension
     {
-        private const string ENTITY_PATH = "Assets/GameKit/Entity/Demo/Prefab/{0}.prefab";
-        private static int s_SerialId = 0;
+        private const string ENTITY_PATH = "Assets/GameMain/Prefabs/{0}.prefab";
+        private const string DEMO_ENTITY_PATH = "Assets/GameKit/Entity/Demo/Reousrce/Prefab/{0}.prefab";
         public static void ShowEntity(this EntityComponent entityComponent, Type logicType, string AssetName, string entityGroup, int priority, EntityData data)
         {
             if (data == null)
@@ -13,11 +13,20 @@ namespace GameKit
                 Utility.Debugger.LogWarning("Data is invalid.");
                 return;
             }
-
             entityComponent.ShowEntity(data.Id, logicType, GetEntityAsset(AssetName), entityGroup, priority, data);
         }
 
-        public static int GenerateSerialId(this EntityComponent entityComponent) => --s_SerialId;
+        public static void ShowEntityDemo(this EntityComponent entityComponent, Type logicType, string AssetName, string entityGroup, int priority, EntityData data)
+        {
+            if (data == null)
+            {
+                Utility.Debugger.LogWarning("Data is invalid.");
+                return;
+            }
+            entityComponent.ShowEntity(data.Id, logicType, GetEntityAssetDemo(AssetName), entityGroup, priority, data);
+        }
         public static string GetEntityAsset(string assetName) => Utility.Text.Format(ENTITY_PATH, assetName);
+        public static string GetEntityAssetDemo(string assetName) => Utility.Text.Format(DEMO_ENTITY_PATH, assetName);
     }
+
 }

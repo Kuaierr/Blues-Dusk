@@ -6,9 +6,8 @@ using GameKit;
 using UnityEngine.Events;
 [DisallowMultipleComponent]
 [AddComponentMenu("GameKit/Dialog System")]
-public class DialogSystem : GameKitComponent
+public class DialogSystem : MonoSingletonBase<DialogSystem>
 {
-    public static bool IsActive = true;
     private DialogTree dialogTree;
     private UI_DialogSystem uI_DialogSystem;
     private TextAnimatorPlayer textAnimatorPlayer;
@@ -19,11 +18,10 @@ public class DialogSystem : GameKitComponent
     private bool isInSelection = false;
     private bool isTextShowing = false;
 
-
     private void Start()
     {
         uI_DialogSystem = UIManager.instance.GetUI<UI_DialogSystem>("UI_DialogSystem");
-        textAnimatorPlayer = uI_DialogSystem.textAnimatorPlayer;
+        textAnimatorPlayer = uI_DialogSystem?.textAnimatorPlayer;
         ResourceManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
         {
             this.characterPool = characterPool;
@@ -53,11 +51,7 @@ public class DialogSystem : GameKitComponent
                 isInSelection = false;
                 Node<Dialog> nextNode = GetNextNode(choiceIndex);
                 ExcuteTextDisplay();
-                uI_DialogSystem.HideResponse(() =>
-                {
-                    uI_DialogSystem.uI_DialogResponse.isActive = false;
-                    uI_DialogSystem.uI_DialogResponse.gameObject.SetActive(false);
-                });
+                uI_DialogSystem.HideResponse();
                 return;
             }
         }
@@ -83,12 +77,9 @@ public class DialogSystem : GameKitComponent
         List<Option> options = dialogTree.GetOptions();
         if (options != null)
         {
-            // Debug.Log($"Update Choice UI");
-            uI_DialogSystem.UpdateOptions(options);
-            uI_DialogSystem.uI_DialogResponse.isActive = true;
-            uI_DialogSystem.uI_DialogResponse.gameObject.SetActive(true);
             isOptionShowing = true;
             isInSelection = true;
+            uI_DialogSystem.UpdateOptions(options);
             uI_DialogSystem.ShowResponse(() =>
             {
                 isOptionShowing = false;
@@ -110,7 +101,7 @@ public class DialogSystem : GameKitComponent
         else
             uI_DialogSystem.speakerName.text = node.nodeEntity.speaker;
         uI_DialogSystem.contents.text = node.nodeEntity.contents;
-        
+
         if (node.nodeEntity.speaker != ">>")
         {
             Character character = characterPool.FindCharacter(node.nodeEntity.speaker.Correction());
@@ -221,6 +212,7 @@ public class DialogSystem : GameKitComponent
         dialogTree.Clear();
         dialogTree = null;
         uI_DialogSystem.Hide();
+        DialogManager.instance.DequeueTree();
     }
 
     private void LoadAnimator()

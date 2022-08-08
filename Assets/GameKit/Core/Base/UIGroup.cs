@@ -13,7 +13,18 @@ namespace GameKit
         private Dictionary<string, List<UIBehaviour>> uiComponet = new Dictionary<string, List<UIBehaviour>>();
         protected CanvasGroup panelCanvasGroup;
         protected Animator animator;
-        protected RectTransform functionalPanel;
+        protected bool m_isShown;
+        public bool IsShown
+        {
+            get
+            {
+                return m_isShown;
+            }
+            protected set
+            {
+                m_isShown = value;
+            }
+        }
         protected override void Awake()
         {
             UIManager.instance.RegisterUI(this as UIGroup);
@@ -26,26 +37,28 @@ namespace GameKit
             FindChildrenByType<UIGroup>();
             FindChildrenByType<LayoutGroup>();
             animator = GetComponent<Animator>();
+            panelCanvasGroup = GetComponent<CanvasGroup>();
         }
         protected override void Start()
         {
-            panelCanvasGroup = GetComponent<CanvasGroup>();
             OnStart();
         }
 
         protected virtual void OnStart() { }
         public virtual void Show(UnityAction callback = null)
         {
-            if (animator!=null && animator.runtimeAnimatorController != null)
+            if (animator != null && animator.runtimeAnimatorController != null)
             {
                 animator.SetTrigger("FadeIn");
                 animator.OnComplete(1f, () =>
                 {
                     callback?.Invoke();
+                    m_isShown = true;
                 });
                 return;
             }
-            functionalPanel?.gameObject.SetActive(true);
+            panelCanvasGroup.alpha = 1;
+            m_isShown = true;
             callback?.Invoke();
         }
         public virtual void Hide(UnityAction callback = null)
@@ -56,10 +69,12 @@ namespace GameKit
                 animator.OnComplete(1f, () =>
                 {
                     callback?.Invoke();
+                    m_isShown = false;
                 });
                 return;
             }
-            functionalPanel?.gameObject.SetActive(false);
+            panelCanvasGroup.alpha = 0;
+            m_isShown = false;
             callback?.Invoke();
         }
         public T GetUIComponent<T>(string name) where T : UIBehaviour
@@ -100,6 +115,17 @@ namespace GameKit
         protected override void OnDestroy()
         {
             UIManager.instance.RemoveUI(this);
+        }
+
+        public virtual void ChangeDisplay(KeyCode keyCode)
+        {
+            if (InputManager.instance.GetUiKeyDown(keyCode))
+            {
+                if (IsShown)
+                    Hide();
+                else
+                    Show();
+            }
         }
     }
 

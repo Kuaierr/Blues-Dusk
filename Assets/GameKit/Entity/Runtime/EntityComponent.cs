@@ -5,13 +5,13 @@ using UnityEngine;
 namespace GameKit
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Kit/Entity")]
+    [AddComponentMenu("Game Kit/Entity Component")]
     public sealed partial class EntityComponent : GameKitComponent
     {
         private const int DefaultPriority = 0;
 
         private IEntityManager m_EntityManager = null;
-        private readonly List<IEntity> m_InternalEntityResults = new List<IEntity>();
+        private readonly List<IEntity> m_CachedEntities = new List<IEntity>();
 
         [SerializeField]
         private bool m_EnableShowEntityUpdateEvent = false;
@@ -223,7 +223,6 @@ namespace GameKit
                 Utility.Debugger.LogError("Entity type is invalid.");
                 return;
             }
-
             m_EntityManager.ShowEntity(entityId, entityAssetName, entityGroupName, priority, EntityInfo.Create(entityLogicType, userData));
         }
 
@@ -497,6 +496,11 @@ namespace GameKit
             }
 
             entityGroup.SetEntityInstancePriority(entity.gameObject, priority);
+        }
+
+        public void RegisterEntity(IEntity entity)
+        {
+            m_CachedEntities.Add(entity);
         }
     }
 }

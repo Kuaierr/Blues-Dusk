@@ -15,18 +15,8 @@
     "interact_callback": [
       {
         "id": 10000,
-        "callbackType": 6,
-        "callbackArgs": "deadA"
-      },
-      {
-        "id": 10000,
-        "callbackType": 6,
-        "callbackArgs": "deadA"
-      },
-      {
-        "id": 10000,
-        "callbackType": 6,
-        "callbackArgs": "deadA"
+        "callbackType": 1,
+        "callbackArgs": "GetCard"
       }
     ]
   },
@@ -43,7 +33,13 @@
     "close_up": "/GameMain/Arts/BOARD GAME ICON/128px/book_open.png",
     "can_interact": true,
     "color": 1,
-    "interact_callback": []
+    "interact_callback": [
+      {
+        "id": 10001,
+        "callbackType": 3,
+        "callbackArgs": "ShowCloseUp"
+      }
+    ]
   },
   {
     "id": 10002,
