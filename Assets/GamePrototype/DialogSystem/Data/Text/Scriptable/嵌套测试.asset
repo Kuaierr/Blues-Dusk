@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd72dcfa5d28cac40a3be446a5ab8f87, type: 3}
+  m_Name: "\u5D4C\u5957\u6D4B\u8BD5"
+  m_EditorClassIdentifier: 
+  title: "\u5D4C\u5957\u6D4B\u8BD5"
+  contents: "\r[mood-Happy]\u5353\u62C9\uFF1A\u5F00\u59CB\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5\r\n\r\n[sbranch-A]\u5353\u62C9\uFF1A\u5206\u652F\u70B9A\r\n\n\t//
+    \u7B2C\u4E00\u4E2A\u5206\u652F\u9009A1\n\r\n\t[name-A1, linkfrom-A]\u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA1\r\n\r\n\t\u5927\u536B\uFF1A\u5206\u652F\u7EBFA1\u540E\u7EED\r\n\r\n\t[sbranch-A1_B]
+    \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA-1\u5185\u7684\u5206\u652F\u70B9B\r\n\r\n\t\t[name-A1_B1,
+    linkfrom-A1_B] \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA1_B1 \u9009\u9879\r\n\r\n\t\t\u5353\u62C9\uFF1A\u5206\u652F\u7EBFA1_B1
+    \u5BF9\u767D1\r\n\r\n\t\t[linkto-A1_B_end] \u5353\u62C9\uFF1A\u5206\u652F\u7EBFA1_B1
+    \u5BF9\u767D2\r\n\r\n\r\n\t\t[name-A1_B2, linkfrom-A1_B] \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA1_B2
+    \u9009\u9879\r\n\r\n\t\t\u5353\u62C9\uFF1A\u5206\u652F\u7EBFA1_B2 \u5BF9\u767D1\r\n\r\n\t\t[linkto-A1_B_end]
+    \u5353\u62C9\uFF1A\u5206\u652F\u7EBFA1_B2 \u5BF9\u767D2\r\n\r\n\t[ebranch-A1_B_end]
+    \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA1_B\u7ED3\u675F\u70B9\r\n\r\t\n\t// \u7B2C\u4E00\u4E2A\u5206\u652F\u9009A2\n\r\n\t[name-A2,
+    linkfrom-A] \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA2\r\n\r\n\t[linkto-A_end] \u5353\u62C9\uFF1A\u5206\u652F\u7EBFA2\u540E\u7EED\r\n\r\n[ebranch-A_end]
+    \u4F0A\u68EE\uFF1A\u5206\u652F\u7EBFA\u7ED3\u675F\u70B9\r\n\r\n"

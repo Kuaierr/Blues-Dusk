@@ -1,11 +1,16 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
-using GameKit;
+using UnityEngine;
 
-
-namespace GameKit.UnityEngine
+namespace GameKit
 {
+    public enum ShutdownType
+    {
+        None,
+        Restart,
+        Quit
+    }
+
     public static class GameKitComponentCenter
     {
         private static readonly CachedLinkedList<GameKitComponent> s_GameKitComponents = new CachedLinkedList<GameKitComponent>();
@@ -52,7 +57,7 @@ namespace GameKit.UnityEngine
         {
             if (gameKitComponent == null)
             {
-                Debug.LogError("Game Kit component is invalid.");
+                Utility.Debugger.LogError("Game Kit component is invalid.");
                 return;
             }
 
@@ -63,7 +68,7 @@ namespace GameKit.UnityEngine
             {
                 if (current.Value.GetType() == ctype)
                 {
-                    Debug.LogError("Game Kit component type is already exist: " + ctype.FullName);
+                    Utility.Debugger.LogError("Game Kit component type is already exist: " + ctype.FullName);
                     return;
                 }
                 current = current.Next;
@@ -71,40 +76,44 @@ namespace GameKit.UnityEngine
 
             s_GameKitComponents.AddLast(gameKitComponent);
         }
+
+
+
+        public static void Shutdown(ShutdownType shutdownType)
+        {
+            Utility.Debugger.Log("Shutdown GameKit ({0})...", shutdownType.ToString());
+            GameKitCoreComponent coreComponent = GetComponent<GameKitCoreComponent>();
+            if (coreComponent != null)
+            {
+                coreComponent.Shutdown();
+                coreComponent = null;
+            }
+
+            s_GameKitComponents.Clear();
+
+            if (shutdownType == ShutdownType.None)
+            {
+                return;
+            }
+
+            if (shutdownType == ShutdownType.Restart)
+            {
+                // SceneManager.LoadScene(GameFrameworkSceneId);
+                return;
+            }
+
+            if (shutdownType == ShutdownType.Quit)
+            {
+                Application.Quit();
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                return;
+            }
+        }
     }
 
 
-    //         public static void Shutdown(ShutdownType shutdownType)
-    //         {
-    //             Log.Info("Shutdown Game Framework ({0})...", shutdownType.ToString());
-    //             BaseComponent baseComponent = GetComponent<BaseComponent>();
-    //             if (baseComponent != null)
-    //             {
-    //                 baseComponent.Shutdown();
-    //                 baseComponent = null;
-    //             }
 
-    //             s_GameFrameworkComponents.Clear();
-
-    //             if (shutdownType == ShutdownType.None)
-    //             {
-    //                 return;
-    //             }
-
-    //             if (shutdownType == ShutdownType.Restart)
-    //             {
-    //                 SceneManager.LoadScene(GameFrameworkSceneId);
-    //                 return;
-    //             }
-
-    //             if (shutdownType == ShutdownType.Quit)
-    //             {
-    //                 Application.Quit();
-    // #if UNITY_EDITOR
-    //                 UnityEditor.EditorApplication.isPlaying = false;
-    // #endif
-    //                 return;
-    //             }
-    //         }
 }
 

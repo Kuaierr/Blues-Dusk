@@ -1,0 +1,16 @@
+<module name="DataTable">
+	<bean name="Color" sep=",">
+        <var name="r" type="float"/>
+        <var name="g" type="float"/>
+        <var name="b" type="float"/>
+        <var name="a" type="float"/>
+    </bean>
+
+    <externaltype name="unity_color" origin_type_name="DataTable.Color">
+        <mapper lan="cs" selector="unity_cs">
+            <target_type_name>UnityEngine.Color</target_type_name>
+            <create_external_object_function>ExternalTypeUtil.NewFromCfgColor</create_external_object_function>
+        </mapper>
+    </externaltype>
+
+</module>

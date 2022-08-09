@@ -22,6 +22,15 @@ namespace GameKit
                 return s_CachedStringBuilder.ToString();
             }
 
+            public static string Combine(string str1, string str2)
+            {
+                CheckCachedStringBuilder();
+                s_CachedStringBuilder.Length = 0;
+                s_CachedStringBuilder.AppendLine(str1);
+                s_CachedStringBuilder.AppendLine(str2);
+                return s_CachedStringBuilder.ToString();
+            }
+
             public static string Format(string format, object arg0, object arg1)
             {
                 if (format == null)

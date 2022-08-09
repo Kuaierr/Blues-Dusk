@@ -1,0 +1,101 @@
+[
+  {
+    "id": 10000,
+    "name": "RadahNote",
+    "zh_name": "拉达冈的誓词",
+    "desc": "拉达冈的誓词，记录了黄金树的诞生",
+    "type": 4,
+    "price": 0,
+    "max_overlap": 1,
+    "upgrade_to_item_id": 10001,
+    "icon": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_0]",
+    "close_up": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_0]",
+    "can_interact": true,
+    "color": 1,
+    "interact_callback": [
+      {
+        "id": 10001,
+        "callbackType": 3,
+        "callbackArgs": "ShowCloseUp"
+      }
+    ]
+  },
+  {
+    "id": 10001,
+    "name": "Cardbag_XX",
+    "zh_name": "XX卡包",
+    "desc": "十分好用的XX卡包",
+    "type": 5,
+    "price": 100,
+    "max_overlap": 1,
+    "upgrade_to_item_id": 10002,
+    "icon": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_1]",
+    "close_up": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_1]",
+    "can_interact": true,
+    "color": 1,
+    "interact_callback": [
+      {
+        "id": 10000,
+        "callbackType": 6,
+        "callbackArgs": "GetCard"
+      }
+    ]
+  },
+  {
+    "id": 10002,
+    "name": "NormalKey",
+    "zh_name": "普通钥匙",
+    "desc": "普普通通平凡无奇的钥匙",
+    "type": 3,
+    "price": 0,
+    "max_overlap": 1,
+    "upgrade_to_item_id": 10003,
+    "icon": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_2]",
+    "close_up": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_2]",
+    "can_interact": false,
+    "color": 1,
+    "interact_callback": []
+  },
+  {
+    "id": 10003,
+    "name": "HappyWater",
+    "zh_name": "快乐水",
+    "desc": "雪崩镇生存必需品",
+    "type": 2,
+    "price": 10,
+    "max_overlap": 3,
+    "upgrade_to_item_id": 10004,
+    "icon": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_3]",
+    "close_up": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_3]",
+    "can_interact": true,
+    "color": 1,
+    "interact_callback": [
+      {
+        "id": 10000,
+        "callbackType": 4,
+        "callbackArgs": "DrinkHappyWater"
+      }
+    ]
+  },
+  {
+    "id": 10004,
+    "name": "HappyStick",
+    "zh_name": "仙女快乐棒",
+    "desc": "“我从没见过这么奇怪的快乐棒”",
+    "type": 1,
+    "price": 300,
+    "max_overlap": 1,
+    "upgrade_to_item_id": 10004,
+    "icon": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_4]",
+    "close_up": "/GameMain/Arts/Demo/UI_Icon_prop_01.png[UI_Icon_prop_01_4]",
+    "can_interact": true,
+    "color": 1,
+    "interact_callback": [
+      {
+        "id": 10000,
+        "callbackType": 1,
+        "callbackArgs": "CheckHappyStick"
+      }
+    ]
+  }
+]

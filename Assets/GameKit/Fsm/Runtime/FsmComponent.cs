@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit.UnityEngine
+namespace GameKit
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Fsm")]

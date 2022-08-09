@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using GameKit;
 
-namespace GameKit.UnityEngine
+namespace GameKit
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Core")]
@@ -55,6 +55,11 @@ namespace GameKit.UnityEngine
         private void Update()
         {
             GameKitModuleCenter.Update(Time.deltaTime, Time.unscaledDeltaTime);
+        }
+
+        public void Shutdown()
+        {
+            
         }
     }
 }

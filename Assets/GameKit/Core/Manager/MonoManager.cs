@@ -7,12 +7,12 @@ namespace GameKit
 {
     public class MonoManager : SingletonBase<MonoManager>
     {
-        public MonoController controller;
+        public GameKitMonoCenter controller;
         public Dictionary<string, GameObject> globalObjects;
         public MonoManager()
         {
-            GameObject obj = new GameObject("MonoController");
-            controller = obj.AddComponent<MonoController>();
+            GameObject obj = new GameObject("GameKitMonoCenter");
+            controller = obj.AddComponent<GameKitMonoCenter>();
         }
 
         public void AddUpdateListener(UnityAction func)
