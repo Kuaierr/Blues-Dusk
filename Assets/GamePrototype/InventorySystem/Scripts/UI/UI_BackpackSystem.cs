@@ -11,6 +11,8 @@ public class UI_BackpackSystem : UIGroup
     {
         base.OnStart();
         Hide();
+        if (uI_Backpack != null)
+            uI_Backpack.SetStockInfoUI(uI_StockInfo);
     }
 
 
@@ -30,12 +32,9 @@ public class UI_BackpackSystem : UIGroup
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             ChangeDisplay(KeyCode.I);
         }
-
-        
-
     }
 }

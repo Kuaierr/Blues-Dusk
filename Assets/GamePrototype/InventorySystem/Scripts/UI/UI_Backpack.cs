@@ -12,6 +12,8 @@ public class UI_Backpack : UIGroup
     [SerializeField] private RectTransform content;
     [SerializeField] private UI_BackpackChunk chunkPrototype;
     private List<UI_BackpackChunk> chunks;
+    private IStock m_CachedCurrentStock;
+    private UI_BackpackInfo uI_StockInfo;
     protected override void OnStart()
     {
         base.OnStart();
@@ -22,29 +24,7 @@ public class UI_Backpack : UIGroup
     public override void Show(UnityAction callback = null)
     {
         base.Show(callback);
-        Debug.Log($"inventory is " + inventory);
-        if (inventory != null)
-        {
-            if (inventory.Size < chunks.Count)
-            {
-                for (int i = inventory.Size; i < chunks.Count; i++)
-                {
-                    Destroy(chunks[i].gameObject);
-                }
-                chunks.RemoveRange(inventory.Size - 1, chunks.Count - 1);
-            }
-            else if (inventory.Size > chunks.Count)
-            {
-                int currentCount = chunks.Count;
-                for (int i = currentCount; i < inventory.Size; i++)
-                {
-                    UI_BackpackChunk newChunk = GameObject.Instantiate(chunkPrototype, Vector3.zero, Quaternion.identity, content.transform);
-                    newChunk.gameObject.SetActive(true);
-                    chunks.Add(newChunk);
-                }
-            }
-            Refresh();
-        }
+        UpdateChunks();
     }
 
     private void Refresh()
@@ -61,12 +41,48 @@ public class UI_Backpack : UIGroup
         for (int i = 0; i < stocksMap.Length; i++)
         {
             if (stocksMap[i] != null)
-                chunks[i].SetData(stocksMap[i].Data);
+            {
+                chunks[i].SetIndex(i);
+                chunks[i].SetData(stocksMap[i]);
+            }
+        }
+    }
+
+    public void UpdateChunks()
+    {
+        if (inventory != null)
+        {
+            if (inventory.Size < chunks.Count)
+            {
+                for (int i = inventory.Size; i < chunks.Count; i++)
+                {
+                    Destroy(chunks[i].gameObject);
+                }
+                chunks.RemoveRange(inventory.Size - 1, chunks.Count - 1);
+            }
+            else if (inventory.Size > chunks.Count)
+            {
+                int currentCount = chunks.Count;
+                for (int i = currentCount; i < inventory.Size; i++)
+                {
+                    UI_BackpackChunk newChunk = GameObject.Instantiate(chunkPrototype, Vector3.zero, Quaternion.identity, content.transform);
+                    newChunk.SetStockInfoUI(uI_StockInfo);
+                    newChunk.gameObject.SetActive(true);
+                    chunks.Add(newChunk);
+                }
+            }
+            Refresh();
         }
     }
 
     public void SetInventory(IInventory newInventory)
     {
         inventory = newInventory;
+        UpdateChunks();
+    }
+
+    public void SetStockInfoUI(UI_BackpackInfo StockInfo)
+    {
+        uI_StockInfo = StockInfo;
     }
 }

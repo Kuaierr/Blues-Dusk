@@ -62,32 +62,32 @@ public sealed class DefaultInventoryHelper : InventoryHelperBase
 
     private void ShowDialog(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Show Dialog");
+        Utility.Debugger.LogSuccess("Interact Callback: Show Dialog. Param: {0}", callbackArg);
     }
 
     private void ShowTip(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Show Tip");
+        Utility.Debugger.LogSuccess("Interact Callback: Show Tip. Param: {0}", callbackArg);
     }
 
     private void ShowCloseUp(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Show CloseUp");
+        Utility.Debugger.LogSuccess("Interact Callback: Show CloseUp. Param: {0}", callbackArg);
     }
 
     private void ShowBubble(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Show Bubble");
+        Utility.Debugger.LogSuccess("Interact Callback: Show Bubble. Param: {0}", callbackArg);
     }
 
     private void ShowTimeline(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Show Timeline");
+        Utility.Debugger.LogSuccess("Interact Callback: Show Timeline. Param: {0}", callbackArg);
     }
 
     private void GetCards(string callbackArg)
     {
-        Utility.Debugger.LogSuccess("Interact Callback: Get Cards");
+        Utility.Debugger.LogSuccess("Interact Callback: Get Cards. Param: {0}", callbackArg);
     }
 
 }

@@ -2,13 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameKit;
 using LubanConfig.DataTable;
+using UnityEngine.Events;
 
 public class UI_BackpackChunk : UIForm
 {
     private int m_index;
     private Animator animator;
     private Button button;
-    private Item itemData;
+    private IStock m_CachedStock;
+    private UI_BackpackInfo uI_Info;
     public RawImage icon;
     public int Index
     {
@@ -24,17 +26,39 @@ public class UI_BackpackChunk : UIForm
         button = GetComponent<Button>();
     }
     public void SetIndex(int index) => m_index = index;
-    public void SetData(object data)
+    public void SetData(IStock stock)
     {
-        itemData = (Item)data;
-        ResourceManager.instance.TryGetAsset<Texture>("Assets" + itemData.Icon, (Texture sprite) =>
+        m_CachedStock = stock;
+        Item data = (Item)m_CachedStock.Data;
+        ResourceManager.instance.TryGetAsset<Texture>("Assets" + data.Icon, (Texture sprite) =>
         {
             icon.texture = sprite;
         });
+        SetButtonListener(OnClick);
     }
 
-    public void OnClick()
+    public void SetButtonListener(UnityAction action)
     {
+        button.onClick.AddListener(action);
+    }
 
+    public void SetStockInfoUI(UI_BackpackInfo StockInfo)
+    {
+        uI_Info = StockInfo;
+    }
+
+    private void OnClick()
+    {
+        if (uI_Info == null)
+        {
+            Utility.Debugger.LogError("Ui_Info reference of chunk {0} is null.", Index);
+            return;
+        }
+
+        if (m_CachedStock != null)
+        {
+            uI_Info.UpdateInfo(m_CachedStock);
+            uI_Info.Show();
+        }
     }
 }
