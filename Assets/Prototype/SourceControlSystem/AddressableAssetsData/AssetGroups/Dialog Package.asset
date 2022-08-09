@@ -32,6 +32,29 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - DialogPack
+<<<<<<< Updated upstream:Assets/Prototype/SourceControlSystem/AddressableAssetsData/AssetGroups/Dialog Package.asset
+=======
+  - m_GUID: 69b6f355037956c4faec456d96c493e1
+    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u590D\u9009\u6D4B\u8BD5.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: b23debf9a6be20044801806a9f69be06
+    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u4EFF\u751F\u4EBA\u7EBF1.1.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: 597e2172b8ef90f42bb0e8a4bdb0ee08
+    m_Address: Assets/Prototype/DialogSystem/Data/Text/Scriptable/dua.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: 4afe6fd62019a3b4f859a6febbd1f0dc
+    m_Address: Assets/Prototype/DialogSystem/Data/Text/Scriptable/sad.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+>>>>>>> Stashed changes:Assets/Prototype/SerializeSystem/AddressableAssetsData/AssetGroups/Dialog Package.asset
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

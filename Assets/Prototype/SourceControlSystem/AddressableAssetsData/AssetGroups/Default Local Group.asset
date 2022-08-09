@@ -26,10 +26,6 @@ MonoBehaviour:
     m_Address: Assets/Prototype/SourceControlSystem/Addressable/Prefabs/CapsuleB.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: a4c804c9069f6ec4b8edd6fb84f12cce
-    m_Address: Assets/Prototype/SourceControlSystem/Addressable/Prefabs/CapsuleC.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:
