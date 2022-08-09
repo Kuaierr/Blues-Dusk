@@ -11,7 +11,7 @@ public class UI_BackpackChunk : UIForm
     private Button button;
     private IStock m_CachedStock;
     private UI_BackpackInfo uI_Info;
-    public RawImage icon;
+    public Image icon;
     public int Index
     {
         get
@@ -30,9 +30,9 @@ public class UI_BackpackChunk : UIForm
     {
         m_CachedStock = stock;
         Item data = (Item)m_CachedStock.Data;
-        ResourceManager.instance.TryGetAsset<Texture>("Assets" + data.Icon, (Texture sprite) =>
+        ResourceManager.instance.TryGetAsset<Sprite>("Assets" + data.Icon, (Sprite sprite) =>
         {
-            icon.texture = sprite;
+            icon.sprite = sprite;
         });
         SetButtonListener(OnClick);
     }

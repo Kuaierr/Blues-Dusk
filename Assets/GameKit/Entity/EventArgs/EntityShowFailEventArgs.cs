@@ -4,6 +4,7 @@ namespace GameKit
     public class EntityShowFailEventArgs : GameKitEventArgs
     {
         private const string m_id = "ENTITY_SHOW_FAIL";
+        public static string EventId = m_id;
         public override string Id
         {
             get

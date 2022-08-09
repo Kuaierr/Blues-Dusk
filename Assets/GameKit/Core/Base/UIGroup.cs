@@ -61,6 +61,7 @@ namespace GameKit
             m_isShown = true;
             callback?.Invoke();
         }
+
         public virtual void Hide(UnityAction callback = null)
         {
             if (animator.runtimeAnimatorController != null)
@@ -77,6 +78,7 @@ namespace GameKit
             m_isShown = false;
             callback?.Invoke();
         }
+
         public T GetUIComponent<T>(string name) where T : UIBehaviour
         {
             if (uiComponet.ContainsKey(name))

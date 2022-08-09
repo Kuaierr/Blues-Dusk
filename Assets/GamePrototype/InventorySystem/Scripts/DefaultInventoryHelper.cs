@@ -29,32 +29,32 @@ public sealed class DefaultInventoryHelper : InventoryHelperBase
                 }
             case InteractCallType.BUBBLE:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(ShowBubble, callbackArg);
                     break;
                 }
             case InteractCallType.CLOSEUP:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(ShowCloseUp, callbackArg);
                     break;
                 }
             case InteractCallType.GETCARDS:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(GetCards, callbackArg);
                     break;
                 }
             case InteractCallType.TIMELINE:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(ShowTimeline, callbackArg);
                     break;
                 }
             case InteractCallType.TIPS:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(ShowTip, callbackArg);
                     break;
                 }
             default:
                 {
-                    stock.SetInteractCallback(ShowDialog, callbackArg);
+                    stock.SetInteractCallback(ShowNone, callbackArg);
                     break;
                 }
         }
@@ -88,6 +88,11 @@ public sealed class DefaultInventoryHelper : InventoryHelperBase
     private void GetCards(string callbackArg)
     {
         Utility.Debugger.LogSuccess("Interact Callback: Get Cards. Param: {0}", callbackArg);
+    }
+
+    private void ShowNone(string callbackArg)
+    {
+        Utility.Debugger.LogSuccess("Interact Callback: None");
     }
 
 }

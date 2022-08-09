@@ -7,13 +7,14 @@ using UnityEngine.Events;
 
 public class UI_BackpackInfo : UIGroup
 {
-    public RawImage closeUp;
+    public Image closeUp;
     public TextMeshProUGUI stockName;
     public TextMeshProUGUI stockType;
     public TextMeshProUGUI stockPrice;
     public TextMeshProUGUI stockDesc;
     public Button interactButton;
     private Item cachedData;
+    private IStock m_CachedStock;
 
     protected override void OnStart()
     {
@@ -24,19 +25,26 @@ public class UI_BackpackInfo : UIGroup
     public void UpdateInfo(IStock stock)
     {
         cachedData = (Item)stock.Data;
-        ResourceManager.instance.TryGetAsset<Texture>("Assets" + cachedData.CloseUp, (Texture texture) =>
+        m_CachedStock = stock;
+        ResourceManager.instance.TryGetAsset<Sprite>("Assets" + cachedData.CloseUp, (Sprite sprite) =>
         {
-            closeUp.texture = texture;
+            closeUp.sprite = sprite;
         });
-        stockName.text = cachedData.Name;
+        stockName.text = cachedData.ZhName;
         stockType.text = cachedData.Type.ToString();
         stockPrice.text = cachedData.Price.ToString();
-        stockDesc.text = cachedData.Price.ToString();
-        interactButton.onClick.AddListener(stock.OnInteract);
+        stockDesc.text = cachedData.Desc.ToString();
+        interactButton.onClick.RemoveAllListeners();
+        interactButton.onClick.AddListener(Interact);
     }
 
     public override void Show(UnityAction callback = null)
     {
         base.Show(callback);
+    }
+
+    private void Interact()
+    {
+        m_CachedStock?.OnInteract();
     }
 }

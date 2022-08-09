@@ -19,6 +19,7 @@ public class UI_Backpack : UIGroup
         base.OnStart();
         chunks = new List<UI_BackpackChunk>();
         backpackSystem = BackpackSystem.current;
+        EventManager.instance.AddEventListener<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
     }
 
     public override void Show(UnityAction callback = null)
@@ -29,7 +30,7 @@ public class UI_Backpack : UIGroup
 
     private void Refresh()
     {
-        Debug.Log($"Refresh");
+        // Debug.Log($"Refresh");
         IStock[] stocksMap = inventory.StockMap;
 
         if (chunks.Count != stocksMap.Length)
@@ -84,5 +85,10 @@ public class UI_Backpack : UIGroup
     public void SetStockInfoUI(UI_BackpackInfo StockInfo)
     {
         uI_StockInfo = StockInfo;
+    }
+
+    private void OnCollectItemSuccess(CollectItemSuccessEventArgs CollectItemSuccessEventArgs)
+    {
+        Refresh();
     }
 }

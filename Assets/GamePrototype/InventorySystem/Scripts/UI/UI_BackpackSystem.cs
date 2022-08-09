@@ -1,6 +1,7 @@
 using UnityEngine;
 using GameKit;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UI_BackpackSystem : UIGroup
 {
@@ -18,16 +19,18 @@ public class UI_BackpackSystem : UIGroup
 
     public override void Show(UnityAction callback = null)
     {
-        Debug.Log($"Show BackpackUI");
+        // Debug.Log($"Show BackpackUI");
         base.Show(callback);
         uI_Backpack.Show();
+        CursorSystem.current.Disable();
     }
 
     public override void Hide(UnityAction callback = null)
     {
-        Debug.Log($"Hide BackpackUI");
+        // Debug.Log($"Hide BackpackUI");
         base.Hide(callback);
         uI_Backpack.Hide();
+        CursorSystem.current.Enable();
     }
 
     private void Update()

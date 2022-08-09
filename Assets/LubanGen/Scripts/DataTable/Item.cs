@@ -64,12 +64,18 @@ public sealed partial class Item :  Bright.Config.BeanBase
     public ItemEnum.ItemType Type { get; private set; }
     public int Price { get; private set; }
     public int MaxOverlap { get; private set; }
+    /// <summary>
+    /// 用于检查引用完整性
+    /// </summary>
     public int UpgradeToItemId { get; private set; }
     public DataTable.Item UpgradeToItemId_Ref { get; private set; }
     public string Icon { get; private set; }
     public string CloseUp { get; private set; }
     public bool CanInteract { get; private set; }
     public ItemEnum.HighLightColor Color { get; private set; }
+    /// <summary>
+    /// DIALOG/TIPS/CLOSEUP/BUBBLE/TIMELINE/GETCARDS
+    /// </summary>
     public System.Collections.Generic.List<ItemBean.InteractCallback> InteractCallback { get; private set; }
 
     public const int __ID__ = 1612032189;

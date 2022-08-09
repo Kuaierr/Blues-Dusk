@@ -4,6 +4,7 @@ namespace GameKit
     public class EntityShowSuccessEventArgs : GameKitEventArgs
     {
         private const string m_id = "ENTITY_SHOW_SUCCESS";
+        public static string EventId = m_id;
         public override string Id
         {
             get

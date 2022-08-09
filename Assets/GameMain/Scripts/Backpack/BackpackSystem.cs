@@ -17,7 +17,12 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
 
     public bool AddToBackpack(Item data)
     {
-        return inventory.AddToInventory<Item>(PlayerBackpackName, data.Id, data.Name, data);
+        bool result = inventory.AddToInventory<Item>(PlayerBackpackName, data.Id, data.Name, data);
+        if (result)
+            EventManager.instance.EventTrigger<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, CollectItemSuccessEventArgs.Create(data));
+        else
+            EventManager.instance.EventTrigger<CollectItemFailEventArgs>(CollectItemFailEventArgs.EventId, CollectItemFailEventArgs.Create(data));
+        return result;
     }
 
     public IStock GetStockFromInventory(string stockName)

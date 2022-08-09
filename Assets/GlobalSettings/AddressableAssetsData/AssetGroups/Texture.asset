@@ -17,12 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8427f409a8f331d4784c7652e002184b
   m_SerializeEntries:
-  - m_GUID: 0ba4f2f966f7b6344935a8ed5a21b70f
-    m_Address: Assets/GameMain/Arts/BOARD GAME ICON/64px
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: b1ad58a2ae715d543acdea48e9beb8da
-    m_Address: Assets/GameMain/Arts/BOARD GAME ICON/128px
+  - m_GUID: e5aef4f325df7ad4a8573e776be222be
+    m_Address: Assets/GameMain/Arts/Demo/UI_Icon_prop_01.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
