@@ -5,7 +5,7 @@ using LubanConfig.DataTable;
 public class CollectItemFailEventArgs : GameKitEventArgs
 {
     private const string m_id = "PLAYER_COLLECT_ITEM";
-    public static string EventId = m_id;
+    public static readonly string EventId = typeof(CollectItemFailEventArgs).GetHashCode().ToString();
     public CollectItemFailEventArgs()
     {
         Data = null;
