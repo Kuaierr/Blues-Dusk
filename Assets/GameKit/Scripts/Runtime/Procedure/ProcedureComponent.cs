@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GameKit.Runtime
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Kit/Procedure")]
+    [AddComponentMenu("GameKit/GameKit Procedure Component")]
     public sealed class ProcedureComponent : GameKitComponent
     {
         private IProcedureManager m_ProcedureManager = null;

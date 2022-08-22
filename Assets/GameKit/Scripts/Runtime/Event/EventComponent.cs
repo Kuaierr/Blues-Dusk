@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameKit
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Framework/Event")]
+    [AddComponentMenu("GameKit/GameKit Event Component")]
     public sealed class EventComponent : GameKitComponent
     {
         private IEventManager m_EventManager = null;

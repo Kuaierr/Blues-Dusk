@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameKit;
-
+[DisallowMultipleComponent]
+[AddComponentMenu("GameKit/GameKit Inventory Component")]
 public class InventoryComponent : GameKitComponent
 {
     [SerializeField] private string m_InventoryHelperTypeName = "DefaultInventoryHelper";

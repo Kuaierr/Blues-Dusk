@@ -7,7 +7,7 @@ using UnityEngine;
 namespace GameKit
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("GameKit/GameKit Fsm")]
+    [AddComponentMenu("GameKit/GameKit Fsm Component")]
     public sealed class FsmComponent : GameKitComponent
     {
         private IFsmManager m_FsmManager = null;

@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace GameKit
 {
+    [DisallowMultipleComponent]
+    [AddComponentMenu("Game Kit/GameKit Element Component")]
     public class ElementComponent : GameKitComponent
     {
         private IElementManager elementManager;

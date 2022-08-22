@@ -8,7 +8,7 @@ namespace GameKit
     /// 对象池组件。
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("GameKit/GameKit Object Pool")]
+    [AddComponentMenu("GameKit/GameKit ObjectPool Component")]
     public sealed class ObjectPoolComponent : GameKitComponent
     {
         private IObjectPoolManager m_ObjectPoolManager = null;

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace GameKit
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Framework/UI")]
+    [AddComponentMenu("GameKit/GameKit UI Component")]
     public sealed partial class UIComponent : GameKitComponent
     {
         private const int DefaultPriority = 0;
