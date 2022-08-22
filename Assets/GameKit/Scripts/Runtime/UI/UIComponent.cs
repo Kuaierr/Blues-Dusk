@@ -124,17 +124,17 @@ namespace GameKit
                 return;
             }
 
-            // if (m_EnableOpenUIFormSuccessEvent)
-            // {
-            //     m_UIManager.OpenUIFormSuccess += OnOpenUIFormSuccess;
-            // }
+            if (m_EnableOpenUIFormSuccessEvent)
+            {
+                m_UIManager.OpenUIFormSuccess += OnOpenUIFormSuccess;
+            }
 
-            // m_UIManager.OpenUIFormFailure += OnOpenUIFormFailure;
+            m_UIManager.OpenUIFormFailure += OnOpenUIFormFailure;
 
-            // if (m_EnableCloseUIFormCompleteEvent)
-            // {
-            //     m_UIManager.CloseUIFormComplete += OnCloseUIFormComplete;
-            // }
+            if (m_EnableCloseUIFormCompleteEvent)
+            {
+                m_UIManager.CloseUIFormComplete += OnCloseUIFormComplete;
+            }
         }
 
         private void Start()
@@ -146,12 +146,12 @@ namespace GameKit
                 return;
             }
 
-            // m_EventComponent = GameKitComponentCenter.GetComponent<EventComponent>();
-            // if (m_EventComponent == null)
-            // {
-            //     Utility.Debugger.LogFail("Event component is invalid.");
-            //     return;
-            // }
+            m_EventComponent = GameKitComponentCenter.GetComponent<EventComponent>();
+            if (m_EventComponent == null)
+            {
+                Utility.Debugger.LogFail("Event component is invalid.");
+                return;
+            }
 
             // if (baseComponent.EditorResourceMode)
             // {
@@ -457,23 +457,23 @@ namespace GameKit
             m_UIManager.SetUIFormInstancePriority(uiForm.gameObject, priority);
         }
 
-        // private void OnOpenUIFormSuccess(object sender, GameFramework.UI.OpenUIFormSuccessEventArgs e)
-        // {
-        //     m_EventComponent.Fire(this, OpenUIFormSuccessEventArgs.Create(e));
-        // }
+        private void OnOpenUIFormSuccess(object sender, GameKit.UI.OpenUIFormSuccessEventArgs e)
+        {
+            m_EventComponent.Fire(this, ShowUIFormSuccessEventArgs.Create(e));
+        }
 
-        // private void OnOpenUIFormFailure(object sender, GameFramework.UI.OpenUIFormFailureEventArgs e)
-        // {
-        //     Utility.Debugger.LogWarning("Open UI form failure, asset name '{0}', UI group name '{1}', pause covered UI form '{2}', error message '{3}'.", e.UIFormAssetName, e.UIGroupName, e.PauseCoveredUIForm, e.ErrorMessage);
-        //     if (m_EnableOpenUIFormFailureEvent)
-        //     {
-        //         m_EventComponent.Fire(this, OpenUIFormFailureEventArgs.Create(e));
-        //     }
-        // }
+        private void OnOpenUIFormFailure(object sender, GameKit.UI.OpenUIFormFailureEventArgs e)
+        {
+            Utility.Debugger.LogWarning("Open UI form failure, asset name '{0}', UI group name '{1}', pause covered UI form '{2}', error message '{3}'.", e.UIFormAssetName, e.UIGroupName, e.PauseCoveredUIForm, e.ErrorMessage);
+            if (m_EnableOpenUIFormFailureEvent)
+            {
+                m_EventComponent.Fire(this, ShowUIFormFailureEventArgs.Create(e));
+            }
+        }
 
-        // private void OnCloseUIFormComplete(object sender, GameFramework.UI.CloseUIFormCompleteEventArgs e)
-        // {
-        //     m_EventComponent.Fire(this, CloseUIFormCompleteEventArgs.Create(e));
-        // }
+        private void OnCloseUIFormComplete(object sender, GameKit.UI.CloseUIFormCompleteEventArgs e)
+        {
+            m_EventComponent.Fire(this, HideUIFormCompleteEventArgs.Create(e));
+        }
     }
 }

@@ -520,6 +520,7 @@ namespace GameKit
 
         private void OnShowEntityFailure(object sender, GameKit.EntityModule.EntityShowFailEventArgs e)
         {
+            Utility.Debugger.LogWarning("Show entity failure, entity id '{0}', asset name '{1}', entity group name '{2}', error message '{3}'.", e.EntityId, e.EntityAssetName, e.EntityGroupName, e.ErrorMessage);
             m_EventComponent.Fire(this, EntityShowFailEventArgs.Create(e));
         }
 

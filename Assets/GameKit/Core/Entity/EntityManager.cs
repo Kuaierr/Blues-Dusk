@@ -543,11 +543,11 @@ namespace GameKit.EntityModule
                 // m_ResourceManager.LoadAsset(entityAssetName, priority, m_LoadAssetCallbacks, EntityInfo.Create(serialId, entityId, entityGroup, userData));
                 AddressableManager.instance.GetAssetAsyn(entityAssetName, (UnityEngine.Object obj) =>
                 {
-                    LoadAssetSuccessCallback(entityAssetName, obj, 0f, EntityInfo.Create(serialId, entityId, entityGroup, userData));
+                    LoadAssetSuccessCallback(entityAssetName, obj, 0f, ShowEntityInfo.Create(serialId, entityId, entityGroup, userData));
                 },
                 () =>
                 {
-                    LoadAssetFailureCallback(entityAssetName, "Load Fail", EntityInfo.Create(serialId, entityId, entityGroup, userData));
+                    LoadAssetFailureCallback(entityAssetName, "Load Fail", ShowEntityInfo.Create(serialId, entityId, entityGroup, userData));
                 });
                 return;
             }
@@ -640,7 +640,7 @@ namespace GameKit.EntityModule
 
         private void LoadAssetSuccessCallback(string entityAssetName, object entityAsset, float duration, object userData)
         {
-            EntityInfo entityInfo = (EntityInfo)userData;
+            ShowEntityInfo entityInfo = (ShowEntityInfo)userData;
             if (entityInfo == null)
             {
                 throw new GameKitException("Show entity info is invalid.");
@@ -664,7 +664,7 @@ namespace GameKit.EntityModule
 
         private void LoadAssetFailureCallback(string entityAssetName, string errorMessage, object userData)
         {
-            EntityInfo entityInfo = (EntityInfo)userData;
+            ShowEntityInfo entityInfo = (ShowEntityInfo)userData;
             if (entityInfo == null)
             {
                 throw new GameKitException("Show entity info is invalid.");

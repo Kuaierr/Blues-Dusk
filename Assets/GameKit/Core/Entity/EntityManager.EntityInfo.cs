@@ -6,20 +6,12 @@ namespace GameKit.EntityModule
     {
         private sealed class EntityInfo : IReference
         {
-            private int m_SerialId;
-            private int m_EntityId;
-            private EntityGroup m_EntityGroup;
-            private object m_UserData;
             private IEntity m_Entity;
             private IEntity m_ParentEntity;
             private List<IEntity> m_ChildEntities;
 
             public EntityInfo()
             {
-                m_SerialId = 0;
-                m_EntityId = 0;
-                m_EntityGroup = null;
-                m_UserData = null;
                 m_Entity = null;
                 m_ParentEntity = null;
                 m_ChildEntities = new List<IEntity>();
@@ -52,37 +44,6 @@ namespace GameKit.EntityModule
                 }
             }
 
-            public int SerialId
-            {
-                get
-                {
-                    return m_SerialId;
-                }
-            }
-
-            public int EntityId
-            {
-                get
-                {
-                    return m_EntityId;
-                }
-            }
-
-            public EntityGroup EntityGroup
-            {
-                get
-                {
-                    return m_EntityGroup;
-                }
-            }
-
-            public object UserData
-            {
-                get
-                {
-                    return m_UserData;
-                }
-            }
             #endregion
 
             #region Public
@@ -129,16 +90,6 @@ namespace GameKit.EntityModule
             }
             #endregion
 
-            public static EntityInfo Create(int serialId, int entityId, EntityGroup entityGroup, object userData)
-            {
-                EntityInfo showEntityInfo = ReferencePool.Acquire<EntityInfo>();
-                showEntityInfo.m_SerialId = serialId;
-                showEntityInfo.m_EntityId = entityId;
-                showEntityInfo.m_EntityGroup = entityGroup;
-                showEntityInfo.m_UserData = userData;
-                return showEntityInfo;
-            }
-
             public static EntityInfo Create(IEntity entity)
             {
                 if (entity == null)
@@ -153,10 +104,6 @@ namespace GameKit.EntityModule
 
             public void Clear()
             {
-                m_SerialId = 0;
-                m_EntityId = 0;
-                m_EntityGroup = null;
-                m_UserData = null;
                 m_Entity = null;
                 m_ParentEntity = null;
                 m_ChildEntities.Clear();
