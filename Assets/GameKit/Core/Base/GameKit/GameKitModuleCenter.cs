@@ -55,7 +55,6 @@ namespace GameKit
                     return module;
                 }
             }
-
             return CreateModule(moduleType);
         }
 
@@ -86,7 +85,6 @@ namespace GameKit
             {
                 s_gameKitModules.AddLast(module);
             }
-
             return module;
         }
     }

@@ -2,8 +2,9 @@ using UnityEngine;
 using GameKit;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using GameKit.QuickCode;
 
-public class UI_BackpackSystem : UIGroup
+public class UI_BackpackSystem : UIPanel
 {
     public UI_Backpack uI_Backpack;
     public UI_BackpackInfo uI_StockInfo;

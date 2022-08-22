@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit
+namespace GameKit.QuickCode
 {
     public class InputManager : SingletonBase<InputManager>
     {
@@ -272,5 +272,7 @@ namespace GameKit
             EventManager.instance.EventTrigger<(float, float)>(target + "AxisRaw", AxisRaw);
         }
         #endregion
+
+
     }
 }

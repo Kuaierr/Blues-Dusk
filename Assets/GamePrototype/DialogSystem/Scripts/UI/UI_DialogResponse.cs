@@ -6,8 +6,9 @@ using DG.Tweening;
 using GameKit;
 using System.Linq;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
-public class UI_DialogResponse : UIGroup
+public class UI_DialogResponse : UIPanel
 {
     public UI_Selector selector;
     public List<UI_DialogOption> ui_options = new List<UI_DialogOption>();

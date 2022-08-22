@@ -70,5 +70,6 @@ public class DialogManager : SingletonBase<DialogManager>
         return dialogTree;
     }
 
-    
+
+
 }

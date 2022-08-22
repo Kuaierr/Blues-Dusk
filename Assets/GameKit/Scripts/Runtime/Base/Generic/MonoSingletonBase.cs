@@ -5,7 +5,7 @@ using GameKit;
 
 namespace GameKit
 {
-    public abstract class MonoSingletonBase<T> : MonoBehaviour, IManager where T : MonoSingletonBase<T>
+    public abstract class MonoSingletonBase<T> : MonoBehaviour where T : MonoSingletonBase<T>
     {
         private bool isActive = true;
         public bool IsActive

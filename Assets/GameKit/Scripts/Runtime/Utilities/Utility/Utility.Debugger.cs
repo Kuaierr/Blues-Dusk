@@ -48,6 +48,21 @@ namespace GameKit
                 LogWarning(s_CachedStringBuilder.ToString());
             }
 
+            public static void LogWarning(string info, object arg0, object arg1, object arg2, object arg3)
+            {
+                CheckCachedStringBuilder();
+                s_CachedStringBuilder.Length = 0;
+                s_CachedStringBuilder.AppendFormat(info, arg0, arg1, arg2, arg3);
+                LogWarning(s_CachedStringBuilder.ToString());
+            }
+            public static void LogWarning(string info, object arg0, object arg1, object arg2, object arg3, object arg4)
+            {
+                CheckCachedStringBuilder();
+                s_CachedStringBuilder.Length = 0;
+                s_CachedStringBuilder.AppendFormat(info, arg0, arg1, arg2, arg3, arg4);
+                LogWarning(s_CachedStringBuilder.ToString());
+            }
+
             public static void LogError(string info, object arg0)
             {
                 CheckCachedStringBuilder();

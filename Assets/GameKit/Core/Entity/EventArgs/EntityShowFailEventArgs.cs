@@ -1,14 +1,15 @@
-namespace GameKit
+using GameKit.Event;
+
+namespace GameKit.EntityModule
 {
-    public class EntityShowFailEventArgs : GameKitEventArgs
+    public class EntityShowFailEventArgs : GameEventArgs
     {
-        private const string m_id = "ENTITY_SHOW_FAIL";
-        public static string EventId = m_id;
-        public override string Id
+        public static int EventId = typeof(EntityShowFailEventArgs).GetHashCode();
+        public override int Id
         {
             get
             {
-                return m_id;
+                return EventId;
             }
         }
 

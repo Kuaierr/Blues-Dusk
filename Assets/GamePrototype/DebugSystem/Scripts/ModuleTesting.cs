@@ -11,6 +11,7 @@ public class ModuleTesting : MonoBehaviour
     public List<DebugButton> moduleButtons;
     private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
+    private IResourceManager resourceManager;
     private bool isShown = false;
     private void Start()
     {
@@ -49,7 +50,7 @@ public class ModuleTesting : MonoBehaviour
         if (dialogAssets == null || dialogAssets.Count == 0)
         {
 
-            ResourceManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
+            AddressableManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
             {
                 dialogAssets = new List<DialogAsset>(assets);
                 Debug.Log($"CreateModuleUnits");

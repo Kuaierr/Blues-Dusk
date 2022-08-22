@@ -4,8 +4,9 @@ using GameKit;
 using TMPro;
 using LubanConfig.DataTable;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
-public class UI_BackpackInfo : UIGroup
+public class UI_BackpackInfo : UIPanel
 {
     public Image closeUp;
     public TextMeshProUGUI stockName;
@@ -26,7 +27,7 @@ public class UI_BackpackInfo : UIGroup
     {
         cachedData = (Item)stock.Data;
         m_CachedStock = stock;
-        ResourceManager.instance.TryGetAsset<Sprite>("Assets" + cachedData.CloseUp, (Sprite sprite) =>
+        ResourceManager.instance.GetAsset<Sprite>("Assets" + cachedData.CloseUp, (Sprite sprite) =>
         {
             closeUp.sprite = sprite;
         });

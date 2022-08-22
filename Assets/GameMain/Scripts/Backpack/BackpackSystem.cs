@@ -1,6 +1,7 @@
 using UnityEngine;
 using GameKit;
 using LubanConfig.DataTable;
+using GameKit.QuickCode;
 public class BackpackSystem : MonoSingletonBase<BackpackSystem>
 {
     private string PlayerBackpackName = "Player's Backpack";

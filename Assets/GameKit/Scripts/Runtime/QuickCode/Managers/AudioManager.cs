@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit;
-namespace GameKit
+
+namespace GameKit.QuickCode
 {
     public class AudioManager : SingletonBase<AudioManager>
     {
@@ -105,6 +105,7 @@ namespace GameKit
         {
             return soundList;
         }
+
     }
 
 }

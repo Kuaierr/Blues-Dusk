@@ -1,21 +1,20 @@
-using UnityEngine;
 using GameKit;
 using LubanConfig.DataTable;
+using GameKit.Event;
 
-public class CollectItemFailEventArgs : GameKitEventArgs
+public class CollectItemFailEventArgs : GameEventArgs
 {
-    private const string m_id = "PLAYER_COLLECT_ITEM";
-    public static readonly string EventId = typeof(CollectItemFailEventArgs).GetHashCode().ToString();
+    public static readonly int EventId = typeof(CollectItemFailEventArgs).GetHashCode();
     public CollectItemFailEventArgs()
     {
         Data = null;
     }
 
-    public override string Id
+    public override int Id
     {
         get
         {
-            return m_id;
+            return EventId;
         }
     }
 

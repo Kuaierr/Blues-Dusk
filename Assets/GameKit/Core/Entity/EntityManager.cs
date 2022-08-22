@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using GameKit.Event;
 
-namespace GameKit
+namespace GameKit.EntityModule
 {
     internal sealed partial class EntityManager : GameKitModule, IEntityManager
     {
@@ -12,11 +13,16 @@ namespace GameKit
         private readonly Queue<EntityInfo> m_RecycleQueue;
         private IObjectPoolManager m_ObjectPoolManager;
         private IEntityHelper m_EntityHelper;
+        private ResourceManager resourceManager;
         private int m_Serial;
         private bool m_IsShutdown;
+        private EventHandler<EntityShowSuccessEventArgs> m_ShowEntitySuccessEventHandler;
+        private EventHandler<EntityShowFailEventArgs> m_ShowEntityFailureEventHandler;
+        private EventHandler<EntityHideCompleteEventArgs> m_HideEntityCompleteEventHandler;
 
         public EntityManager()
         {
+            resourceManager = GameKitModuleCenter.GetModule<ResourceManager>();
             m_EntityInfos = new Dictionary<int, EntityInfo>();
             m_EntityGroups = new Dictionary<string, EntityGroup>(StringComparer.Ordinal);
             m_EntitiesBeingLoaded = new Dictionary<int, int>();
@@ -26,6 +32,9 @@ namespace GameKit
             m_EntityHelper = null;
             m_Serial = 0;
             m_IsShutdown = false;
+            m_ShowEntitySuccessEventHandler = null;
+            m_ShowEntityFailureEventHandler = null;
+            m_HideEntityCompleteEventHandler = null;
         }
 
         #region Properties
@@ -44,6 +53,43 @@ namespace GameKit
                 return m_EntityGroups.Count;
             }
         }
+
+        public event EventHandler<EntityShowSuccessEventArgs> ShowEntitySuccess
+        {
+            add
+            {
+                m_ShowEntitySuccessEventHandler += value;
+            }
+            remove
+            {
+                m_ShowEntitySuccessEventHandler -= value;
+            }
+        }
+
+        public event EventHandler<EntityShowFailEventArgs> ShowEntityFailure
+        {
+            add
+            {
+                m_ShowEntityFailureEventHandler += value;
+            }
+            remove
+            {
+                m_ShowEntityFailureEventHandler -= value;
+            }
+        }       
+
+        public event EventHandler<EntityHideCompleteEventArgs> HideEntityComplete
+        {
+            add
+            {
+                m_HideEntityCompleteEventHandler += value;
+            }
+            remove
+            {
+                m_HideEntityCompleteEventHandler -= value;
+            }
+        }
+
         #endregion
 
         #region Functional
@@ -495,7 +541,7 @@ namespace GameKit
                 int serialId = ++m_Serial;
                 m_EntitiesBeingLoaded.Add(entityId, serialId);
                 // m_ResourceManager.LoadAsset(entityAssetName, priority, m_LoadAssetCallbacks, EntityInfo.Create(serialId, entityId, entityGroup, userData));
-                ResourceManager.instance.GetAssetAsyn(entityAssetName, (UnityEngine.Object obj) =>
+                AddressableManager.instance.GetAssetAsyn(entityAssetName, (UnityEngine.Object obj) =>
                 {
                     LoadAssetSuccessCallback(entityAssetName, obj, 0f, EntityInfo.Create(serialId, entityId, entityGroup, userData));
                 },
@@ -535,6 +581,14 @@ namespace GameKit
             {
                 throw new GameKitException("Entity info is unmanaged.");
             }
+
+            if (m_HideEntityCompleteEventHandler != null)
+            {
+                EntityHideCompleteEventArgs hideEntityCompleteEventArgs = EntityHideCompleteEventArgs.Create(entity.Id, entity.AssetName, entityGroup, userData);
+                m_HideEntityCompleteEventHandler(this, hideEntityCompleteEventArgs);
+                ReferencePool.Release(hideEntityCompleteEventArgs);
+            }
+
             m_RecycleQueue.Enqueue(entityInfo);
         }
 
@@ -561,15 +615,25 @@ namespace GameKit
                 entityGroup.AddEntity(entity);
                 entity.OnShow(userData);
 
-                EntityShowSuccessEventArgs eventArgs = EntityShowSuccessEventArgs.Create(entity, duration, userData);
-                EventManager.instance.EventTrigger<EntityShowSuccessEventArgs>(eventArgs.Id, eventArgs);
-                ReferencePool.Release(eventArgs);
+                if (m_ShowEntitySuccessEventHandler != null)
+                {
+                    EntityShowSuccessEventArgs showEntitySuccessEventArgs = EntityShowSuccessEventArgs.Create(entity, duration, userData);
+                    m_ShowEntitySuccessEventHandler(this, showEntitySuccessEventArgs);
+                    // EventManager.instance.EventTrigger<EntityShowSuccessEventArgs>(showEntitySuccessEventArgs.Id, showEntitySuccessEventArgs);
+                    ReferencePool.Release(showEntitySuccessEventArgs);
+                }
             }
             catch (Exception exception)
             {
-                EntityShowFailEventArgs eventArgs = EntityShowFailEventArgs.Create(entityId, entityAssetName, entityGroup.Name, exception.ToString(), userData);
-                EventManager.instance.EventTrigger<EntityShowFailEventArgs>(eventArgs.Id, eventArgs);
-                ReferencePool.Release(eventArgs);
+                if (m_ShowEntityFailureEventHandler != null)
+                {
+                    EntityShowFailEventArgs showEntityFailureEventArgs = EntityShowFailEventArgs.Create(entityId, entityAssetName, entityGroup.Name, exception.ToString(), userData);
+                    // EventManager.instance.EventTrigger<EntityShowFailEventArgs>(showEntityFailureEventArgs.Id, showEntityFailureEventArgs);
+                    m_ShowEntityFailureEventHandler(this, showEntityFailureEventArgs);
+                    ReferencePool.Release(showEntityFailureEventArgs);
+                    return;
+                }
+
                 throw new GameKitException("Internal Show Entity Fail.", exception);
             }
         }
@@ -614,10 +678,18 @@ namespace GameKit
 
             m_EntitiesBeingLoaded.Remove(entityInfo.EntityId);
             string appendErrorMessage = Utility.Text.Format("Load entity failure, asset name '{0}', error message '{2}'.", entityAssetName, errorMessage);
-            EntityShowFailEventArgs entityShowFailEventArgs = EntityShowFailEventArgs.Create(entityInfo.EntityId, entityAssetName, entityInfo.EntityGroup.Name, appendErrorMessage, entityInfo.UserData);
-            EventManager.instance.EventTrigger<EntityShowFailEventArgs>(entityShowFailEventArgs.Id, entityShowFailEventArgs);
-            ReferencePool.Release(entityShowFailEventArgs);
+            if (m_ShowEntityFailureEventHandler != null)
+            {
+                EntityShowFailEventArgs showEntityFailureEventArgs = EntityShowFailEventArgs.Create(entityInfo.EntityId, entityAssetName, entityInfo.EntityGroup.Name, appendErrorMessage, entityInfo.UserData);
+                m_ShowEntityFailureEventHandler(this, showEntityFailureEventArgs);
+                // EventManager.instance.EventTrigger<EntityShowFailEventArgs>(entityShowFailEventArgs.Id, entityShowFailEventArgs);
+                ReferencePool.Release(showEntityFailureEventArgs);
+                return;
+            }
+
+            throw new GameKitException(appendErrorMessage);
         }
+
         #endregion
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using GameKit;
 using UnityEngine.EventSystems;
-public class UI_DialogOption : UIForm, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+using GameKit.QuickCode;
+public class UI_DialogOption : UIData, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI content;
     public int index = 0;

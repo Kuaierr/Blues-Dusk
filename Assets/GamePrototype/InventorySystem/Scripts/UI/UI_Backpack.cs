@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameKit;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
-public class UI_Backpack : UIGroup
+public class UI_Backpack : UIPanel
 {
     private IInventory inventory;
     BackpackSystem backpackSystem;

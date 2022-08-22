@@ -4,8 +4,9 @@ using UnityEngine.UI;
 using GameKit;
 using System.Collections.Generic;
 using Febucci.UI;
+using GameKit.QuickCode;
 
-public class UI_Character : UIForm
+public class UI_Character : UIData
 {
     public Animator animator;
     public Image avatar;

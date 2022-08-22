@@ -1,14 +1,13 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit.DataStructure;
 #if PACKAGE_ADDRESSABLES
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 #endif
-namespace GameKit
+namespace GameKit.QuickCode
 {
     public class ResourceManager : SingletonBase<ResourceManager>
     {
@@ -177,11 +176,6 @@ namespace GameKit
             else
                 Utility.Debugger.LogWarning("Try Release Uncached {0} Asset Handle.", obj.name);
 #endif
-        }
-
-        public void TryGetAsset<T>(string keyName, UnityAction<T> action) where T : Object
-        {
-            GetAsset(keyName, action);
         }
 
     }

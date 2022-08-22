@@ -5,8 +5,9 @@ using GameKit;
 using System.Collections.Generic;
 using Febucci.UI;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
-public class UI_DialogSystem : UIGroup
+public class UI_DialogSystem : UIPanel
 {
     public UI_Character character;
     public TextMeshProUGUI speakerName;

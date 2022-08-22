@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using DG.Tweening;
+using GameKit.QuickCode;
 namespace GameKit
 {
     public enum SceneSwitchType

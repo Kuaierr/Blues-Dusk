@@ -4,6 +4,7 @@ using Febucci.UI;
 using GameKit.DataStructure;
 using GameKit;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 [DisallowMultipleComponent]
 [AddComponentMenu("GameKit/Dialog System")]
 public class DialogSystem : MonoSingletonBase<DialogSystem>
@@ -22,7 +23,7 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
     {
         uI_DialogSystem = UIManager.instance.GetUI<UI_DialogSystem>("UI_DialogSystem");
         textAnimatorPlayer = uI_DialogSystem?.textAnimatorPlayer;
-        ResourceManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
+        AddressableManager.instance.GetAssetAsyn<CharacterPool>("Character Pool", (characterPool) =>
         {
             this.characterPool = characterPool;
         });
@@ -219,7 +220,7 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
     {
         if (charaAnimators == null || charaAnimators.Count == 0)
         {
-            ResourceManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
+            AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
             {
                 charaAnimators = new List<RuntimeAnimatorController>(assets);
             });

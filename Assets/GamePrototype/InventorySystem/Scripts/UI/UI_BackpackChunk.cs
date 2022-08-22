@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using GameKit;
 using LubanConfig.DataTable;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
-public class UI_BackpackChunk : UIForm
+public class UI_BackpackChunk : UIData
 {
     private int m_index;
     private Animator animator;
@@ -30,7 +31,7 @@ public class UI_BackpackChunk : UIForm
     {
         m_CachedStock = stock;
         Item data = (Item)m_CachedStock.Data;
-        ResourceManager.instance.TryGetAsset<Sprite>("Assets" + data.Icon, (Sprite sprite) =>
+        ResourceManager.instance.GetAsset<Sprite>("Assets" + data.Icon, (Sprite sprite) =>
         {
             icon.sprite = sprite;
         });

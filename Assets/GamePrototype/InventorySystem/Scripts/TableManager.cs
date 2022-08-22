@@ -54,10 +54,12 @@ public class TableManager : SingletonBase<TableManager>
     {
         // string jsonData = File.ReadAllText(Application.dataPath + "/LubanGen/Datas/json/" + fileName + ".json", System.Text.Encoding.UTF8);
         string jsonData2 = "";
-        ResourceManager.instance.TryGetAsset<TextAsset>("Assets/LubanGen/Datas/json/" + fileName + ".json", (TextAsset data) =>
+        AddressableManager.instance.GetAsset<TextAsset>("Assets/LubanGen/Datas/json/" + fileName + ".json", (TextAsset data) =>
         {
             jsonData2 = data.text;
         });
         return JSON.Parse(jsonData2);
     }
+
+
 }

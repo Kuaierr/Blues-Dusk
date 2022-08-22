@@ -7,5 +7,6 @@ namespace GameKit
         void Disable();
         void ShutDown();
         void Clear();
+        void Update(float elapseSeconds, float realElapseSeconds);
     }
 }

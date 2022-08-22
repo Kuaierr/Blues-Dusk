@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using GameKit.EntityModule;
+
 
 namespace GameKit
 {
@@ -9,8 +11,8 @@ namespace GameKit
     public sealed partial class EntityComponent : GameKitComponent
     {
         private const int DefaultPriority = 0;
-
         private IEntityManager m_EntityManager = null;
+        private EventComponent m_EventComponent = null;
         private readonly List<IEntity> m_CachedEntities = new List<IEntity>();
 
         [SerializeField]
@@ -56,13 +58,16 @@ namespace GameKit
         protected override void Awake()
         {
             base.Awake();
-
             m_EntityManager = GameKitModuleCenter.GetModule<IEntityManager>();
             if (m_EntityManager == null)
             {
                 Utility.Debugger.LogFail("Entity manager is invalid.");
                 return;
             }
+
+            m_EntityManager.ShowEntitySuccess += OnShowEntitySuccess;
+            m_EntityManager.ShowEntityFailure += OnShowEntityFailure;
+            m_EntityManager.HideEntityComplete += OnHideEntityComplete;
         }
 
         private void Start()
@@ -75,7 +80,12 @@ namespace GameKit
                 Utility.Debugger.LogError("Can not create entity helper.");
                 return;
             }
-            
+            m_EventComponent = GameKitComponentCenter.GetComponent<EventComponent>();
+            if (m_EventComponent == null)
+            {
+                Utility.Debugger.LogFail("Event component is invalid.");
+                return;
+            }
             entityHelper.name = "Entity Helper";
             Transform transform = entityHelper.transform;
             transform.SetParent(this.transform);
@@ -501,6 +511,21 @@ namespace GameKit
         public void RegisterEntity(IEntity entity)
         {
             m_CachedEntities.Add(entity);
+        }
+
+        private void OnShowEntitySuccess(object sender, GameKit.EntityModule.EntityShowSuccessEventArgs e)
+        {
+            m_EventComponent.Fire(this, EntityShowSuccessEventArgs.Create(e));
+        }
+
+        private void OnShowEntityFailure(object sender, GameKit.EntityModule.EntityShowFailEventArgs e)
+        {
+            m_EventComponent.Fire(this, EntityShowFailEventArgs.Create(e));
+        }
+
+        private void OnHideEntityComplete(object sender, GameKit.EntityModule.EntityHideCompleteEventArgs e)
+        {
+            m_EventComponent.Fire(this, EntityHideCompleteEventArgs.Create(e));
         }
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameKit.EntityModule;
 using System;
 using UnityEngine;
+
+
 namespace GameKit
 {
-    public class Entity : MonoBehaviour, IEntity
+    public sealed class Entity : MonoBehaviour, IEntity
     {
         private int m_Id;
         private string m_AssetName;

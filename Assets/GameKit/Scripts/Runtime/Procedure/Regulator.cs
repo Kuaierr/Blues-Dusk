@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using GameKit.QuickCode;
 
 namespace GameKit
 {
@@ -10,7 +11,7 @@ namespace GameKit
     [AddComponentMenu("GameKit/GameKit Regulator")]
     public class Regulator : MonoSingletonBase<Regulator>
     {
-        public UIGroup GetUI(string name) => UIManager.instance.GetUI(name);
+        public UIPanel GetUI(string name) => UIManager.instance.GetUI(name);
         public void ShowUI(string name) => GetUI(name).Show();
         public void HideUI(string name) => GetUI(name).Hide();
         public void SwitchSceneByDefault(string name) => Scheduler.current.SwitchSceneByDefault(name);

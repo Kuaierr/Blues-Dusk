@@ -1,6 +1,6 @@
 namespace GameKit
 {
-    public abstract class SingletonBase<T> : IManager where T : new()
+    public abstract class SingletonBase<T> where T : new()
     {
         protected static bool IsDisabled = true;
         private static T Instance;
@@ -39,7 +39,6 @@ namespace GameKit
         public virtual void Enable() => isActive = true;
         public virtual void Disable() => isActive = false;
         public virtual void Clear() { }
-
     }
 }
 

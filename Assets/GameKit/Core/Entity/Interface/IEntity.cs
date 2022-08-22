@@ -1,4 +1,4 @@
-namespace GameKit
+namespace GameKit.EntityModule
 {
     public interface IEntity
     {

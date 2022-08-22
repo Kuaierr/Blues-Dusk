@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit;
-namespace GameKit
+
+namespace GameKit.QuickCode
 {
     public class PoolData
     {
@@ -124,5 +124,7 @@ namespace GameKit
         {
             return pool;
         }
+
+
     }
 }

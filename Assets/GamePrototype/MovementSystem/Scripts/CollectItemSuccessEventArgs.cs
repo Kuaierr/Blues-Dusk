@@ -1,21 +1,21 @@
-using UnityEngine;
 using GameKit;
+using GameKit.Event;
+using GameKit.EntityModule;
 using LubanConfig.DataTable;
 
-public class CollectItemSuccessEventArgs : GameKitEventArgs
+public class CollectItemSuccessEventArgs : GameEventArgs
 {
-    private const string m_id = "PLAYER_COLLECT_ITEM";
-    public static string EventId = m_id;
+    public static int EventId = typeof(CollectItemSuccessEventArgs).GetHashCode();
     public CollectItemSuccessEventArgs()
     {
         Data = null;
     }
 
-    public override string Id
+    public override int Id
     {
         get
         {
-            return m_id;
+            return EventId;
         }
     }
 

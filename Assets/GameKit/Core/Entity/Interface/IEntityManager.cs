@@ -1,9 +1,14 @@
-namespace GameKit
+using System;
+
+namespace GameKit.EntityModule
 {
     public interface IEntityManager
     {
         int EntityCount { get; }
         int EntityGroupCount { get; }
+        event EventHandler<EntityShowSuccessEventArgs> ShowEntitySuccess;
+        event EventHandler<EntityShowFailEventArgs> ShowEntityFailure;
+        event EventHandler<EntityHideCompleteEventArgs> HideEntityComplete;
         void SetObjectPoolManager(IObjectPoolManager objectPoolManager);
         void SetEntityHelper(IEntityHelper entityHelper);
         bool HasEntityGroup(string entityGroupName);

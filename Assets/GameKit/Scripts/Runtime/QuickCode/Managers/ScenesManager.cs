@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using GameKit;
-namespace GameKit
+namespace GameKit.QuickCode
 {
     public class ScenesManager : SingletonBase<ScenesManager>
     {
@@ -72,5 +72,7 @@ namespace GameKit
             }
             callback?.Invoke();
         }
+
+
     }
 }

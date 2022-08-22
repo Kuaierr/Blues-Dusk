@@ -5,7 +5,8 @@ using DG.Tweening;
 using GameKit;
 using System.Linq;
 using UnityEngine.Events;
-public class UI_DiceRollPack : UIGroup
+using GameKit.QuickCode;
+public class UI_DiceRollPack : UIPanel
 {
     public UI_Selector selector;
     public List<UI_Dice> ui_dices = new List<UI_Dice>();

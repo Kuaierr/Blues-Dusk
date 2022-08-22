@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using GameKit;
 using GameKit.Timer;
+using GameKit.QuickCode;
 using Geometry = GameKit.Utility.Geometry;
 using DG.Tweening;
 

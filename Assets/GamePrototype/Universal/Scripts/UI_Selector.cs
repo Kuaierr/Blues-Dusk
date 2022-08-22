@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using GameKit;
-public class UI_Selector : UIForm 
+using GameKit.QuickCode;
+public class UI_Selector : UIData 
 {
     public override void OnStart()
     {

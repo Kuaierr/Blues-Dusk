@@ -1,6 +1,7 @@
 using UnityEngine;
 using GameKit;
-public class UI_DiceRollSystem : UIGroup
+using GameKit.QuickCode;
+public class UI_DiceRollSystem : UIPanel
 {
     public UI_DiceRollPack uI_DiceRollPack;
     public Camera ui_Camera;

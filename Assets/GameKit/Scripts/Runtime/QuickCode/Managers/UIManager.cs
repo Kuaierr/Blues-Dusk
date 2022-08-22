@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-namespace GameKit
+namespace GameKit.QuickCode
 {
     public class UIManager : SingletonBase<UIManager>
     {
-        private Dictionary<string, UIGroup> panels = new Dictionary<string, UIGroup>();
-        public void RegisterUI(UIGroup panel)
+        private Dictionary<string, UIPanel> panels = new Dictionary<string, UIPanel>();
+        public void RegisterUI(UIPanel panel)
         {
             if (panels == null)
-                panels = new Dictionary<string, UIGroup>();
+                panels = new Dictionary<string, UIPanel>();
 
             if (!panels.ContainsKey(panel.gameObject.name))
                 panels.Add(panel.gameObject.name, panel);
@@ -19,7 +19,7 @@ namespace GameKit
                 panels[panel.gameObject.name] = panel;
         }
 
-        public void RemoveUI(UIGroup panel)
+        public void RemoveUI(UIPanel panel)
         {
             if (panels.ContainsKey(panel.gameObject.name))
                 panels.Remove(panel.gameObject.name);
@@ -40,7 +40,7 @@ namespace GameKit
             callback?.Invoke();
         }
 
-        public void ShowUI<T>(string uiName, UnityAction callback = null) where T : UIGroup
+        public void ShowUI<T>(string uiName, UnityAction callback = null) where T : UIPanel
         {
             if (panels.ContainsKey(uiName))
                 (panels[uiName] as T).Show();
@@ -54,26 +54,28 @@ namespace GameKit
             callback?.Invoke();
         }
 
-        public void HideUI<T>(string uiName, UnityAction callback = null) where T : UIGroup
+        public void HideUI<T>(string uiName, UnityAction callback = null) where T : UIPanel
         {
             if (panels.ContainsKey(uiName))
                 (panels[uiName] as T).Hide();
             callback?.Invoke();
         }
 
-        public UIGroup GetUI(string name)
+        public UIPanel GetUI(string name)
         {
             if (panels.ContainsKey(name))
                 return panels[name];
             return null;
         }
         
-        public T GetUI<T>(string name) where T : UIGroup
+        public T GetUI<T>(string name) where T : UIPanel
         {
             if (panels.ContainsKey(name))
                 return panels[name] as T;
             return null;
         }
+
+
     }
 }
 

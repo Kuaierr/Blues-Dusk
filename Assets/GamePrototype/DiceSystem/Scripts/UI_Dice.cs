@@ -1,7 +1,8 @@
 using UnityEngine;
 using GameKit;
+using GameKit.QuickCode;
 
-public class UI_Dice : UIForm
+public class UI_Dice : UIData
 {
     public RectTransform diceCube;
     

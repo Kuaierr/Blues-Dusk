@@ -4,21 +4,23 @@ using UnityEditor.SceneManagement;
 public static class ScenesList
 {
     [MenuItem("Scenes/GameKitDemo_Entity")]
-    public static void Assets_GameKit_Entity_Demo_Scenes_GameKitDemo_Entity_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Entity/Demo/Scenes/GameKitDemo_Entity.unity"); }
+    public static void Assets_GameKit_Demo_Entity_Scenes_GameKitDemo_Entity_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/Entity/Scenes/GameKitDemo_Entity.unity"); }
     [MenuItem("Scenes/GameKitDemo_Fsm")]
-    public static void Assets_GameKit_Fsm_Demo_GameKitDemo_Fsm_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Fsm/Demo/GameKitDemo_Fsm.unity"); }
+    public static void Assets_GameKit_Demo_Fsm_GameKitDemo_Fsm_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/Fsm/GameKitDemo_Fsm.unity"); }
     [MenuItem("Scenes/GameKitDemo_ObjectPool")]
-    public static void Assets_GameKit_ObjectPool_Demo_GameKitDemo_ObjectPool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/ObjectPool/Demo/GameKitDemo_ObjectPool.unity"); }
+    public static void Assets_GameKit_Demo_ObjectPool_GameKitDemo_ObjectPool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/ObjectPool/GameKitDemo_ObjectPool.unity"); }
     [MenuItem("Scenes/GameKit_Launcher")]
-    public static void Assets_GameKit_Procedure_Demo_GameKit_Launcher_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Procedure/Demo/GameKit_Launcher.unity"); }
+    public static void Assets_GameKit_Demo_Procedure_GameKit_Launcher_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity"); }
     [MenuItem("Scenes/GameKitDemo_Loading")]
-    public static void Assets_GameKit_Procedure_Demo_GameKitDemo_Loading_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Procedure/Demo/GameKitDemo_Loading.unity"); }
+    public static void Assets_GameKit_Demo_Procedure_GameKitDemo_Loading_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/Procedure/GameKitDemo_Loading.unity"); }
     [MenuItem("Scenes/GameKitDemo_Main")]
-    public static void Assets_GameKit_Procedure_Demo_GameKitDemo_Main_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Procedure/Demo/GameKitDemo_Main.unity"); }
-    [MenuItem("Scenes/QuickDev_TabGroup")]
-    public static void Assets_GameKit_QuickDev_UGUI_TabGroup_Demo_QuickDev_TabGroup_unity() { ScenesUpdate.OpenScene("Assets/GameKit/QuickDev/UGUI/TabGroup/Demo/QuickDev_TabGroup.unity"); }
+    public static void Assets_GameKit_Demo_Procedure_GameKitDemo_Main_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/Procedure/GameKitDemo_Main.unity"); }
     [MenuItem("Scenes/GameKitDemo_ReferencePool")]
-    public static void Assets_GameKit_ReferencePool_Demo_GameKitDemo_ReferencePool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/ReferencePool/Demo/GameKitDemo_ReferencePool.unity"); }
+    public static void Assets_GameKit_Demo_ReferencePool_GameKitDemo_ReferencePool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/ReferencePool/GameKitDemo_ReferencePool.unity"); }
+    [MenuItem("Scenes/GameKitDemo_TaskPool")]
+    public static void Assets_GameKit_Demo_TaskPool_GameKitDemo_TaskPool_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/TaskPool/GameKitDemo_TaskPool.unity"); }
+    [MenuItem("Scenes/QuickDev_TabGroup")]
+    public static void Assets_GameKit_Demo_UI_TabGroup_Demo_QuickDev_TabGroup_unity() { ScenesUpdate.OpenScene("Assets/GameKit/Demo/UI/TabGroup/Demo/QuickDev_TabGroup.unity"); }
     [MenuItem("Scenes/GameMain")]
     public static void Assets_GameMain_Scenes_GameMain_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/GameMain.unity"); }
     [MenuItem("Scenes/Prototype_Dialog")]
