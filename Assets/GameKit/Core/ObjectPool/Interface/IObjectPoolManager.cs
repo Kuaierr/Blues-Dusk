@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace GameKit
+namespace GameKit.ObjectPool
 {
     public interface IObjectPoolManager
     {

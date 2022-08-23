@@ -6,9 +6,10 @@
 //------------------------------------------------------------
 
 using UnityEngine;
+using GameKit;
 using GameKit.EntityModule;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     /// <summary>
     /// 默认实体辅助器。

@@ -1,4 +1,4 @@
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public class DefaultUIGroupHelper : UIGroupHelperBase
     {

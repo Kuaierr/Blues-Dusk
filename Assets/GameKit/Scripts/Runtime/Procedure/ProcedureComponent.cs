@@ -3,8 +3,9 @@ using GameKit.Fsm;
 using System;
 using System.Collections;
 using UnityEngine;
+using GameKit.Procedure;
 
-namespace GameKit.Runtime
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Procedure Component")]

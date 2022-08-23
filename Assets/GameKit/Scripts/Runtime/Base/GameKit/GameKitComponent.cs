@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public abstract class GameKitComponent : MonoBehaviour
     {

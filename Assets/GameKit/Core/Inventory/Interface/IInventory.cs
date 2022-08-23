@@ -1,4 +1,4 @@
-namespace GameKit
+namespace GameKit.Inventory
 {
     public interface IInventory
     {

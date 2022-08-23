@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace GameKit
+namespace GameKit.Inventory
 {
-    internal class InventoryManager : SingletonBase<InventoryManager>
+    public class InventoryManager : SingletonBase<InventoryManager>
     {
         private Dictionary<string, IInventory> inventories;
         private IInventory currentCachedInventory;

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GameKit.Fsm;
+using UnityGameKit.Runtime;
 
-namespace GameKit.Demo
+
+namespace UnityGameKit.Demo
 {
     public class FsmPlayer : MonoBehaviour
     {

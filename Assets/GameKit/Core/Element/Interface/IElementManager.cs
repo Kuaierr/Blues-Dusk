@@ -1,4 +1,5 @@
-namespace GameKit
+
+namespace GameKit.Element
 {
     public interface IElementManager
     {

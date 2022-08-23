@@ -1,7 +1,8 @@
+using GameKit;
 using GameKit.Event;
 using System;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed class EntityShowSuccessEventArgs : GameEventArgs
     {

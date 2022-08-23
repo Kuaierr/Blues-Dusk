@@ -1,7 +1,8 @@
 using GameKit.UI;
+using GameKit;
 using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public class DefaultUIFormHelper : UIFormHelperBase
     {

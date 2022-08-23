@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using GameKit.EntityModule;
 
-namespace GameKit
+
+namespace UnityGameKit.Runtime
 {
     public sealed partial class EntityComponent : GameKitComponent
     {

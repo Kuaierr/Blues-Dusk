@@ -1,5 +1,5 @@
 using UnityEngine;
-using GameKit;
+using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 
 public class InteractiveElement : ElementBase
@@ -34,7 +34,7 @@ public class InteractiveElement : ElementBase
     private void Start()
     {
         interactTrans = transform.Find("Destination");
-        m_configData = TableManager.instance.ItemTable.Get(m_DataId);
+        m_configData = DataTable.instance.ItemTable.Get(m_DataId);
         outline = this.gameObject.GetOrAddComponent<Outline>();
         outline.OutlineWidth = 5f;
         outline.enabled = false;

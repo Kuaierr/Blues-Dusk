@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameKit;
+using UnityGameKit.Runtime;
 
 public class SphereEntity : EntityBase
 {

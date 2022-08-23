@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 #endif
+using UnityGameKit.Runtime;
 namespace GameKit.QuickCode
 {
     public class ResourceManager : SingletonBase<ResourceManager>

@@ -5,6 +5,7 @@ using TMPro;
 using LubanConfig.DataTable;
 using UnityEngine.Events;
 using GameKit.QuickCode;
+using GameKit.Inventory;
 
 public class UI_BackpackInfo : UIPanel
 {

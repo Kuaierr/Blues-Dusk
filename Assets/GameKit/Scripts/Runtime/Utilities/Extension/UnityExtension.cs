@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
 
     public static partial class UnityExtension
@@ -111,6 +111,30 @@ namespace GameKit
         public static Vector3 ToLocal(this Vector3 position, Transform transform)
         {
             return transform.InverseTransformPoint(position);
+        }
+
+        public static Vector3 IgnoreX(this Vector3 position)
+        {
+            return new Vector3(0, position.y, position.z);
+        }
+        public static Vector3 IgnoreY(this Vector3 position)
+        {
+            return new Vector3(position.x, 0, position.z);
+        }
+
+        public static Vector3 IgnoreZ(this Vector3 position)
+        {
+            return new Vector3(position.x, position.y, 0);
+        }
+
+        public static float EuclidDistance(this Vector3 orgin, Vector3 end)
+        {
+            return (orgin - end).sqrMagnitude;
+        }
+
+        public static float EuclidDistance(this Vector2 orgin, Vector2 end)
+        {
+            return (orgin - end).sqrMagnitude;
         }
         #endregion
 

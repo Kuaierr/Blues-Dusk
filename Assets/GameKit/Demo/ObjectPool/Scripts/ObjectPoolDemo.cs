@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit;
+using UnityGameKit.Runtime;
+using GameKit.ObjectPool;
 
-namespace GameKit.Demo
+namespace UnityGameKit.Demo
 {
     public class ObjectPoolDemo : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameKit.Demo
+namespace UnityGameKit.Demo
 {
     public class MonoObject : MonoBehaviour
     {

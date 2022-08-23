@@ -1,6 +1,7 @@
 ﻿using System;
+using GameKit.DataStructure;
 
-namespace GameKit
+namespace GameKit.ObjectPool
 {
     public abstract class ObjectPoolBase
     {

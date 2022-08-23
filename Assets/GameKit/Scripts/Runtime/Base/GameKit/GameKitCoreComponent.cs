@@ -1,8 +1,7 @@
-using System;
-using UnityEngine;
 using GameKit;
+using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Core")]

@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using GameKit;
 using LubanConfig.DataTable;
 using UnityEngine.Events;
 using GameKit.QuickCode;
+using GameKit.Inventory;
+using GameKit;
 
 public class UI_BackpackChunk : UIData
 {

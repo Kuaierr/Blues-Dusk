@@ -1,4 +1,7 @@
-public interface ITestTaskAgentHelper
+namespace UnityGameKit.Demo
 {
-    void CallHelper(string arg);
+    public interface ITestTaskAgentHelper
+    {
+        void CallHelper(string arg);
+    }
 }

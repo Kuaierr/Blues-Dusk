@@ -1,5 +1,7 @@
+using GameKit;
 using GameKit.Event;
-namespace GameKit
+
+namespace UnityGameKit.Runtime
 {
     public sealed class ShowUIFormSuccessEventArgs : GameEventArgs
     {

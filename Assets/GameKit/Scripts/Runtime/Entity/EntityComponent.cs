@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using GameKit;
 using GameKit.EntityModule;
+using GameKit.ObjectPool;
 
-
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Kit/Entity Component")]

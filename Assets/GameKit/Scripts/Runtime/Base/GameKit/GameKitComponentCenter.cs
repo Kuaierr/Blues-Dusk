@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using GameKit;
+using GameKit.DataStructure;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public enum ShutdownType
     {

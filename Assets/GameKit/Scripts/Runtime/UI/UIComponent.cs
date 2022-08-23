@@ -1,11 +1,11 @@
 using GameKit;
-// using GameKit.ObjectPool;
-// using GameKit.Resource;
+using GameKit.ObjectPool;
 using GameKit.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit
+
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit UI Component")]
@@ -240,7 +240,7 @@ namespace GameKit
                 return false;
             }
 
-            uiGroupHelper.name = Utility.Text.Format("UI Group - {0}", uiGroupName);
+            uiGroupHelper.name = GameKit.Utility.Text.Format("UI Group - {0}", uiGroupName);
             uiGroupHelper.gameObject.layer = LayerMask.NameToLayer("UI");
             Transform transform = uiGroupHelper.transform;
             transform.SetParent(m_InstanceRoot);

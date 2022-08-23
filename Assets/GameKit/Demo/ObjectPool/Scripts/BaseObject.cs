@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GameKit;
+using GameKit.ObjectPool;
 
-namespace GameKit.Demo
+namespace UnityGameKit.Demo
 {
     public class BaseObject : ObjectBase
     {
@@ -14,7 +13,7 @@ namespace GameKit.Demo
             return baseObject;
         }
 
-        protected internal override void Release(bool isShutdown)
+        protected override void Release(bool isShutdown)
         {
             MonoObject monoObject = (MonoObject)Target;
             if (monoObject == null)
@@ -22,14 +21,14 @@ namespace GameKit.Demo
             Object.Destroy(monoObject.gameObject);
         }
 
-        protected internal override void OnSpawn()
+        protected override void OnSpawn()
         {
             base.OnSpawn();
             MonoObject monoObject = (MonoObject)Target;
             monoObject.gameObject.SetActive(true);
         }
 
-        protected internal override void OnUnspawn()
+        protected override void OnUnspawn()
         {
             base.OnUnspawn();
             MonoObject monoObject = (MonoObject)Target;

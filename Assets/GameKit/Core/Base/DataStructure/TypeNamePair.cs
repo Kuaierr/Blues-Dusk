@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace GameKit
+namespace GameKit.DataStructure
 {
     [StructLayout(LayoutKind.Auto)]
     internal struct TypeNamePair : IEquatable<TypeNamePair>

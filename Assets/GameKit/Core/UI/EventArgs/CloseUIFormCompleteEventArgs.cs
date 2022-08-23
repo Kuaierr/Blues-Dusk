@@ -1,4 +1,4 @@
-using GameKit;
+
 namespace GameKit.UI
 {
     public sealed class CloseUIFormCompleteEventArgs : GameKitEventArgs

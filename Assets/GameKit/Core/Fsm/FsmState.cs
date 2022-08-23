@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace GameKit.Fsm
 {
     public abstract class FsmState<T> where T : class

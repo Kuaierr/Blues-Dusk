@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using GameKit.DataStructure;
 
-namespace GameKit
+
+namespace GameKit.ObjectPool
 {
     internal sealed partial class ObjectPoolManager : GameKitModule, IObjectPoolManager
     {

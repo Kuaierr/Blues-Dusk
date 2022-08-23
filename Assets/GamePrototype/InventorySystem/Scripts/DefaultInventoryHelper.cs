@@ -1,6 +1,9 @@
 using LubanConfig.DataTable;
 using InteractCallType = LubanConfig.ItemEnum.InteractCallbackType;
 using GameKit;
+using UnityGameKit.Runtime;
+using GameKit.Inventory;
+
 public sealed class DefaultInventoryHelper : InventoryHelperBase
 {
     public override IStock InitStock(IStock stock, object data)

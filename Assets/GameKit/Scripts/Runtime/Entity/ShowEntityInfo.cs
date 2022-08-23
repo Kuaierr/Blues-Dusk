@@ -1,6 +1,7 @@
 using System;
+using GameKit;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     internal sealed class ShowEntityInfo : IReference
     {

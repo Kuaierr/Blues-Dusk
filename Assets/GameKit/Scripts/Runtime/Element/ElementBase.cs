@@ -1,6 +1,8 @@
 using UnityEngine;
+using GameKit;
+using GameKit.Element;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public abstract class ElementBase : MonoBehaviour, IElement
     {

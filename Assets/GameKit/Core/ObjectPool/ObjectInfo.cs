@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GameKit
+namespace GameKit.ObjectPool
 {
     [StructLayout(LayoutKind.Auto)]
     public struct ObjectInfo

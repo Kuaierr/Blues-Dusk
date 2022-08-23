@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameKit;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public abstract class MonoSingletonBase<T> : MonoBehaviour where T : MonoSingletonBase<T>
     {

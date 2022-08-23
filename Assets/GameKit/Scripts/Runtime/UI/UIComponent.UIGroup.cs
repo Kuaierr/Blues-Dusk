@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed partial class UIComponent : GameKitComponent
     {

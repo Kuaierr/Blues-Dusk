@@ -1,17 +1,11 @@
 using GameKit.Event;
 
+
 namespace GameKit.EntityModule
 {
-    public class EntityShowSuccessEventArgs : GameEventArgs
+    public class EntityShowSuccessEventArgs : GameKitEventArgs
     {
         public static int EventId = typeof(EntityShowSuccessEventArgs).GetHashCode();
-        public override int Id
-        {
-            get
-            {
-                return EventId;
-            }
-        }
 
         public EntityShowSuccessEventArgs()
         {

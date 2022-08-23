@@ -1,8 +1,9 @@
 using GameKit.UI;
+using GameKit;
 using System;
 using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed class UIForm : MonoBehaviour, IUIForm
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace GameKit
+namespace GameKit.DataStructure
 {
     public sealed class CachedLinkedList<T> : ICollection, ICollection<T>, IEnumerable, IEnumerable<T>
     {

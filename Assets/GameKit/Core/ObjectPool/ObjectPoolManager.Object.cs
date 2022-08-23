@@ -1,5 +1,7 @@
 ﻿using System;
-namespace GameKit
+
+
+namespace GameKit.ObjectPool
 {
     internal sealed partial class ObjectPoolManager : GameKitModule, IObjectPoolManager
     {

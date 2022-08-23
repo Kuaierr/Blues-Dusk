@@ -5,6 +5,7 @@ using GameKit.DataStructure;
 using GameKit;
 using UnityEngine.Events;
 using GameKit.QuickCode;
+using UnityGameKit.Runtime;
 [DisallowMultipleComponent]
 [AddComponentMenu("GameKit/Dialog System")]
 public class DialogSystem : MonoSingletonBase<DialogSystem>

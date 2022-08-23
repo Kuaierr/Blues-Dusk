@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameKit;
 
-public class EntityTest : EntityBase
+namespace UnityGameKit.Demo
 {
-    private EntityTestData m_testdata = null;
-    protected internal override void OnShow(object userData)
+    public class EntityTest : EntityBase
     {
-        base.OnShow(userData);
-        m_testdata = userData as EntityTestData;
-        Debug.Log(m_testdata.TestData);
+        private EntityTestData m_testdata = null;
+        protected override void OnShow(object userData)
+        {
+            base.OnShow(userData);
+            m_testdata = userData as EntityTestData;
+            Debug.Log(m_testdata.TestData);
+        }
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GameKit
+namespace GameKit.Element
 {
     internal sealed class ElementManager : GameKitModule, IElementManager
     {

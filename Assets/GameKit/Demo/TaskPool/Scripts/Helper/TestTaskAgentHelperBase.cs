@@ -1,5 +1,9 @@
 using UnityEngine;
-public abstract class TestTaskAgentHelperBase : MonoBehaviour, ITestTaskAgentHelper
+
+namespace UnityGameKit.Demo
 {
-    public abstract void CallHelper(string arg);
+    public abstract class TestTaskAgentHelperBase : MonoBehaviour, ITestTaskAgentHelper
+    {
+        public abstract void CallHelper(string arg);
+    }
 }

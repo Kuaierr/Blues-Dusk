@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using GameKit;
+using UnityGameKit.Runtime;
 using GameKit.Timer;
 using GameKit.QuickCode;
-using Geometry = GameKit.Utility.Geometry;
 using DG.Tweening;
 
 public class Prototyper : MonoBehaviour

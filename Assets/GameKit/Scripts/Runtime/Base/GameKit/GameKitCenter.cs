@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public class GameKitCenter : MonoBehaviour
     {
@@ -14,8 +14,8 @@ namespace GameKit
 
         private static void InitComponents()
         {
-            Core = GameKit.GameKitComponentCenter.GetComponent<GameKitCoreComponent>();
-            Fsm = GameKit.GameKitComponentCenter.GetComponent<FsmComponent>();
+            Core = UnityGameKit.Runtime.GameKitComponentCenter.GetComponent<GameKitCoreComponent>();
+            Fsm = UnityGameKit.Runtime.GameKitComponentCenter.GetComponent<FsmComponent>();
         }
     }
 }

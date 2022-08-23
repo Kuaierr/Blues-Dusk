@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using GameKit.DataStructure;
 
-using GameKit;
+
 namespace GameKit.UI
 {
     internal sealed partial class UIManager : GameKitModule, IUIManager

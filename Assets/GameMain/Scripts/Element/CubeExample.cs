@@ -1,5 +1,5 @@
 using UnityEngine;
-using GameKit;
+using UnityGameKit.Runtime;
 
 public class CubeExample : InteractiveElement 
 {    

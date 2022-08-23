@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using GameKit.EntityModule;
+using GameKit;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     internal sealed class EntityInfo : IReference
     {

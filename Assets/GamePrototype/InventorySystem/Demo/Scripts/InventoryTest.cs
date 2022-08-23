@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using GameKit;
+using UnityGameKit.Runtime;
+using GameKit.Inventory;
 using LubanConfig.DataTable;
 
 
@@ -14,7 +16,7 @@ public class InventoryTest : MonoBehaviour
     {
         yield return null;
         inventorySystem = GameKitComponentCenter.GetComponent<InventoryComponent>();
-        Item item = TableManager.instance.ItemTable.Get(10001);
+        Item item = DataTable.instance.ItemTable.Get(10001);
 
         inventorySystem.CreateInventory("TempInventory", 60);
         inventorySystem.AddToInventory<Item>("TempInventory", 10001, item.Name, item);

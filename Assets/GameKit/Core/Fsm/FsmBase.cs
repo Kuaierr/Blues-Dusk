@@ -1,5 +1,6 @@
 
 using System;
+using GameKit.DataStructure;
 
 namespace GameKit.Fsm
 {

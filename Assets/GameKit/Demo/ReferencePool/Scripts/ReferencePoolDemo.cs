@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GameKit;
 using GameKit.DataStructure;
 
-namespace GameKit.Demo
+namespace UnityGameKit.Demo
 {
     public class ReferencePoolDemo : MonoBehaviour
     {

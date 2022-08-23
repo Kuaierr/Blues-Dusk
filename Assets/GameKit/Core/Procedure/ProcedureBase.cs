@@ -1,7 +1,7 @@
 using GameKit.Fsm;
-using ProcedureFsm = GameKit.Fsm.IFsm<GameKit.IProcedureManager>;
+using ProcedureFsm = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
-namespace GameKit
+namespace GameKit.Procedure
 {
     public abstract class ProcedureBase : FsmState<IProcedureManager>
     {

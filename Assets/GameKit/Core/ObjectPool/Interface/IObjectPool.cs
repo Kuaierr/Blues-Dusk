@@ -1,5 +1,5 @@
 ﻿using System;
-namespace GameKit
+namespace GameKit.ObjectPool
 {
     public interface IObjectPool<T> where T : ObjectBase
     {

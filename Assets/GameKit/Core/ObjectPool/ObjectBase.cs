@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace GameKit
+
+namespace GameKit.ObjectPool
 {
     public abstract class ObjectBase : IReference
     {

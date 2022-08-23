@@ -1,5 +1,5 @@
 using UnityEngine;
-using GameKit;
+using UnityGameKit.Runtime;
 public class GameRegulator : Regulator
 {
     private InteractiveElement m_CachedInteractiveElement;

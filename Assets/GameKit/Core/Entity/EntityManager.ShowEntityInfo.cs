@@ -1,3 +1,4 @@
+
 namespace GameKit.EntityModule
 {
     internal sealed partial class EntityManager : GameKitModule, IEntityManager

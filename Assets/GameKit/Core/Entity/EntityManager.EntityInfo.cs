@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+
 namespace GameKit.EntityModule
 {
     internal sealed partial class EntityManager : GameKitModule, IEntityManager

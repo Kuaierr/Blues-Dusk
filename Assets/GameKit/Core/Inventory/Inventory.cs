@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GameKit
+namespace GameKit.Inventory
 {
     [System.Serializable]
     public partial class Inventory : IInventory

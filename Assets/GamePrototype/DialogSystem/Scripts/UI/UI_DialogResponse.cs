@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using GameKit;
+using UnityGameKit.Runtime;
 using System.Linq;
 using UnityEngine.Events;
 using GameKit.QuickCode;

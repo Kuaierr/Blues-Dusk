@@ -1,7 +1,7 @@
 using System;
 using GameKit.Fsm;
 
-namespace GameKit
+namespace GameKit.Procedure
 {
     public interface IProcedureManager
     {

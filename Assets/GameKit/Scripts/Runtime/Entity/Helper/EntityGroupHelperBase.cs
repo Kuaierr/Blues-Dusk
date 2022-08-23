@@ -1,7 +1,7 @@
 using UnityEngine;
 using GameKit.EntityModule;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public abstract class EntityGroupHelperBase : MonoBehaviour, IEntityGroupHelper
     {

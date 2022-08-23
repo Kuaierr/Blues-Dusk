@@ -1,5 +1,6 @@
 using System;
 
+
 namespace GameKit.Event
 {
     internal sealed class EventManager : GameKitModule, IEventManager

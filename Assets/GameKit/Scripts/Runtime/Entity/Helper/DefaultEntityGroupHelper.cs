@@ -1,6 +1,7 @@
-﻿namespace GameKit
+﻿namespace UnityGameKit.Runtime
 {
     public class DefaultEntityGroupHelper : EntityGroupHelperBase
     {
+
     }
 }

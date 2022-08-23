@@ -8,7 +8,6 @@ namespace GameKit
         public const string GAMEMAIN_PATH = "Assets/GameMain/";
         public const string CORE_PATH = "Assets/GameKit/Core/";
         public const string RUNTIME_PATH = "Assets/GameKit/Runtime/";
-        public const string DEMO_PATH = "Assets/GameKit/Demo/";
     }
 }
 

@@ -1,3 +1,4 @@
+
 namespace GameKit.UI
 {
     public sealed class OpenUIFormSuccessEventArgs : GameKitEventArgs

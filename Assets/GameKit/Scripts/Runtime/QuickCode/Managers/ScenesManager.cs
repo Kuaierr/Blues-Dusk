@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using GameKit;
+using UnityGameKit.Runtime;
 namespace GameKit.QuickCode
 {
     public class ScenesManager : SingletonBase<ScenesManager>

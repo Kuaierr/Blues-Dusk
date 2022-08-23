@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using GameKit.DataStructure;
 #if PACKAGE_ADDRESSABLES
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -54,7 +53,7 @@ namespace GameKit
                 callback.Invoke(m_CachedAssets[idName].Target as T);
                 return;
             }
-            MonoManager.instance.StartCoroutine(LoadResourceAsyncProcess<T>(idName, callback));
+            // UnityGameKit.Runtime.MonoManager.instance.StartCoroutine(LoadResourceAsyncProcess<T>(idName, callback));
         }
 
         private IEnumerator LoadResourceAsyncProcess<T>(string idName, UnityAction<T> callback) where T : Object
@@ -128,7 +127,7 @@ namespace GameKit
                 return;
             }
 #if PACKAGE_ADDRESSABLES
-            MonoManager.instance.StartCoroutine(GetAddressableAsynProcess<T>(keyName, onSuccess, onFail));
+            // UnityGameKit.Runtime.MonoManager.instance.StartCoroutine(GetAddressableAsynProcess<T>(keyName, onSuccess, onFail));
 #else
             Utility.Debugger.LogFail("Addressables Is Not Installed.");
 #endif
@@ -142,7 +141,7 @@ namespace GameKit
                 return;
             }
 #if PACKAGE_ADDRESSABLES
-            MonoManager.instance.StartCoroutine(GetAddressableAsynProcessByLabel<T>(labels, eachCall, onSuccess, onFail));
+            // UnityGameKit.Runtime.MonoManager.instance.StartCoroutine(GetAddressableAsynProcessByLabel<T>(labels, eachCall, onSuccess, onFail));
 #else
             Utility.Debugger.LogFail("Addressables Is Not Installed.");
 #endif

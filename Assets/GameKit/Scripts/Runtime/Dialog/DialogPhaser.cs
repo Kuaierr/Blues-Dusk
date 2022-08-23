@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using GameKit.DataStructure;
 using GameKit;
+using UnityGameKit.Runtime;
 
 public static class DialogPhaser
 {

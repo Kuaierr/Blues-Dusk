@@ -1,7 +1,8 @@
 using GameKit.Event;
+using GameKit;
 using System;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed class EntityShowFailEventArgs : GameEventArgs
     {

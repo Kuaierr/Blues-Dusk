@@ -1,8 +1,10 @@
+using GameKit;
 using GameKit.Event;
 using System;
 using UnityEngine;
 
-namespace GameKit
+
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Event Component")]

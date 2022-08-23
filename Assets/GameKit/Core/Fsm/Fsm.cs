@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using GameKit.DataStructure;
+
 
 namespace GameKit.Fsm
 {

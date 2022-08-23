@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using GameKit;
+using UnityGameKit.Runtime;
 
 public class ModuleTesting : MonoBehaviour
 {

@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using GameKit.DataStructure;
+using GameKit.ObjectPool;
+
 
 namespace GameKit.EntityModule
 {

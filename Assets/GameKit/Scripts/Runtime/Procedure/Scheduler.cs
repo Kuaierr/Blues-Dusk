@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using DG.Tweening;
 using GameKit.QuickCode;
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public enum SceneSwitchType
     {

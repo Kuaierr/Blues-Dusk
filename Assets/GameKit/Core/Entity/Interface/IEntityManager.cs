@@ -1,4 +1,5 @@
 using System;
+using GameKit.ObjectPool;
 
 namespace GameKit.EntityModule
 {

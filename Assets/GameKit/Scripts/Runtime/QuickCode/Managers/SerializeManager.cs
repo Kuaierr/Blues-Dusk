@@ -3,6 +3,7 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using LitJson;
+using UnityGameKit.Runtime;
 
 /// <summary>
 /// 非异步文件加载管理器

@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameKit;
 using GameKit.EntityModule;
 using System;
 using UnityEngine;
 
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed class Entity : MonoBehaviour, IEntity
     {

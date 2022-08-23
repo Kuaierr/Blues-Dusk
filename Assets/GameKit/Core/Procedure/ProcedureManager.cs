@@ -1,7 +1,8 @@
 using GameKit.Fsm;
 using System;
 
-namespace GameKit
+
+namespace GameKit.Procedure
 {
     internal sealed class ProcedureManager : GameKitModule, IProcedureManager
     {

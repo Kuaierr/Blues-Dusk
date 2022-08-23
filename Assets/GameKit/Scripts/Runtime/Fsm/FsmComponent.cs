@@ -1,10 +1,11 @@
 using GameKit;
+
 using GameKit.Fsm;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Fsm Component")]

@@ -1,5 +1,4 @@
-// using GameKit.ObjectPool;
-using GameKit;
+using GameKit.ObjectPool;
 
 namespace GameKit.UI
 {

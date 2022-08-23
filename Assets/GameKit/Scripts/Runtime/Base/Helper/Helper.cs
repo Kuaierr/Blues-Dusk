@@ -1,7 +1,8 @@
+using GameKit;
 using UnityEngine;
 using Debugger = GameKit.Utility.Debugger;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public static class Helper
     {

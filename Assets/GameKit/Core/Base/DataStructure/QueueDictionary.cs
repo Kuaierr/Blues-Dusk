@@ -1,50 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-public class QueueDictionary<TKey, TValue> {
-	private Queue<TKey> queue;
-	private Dictionary<TKey, TValue> dict;
 
-	private Func<TValue> generator;
+namespace DataStructure
+{
+    public class QueueDictionary<TKey, TValue>
+    {
+        private Queue<TKey> queue;
+        private Dictionary<TKey, TValue> dict;
 
-	public QueueDictionary(Func<TValue> generator) {
-		this.generator = generator;
-		this.queue = new Queue<TKey>();
-		this.dict = new Dictionary<TKey, TValue>();
-	}
+        private Func<TValue> generator;
 
-	public KeyValuePair<TKey, TValue> Peek() {
-		return new KeyValuePair<TKey,TValue>(this.queue.Peek(), this.dict[this.queue.Peek()]);
-	}
+        public QueueDictionary(Func<TValue> generator)
+        {
+            this.generator = generator;
+            this.queue = new Queue<TKey>();
+            this.dict = new Dictionary<TKey, TValue>();
+        }
 
-	public KeyValuePair<TKey, TValue> Dequeue() {
-		var key = this.queue.Dequeue();
-		var result = new KeyValuePair<TKey, TValue>(key, this.dict[key]);
-		this.dict.Remove(key);
-		return result;
-	}
+        public KeyValuePair<TKey, TValue> Peek()
+        {
+            return new KeyValuePair<TKey, TValue>(this.queue.Peek(), this.dict[this.queue.Peek()]);
+        }
 
-	public bool Any() {
-		return this.queue.Count != 0;
-	}
+        public KeyValuePair<TKey, TValue> Dequeue()
+        {
+            var key = this.queue.Dequeue();
+            var result = new KeyValuePair<TKey, TValue>(key, this.dict[key]);
+            this.dict.Remove(key);
+            return result;
+        }
 
-	public TValue this[TKey key] {
-		get {
-			if (!this.dict.ContainsKey(key)) {
-				this.dict[key] = this.generator.Invoke();
-				this.queue.Enqueue(key);
-			}
-			return this.dict[key];
-		}
-		set {
-			if (!this.dict.ContainsKey(key)) {
-				this.queue.Enqueue(key);
-			}
-			this.dict[key] = value;
-		}
-	}
+        public bool Any()
+        {
+            return this.queue.Count != 0;
+        }
 
-	public void Clear() {
-		this.dict.Clear();
-		this.queue.Clear();
-	}
+        public TValue this[TKey key]
+        {
+            get
+            {
+                if (!this.dict.ContainsKey(key))
+                {
+                    this.dict[key] = this.generator.Invoke();
+                    this.queue.Enqueue(key);
+                }
+                return this.dict[key];
+            }
+            set
+            {
+                if (!this.dict.ContainsKey(key))
+                {
+                    this.queue.Enqueue(key);
+                }
+                this.dict[key] = value;
+            }
+        }
+
+        public void Clear()
+        {
+            this.dict.Clear();
+            this.queue.Clear();
+        }
+    }
 }

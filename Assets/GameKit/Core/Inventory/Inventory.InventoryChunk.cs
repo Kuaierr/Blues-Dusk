@@ -1,4 +1,4 @@
-namespace GameKit
+namespace GameKit.Inventory
 {
     public partial class Inventory
     {

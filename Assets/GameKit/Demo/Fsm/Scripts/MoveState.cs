@@ -1,8 +1,9 @@
 using UnityEngine;
 using GameKit.Fsm;
-using FsmInterface = GameKit.Fsm.IFsm<GameKit.Demo.FsmPlayer>;
+using GameKit;
+using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Demo.FsmPlayer>;
 
-namespace GameKit.Demo
+namespace UnityGameKit.Demo
 {
     public class MoveState : FsmState<FsmPlayer>, IReference
     {
@@ -12,14 +13,14 @@ namespace GameKit.Demo
 
         }
 
-        protected internal override void OnEnter(FsmInterface ifsm)
+        protected override void OnEnter(FsmInterface ifsm)
         {
             base.OnEnter(ifsm);
             Debug.Log("Enter Move State.");
             user = ifsm.User;
         }
 
-        protected internal override void OnUpdate(FsmInterface ifsm, float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(FsmInterface ifsm, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(ifsm, elapseSeconds, realElapseSeconds);
             if (Input.GetKeyDown(KeyCode.Space))

@@ -1,9 +1,12 @@
 using UnityEngine;
 using GameKit;
-public class DefaultTestTaskAgentHelper : TestTaskAgentHelperBase
+namespace UnityGameKit.Demo
 {
-    public override void CallHelper(string arg)
+    public class DefaultTestTaskAgentHelper : TestTaskAgentHelperBase
     {
-        Utility.Debugger.LogSuccess("Call Example Helper with Arg: {0}", arg);
+        public override void CallHelper(string arg)
+        {
+            Utility.Debugger.LogSuccess("Call Example Helper with Arg: {0}", arg);
+        }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using GameKit.Event;
+using GameKit.ObjectPool;
+
 
 namespace GameKit.EntityModule
 {

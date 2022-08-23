@@ -2,9 +2,10 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GameKit;
 using UnityEngine.Events;
+using GameKit;
 using GameKit.QuickCode;
+using GameKit.Inventory;
 
 public class UI_Backpack : UIPanel
 {

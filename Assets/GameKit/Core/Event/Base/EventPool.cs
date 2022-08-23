@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameKit.DataStructure;
 
+
 namespace GameKit.Event
 {
     internal sealed partial class EventPool<T> where T : GameEventArgs

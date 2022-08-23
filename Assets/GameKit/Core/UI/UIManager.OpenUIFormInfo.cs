@@ -1,3 +1,4 @@
+
 namespace GameKit.UI
 {
     internal sealed partial class UIManager : GameKitModule, IUIManager

@@ -1,7 +1,9 @@
 using GameKit.EntityModule;
 using GameKit.Event;
+using GameKit;
 
-namespace GameKit
+
+namespace UnityGameKit.Runtime
 {
     public sealed class EntityHideCompleteEventArgs : GameEventArgs
     {

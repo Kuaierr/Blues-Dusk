@@ -1,35 +1,38 @@
 using UnityEngine;
 using GameKit;
-
-public class TestTaskEntry : MonoBehaviour
+using UnityGameKit.Runtime;
+namespace UnityGameKit.Demo
 {
-    [SerializeField] private string m_TestTaskAgentHelper = "DefaultTestTaskAgentHelper";
-    private TaskPool<TestTaskBase> m_TaskPool;
-    private TestTaskAgent testTaskAgent;
-    private TestTaskAgentHelperBase taskAgentHelper;
-    private void Start()
+    public class TestTaskEntry : MonoBehaviour
     {
-        taskAgentHelper = Helper.CreateHelper<TestTaskAgentHelperBase>(m_TestTaskAgentHelper, null);
-        taskAgentHelper.name = "Test Task Agent Helper";
-        taskAgentHelper.transform.SetParent(this.transform);
-
-        testTaskAgent = new TestTaskAgent();
-        testTaskAgent.SetHelper(taskAgentHelper);
-
-        m_TaskPool = new TaskPool<TestTaskBase>();
-        m_TaskPool.AddAgent(testTaskAgent);
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        [SerializeField] private string m_TestTaskAgentHelper = "DefaultTestTaskAgentHelper";
+        private TaskPool<TestTaskBase> m_TaskPool;
+        private TestTaskAgent testTaskAgent;
+        private TestTaskAgentHelperBase taskAgentHelper;
+        private void Start()
         {
-            TestTaskBase mainTask = TestTaskBase.Create(Time.fixedUnscaledTime);
-            m_TaskPool.AddTask(mainTask);
-        }   
+            taskAgentHelper = Helper.CreateHelper<TestTaskAgentHelperBase>(m_TestTaskAgentHelper, null);
+            taskAgentHelper.name = "Test Task Agent Helper";
+            taskAgentHelper.transform.SetParent(this.transform);
 
-        m_TaskPool.Update(0, 0);
-        // m_TaskPool.AddAgent
+            testTaskAgent = new TestTaskAgent();
+            testTaskAgent.SetHelper(taskAgentHelper);
+
+            m_TaskPool = new TaskPool<TestTaskBase>();
+            m_TaskPool.AddAgent(testTaskAgent);
+        }
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TestTaskBase mainTask = TestTaskBase.Create(Time.fixedUnscaledTime);
+                m_TaskPool.AddTask(mainTask);
+            }
+
+            m_TaskPool.Update(0, 0);
+            // m_TaskPool.AddAgent
+        }
     }
 }

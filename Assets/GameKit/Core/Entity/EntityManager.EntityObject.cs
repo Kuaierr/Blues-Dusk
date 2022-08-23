@@ -1,3 +1,5 @@
+
+using GameKit.ObjectPool;
 namespace GameKit.EntityModule
 {
     internal sealed partial class EntityManager

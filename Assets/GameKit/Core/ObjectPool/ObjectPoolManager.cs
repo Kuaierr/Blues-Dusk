@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameKit.DataStructure;
 
-namespace GameKit
+
+namespace GameKit.ObjectPool
 {
     public delegate List<T> ReleaseObjectFilterCallback<T>(List<T> candidateObjects, int toReleaseCount, DateTime expireTime) where T : ObjectBase;
 

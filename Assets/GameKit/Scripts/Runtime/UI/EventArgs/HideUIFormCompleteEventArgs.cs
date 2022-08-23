@@ -1,7 +1,8 @@
+using GameKit;
 using GameKit.UI;
 using GameKit.Event;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public sealed class HideUIFormCompleteEventArgs : GameEventArgs
     {

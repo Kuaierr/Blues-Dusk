@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityGameKit.Runtime;
 using UnityEngine;
-using GameKit;
 
-[System.Serializable]
-public class EntityTestData : EntityData
+namespace UnityGameKit.Demo
 {
-    [SerializeField] private string m_testData;
-    public EntityTestData(int entityId, int typeId) : base(entityId, typeId)
+    [System.Serializable]
+    public class EntityTestData : EntityData
     {
-        m_testData = "this is test data";
-    }
-
-    public string TestData
-    {
-        get
+        [SerializeField] private string m_testData;
+        public EntityTestData(int entityId, int typeId) : base(entityId, typeId)
         {
-            return m_testData;
+            m_testData = "this is test data";
+        }
+
+        public string TestData
+        {
+            get
+            {
+                return m_testData;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
+using GameKit;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public abstract class UIFormLogic : MonoBehaviour
     {

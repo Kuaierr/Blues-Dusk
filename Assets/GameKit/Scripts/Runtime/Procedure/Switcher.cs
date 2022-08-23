@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using GameKit.QuickCode;
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public class Switcher : GameKit.QuickCode.UIData
     {

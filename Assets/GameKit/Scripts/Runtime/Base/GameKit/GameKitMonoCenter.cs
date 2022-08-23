@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public delegate void MonoAction<T>(T param);
     public delegate void MonoAction<T0, T1>(T0 param1, T1 param2);
