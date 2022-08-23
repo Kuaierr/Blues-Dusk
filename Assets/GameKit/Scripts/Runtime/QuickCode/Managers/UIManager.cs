@@ -13,6 +13,7 @@ namespace GameKit.QuickCode
             if (panels == null)
                 panels = new Dictionary<string, UIPanel>();
 
+            Debug.Log("Register UI " + panel.ToString());
             if (!panels.ContainsKey(panel.gameObject.name))
                 panels.Add(panel.gameObject.name, panel);
             else
