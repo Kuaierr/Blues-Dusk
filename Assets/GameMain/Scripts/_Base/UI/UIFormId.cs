@@ -1,4 +1,4 @@
-public enum UIFormId : byte
+public enum UIFormId
 {
     UI_Menu = 100,
     UI_Setting = 101,

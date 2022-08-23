@@ -5,7 +5,7 @@ using UnityGameKit.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+[RequireComponent(typeof(CanvasGroup), typeof(Animator))]
 public abstract class UIFormBase : UIFormLogic
 {
     public const int DepthFactor = 100;
@@ -40,7 +40,7 @@ public abstract class UIFormBase : UIFormLogic
 
         if (ignoreFade)
         {
-            // GameEntry.UI.CloseUIForm(this);
+            GameKitCenter.UI.CloseUIForm(this);
         }
         else
         {
@@ -77,15 +77,15 @@ public abstract class UIFormBase : UIFormLogic
 
         gameObject.GetOrAddComponent<GraphicRaycaster>();
 
-        Text[] texts = GetComponentsInChildren<Text>(true);
-        for (int i = 0; i < texts.Length; i++)
-        {
-            texts[i].font = s_MainFont;
-            if (!string.IsNullOrEmpty(texts[i].text))
-            {
-                // texts[i].text = GameEntry.Localization.GetString(texts[i].text);
-            }
-        }
+        // Text[] texts = GetComponentsInChildren<Text>(true);
+        // for (int i = 0; i < texts.Length; i++)
+        // {
+        //     texts[i].font = s_MainFont;
+        //     if (!string.IsNullOrEmpty(texts[i].text))
+        //     {
+        //         // texts[i].text = GameEntry.Localization.GetString(texts[i].text);
+        //     }
+        // }
     }
 
     protected override void OnRecycle()
@@ -145,14 +145,14 @@ public abstract class UIFormBase : UIFormLogic
     {
         int oldDepth = Depth;
         base.OnDepthChanged(uiGroupDepth, depthInUIGroup);
-        // int deltaDepth = UGuiGroupHelper.DepthFactor * uiGroupDepth + DepthFactor * depthInUIGroup - oldDepth + OriginalDepth;
-        // GetComponentsInChildren(true, m_CachedCanvasContainer);
-        // for (int i = 0; i < m_CachedCanvasContainer.Count; i++)
-        // {
-        //     m_CachedCanvasContainer[i].sortingOrder += deltaDepth;
-        // }
+        int deltaDepth = UIFormBaseGroupHelper.DepthFactor * uiGroupDepth + DepthFactor * depthInUIGroup - oldDepth + OriginalDepth;
+        GetComponentsInChildren(true, m_CachedCanvasContainer);
+        for (int i = 0; i < m_CachedCanvasContainer.Count; i++)
+        {
+            m_CachedCanvasContainer[i].sortingOrder += deltaDepth;
+        }
 
-        // m_CachedCanvasContainer.Clear();
+        m_CachedCanvasContainer.Clear();
     }
 
     // private IEnumerator CloseCo(float duration)
