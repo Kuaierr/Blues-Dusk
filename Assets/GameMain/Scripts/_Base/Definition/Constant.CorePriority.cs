@@ -1,4 +1,4 @@
-namespace GameKit
+namespace UnityGameKit.Runtime
 {
     public static partial class Constant
     {

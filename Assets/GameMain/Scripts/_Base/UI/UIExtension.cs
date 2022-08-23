@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameKit.Runtime;
+using UiConfig = LubanConfig.DataTable.UIConfig;
 
 public static class UIExtension
 {
@@ -51,7 +52,17 @@ public static class UIExtension
 
     public static bool HasUIForm(this UIComponent uiComponent, int uiFormId, string uiGroupName = null)
     {
-        return false;
+        if (string.IsNullOrEmpty(uiGroupName))
+        {
+            return uiComponent.HasUIForm(uiFormId);
+        }
+
+        IUIGroup uiGroup = uiComponent.GetUIGroup(uiGroupName);
+        if (uiGroup == null)
+        {
+            return false;
+        }
+        return uiGroup.HasUIForm(uiFormId);
     }
 
     public static UIFormBase GetUIForm(this UIComponent uiComponent, string uiFormName, string uiGroupName = null)
@@ -84,9 +95,33 @@ public static class UIExtension
         return (UIFormBase)uiForm.Logic;
     }
 
-    public static UIFormBase GetUIForm(this UIComponent uiComponent, int uiFormName, string uiGroupName = null)
+    public static UIFormBase GetUIForm(this UIComponent uiComponent, int uiFormId, string uiGroupName = null)
     {
-        return null;
+        UIForm uiForm = null;
+        if (string.IsNullOrEmpty(uiGroupName))
+        {
+            uiForm = uiComponent.GetUIForm(uiFormId);
+            if (uiForm == null)
+            {
+                return null;
+            }
+
+            return (UIFormBase)uiForm.Logic;
+        }
+
+        IUIGroup uiGroup = uiComponent.GetUIGroup(uiGroupName);
+        if (uiGroup == null)
+        {
+            return null;
+        }
+
+        uiForm = (UIForm)uiGroup.GetUIForm(uiFormId);
+        if (uiForm == null)
+        {
+            return null;
+        }
+
+        return (UIFormBase)uiForm.Logic;
     }
 
     public static void CloseUIForm(this UIComponent uiComponent, UIFormBase uiForm)
@@ -96,28 +131,50 @@ public static class UIExtension
 
     public static int? OpenUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)
     {
-        return null;
-        
-        // string assetName = AssetUtility.GetUIFormAsset(uiFormName);
-        // if (!drUIForm.AllowMultiInstance)
-        // {
-        //     if (uiComponent.IsLoadingUIForm(assetName))
-        //     {
-        //         return null;
-        //     }
+        UiConfig uiConfig = DataTable.instance.UIConfigTable.GetByAssetName(uiFormName);
+        if (uiConfig == null)
+        {
+            Log.Warning("Can not load UI form '{0}' from data table.", uiFormName);
+            return null;
+        }
+        string assetName = AssetUtility.GetUIFormAsset(uiFormName);
+        if (!uiConfig.AllowMultiInstance)
+        {
+            if (uiComponent.IsLoadingUIForm(assetName))
+            {
+                return null;
+            }
 
-        //     if (uiComponent.HasUIForm(assetName))
-        //     {
-        //         return null;
-        //     }
-        // }
-
-        // return uiComponent.OpenUIForm(assetName, drUIForm.UIGroupName, Constant.CorePriority.UIFormAsset, drUIForm.PauseCoveredUIForm, userData);
+            if (uiComponent.HasUIForm(assetName))
+            {
+                return null;
+            }
+        }
+        return uiComponent.OpenUIForm(assetName, uiConfig.UiGroupName, Constant.CorePriority.UIFormAsset, uiConfig.PauseCoveredUiForm, userData);
     }
 
-    public static int? OpenUIForm(this UIComponent uiComponent, int uiFormName, object userData = null)
+    public static int? OpenUIForm(this UIComponent uiComponent, int uiFormId, object userData = null)
     {
-        return null;
+        UiConfig uiConfig = DataTable.instance.UIConfigTable.GetById(uiFormId);
+        if (uiConfig == null)
+        {
+            Log.Warning("Can not load UI form '{0}' from data table.", uiFormId);
+            return null;
+        }
+        string assetName = AssetUtility.GetUIFormAsset(uiConfig.AssetName);
+        if (!uiConfig.AllowMultiInstance)
+        {
+            if (uiComponent.IsLoadingUIForm(assetName))
+            {
+                return null;
+            }
+
+            if (uiComponent.HasUIForm(assetName))
+            {
+                return null;
+            }
+        }
+        return uiComponent.OpenUIForm(assetName, uiConfig.UiGroupName, Constant.CorePriority.UIFormAsset, uiConfig.PauseCoveredUiForm, userData);
     }
 }
 

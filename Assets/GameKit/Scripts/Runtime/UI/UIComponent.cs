@@ -43,13 +43,13 @@ namespace UnityGameKit.Runtime
         private Transform m_InstanceRoot = null;
 
         [SerializeField]
-        private string m_UIFormHelperTypeName = "GameKit.DefaultUIFormHelper";
+        private string m_UIFormHelperTypeName = "UnityGameKit.Runtime.DefaultUIFormHelper";
 
         [SerializeField]
         private UIFormHelperBase m_CustomUIFormHelper = null;
 
         [SerializeField]
-        private string m_UIGroupHelperTypeName = "GameKit.DefaultUIGroupHelper";
+        private string m_UIGroupHelperTypeName = "UnityGameKit.Runtime.DefaultUIGroupHelper";
 
         [SerializeField]
         private UIGroupHelperBase m_CustomUIGroupHelper = null;

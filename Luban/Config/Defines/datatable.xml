@@ -6,11 +6,11 @@
         <var name="a" type="float"/>
     </bean>
 
-    <externaltype name="unity_color" origin_type_name="DataTable.Color">
+<!--     <externaltype name="unity_color" origin_type_name="DataTable.Color">
         <mapper lan="cs" selector="unity_cs">
             <target_type_name>UnityEngine.Color</target_type_name>
             <create_external_object_function>ExternalTypeUtil.NewFromCfgColor</create_external_object_function>
         </mapper>
-    </externaltype>
+    </externaltype> -->
 
 </module>

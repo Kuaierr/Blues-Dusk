@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("GameKit/GameKit Core")]
+    [AddComponentMenu("GameKit/GameKit Core Component")]
     public sealed class GameKitCoreComponent : GameKitComponent
     {
         protected override void Awake()

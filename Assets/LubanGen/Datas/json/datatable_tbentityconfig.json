@@ -1,0 +1,14 @@
+[
+  {
+    "id": 10000,
+    "asset_name": "CubeExample"
+  },
+  {
+    "id": 10001,
+    "asset_name": "SphereExample"
+  },
+  {
+    "id": 10002,
+    "asset_name": "CylinderExample"
+  }
+]

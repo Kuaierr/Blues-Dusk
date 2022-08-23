@@ -16,7 +16,8 @@ public sealed partial class Tables
     public DataTable.TbItem TbItem {get; }
     public DataTable.TbDice TbDice {get; }
     public DataTable.TbCard TbCard {get; }
-    public Global.TbGlobal TbGlobal {get; }
+    public DataTable.TbUIConfig TbUIConfig {get; }
+    public DataTable.TbEntityConfig TbEntityConfig {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -27,14 +28,17 @@ public sealed partial class Tables
         tables.Add("DataTable.TbDice", TbDice);
         TbCard = new DataTable.TbCard(loader("datatable_tbcard")); 
         tables.Add("DataTable.TbCard", TbCard);
-        TbGlobal = new Global.TbGlobal(loader("global_tbglobal")); 
-        tables.Add("Global.TbGlobal", TbGlobal);
+        TbUIConfig = new DataTable.TbUIConfig(loader("datatable_tbuiconfig")); 
+        tables.Add("DataTable.TbUIConfig", TbUIConfig);
+        TbEntityConfig = new DataTable.TbEntityConfig(loader("datatable_tbentityconfig")); 
+        tables.Add("DataTable.TbEntityConfig", TbEntityConfig);
         PostInit();
 
         TbItem.Resolve(tables); 
         TbDice.Resolve(tables); 
         TbCard.Resolve(tables); 
-        TbGlobal.Resolve(tables); 
+        TbUIConfig.Resolve(tables); 
+        TbEntityConfig.Resolve(tables); 
         PostResolve();
     }
 
@@ -43,7 +47,8 @@ public sealed partial class Tables
         TbItem.TranslateText(translator); 
         TbDice.TranslateText(translator); 
         TbCard.TranslateText(translator); 
-        TbGlobal.TranslateText(translator); 
+        TbUIConfig.TranslateText(translator); 
+        TbEntityConfig.TranslateText(translator); 
     }
     
     partial void PostInit();

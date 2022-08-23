@@ -10,7 +10,9 @@ public class DataTable : SingletonBase<DataTable>
     private TbItem m_ItemTable;
     private TbCard m_CardTable;
     private TbDice m_DiceTable;
-    public Tables DataTables
+    private TbUIConfig m_UIConfigTable;
+    private TbEntityConfig m_EntityConfigTable;
+    private Tables DataTables
     {
         get
         {
@@ -46,6 +48,26 @@ public class DataTable : SingletonBase<DataTable>
             if (m_DiceTable == null)
                 m_DiceTable = DataTables.TbDice;
             return m_DiceTable;
+        }
+    }
+
+    public TbUIConfig UIConfigTable
+    {
+        get
+        {
+            if (m_UIConfigTable == null)
+                m_UIConfigTable = DataTables.TbUIConfig;
+            return m_UIConfigTable;
+        }
+    }
+
+    public TbEntityConfig EntityConfigTable
+    {
+        get
+        {
+            if (m_EntityConfigTable == null)
+                m_EntityConfigTable = DataTables.TbEntityConfig;
+            return m_EntityConfigTable;
         }
     }
 

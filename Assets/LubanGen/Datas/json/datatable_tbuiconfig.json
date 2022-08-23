@@ -1,0 +1,37 @@
+[
+  {
+    "id": 100,
+    "asset_name": "UI_Menu",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
+  },
+  {
+    "id": 101,
+    "asset_name": "UI_Setting",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
+  },
+  {
+    "id": 102,
+    "asset_name": "UI_About",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
+  },
+  {
+    "id": 1000,
+    "asset_name": "UI_Dialog",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
+  },
+  {
+    "id": 1001,
+    "asset_name": "UI_Inventory",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
+  }
+]

@@ -11,34 +11,39 @@ using SimpleJSON;
 
 
 
-namespace LubanConfig.Global
+namespace LubanConfig.DataTable
 {
 
-public sealed partial class TbGlobal
+public sealed partial class TbUIConfig
 {
-    private readonly Dictionary<int, Global.GlobalVariable> _dataMap;
-    private readonly List<Global.GlobalVariable> _dataList;
+    private readonly List<DataTable.UIConfig> _dataList;
     
-    public TbGlobal(JSONNode _json)
+    private Dictionary<int, DataTable.UIConfig> _dataMap_id;
+    private Dictionary<string, DataTable.UIConfig> _dataMap_asset_name;
+
+    public TbUIConfig(JSONNode _json)
     {
-        _dataMap = new Dictionary<int, Global.GlobalVariable>();
-        _dataList = new List<Global.GlobalVariable>();
+        _dataList = new List<DataTable.UIConfig>();
         
         foreach(JSONNode _row in _json.Children)
         {
-            var _v = Global.GlobalVariable.DeserializeGlobalVariable(_row);
+            var _v = DataTable.UIConfig.DeserializeUIConfig(_row);
             _dataList.Add(_v);
-            _dataMap.Add(_v.GuildOpenLevel, _v);
         }
+        _dataMap_id = new Dictionary<int, DataTable.UIConfig>();
+        _dataMap_asset_name = new Dictionary<string, DataTable.UIConfig>();
+    foreach(var _v in _dataList)
+    {
+        _dataMap_id.Add(_v.Id, _v);
+        _dataMap_asset_name.Add(_v.AssetName, _v);
+    }
         PostInit();
     }
 
-    public Dictionary<int, Global.GlobalVariable> DataMap => _dataMap;
-    public List<Global.GlobalVariable> DataList => _dataList;
+    public List<DataTable.UIConfig> DataList => _dataList;
 
-    public Global.GlobalVariable GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public Global.GlobalVariable Get(int key) => _dataMap[key];
-    public Global.GlobalVariable this[int key] => _dataMap[key];
+    public DataTable.UIConfig GetById(int key) => _dataMap_id.TryGetValue(key, out DataTable.UIConfig __v) ? __v : null;
+    public DataTable.UIConfig GetByAssetName(string key) => _dataMap_asset_name.TryGetValue(key, out DataTable.UIConfig __v) ? __v : null;
 
     public void Resolve(Dictionary<string, object> _tables)
     {
@@ -56,7 +61,7 @@ public sealed partial class TbGlobal
             v.TranslateText(translator);
         }
     }
-    
+
     
     partial void PostInit();
     partial void PostResolve();

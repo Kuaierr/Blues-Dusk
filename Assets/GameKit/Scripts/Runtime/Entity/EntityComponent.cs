@@ -8,7 +8,7 @@ using GameKit.ObjectPool;
 namespace UnityGameKit.Runtime
 {
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Kit/Entity Component")]
+    [AddComponentMenu("GameKit/GameKit Entity Component")]
     public sealed partial class EntityComponent : GameKitComponent
     {
         private const int DefaultPriority = 0;
@@ -26,7 +26,7 @@ namespace UnityGameKit.Runtime
         private Transform m_InstanceRoot = null;
 
         [SerializeField]
-        private string m_EntityHelperTypeName = "GameKit.DefaultEntityHelper";
+        private string m_EntityHelperTypeName = "UnityGameKit.Runtime.DefaultEntityHelper";
 
         [SerializeField]
         private EntityHelperBase m_CustomEntityHelper = null;
@@ -35,7 +35,7 @@ namespace UnityGameKit.Runtime
         private EntityGroup[] m_EntityGroups = null;
 
         [SerializeField]
-        private string m_EntityGroupHelperTypeName = "GameKit.DefaultEntityGroupHelper";
+        private string m_EntityGroupHelperTypeName = "UnityGameKit.Runtime.DefaultEntityGroupHelper";
 
         [SerializeField]
         private EntityGroupHelperBase m_CustomEntityGroupHelper = null;
