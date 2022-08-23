@@ -19,7 +19,7 @@ public class UI_Backpack : UIPanel
     protected override void OnStart()
     {
         base.OnStart();
-        chunks = new List<UI_BackpackChunk>();
+        // chunks = new List<UI_BackpackChunk>();
         backpackSystem = BackpackSystem.current;
         EventManager.instance.AddEventListener<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
     }
@@ -55,6 +55,9 @@ public class UI_Backpack : UIPanel
     {
         if (inventory != null)
         {
+            if(chunks == null)
+                chunks = new List<UI_BackpackChunk>();
+            
             if (inventory.Size < chunks.Count)
             {
                 for (int i = inventory.Size; i < chunks.Count; i++)

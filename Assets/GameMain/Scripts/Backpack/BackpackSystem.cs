@@ -16,7 +16,10 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
         uI_Backpack = UIManager.instance.GetUI<UI_BackpackSystem>("UI_BackpackSystem");
         playerBackpack = inventory.GetOrCreateInventory(PlayerBackpackName, 60);
         if (uI_Backpack != null)
+        {
             uI_Backpack.uI_Backpack.SetInventory(playerBackpack);
+            uI_Backpack.OnInit();
+        }
     }
 
     public bool AddToBackpack(Item data)

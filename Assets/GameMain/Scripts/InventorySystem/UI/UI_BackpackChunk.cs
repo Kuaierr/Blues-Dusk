@@ -32,7 +32,7 @@ public class UI_BackpackChunk : UIData
     {
         m_CachedStock = stock;
         Item data = (Item)m_CachedStock.Data;
-        ResourceManager.instance.GetAsset<Sprite>("Assets" + data.Icon, (Sprite sprite) =>
+        AddressableManager.instance.GetAsset<Sprite>("Assets" + data.Icon, (Sprite sprite) =>
         {
             icon.sprite = sprite;
         });
@@ -41,6 +41,7 @@ public class UI_BackpackChunk : UIData
 
     public void SetButtonListener(UnityAction action)
     {
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
     }
 

@@ -13,11 +13,14 @@ public class UI_BackpackSystem : UIPanel
     protected override void OnStart()
     {
         base.OnStart();
-        Hide();
-        if (uI_Backpack != null)
-            uI_Backpack.SetStockInfoUI(uI_StockInfo);
+        OnInit();
     }
 
+    public void OnInit()
+    {
+        Hide();
+        uI_Backpack.SetStockInfoUI(uI_StockInfo);
+    }
 
     public override void Show(UnityAction callback = null)
     {
