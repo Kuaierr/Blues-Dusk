@@ -468,6 +468,14 @@ namespace GameKit.UI
             if (uiFormInstanceObject == null)
             {
                 m_UIFormsBeingLoaded.Add(serialId, uiFormAssetName);
+                AddressableManager.instance.GetAssetAsyn(uiFormAssetName, (UnityEngine.Object obj) =>
+                {
+                    LoadAssetSuccessCallback(uiFormAssetName, obj, 0f, OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
+                },
+                () =>
+                {
+                    LoadAssetFailureCallback(uiFormAssetName, "Load UI Fail", OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
+                });
                 // m_ResourceManager.LoadAsset(uiFormAssetName, priority, m_LoadAssetCallbacks, OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
             }
             else
@@ -610,6 +618,7 @@ namespace GameKit.UI
             try
             {
                 IUIForm uiForm = m_UIFormHelper.CreateUIForm(uiFormInstance, uiGroup, userData);
+                
                 if (uiForm == null)
                 {
                     throw new GameKitException("Can not create UI form in UI form helper.");

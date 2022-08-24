@@ -129,7 +129,7 @@ public static class UIExtension
         uiComponent.CloseUIForm(uiForm.UIForm);
     }
 
-    public static int? OpenUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)
+    public static int? TryOpenUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)
     {
         UiConfig uiConfig = DataTable.instance.UIConfigTable.GetByAssetName(uiFormName);
         if (uiConfig == null)
@@ -153,7 +153,7 @@ public static class UIExtension
         return uiComponent.OpenUIForm(assetName, uiConfig.UiGroupName, Constant.CorePriority.UIFormAsset, uiConfig.PauseCoveredUiForm, userData);
     }
 
-    public static int? OpenUIForm(this UIComponent uiComponent, int uiFormId, object userData = null)
+    public static int? TryOpenUIForm(this UIComponent uiComponent, int uiFormId, object userData = null)
     {
         UiConfig uiConfig = DataTable.instance.UIConfigTable.GetById(uiFormId);
         if (uiConfig == null)

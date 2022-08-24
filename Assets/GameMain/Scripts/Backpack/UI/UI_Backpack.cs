@@ -7,27 +7,29 @@ using GameKit;
 using GameKit.QuickCode;
 using GameKit.Inventory;
 
-public class UI_Backpack : UIPanel
+public class UI_Backpack : UIFormChildBase
 {
     private IInventory inventory;
-    BackpackSystem backpackSystem;
     [SerializeField] private RectTransform content;
     [SerializeField] private UI_BackpackChunk chunkPrototype;
-    private List<UI_BackpackChunk> chunks;
     private IStock m_CachedCurrentStock;
     private UI_BackpackInfo uI_StockInfo;
-    protected override void OnStart()
+    private List<UI_BackpackChunk> chunks = new List<UI_BackpackChunk>();
+    public override void OnInit(UIFormBase uIFormBase)
     {
-        base.OnStart();
-        // chunks = new List<UI_BackpackChunk>();
-        backpackSystem = BackpackSystem.current;
+        base.OnInit(uIFormBase);
         EventManager.instance.AddEventListener<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
     }
 
-    public override void Show(UnityAction callback = null)
+    public override void OnShow()
     {
-        base.Show(callback);
+        base.OnShow();
         UpdateChunks();
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
     }
 
     private void Refresh()
@@ -51,13 +53,10 @@ public class UI_Backpack : UIPanel
         }
     }
 
-    public void UpdateChunks()
+    private void UpdateChunks()
     {
         if (inventory != null)
-        {
-            if(chunks == null)
-                chunks = new List<UI_BackpackChunk>();
-            
+        {            
             if (inventory.Size < chunks.Count)
             {
                 for (int i = inventory.Size; i < chunks.Count; i++)
@@ -72,7 +71,7 @@ public class UI_Backpack : UIPanel
                 for (int i = currentCount; i < inventory.Size; i++)
                 {
                     UI_BackpackChunk newChunk = GameObject.Instantiate(chunkPrototype, Vector3.zero, Quaternion.identity, content.transform);
-                    newChunk.SetStockInfoUI(uI_StockInfo);
+                    newChunk.OnInit(uI_StockInfo);
                     newChunk.gameObject.SetActive(true);
                     chunks.Add(newChunk);
                 }

@@ -14,12 +14,6 @@ namespace UnityGameKit.Runtime
         public static ElementComponent Element { get; private set; }
         public static EventComponent Event { get; private set; }
 
-        private void Start()
-        {
-            InitComponents();
-            InitCustomComponents();
-        }
-
         private static void InitComponents()
         {
             Core = GameKitComponentCenter.GetComponent<GameKitCoreComponent>();

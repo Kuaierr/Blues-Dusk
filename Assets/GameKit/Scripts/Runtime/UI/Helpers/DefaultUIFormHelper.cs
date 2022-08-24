@@ -22,9 +22,11 @@ namespace UnityGameKit.Runtime
                 return null;
             }
 
+            // RectTransform transform = gameObject.GetOrAddComponent<RectTransform>();
             Transform transform = gameObject.transform;
             transform.SetParent(((MonoBehaviour)uiGroup.Helper).transform);
             transform.localScale = Vector3.one;
+            
 
             return gameObject.GetOrAddComponent<UIForm>();
         }
@@ -32,6 +34,7 @@ namespace UnityGameKit.Runtime
         public override void ReleaseUIForm(object uiFormAsset, object uiFormInstance)
         {
             // m_ResourceComponent.UnloadAsset(uiFormAsset);
+            AddressableManager.instance.ReleaseHandle(uiFormAsset);
             Destroy((Object)uiFormInstance);
         }
 

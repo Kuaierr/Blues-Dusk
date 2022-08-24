@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using GameKit;
 using UnityGameKit.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using GameKit.QuickCode;
+using GameKit;
 
-[RequireComponent(typeof(CanvasGroup), typeof(Animator))]
+[RequireComponent(typeof(CanvasGroup))]
 public abstract class UIFormBase : UIFormLogic
 {
     public const int DepthFactor = 100;
     private const float FadeTime = 0.3f;
     private static Font s_MainFont = null;
+    private RectTransform m_RectTransform;
     private Canvas m_CachedCanvas = null;
     private CanvasGroup m_CanvasGroup = null;
     private List<Canvas> m_CachedCanvasContainer = new List<Canvas>();
+    private Dictionary<string, List<UIBehaviour>> m_UIFormChildren = new Dictionary<string, List<UIBehaviour>>();
 
     public int OriginalDepth
     {
@@ -29,33 +34,40 @@ public abstract class UIFormBase : UIFormLogic
         }
     }
 
-    public void Close()
+    public RectTransform RectTransform
     {
-        Close(false);
+        get
+        {
+            if (m_RectTransform == null)
+                m_RectTransform = this.GetComponent<RectTransform>();
+            return m_RectTransform;
+        }
     }
 
-    public void Close(bool ignoreFade)
+    public void ChangeDisplayUpdate(KeyCode keyCode)
+    {
+        if (InputManager.instance.GetUiKeyDown(keyCode))
+        {
+            if (Visible)
+                OnPause();
+            else
+                OnResume();
+        }
+    }
+
+    public void Close()
     {
         StopAllCoroutines();
-
-        if (ignoreFade)
-        {
-            GameKitCenter.UI.CloseUIForm(this);
-        }
-        else
-        {
-            // StartCoroutine(CloseCo(FadeTime));
-        }
+        StartCoroutine(CloseCo(FadeTime));
     }
 
     public static void SetMainFont(Font mainFont)
     {
         if (mainFont == null)
         {
-            Utility.Debugger.LogError("Main font is invalid.");
+            Log.Error("Main font is invalid.");
             return;
         }
-
         s_MainFont = mainFont;
     }
 
@@ -66,7 +78,6 @@ public abstract class UIFormBase : UIFormLogic
         m_CachedCanvas = gameObject.GetOrAddComponent<Canvas>();
         m_CachedCanvas.overrideSorting = true;
         OriginalDepth = m_CachedCanvas.sortingOrder;
-
         m_CanvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
 
         RectTransform transform = GetComponent<RectTransform>();
@@ -77,14 +88,16 @@ public abstract class UIFormBase : UIFormLogic
 
         gameObject.GetOrAddComponent<GraphicRaycaster>();
 
+        // FindChildrenByType<UIFormChildBase>();
+
         // Text[] texts = GetComponentsInChildren<Text>(true);
         // for (int i = 0; i < texts.Length; i++)
         // {
         //     texts[i].font = s_MainFont;
-        //     if (!string.IsNullOrEmpty(texts[i].text))
-        //     {
-        //         // texts[i].text = GameEntry.Localization.GetString(texts[i].text);
-        //     }
+        //     // if (!string.IsNullOrEmpty(texts[i].text))
+        //     // {
+        //     //     // texts[i].text = GameEntry.Localization.GetString(texts[i].text);
+        //     // }
         // }
     }
 
@@ -96,10 +109,9 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-
         m_CanvasGroup.alpha = 0f;
         StopAllCoroutines();
-        // StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
     }
 
     protected override void OnClose(bool isShutdown, object userData)
@@ -115,10 +127,9 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnResume()
     {
         base.OnResume();
-
         m_CanvasGroup.alpha = 0f;
         StopAllCoroutines();
-        // StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
     }
 
     protected override void OnCover()
@@ -155,9 +166,22 @@ public abstract class UIFormBase : UIFormLogic
         m_CachedCanvasContainer.Clear();
     }
 
-    // private IEnumerator CloseCo(float duration)
-    // {
-    //     yield return m_CanvasGroup.FadeToAlpha(0f, duration);
-    //     GameEntry.UI.CloseUIForm(this);
-    // }
+    private IEnumerator CloseCo(float duration)
+    {
+        yield return m_CanvasGroup.FadeToAlpha(0f, duration);
+        GameKitCenter.UI.CloseUIForm(this);
+    }
+
+    private void FindChildrenByType<T>() where T : UIBehaviour
+    {
+        T[] components = this.GetComponentsInChildren<T>(true);
+        for (int i = 0; i < components.Length; ++i)
+        {
+            string objName = components[i].gameObject.name;
+            if (m_UIFormChildren.ContainsKey(objName))
+                m_UIFormChildren[objName].Add(components[i]);
+            else
+                m_UIFormChildren.Add(objName, new List<UIBehaviour>() { components[i] });
+        }
+    }
 }

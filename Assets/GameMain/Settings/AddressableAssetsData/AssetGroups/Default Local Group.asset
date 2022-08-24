@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Assets/GameKit/Entity/Demo/Reousrce/Prefab/CubeDemo.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 4480cb6d9cc3f4f469f63bca4bcfb3f8
+    m_Address: Assets/GameMain/UI/UIForms/UI_Backpack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

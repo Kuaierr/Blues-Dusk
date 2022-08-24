@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using LubanConfig.DataTable;
 using UnityEngine.Events;
-using GameKit.QuickCode;
 using GameKit.Inventory;
 using GameKit;
 
-public class UI_BackpackChunk : UIData
+public class UI_BackpackChunk : MonoBehaviour
 {
     private int m_index;
     private Animator animator;
@@ -21,13 +20,18 @@ public class UI_BackpackChunk : UIData
             return m_index;
         }
     }
-    public override void OnStart()
+    public void OnInit(UI_BackpackInfo StockInfo)
     {
-        base.OnStart();
         animator = GetComponent<Animator>();
         button = GetComponent<Button>();
+        uI_Info = StockInfo;
     }
-    public void SetIndex(int index) => m_index = index;
+
+    public void SetIndex(int index)
+    {
+        m_index = index;
+    }
+
     public void SetData(IStock stock)
     {
         m_CachedStock = stock;
@@ -45,7 +49,7 @@ public class UI_BackpackChunk : UIData
         button.onClick.AddListener(action);
     }
 
-    public void SetStockInfoUI(UI_BackpackInfo StockInfo)
+    public void SetBackpackInfo(UI_BackpackInfo StockInfo)
     {
         uI_Info = StockInfo;
     }
@@ -61,7 +65,7 @@ public class UI_BackpackChunk : UIData
         if (m_CachedStock != null)
         {
             uI_Info.UpdateInfo(m_CachedStock);
-            uI_Info.Show();
+            uI_Info.OnShow();
         }
     }
 }

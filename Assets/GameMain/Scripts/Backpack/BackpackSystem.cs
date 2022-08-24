@@ -3,28 +3,29 @@ using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 using GameKit.QuickCode;
 using GameKit.Inventory;
+using GameKit.UI;
 
 public class BackpackSystem : MonoSingletonBase<BackpackSystem>
 {
-    private string PlayerBackpackName = "Player's Backpack";
-    private InventoryComponent inventory;
+    private const string PlayerBackpackName = "Player's Backpack";
     private UI_BackpackSystem uI_Backpack;
     private IInventory playerBackpack;
     private void Start()
     {
-        inventory = GameKitComponentCenter.GetComponent<InventoryComponent>();
-        uI_Backpack = UIManager.instance.GetUI<UI_BackpackSystem>("UI_BackpackSystem");
-        playerBackpack = inventory.GetOrCreateInventory(PlayerBackpackName, 60);
-        if (uI_Backpack != null)
+        playerBackpack = GameKitCenter.Inventory.GetOrCreateInventory(PlayerBackpackName, 60);
+    }
+
+    private void Update()
+    {
+        if (InputManager.instance.GetWorldKeyDown(KeyCode.I))
         {
-            uI_Backpack.uI_Backpack.SetInventory(playerBackpack);
-            uI_Backpack.OnInit();
+            GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: InitUIInfo.Create(KeyCode.I, playerBackpack));
         }
     }
 
     public bool AddToBackpack(Item data)
     {
-        bool result = inventory.AddToInventory<Item>(PlayerBackpackName, data.Id, data.Name, data);
+        bool result = GameKitCenter.Inventory.AddToInventory<Item>(PlayerBackpackName, data.Id, data.Name, data);
         if (result)
             EventManager.instance.EventTrigger<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, CollectItemSuccessEventArgs.Create(data));
         else
@@ -34,31 +35,31 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
 
     public IStock GetStockFromInventory(string stockName)
     {
-        return inventory.GetStockFromInventory(PlayerBackpackName, stockName);
+        return GameKitCenter.Inventory.GetStockFromInventory(PlayerBackpackName, stockName);
     }
 
     public Item GetFromInventory(string stockName)
     {
-        return inventory.GetFromInventory<Item>(PlayerBackpackName, stockName);
+        return GameKitCenter.Inventory.GetFromInventory<Item>(PlayerBackpackName, stockName);
     }
 
     public IStock GetStockFromInventory(int id, string stockName)
     {
-        return inventory.GetStockFromInventory(PlayerBackpackName, id, stockName);
+        return GameKitCenter.Inventory.GetStockFromInventory(PlayerBackpackName, id, stockName);
     }
 
     public Item GetFromInventory(int id, string stockName)
     {
-        return inventory.GetFromInventory<Item>(PlayerBackpackName, id, stockName);
+        return GameKitCenter.Inventory.GetFromInventory<Item>(PlayerBackpackName, id, stockName);
     }
 
     public IStock GetStockFromInventory(int index)
     {
-        return inventory.GetStockFromInventory(PlayerBackpackName, index);
+        return GameKitCenter.Inventory.GetStockFromInventory(PlayerBackpackName, index);
     }
 
     public Item GetFromInventory(int index)
     {
-        return inventory.GetFromInventory<Item>(PlayerBackpackName, index);
+        return GameKitCenter.Inventory.GetFromInventory<Item>(PlayerBackpackName, index);
     }
 }

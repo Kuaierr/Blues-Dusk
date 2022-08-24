@@ -549,7 +549,7 @@ namespace GameKit.EntityModule
                 },
                 () =>
                 {
-                    LoadAssetFailureCallback(entityAssetName, "Load Fail", ShowEntityInfo.Create(serialId, entityId, entityGroup, userData));
+                    LoadAssetFailureCallback(entityAssetName, "Load Entity Fail", ShowEntityInfo.Create(serialId, entityId, entityGroup, userData));
                 });
                 return;
             }

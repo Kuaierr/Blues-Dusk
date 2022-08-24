@@ -36,11 +36,7 @@ namespace GameKit
             yield return handle;
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                if (handle.Result is GameObject)
-                    onSuccess?.Invoke(GameObject.Instantiate(handle.Result as GameObject) as T);
-                else
-                    onSuccess?.Invoke(handle.Result as T);
-
+                onSuccess?.Invoke(handle.Result as T);
                 if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
                     m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
             }
@@ -114,16 +110,18 @@ namespace GameKit
             base.ShutDown();
         }
 
-        public void ReleaseHandle(Object obj)
+        public void ReleaseHandle(object obj)
         {
-            int instanceId = obj.GetInstanceID();
+            Object monoObj = (Object)obj;
+            int instanceId = monoObj.GetInstanceID();
             if (m_cachedHandles.ContainsKey(instanceId))
             {
+                Utility.Debugger.LogSuccess("Release Asset Handle {0}.", monoObj.name);
                 Addressables.Release(m_cachedHandles[instanceId]);
                 m_cachedHandles.Remove(instanceId);
             }
             else
-                Utility.Debugger.LogWarning("Try Release Uncached {0} Asset Handle.", obj.name);
+                Utility.Debugger.LogWarning("Try Release Uncached {0} Asset Handle.", monoObj.name);
         }
     }
 }

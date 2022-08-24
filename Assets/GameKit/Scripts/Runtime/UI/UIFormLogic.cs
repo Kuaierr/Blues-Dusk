@@ -77,7 +77,6 @@ namespace UnityGameKit.Runtime
             {
                 m_CachedTransform = transform;
             }
-
             m_UIForm = GetComponent<UIForm>();
             m_OriginalLayer = gameObject.layer;
         }
@@ -123,6 +122,7 @@ namespace UnityGameKit.Runtime
 
         protected internal virtual void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
+            
         }
 
         protected internal virtual void OnDepthChanged(int uiGroupDepth, int depthInUIGroup)

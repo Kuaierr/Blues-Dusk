@@ -6,8 +6,9 @@ using LubanConfig.DataTable;
 using UnityEngine.Events;
 using GameKit.QuickCode;
 using GameKit.Inventory;
+using UnityGameKit.Runtime;
 
-public class UI_BackpackInfo : UIPanel
+public class UI_BackpackInfo : UIFormChildBase
 {
     public Image closeUp;
     public TextMeshProUGUI stockName;
@@ -18,17 +19,27 @@ public class UI_BackpackInfo : UIPanel
     private Item cachedData;
     private IStock m_CachedStock;
 
-    protected override void OnStart()
+    public override void OnInit(UIFormBase uIFormBase)
     {
-        base.OnStart();
-        Hide();
+        base.OnInit(uIFormBase);
+        this.OnHide();
+    }
+
+    public override void OnShow()
+    {
+        base.OnShow();
+    }
+
+    public override void OnHide()
+    {
+        base.OnHide();
     }
 
     public void UpdateInfo(IStock stock)
     {
         cachedData = (Item)stock.Data;
         m_CachedStock = stock;
-        ResourceManager.instance.GetAsset<Sprite>("Assets" + cachedData.CloseUp, (Sprite sprite) =>
+        AddressableManager.instance.GetAsset<Sprite>("Assets" + cachedData.CloseUp, (Sprite sprite) =>
         {
             closeUp.sprite = sprite;
         });
@@ -38,11 +49,6 @@ public class UI_BackpackInfo : UIPanel
         stockDesc.text = cachedData.Desc.ToString();
         interactButton.onClick.RemoveAllListeners();
         interactButton.onClick.AddListener(Interact);
-    }
-
-    public override void Show(UnityAction callback = null)
-    {
-        base.Show(callback);
     }
 
     private void Interact()

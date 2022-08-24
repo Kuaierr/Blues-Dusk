@@ -1042,10 +1042,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3872b16984e4d14bbf97e47ec21fb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navigationLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  movePositionTransform: {fileID: 0}
+  pressUpdateInterval: 0.2
+  suddenStopDistance: 0.1
+  RoateSpeed: 5
+  IsManuallyRoatating: 1
 --- !u!195 &5311589681718341249
 NavMeshAgent:
   m_ObjectHideFlags: 0
