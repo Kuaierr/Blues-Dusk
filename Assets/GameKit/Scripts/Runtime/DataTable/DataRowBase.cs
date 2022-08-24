@@ -20,5 +20,11 @@ namespace UnityGameKit.Runtime
             Log.Warning("Not implemented ParseDataRow(byte[] dataRowBytes, int startIndex, int length, object userData).");
             return false;
         }
+
+        public virtual bool ParseDataRow(object dataRowObject, object userData)
+        {
+            Log.Warning("Not implemented ParseDataRow(object dataRowObject, object userData).");
+            return false;
+        }
     }
 }
