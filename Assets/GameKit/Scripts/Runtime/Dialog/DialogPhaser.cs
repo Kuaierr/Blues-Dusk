@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GameKit.DataStructure;
@@ -41,13 +40,13 @@ public static class DialogPhaser
     {
         if (text.Correction() == "\n" || text.Correction() == "")
         {
-            Debug.LogWarning("[Phaser] Skip invalid node syntax.");
+            Utility.Debugger.LogWarning("[Phaser] Skip invalid node syntax.");
             return;
         }
 
         if (text.Substring(0, 2).Correction() == "//")
         {
-            Debug.Log($"[Phaser] Detect comments.");
+            Utility.Debugger.Log($"[Phaser] Detect comments.");
             return;
         }
         DialogTree tree = (node.Tree as DialogTree);
@@ -92,7 +91,7 @@ public static class DialogPhaser
                     customLinking = false;
 
                 if (!semantics.Contains(semantic))
-                    Debug.LogWarning(string.Format("Invalid semantic {0} is used.", semantic));
+                    Utility.Debugger.LogWarning(string.Format("Invalid semantic {0} is used.", semantic));
 
                 if (semantic == "pos")
                 {
@@ -106,7 +105,6 @@ public static class DialogPhaser
 
                 if (semantic == "sbranch")
                 {
-                    node.IsSBranch = true;
                     tree.RecordBranch(node);
                     node.Id = value;
                     tree.RecordDeclaredNode(node);
@@ -134,7 +132,7 @@ public static class DialogPhaser
                 if (semantic == "ccomplete")
                 {
                     node.nodeEntity.IsCompleter = true;
-                    // Debug.Log(smallBracketRegex.Match(value));
+                    // Utility.Debugger.Log(smallBracketRegex.Match(value));
                     node.nodeEntity.completeConditons = value.Trim().RemoveBracket().Split('&').ToList();
                     foreach (var condition in node.nodeEntity.completeConditons)
                     {
@@ -150,12 +148,12 @@ public static class DialogPhaser
                     string[] cparams = GetParams(value);
                     if (cparams.Length < 3)
                     {
-                        Debug.LogError($"[Phaser] cdivider command require at least 3 parameters");
+                        Utility.Debugger.LogError($"[Phaser] cdivider command require at least 3 parameters");
                         return;
                     }
 
                     node.nodeEntity.dividerConditions = cparams[0].Trim().RemoveBracket().Split('&').ToList();
-                    // Debug.Log(smallBracketRegex.Match(cparams[0]));
+                    // Utility.Debugger.Log(smallBracketRegex.Match(cparams[0]));
                     tree.CachedLinkToDeclared(node, cparams[1]);
                     tree.CachedLinkToDeclared(node, cparams[2]);
                 }

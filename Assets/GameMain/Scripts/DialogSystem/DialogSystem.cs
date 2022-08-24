@@ -3,6 +3,7 @@ using UnityEngine;
 using Febucci.UI;
 using GameKit.DataStructure;
 using GameKit;
+using GameKit.Fsm;
 using UnityEngine.Events;
 using GameKit.QuickCode;
 using UnityGameKit.Runtime;
@@ -20,6 +21,9 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
     private bool isInSelection = false;
     private bool isTextShowing = false;
 
+    private IFsm<DialogSystem> fsm;
+    private List<FsmState<DialogSystem>> stateList;
+
     private void Start()
     {
         uI_DialogSystem = UIManager.instance.GetUI<UI_DialogSystem>("UI_DialogSystem");
@@ -30,6 +34,24 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         });
         LoadAnimator();
     }
+
+    private void CreateFsm()
+    {
+        stateList.Add(new DialogIdleState());
+        stateList.Add(new DialogTalkState());
+        stateList.Add(new DialogChoiceState());
+        stateList.Add(new DialogChoiceDicerollState());
+        fsm = GameKitCenter.Fsm.CreateFsm<DialogSystem>(gameObject.name, this, stateList);
+        fsm.Start<DialogIdleState>();
+    }
+
+    private void DestroyFsm()
+    {
+        GameKitCenter.Fsm.DestroyFsm(fsm);
+        stateList.Clear();
+        fsm = null;
+    }
+
     public void StartDialog(string title, string dialogText)
     {
         Debug.Log($"Start Dialog");
@@ -37,34 +59,36 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         dialogTree = DialogManager.instance.CreateTree(title, dialogText);
         dialogTree.Reset();
         uI_DialogSystem.Show();
-        ExcuteTextDisplay();
+        SelectNextNode();
     }
 
     private void Update()
     {
-        if (IsActive == false || dialogTree == null)
+        if (dialogTree == null)
             return;
 
+        // 正在选择中 
         if (!isOptionShowing && isInSelection)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 int choiceIndex = uI_DialogSystem.GetSelection();
-                isInSelection = false;
                 Node<Dialog> nextNode = GetNextNode(choiceIndex);
-                ExcuteTextDisplay();
+                SelectNextNode();
                 uI_DialogSystem.HideResponse();
+                isInSelection = false;
                 return;
             }
         }
 
+        // 不在选择中
         if (!isInSelection)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (isTextShowing == false)
                 {
-                    ExcuteTextDisplay();
+                    SelectNextNode();
                 }
                 else
                     InterruptTextDisplay();
@@ -144,30 +168,31 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         dialogTree.currentNode = dialogTree.currentNode.Sons[index];
         return dialogTree.currentNode as Node<Dialog>;
     }
-    private void ExcuteTextDisplay(Node<Dialog> nextNode)
+    private Node<Dialog> SelectNextNode(Node<Dialog> currentNode)
     {
-        if (nextNode == null)
+        Node<Dialog> nextNode = null;
+        if (currentNode == null)
         {
             ReachTheEndOfConversation();
-            return;
+            return null;
         }
 
-        if (nextNode.nodeEntity.IsFunctional)
+        if (currentNode.nodeEntity.IsFunctional)
         {
-            if (nextNode.nodeEntity.IsCompleter)
+            if (currentNode.nodeEntity.IsCompleter)
             {
-                for (int j = 0; j < nextNode.nodeEntity.completeConditons.Count; j++)
+                for (int j = 0; j < currentNode.nodeEntity.completeConditons.Count; j++)
                 {
-                    dialogTree.LocalConditions[nextNode.nodeEntity.completeConditons[j]] = true;
+                    dialogTree.LocalConditions[currentNode.nodeEntity.completeConditons[j]] = true;
                 }
             }
 
-            if (nextNode.nodeEntity.IsDivider)
+            if (currentNode.nodeEntity.IsDivider)
             {
                 bool isComplete = true;
-                for (int j = 0; j < nextNode.nodeEntity.dividerConditions.Count; j++)
+                for (int j = 0; j < currentNode.nodeEntity.dividerConditions.Count; j++)
                 {
-                    if (!dialogTree.LocalConditions[nextNode.nodeEntity.dividerConditions[j]])
+                    if (!dialogTree.LocalConditions[currentNode.nodeEntity.dividerConditions[j]])
                     {
                         isComplete = false;
                         break;
@@ -176,30 +201,35 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
 
                 if (isComplete)
                 {
-                    PhaseNode(GetNextNode(0));
+                    nextNode = GetNextNode(0);
+                    // PhaseNode(GetNextNode(0));
                 }
                 else
                 {
-                    PhaseNode(GetNextNode(1));
+                    nextNode = GetNextNode(1);
+                    // PhaseNode(GetNextNode(1));
                 }
             }
         }
         else
         {
-            if (nextNode.IsBranch)
+            if (currentNode.IsBranch)
             {
-                PhaseNode(nextNode, UpdateChoiceUI);
+                nextNode = currentNode;
+                // PhaseNode(currentNode, UpdateChoiceUI);
             }
             else
             {
-                PhaseNode(nextNode);
+                nextNode = currentNode;
+                // PhaseNode(currentNode);
             }
         }
+        return nextNode;
     }
-    private void ExcuteTextDisplay(int index = 0)
+    private void SelectNextNode(int index = 0)
     {
         Node<Dialog> nextNode = GetNextNode(index);
-        ExcuteTextDisplay(nextNode);
+        SelectNextNode(nextNode);
     }
 
     private void InterruptTextDisplay()

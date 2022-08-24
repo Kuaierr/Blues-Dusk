@@ -9,10 +9,8 @@ namespace GameKit.DataStructure
         private List<INode> sons;
         private List<INode> siblings;
         private ITree tree;
-
         public T nodeEntity;
-        public bool IsSBranch = false;
-        public bool IsCBranch = false;
+        
         public string Id
         {
             get

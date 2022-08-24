@@ -17,6 +17,7 @@ public class UI_DialogSystem : UIPanel
     public GameObject indicator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
+    private bool isTextShowing = false;
 
     protected override void OnStart()
     {
@@ -72,4 +73,17 @@ public class UI_DialogSystem : UIPanel
         uI_DialogResponse.isActive = false;
         uI_DialogResponse.gameObject.SetActive(false);
     }
+
+    private void AddTyperWriterListener()
+    {
+        textAnimatorPlayer.onTypewriterStart.AddListener(() =>
+        {
+            isTextShowing = true;
+        });
+        textAnimatorPlayer.onTextShowed.AddListener(() =>
+        {
+            isTextShowing = false;
+        });
+    }
+
 }

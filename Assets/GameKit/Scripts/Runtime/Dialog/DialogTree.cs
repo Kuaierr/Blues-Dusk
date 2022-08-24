@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 using GameKit;
 using GameKit.DataStructure;
@@ -157,12 +156,12 @@ public partial class DialogTree : ITree
 
     public DialogNode TryPhaseNext(int index = 0)
     {
-        Debug.Log("[Debug]" + currentNode + ", Son Counts: " + currentNode.Sons.Count);
+        Utility.Debugger.Log("[Utility.Debugger]" + currentNode + ", Son Counts: " + currentNode.Sons.Count);
         if (currentNode.Sons.Count > 1)
         {
             foreach (var son in currentNode.Sons)
             {
-                Debug.Log("[Debug]----" + son);
+                Utility.Debugger.Log("[Utility.Debugger]----" + son);
             }
         }
         if (currentNode.Sons.Count == 0 || index < 0 || index > currentNode.Sons.Count)

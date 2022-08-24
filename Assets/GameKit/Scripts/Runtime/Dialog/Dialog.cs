@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 using GameKit.DataStructure;
 public delegate void NodeEvent<in T>(T obj);
@@ -12,7 +11,6 @@ public enum SpritePos
 }
 public sealed class Dialog : NodeType
 {
-    public Sprite sprite;
     public SpritePos pos;
     public string speaker;
     public string contents;

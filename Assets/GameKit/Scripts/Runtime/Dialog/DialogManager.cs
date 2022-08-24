@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using GameKit;
@@ -55,7 +54,6 @@ public class DialogManager : SingletonBase<DialogManager>
 
     public DialogTree CreateTree(string title, string text)
     {
-        Debug.Log($"Create Tree");
         DialogTree dialogTree = new DialogTree(title);
         List<string> lines = new List<string>(text.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries));
         foreach (var line in lines)

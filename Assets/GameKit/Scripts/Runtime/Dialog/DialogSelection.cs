@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine.Events;
 using GameKit;
 using GameKit.DataStructure;
 
@@ -9,19 +8,11 @@ public class Option
     public int autoIncreaseIndex;
     public bool multiParse;
     public string text;
-    public UnityAction callback;
-
-    public Option(int index, string text, bool multiParse = false, UnityAction callback = null)
+    public Option(int index, string text, bool multiParse = false)
     {
         this.autoIncreaseIndex = index;
         this.text = text;
         this.multiParse = multiParse;
-        this.callback = callback;
-    }
-
-    public void BeSelected()
-    {
-        callback?.Invoke();
     }
 }
 
@@ -30,9 +21,9 @@ public class DialogSelection
     private static List<Option> options;
     private static int currentIndex = 0;
 
-    public static void CreateOption(int index, string text, bool multiParse = false, UnityAction callback = null)
+    public static void CreateOption(int index, string text, bool multiParse = false)
     {
-        Option newOption = new Option(index, text, multiParse, callback);
+        Option newOption = new Option(index, text, multiParse);
         options.Add(newOption);
     }
 
