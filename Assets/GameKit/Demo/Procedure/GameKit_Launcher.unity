@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &289145281
 MonoBehaviour:
@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &444044319
 Transform:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &865538141
 Transform:
   m_ObjectHideFlags: 0
@@ -937,7 +937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1149099945
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +950,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1149099946
 MonoBehaviour:
@@ -964,8 +964,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b749dd8d55cb5cd4eabc85e7583748d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AvailableProcedureTypeNames: []
-  m_EntranceProcedureTypeName: 
+  m_AvailableProcedureTypeNames:
+  - ProcedureChangeScene
+  - ProcedureInitResources
+  - ProcedureLaunch
+  - ProcedurePreload
+  - ProcedureSplash
+  m_EntranceProcedureTypeName: ProcedureLaunch
 --- !u!1 &1201495380
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1201495381
 Transform:
   m_ObjectHideFlags: 0
@@ -1673,8 +1678,8 @@ Transform:
   m_Children:
   - {fileID: 719977328}
   - {fileID: 722290202}
-  - {fileID: 1149099945}
   - {fileID: 289145280}
+  - {fileID: 1149099945}
   - {fileID: 773984125}
   - {fileID: 1348460021}
   - {fileID: 444044319}
