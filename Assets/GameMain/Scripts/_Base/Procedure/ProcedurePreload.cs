@@ -23,12 +23,12 @@ public class ProcedurePreload : ProcedureBase
     {
         base.OnEnter(procedureOwner);
 
-        // GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
-        // GameKitCenter.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
+        GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+        GameKitCenter.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
         GameKitCenter.Event.Subscribe(LoadDataTableSuccessEventArgs.EventId, OnLoadDataTableSuccess);
         GameKitCenter.Event.Subscribe(LoadDataTableFailureEventArgs.EventId, OnLoadDataTableFailure);
-        // GameKitCenter.Event.Subscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
-        // GameKitCenter.Event.Subscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
+        GameKitCenter.Event.Subscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
+        GameKitCenter.Event.Subscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
 
         m_LoadedFlag.Clear();
 
@@ -37,12 +37,12 @@ public class ProcedurePreload : ProcedureBase
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
     {
-        // GameKitCenter.Event.Unsubscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
-        // GameKitCenter.Event.Unsubscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
+        GameKitCenter.Event.Unsubscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+        GameKitCenter.Event.Unsubscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
         GameKitCenter.Event.Unsubscribe(LoadDataTableSuccessEventArgs.EventId, OnLoadDataTableSuccess);
         GameKitCenter.Event.Unsubscribe(LoadDataTableFailureEventArgs.EventId, OnLoadDataTableFailure);
-        // GameKitCenter.Event.Unsubscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
-        // GameKitCenter.Event.Unsubscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
+        GameKitCenter.Event.Unsubscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
+        GameKitCenter.Event.Unsubscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
 
         base.OnExit(procedureOwner, isShutdown);
     }
@@ -85,13 +85,13 @@ public class ProcedurePreload : ProcedureBase
     {
         string configAssetName = AssetUtility.GetConfigAsset(configName, false);
         m_LoadedFlag.Add(configAssetName, false);
-        // GameKitCenter.Config.ReadData(configAssetName, this);
+        GameKitCenter.Config.ReadData(configAssetName, this);
     }
 
     private void LoadDataTable(string dataTableName)
     {
-        string dataTableAssetName = AssetUtility.GetDataTableAsset(dataTableName, false);
-        m_LoadedFlag.Add(dataTableAssetName, false);
+        // string dataTableAssetName = AssetUtility.GetDataTableAsset(dataTableName, false);
+        // m_LoadedFlag.Add(dataTableAssetName, false);
         // GameKitCenter.DataTable.LoadDataTable(dataTableName, dataTableAssetName, this);
     }
 
@@ -104,7 +104,7 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadFont(string fontName)
     {
-        m_LoadedFlag.Add(Utility.Text.Format("Font.{0}", fontName), false);
+        // m_LoadedFlag.Add(Utility.Text.Format("Font.{0}", fontName), false);
         // GameKitCenter.Resource.LoadAsset(AssetUtility.GetFontAsset(fontName), Constant.AssetPriority.FontAsset, new LoadAssetCallbacks(
         //     (assetName, asset, duration, userData) =>
         //     {
@@ -121,25 +121,25 @@ public class ProcedurePreload : ProcedureBase
 
     private void OnLoadConfigSuccess(object sender, GameEventArgs e)
     {
-        // LoadConfigSuccessEventArgs ne = (LoadConfigSuccessEventArgs)e;
-        // if (ne.UserData != this)
-        // {
-        //     return;
-        // }
+        LoadConfigSuccessEventArgs ne = (LoadConfigSuccessEventArgs)e;
+        if (ne.UserData != this)
+        {
+            return;
+        }
 
-        // m_LoadedFlag[ne.ConfigAssetName] = true;
-        // Log.Info("Load config '{0}' OK.", ne.ConfigAssetName);
+        m_LoadedFlag[ne.ConfigAssetName] = true;
+        Log.Info("Load config '{0}' OK.", ne.ConfigAssetName);
     }
 
     private void OnLoadConfigFailure(object sender, GameEventArgs e)
     {
-        // LoadConfigFailureEventArgs ne = (LoadConfigFailureEventArgs)e;
-        // if (ne.UserData != this)
-        // {
-        //     return;
-        // }
+        LoadConfigFailureEventArgs ne = (LoadConfigFailureEventArgs)e;
+        if (ne.UserData != this)
+        {
+            return;
+        }
 
-        // Log.Error("Can not load config '{0}' from '{1}' with error message '{2}'.", ne.ConfigAssetName, ne.ConfigAssetName, ne.ErrorMessage);
+        Log.Error("Can not load config '{0}' from '{1}' with error message '{2}'.", ne.ConfigAssetName, ne.ConfigAssetName, ne.ErrorMessage);
     }
 
     private void OnLoadDataTableSuccess(object sender, GameEventArgs e)
@@ -167,25 +167,25 @@ public class ProcedurePreload : ProcedureBase
 
     private void OnLoadDictionarySuccess(object sender, GameEventArgs e)
     {
-        // LoadDictionarySuccessEventArgs ne = (LoadDictionarySuccessEventArgs)e;
-        // if (ne.UserData != this)
-        // {
-        //     return;
-        // }
+        LoadDictionarySuccessEventArgs ne = (LoadDictionarySuccessEventArgs)e;
+        if (ne.UserData != this)
+        {
+            return;
+        }
 
-        // m_LoadedFlag[ne.DictionaryAssetName] = true;
-        // Log.Info("Load dictionary '{0}' OK.", ne.DictionaryAssetName);
+        m_LoadedFlag[ne.DictionaryAssetName] = true;
+        Log.Info("Load dictionary '{0}' OK.", ne.DictionaryAssetName);
     }
 
     private void OnLoadDictionaryFailure(object sender, GameEventArgs e)
     {
-        // LoadDictionaryFailureEventArgs ne = (LoadDictionaryFailureEventArgs)e;
-        // if (ne.UserData != this)
-        // {
-        //     return;
-        // }
+        LoadDictionaryFailureEventArgs ne = (LoadDictionaryFailureEventArgs)e;
+        if (ne.UserData != this)
+        {
+            return;
+        }
 
-        // Log.Error("Can not load dictionary '{0}' from '{1}' with error message '{2}'.", ne.DictionaryAssetName, ne.DictionaryAssetName, ne.ErrorMessage);
+        Log.Error("Can not load dictionary '{0}' from '{1}' with error message '{2}'.", ne.DictionaryAssetName, ne.DictionaryAssetName, ne.ErrorMessage);
     }
 }
 

@@ -1,6 +1,7 @@
 // using GameKit.Localization;
 using System;
 using UnityGameKit.Runtime;
+using GameKit.Localization;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
 public class ProcedureLaunch : ProcedureBase
@@ -44,48 +45,48 @@ public class ProcedureLaunch : ProcedureBase
 
     private void InitLanguageSettings()
     {
-        // if (GameKitCenter.Base.EditorResourceMode && GameKitCenter.Base.EditorLanguage != Language.Unspecified)
-        // {
-        //     // 编辑器资源模式直接使用 Inspector 上设置的语言
-        //     return;
-        // }
+        if (GameKitCenter.Core.EditorResourceMode && GameKitCenter.Core.EditorLanguage != Language.Unspecified)
+        {
+            // 编辑器资源模式直接使用 Inspector 上设置的语言
+            return;
+        }
 
-        // Language language = GameKitCenter.Localization.Language;
-        // if (GameKitCenter.Setting.HasSetting(Constant.Setting.Language))
-        // {
-        //     try
-        //     {
-        //         string languageString = GameKitCenter.Setting.GetString(Constant.Setting.Language);
-        //         language = (Language)Enum.Parse(typeof(Language), languageString);
-        //     }
-        //     catch
-        //     {
-        //     }
-        // }
+        Language language = GameKitCenter.Localization.Language;
+        if (GameKitCenter.Setting.HasSetting(Constant.Setting.Language))
+        {
+            try
+            {
+                string languageString = GameKitCenter.Setting.GetString(Constant.Setting.Language);
+                language = (Language)Enum.Parse(typeof(Language), languageString);
+            }
+            catch
+            {
+            }
+        }
 
-        // if (language != Language.English
-        //     && language != Language.ChineseSimplified
-        //     && language != Language.ChineseTraditional
-        //     && language != Language.Korean)
-        // {
-        //     // 若是暂不支持的语言，则使用英语
-        //     language = Language.English;
+        if (language != Language.English
+            && language != Language.ChineseSimplified
+            && language != Language.ChineseTraditional
+            && language != Language.Korean)
+        {
+            // 若是暂不支持的语言，则使用英语
+            language = Language.English;
 
-        //     GameKitCenter.Setting.SetString(Constant.Setting.Language, language.ToString());
-        //     GameKitCenter.Setting.Save();
-        // }
+            GameKitCenter.Setting.SetString(Constant.Setting.Language, language.ToString());
+            GameKitCenter.Setting.Save();
+        }
 
-        // GameKitCenter.Localization.Language = language;
+        GameKitCenter.Localization.Language = language;
         // Log.Info("Init language settings complete, current language is '{0}'.", language.ToString());
     }
 
     private void InitCurrentVariant()
     {
-        // if (GameKitCenter.Base.EditorResourceMode)
-        // {
-        //     // 编辑器资源模式不使用 AssetBundle，也就没有变体了
-        //     return;
-        // }
+        if (GameKitCenter.Core.EditorResourceMode)
+        {
+            // 编辑器资源模式不使用 AssetBundle，也就没有变体了
+            return;
+        }
 
         // string currentVariant = null;
         // switch (GameKitCenter.Localization.Language)
