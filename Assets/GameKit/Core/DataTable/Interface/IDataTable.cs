@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameKit.DataTable
 {
-    public interface IDataTable<T> : IEnumerable<T> where T : IDataRow
+    public interface IDataTable<T> : IEnumerable<T>
     {
         string Name { get; }
 
@@ -24,6 +24,7 @@ namespace GameKit.DataTable
         bool HasDataRow(Predicate<T> condition);
 
         T GetDataRow(int id);
+        
         T GetDataRow(Predicate<T> condition);
 
         T[] GetDataRows(Predicate<T> condition);

@@ -90,7 +90,7 @@ namespace GameKit.DataTable
             DataProvider<DataTableBase>.FreeCachedBytes();
         }
 
-        public bool HasDataTable<T>() where T : IDataRow
+        public bool HasDataTable<T>() 
         {
             return InternalHasDataTable(new TypeNamePair(typeof(T)));
         }
@@ -110,7 +110,7 @@ namespace GameKit.DataTable
             return InternalHasDataTable(new TypeNamePair(dataRowType));
         }
 
-        public bool HasDataTable<T>(string name) where T : IDataRow
+        public bool HasDataTable<T>(string name) 
         {
             return InternalHasDataTable(new TypeNamePair(typeof(T), name));
         }
@@ -130,7 +130,7 @@ namespace GameKit.DataTable
             return InternalHasDataTable(new TypeNamePair(dataRowType, name));
         }
 
-        public IDataTable<T> GetDataTable<T>() where T : IDataRow
+        public IDataTable<T> GetDataTable<T>() 
         {
             return (IDataTable<T>)InternalGetDataTable(new TypeNamePair(typeof(T)));
         }
@@ -150,7 +150,7 @@ namespace GameKit.DataTable
             return InternalGetDataTable(new TypeNamePair(dataRowType));
         }
 
-        public IDataTable<T> GetDataTable<T>(string name) where T : IDataRow
+        public IDataTable<T> GetDataTable<T>(string name) 
         {
             return (IDataTable<T>)InternalGetDataTable(new TypeNamePair(typeof(T), name));
         }
@@ -267,7 +267,7 @@ namespace GameKit.DataTable
             return dataTable;
         }
 
-        public bool DestroyDataTable<T>() where T : IDataRow
+        public bool DestroyDataTable<T>() 
         {
             return InternalDestroyDataTable(new TypeNamePair(typeof(T)));
         }
@@ -287,7 +287,7 @@ namespace GameKit.DataTable
             return InternalDestroyDataTable(new TypeNamePair(dataRowType));
         }
 
-        public bool DestroyDataTable<T>(string name) where T : IDataRow
+        public bool DestroyDataTable<T>(string name) 
         {
             return InternalDestroyDataTable(new TypeNamePair(typeof(T), name));
         }
@@ -307,7 +307,7 @@ namespace GameKit.DataTable
             return InternalDestroyDataTable(new TypeNamePair(dataRowType, name));
         }
 
-        public bool DestroyDataTable<T>(IDataTable<T> dataTable) where T : IDataRow
+        public bool DestroyDataTable<T>(IDataTable<T> dataTable) 
         {
             if (dataTable == null)
             {

@@ -20,19 +20,19 @@ namespace GameKit.DataTable
 
         void FreeCachedBytes();
 
-        bool HasDataTable<T>() where T : IDataRow;
+        bool HasDataTable<T>();
 
         bool HasDataTable(Type dataRowType);
 
-        bool HasDataTable<T>(string name) where T : IDataRow;
+        bool HasDataTable<T>(string name);
 
         bool HasDataTable(Type dataRowType, string name);
 
-        IDataTable<T> GetDataTable<T>() where T : IDataRow;
+        IDataTable<T> GetDataTable<T>();
 
         DataTableBase GetDataTable(Type dataRowType);
 
-        IDataTable<T> GetDataTable<T>(string name) where T : IDataRow;
+        IDataTable<T> GetDataTable<T>(string name);
 
         DataTableBase GetDataTable(Type dataRowType, string name);
 
@@ -48,15 +48,15 @@ namespace GameKit.DataTable
 
         DataTableBase CreateDataTable(Type dataRowType, string name);
 
-        bool DestroyDataTable<T>() where T : IDataRow;
+        bool DestroyDataTable<T>();
 
         bool DestroyDataTable(Type dataRowType);
 
-        bool DestroyDataTable<T>(string name) where T : IDataRow;
+        bool DestroyDataTable<T>(string name);
 
         bool DestroyDataTable(Type dataRowType, string name);
 
-        bool DestroyDataTable<T>(IDataTable<T> dataTable) where T : IDataRow;
+        bool DestroyDataTable<T>(IDataTable<T> dataTable);
 
         bool DestroyDataTable(DataTableBase dataTable);
     }
