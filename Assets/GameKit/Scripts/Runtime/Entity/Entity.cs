@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameKit;
-using GameKit.EntityModule;
+using GameKit.Entity;
 using System;
 using UnityEngine;
 

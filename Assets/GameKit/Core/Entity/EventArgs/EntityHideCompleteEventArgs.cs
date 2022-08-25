@@ -1,5 +1,5 @@
 
-namespace GameKit.EntityModule
+namespace GameKit.Entity
 {
     public sealed class EntityHideCompleteEventArgs : GameKitEventArgs
     {

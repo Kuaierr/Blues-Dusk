@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using GameKit.EntityModule;
+using GameKit.Entity;
 using GameKit;
 
 namespace UnityGameKit.Runtime

@@ -62,7 +62,7 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static EntityShowFailEventArgs Create(GameKit.EntityModule.EntityShowFailEventArgs e)
+        public static EntityShowFailEventArgs Create(GameKit.Entity.EntityShowFailEventArgs e)
         {
             ShowEntityInfo showEntityInfo = (ShowEntityInfo)e.UserData;
             EntityShowFailEventArgs entityShowFailEventArgs = ReferencePool.Acquire<EntityShowFailEventArgs>();

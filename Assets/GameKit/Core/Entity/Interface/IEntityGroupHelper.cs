@@ -1,4 +1,4 @@
-namespace GameKit.EntityModule
+namespace GameKit.Entity
 {
     public interface IEntityGroupHelper
     {

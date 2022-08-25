@@ -1,4 +1,4 @@
-using GameKit.EntityModule;
+using GameKit.Entity;
 using GameKit.Event;
 using GameKit;
 
@@ -49,7 +49,7 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static EntityHideCompleteEventArgs Create(GameKit.EntityModule.EntityHideCompleteEventArgs e)
+        public static EntityHideCompleteEventArgs Create(GameKit.Entity.EntityHideCompleteEventArgs e)
         {
             EntityHideCompleteEventArgs entityHideCompleteEventArgs = ReferencePool.Acquire<EntityHideCompleteEventArgs>();
             entityHideCompleteEventArgs.EntityId = e.EntityId;

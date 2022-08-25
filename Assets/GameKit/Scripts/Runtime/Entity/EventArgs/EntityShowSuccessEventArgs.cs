@@ -48,7 +48,7 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static EntityShowSuccessEventArgs Create(GameKit.EntityModule.EntityShowSuccessEventArgs e)
+        public static EntityShowSuccessEventArgs Create(GameKit.Entity.EntityShowSuccessEventArgs e)
         {
             ShowEntityInfo showEntityInfo = (ShowEntityInfo)e.UserData;
             EntityShowSuccessEventArgs entityShowSuccessEventArgs = ReferencePool.Acquire<EntityShowSuccessEventArgs>();

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GameKit;
-using GameKit.EntityModule;
+using GameKit.Entity;
 using GameKit.ObjectPool;
 
 namespace UnityGameKit.Runtime
@@ -508,18 +508,18 @@ namespace UnityGameKit.Runtime
             m_CachedEntities.Add(entity);
         }
 
-        private void OnShowEntitySuccess(object sender, GameKit.EntityModule.EntityShowSuccessEventArgs e)
+        private void OnShowEntitySuccess(object sender, GameKit.Entity.EntityShowSuccessEventArgs e)
         {
             m_EventComponent.Fire(this, EntityShowSuccessEventArgs.Create(e));
         }
 
-        private void OnShowEntityFailure(object sender, GameKit.EntityModule.EntityShowFailEventArgs e)
+        private void OnShowEntityFailure(object sender, GameKit.Entity.EntityShowFailEventArgs e)
         {
             Utility.Debugger.LogWarning("Show entity failure, entity id '{0}', asset name '{1}', entity group name '{2}', error message '{3}'.", e.EntityId, e.EntityAssetName, e.EntityGroupName, e.ErrorMessage);
             m_EventComponent.Fire(this, EntityShowFailEventArgs.Create(e));
         }
 
-        private void OnHideEntityComplete(object sender, GameKit.EntityModule.EntityHideCompleteEventArgs e)
+        private void OnHideEntityComplete(object sender, GameKit.Entity.EntityHideCompleteEventArgs e)
         {
             m_EventComponent.Fire(this, EntityHideCompleteEventArgs.Create(e));
         }

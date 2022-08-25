@@ -3,7 +3,7 @@ using GameKit.DataStructure;
 using GameKit.ObjectPool;
 
 
-namespace GameKit.EntityModule
+namespace GameKit.Entity
 {
     internal sealed partial class EntityManager
     {

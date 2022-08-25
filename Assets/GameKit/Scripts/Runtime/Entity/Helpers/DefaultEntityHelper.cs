@@ -2,7 +2,7 @@
 
 using UnityEngine;
 using GameKit;
-using GameKit.EntityModule;
+using GameKit.Entity;
 
 namespace UnityGameKit.Runtime
 {

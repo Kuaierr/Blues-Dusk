@@ -1,7 +1,7 @@
 ﻿
 
 using GameKit;
-using GameKit.EntityModule;
+using GameKit.Entity;
 using UnityEditor;
 using UnityGameKit.Runtime;
 

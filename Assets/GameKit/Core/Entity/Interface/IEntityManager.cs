@@ -1,7 +1,7 @@
 using System;
 using GameKit.ObjectPool;
 
-namespace GameKit.EntityModule
+namespace GameKit.Entity
 {
     public interface IEntityManager
     {

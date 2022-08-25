@@ -1,7 +1,7 @@
 using GameKit.Event;
 
 
-namespace GameKit.EntityModule
+namespace GameKit.Entity
 {
     public class EntityShowFailEventArgs : GameKitEventArgs
     {
