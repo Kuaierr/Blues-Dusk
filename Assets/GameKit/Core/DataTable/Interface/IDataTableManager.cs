@@ -40,11 +40,11 @@ namespace GameKit.DataTable
 
         void GetAllDataTables(List<DataTableBase> results);
 
-        IDataTable<T> CreateDataTable<T>() where T : class, IDataRow, new();
+        IDataTable<T> CreateDataTable<T>() where T : class, new();
 
         DataTableBase CreateDataTable(Type dataRowType);
 
-        IDataTable<T> CreateDataTable<T>(string name) where T : class, IDataRow, new();
+        IDataTable<T> CreateDataTable<T>(string name) where T : class, new();
 
         DataTableBase CreateDataTable(Type dataRowType, string name);
 

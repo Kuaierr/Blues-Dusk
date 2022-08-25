@@ -5,56 +5,89 @@ namespace GameKit
 {
     public static partial class Utility
     {
-        public static class Text
+        public static partial class Text
         {
-            [ThreadStatic]
-            private static StringBuilder s_CachedStringBuilder = null;
-            public static string Format(string format, object arg0)
+            
+            private static ITextHelper s_TextHelper = null;
+
+            public static void SetTextHelper(ITextHelper textHelper)
+            {
+                s_TextHelper = textHelper;
+            }
+
+            public static string Format<T>(string format, T arg)
             {
                 if (format == null)
                 {
                     throw new GameKitException("Format is invalid.");
                 }
 
-                CheckCachedStringBuilder();
-                s_CachedStringBuilder.Length = 0;
-                s_CachedStringBuilder.AppendFormat(format, arg0);
-                return s_CachedStringBuilder.ToString();
+                if (s_TextHelper == null)
+                {
+                    return string.Format(format, arg);
+                }
+
+                return s_TextHelper.Format(format, arg);
             }
 
-            public static string Combine(string str1, string str2)
-            {
-                CheckCachedStringBuilder();
-                s_CachedStringBuilder.Length = 0;
-                s_CachedStringBuilder.AppendLine(str1);
-                s_CachedStringBuilder.AppendLine(str2);
-                return s_CachedStringBuilder.ToString();
-            }
-
-            public static string Format(string format, object arg0, object arg1)
+            public static string Format<T1, T2>(string format, T1 arg1, T2 arg2)
             {
                 if (format == null)
                 {
                     throw new GameKitException("Format is invalid.");
                 }
 
-                CheckCachedStringBuilder();
-                s_CachedStringBuilder.Length = 0;
-                s_CachedStringBuilder.AppendFormat(format, arg0, arg1);
-                return s_CachedStringBuilder.ToString();
+                if (s_TextHelper == null)
+                {
+                    return string.Format(format, arg1, arg2);
+                }
+
+                return s_TextHelper.Format(format, arg1, arg2);
             }
 
-            public static string Format(string format, object arg0, object arg1, object arg2)
+            public static string Format<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
             {
                 if (format == null)
                 {
                     throw new GameKitException("Format is invalid.");
                 }
 
-                CheckCachedStringBuilder();
-                s_CachedStringBuilder.Length = 0;
-                s_CachedStringBuilder.AppendFormat(format, arg0, arg1, arg2);
-                return s_CachedStringBuilder.ToString();
+                if (s_TextHelper == null)
+                {
+                    return string.Format(format, arg1, arg2, arg3);
+                }
+
+                return s_TextHelper.Format(format, arg1, arg2, arg3);
+            }
+
+            public static string Format<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+            {
+                if (format == null)
+                {
+                    throw new GameKitException("Format is invalid.");
+                }
+
+                if (s_TextHelper == null)
+                {
+                    return string.Format(format, arg1, arg2, arg3, arg4);
+                }
+
+                return s_TextHelper.Format(format, arg1, arg2, arg3, arg4);
+            }
+
+            public static string Format<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+            {
+                if (format == null)
+                {
+                    throw new GameKitException("Format is invalid.");
+                }
+
+                if (s_TextHelper == null)
+                {
+                    return string.Format(format, arg1, arg2, arg3, arg4, arg5);
+                }
+
+                return s_TextHelper.Format(format, arg1, arg2, arg3, arg4, arg5);
             }
 
             public static string Format(string format, params object[] args)
@@ -69,18 +102,12 @@ namespace GameKit
                     throw new GameKitException("Args is invalid.");
                 }
 
-                CheckCachedStringBuilder();
-                s_CachedStringBuilder.Length = 0;
-                s_CachedStringBuilder.AppendFormat(format, args);
-                return s_CachedStringBuilder.ToString();
-            }
-
-            private static void CheckCachedStringBuilder()
-            {
-                if (s_CachedStringBuilder == null)
+                if (s_TextHelper == null)
                 {
-                    s_CachedStringBuilder = new StringBuilder(1024);
+                    return string.Format(format, args);
                 }
+                
+                return s_TextHelper.Format(format, args);
             }
         }
     }

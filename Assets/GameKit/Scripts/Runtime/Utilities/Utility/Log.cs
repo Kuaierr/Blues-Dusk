@@ -1,227 +1,256 @@
-using System;
-using System.Text;
-using System.Security.Cryptography;
-using System.Collections;
-using UnityEngine;
+//------------------------------------------------------------
+// Game Framework
+// Copyright © 2013-2021 Jiang Yin. All rights reserved.
+// Homepage: https://gameframework.cn/
+// Feedback: mailto:ellan@gameframework.cn
+//------------------------------------------------------------
+
+using GameKit;
+using System.Diagnostics;
 
 namespace UnityGameKit.Runtime
 {
-    public static partial class Log
+    public static class Log
     {
-        [ThreadStatic]
-        private static StringBuilder s_CachedStringBuilder = null;
-        public static void Info(object info) => Debug.Log(info);
-        public static void Warning(object info) => Debug.Log(string.Format("<b><color=orange>[Warning]</color></b> {0}", info));
-        public static void Error(object info) => Debug.LogError(string.Format("<b><color=red>[Error]</color></b> {0}", info));
-        public static void Success(object info) => Debug.Log(string.Format("<b><color=green>[Success]</color></b> {0}", info));
-        public static void Fatal(object info) => Debug.Log(string.Format("<b><color=red>[Failed]</color></b> {0}", info));
-
-        public static void Warning(object info, object arg0)
+        public static void Success(object message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0);
-            Warning(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(message);
         }
 
-        public static void Warning(object info, object arg0, object arg1)
+        public static void Success(string message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1);
-            Warning(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(message);
         }
 
-        public static void Warning(object info, object arg0, object arg1, object arg2)
+        public static void Success<T>(string format, T arg)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2);
-            Warning(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(format, arg);
         }
 
-        public static void Warning(object info, object arg0, object arg1, object arg2, object arg3)
+        public static void Success<T1, T2>(string format, T1 arg1, T2 arg2)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3);
-            Warning(s_CachedStringBuilder.ToString());
-        }
-        public static void Warning(object info, object arg0, object arg1, object arg2, object arg3, object arg4)
-        {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3, arg4);
-            Warning(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(format, arg1, arg2);
         }
 
-        public static void Error(object info, object arg0)
+        public static void Success<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0);
-            Error(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(format, arg1, arg2, arg3);
         }
 
-        public static void Error(object info, object arg0, object arg1)
+        public static void Success<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1);
-            Error(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(format, arg1, arg2, arg3, arg4);
         }
 
-        public static void Error(object info, object arg0, object arg1, object arg2)
+        public static void Success<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2);
-            Error(s_CachedStringBuilder.ToString());
+            GameKitLog.Success(format, arg1, arg2, arg3, arg4, arg5);
         }
 
-        public static void Error(object info, object arg0, object arg1, object arg2, object arg3)
+        public static void Fail(object message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3);
-            Error(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(message);
         }
 
-        public static void Error(object info, object arg0, object arg1, object arg2, object arg3, object arg4)
+        public static void Fail(string message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3, arg4);
-            Error(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(message);
         }
 
-        public static void Info(object info, object arg0)
+        public static void Fail<T>(string format, T arg)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0);
-            Info(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(format, arg);
         }
 
-        public static void Info(object info, object arg0, object arg1)
+        public static void Fail<T1, T2>(string format, T1 arg1, T2 arg2)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1);
-            Info(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(format, arg1, arg2);
         }
 
-        public static void Info(object info, object arg0, object arg1, object arg2)
+        public static void Fail<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2);
-            Info(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(format, arg1, arg2, arg3);
         }
 
-        public static void Info(object info, object arg0, object arg1, object arg2, object arg3)
+        public static void Fail<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3);
-            Info(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(format, arg1, arg2, arg3, arg4);
         }
 
-        public static void Info(object info, object arg0, object arg1, object arg2, object arg3, object arg4)
+        public static void Fail<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3, arg4);
-            Info(s_CachedStringBuilder.ToString());
+            GameKitLog.Fail(format, arg1, arg2, arg3, arg4, arg5);
         }
 
-        public static void Success(object info, object arg0)
+        public static void Info(object message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0);
-            Success(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(message);
         }
 
-        public static void Success(object info, object arg0, object arg1)
+        public static void Info(string message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1);
-            Success(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(message);
         }
 
-        public static void Success(object info, object arg0, object arg1, object arg2)
+        public static void Info<T>(string format, T arg)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2);
-            Success(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(format, arg);
         }
 
-        public static void Success(object info, object arg0, object arg1, object arg2, object arg3)
+        public static void Info<T1, T2>(string format, T1 arg1, T2 arg2)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3);
-            Success(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(format, arg1, arg2);
         }
 
-        public static void Success(object info, object arg0, object arg1, object arg2, object arg3, object arg4)
+        public static void Info<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3, arg4);
-            Success(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(format, arg1, arg2, arg3);
         }
 
-        public static void Fatal(object info, object arg0)
+        public static void Info<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0);
-            Fatal(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(format, arg1, arg2, arg3, arg4);
         }
 
-        public static void Fatal(object info, object arg0, object arg1)
+        public static void Info<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1);
-            Fatal(s_CachedStringBuilder.ToString());
+            GameKitLog.Info(format, arg1, arg2, arg3, arg4, arg5);
         }
 
-        public static void Fatal(object info, object arg0, object arg1, object arg2)
+        public static void Warning(object message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2);
-            Fatal(s_CachedStringBuilder.ToString());
+            GameKitLog.Warning(message);
         }
 
-        public static void Fatal(object info, object arg0, object arg1, object arg2, object arg3)
+        public static void Warning(string message)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3);
-            Fatal(s_CachedStringBuilder.ToString());
+            GameKitLog.Warning(message);
         }
 
-        public static void Fatal(object info, object arg0, object arg1, object arg2, object arg3, object arg4)
+        public static void Warning<T>(string format, T arg)
         {
-            CheckCachedStringBuilder();
-            s_CachedStringBuilder.Length = 0;
-            s_CachedStringBuilder.AppendFormat(info.ToString(), arg0, arg1, arg2, arg3, arg4);
-            Fatal(s_CachedStringBuilder.ToString());
+            GameKitLog.Warning(format, arg);
         }
 
-        private static void CheckCachedStringBuilder()
+        public static void Warning<T1, T2>(string format, T1 arg1, T2 arg2)
         {
-            if (s_CachedStringBuilder == null)
-            {
-                s_CachedStringBuilder = new StringBuilder(1024);
-            }
+            GameKitLog.Warning(format, arg1, arg2);
         }
+
+        public static void Warning<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
+        {
+            GameKitLog.Warning(format, arg1, arg2, arg3);
+        }
+
+        public static void Warning<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            GameKitLog.Warning(format, arg1, arg2, arg3, arg4);
+        }
+
+        public static void Warning<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        {
+            GameKitLog.Warning(format, arg1, arg2, arg3, arg4, arg5);
+        }
+
+        public static void Error(object message)
+        {
+            GameKitLog.Error(message);
+        }
+
+        public static void Error(string message)
+        {
+            GameKitLog.Error(message);
+        }
+
+        public static void Error<T>(string format, T arg)
+        {
+            GameKitLog.Error(format, arg);
+        }
+
+        public static void Error<T1, T2>(string format, T1 arg1, T2 arg2)
+        {
+            GameKitLog.Error(format, arg1, arg2);
+        }
+
+        public static void Error<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
+        {
+            GameKitLog.Error(format, arg1, arg2, arg3);
+        }
+
+        public static void Error<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            GameKitLog.Error(format, arg1, arg2, arg3, arg4);
+        }
+
+        public static void Error<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        {
+            GameKitLog.Error(format, arg1, arg2, arg3, arg4, arg5);
+        }
+
+        public static void Fatal(object message)
+        {
+            GameKitLog.Fatal(message);
+        }
+
+        public static void Fatal(string message)
+        {
+            GameKitLog.Fatal(message);
+        }
+
+        public static void Fatal<T>(string format, T arg)
+        {
+            GameKitLog.Fatal(format, arg);
+        }
+
+        public static void Fatal<T1, T2>(string format, T1 arg1, T2 arg2)
+        {
+            GameKitLog.Fatal(format, arg1, arg2);
+        }
+
+        public static void Fatal<T1, T2, T3>(string format, T1 arg1, T2 arg2, T3 arg3)
+        {
+            GameKitLog.Fatal(format, arg1, arg2, arg3);
+        }
+
+        public static void Fatal<T1, T2, T3, T4>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            GameKitLog.Fatal(format, arg1, arg2, arg3, arg4);
+        }
+
+        public static void Fatal<T1, T2, T3, T4, T5>(string format, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        {
+            GameKitLog.Fatal(format, arg1, arg2, arg3, arg4, arg5);
+        }
+
+        #region Params Args
+        public static void Fatal(string format, params object[] args)
+        {
+            GameKitLog.Fatal(format, args);
+        }
+
+        public static void Fail(string format, params object[] args)
+        {
+            GameKitLog.Fail(format, args);
+        }
+
+        public static void Success(string format, params object[] args)
+        {
+            GameKitLog.Success(format, args);
+        }
+
+        public static void Info(string format, params object[] args)
+        {
+            GameKitLog.Info(format, args);
+        }
+        public static void Warning(string format, params object[] args)
+        {
+            GameKitLog.Warning(format, args);
+        }
+
+        public static void Error(string format, params object[] args)
+        {
+            GameKitLog.Error(format, args);
+        }
+        #endregion
     }
 }
-

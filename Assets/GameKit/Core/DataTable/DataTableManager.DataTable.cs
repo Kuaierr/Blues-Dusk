@@ -8,18 +8,26 @@ namespace GameKit.DataTable
 {
     internal sealed partial class DataTableManager : GameKitModule, IDataTableManager
     {
-        private sealed class DataTable<T> : DataTableBase, IDataTable<T> where T : class, IDataRow, new()
+        private sealed class DataTable<T> : DataTableBase, IDataTable<T> where T : class, new()
         {
             private readonly Dictionary<int, T> m_DataSet;
+            private readonly IDataTableHelper m_DataTableHelper;
             private T m_MinIdDataRow;
             private T m_MaxIdDataRow;
 
-            public DataTable(string name)
-                : base(name)
+            public DataTable(string name, IDataTableHelper helper) : base(name, helper)
             {
                 m_DataSet = new Dictionary<int, T>();
                 m_MinIdDataRow = null;
                 m_MaxIdDataRow = null;
+            }
+
+            public IDataTableHelper Helper
+            {
+                get
+                {
+                    return m_DataTableHelper;
+                }
             }
 
             public override Type Type
@@ -278,7 +286,7 @@ namespace GameKit.DataTable
                 try
                 {
                     T dataRow = new T();
-                    if (!dataRow.ParseDataRow(dataRowString, userData))
+                    if (!m_DataTableHelper.ParseInternalData(dataRow, dataRowString, userData))
                     {
                         return false;
                     }
@@ -302,11 +310,34 @@ namespace GameKit.DataTable
                 try
                 {
                     T dataRow = new T();
-                    if (!dataRow.ParseDataRow(dataRowBytes, startIndex, length, userData))
+                    if (!m_DataTableHelper.ParseInternalData(dataRow, dataRowBytes, startIndex, length, userData))
                     {
                         return false;
                     }
 
+                    InternalAddDataRow(dataRow);
+                    return true;
+                }
+                catch (Exception exception)
+                {
+                    if (exception is GameKitException)
+                    {
+                        throw;
+                    }
+
+                    throw new GameKitException(Utility.Text.Format("Can not parse data row bytes for data table '{0}' with exception '{1}'.", new TypeNamePair(typeof(T), Name), exception), exception);
+                }
+            }
+
+            public override bool AddDataRow(object dataRowRaw, object userData)
+            {
+                try
+                {
+                    T dataRow = new T();
+                    if (!m_DataTableHelper.ParseInternalData(dataRow, dataRowRaw, userData))
+                    {
+                        return false;
+                    }
                     InternalAddDataRow(dataRow);
                     return true;
                 }
@@ -333,18 +364,18 @@ namespace GameKit.DataTable
                     return false;
                 }
 
-                if (m_MinIdDataRow != null && m_MinIdDataRow.Id == id || m_MaxIdDataRow != null && m_MaxIdDataRow.Id == id)
+                if (m_MinIdDataRow != null && m_DataTableHelper.ParseExternalDataId(m_MinIdDataRow) == id || m_MaxIdDataRow != null && m_DataTableHelper.ParseExternalDataId(m_MaxIdDataRow) == id)
                 {
                     m_MinIdDataRow = null;
                     m_MaxIdDataRow = null;
                     foreach (KeyValuePair<int, T> dataRow in m_DataSet)
                     {
-                        if (m_MinIdDataRow == null || m_MinIdDataRow.Id > dataRow.Key)
+                        if (m_MinIdDataRow == null || m_DataTableHelper.ParseExternalDataId(m_MinIdDataRow) > dataRow.Key)
                         {
                             m_MinIdDataRow = dataRow.Value;
                         }
 
-                        if (m_MaxIdDataRow == null || m_MaxIdDataRow.Id < dataRow.Key)
+                        if (m_MaxIdDataRow == null || m_DataTableHelper.ParseExternalDataId(m_MaxIdDataRow) < dataRow.Key)
                         {
                             m_MaxIdDataRow = dataRow.Value;
                         }
@@ -378,19 +409,20 @@ namespace GameKit.DataTable
 
             private void InternalAddDataRow(T dataRow)
             {
-                if (m_DataSet.ContainsKey(dataRow.Id))
+                int externalId = m_DataTableHelper.ParseExternalDataId(dataRow);
+                if (m_DataSet.ContainsKey(externalId))
                 {
-                    throw new GameKitException(Utility.Text.Format("Already exist '{0}' in data table '{1}'.", dataRow.Id, new TypeNamePair(typeof(T), Name)));
+                    throw new GameKitException(Utility.Text.Format("Already exist '{0}' in data table '{1}'.", externalId, new TypeNamePair(typeof(T), Name)));
                 }
 
-                m_DataSet.Add(dataRow.Id, dataRow);
+                m_DataSet.Add(externalId, dataRow);
 
-                if (m_MinIdDataRow == null || m_MinIdDataRow.Id > dataRow.Id)
+                if (m_MinIdDataRow == null || m_DataTableHelper.ParseExternalDataId(m_MinIdDataRow) > externalId)
                 {
                     m_MinIdDataRow = dataRow;
                 }
 
-                if (m_MaxIdDataRow == null || m_MaxIdDataRow.Id < dataRow.Id)
+                if (m_MaxIdDataRow == null || m_DataTableHelper.ParseExternalDataId(m_MaxIdDataRow) < externalId)
                 {
                     m_MaxIdDataRow = dataRow;
                 }

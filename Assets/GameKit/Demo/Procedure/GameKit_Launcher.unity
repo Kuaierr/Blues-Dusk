@@ -1426,6 +1426,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bb0f60a22ac0f439f6b102db1db851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TextHelperTypeName: 
+  m_VersionHelperTypeName: 
+  m_LogHelperTypeName: 
+  m_CompressionHelperTypeName: 
+  m_JsonHelperTypeName: 
+  m_EditorResourceMode: 1
+  m_EditorLanguage: 0
+  m_FrameRate: 30
+  m_GameSpeed: 1
+  m_RunInBackground: 1
+  m_NeverSleep: 1
 --- !u!4 &7502916435143678050
 Transform:
   m_ObjectHideFlags: 0

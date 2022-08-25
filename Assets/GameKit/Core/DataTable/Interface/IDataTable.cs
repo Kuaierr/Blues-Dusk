@@ -1,3 +1,4 @@
+using System.Dynamic;
 using System;
 using System.Collections.Generic;
 
@@ -19,12 +20,14 @@ namespace GameKit.DataTable
 
         T MaxIdDataRow { get; }
 
+        IDataTableHelper Helper { get; }
+
         bool HasDataRow(int id);
 
         bool HasDataRow(Predicate<T> condition);
 
         T GetDataRow(int id);
-        
+
         T GetDataRow(Predicate<T> condition);
 
         T[] GetDataRows(Predicate<T> condition);
@@ -44,6 +47,8 @@ namespace GameKit.DataTable
         void GetAllDataRows(List<T> results);
 
         bool AddDataRow(string dataRowString, object userData);
+
+        bool AddDataRow(object dataRowRaw, object userData);
 
         bool AddDataRow(byte[] dataRowBytes, int startIndex, int length, object userData);
 

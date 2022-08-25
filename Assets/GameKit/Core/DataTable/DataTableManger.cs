@@ -196,7 +196,7 @@ namespace GameKit.DataTable
             }
         }
 
-        public IDataTable<T> CreateDataTable<T>() where T : class, IDataRow, new()
+        public IDataTable<T> CreateDataTable<T>() where T : class, new()
         {
             return CreateDataTable<T>(string.Empty);
         }
@@ -206,7 +206,7 @@ namespace GameKit.DataTable
             return CreateDataTable(dataRowType, string.Empty);
         }
 
-        public IDataTable<T> CreateDataTable<T>(string name) where T : class, IDataRow, new()
+        public IDataTable<T> CreateDataTable<T>(string name) where T : class, new()
         {
             // if (m_ResourceManager == null)
             // {
@@ -224,7 +224,7 @@ namespace GameKit.DataTable
                 throw new GameKitException(Utility.Text.Format("Already exist data table '{0}'.", typeNamePair));
             }
 
-            DataTable<T> dataTable = new DataTable<T>(name);
+            DataTable<T> dataTable = new DataTable<T>(name, m_DataTableHelper);
             // dataTable.SetResourceManager(m_ResourceManager);
             dataTable.SetDataProviderHelper(m_DataProviderHelper);
             m_DataTables.Add(typeNamePair, dataTable);

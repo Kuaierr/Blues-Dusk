@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
-    public class DefaultDataTableHelper : DataTableHelperBase
+    public class LubanDataTableHelper : DataTableHelperBase
     {
         private static readonly string BytesAssetExtension = ".bytes";
 

@@ -8,12 +8,12 @@ namespace GameKit.DataTable
         private readonly string m_Name;
         private readonly DataProvider<DataTableBase> m_DataProvider;
 
-        public DataTableBase() : this(null)
+        public DataTableBase() : this(null, null)
         {
 
         }
 
-        public DataTableBase(string name)
+        public DataTableBase(string name, IDataTableHelper dataTableHelper)
         {
             m_Name = name ?? string.Empty;
             m_DataProvider = new DataProvider<DataTableBase>(this);
@@ -125,6 +125,8 @@ namespace GameKit.DataTable
 
         public abstract bool AddDataRow(byte[] dataRowBytes, int startIndex, int length, object userData);
 
+        public abstract bool AddDataRow(object dataRowRaw, object userData);
+        
         public abstract bool RemoveDataRow(int id);
 
         public abstract void RemoveAllDataRows();
