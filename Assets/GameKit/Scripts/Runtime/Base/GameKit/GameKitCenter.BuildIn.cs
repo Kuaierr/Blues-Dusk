@@ -13,6 +13,8 @@ namespace UnityGameKit.Runtime
         public static UIComponent UI { get; private set; }
         public static ElementComponent Element { get; private set; }
         public static EventComponent Event { get; private set; }
+        public static LocalizationComponent Localization { get; private set; }
+        public static ConfigComponent Config { get; private set; }
 
         private static void InitComponents()
         {
@@ -25,6 +27,8 @@ namespace UnityGameKit.Runtime
             UI = GameKitComponentCenter.GetComponent<UIComponent>();
             Element = GameKitComponentCenter.GetComponent<ElementComponent>();
             Event = GameKitComponentCenter.GetComponent<EventComponent>();
+            Localization = GameKitComponentCenter.GetComponent<LocalizationComponent>();
+            Config = GameKitComponentCenter.GetComponent<ConfigComponent>();
         }
     }
 }

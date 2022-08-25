@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using GameKit;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 namespace UnityGameKit.Editor
 {
@@ -10,7 +12,7 @@ namespace UnityGameKit.Editor
         private static readonly string[] RuntimeAssemblyNames =
         {
             "UnityGameKit.Runtime",
-            "Assembly-CSharp",
+            "Assembly-CSharp"
         };
 
         private static readonly string[] RuntimeOrEditorAssemblyNames =
@@ -18,7 +20,7 @@ namespace UnityGameKit.Editor
             "UnityGameKit.Runtime",
             "Assembly-CSharp",
             "UnityGameKit.Editor",
-            "Assembly-CSharp-Editor",
+            "Assembly-CSharp-Editor"
         };
 
         /// <summary>
@@ -78,15 +80,20 @@ namespace UnityGameKit.Editor
         private static string[] GetTypeNames(System.Type typeBase, string[] assemblyNames)
         {
             List<string> typeNames = new List<string>();
+            
             foreach (string assemblyName in assemblyNames)
             {
+                
                 Assembly assembly = null;
+                
                 try
                 {
                     assembly = Assembly.Load(assemblyName);
+                    
                 }
                 catch
                 {
+                    UnityEngine.Debug.Log(assemblyName);
                     continue;
                 }
 

@@ -17,12 +17,6 @@ namespace UnityGameKit.Runtime
         private readonly List<IEntity> m_CachedEntities = new List<IEntity>();
 
         [SerializeField]
-        private bool m_EnableShowEntityUpdateEvent = false;
-
-        [SerializeField]
-        private bool m_EnableShowEntityDependencyAssetEvent = false;
-
-        [SerializeField]
         private Transform m_InstanceRoot = null;
 
         [SerializeField]

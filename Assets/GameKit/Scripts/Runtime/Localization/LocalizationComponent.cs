@@ -16,12 +16,6 @@ namespace UnityGameKit.Runtime
         private EventComponent m_EventComponent = null;
 
         [SerializeField]
-        private bool m_EnableLoadDictionaryUpdateEvent = false;
-
-        [SerializeField]
-        private bool m_EnableLoadDictionaryDependencyAssetEvent = false;
-
-        [SerializeField]
         private string m_LocalizationHelperTypeName = "UnityGameKit.Runtime.DefaultLocalizationHelper";
 
         [SerializeField]

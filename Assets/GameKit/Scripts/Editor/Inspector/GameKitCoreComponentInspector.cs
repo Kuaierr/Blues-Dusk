@@ -50,7 +50,7 @@ namespace UnityGameKit.Editor
             {
                 m_EditorResourceMode.boolValue = EditorGUILayout.BeginToggleGroup("Editor Resource Mode", m_EditorResourceMode.boolValue);
                 {
-                    EditorGUILayout.HelpBox("Editor resource mode option is only for editor mode. Game Framework will use editor resource files, which you should validate first.", MessageType.Warning);
+                    EditorGUILayout.HelpBox("Editor resource mode option is only for editor mode. Game Kit use editor resource files which you should validate first.", MessageType.Info);
                     EditorGUILayout.PropertyField(m_EditorLanguage);
                     EditorGUILayout.HelpBox("Editor language option is only use for localization test in editor mode.", MessageType.Info);
                 }
@@ -198,8 +198,6 @@ namespace UnityGameKit.Editor
             textHelperTypeNames.AddRange(Type.GetRuntimeTypeNames(typeof(Utility.Text.ITextHelper)));
             m_TextHelperTypeNames = textHelperTypeNames.ToArray();
             m_TextHelperTypeNameIndex = 0;
-
-            Debug.Log(Type.GetRuntimeTypeNames(typeof(Utility.Text.ITextHelper)).Length);
             if (!string.IsNullOrEmpty(m_TextHelperTypeName.stringValue))
             {
                 m_TextHelperTypeNameIndex = textHelperTypeNames.IndexOf(m_TextHelperTypeName.stringValue);

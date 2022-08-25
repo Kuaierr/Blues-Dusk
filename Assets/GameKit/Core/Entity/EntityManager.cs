@@ -15,7 +15,7 @@ namespace GameKit.EntityModule
         private readonly Queue<EntityInfo> m_RecycleQueue;
         private IObjectPoolManager m_ObjectPoolManager;
         private IEntityHelper m_EntityHelper;
-        private ResourceManager resourceManager;
+        // private ResourceManager resourceManager;
         private int m_Serial;
         private bool m_IsShutdown;
         private EventHandler<EntityShowSuccessEventArgs> m_ShowEntitySuccessEventHandler;
@@ -24,7 +24,7 @@ namespace GameKit.EntityModule
 
         public EntityManager()
         {
-            resourceManager = GameKitModuleCenter.GetModule<ResourceManager>();
+            // resourceManager = GameKitModuleCenter.GetModule<ResourceManager>();
             m_EntityInfos = new Dictionary<int, EntityInfo>();
             m_EntityGroups = new Dictionary<string, EntityGroup>(StringComparer.Ordinal);
             m_EntitiesBeingLoaded = new Dictionary<int, int>();

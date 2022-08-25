@@ -6,9 +6,9 @@ namespace UnityGameKit.Runtime
     {
         private void Start()
         {
-            Log.Success("GameKitCenter Initialize.");
             InitComponents();
             InitCustomComponents();
+            Log.Success("GameKitCenter Initialized.");
         }
     }
 }

@@ -356,7 +356,6 @@ namespace GameKit.Inventory
 
         public void SetHelper(IInventoryHelper helper)
         {
-            Utility.Debugger.LogSuccess("Set Inventory Helper for {0} with {1}", Name, helper);
             m_helper = helper;
         }
 

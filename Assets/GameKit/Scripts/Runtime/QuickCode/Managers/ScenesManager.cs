@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityGameKit.Runtime;
-namespace GameKit.QuickCode
+
+namespace GameKitQuickCode
 {
-    public class ScenesManager : SingletonBase<ScenesManager>
+    public class ScenesManager : GameKit.SingletonBase<ScenesManager>
     {
         // 场景加载 同步
         public Scene GetScene()
@@ -45,7 +46,7 @@ namespace GameKit.QuickCode
 
             while (!ao.isDone)
             {
-                EventManager.instance.EventTrigger("Loading Scene", ao.progress);
+                GameKit.QuickCode.EventManager.instance.EventTrigger("Loading Scene", ao.progress);
                 yield return ao.progress;
             }
             callback?.Invoke();
@@ -56,7 +57,7 @@ namespace GameKit.QuickCode
             AsyncOperation ao = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
             while (!ao.isDone)
             {
-                EventManager.instance.EventTrigger("Loading Scene", ao.progress);
+                GameKit.QuickCode.EventManager.instance.EventTrigger("Loading Scene", ao.progress);
                 yield return ao.progress;
             }
             callback?.Invoke();
@@ -67,7 +68,7 @@ namespace GameKit.QuickCode
             AsyncOperation ao = SceneManager.UnloadSceneAsync(name);
             while (!ao.isDone)
             {
-                EventManager.instance.EventTrigger("Removing Scene", ao.progress);
+                GameKit.QuickCode.EventManager.instance.EventTrigger("Removing Scene", ao.progress);
                 yield return ao.progress;
             }
             callback?.Invoke();

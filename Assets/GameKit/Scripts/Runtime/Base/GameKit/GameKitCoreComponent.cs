@@ -151,9 +151,9 @@ namespace UnityGameKit.Runtime
             InitCompressionHelper();
             InitJsonHelper();
 
-            Log.Info("<color=blue>GameKit Version</color>: {0}", GameKit.Version.GameKitVersion);
-            Log.Info("<color=blue>Game Version</color>: {0} ({1})", GameKit.Version.GameVersion, GameKit.Version.InternalGameVersion.ToString());
-            Log.Info("<color=blue>Unity Version:</color> {0}", Application.unityVersion);
+            Log.Info("<b><color=#87CEFA>GameKit Version</color></b>: {0}", GameKit.Version.GameKitVersion);
+            Log.Info("<b><color=#87CEFA>Game Version</color></b>: {0} ({1})", GameKit.Version.GameVersion, GameKit.Version.InternalGameVersion.ToString());
+            Log.Info("<b><color=#87CEFA>Unity Version:</color></b> {0}", Application.unityVersion);
 
             Utility.Converter.ScreenDpi = Screen.dpi;
             if (Utility.Converter.ScreenDpi <= 0)
@@ -164,7 +164,7 @@ namespace UnityGameKit.Runtime
             m_EditorResourceMode &= Application.isEditor;
             if (m_EditorResourceMode)
             {
-                Log.Info("During this run, Game Framework will use editor resource files, which you should validate first.");
+                Log.Info("<b><color=#87CEFA>Game Resource Mode:</color></b> Game Kit use editor resource files.");
             }
 
             Application.targetFrameRate = m_FrameRate;

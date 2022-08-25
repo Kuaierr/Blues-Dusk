@@ -52,7 +52,7 @@ namespace UnityGameKit.Runtime
             m_ProcedureManager = GameKitModuleCenter.GetModule<IProcedureManager>();
             if (m_ProcedureManager == null)
             {
-                Utility.Debugger.LogFail("Procedure manager is invalid.");
+                Log.Fail("Procedure manager is invalid.");
                 return;
             }
         }
@@ -65,14 +65,14 @@ namespace UnityGameKit.Runtime
                 Type procedureType = Utility.Assembly.GetType(m_AvailableProcedureTypeNames[i]);
                 if (procedureType == null)
                 {
-                    Utility.Debugger.LogError("Can not find procedure type '{0}'.", m_AvailableProcedureTypeNames[i]);
+                    Log.Error("Can not find procedure type '{0}'.", m_AvailableProcedureTypeNames[i]);
                     yield break;
                 }
 
                 procedures[i] = (ProcedureBase)Activator.CreateInstance(procedureType);
                 if (procedures[i] == null)
                 {
-                    Utility.Debugger.LogError("Can not create procedure instance '{0}'.", m_AvailableProcedureTypeNames[i]);
+                    Log.Error("Can not create procedure instance '{0}'.", m_AvailableProcedureTypeNames[i]);
                     yield break;
                 }
 
@@ -84,7 +84,7 @@ namespace UnityGameKit.Runtime
 
             if (m_EntranceProcedure == null)
             {
-                Utility.Debugger.LogError("Entrance procedure is invalid.");
+                Log.Error("Entrance procedure is invalid.");
                 yield break;
             }
 

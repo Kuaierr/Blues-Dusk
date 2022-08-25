@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using DG.Tweening;
-using GameKit.QuickCode;
+using GameKitQuickCode;
 namespace UnityGameKit.Runtime
 {
     public enum SceneSwitchType
@@ -29,6 +29,12 @@ namespace UnityGameKit.Runtime
         {
             get;
             private set;
+        }
+
+        public bool HasScene(string name)
+        {
+            // SceneManager.
+            return true;
         }
 
         protected override void Awake()
@@ -154,15 +160,15 @@ namespace UnityGameKit.Runtime
             SwitchScene(LoadingScene, callback);
         }
 
-        private void LoadSceneAsyn(string name, UnityAction callback = null)
+        public void LoadSceneAsyn(string name, UnityAction callback = null)
         {
             ScenesManager.instance.LoadSceneAsynAdd(name, callback);
         }
-        private void LoadSceneAsynSingle(string name, UnityAction callback = null)
+        public void LoadSceneAsynSingle(string name, UnityAction callback = null)
         {
             ScenesManager.instance.LoadSceneAsyn(name, callback);
         }
-        private void UnloadSceneAsyn(string name, UnityAction callback = null)
+        public void UnloadSceneAsyn(string name, UnityAction callback = null)
         {
             ScenesManager.instance.UnloadSceneAsyn(name, callback);
         }

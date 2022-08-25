@@ -1,5 +1,4 @@
 using GameKit;
-
 using GameKit.Fsm;
 using System;
 using System.Collections.Generic;

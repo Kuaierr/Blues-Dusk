@@ -14,23 +14,23 @@ namespace UnityGameKit.Runtime
                     break;
 
                 case GameKitLogType.Warning:
-                    Debug.Log(Utility.Text.Format("<color=yellow>[Warning] {0}</color>", message));
+                    Debug.Log(Utility.Text.Format("<b><color=yellow>[Warning] </color></b>{0}", message));
                     break;
 
                 case GameKitLogType.Error:
-                    Debug.LogError(Utility.Text.Format("<color=red>[Error] {0}</color>", message));
+                    Debug.LogError(Utility.Text.Format("<b><color=red>[Error] </color></b>{0}", message));
                     break;
                 
                 case GameKitLogType.Success:
-                    Debug.Log(Utility.Text.Format("<color=green>[Success] {0}</color>", message));
+                    Debug.Log(Utility.Text.Format("<b><color=green>[Success] </color></b>{0}", message));
                     break;
                 
                 case GameKitLogType.Fail:
-                    Debug.Log(Utility.Text.Format("<color=#B22222>[Fail] {0}</color>", message));
+                    Debug.Log(Utility.Text.Format("<b><color=#B22222>[Fail] </color></b>{0}", message));
                     break;
 
                 default:
-                    throw new GameKitException(Utility.Text.Format("<color=#800000>[Fatal] {0}</color>", message));
+                    throw new GameKitException(Utility.Text.Format("<b><color=#800000>[Fatal] </color></b>{0}", message));
             }
         }
     }

@@ -1,5 +1,5 @@
 {
-    "name": "GameKit.Runtime",
+    "name": "UnityGameKit.Runtime",
     "rootNamespace": "",
     "references": [
         "GUID:04e133d689d5e7b4f9596650eb575e3e",

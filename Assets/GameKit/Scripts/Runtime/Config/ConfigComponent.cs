@@ -15,12 +15,6 @@ namespace UnityGameKit.Runtime
         private EventComponent m_EventComponent = null;
 
         [SerializeField]
-        private bool m_EnableLoadConfigUpdateEvent = false;
-
-        [SerializeField]
-        private bool m_EnableLoadConfigDependencyAssetEvent = false;
-
-        [SerializeField]
         private string m_ConfigHelperTypeName = "UnityGameKit.Runtime.DefaultConfigHelper";
 
         [SerializeField]
