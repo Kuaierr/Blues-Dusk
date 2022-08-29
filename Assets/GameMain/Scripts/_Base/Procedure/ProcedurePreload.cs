@@ -23,12 +23,12 @@ public class ProcedurePreload : ProcedureBase
     {
         base.OnEnter(procedureOwner);
 
-        // GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
-        // GameKitCenter.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
+        GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+        GameKitCenter.Event.Subscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
         GameKitCenter.Event.Subscribe(LoadDataTableSuccessEventArgs.EventId, OnLoadDataTableSuccess);
         GameKitCenter.Event.Subscribe(LoadDataTableFailureEventArgs.EventId, OnLoadDataTableFailure);
-        // GameKitCenter.Event.Subscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
-        // GameKitCenter.Event.Subscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
+        GameKitCenter.Event.Subscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
+        GameKitCenter.Event.Subscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
 
         m_LoadedFlag.Clear();
 
@@ -37,12 +37,12 @@ public class ProcedurePreload : ProcedureBase
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
     {
-        // GameKitCenter.Event.Unsubscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
-        // GameKitCenter.Event.Unsubscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
+        GameKitCenter.Event.Unsubscribe(LoadConfigSuccessEventArgs.EventId, OnLoadConfigSuccess);
+        GameKitCenter.Event.Unsubscribe(LoadConfigFailureEventArgs.EventId, OnLoadConfigFailure);
         GameKitCenter.Event.Unsubscribe(LoadDataTableSuccessEventArgs.EventId, OnLoadDataTableSuccess);
         GameKitCenter.Event.Unsubscribe(LoadDataTableFailureEventArgs.EventId, OnLoadDataTableFailure);
-        // GameKitCenter.Event.Unsubscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
-        // GameKitCenter.Event.Unsubscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
+        GameKitCenter.Event.Unsubscribe(LoadDictionarySuccessEventArgs.EventId, OnLoadDictionarySuccess);
+        GameKitCenter.Event.Unsubscribe(LoadDictionaryFailureEventArgs.EventId, OnLoadDictionaryFailure);
 
         base.OnExit(procedureOwner, isShutdown);
     }
@@ -60,6 +60,7 @@ public class ProcedurePreload : ProcedureBase
         }
 
         // procedureOwner.SetData<VarInt32>("NextSceneId", GameKitCenter.Config.GetInt("Scene.Menu"));
+        procedureOwner.SetData<VarString>("NextSceneName", "SceneMenu");
         ChangeState<ProcedureChangeScene>(procedureOwner);
     }
 

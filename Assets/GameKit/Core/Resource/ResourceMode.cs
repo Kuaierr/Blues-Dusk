@@ -6,6 +6,6 @@ namespace GameKit
         Default,
         Reousrces,
         Addressables,
-        GameFramework
+        GameKit
     }
 }
