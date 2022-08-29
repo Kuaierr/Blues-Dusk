@@ -12,5 +12,6 @@ namespace GameKit.Dialog
         IDataNodeManager DataNodeManager { get; }
         Dictionary<string, bool> LocalConditions { get; }
         void Reset();
+        void Update(float elapseSeconds, float realElapseSeconds);
     }
 }

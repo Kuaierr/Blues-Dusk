@@ -107,6 +107,25 @@ namespace GameKit.Dialog
                 m_CurrentNode = m_StartNode;
             }
 
+            public IDataNode GetChildNode(int index = 0)
+            {
+                if (CurrentNode.IsLeaf || index < 0 || index >= CurrentNode.ChildCount)
+                    return null;
+                m_CurrentNode = CurrentNode.GetChild(index);
+                return CurrentNode as IDataNode;
+            }
+
+            public void SetCondition(string predicate, bool status)
+            {
+                m_LocalConditions[predicate] = status;
+            }
+
+
+            public void Update(float elapseSeconds, float realElapseSeconds)
+            {
+
+            }
+
             // public List<Option> GetOptions()
             // {
             //     if (m_CurrentNode.Sons.Count > 1)
@@ -119,7 +138,11 @@ namespace GameKit.Dialog
 
             public void Clear()
             {
-                
+                m_Name = "<Default>";
+                m_RootNode = null;
+                m_StartNode = null;
+                m_CurrentNode = null;
+                m_LocalConditions.Clear();
             }
         }
     }
