@@ -30,6 +30,21 @@ namespace GameKit
             else
                 onFail?.Invoke();
         }
+
+        IEnumerator GetTextProcess(string keyName, UnityAction<string> onSuccess, UnityAction onFail)
+        {
+            AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(keyName);
+            yield return handle;
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                onSuccess?.Invoke(handle.Result.text);
+                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
+                    m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
+            }
+            else
+                onFail?.Invoke();
+        }
+
         IEnumerator GetAsynProcess<T>(string keyName, UnityAction<T> onSuccess, UnityAction onFail) where T : Object
         {
             AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(keyName);
@@ -67,6 +82,11 @@ namespace GameKit
         public void GetBinaryAsyn(string keyName, UnityAction<byte[]> onSuccess = null, UnityAction onFail = null)
         {
             QuickMonoManager.instance.StartCoroutine(GetBinaryProcess(keyName, onSuccess, onFail));
+        }
+
+        public void GetTextAsyn(string keyName, UnityAction<string> onSuccess = null, UnityAction onFail = null)
+        {
+            QuickMonoManager.instance.StartCoroutine(GetTextProcess(keyName, onSuccess, onFail));
         }
 
         public void GetAssetAsyn(string keyName, UnityAction<Object> onSuccess = null, UnityAction onFail = null)
