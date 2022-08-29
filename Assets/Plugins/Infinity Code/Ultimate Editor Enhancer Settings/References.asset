@@ -183,4 +183,8 @@ MonoBehaviour:
     customWindowSize: {x: 400, y: 300}
     alignWindowToBar: 1
     windowMode: 0
-  _sceneHistory: []
+  _sceneHistory:
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_Dialog_UIandDice
+    path: Assets/GameMain/Scenes/Prototype_Dialog_UIandDice.unity
