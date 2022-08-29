@@ -9,7 +9,7 @@ namespace GameKit.Fsm
     {
         private T m_User;
         private readonly Dictionary<Type, FsmState<T>> m_States;
-        // private Dictionary<string, Variable> m_Datas;
+        private Dictionary<string, Variable> m_Datas;
         private FsmState<T> m_CurrentState;
         private float m_CurrentStateTime;
         private bool m_IsDestroyed;
@@ -18,7 +18,7 @@ namespace GameKit.Fsm
         {
             m_User = null;
             m_States = new Dictionary<Type, FsmState<T>>();
-            // m_Datas = null;
+            m_Datas = null;
             m_CurrentState = null;
             m_CurrentStateTime = 0f;
             m_IsDestroyed = true;
@@ -168,20 +168,20 @@ namespace GameKit.Fsm
             m_User = null;
             m_States.Clear();
 
-            // if (m_Datas != null)
-            // {
-            //     foreach (KeyValuePair<string, Variable> data in m_Datas)
-            //     {
-            //         if (data.Value == null)
-            //         {
-            //             continue;
-            //         }
+            if (m_Datas != null)
+            {
+                foreach (KeyValuePair<string, Variable> data in m_Datas)
+                {
+                    if (data.Value == null)
+                    {
+                        continue;
+                    }
 
-            //         ReferencePool.Release(data.Value);
-            //     }
+                    ReferencePool.Release(data.Value);
+                }
 
-            //     m_Datas.Clear();
-            // }
+                m_Datas.Clear();
+            }
 
             m_CurrentState = null;
             m_CurrentStateTime = 0f;
@@ -346,5 +346,92 @@ namespace GameKit.Fsm
             m_CurrentState.OnEnter(this);
         }
 
+        public bool HasData(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new GameKitException("Data name is invalid.");
+            }
+
+            if (m_Datas == null)
+            {
+                return false;
+            }
+
+            return m_Datas.ContainsKey(name);
+        }
+
+        public TData GetData<TData>(string name) where TData : Variable
+        {
+            return (TData)GetData(name);
+        }
+
+        public Variable GetData(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new GameKitException("Data name is invalid.");
+            }
+
+            if (m_Datas == null)
+            {
+                return null;
+            }
+
+            Variable data = null;
+            if (m_Datas.TryGetValue(name, out data))
+            {
+                return data;
+            }
+
+            return null;
+        }
+
+        public void SetData<TData>(string name, TData data) where TData : Variable
+        {
+            SetData(name, (Variable)data);
+        }
+
+        public void SetData(string name, Variable data)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new GameKitException("Data name is invalid.");
+            }
+
+            if (m_Datas == null)
+            {
+                m_Datas = new Dictionary<string, Variable>(StringComparer.Ordinal);
+            }
+
+            Variable oldData = GetData(name);
+            if (oldData != null)
+            {
+                ReferencePool.Release(oldData);
+            }
+
+            m_Datas[name] = data;
+        }
+
+        public bool RemoveData(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new GameKitException("Data name is invalid.");
+            }
+
+            if (m_Datas == null)
+            {
+                return false;
+            }
+
+            Variable oldData = GetData(name);
+            if (oldData != null)
+            {
+                ReferencePool.Release(oldData);
+            }
+
+            return m_Datas.Remove(name);
+        }
     }
 }
