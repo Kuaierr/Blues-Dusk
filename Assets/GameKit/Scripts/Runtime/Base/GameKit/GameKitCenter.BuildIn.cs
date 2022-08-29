@@ -15,6 +15,8 @@ namespace UnityGameKit.Runtime
         public static EventComponent Event { get; private set; }
         public static LocalizationComponent Localization { get; private set; }
         public static ConfigComponent Config { get; private set; }
+        public static SettingComponent Setting { get; private set; }
+        public static SceneComponent Scene { get; private set; }
 
         private static void InitComponents()
         {
@@ -29,6 +31,8 @@ namespace UnityGameKit.Runtime
             Event = GameKitComponentCenter.GetComponent<EventComponent>();
             Localization = GameKitComponentCenter.GetComponent<LocalizationComponent>();
             Config = GameKitComponentCenter.GetComponent<ConfigComponent>();
+            Setting = GameKitComponentCenter.GetComponent<SettingComponent>();
+            Scene = GameKitComponentCenter.GetComponent<SceneComponent>();
         }
     }
 }

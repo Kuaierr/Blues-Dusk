@@ -56,7 +56,7 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
     {
         Debug.Log($"Start Dialog");
         isTextShowing = false;
-        dialogTree = DialogManager.instance.CreateTree(title, dialogText);
+        dialogTree = DialogDManager.instance.CreateTree(title, dialogText);
         dialogTree.Reset();
         uI_DialogSystem.Show();
         SelectNextNode();
@@ -244,7 +244,7 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         dialogTree.Clear();
         dialogTree = null;
         uI_DialogSystem.Hide();
-        DialogManager.instance.DequeueTree();
+        DialogDManager.instance.DequeueTree();
     }
 
     private void LoadAnimator()

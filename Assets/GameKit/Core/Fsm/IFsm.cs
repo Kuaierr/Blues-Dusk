@@ -55,12 +55,11 @@ namespace GameKit.Fsm
         FsmState<T> GetState(Type stateType);
         FsmState<T>[] GetAllStates();
         void GetAllStates(List<FsmState<T>> results);
-
-        // bool HasData(string name);
-        // TData GetData<TData>(string name) where TData : Variable;
-        // Variable GetData(string name);
-        // void SetData<TData>(string name, TData data) where TData : Variable;
-        // void SetData(string name, Variable data);
-        // bool RemoveData(string name);
+        bool HasData(string name);
+        TData GetData<TData>(string name) where TData : Variable;
+        Variable GetData(string name);
+        void SetData<TData>(string name, TData data) where TData : Variable;
+        void SetData(string name, Variable data);
+        bool RemoveData(string name);
     }
 }
