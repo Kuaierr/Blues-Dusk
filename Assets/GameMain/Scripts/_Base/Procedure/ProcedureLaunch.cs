@@ -1,5 +1,7 @@
 // using GameKit.Localization;
 using System;
+using GameKit.Localization;
+using GameKit.Setting;
 using UnityGameKit.Runtime;
 using GameKit.Localization;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;

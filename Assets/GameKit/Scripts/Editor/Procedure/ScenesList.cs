@@ -8,6 +8,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_GameMain_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/GameMain.unity"); }
         [MenuItem("Scenes/Prototype_Dialog")]
         public static void Assets_GameMain_Scenes_Prototype_Dialog_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype_Dialog.unity"); }
+        [MenuItem("Scenes/Prototype_Dialog_DiceDev")]
+        public static void Assets_GameMain_Scenes_Prototype_Dialog_DiceDev_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity"); }
         [MenuItem("Scenes/Prototype_Dialog_UIandDice")]
         public static void Assets_GameMain_Scenes_Prototype_Dialog_UIandDice_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype_Dialog_UIandDice.unity"); }
         [MenuItem("Scenes/Prototype_Interact")]

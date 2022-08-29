@@ -1654,12 +1654,12 @@ MonoBehaviour:
   m_VersionHelperTypeName: UnityGameKit.Runtime.DefaultVersionHelper
   m_LogHelperTypeName: UnityGameKit.Runtime.DefaultLogHelper
   m_CompressionHelperTypeName: UnityGameKit.Runtime.DefaultCompressionHelper
-  m_JsonHelperTypeName: LitJsonHelper
+  m_JsonHelperTypeName: UnityGameKit.Runtime.DefaultJsonHelper
   m_EditorResourceMode: 1
-  m_EditorLanguage: 14
+  m_EditorLanguage: 0
   m_FrameRate: 30
   m_GameSpeed: 1
-  m_RunInBackground: 0
+  m_RunInBackground: 1
   m_NeverSleep: 1
 --- !u!4 &7502916435143678050
 Transform:

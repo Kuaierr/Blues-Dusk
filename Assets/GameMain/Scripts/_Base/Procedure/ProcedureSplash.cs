@@ -33,9 +33,9 @@ public class ProcedureSplash : ProcedureBase
         // }
         // else
         // {
-        //     // 可更新模式
-        //     Log.Info("Updatable resource mode detected.");
-        //     ChangeState<ProcedureCheckVersion>(procedureOwner);
+        //     // 可更新模式（暂无）
+        //     // Log.Info("Updatable resource mode detected.");
+        //     // ChangeState<ProcedureCheckVersion>(procedureOwner);
         // }
     }
 }

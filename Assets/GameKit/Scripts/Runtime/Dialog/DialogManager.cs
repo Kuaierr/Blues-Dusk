@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameKit;
 using System.Linq;
 using GameKit.DataStructure;
-public class DialogManager : SingletonBase<DialogManager>
+public class DialogDManager : SingletonBase<DialogDManager>
 {
     private Queue<DialogTree> dialogTrees = new Queue<DialogTree>();
     public void EnqueueTree(DialogTree tree)
@@ -67,7 +67,4 @@ public class DialogManager : SingletonBase<DialogManager>
         EnqueueTree(dialogTree);
         return dialogTree;
     }
-
-
-
 }

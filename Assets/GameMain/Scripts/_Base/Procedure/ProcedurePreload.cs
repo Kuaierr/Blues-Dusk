@@ -60,6 +60,7 @@ public class ProcedurePreload : ProcedureBase
         }
 
         // procedureOwner.SetData<VarInt32>("NextSceneId", GameKitCenter.Config.GetInt("Scene.Menu"));
+        procedureOwner.SetData<VarString>("NextSceneName", "SceneMenu");
         ChangeState<ProcedureChangeScene>(procedureOwner);
     }
 
