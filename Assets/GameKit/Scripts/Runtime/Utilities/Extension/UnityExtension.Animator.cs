@@ -8,7 +8,7 @@ namespace UnityGameKit.Runtime
         private static Animator s_animator;
         private static UnityAction onFinish;
         private static float normalizedTime;
-        public static void OnComplete(this Animator animator, float checkTime = 0.8f, UnityAction callback = null)
+        public static void OnComplete(this Animator animator, float checkTime = 1f, UnityAction callback = null)
         {
             s_animator = animator;
             onFinish = callback;

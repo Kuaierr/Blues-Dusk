@@ -1,8 +1,8 @@
 namespace GameKit.Dialog
 {
-    public sealed class LoadDialogSuccessEventArgs : GameKitEventArgs
+    public sealed class FinishDialogCompleteEventArgs : GameKitEventArgs
     {
-        public LoadDialogSuccessEventArgs()
+        public FinishDialogCompleteEventArgs()
         {
             DialogAssetName = null;
             UserData = null;
@@ -20,9 +20,9 @@ namespace GameKit.Dialog
             private set;
         }
 
-        public static LoadDialogSuccessEventArgs Create(string sceneAssetName, object userData)
+        public static FinishDialogCompleteEventArgs Create(string sceneAssetName, object userData)
         {
-            LoadDialogSuccessEventArgs loadDialogSuccessEventArgs = ReferencePool.Acquire<LoadDialogSuccessEventArgs>();
+            FinishDialogCompleteEventArgs loadDialogSuccessEventArgs = ReferencePool.Acquire<FinishDialogCompleteEventArgs>();
             loadDialogSuccessEventArgs.DialogAssetName = sceneAssetName;
             loadDialogSuccessEventArgs.UserData = userData;
             return loadDialogSuccessEventArgs;

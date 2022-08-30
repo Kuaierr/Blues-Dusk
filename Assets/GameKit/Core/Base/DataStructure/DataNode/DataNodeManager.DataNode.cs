@@ -101,6 +101,11 @@ namespace GameKit.DataNode
                 }
             }
 
+            public void ChangeName(string name)
+            {
+                m_Name = name;
+            }
+
             public T GetData<T>() where T : DataNodeVariableBase
             {
                 return (T)m_Data;
@@ -199,6 +204,16 @@ namespace GameKit.DataNode
                 m_Childs.Add(node);
 
                 return node;
+            }
+
+            public IDataNode AddChild(IDataNode child)
+            {
+                if (m_Childs == null)
+                {
+                    m_Childs = new List<DataNode>();
+                }
+                m_Childs.Add(child as DataNode);
+                return child;
             }
 
             public IDataNode[] GetAllChild()

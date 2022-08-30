@@ -13,7 +13,6 @@ namespace GameKit.Dialog
             private IDataNode m_CurrentNode;
             private IDataNode m_StartNode;
             private IDataNodeManager m_DataNodeManager;
-            private IDialogTreeParseHelper m_DialogTreeParseHelper;
             private Dictionary<string, bool> m_LocalConditions;
 
             public string Name
@@ -38,6 +37,10 @@ namespace GameKit.Dialog
                 {
                     return m_CurrentNode;
                 }
+                set
+                {
+                    m_CurrentNode = value;
+                }
             }
 
             public IDataNode StartNode
@@ -61,6 +64,10 @@ namespace GameKit.Dialog
                 get
                 {
                     return m_LocalConditions;
+                }
+                set
+                {
+                    m_LocalConditions = value;
                 }
             }
 
@@ -97,11 +104,6 @@ namespace GameKit.Dialog
                 return tree;
             }
 
-            public void Initialize(string rawData)
-            {
-                m_DialogTreeParseHelper.Phase(rawData, this);
-            }
-
             public void Reset()
             {
                 m_CurrentNode = m_StartNode;
@@ -115,6 +117,14 @@ namespace GameKit.Dialog
                 return CurrentNode as IDataNode;
             }
 
+            public IDataNode[] GetAllChildNodes()
+            {
+                if (CurrentNode.IsLeaf)
+                    return null;
+                return CurrentNode.GetAllChild();;
+            }
+
+
             public void SetCondition(string predicate, bool status)
             {
                 m_LocalConditions[predicate] = status;
@@ -125,16 +135,6 @@ namespace GameKit.Dialog
             {
 
             }
-
-            // public List<Option> GetOptions()
-            // {
-            //     if (m_CurrentNode.Sons.Count > 1)
-            //     {
-            //         List<Option> options = DialogSelection.CreateSelection(m_CurrentNode.Sons);
-            //         return options;
-            //     }
-            //     return null;
-            // }
 
             public void Clear()
             {

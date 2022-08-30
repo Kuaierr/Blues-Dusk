@@ -1,11 +1,12 @@
 using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
-using FsmInterface = GameKit.Fsm.IFsm<DialogSystem>;
+using UnityGameKit.Runtime;
+using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
 
-public class DialogChoiceDicerollState : FsmState<DialogSystem>, IReference
+public class DiceDialogResetingState : FsmState<DialogComponent>, IReference
 {
-    private DialogSystem masterFsm;
+    private DialogComponent fsmMaster;
     public void Clear()
     {
 
@@ -20,12 +21,12 @@ public class DialogChoiceDicerollState : FsmState<DialogSystem>, IReference
     {
         base.OnEnter(updateFsm);
         Debug.Log("Enter ChoiceDiceroll State.");
-        masterFsm = updateFsm.User;
+        fsmMaster = updateFsm.User;
     }
 
-    protected override void OnUpdate(FsmInterface ifsm, float elapseSeconds, float realElapseSeconds)
+    protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
-        base.OnUpdate(ifsm, elapseSeconds, realElapseSeconds);
+        base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
     }
 
     protected override void OnExit(FsmInterface fsm, bool isShutdown)

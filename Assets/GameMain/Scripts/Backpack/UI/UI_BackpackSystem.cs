@@ -18,7 +18,6 @@ public class UI_BackpackSystem : UIFormBase
         uI_Backpack.SetStockInfoUI(uI_StockInfo);
         uI_Backpack.SetInventory((IInventory)initUIInfo.UserData);
         ChangeDisplayKeyCode = initUIInfo.ChangeDisplayKeyCode;
-        // GameKitCenter.UI.CloseUIForm(this);
         ReferencePool.Release(initUIInfo);
     }
 

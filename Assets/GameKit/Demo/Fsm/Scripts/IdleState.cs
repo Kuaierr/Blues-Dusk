@@ -20,12 +20,12 @@ namespace UnityGameKit.Demo
             user = updateFsm.User;
         }
 
-        protected override void OnUpdate(FsmInterface ifsm, float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(ifsm, elapseSeconds, realElapseSeconds);
+            base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                ChangeState<MoveState>(ifsm);
+                ChangeState<MoveState>(fsmOwner);
             }
         }
     }

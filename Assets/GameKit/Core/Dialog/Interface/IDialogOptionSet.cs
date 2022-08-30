@@ -5,5 +5,6 @@ namespace GameKit.Dialog
     public interface IDialogOptionSet
     {
         List<IDialogOption> Options { get; }
+        void Release();
     }
 }

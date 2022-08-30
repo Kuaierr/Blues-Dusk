@@ -13,19 +13,19 @@ namespace UnityGameKit.Demo
 
         }
 
-        protected override void OnEnter(FsmInterface ifsm)
+        protected override void OnEnter(FsmInterface fsmOwner)
         {
-            base.OnEnter(ifsm);
+            base.OnEnter(fsmOwner);
             Debug.Log("Enter Move State.");
-            user = ifsm.User;
+            user = fsmOwner.User;
         }
 
-        protected override void OnUpdate(FsmInterface ifsm, float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
         {
-            base.OnUpdate(ifsm, elapseSeconds, realElapseSeconds);
+            base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                ChangeState<IdleState>(ifsm);
+                ChangeState<IdleState>(fsmOwner);
             }
         }
     }

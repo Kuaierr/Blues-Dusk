@@ -11,7 +11,7 @@ namespace GameKit.DataNode
         T GetData<T>(string path, IDataNode node) where T : DataNodeVariableBase;
 
         DataNodeVariableBase GetData(string path, IDataNode node);
-
+        
         void SetData<T>(string path, T data) where T : DataNodeVariableBase;
 
         void SetData(string path, DataNodeVariableBase data);

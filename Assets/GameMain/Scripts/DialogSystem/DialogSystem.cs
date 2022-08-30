@@ -37,19 +37,19 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
 
     private void CreateFsm()
     {
-        stateList.Add(new DialogIdleState());
-        stateList.Add(new DialogTalkState());
-        stateList.Add(new DialogChoiceState());
-        stateList.Add(new DialogChoiceDicerollState());
-        fsm = GameKitCenter.Fsm.CreateFsm<DialogSystem>(gameObject.name, this, stateList);
-        fsm.Start<DialogIdleState>();
+        // stateList.Add(new DialogIdleState());
+        // stateList.Add(new DialogTalkState());
+        // stateList.Add(new DialogChoiceState());
+        // stateList.Add(new DialogChoiceDicerollState());
+        // fsm = GameKitCenter.Fsm.CreateFsm<DialogSystem>(gameObject.name, this, stateList);
+        // fsm.Start<DialogIdleState>();
     }
 
     private void DestroyFsm()
     {
-        GameKitCenter.Fsm.DestroyFsm(fsm);
-        stateList.Clear();
-        fsm = null;
+        // GameKitCenter.Fsm.DestroyFsm(fsm);
+        // stateList.Clear();
+        // fsm = null;
     }
 
     public void StartDialog(string title, string dialogText)

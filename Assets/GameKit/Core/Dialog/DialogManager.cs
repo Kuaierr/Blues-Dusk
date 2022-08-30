@@ -9,10 +9,12 @@ namespace GameKit.Dialog
         private readonly Dictionary<string, DialogTree> m_DialogTrees;
         private readonly List<string> m_LoadingDialogAssetNames;
         private readonly List<string> m_UnloadingDialogAssetNames;
-        private EventHandler<LoadDialogSuccessEventArgs> m_LoadDialogSuccessEventHandler;
-        private EventHandler<LoadDialogFailureEventArgs> m_LoadDialogFailureEventHandler;
+        private IDialogTreeParseHelper m_DialogTreeParseHelper;
         private DialogTree m_CachedCurrentTree;
         private string m_CachedCurrentTreeName;
+        private EventHandler<FinishDialogCompleteEventArgs> m_FinishDialogCompleteEventHandler;
+        private EventHandler<StartDialogFailureEventArgs> m_StartDialogFailureEventHandler;
+        private EventHandler<StartDialogSuccessEventArgs> m_StartDialogSuccessEventHandler;
 
         public DialogManager()
         {
@@ -21,32 +23,48 @@ namespace GameKit.Dialog
             m_UnloadingDialogAssetNames = new List<string>();
             m_CachedCurrentTree = null;
             m_CachedCurrentTreeName = string.Empty;
-            m_LoadDialogSuccessEventHandler = null;
-            m_LoadDialogFailureEventHandler = null;
+            m_FinishDialogCompleteEventHandler = null;
+            m_StartDialogFailureEventHandler = null;
         }
 
-        public event EventHandler<LoadDialogSuccessEventArgs> LoadDialogSuccess
+        public event EventHandler<FinishDialogCompleteEventArgs> FinishDialogComplete
         {
             add
             {
-                m_LoadDialogSuccessEventHandler += value;
+                m_FinishDialogCompleteEventHandler += value;
             }
             remove
             {
-                m_LoadDialogSuccessEventHandler -= value;
+                m_FinishDialogCompleteEventHandler -= value;
             }
         }
 
-        public event EventHandler<LoadDialogFailureEventArgs> LoadDialogFailure
+        public event EventHandler<StartDialogFailureEventArgs> StartDialogFailure
         {
             add
             {
-                m_LoadDialogFailureEventHandler += value;
+                m_StartDialogFailureEventHandler += value;
             }
             remove
             {
-                m_LoadDialogFailureEventHandler -= value;
+                m_StartDialogFailureEventHandler -= value;
             }
+        }
+
+        public event EventHandler<StartDialogSuccessEventArgs> StartDialogSuccess
+        {
+            add
+            {
+                m_StartDialogSuccessEventHandler += value;
+            }
+            remove
+            {
+                m_StartDialogSuccessEventHandler -= value;
+            }
+        }
+        public void SetDialogHelper(IDialogTreeParseHelper helper)
+        {
+            m_DialogTreeParseHelper = helper;
         }
 
         public bool HasDialogTree(string treeName)
@@ -87,108 +105,39 @@ namespace GameKit.Dialog
             return null;
         }
 
-        public DialogTree GetOrCreateTree(string treeName)
+        public void GetOrCreatetDialogTree(string treeName)
         {
             m_CachedCurrentTreeName = treeName;
             if (HasDialogTree(treeName))
             {
-                return m_DialogTrees[treeName];
-            }
-            AddressableManager.instance.GetTextAsyn(treeName, LoadDialogSuccessCallback, LoadDialogFailCallback);
-            return null;
-        }
-
-        public void StartDialog(string title, string dialogText)
-        {
-            Utility.Debugger.LogSuccess("Start Dialog {0}", title);
-
-            // dialogTree = DialogDManager.instance.CreateTree(title, dialogText);
-            // dialogTree.Reset();
-        }
-
-        public void ParseNode(int index = 0)
-        {
-            if (m_CachedCurrentTree == null)
-            {
-                Utility.Debugger.LogError("Cached Current Tree is Empty");
+                m_CachedCurrentTree = m_DialogTrees[treeName];
+                m_CachedCurrentTree.Reset();
+                InternalStartDialog(m_CachedCurrentTree);
                 return;
             }
-            IDataNode nextNode = m_CachedCurrentTree.GetChildNode(index);
-            ParseNode(nextNode);
+            AddressableManager.instance.GetTextAsyn(treeName, LoadDialogSuccessCallback, LoadDialogFailCallback);
         }
 
-        public IDataNode ParseNode(IDataNode currentNode)
+        public IDialogOptionSet CreateOptionSet(IDataNode node)
         {
-            if (m_CachedCurrentTree == null)
-            {
-                Utility.Debugger.LogError("Cached Current Tree is Empty");
-                return null;
-            }
-
-            IDataNode nextNode = null;
-            if (currentNode == null)
-            {
-                ReachTheEndOfConversation();
-                return null;
-            }
-
-            DialogDataNodeVariable tempDialogData = currentNode.GetData<DialogDataNodeVariable>();
-            if (tempDialogData.IsFunctional)
-            {
-                if (tempDialogData.IsCompleter)
-                {
-                    for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
-                    {
-                        m_CachedCurrentTree.SetCondition(tempDialogData.CompleteConditons[j], true);
-                    }
-                }
-
-                if (tempDialogData.IsDivider)
-                {
-                    bool isComplete = true;
-                    for (int j = 0; j < tempDialogData.DividerConditions.Count; j++)
-                    {
-                        if (!m_CachedCurrentTree.LocalConditions[tempDialogData.DividerConditions[j]])
-                        {
-                            isComplete = false;
-                            break;
-                        }
-                    }
-
-                    if (isComplete)
-                    {
-                        nextNode = m_CachedCurrentTree.GetChildNode(0);
-                    }
-                    else
-                    {
-                        nextNode = m_CachedCurrentTree.GetChildNode(1);
-                    }
-                }
-            }
-            else
-            {
-                if (currentNode.IsBranch)
-                {
-                    nextNode = currentNode;
-                }
-                else
-                {
-                    nextNode = currentNode;
-                }
-            }
-            return nextNode;
+            return DialogOptionSet.Create(node.GetAllChild());
         }
 
-        private void ReachTheEndOfConversation()
-        {
-            Utility.Debugger.Log("Reach The End Of Conversation.");
-            m_CachedCurrentTree.Clear();
-            m_CachedCurrentTree = null;
-        }
+        // public List<Option> GetOptions()
+        // {
+        //     if (m_CurrentNode.Sons.Count > 1)
+        //     {
+        //         List<Option> options = DialogSelection.CreateSelection(m_CurrentNode.Sons);
+        //         return options;
+        //     }
+        //     return null;
+        // }
 
         internal override void Shutdown()
         {
-
+            m_LoadingDialogAssetNames.Clear();
+            m_UnloadingDialogAssetNames.Clear();
+            m_DialogTrees.Clear();
         }
 
         internal override void Update(float elapseSeconds, float realElapseSeconds)
@@ -196,31 +145,46 @@ namespace GameKit.Dialog
 
         }
 
-
+        private void InternalStartDialog(DialogTree dialogTree)
+        {
+            if (m_StartDialogSuccessEventHandler != null)
+            {
+                StartDialogSuccessEventArgs startDialogSuccessEventArgs = StartDialogSuccessEventArgs.Create(dialogTree, null);
+                m_StartDialogSuccessEventHandler.Invoke(this, startDialogSuccessEventArgs);
+                ReferencePool.Release(startDialogSuccessEventArgs);
+                return;
+            }
+            Utility.Debugger.LogError("Start Dialog Success EventHandler is Null.");
+        }
 
         private void LoadDialogSuccessCallback(string rawData)
         {
             m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName, null);
-            m_CachedCurrentTree.Initialize(rawData);
+            m_DialogTreeParseHelper.Phase(rawData, m_CachedCurrentTree);
             AddDialogTree(m_CachedCurrentTree);
-            if (m_LoadDialogSuccessEventHandler != null)
+            InternalStartDialog(m_CachedCurrentTree);
+        }
+
+
+        private void FinishDialogCompleteCallback()
+        {
+            if (m_FinishDialogCompleteEventHandler != null)
             {
-                LoadDialogSuccessEventArgs loadDialogSuccessEventArgs = LoadDialogSuccessEventArgs.Create(m_CachedCurrentTreeName, null);
-                m_LoadDialogSuccessEventHandler(this, loadDialogSuccessEventArgs);
-                ReferencePool.Release(loadDialogSuccessEventArgs);
+                FinishDialogCompleteEventArgs finishDialogCompleteEventArgs = FinishDialogCompleteEventArgs.Create(m_CachedCurrentTreeName, null);
+                m_FinishDialogCompleteEventHandler.Invoke(this, finishDialogCompleteEventArgs);
+                ReferencePool.Release(finishDialogCompleteEventArgs);
             }
         }
 
         private void LoadDialogFailCallback()
         {
-            Utility.Debugger.LogFail("Create Dialog Tree for {0} fail.", m_CachedCurrentTreeName);
             m_LoadingDialogAssetNames.Remove(m_CachedCurrentTreeName);
-            string appendErrorMessage = Utility.Text.Format("Load scene failure, scene asset name '{0}', error message '{1}'.", m_CachedCurrentTreeName, "Can not find shit.");
-            if (m_LoadDialogFailureEventHandler != null)
+            string appendErrorMessage = Utility.Text.Format("Load dialog failure, scene asset name '{0}', error message '{1}'.", m_CachedCurrentTreeName, "Can not find shit.");
+            if (m_StartDialogFailureEventHandler != null)
             {
-                LoadDialogFailureEventArgs loadDialogFailureEventArgs = LoadDialogFailureEventArgs.Create(m_CachedCurrentTreeName, appendErrorMessage, null);
-                m_LoadDialogFailureEventHandler(this, loadDialogFailureEventArgs);
-                ReferencePool.Release(loadDialogFailureEventArgs);
+                StartDialogFailureEventArgs startDialogFailureEventArgs = StartDialogFailureEventArgs.Create(m_CachedCurrentTreeName, appendErrorMessage, null);
+                m_StartDialogFailureEventHandler.Invoke(this, startDialogFailureEventArgs);
+                ReferencePool.Release(startDialogFailureEventArgs);
                 return;
             }
         }

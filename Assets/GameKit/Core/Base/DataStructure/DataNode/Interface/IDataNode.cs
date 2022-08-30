@@ -38,6 +38,8 @@ namespace GameKit.DataNode
 
         IDataNode GetOrAddChild(string name);
 
+        IDataNode AddChild(IDataNode child);
+
         IDataNode[] GetAllChild();
 
         void GetAllChild(List<IDataNode> results);
@@ -46,7 +48,10 @@ namespace GameKit.DataNode
 
         void RemoveChild(string name);
 
+        void ChangeName(string name);
+
         void Clear();
+
 
         string ToString();
 

@@ -8,10 +8,13 @@ namespace GameKit.Dialog
         string Name { get; }
         IDataNode StartNode { get; }
         IDataNode RootNode { get; }
-        IDataNode CurrentNode { get; }
+        IDataNode CurrentNode { get; set; }
         IDataNodeManager DataNodeManager { get; }
-        Dictionary<string, bool> LocalConditions { get; }
+        Dictionary<string, bool> LocalConditions { get; set; }
+        IDataNode GetChildNode(int index = 0);
+        IDataNode[] GetAllChildNodes();
         void Reset();
+        void Clear();
         void Update(float elapseSeconds, float realElapseSeconds);
     }
 }
