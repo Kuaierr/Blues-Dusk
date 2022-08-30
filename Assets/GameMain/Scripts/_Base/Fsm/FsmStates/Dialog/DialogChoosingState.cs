@@ -3,11 +3,11 @@ using GameKit.Fsm;
 using GameKit;
 using GameKit.Event;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DialogChoosingState : FsmState<DialogComponent>, IReference
+public class DialogChoosingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     private int m_CurrentIndex;
     public void Clear()
     {
@@ -18,14 +18,14 @@ public class DialogChoosingState : FsmState<DialogComponent>, IReference
     {
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
-        GameKitCenter.Event.Subscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
+        // GameKitCenter.Event.Subscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
     }
 
     protected override void OnEnter(FsmInterface updateFsm)
     {
         base.OnEnter(updateFsm);
-        m_CurrentIndex = 0;
-        fsmMaster.InformOptionUI();
+        Log.Info("DialogChoosingState");
+        fsmMaster.UpdateOptionUI();
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -33,14 +33,16 @@ public class DialogChoosingState : FsmState<DialogComponent>, IReference
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            MakeChoice(fsmOwner);
+            fsmMaster.MakeChoice();
+            fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogTalkingState));
+            ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }
 
     protected override void OnExit(FsmInterface fsm, bool isShutdown)
     {
         base.OnExit(fsm, isShutdown);
-        GameKitCenter.Event.Unsubscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
+        // GameKitCenter.Event.Unsubscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
     }
 
     protected override void OnDestroy(FsmInterface fsm)
@@ -48,17 +50,5 @@ public class DialogChoosingState : FsmState<DialogComponent>, IReference
         base.OnDestroy(fsm);
     }
 
-    private void UpdateCurrentChoosenIndex(object sender, GameEventArgs e)
-    {
-        ObtainDialogChoiceEventArgs eventArg = (ObtainDialogChoiceEventArgs)e;
-        m_CurrentIndex = eventArg.ChoosenIndex;
-    }
-
-    public void MakeChoice(FsmInterface fsmOwner)
-    {
-        fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogTalkingState));
-        fsmOwner.SetData<VarInt32>("Choosen Idenx", m_CurrentIndex);
-        ChangeState<DialogAnimatingState>(fsmOwner);
-    }
 }
 

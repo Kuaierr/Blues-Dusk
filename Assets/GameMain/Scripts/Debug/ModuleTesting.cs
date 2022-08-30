@@ -61,7 +61,7 @@ public class ModuleTesting : MonoBehaviour
                     int index = i;
                     CreateModuleUnits(dialogAssets[index].title, () =>
                     {
-                        dialogSystem.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
+                        DialogCenter.current.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
                         ChangeDisplay(false);
                     });
                 }
@@ -75,7 +75,7 @@ public class ModuleTesting : MonoBehaviour
                 int index = i;
                 CreateModuleUnits(dialogAssets[index].title, () =>
                 {
-                    dialogSystem.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
+                    DialogCenter.current.StartDialog(dialogAssets[index].title, dialogAssets[index].contents);
                     ChangeDisplay(false);
                 });
             }

@@ -184,7 +184,9 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: GameMain
-    path: Assets/GameMain/Scenes/GameMain.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype_Dialog.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: GameMain
+    path: Assets/GameMain/Scenes/GameMain.unity

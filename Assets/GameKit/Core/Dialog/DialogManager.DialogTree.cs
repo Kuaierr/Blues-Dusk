@@ -83,7 +83,7 @@ namespace GameKit.Dialog
             public static DialogTree Create(string name, IDataNode rootNode)
             {
                 DialogTree tree = ReferencePool.Acquire<DialogTree>();
-                tree.m_DataNodeManager = GameKitModuleCenter.GetModule<DataNodeManager>();
+                tree.m_DataNodeManager = GameKitModuleCenter.GetModule<IDataNodeManager>();
                 tree.m_Name = name;
                 tree.m_RootNode = rootNode;
                 tree.m_StartNode = tree.m_RootNode;
@@ -95,7 +95,7 @@ namespace GameKit.Dialog
             public static DialogTree Create(string name)
             {
                 DialogTree tree = ReferencePool.Acquire<DialogTree>();
-                tree.m_DataNodeManager = GameKitModuleCenter.GetModule<DataNodeManager>();
+                tree.m_DataNodeManager = GameKitModuleCenter.GetModule<IDataNodeManager>();
                 tree.m_Name = name;
                 tree.m_RootNode = tree.m_DataNodeManager.Root;
                 tree.m_StartNode = tree.m_RootNode;
@@ -107,21 +107,22 @@ namespace GameKit.Dialog
             public void Reset()
             {
                 m_CurrentNode = m_StartNode;
+                // Utility.Debugger.LogSuccess(m_CurrentNode.ToString());
             }
 
             public IDataNode GetChildNode(int index = 0)
             {
-                if (CurrentNode.IsLeaf || index < 0 || index >= CurrentNode.ChildCount)
+                if (m_CurrentNode.IsLeaf || index < 0 || index >= m_CurrentNode.ChildCount)
                     return null;
-                m_CurrentNode = CurrentNode.GetChild(index);
-                return CurrentNode as IDataNode;
+                m_CurrentNode = m_CurrentNode.GetChild(index);
+                return m_CurrentNode as IDataNode;
             }
 
             public IDataNode[] GetAllChildNodes()
             {
-                if (CurrentNode.IsLeaf)
+                if (m_CurrentNode.IsLeaf)
                     return null;
-                return CurrentNode.GetAllChild();;
+                return m_CurrentNode.GetAllChild();;
             }
 
 

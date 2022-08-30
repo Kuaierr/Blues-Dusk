@@ -93,7 +93,7 @@ namespace UnityGameKit.Runtime
 
         protected internal virtual void OnClose(bool isShutdown, object userData)
         {
-            gameObject.SetLayerRecursively(m_OriginalLayer);
+            // gameObject.SetLayerRecursively(m_OriginalLayer);
             Visible = false;
             m_Available = false;
         }

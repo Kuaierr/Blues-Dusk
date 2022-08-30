@@ -44,6 +44,14 @@ public abstract class UIFormBase : UIFormLogic
         }
     }
 
+    protected CanvasGroup CanvasGroup
+    {
+        get
+        {
+            return m_CanvasGroup;
+        }
+    }
+
     public void ChangeDisplayUpdate(KeyCode keyCode)
     {
         if (InputManager.instance.GetUiKeyDown(keyCode))

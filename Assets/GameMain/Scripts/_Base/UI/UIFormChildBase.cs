@@ -11,7 +11,7 @@ public abstract class UIFormChildBase : UIBehaviour
 {
     protected const int DepthFactor = 10;
     protected const float FadeTime = 0.3f;
-    private UIFormBase m_UIFormBase;
+    private int ParentDepth = 0;
     private RectTransform m_RectTransform;
     private Canvas m_CachedCanvas = null;
     private CanvasGroup m_CanvasGroup = null;
@@ -38,65 +38,54 @@ public abstract class UIFormChildBase : UIBehaviour
         }
     }
 
-    public UIFormBase UIFormParent
-    {
-        get
-        {
-            return m_UIFormBase;
-        }
-    }
 
-    public void Close()
+    protected override void Awake()
     {
-        StopAllCoroutines();
-        StartCoroutine(CloseProcess(FadeTime));
-    }
-
-    public virtual void OnInit(UIFormBase uIFormBase)
-    {
-        m_UIFormBase = uIFormBase;
         m_CachedCanvas = this.gameObject.GetOrAddComponent<Canvas>();
         m_CachedCanvas.overrideSorting = true;
         OriginalDepth = m_CachedCanvas.sortingOrder;
-
         m_CanvasGroup = this.gameObject.GetOrAddComponent<CanvasGroup>();
         this.gameObject.GetOrAddComponent<GraphicRaycaster>();
     }
 
-    public virtual void OnShow()
+    public void Close()
+    {
+        m_CanvasGroup.alpha = 0;
+    }
+
+    public virtual void OnInit(int parentDepth)
+    {
+        ParentDepth = parentDepth;
+    }
+
+    public virtual void OnShow(UnityAction callback = null)
     {
         this.gameObject.SetActive(true);
     }
 
-    public virtual void OnHide()
+    public virtual void OnHide(UnityAction callback = null)
     {
         this.gameObject.SetActive(false);
     }
 
-    public virtual void OnPause()
+    public virtual void OnPause(UnityAction callback = null)
     {
 
     }
 
-    public virtual void OnResume()
+    public virtual void OnResume(UnityAction callback = null)
     {
 
     }
 
-    public virtual void OnUpdate(float elapseSeconds, float realElapseSeconds)
+    public virtual void OnUpdate()
     {
 
     }
 
     public virtual void OnDepthChanged(int depthInForm)
     {
-        int deltaDepth = m_UIFormBase.Depth + DepthFactor * depthInForm + OriginalDepth;
+        int deltaDepth = ParentDepth + DepthFactor * depthInForm + OriginalDepth;
         m_CachedCanvas.sortingOrder = deltaDepth;
-    }
-
-    private IEnumerator CloseProcess(float duration)
-    {
-        yield return m_CanvasGroup.FadeToAlpha(0f, duration);
-        OnHide();
     }
 }

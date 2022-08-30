@@ -1,0 +1,341 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using GameKit;
+using GameKit.Fsm;
+using GameKit.UI;
+using GameKit.Event;
+using GameKit.Dialog;
+using GameKit.DataNode;
+using System.Collections.Generic;
+using Febucci.UI;
+using UnityEngine.Events;
+using UnityGameKit.Runtime;
+
+
+public class UI_Dialog : UIFormBase
+{
+    private const string DataNameForAnimatingNext = "Next State For Animating";
+    public CharacterPool characterPool;
+    public UI_Character uI_Character;
+    public UI_Response uI_Response;
+    public UI_Indicator uI_Indicator;
+    public TextMeshProUGUI t_SpeakerName;
+    public TextMeshProUGUI t_Contents;
+    public TextAnimatorPlayer TextAnimatorPlayer;
+    public Animator dialogAnimator;
+    public Animator speakerAnimator;
+    public Animator edgeAnimator;
+    private bool isTextShowing = false;
+
+    private Character m_CurrentCharacter;
+    private IFsm<UI_Dialog> fsm;
+    private List<FsmState<UI_Dialog>> stateList;
+
+
+    public string AnimatingNextDataName
+    {
+        get
+        {
+            return DataNameForAnimatingNext;
+        }
+    }
+
+    public IDialogTree CurrentTree
+    {
+        get
+        {
+            return GameKitCenter.Dialog.CurrentTree;
+        }
+    }
+
+
+    #region Override
+    protected override void OnInit(object userData)
+    {
+        base.OnInit(userData);
+        GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
+        CreateFsm();
+        fsm.SetData<VarBoolean>("Dialog Started", true);
+        uI_Response.OnInit(Depth);
+        uI_Character.OnInit(Depth);
+        uI_Indicator.OnInit(Depth);
+    }
+
+    protected override void OnOpen(object userData)
+    {
+        base.OnOpen(userData);
+        CursorSystem.current.Disable();
+        StartFsm();
+    }
+
+    protected override void OnClose(bool isShutdown, object userData)
+    {
+        base.OnClose(isShutdown, userData);
+        CursorSystem.current.Enable();
+        DestroyFsm();
+    }
+
+    protected override void OnPause()
+    {
+        base.OnPause();
+        Log.Warning("OnPause");
+        CursorSystem.current.Enable();
+        dialogAnimator.SetTrigger("FadeOut");
+        edgeAnimator.SetTrigger("FadeOut");
+        speakerAnimator.SetTrigger("FadeOut");
+    }
+
+    protected override void OnResume()
+    {
+        base.OnResume();
+        Log.Warning("OnResume");
+        CursorSystem.current.Disable();
+        dialogAnimator.SetTrigger("FadeIn");
+        dialogAnimator.SetTrigger("FadeIn");
+        edgeAnimator.SetTrigger("FadeIn");
+        fsm.SetData<VarBoolean>("Dialog Started", true);
+    }
+
+    protected override void OnRecycle()
+    {
+        base.OnRecycle();
+    }
+
+    protected override void OnRefocus(object userData)
+    {
+        base.OnRefocus(userData);
+    }
+
+    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+    {
+        base.OnUpdate(elapseSeconds, realElapseSeconds);
+        uI_Response.OnUpdate();
+    }
+    #endregion
+
+    public void ShowResponse(UnityAction callback = null)
+    {
+        uI_Response.isActive = true;
+        uI_Response.gameObject.SetActive(true);
+        uI_Response.OnShow(callback);
+    }
+
+    public void HideResponse(UnityAction callback = null)
+    {
+        uI_Response.OnHide(callback);
+    }
+
+    public void MakeChoice()
+    {
+        fsm.SetData<VarInt32>("Choosen Idenx", uI_Response.CurIndex);
+        HideResponse(() =>
+        {
+            uI_Response.isActive = false;
+            uI_Response.gameObject.SetActive(false);
+        });
+    }
+
+    public void AddTyperWriterListener(UnityAction onTypewriterStart, UnityAction onTextShowed)
+    {
+        TextAnimatorPlayer.onTypewriterStart.AddListener(onTypewriterStart);
+        TextAnimatorPlayer.onTextShowed.AddListener(onTextShowed);
+    }
+
+    private void CreateFsm()
+    {
+        stateList = new List<FsmState<UI_Dialog>>();
+        stateList.Add(new DialogIdleState());
+        stateList.Add(new DialogTalkingState());
+        stateList.Add(new DialogChoosingState());
+        stateList.Add(new DialogAnimatingState());
+        fsm = GameKitCenter.Fsm.CreateFsm<UI_Dialog>(gameObject.name, this, stateList);
+    }
+
+    private void StartFsm()
+    {
+        fsm.Start<DialogTalkingState>();
+    }
+
+    private void DestroyFsm()
+    {
+        GameKitCenter.Fsm.DestroyFsm(fsm);
+        stateList.Clear();
+        fsm = null;
+    }
+
+
+    public void InterruptDialogDisplay(InformUICallback callback)
+    {
+        InterruptDialogDislayEventArgs interruptDialogDislayEventArgs = InterruptDialogDislayEventArgs.Create(callback);
+        GameKitCenter.Event.Fire(this, interruptDialogDislayEventArgs);
+        ReferencePool.Release(interruptDialogDislayEventArgs);
+    }
+
+    public IDataNode ParseNode(int index = 0)
+    {
+        if (GameKitCenter.Dialog.CurrentTree == null)
+        {
+            Log.Warning("Cached Current Tree is Empty");
+            return null;
+        }
+        IDataNode nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(index);
+        return ParseNode(nextNode);
+    }
+
+    public IDataNode ParseNode(IDataNode currentNode)
+    {
+        if (GameKitCenter.Dialog.CurrentTree == null)
+        {
+            Log.Warning("Cached Current Tree is Empty");
+            return null;
+        }
+
+        IDataNode nextNode = null;
+        if (currentNode == null)
+        {
+            ReachTheEndOfConversation();
+            return null;
+        }
+
+        DialogDataNodeVariable tempDialogData = currentNode.GetData<DialogDataNodeVariable>();
+        if (tempDialogData.IsFunctional)
+        {
+            if (tempDialogData.IsCompleter)
+            {
+                for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
+                {
+                    GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.CompleteConditons[j]] = true;
+                }
+            }
+
+            if (tempDialogData.IsDivider)
+            {
+                bool isComplete = true;
+                for (int j = 0; j < tempDialogData.DividerConditions.Count; j++)
+                {
+                    if (!GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.DividerConditions[j]])
+                    {
+                        isComplete = false;
+                        break;
+                    }
+                }
+
+                if (isComplete)
+                {
+                    nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(0);
+                }
+                else
+                {
+                    nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(1);
+                }
+            }
+        }
+        else
+        {
+            if (currentNode.IsBranch)
+            {
+                nextNode = currentNode;
+            }
+            else
+            {
+                nextNode = currentNode;
+            }
+        }
+        return nextNode;
+    }
+
+    private void ReachTheEndOfConversation()
+    {
+        Log.Info("Reach The End Of Conversation.");
+        fsm.SetData<VarBoolean>("Dialog Started", false);
+        GameKitCenter.Dialog.CurrentTree = null;
+    }
+
+    public void UpdateDialogUI(IDataNode node, UnityAction callback = null)
+    {
+        DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
+        if (node == null || data.Speaker == "Default")
+            return;
+
+        if (data.Speaker == ">>")
+            t_SpeakerName.text = "";
+        else if (data.Speaker == "??")
+            t_SpeakerName.text = "未知";
+        else
+            t_SpeakerName.text = data.Speaker;
+        t_Contents.text = data.Contents;
+
+        if (data.Speaker != ">>")
+        {
+            Character character = characterPool.FindCharacter(data.Speaker.Correction());
+            if (m_CurrentCharacter != character)
+            {
+                m_CurrentCharacter = character;
+                speakerAnimator.SetTrigger("FadeIn");
+            }
+            // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
+            uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
+            // character.animator.runtimeAnimatorController = charaAnimator;
+        }
+    }
+
+
+    public void UpdateOptionUI(UnityAction callback = null)
+    {
+        IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (optionSet != null)
+        {
+            uI_Response.UpdateOptions(optionSet);
+            ShowResponse(callback);
+        }
+    }
+
+    public void Resume()
+    {
+        OnResume();
+
+    }
+
+    public void Pause()
+    {
+        OnPause();
+    }
+
+    protected override void InternalSetVisible(bool visible)
+    {
+        CanvasGroup.alpha = visible ? 1 : 0;
+        CanvasGroup.blocksRaycasts = visible;
+        CanvasGroup.interactable = visible;
+    }
+
+    private void OnStartDialogSuccess(object sender, GameEventArgs e)
+    {
+        Resume();
+    }
+
+
+    // private void LoadAnimator()
+    // {
+    //     if (charaAnimators == null || charaAnimators.Count == 0)
+    //     {
+    //         AddressableManager.instance.GetAssetsAsyn<RuntimeAnimatorController>(new List<string> { "Character Animator" }, callback: (IList<RuntimeAnimatorController> assets) =>
+    //         {
+    //             charaAnimators = new List<RuntimeAnimatorController>(assets);
+    //         });
+    //     }
+    // }
+
+    // private RuntimeAnimatorController FindAnimator(string name)
+    // {
+    //     for (int i = 0; i < charaAnimators.Count; i++)
+    //     {
+    //         if (charaAnimators[i].name == "AC_" + name)
+    //         {
+    //             return charaAnimators[i];
+    //         }
+    //     }
+    //     return null;
+    // }
+
+}

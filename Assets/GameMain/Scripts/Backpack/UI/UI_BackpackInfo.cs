@@ -19,20 +19,20 @@ public class UI_BackpackInfo : UIFormChildBase
     private Item cachedData;
     private IStock m_CachedStock;
 
-    public override void OnInit(UIFormBase uIFormBase)
+    public override void OnInit(int parentDepth)
     {
-        base.OnInit(uIFormBase);
+        base.OnInit(parentDepth);
         this.OnHide();
     }
 
-    public override void OnShow()
+    public override void OnShow(UnityAction callback = null)
     {
-        base.OnShow();
+        base.OnShow(callback);
     }
 
-    public override void OnHide()
+    public override void OnHide(UnityAction callback = null)
     {
-        base.OnHide();
+        base.OnHide(callback);
     }
 
     public void UpdateInfo(IStock stock)

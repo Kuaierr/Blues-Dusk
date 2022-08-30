@@ -2,12 +2,12 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
 
-public class DialogIdleState : FsmState<DialogComponent>, IReference
+public class DialogIdleState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     private bool m_DialogStarted;
     public void Clear()
     {
@@ -17,13 +17,14 @@ public class DialogIdleState : FsmState<DialogComponent>, IReference
     protected override void OnInit(FsmInterface fsmOwner)
     {
         base.OnInit(fsmOwner);
-        base.OnInit(fsmOwner);
+        
         fsmMaster = fsmOwner.User;
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
+        Log.Info("DialogIdleState");
         fsmOwner.SetData<VarBoolean>("Dialog Started", false);
     }
 
@@ -33,9 +34,8 @@ public class DialogIdleState : FsmState<DialogComponent>, IReference
         m_DialogStarted = fsmOwner.GetData<VarBoolean>("Dialog Started");
         if(m_DialogStarted)
         {
-            int? uiSerialId = GameKitCenter.UI.TryOpenUIForm("UI_Dialog");
+            fsmMaster.Resume();
             fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogTalkingState));
-            fsmOwner.SetData<VarInt32>("UI Dialog Serial Id", uiSerialId);
             ChangeState<DialogAnimatingState>(fsmOwner);
         } 
     }

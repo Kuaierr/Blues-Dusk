@@ -105,6 +105,26 @@ namespace GameKit.Dialog
             return null;
         }
 
+        public void CreateDialogTree(string treeName, string content)
+        {
+            m_CachedCurrentTreeName = treeName;
+            if(content==string.Empty)
+            {
+                Utility.Debugger.LogError("Content for phasing is invalid");
+                return;
+            }
+
+            if (HasDialogTree(treeName))
+            {
+                m_CachedCurrentTree = m_DialogTrees[treeName];
+                m_CachedCurrentTree.Reset();
+                InternalStartDialog(m_CachedCurrentTree);
+                return;
+            }
+
+            LoadDialogSuccessCallback(content);
+        }
+
         public void GetOrCreatetDialogTree(string treeName)
         {
             m_CachedCurrentTreeName = treeName;
@@ -159,7 +179,7 @@ namespace GameKit.Dialog
 
         private void LoadDialogSuccessCallback(string rawData)
         {
-            m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName, null);
+            m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName);
             m_DialogTreeParseHelper.Phase(rawData, m_CachedCurrentTree);
             AddDialogTree(m_CachedCurrentTree);
             InternalStartDialog(m_CachedCurrentTree);

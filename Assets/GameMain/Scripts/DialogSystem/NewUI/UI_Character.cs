@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using Febucci.UI;
 using GameKit.QuickCode;
 
-public class UI_Character : UIData
+public class UI_Character : UIFormChildBase
 {
     public Animator animator;
     public Image avatar;
-    public override void OnStart()
+    public override void OnInit(int parentDepth)
     {
+        base.OnInit(parentDepth);
         animator = GetComponent<Animator>();
         avatar = GetComponent<Image>();
     }

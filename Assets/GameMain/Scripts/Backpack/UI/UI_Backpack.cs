@@ -15,21 +15,21 @@ public class UI_Backpack : UIFormChildBase
     private IStock m_CachedCurrentStock;
     private UI_BackpackInfo uI_StockInfo;
     private List<UI_BackpackChunk> chunks = new List<UI_BackpackChunk>();
-    public override void OnInit(UIFormBase uIFormBase)
+    public override void OnInit(int parentDepth)
     {
-        base.OnInit(uIFormBase);
+        base.OnInit(parentDepth);
         EventManager.instance.AddEventListener<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
     }
 
-    public override void OnShow()
+    public override void OnShow(UnityAction callback = null)
     {
-        base.OnShow();
+        base.OnShow(callback);
         UpdateChunks();
     }
 
-    public override void OnHide()
+    public override void OnHide(UnityAction callback = null)
     {
-        base.OnHide();
+        base.OnHide(callback);
     }
 
     private void Refresh()

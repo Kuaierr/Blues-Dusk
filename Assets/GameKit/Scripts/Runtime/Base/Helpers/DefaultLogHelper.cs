@@ -10,7 +10,7 @@ namespace UnityGameKit.Runtime
             switch (level)
             {
                 case GameKitLogType.Info:
-                    Debug.Log(message.ToString());
+                    Debug.Log(Utility.Text.Format("<b>{0}</b>", message));
                     break;
 
                 case GameKitLogType.Warning:
@@ -20,11 +20,11 @@ namespace UnityGameKit.Runtime
                 case GameKitLogType.Error:
                     Debug.LogError(Utility.Text.Format("<b><color=red>[Error] </color></b>{0}", message));
                     break;
-                
+
                 case GameKitLogType.Success:
                     Debug.Log(Utility.Text.Format("<b><color=green>[Success] </color></b>{0}", message));
                     break;
-                
+
                 case GameKitLogType.Fail:
                     Debug.Log(Utility.Text.Format("<b><color=#B22222>[Fail] </color></b>{0}", message));
                     break;

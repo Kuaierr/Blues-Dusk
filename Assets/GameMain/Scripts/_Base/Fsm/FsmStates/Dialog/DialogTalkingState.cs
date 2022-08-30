@@ -3,13 +3,12 @@ using GameKit.Fsm;
 using GameKit;
 using GameKit.DataNode;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
 
-public class DialogTalkingState : FsmState<DialogComponent>, IReference
+public class DialogTalkingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
-    private InformUICallback m_InterruptDialogDisplayCallback;
+    private UI_Dialog fsmMaster;
     private bool m_isTextShowing;
     private bool m_DialogStarted;
     private IDataNode m_CachedCurrentNode;
@@ -22,17 +21,16 @@ public class DialogTalkingState : FsmState<DialogComponent>, IReference
     {
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
-        m_InterruptDialogDisplayCallback += InterruptDialogDisplayCallback;
-        fsmOwner.SetData<VarInt32>("Choosen Idenx", 0);
+        fsmMaster.AddTyperWriterListener(SetTextShowing, SetTextShown);
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
-        m_isTextShowing = false;
-        int index = fsmOwner.GetData<VarInt32>("Choosen Idenx");
-        fsmMaster.ParseNode(index);
-        fsmMaster.InformDialogUI(fsmMaster.CurrentDialog.CurrentNode);
+        SetTextShowing();
+        fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
+        fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
+        Log.Info("DialogTalkingState");
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -53,20 +51,19 @@ public class DialogTalkingState : FsmState<DialogComponent>, IReference
                 }
                 else
                 {
-                    fsmMaster.InformDialogUI(m_CachedCurrentNode);
+                    fsmMaster.UpdateDialogUI(m_CachedCurrentNode);
                 }
 
             }
             else
-                fsmMaster.InterruptDialogDisplay(m_InterruptDialogDisplayCallback);
+                InterruptDialogDisplayCallback();
         }
         m_DialogStarted = fsmOwner.GetData<VarBoolean>("Dialog Started");
 
         if (!m_DialogStarted)
         {
             fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogIdleState));
-            int serialId = fsmOwner.GetData<VarInt32>("UI Dialog Serial Id");
-            GameKitCenter.UI.CloseUIForm(serialId);
+            fsmMaster.Pause();
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }
@@ -80,12 +77,22 @@ public class DialogTalkingState : FsmState<DialogComponent>, IReference
     protected override void OnDestroy(FsmInterface fsm)
     {
         base.OnDestroy(fsm);
-        m_InterruptDialogDisplayCallback -= InterruptDialogDisplayCallback;
     }
 
     private void InterruptDialogDisplayCallback()
     {
+        fsmMaster.TextAnimatorPlayer.SkipTypewriter();
         m_isTextShowing = false;
+    }
+
+    private void SetTextShown()
+    {
+        m_isTextShowing = false;
+    }
+
+    private void SetTextShowing()
+    {
+        m_isTextShowing = true;
     }
 }
 

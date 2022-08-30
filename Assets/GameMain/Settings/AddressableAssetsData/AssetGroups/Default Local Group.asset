@@ -33,6 +33,10 @@ MonoBehaviour:
     m_Address: Assets/GameMain/Scenes/Prototype_Dialog.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 357be379c3c269e408a28ca1c5460251
+    m_Address: Assets/GameMain/UI/UIForms/UI_Dialog.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

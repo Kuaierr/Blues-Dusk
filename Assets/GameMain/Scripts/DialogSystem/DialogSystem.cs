@@ -140,7 +140,6 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
             uI_DialogSystem.character.avatar.sprite = character.GetMood(node.nodeEntity.moodName).avatar;
             uI_DialogSystem.character.animator.runtimeAnimatorController = charaAnimator;
         }
-
     }
 
     private void PhaseNode(Node<Dialog> dialogNode, UnityAction onTextShowed = null)

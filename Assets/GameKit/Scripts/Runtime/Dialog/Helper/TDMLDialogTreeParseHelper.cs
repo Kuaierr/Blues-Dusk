@@ -59,6 +59,7 @@ namespace UnityGameKit.Runtime
             for (int i = 0; i < lines.Length; i++)
             {
                 IDataNode node = dialogTree.DataNodeManager.GetOrAddNode(i.ToString());
+                PhaseNode(node, lines[i]);
                 // m_DataNodeManager.SetData<DialogDataNodeVariable>(DialogDataNodeVariable.Create());
                 // DialogPhaser.PhaseNode(node, line);
             }
@@ -192,7 +193,7 @@ namespace UnityGameKit.Runtime
             {
                 AddFromLast(node);
             }
-
+            node.SetData(data);
             m_CachedDialogTree.CurrentNode = node;
         }
 
@@ -206,7 +207,7 @@ namespace UnityGameKit.Runtime
 
         public void AddFromLast(IDataNode node)
         {
-            AddFrom(node, m_CachedDialogTree.CurrentNode as IDataNode);
+            AddFrom(node, m_CachedDialogTree.CurrentNode);
         }
 
         public void RecordBranch(IDataNode node)

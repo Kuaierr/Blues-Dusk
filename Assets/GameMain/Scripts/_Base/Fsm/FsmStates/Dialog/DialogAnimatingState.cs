@@ -3,12 +3,12 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
 
-public class DialogAnimatingState : FsmState<DialogComponent>, IReference
+public class DialogAnimatingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     private Type m_CachedNextStateType;
     private bool m_isAnimating;
     public void Clear()
@@ -19,7 +19,6 @@ public class DialogAnimatingState : FsmState<DialogComponent>, IReference
     protected override void OnInit(FsmInterface fsmOwner)
     {
         base.OnInit(fsmOwner);
-        base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
     }
 
@@ -27,6 +26,7 @@ public class DialogAnimatingState : FsmState<DialogComponent>, IReference
     {
         base.OnEnter(fsmOwner);
         m_CachedNextStateType = fsmOwner.GetData<VarType>(fsmMaster.AnimatingNextDataName);
+        Log.Info("DialogAnimatingState");
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
