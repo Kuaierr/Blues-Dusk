@@ -25,5 +25,11 @@ namespace UnityGameKit.Runtime
                 MonoManager.instance.RemoveUpdateListener(CheckAnimatorComplete);
             }
         }
+
+        public static bool IsComplete(this Animator animator)
+        {
+            AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+            return info.normalizedTime >= 1;
+        }
     }
 }

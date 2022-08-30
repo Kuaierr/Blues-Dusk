@@ -46,7 +46,9 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
 
                 if (m_CachedCurrentNode.IsBranch)
                 {
-                    fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogChoosingState));
+                    fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogChoosingState));
+                    fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.uI_Response.Animator);
+                    fsmMaster.UpdateOptionUI();
                     ChangeState<DialogAnimatingState>(fsmOwner);
                 }
                 else
@@ -58,11 +60,12 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
             else
                 InterruptDialogDisplayCallback();
         }
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>("Dialog Started");
+        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
 
         if (!m_DialogStarted)
         {
-            fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogIdleState));
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogIdleState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.dialogAnimator);
             fsmMaster.Pause();
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
@@ -71,7 +74,6 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     protected override void OnExit(FsmInterface fsmOwner, bool isShutdown)
     {
         base.OnExit(fsmOwner, isShutdown);
-        fsmOwner.SetData<VarInt32>("Choosen Idenx", 0);
     }
 
     protected override void OnDestroy(FsmInterface fsm)

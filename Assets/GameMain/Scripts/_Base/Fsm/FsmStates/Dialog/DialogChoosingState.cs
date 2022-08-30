@@ -25,7 +25,6 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
     {
         base.OnEnter(updateFsm);
         Log.Info("DialogChoosingState");
-        fsmMaster.UpdateOptionUI();
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -34,7 +33,8 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fsmMaster.MakeChoice();
-            fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.uI_Response.Animator);
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }

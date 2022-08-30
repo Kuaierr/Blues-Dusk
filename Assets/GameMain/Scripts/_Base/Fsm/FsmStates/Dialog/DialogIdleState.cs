@@ -25,17 +25,18 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
     {
         base.OnEnter(fsmOwner);
         Log.Info("DialogIdleState");
-        fsmOwner.SetData<VarBoolean>("Dialog Started", false);
+        fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, false);
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>("Dialog Started");
+        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
         if(m_DialogStarted)
         {
             fsmMaster.Resume();
-            fsmOwner.SetData<VarType>(fsmMaster.AnimatingNextDataName, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.dialogAnimator);
             ChangeState<DialogAnimatingState>(fsmOwner);
         } 
     }

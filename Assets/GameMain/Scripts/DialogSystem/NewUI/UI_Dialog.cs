@@ -56,7 +56,7 @@ public class UI_Dialog : UIFormBase
         base.OnInit(userData);
         GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
         CreateFsm();
-        fsm.SetData<VarBoolean>("Dialog Started", true);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
         uI_Response.OnInit(Depth);
         uI_Character.OnInit(Depth);
         uI_Indicator.OnInit(Depth);
@@ -94,7 +94,7 @@ public class UI_Dialog : UIFormBase
         dialogAnimator.SetTrigger("FadeIn");
         dialogAnimator.SetTrigger("FadeIn");
         edgeAnimator.SetTrigger("FadeIn");
-        fsm.SetData<VarBoolean>("Dialog Started", true);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
 
     protected override void OnRecycle()
@@ -128,7 +128,6 @@ public class UI_Dialog : UIFormBase
 
     public void MakeChoice()
     {
-        fsm.SetData<VarInt32>("Choosen Idenx", uI_Response.CurIndex);
         HideResponse(() =>
         {
             uI_Response.isActive = false;
@@ -248,7 +247,7 @@ public class UI_Dialog : UIFormBase
     private void ReachTheEndOfConversation()
     {
         Log.Info("Reach The End Of Conversation.");
-        fsm.SetData<VarBoolean>("Dialog Started", false);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, false);
         GameKitCenter.Dialog.CurrentTree = null;
     }
 

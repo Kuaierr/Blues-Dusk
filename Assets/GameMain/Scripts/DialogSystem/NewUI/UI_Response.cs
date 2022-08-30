@@ -28,6 +28,15 @@ public class UI_Response : UIFormChildBase
             return currentIndex;
         }
     }
+
+    public Animator Animator
+    {
+        get
+        {
+            return animator;
+        }
+    }
+    
     public override void OnInit(int parentDepth)
     {
         base.OnInit(parentDepth);
