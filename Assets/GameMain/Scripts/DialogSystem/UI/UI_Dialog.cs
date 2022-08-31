@@ -78,13 +78,12 @@ public class UI_Dialog : UIFormBase
 
     protected override void OnResume()
     {
-        // base.OnResume();
+        base.OnResume();
         Log.Warning("OnResume");
         CursorSystem.current.Disable();
         dialogAnimator.SetTrigger("FadeIn");
         dialogAnimator.SetTrigger("FadeIn");
         edgeAnimator.SetTrigger("FadeIn");
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
 
     protected override void OnRecycle()
@@ -292,6 +291,7 @@ public class UI_Dialog : UIFormBase
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
     {
         // Resume();
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
 
 

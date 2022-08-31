@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityGameKit.Runtime;
 using GameKit.Element;
 using LubanConfig.DataTable;
-
+[DisallowMultipleComponent]
+[AddComponentMenu("BluesDusk/Collect Object")]
 public class CollectElement : GameElementBase, ICollective
 {
     public bool CanCollect = true;
@@ -21,7 +22,7 @@ public class CollectElement : GameElementBase, ICollective
         m_configData = DataTable.instance.ItemTable.Get(m_DataId);
         if (m_configData == null)
         {
-            Log.Warning("Incorrect Data Id for {0}", gameObject.name);
+            Log.Fail("Incorrect Data Id for {0}", gameObject.name);
             CanCollect = false;
             return;
         }

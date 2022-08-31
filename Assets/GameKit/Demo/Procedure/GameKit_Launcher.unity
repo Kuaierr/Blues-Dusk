@@ -1671,7 +1671,7 @@ MonoBehaviour:
   m_JsonHelperTypeName: UnityGameKit.Runtime.DefaultJsonHelper
   m_EditorResourceMode: 1
   m_EditorLanguage: 0
-  m_FrameRate: 30
+  m_FrameRate: 60
   m_GameSpeed: 1
   m_RunInBackground: 1
   m_NeverSleep: 1

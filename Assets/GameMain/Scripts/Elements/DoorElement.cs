@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
-
+[DisallowMultipleComponent]
+[AddComponentMenu("BluesDusk/Door Object")]
 public class DoorElement : GameElementBase
 {
     public bool CanPass = true;
@@ -15,11 +16,11 @@ public class DoorElement : GameElementBase
         }
         else if(TargetScene != "<None>")
         {
-            Log.Warning("Target Scene for {0} has not set.", gameObject.name);
+            Log.Fail("Target Scene for {0} has not set.", gameObject.name);
         }
         else
         {
-            Log.Warning("Door for {0} can not pass.", gameObject.name);
+            Log.Fail("Door for {0} can not pass.", gameObject.name);
         }
     }
 }
