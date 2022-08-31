@@ -8,7 +8,7 @@ using UnityGameKit.Runtime;
 public class ModuleTesting : MonoBehaviour
 {
     public DebugButton debugButtonPrototype;
-    private DialogSystem dialogSystem;
+    // private DialogSystem dialogSystem;
     public List<DebugButton> moduleButtons;
     private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
@@ -16,7 +16,6 @@ public class ModuleTesting : MonoBehaviour
     private bool isShown = false;
     private void Start()
     {
-        dialogSystem = DialogSystem.current;
         canvasGroup = GetComponent<CanvasGroup>();
         ChangeDisplay(isShown);
     }
@@ -61,7 +60,7 @@ public class ModuleTesting : MonoBehaviour
                     int index = i;
                     CreateModuleUnits(dialogAssets[index].title, () =>
                     {
-                        DialogCenter.current.StartDialog(dialogAssets[index].title);
+                        DialogSystem.current.StartDialog(dialogAssets[index].title);
                         ChangeDisplay(false);
                     });
                 }
@@ -75,7 +74,7 @@ public class ModuleTesting : MonoBehaviour
                 int index = i;
                 CreateModuleUnits(dialogAssets[index].title, () =>
                 {
-                    DialogCenter.current.StartDialog(dialogAssets[index].title);
+                    DialogSystem.current.StartDialog(dialogAssets[index].title);
                     ChangeDisplay(false);
                 });
             }

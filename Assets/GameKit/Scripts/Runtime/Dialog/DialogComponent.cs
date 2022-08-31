@@ -19,9 +19,10 @@ namespace UnityGameKit.Runtime
         private const int DefaultPriority = 0;
         private IDialogManager m_DialogManager = null;
         private EventComponent m_EventComponent = null;
-        private string m_DialogHelperTypeName = "UnityGameKit.Runtime.TDMLDialogTreeParseHelper";
         [SerializeField]
-        private DialogTreePharseHelperBase m_CustomDialogHelper = null;
+        private string m_DialogTreePharseHelperTypeName = "UnityGameKit.Runtime.TDMLDialogTreeParseHelper";
+        [SerializeField]
+        private DialogTreePharseHelperBase m_CustomDialogTreePharseHelper = null;
         private IDialogTree m_CachedCurrentTree;
 
         public IDialogTree CurrentTree
@@ -53,7 +54,7 @@ namespace UnityGameKit.Runtime
         }
         private void InitDialogHelper()
         {
-            DialogTreePharseHelperBase DialogHelper = Helper.CreateHelper(m_DialogHelperTypeName, m_CustomDialogHelper);
+            DialogTreePharseHelperBase DialogHelper = Helper.CreateHelper(m_DialogTreePharseHelperTypeName, m_CustomDialogTreePharseHelper);
             if (DialogHelper == null)
             {
                 Log.Error("Can not create Dialog helper.");
@@ -105,6 +106,11 @@ namespace UnityGameKit.Runtime
         public IDialogOptionSet CreateOptionSet(IDataNode node)
         {
             return m_DialogManager.CreateOptionSet(node);
+        }
+
+        public string[] GetLoadedDialogAssetNames()
+        {
+            return m_DialogManager.GetLoadedDialogAssetNames();
         }
 
         public void StartDialog(string name)

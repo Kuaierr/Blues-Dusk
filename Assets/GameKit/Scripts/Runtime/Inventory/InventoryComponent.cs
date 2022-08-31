@@ -12,7 +12,7 @@ namespace UnityGameKit.Runtime
     {
         [SerializeField] private string m_InventoryHelperTypeName = "DefaultInventoryHelper";
         [SerializeField] private InventoryHelperBase m_CustomInventoryHelper = null;
-        [SerializeField] private InventoryHelperBase helper;
+        private InventoryHelperBase helper;
 
         protected override void Awake()
         {

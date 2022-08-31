@@ -19,7 +19,7 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
     {
         if (InputManager.instance.GetWorldKeyDown(KeyCode.I))
         {
-            GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: InitUIInfo.Create(KeyCode.I, playerBackpack));
+            GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: InventoryUIInitInfo.Create(KeyCode.I, playerBackpack));
         }
     }
 

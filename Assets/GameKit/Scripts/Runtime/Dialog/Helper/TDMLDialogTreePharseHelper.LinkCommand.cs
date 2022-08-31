@@ -1,10 +1,11 @@
-using System.Collections.Generic;
-using GameKit.DataStructure;
 using GameKit.DataNode;
+using System.Collections.Generic;
+using GameKit.Dialog;
+using GameKit;
 
-namespace GameKit.Dialog
+namespace UnityGameKit.Runtime
 {
-    internal sealed partial class DialogManager : GameKitModule, IDialogManager
+    public sealed partial class TDMLDialogTreePharseHelper : DialogTreePharseHelperBase
     {
         public delegate void DialogPostEventHandler(IDataNode nodeA, string nodeB);
         public sealed class LinkCommand : CommandBase

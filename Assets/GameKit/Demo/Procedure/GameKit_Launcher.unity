@@ -1318,9 +1318,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1889010949}
-  - component: {fileID: 1889010950}
   - component: {fileID: 1889010951}
-  - component: {fileID: 1889010952}
+  - component: {fileID: 1889010950}
   m_Layer: 0
   m_Name: Dialog
   m_TagString: Untagged
@@ -1349,9 +1348,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889010948}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8eba6e0f534b2408a139dc9db929a6, type: 3}
+  m_Script: {fileID: 11500000, guid: f7e33d9fac016b94abcf980f897a83cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1889010951
@@ -1366,19 +1365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abb8863ce0d4d043b623b4053594880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CustomDialogHelper: {fileID: 0}
---- !u!114 &1889010952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1889010948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e33d9fac016b94abcf980f897a83cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_DialogTreePharseHelperTypeName: UnityGameKit.Runtime.TDMLDialogTreePharseHelper
+  m_CustomDialogTreePharseHelper: {fileID: 0}
 --- !u!1 &2001408789
 GameObject:
   m_ObjectHideFlags: 0

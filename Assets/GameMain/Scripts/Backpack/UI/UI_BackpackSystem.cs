@@ -14,7 +14,7 @@ public class UI_BackpackSystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        InitUIInfo initUIInfo = (InitUIInfo)userData;
+        InventoryUIInitInfo initUIInfo = (InventoryUIInitInfo)userData;
         uI_Backpack.SetStockInfoUI(uI_StockInfo);
         uI_Backpack.SetInventory((IInventory)initUIInfo.UserData);
         ChangeDisplayKeyCode = initUIInfo.ChangeDisplayKeyCode;
@@ -24,8 +24,9 @@ public class UI_BackpackSystem : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        uI_Backpack.OnShow();
-        CursorSystem.current.Disable();
+        // uI_Backpack.OnShow();
+        // CursorSystem.current.Disable();
+        OnResume();
     }
 
     protected override void OnClose(bool isShutdown, object userData)

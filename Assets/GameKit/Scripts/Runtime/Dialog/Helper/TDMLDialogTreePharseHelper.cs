@@ -8,7 +8,7 @@ using GameKit.DataStructure;
 
 namespace UnityGameKit.Runtime
 {
-    public sealed partial class TDMLDialogTreeParseHelper : DialogTreePharseHelperBase
+    public sealed partial class TDMLDialogTreePharseHelper : DialogTreePharseHelperBase
     {
         private Queue<CommandBase> m_LinkBuffer;
         private List<IDataNode> m_DeclaredNodes;

@@ -69,7 +69,7 @@ public class UI_Dialog : UIFormBase
     protected override void OnPause()
     {
         // base.OnPause();
-        Log.Warning("OnPause");
+        
         CursorSystem.current.Enable();
         dialogAnimator.SetTrigger("FadeOut");
         edgeAnimator.SetTrigger("FadeOut");
@@ -151,15 +151,7 @@ public class UI_Dialog : UIFormBase
         stateList.Clear();
         fsm = null;
     }
-
-
-    public void InterruptDialogDisplay(InformUICallback callback)
-    {
-        InterruptDialogDislayEventArgs interruptDialogDislayEventArgs = InterruptDialogDislayEventArgs.Create(callback);
-        GameKitCenter.Event.Fire(this, interruptDialogDislayEventArgs);
-        ReferencePool.Release(interruptDialogDislayEventArgs);
-    }
-
+    
     public IDataNode ParseNode(int index = 0)
     {
         if (GameKitCenter.Dialog.CurrentTree == null)

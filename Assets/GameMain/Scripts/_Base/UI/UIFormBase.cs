@@ -74,7 +74,7 @@ public abstract class UIFormBase : UIFormLogic
         m_CachedCanvas = gameObject.GetOrAddComponent<Canvas>();
         m_CanvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
         gameObject.GetOrAddComponent<GraphicRaycaster>();
-        InternalSetVisible(false);
+        // InternalSetVisible(false);
     }
 
     public static void SetMainFont(Font mainFont)
@@ -90,12 +90,8 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-
-
         m_CachedCanvas.overrideSorting = true;
         OriginalDepth = m_CachedCanvas.sortingOrder;
-
-
         RectTransform transform = GetComponent<RectTransform>();
         transform.anchorMin = Vector2.zero;
         transform.anchorMax = Vector2.one;
@@ -124,6 +120,7 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void OnOpen(object userData)
     {
+        Log.Warning("{0} OnOpen", gameObject.name);
         base.OnOpen(userData);
         m_CanvasGroup.alpha = 0f;
         StopAllCoroutines();
@@ -132,16 +129,19 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void OnClose(bool isShutdown, object userData)
     {
+        Log.Warning("{0} OnClose", gameObject.name);
         base.OnClose(isShutdown, userData);
     }
 
     protected override void OnPause()
     {
+        Log.Warning("{0} OnPause", gameObject.name);
         base.OnPause();
     }
 
     protected override void OnResume()
     {
+        Log.Warning("{0} OnResume", gameObject.name);
         base.OnResume();
         m_CanvasGroup.alpha = 0f;
         StopAllCoroutines();
@@ -184,7 +184,7 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void InternalSetVisible(bool visible)
     {
-        Log.Warning("InternalSetVisible");
+        Log.Warning("{0} InternalSetVisible", gameObject.name);
         CanvasGroup.alpha = visible ? 1 : 0;
         CanvasGroup.blocksRaycasts = visible;
         CanvasGroup.interactable = visible;

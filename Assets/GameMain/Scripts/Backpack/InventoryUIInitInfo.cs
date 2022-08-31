@@ -3,12 +3,12 @@ using GameKit;
 
 namespace UnityGameKit.Runtime
 {
-    internal sealed class InitUIInfo : IReference
+    internal sealed class InventoryUIInitInfo : IReference
     {
         private KeyCode m_KeyCode;
         private object m_UserData;
 
-        public InitUIInfo()
+        public InventoryUIInitInfo()
         {
             m_KeyCode = KeyCode.None;
             m_UserData = null;
@@ -30,9 +30,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        public static InitUIInfo Create(KeyCode keyCode, object userData)
+        public static InventoryUIInitInfo Create(KeyCode keyCode, object userData)
         {
-            InitUIInfo initUIInfo = ReferencePool.Acquire<InitUIInfo>();
+            InventoryUIInitInfo initUIInfo = ReferencePool.Acquire<InventoryUIInitInfo>();
             initUIInfo.m_KeyCode = keyCode;
             initUIInfo.m_UserData = userData;
             return initUIInfo;

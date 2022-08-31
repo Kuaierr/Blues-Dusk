@@ -13,5 +13,7 @@ namespace GameKit.Dialog
         void SetDialogHelper(IDialogTreeParseHelper helper);
         void GetOrCreatetDialogTree(string treeName);
         void CreateDialogTree(string treeName, string content);
+        string[] GetLoadedDialogAssetNames();
+        IDialogTree GetDialogTree(string treeName);
     }
 }

@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using GameKit.DataNode;
 namespace GameKit.Dialog
@@ -7,6 +8,7 @@ namespace GameKit.Dialog
     internal sealed partial class DialogManager : GameKitModule, IDialogManager
     {
         private readonly Dictionary<string, DialogTree> m_DialogTrees;
+        private readonly List<string> m_LoadedDialogAssetNames;
         private readonly List<string> m_LoadingDialogAssetNames;
         private readonly List<string> m_UnloadingDialogAssetNames;
         private IDialogTreeParseHelper m_DialogTreeParseHelper;
@@ -19,6 +21,7 @@ namespace GameKit.Dialog
         public DialogManager()
         {
             m_DialogTrees = new Dictionary<string, DialogTree>();
+            m_LoadedDialogAssetNames = new List<string>();
             m_LoadingDialogAssetNames = new List<string>();
             m_UnloadingDialogAssetNames = new List<string>();
             m_CachedCurrentTree = null;
@@ -80,6 +83,7 @@ namespace GameKit.Dialog
             if (!HasDialogTree(tree.Name))
             {
                 m_DialogTrees.Add(tree.Name, tree);
+                m_LoadedDialogAssetNames.Add(tree.Name);
             }
         }
 
@@ -96,7 +100,12 @@ namespace GameKit.Dialog
             RemoveDialogTree(tree.Name);
         }
 
-        public DialogTree GetDialogTree(string treeName)
+        public string[] GetLoadedDialogAssetNames()
+        {
+            return m_LoadedDialogAssetNames.ToArray();
+        }
+
+        public IDialogTree GetDialogTree(string treeName)
         {
             if (HasDialogTree(treeName))
             {
@@ -108,7 +117,7 @@ namespace GameKit.Dialog
         public void CreateDialogTree(string treeName, string content)
         {
             m_CachedCurrentTreeName = treeName;
-            if(content==string.Empty)
+            if (content == string.Empty)
             {
                 Utility.Debugger.LogError("Content for phasing is invalid");
                 return;
