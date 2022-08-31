@@ -40,28 +40,18 @@ public class Prototyper : MonoBehaviour
     }
     void Update()
     {
-        // if (Geometry.EuclidDistance(this.transform.position.ToVector2(), m_CachedTargetPos.ToVector2()) <= suddenStopDistance)
-        // {
-        //     navMeshAgent.velocity = Vector3.zero;
-        // }
         navMeshAgent.updateRotation = !IsManuallyRoatating;
-        // if (navMeshAgent.velocity == Vector3.zero)
-        // {
-        //     Debug.Log($"Prototyper is Stop.");
-        //     m_CachedTargetPos = MAGIC_TARGET_POS;
-        // }
-
-        if (!navMeshAgent.updateRotation && m_CachedAngle == MAGIC_ANGLE)
+        
+        if (!navMeshAgent.updateRotation && m_CachedAngle == MAGIC_ANGLE && m_CachedTargetPos != MAGIC_TARGET_POS)
         {
             Vector2 faceDirection = m_CachedTargetPos.ToVector2() - transform.position.ToVector2();
             m_CachedAngle = Mathf.Abs(Vector3.Angle(transform.forward.ToVector2(), faceDirection));
-
         }
 
         if (m_CachedAngle != MAGIC_ANGLE)
         {
             float roateMultipier = Mathf.InverseLerp(0, 180, m_CachedAngle);
-            RotateTo(m_CachedTargetPos, roateMultipier * 3f);
+            RotateTo(m_CachedTargetPos.IgnoreY(), roateMultipier * 2f);
             Vector2 faceDirection = m_CachedTargetPos.ToVector2() - transform.position.ToVector2();
             float angle = Mathf.Abs(Vector3.Angle(transform.forward.ToVector2(), faceDirection));
             if (angle < 5)
@@ -74,7 +64,7 @@ public class Prototyper : MonoBehaviour
         {
             if (m_CachedInteractivePos != MAGIC_INTERACTIVE_POS)
             {
-                RotateTo(m_CachedInteractivePos);
+                RotateTo(m_CachedInteractivePos.IgnoreY());
                 Vector2 faceDirection = m_CachedInteractivePos.ToVector2() - transform.position.ToVector2();
                 float angle = Vector3.Angle(transform.forward.ToVector2(), faceDirection);
                 if (angle <= 5f)
@@ -134,7 +124,9 @@ public class Prototyper : MonoBehaviour
     private void RotateTo(Vector3 position, float roateMultipier = 1)
     {
         Quaternion quaternion = Quaternion.LookRotation(position - transform.position);
-        this.transform.rotation = Quaternion.Lerp(transform.rotation, quaternion, RoateSpeed * roateMultipier * Time.deltaTime);
+        Quaternion clampQuaternion = Quaternion.Euler(quaternion.eulerAngles.IgnoreX().IgnoreZ());
+        this.transform.rotation = Quaternion.Lerp(transform.rotation, clampQuaternion, RoateSpeed * roateMultipier * Time.deltaTime);
+        
     }
 
     private void OnDrawGizmos()
