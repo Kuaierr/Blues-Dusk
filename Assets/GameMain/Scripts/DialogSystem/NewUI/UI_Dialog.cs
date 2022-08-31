@@ -15,7 +15,6 @@ using UnityGameKit.Runtime;
 
 public class UI_Dialog : UIFormBase
 {
-    private const string DataNameForAnimatingNext = "Next State For Animating";
     public CharacterPool characterPool;
     public UI_Character uI_Character;
     public UI_Response uI_Response;
@@ -31,15 +30,6 @@ public class UI_Dialog : UIFormBase
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
-
-
-    public string AnimatingNextDataName
-    {
-        get
-        {
-            return DataNameForAnimatingNext;
-        }
-    }
 
     public IDialogTree CurrentTree
     {
@@ -78,7 +68,7 @@ public class UI_Dialog : UIFormBase
 
     protected override void OnPause()
     {
-        base.OnPause();
+        // base.OnPause();
         Log.Warning("OnPause");
         CursorSystem.current.Enable();
         dialogAnimator.SetTrigger("FadeOut");
@@ -88,7 +78,7 @@ public class UI_Dialog : UIFormBase
 
     protected override void OnResume()
     {
-        base.OnResume();
+        // base.OnResume();
         Log.Warning("OnResume");
         CursorSystem.current.Disable();
         dialogAnimator.SetTrigger("FadeIn");
@@ -128,17 +118,15 @@ public class UI_Dialog : UIFormBase
 
     public void MakeChoice()
     {
-        HideResponse(() =>
-        {
-            uI_Response.isActive = false;
-            uI_Response.gameObject.SetActive(false);
-        });
+        HideResponse();
     }
 
     public void AddTyperWriterListener(UnityAction onTypewriterStart, UnityAction onTextShowed)
     {
         TextAnimatorPlayer.onTypewriterStart.AddListener(onTypewriterStart);
         TextAnimatorPlayer.onTextShowed.AddListener(onTextShowed);
+
+
     }
 
     private void CreateFsm()
@@ -153,7 +141,8 @@ public class UI_Dialog : UIFormBase
 
     private void StartFsm()
     {
-        fsm.Start<DialogTalkingState>();
+        fsm.Start<DialogIdleState>();
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
 
     private void DestroyFsm()
@@ -251,8 +240,10 @@ public class UI_Dialog : UIFormBase
         GameKitCenter.Dialog.CurrentTree = null;
     }
 
-    public void UpdateDialogUI(IDataNode node, UnityAction callback = null)
+    public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
     {
+
+        TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         if (node == null || data.Speaker == "Default")
             return;
@@ -301,16 +292,14 @@ public class UI_Dialog : UIFormBase
         OnPause();
     }
 
-    protected override void InternalSetVisible(bool visible)
+    public void InternalVisible(bool status)
     {
-        CanvasGroup.alpha = visible ? 1 : 0;
-        CanvasGroup.blocksRaycasts = visible;
-        CanvasGroup.interactable = visible;
+        base.InternalSetVisible(status);
     }
 
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
     {
-        Resume();
+        // Resume();
     }
 
 

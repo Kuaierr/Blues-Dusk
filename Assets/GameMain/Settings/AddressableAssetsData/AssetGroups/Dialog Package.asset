@@ -18,30 +18,34 @@ MonoBehaviour:
   m_GUID: 279438fa1bc42f344ac143d6cbadbb95
   m_SerializeEntries:
   - m_GUID: 10a4f7d3ca7066549b5ac5d19960a614
-    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u5206\u652F\u5D4C\u5957\u6D4B\u8BD5.asset"
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - DialogPack
-  - m_GUID: bf71628fccb79f14999fd90f79345933
-    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u9009\u62E9\u5206\u652F\u6D4B\u8BD5.asset"
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - DialogPack
-  - m_GUID: 09312e70070a591448bde0f1844d5042
-    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u6587\u5B57\u6548\u679C\u6D4B\u8BD5.asset"
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - DialogPack
-  - m_GUID: 69b6f355037956c4faec456d96c493e1
-    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u590D\u9009\u6D4B\u8BD5.asset"
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u5D4C\u5957\u6D4B\u8BD5.asset"
     m_ReadOnly: 0
     m_SerializedLabels:
     - DialogPack
   - m_GUID: b23debf9a6be20044801806a9f69be06
-    m_Address: "Assets/Prototype/DialogSystem/Data/Text/Scriptable/\u4EFF\u751F\u4EBA\u7EBF1.1.asset"
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u4EFF\u751F\u4EBA\u7EBF1.1.asset"
     m_ReadOnly: 0
     m_SerializedLabels:
     - DialogPack
+  - m_GUID: 69b6f355037956c4faec456d96c493e1
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u590D\u9009\u6D4B\u8BD5.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: 09312e70070a591448bde0f1844d5042
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u5B57\u6548\u6D4B\u8BD5.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: bf71628fccb79f14999fd90f79345933
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u5206\u652F\u6D4B\u8BD5.asset"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DialogPack
+  - m_GUID: 9d221616940a8f3429e4b3c523358f8c
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Raw/\u5206\u652F\u6D4B\u8BD5.txt"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

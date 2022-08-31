@@ -14,6 +14,8 @@ namespace GameKit.UI
 
         bool PauseCoveredUIForm { get; }
 
+        void OnInstantiate(object userData);
+        
         void OnInit(int serialId, string uiFormAssetName, IUIGroup uiGroup, bool pauseCoveredUIForm, bool isNewInstance, object userData);
 
         void OnRecycle();

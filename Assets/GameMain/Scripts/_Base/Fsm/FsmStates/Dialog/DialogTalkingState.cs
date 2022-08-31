@@ -27,10 +27,16 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
+        Log.Info("DialogTalkingState");
         SetTextShowing();
+
+        if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START_ID))
+        {
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START_ID, false);
+            return;
+        }
         fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
         fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
-        Log.Info("DialogTalkingState");
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -60,8 +66,8 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
             else
                 InterruptDialogDisplayCallback();
         }
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
 
+        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
         if (!m_DialogStarted)
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogIdleState));

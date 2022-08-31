@@ -92,6 +92,7 @@ public class UI_Response : UIFormChildBase
 
     public override void OnHide(UnityAction callback = null)
     {
+        Log.Info("Response OnHide");
         animator.SetTrigger("FadeOut");
         animator.OnComplete(callback: callback);
         currentOptions.Clear();

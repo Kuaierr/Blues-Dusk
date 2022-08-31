@@ -668,6 +668,7 @@ namespace GameKit.UI
 
             m_UIFormsBeingLoaded.Remove(openUIFormInfo.SerialId);
             UIFormObject uiFormInstanceObject = UIFormObject.Create(uiFormAssetName, uiFormAsset, m_UIFormHelper.InstantiateUIForm(uiFormAsset), m_UIFormHelper);
+            // (uiFormAsset as IUIForm).OnInstantiate(null);
             m_InstancePool.Register(uiFormInstanceObject, true);
 
             InternalOpenUIForm(openUIFormInfo.SerialId, uiFormAssetName, openUIFormInfo.UIGroup, uiFormInstanceObject.Target, openUIFormInfo.PauseCoveredUIForm, true, duration, openUIFormInfo.UserData);

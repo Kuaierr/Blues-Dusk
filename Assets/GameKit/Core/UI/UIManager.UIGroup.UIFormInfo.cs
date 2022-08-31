@@ -60,7 +60,7 @@ namespace GameKit.UI
 
                     UIFormInfo uiFormInfo = ReferencePool.Acquire<UIFormInfo>();
                     uiFormInfo.m_UIForm = uiForm;
-                    uiFormInfo.m_Paused = true;
+                    uiFormInfo.m_Paused = false;
                     uiFormInfo.m_Covered = true;
                     return uiFormInfo;
                 }

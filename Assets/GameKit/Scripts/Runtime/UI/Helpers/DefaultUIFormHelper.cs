@@ -10,7 +10,8 @@ namespace UnityGameKit.Runtime
 
         public override object InstantiateUIForm(object uiFormAsset)
         {
-            return Instantiate((Object)uiFormAsset);
+            Object uIInstance = Instantiate((Object)uiFormAsset);            
+            return uIInstance;
         }
 
         public override IUIForm CreateUIForm(object uiFormInstance, IUIGroup uiGroup, object userData)

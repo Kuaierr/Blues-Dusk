@@ -129,6 +129,11 @@ namespace UnityGameKit.Runtime
         {
         }
 
+        protected internal virtual void OnInstantiate(object userData)
+        {
+            
+        }
+
         protected virtual void InternalSetVisible(bool visible)
         {
             gameObject.SetActive(visible);

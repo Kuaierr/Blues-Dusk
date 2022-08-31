@@ -612,7 +612,7 @@ MonoBehaviour:
   m_InstanceExpireTime: 60
   m_InstancePriority: 0
   m_InstanceRoot: {fileID: 501089868}
-  m_UIFormHelperTypeName: UnityGameKit.Runtime.DefaultUIFormHelper
+  m_UIFormHelperTypeName: UIFormBaseHelper
   m_CustomUIFormHelper: {fileID: 0}
   m_UIGroupHelperTypeName: UIFormBaseGroupHelper
   m_CustomUIGroupHelper: {fileID: 0}

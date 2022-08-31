@@ -39,7 +39,6 @@ namespace UnityGameKit.Runtime
         protected override void Awake()
         {
             base.Awake();
-
             m_DialogManager = GameKitModuleCenter.GetModule<IDialogManager>();
             if (m_DialogManager == null)
             {

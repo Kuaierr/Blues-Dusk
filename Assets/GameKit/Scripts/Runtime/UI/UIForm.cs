@@ -100,6 +100,18 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public void OnInstantiate(object userData)
+        {
+            try
+            {
+                m_UIFormLogic.OnInstantiate(userData);
+            }
+            catch (Exception exception)
+            {
+                Utility.Debugger.LogError("UI form '[{0}]{1}' OnInstantiate with exception '{2}'.", m_SerialId, m_UIFormAssetName, exception);
+            }
+        }
+
         public void OnRecycle()
         {
             try

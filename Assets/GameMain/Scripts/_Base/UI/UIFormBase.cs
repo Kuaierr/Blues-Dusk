@@ -69,6 +69,14 @@ public abstract class UIFormBase : UIFormLogic
         StartCoroutine(CloseCo(FadeTime));
     }
 
+    public void OnInstantiate()
+    {
+        m_CachedCanvas = gameObject.GetOrAddComponent<Canvas>();
+        m_CanvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
+        gameObject.GetOrAddComponent<GraphicRaycaster>();
+        InternalSetVisible(false);
+    }
+
     public static void SetMainFont(Font mainFont)
     {
         if (mainFont == null)
@@ -83,10 +91,10 @@ public abstract class UIFormBase : UIFormLogic
     {
         base.OnInit(userData);
 
-        m_CachedCanvas = gameObject.GetOrAddComponent<Canvas>();
+
         m_CachedCanvas.overrideSorting = true;
         OriginalDepth = m_CachedCanvas.sortingOrder;
-        m_CanvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
+
 
         RectTransform transform = GetComponent<RectTransform>();
         transform.anchorMin = Vector2.zero;
@@ -94,7 +102,7 @@ public abstract class UIFormBase : UIFormLogic
         transform.anchoredPosition = Vector2.zero;
         transform.sizeDelta = Vector2.zero;
 
-        gameObject.GetOrAddComponent<GraphicRaycaster>();
+
 
         // FindChildrenByType<UIFormChildBase>();
 
@@ -172,6 +180,14 @@ public abstract class UIFormBase : UIFormLogic
         }
 
         m_CachedCanvasContainer.Clear();
+    }
+
+    protected override void InternalSetVisible(bool visible)
+    {
+        Log.Warning("InternalSetVisible");
+        CanvasGroup.alpha = visible ? 1 : 0;
+        CanvasGroup.blocksRaycasts = visible;
+        CanvasGroup.interactable = visible;
     }
 
     private IEnumerator CloseCo(float duration)
