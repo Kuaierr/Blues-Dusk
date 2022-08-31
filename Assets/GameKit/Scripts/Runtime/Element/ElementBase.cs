@@ -12,11 +12,10 @@ namespace UnityGameKit.Runtime
         {
             get
             {
-                if (m_DataId == 0)
-                    Utility.Debugger.LogFail("Element {0} has not set correct data id.", this.gameObject.name);
                 return m_DataId;
             }
         }
+        protected abstract void Start();
 
         public void OnDestory()
         {

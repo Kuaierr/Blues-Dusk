@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0453cf14011a91246a60391a46679526, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: adda22258aa8e094398841678f999cfb, type: 2}
 --- !u!1 &289145279
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +353,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InventoryHelperTypeName: DefaultInventoryHelper
   m_CustomInventoryHelper: {fileID: 0}
-  helper: {fileID: 0}
 --- !u!1 &616272547
 GameObject:
   m_ObjectHideFlags: 0

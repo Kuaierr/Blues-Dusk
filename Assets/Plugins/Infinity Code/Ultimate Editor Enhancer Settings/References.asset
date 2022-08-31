@@ -184,9 +184,41 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype_Dialog.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_Dialog_UIandDice
+    path: Assets/GameMain/Scenes/Prototype_Dialog_UIandDice.unity
   - name: GameMain
     path: Assets/GameMain/Scenes/GameMain.unity
+  - name: GameKitDemo_Fsm
+    path: Assets/GameKit/Demo/Fsm/GameKitDemo_Fsm.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_Interact
+    path: Assets/GameMain/Scenes/Prototype_Interact.unity
+  - name: View States
+    path: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Examples/View States.unity
+  - name: S_test
+    path: Assets/GamePrototype/Scenes/S_test.unity
+  - name: S_heya_toilet
+    path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
+  - name: S_heya_parlor
+    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: Demo
+    path: Assets/GamePrototype/Resources/Model/AnimeGirls/Casual1/Demo.unity
+  - name: Demo
+    path: Assets/GamePrototype/Prototype Kit 1/Demo.unity
+  - name: Testing
+    path: Assets/GameMain/Testing/Testing.unity
+  - name: Prototype_Inventory
+    path: Assets/GameMain/Scenes/Prototype_Inventory.unity
+  - name: Prototype_Dialog_DiceDev
+    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype_Dialog.unity
+  - name: Demo
+    path: Assets/GameMain/Arts/40-Simple Icons-Free/Scenes/Demo.unity
+  - name: QuickDev_TabGroup
+    path: Assets/GameKit/Demo/UI/TabGroup/Demo/QuickDev_TabGroup.unity
+  - name: GameKitDemo_TaskPool
+    path: Assets/GameKit/Demo/TaskPool/GameKitDemo_TaskPool.unity
+  - name: GameKitDemo_ReferencePool
+    path: Assets/GameKit/Demo/ReferencePool/GameKitDemo_ReferencePool.unity

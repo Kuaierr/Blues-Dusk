@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityGameKit.Runtime;
+using GameKit.Element;
 using GameKit.Timer;
 using GameKit.QuickCode;
 using DG.Tweening;
@@ -21,7 +22,7 @@ public class Prototyper : MonoBehaviour
     private Vector3 m_CachedTargetPos;
     private Vector3 m_CachedInteractivePos;
     private float m_CachedAngle;
-    private InteractiveElement m_CachedInteractive;
+    private GameElementBase m_CachedInteractive;
     private LayerMask layerMask;
     public bool IsManuallyRoatating = false;
 
@@ -101,7 +102,7 @@ public class Prototyper : MonoBehaviour
     private void MoveToDestination()
     {
         RaycastHit hitInfo = CursorSystem.current.GetHitInfo(layerMask);
-        InteractiveElement interactive = CursorSystem.current.GetComponentFromRaycast<InteractiveElement>(hitInfo);
+        GameElementBase interactive = CursorSystem.current.GetComponentFromRaycast<GameElementBase>(hitInfo);
         if (interactive == null)
         {
             Vector3 pos = CursorSystem.current.GetPositionFromRaycast(hitInfo);

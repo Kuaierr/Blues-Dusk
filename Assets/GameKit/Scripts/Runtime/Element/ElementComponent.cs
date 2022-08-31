@@ -17,6 +17,7 @@ namespace UnityGameKit.Runtime
         public void RegisterElement(IElement element)
         {
             elementManager.RegisterElement(element);
+            element.SetManager(elementManager);
         }
 
         public void RemoveElement(IElement element)
