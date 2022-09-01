@@ -2,11 +2,14 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DiceDialogRollingState : FsmState<DialogComponent>, IReference
+/// <summary>
+/// 有骰子正在运动时（即尚未出结果）的状态
+/// </summary>
+public class DiceDialogRollingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     public void Clear()
     {
 

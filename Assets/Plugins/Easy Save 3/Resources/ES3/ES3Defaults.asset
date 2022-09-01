@@ -30,10 +30,10 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp
+    - Assembly-CSharp-firstpass
     - GameKit
     - Cinemachine
     - Febucci.TextAnimator.Runtime
-    - Assembly-CSharp-firstpass
     - UltimateEditorEnhancer
     - DOTween.Modules
     - PsdPlugin

@@ -2,15 +2,15 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DiceDialogSelectingState : FsmState<DialogComponent>, IReference
+/// <summary>
+/// 选择要使用的骰子的阶段
+/// </summary>
+public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
-    public void Clear()
-    {
-
-    }
+    private UI_Dialog fsmMaster;
+    public void Clear() { }
 
     protected override void OnInit(FsmInterface fsm)
     {
@@ -38,8 +38,4 @@ public class DiceDialogSelectingState : FsmState<DialogComponent>, IReference
     {
         base.OnDestroy(fsm);
     }
-
-    
-
 }
-
