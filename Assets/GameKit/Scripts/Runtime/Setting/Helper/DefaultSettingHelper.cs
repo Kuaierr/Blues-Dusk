@@ -46,6 +46,15 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        private void Awake()
+        {
+            m_FilePath = Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
+            m_Settings = new DefaultSetting();
+            m_Serializer = new DefaultSettingSerializer();
+            m_Serializer.RegisterSerializeCallback(0, SerializeDefaultSettingCallback);
+            m_Serializer.RegisterDeserializeCallback(0, DeserializeDefaultSettingCallback);
+        }
+
         public override bool Load()
         {
             try
@@ -209,15 +218,6 @@ namespace UnityGameKit.Runtime
         public override void SetObject(string settingName, object obj)
         {
             SetString(settingName, Utility.Json.ToJson(obj));
-        }
-
-        private void Awake()
-        {
-            m_FilePath = Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
-            m_Settings = new DefaultSetting();
-            m_Serializer = new DefaultSettingSerializer();
-            m_Serializer.RegisterSerializeCallback(0, SerializeDefaultSettingCallback);
-            m_Serializer.RegisterDeserializeCallback(0, DeserializeDefaultSettingCallback);
         }
 
         private bool SerializeDefaultSettingCallback(Stream stream, DefaultSetting defaultSetting)

@@ -25,8 +25,7 @@ public class UI_Dialog : UIFormBase
     public Animator dialogAnimator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
-    private bool isTextShowing = false;
-
+    
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;

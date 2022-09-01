@@ -17,7 +17,7 @@ namespace GameKit.Element
 
         internal override void Shutdown()
         {
-
+            
         }
 
         public void RegisterElement(IElement element)
@@ -43,6 +43,22 @@ namespace GameKit.Element
             for (int i = 0; i < m_CachedElements.Count; i++)
             {
                 m_CachedElements[i].OnHighlightExit();
+            }
+        }
+
+        public void SaveAll()
+        {
+            for (int i = 0; i < m_CachedElements.Count; i++)
+            {
+                m_CachedElements[i].OnSave();
+            }
+        }
+
+        public void LoadAll()
+        {
+            for (int i = 0; i < m_CachedElements.Count; i++)
+            {
+                m_CachedElements[i].OnLoad();
             }
         }
     }

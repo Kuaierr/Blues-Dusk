@@ -12,7 +12,10 @@ public class DoorElement : GameElementBase
         base.OnInteract();
         if (CanPass && TargetScene != "<None>")
         {
-
+            CursorSystem.current.Disable();
+            Scheduler.current.SwitchSceneByFade(TargetScene,()=>{
+                CursorSystem.current.Enable();
+            });
         }
         else if(TargetScene != "<None>")
         {

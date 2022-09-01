@@ -341,6 +341,7 @@ namespace GameKit.Setting
 
         public T GetObject<T>(string settingName, T defaultObj)
         {
+            Utility.Debugger.LogSuccess("GetObject {0}-{1}", settingName, defaultObj);
             if (m_SettingHelper == null)
             {
                 throw new GameKitException("Setting helper is invalid.");
@@ -356,6 +357,7 @@ namespace GameKit.Setting
 
         public object GetObject(Type objectType, string settingName, object defaultObj)
         {
+            Utility.Debugger.LogSuccess("GetObject {0}-{1}", settingName, defaultObj);
             if (m_SettingHelper == null)
             {
                 throw new GameKitException("Setting helper is invalid.");
@@ -376,6 +378,7 @@ namespace GameKit.Setting
 
         public void SetObject<T>(string settingName, T obj)
         {
+            Utility.Debugger.LogSuccess("SetObject {0}-{1}", settingName, obj);
             if (m_SettingHelper == null)
             {
                 throw new GameKitException("Setting helper is invalid.");
@@ -391,6 +394,7 @@ namespace GameKit.Setting
 
         public void SetObject(string settingName, object obj)
         {
+            Utility.Debugger.LogSuccess("SetObject {0}-{1}", settingName, obj);
             if (m_SettingHelper == null)
             {
                 throw new GameKitException("Setting helper is invalid.");

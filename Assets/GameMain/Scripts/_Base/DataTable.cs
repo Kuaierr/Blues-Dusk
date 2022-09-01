@@ -80,7 +80,7 @@ public class DataTable : SingletonBase<DataTable>
             runtimeJsonData = data.text;
         });
         return JSON.Parse(runtimeJsonData);
+        // m_DataTables.TbDefaultSetting.
     }
-
 
 }

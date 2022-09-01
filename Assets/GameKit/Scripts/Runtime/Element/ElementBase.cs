@@ -1,13 +1,20 @@
 using UnityEngine;
-using GameKit;
+using GameKit.Setting;
 using GameKit.Element;
 
 namespace UnityGameKit.Runtime
 {
+    [System.Serializable]
     public abstract class ElementBase : MonoBehaviour, IElement
     {
         [SerializeField] protected int m_DataId = 0;
-        private IElementManager elementManager;
+        public string Name
+        {
+            get
+            {
+                return string.Format("{0}-{1}", gameObject.name, gameObject.GetInstanceID());
+            }
+        }
         public int DataId
         {
             get
@@ -15,20 +22,13 @@ namespace UnityGameKit.Runtime
                 return m_DataId;
             }
         }
-        protected abstract void Start();
+        public abstract void OnInit();
+        public abstract void OnLoad();
+        public abstract void OnSave();
 
-        public void OnDestory()
+        private void Start()
         {
-            if (elementManager != null)
-                elementManager.RemoveElement(this);
-            else
-                Utility.Debugger.LogFail("ElementManage is Null");
-            Destroy(this.gameObject);
-        }
-
-        public void SetManager(IElementManager manager)
-        {
-            elementManager = manager;
+            GameKitCenter.Element.RegisterElement(this);
         }
 
         public virtual void Show()
@@ -39,11 +39,6 @@ namespace UnityGameKit.Runtime
         public virtual void Hide()
         {
             this.gameObject.SetActive(false);
-        }
-
-        public virtual void OnRefresh()
-        {
-
         }
 
         public virtual void OnHighlightEnter()

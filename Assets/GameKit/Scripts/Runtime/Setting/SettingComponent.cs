@@ -60,6 +60,10 @@ namespace UnityGameKit.Runtime
                 Log.Error("Load settings failure.");
             }
         }
+        public void Load()
+        {
+            m_SettingManager.Load();
+        }
 
         public void Save()
         {
@@ -178,6 +182,7 @@ namespace UnityGameKit.Runtime
 
         public void SetObject(string settingName, object obj)
         {
+            
             m_SettingManager.SetObject(settingName, obj);
         }
     }

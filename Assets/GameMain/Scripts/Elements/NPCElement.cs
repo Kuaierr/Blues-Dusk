@@ -8,6 +8,11 @@ public class NPCElement : GameElementBase
 {
     public TextAsset DialogAsset;
     public string DialogName = "<None>";
+
+    public override void OnInit()
+    {
+        base.OnInit();
+    }
     public override void OnInteract()
     {
         base.OnInteract();

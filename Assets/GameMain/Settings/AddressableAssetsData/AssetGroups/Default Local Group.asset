@@ -29,10 +29,6 @@ MonoBehaviour:
     m_Address: Assets/GameMain/UI/UIForms/UI_Backpack.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 96a6b3299dbf19948a73228c8906e2e2
-    m_Address: Assets/GameMain/Scenes/Prototype_Dialog.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 357be379c3c269e408a28ca1c5460251
     m_Address: Assets/GameMain/UI/UIForms/UI_Dialog.prefab
     m_ReadOnly: 0

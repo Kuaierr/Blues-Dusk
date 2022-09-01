@@ -16,9 +16,9 @@ public class CollectElement : GameElementBase, ICollective
         }
     }
 
-    protected override void Start()
+    public override void OnInit()
     {
-        base.Start();
+        base.OnInit();
         m_configData = DataTable.instance.ItemTable.Get(m_DataId);
         if (m_configData == null)
         {
@@ -40,7 +40,8 @@ public class CollectElement : GameElementBase, ICollective
         if (CanCollect)
         {
             BackpackSystem.current.AddToBackpack(m_configData);
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

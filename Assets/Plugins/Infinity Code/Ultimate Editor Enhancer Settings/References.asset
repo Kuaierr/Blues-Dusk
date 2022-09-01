@@ -184,14 +184,24 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
+  - name: S_Parlor
+    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_heya_parlor
+    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: S_heya_toilet
+    path: Assets/GameMain/Scenes/S_heya_toilet.unity
+  - name: C1_Parlor
+    path: Assets/GameMain/Scenes/C1_Parlor.unity
   - name: Prototype_Dialog_UIandDice
     path: Assets/GameMain/Scenes/Prototype_Dialog_UIandDice.unity
   - name: GameMain
     path: Assets/GameMain/Scenes/GameMain.unity
   - name: GameKitDemo_Fsm
     path: Assets/GameKit/Demo/Fsm/GameKitDemo_Fsm.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
   - name: Prototype_Interact
     path: Assets/GameMain/Scenes/Prototype_Interact.unity
   - name: View States
@@ -200,8 +210,6 @@ MonoBehaviour:
     path: Assets/GamePrototype/Scenes/S_test.unity
   - name: S_heya_toilet
     path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
   - name: Demo
     path: Assets/GamePrototype/Resources/Model/AnimeGirls/Casual1/Demo.unity
   - name: Demo
@@ -214,11 +222,3 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype_Dialog.unity
-  - name: Demo
-    path: Assets/GameMain/Arts/40-Simple Icons-Free/Scenes/Demo.unity
-  - name: QuickDev_TabGroup
-    path: Assets/GameKit/Demo/UI/TabGroup/Demo/QuickDev_TabGroup.unity
-  - name: GameKitDemo_TaskPool
-    path: Assets/GameKit/Demo/TaskPool/GameKitDemo_TaskPool.unity
-  - name: GameKitDemo_ReferencePool
-    path: Assets/GameKit/Demo/ReferencePool/GameKitDemo_ReferencePool.unity

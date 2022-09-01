@@ -46,20 +46,20 @@ namespace UnityGameKit.Runtime
                 LoadSceneAsyn(StartScene, callback: () => { CurrentScene = StartScene; });
             switcher = GetComponentInChildren<Switcher>();
         }
-        public void SwitchSceneByDefault(string name)
+        public void SwitchSceneByDefault(string name, UnityAction callback = null)
         {
             if (defaultSwitchType == SceneSwitchType.Swipe)
-                SwitchSceneBySwipe(name);
+                SwitchSceneBySwipe(name, callback);
             else if (defaultSwitchType == SceneSwitchType.LoadingScene)
-                SwitchSceneByLoadingScene(name);
+                SwitchSceneByLoadingScene(name, callback);
             else if (defaultSwitchType == SceneSwitchType.Fade)
-                SwitchSceneByFade(name);
+                SwitchSceneByFade(name, callback);
             else if (defaultSwitchType == SceneSwitchType.Animation)
-                SwitchSceneByAnimation(name);
+                SwitchSceneByAnimation(name, callback);
             else if (defaultSwitchType == SceneSwitchType.Immediately)
-                SwitchScene(name);
+                SwitchScene(name,callback);
         }
-        public void SwitchSceneByAnimation(string name)
+        public void SwitchSceneByAnimation(string name, UnityAction callback = null)
         {
             switcher.animator.gameObject.SetActive(true);
             switcher.animator.SetTrigger("Swicth");
@@ -75,12 +75,13 @@ namespace UnityGameKit.Runtime
                         {
                             switcher.animator.gameObject.SetActive(false);
                         });
+                        callback?.Invoke();
                     });
                 });
             });
         }
 
-        public void SwitchSceneBySwipe(string name)
+        public void SwitchSceneBySwipe(string name, UnityAction callback = null)
         {
             switcher.swiper.gameObject.SetActive(true);
             switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
@@ -95,12 +96,13 @@ namespace UnityGameKit.Runtime
                             switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
                             switcher.swiper.gameObject.SetActive(false);
                         });
+                        callback?.Invoke();
                     });
                 });
             });
         }
 
-        public void SwitchSceneByFade(string name)
+        public void SwitchSceneByFade(string name, UnityAction callback = null)
         {
             switcher.gradienter.gameObject.SetActive(true);
             switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
@@ -114,6 +116,7 @@ namespace UnityGameKit.Runtime
                         {
                             switcher.gradienter.gameObject.SetActive(false);
                         });
+                        callback?.Invoke();
                     });
                 });
             });
@@ -126,6 +129,7 @@ namespace UnityGameKit.Runtime
                 LoadSceneAsyn(name, () =>
                 {
                     CurrentScene = name;
+                    callback?.Invoke();
                 });
             });
         }
@@ -143,6 +147,7 @@ namespace UnityGameKit.Runtime
                         {
                             switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
                             switcher.swiper.gameObject.SetActive(false);
+                            
                         });
                     });
                 });

@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using GameKit;
 using System;
 using System.Collections.Generic;
@@ -177,6 +178,12 @@ namespace UnityGameKit.Runtime
 
         public void Serialize(Stream stream)
         {
+
+            foreach (KeyValuePair<string, string> setting in m_Settings)
+            {
+                Log.Info(setting.Key + " : " + setting.Value);
+            }
+
             using (BinaryWriter binaryWriter = new BinaryWriter(stream, Encoding.UTF8))
             {
                 binaryWriter.Write7BitEncodedInt32(m_Settings.Count);
@@ -198,6 +205,11 @@ namespace UnityGameKit.Runtime
                 {
                     m_Settings.Add(binaryReader.ReadString(), binaryReader.ReadString());
                 }
+            }
+
+            foreach (KeyValuePair<string, string> setting in m_Settings)
+            {
+                Log.Info(setting.Key + " : " + setting.Value);
             }
         }
     }

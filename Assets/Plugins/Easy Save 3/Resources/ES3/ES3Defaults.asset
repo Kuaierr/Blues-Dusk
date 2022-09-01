@@ -30,17 +30,17 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp
+    - Assembly-CSharp-firstpass
     - GameKit
     - Cinemachine
     - Febucci.TextAnimator.Runtime
-    - Assembly-CSharp-firstpass
     - UltimateEditorEnhancer
     - DOTween.Modules
     - PsdPlugin
     - Febucci.TextAnimator.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
-  autoUpdateReferences: 1
+  autoUpdateReferences: 0
   addAllPrefabsToManager: 1
   logDebugInfo: 0
   logWarnings: 1

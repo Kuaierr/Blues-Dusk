@@ -1,15 +1,15 @@
+using GameKit.Setting;
 namespace GameKit.Element
 {
-    public interface IElement
+    public interface IElement : ISaveable
     {
+        string Name { get; }
         int DataId { get; }
-        void OnDestory();
-        void OnRefresh();
+        void OnInit();
         void Show();
         void Hide();
         void OnHighlightEnter();
         void OnHighlightExit();
         void OnInteract();
-        void SetManager(IElementManager manager);
     }
-}   
+}
