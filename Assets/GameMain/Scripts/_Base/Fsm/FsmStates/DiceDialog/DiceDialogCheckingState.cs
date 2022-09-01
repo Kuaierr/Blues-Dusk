@@ -2,11 +2,15 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DiceDialogCheckingState : FsmState<DialogComponent>, IReference
+/// <summary>
+/// 长按「鉴定」按钮的状态
+/// 如果放开按钮，就切换回到Selecting状态
+/// </summary>
+public class DiceDialogCheckingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     public void Clear()
     {
 

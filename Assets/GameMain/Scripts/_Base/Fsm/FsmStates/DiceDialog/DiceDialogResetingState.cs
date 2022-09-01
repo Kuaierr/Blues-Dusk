@@ -2,11 +2,15 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DiceDialogResetingState : FsmState<DialogComponent>, IReference
+/// <summary>
+/// 骰子均静止后，将其按照规定的顺序排列
+/// 排序完成后进入Choosing
+/// </summary>
+public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     public void Clear()
     {
 

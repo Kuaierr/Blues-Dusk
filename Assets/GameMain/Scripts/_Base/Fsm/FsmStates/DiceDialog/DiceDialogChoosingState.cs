@@ -2,11 +2,14 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using UnityGameKit.Runtime;
-using FsmInterface = GameKit.Fsm.IFsm<UnityGameKit.Runtime.DialogComponent>;
+using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
-public class DiceDialogChoosingState : FsmState<DialogComponent>, IReference
+/// <summary>
+/// 骰子的运动完全结束，选择选项的阶段
+/// </summary>
+public class DiceDialogChoosingState : FsmState<UI_Dialog>, IReference
 {
-    private DialogComponent fsmMaster;
+    private UI_Dialog fsmMaster;
     public void Clear()
     {
 
