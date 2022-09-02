@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UI_DiceFace : MonoBehaviour
 {
-    public string Value { get; private set; } = "";
-
-    public Vector3 finalRotation = new Vector3();
-
+    private UI_DiceFaceBase_SO _data;
+    
     private MeshRenderer _meshRenderer;
     private Texture _texture;
+    
+    public Vector3 finalRotation = new Vector3();
 
     public Material CurrentMaterial
     {
@@ -25,17 +25,17 @@ public class UI_DiceFace : MonoBehaviour
         set => _meshRenderer.material.mainTexture = value;
     }
 
-    public void OnInit(UI_DiceFace_SO faceData)
+    public void OnInit(UI_DiceFaceBase_SO faceBaseData)
     {
-        Value = faceData.name;
+        _data = faceBaseData;
 
         _meshRenderer = GetComponent<MeshRenderer>();
-        _texture = CurrentTexture = faceData.icon.texture;
+        _texture = CurrentTexture = faceBaseData.icon.texture;
     }
 
-    public string GetValue()
+    public UI_DiceFaceBase_SO GetValue()
     {
-        return Value;
+        return _data;
     }
 
     public Vector3 GetFinalRotation()

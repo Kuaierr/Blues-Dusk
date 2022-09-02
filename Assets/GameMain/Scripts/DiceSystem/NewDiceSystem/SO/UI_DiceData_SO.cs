@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO 后续应该会接入用excel的配置，因为不清楚背包道具的结构，先临时使用
+//似乎不需要配表了 继续沿用这个用法？
+//TODO 如何接入背包
 [CreateAssetMenu(fileName = "New Dice",menuName = "GameMain/DiceData/DiceAsset")]
 public class UI_DiceData_SO : ScriptableObject
 {
 	public new string name;
-	public string type;
+	
+	[TextArea]
+	public string description;
+	public string type => consume ? "闪念" : "定势";
 
 	[Space]
-	public List<UI_DiceFace_SO> faceDatas = new List<UI_DiceFace_SO>();
+	[Tooltip("定势/闪念")]
+	public bool consume = false;
+	
+	[Space]
+	[Tooltip("Up,Down,Right,Left,Forward,Back")]
+	public List<UI_DiceFaceBase_SO> faceDatas = new List<UI_DiceFaceBase_SO>();
 
 	/*public UI_DiceFace_SO up;
 	public UI_DiceFace_SO down;

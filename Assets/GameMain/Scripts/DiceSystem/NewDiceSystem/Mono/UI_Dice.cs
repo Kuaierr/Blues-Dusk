@@ -42,7 +42,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
     public NoParameterEvent_SO onDiceMouseExit;
 
-    public string Result { get; private set; } = null;
+    public Dice_SuitType Result { get; private set; }
 
     public bool Stopped => _rb.velocity == Vector3.zero;
     private Vector3 _finalRotation;
@@ -90,7 +90,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
     public void ChangeToDiceUIMaterial() => ChangeDiceMaterial(diceUIMaterial);
 
-    public string GetResult()
+    public UI_DiceFaceBase_SO GetResult()
     {
         UI_DiceFace resFace = faces[0];
         foreach (UI_DiceFace face in faces)
@@ -101,8 +101,8 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         
         _finalRotation = resFace.finalRotation;
         
-        Result = resFace.Value;
-        return resFace.Value;
+        Result = resFace.GetValue().Type;
+        return resFace.GetValue();
     }
 
     public void Roll()
@@ -127,12 +127,20 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
         dice.DOMove(transform.position, 0.5f);
         dice.DORotate(_finalRotation, 0.5f);
+
+        this.enabled = false;
     }
 
     private void ChangeDiceMaterial(Material mat)
     {
         foreach (UI_DiceFace face in faces)
             face.CurrentMaterial = mat;
+
+        //替换一下骰子本体的shader
+        var diceMat = _rb.GetComponent<MeshRenderer>();
+        Texture diceTex = diceMat.material.mainTexture;
+        diceMat.material = mat;
+        diceMat.material.mainTexture = diceTex;
     }
 
     //需要一个Image作为鼠标判定的范围
