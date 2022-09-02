@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9164bf18c56c4dc499af4b2ed99a8f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConfigHelperTypeName: UnityGameKit.Runtime.DefaultConfigHelper
+  m_ConfigHelperTypeName: LubanConfigHelper
   m_CustomConfigHelper: {fileID: 0}
   m_CachedBytesSize: 0
 --- !u!1 &719977327
@@ -828,7 +828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1149099945
 Transform:
   m_ObjectHideFlags: 0
@@ -856,7 +856,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AvailableProcedureTypeNames:
+  - ProcedureChangeScene
+  - ProcedureInitResources
   - ProcedureLaunch
+  - ProcedureMain
+  - ProcedureMenu
+  - ProcedurePreload
+  - ProcedureSplash
   m_EntranceProcedureTypeName: ProcedureLaunch
 --- !u!1 &1201495380
 GameObject:

@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GameKit
 {
@@ -83,6 +85,16 @@ namespace GameKit
                     throw new GameKitException(Text.Format("Can not convert to object with exception '{0}'.", exception), exception);
                 }
             }
+
+            // public static string DictionaryToJson(Dictionary<string, string> myDic)
+            // {
+            //     return JsonConvert.SerializeObject(myDic);
+            // }
+
+            // public static Dictionary<string, string> JsonToDictionary(string jsonStr)
+            // {
+            //     return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonStr);
+            // }
         }
     }
 }

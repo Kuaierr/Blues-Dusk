@@ -48,6 +48,11 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public override bool ReadExternalData(IConfigManager configManager, string configAssetName, object userData)
+        {
+            return false;
+        }
+ 
         public override bool ParseData(IConfigManager configManager, string configString, object userData)
         {
             try

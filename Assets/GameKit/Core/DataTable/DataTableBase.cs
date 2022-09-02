@@ -88,6 +88,11 @@ namespace GameKit.DataTable
         {
             m_DataProvider.ReadData(dataTableAssetName, priority, userData);
         }
+        
+        public void ReadExternalData(string dataTableAssetName, int priority, object userData)
+        {
+            m_DataProvider.ReadExternalData(dataTableAssetName, priority, userData);
+        }
 
         public bool ParseData(string dataTableString)
         {
@@ -126,7 +131,7 @@ namespace GameKit.DataTable
         public abstract bool AddDataRow(byte[] dataRowBytes, int startIndex, int length, object userData);
 
         public abstract bool AddDataRow(object dataRowRaw, object userData);
-        
+
         public abstract bool RemoveDataRow(int id);
 
         public abstract void RemoveAllDataRows();

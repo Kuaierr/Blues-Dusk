@@ -44,6 +44,13 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public override bool ReadExternalData(DataTableBase dataTable, string rawData, object userData)
+        {
+            return true;
+        }
+
+
+
         public override bool ParseData(DataTableBase dataTable, string dataTableString, object userData)
         {
             try

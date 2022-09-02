@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using GameKit;
 using SimpleJSON;
@@ -12,6 +13,7 @@ public class DataTable : SingletonBase<DataTable>
     private TbDice m_DiceTable;
     private TbUIConfig m_UIConfigTable;
     private TbEntityConfig m_EntityConfigTable;
+    private TbGameConfig m_GameConfigTable;
     private Tables DataTables
     {
         get
@@ -71,6 +73,16 @@ public class DataTable : SingletonBase<DataTable>
         }
     }
 
+    public TbGameConfig GameConfigTable
+    {
+        get
+        {
+            if (m_GameConfigTable == null)
+                m_GameConfigTable = DataTables.TbGameConfig;
+            return m_GameConfigTable;
+        }
+    }
+
     private JSONNode LoadByJson(string fileName)
     {
         // string jsonData = File.ReadAllText(Application.dataPath + "/LubanGen/Datas/json/" + fileName + ".json", System.Text.Encoding.UTF8);
@@ -80,7 +92,8 @@ public class DataTable : SingletonBase<DataTable>
             runtimeJsonData = data.text;
         });
         return JSON.Parse(runtimeJsonData);
-        // m_DataTables.TbDefaultSetting.
     }
+
+
 
 }

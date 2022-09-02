@@ -9,9 +9,29 @@ namespace GameKit
             return str.Trim().Replace(((char)13).ToString(), "").Replace('\u200B'.ToString(), "");
         }
 
-        public static string RemoveBracket(this string str)
+        public static string RemoveBrackets(this string str)
+        {
+            return str.RemoveCurlyBrackets().RemoveParentheses().RemoveSquareBrackets();
+        }
+
+        public static string RemoveCurlyBrackets(this string str)
+        {
+            return str.Replace("{", "").Replace("}", "");
+        }
+
+        public static string RemoveParentheses(this string str)
         {
             return str.Replace("(", "").Replace(")", "");
+        }
+
+        public static string RemoveSquareBrackets(this string str)
+        {
+            return str.Replace("[", "").Replace("]", "");
+        }
+
+        public static string RemoveLast(this string str)
+        {
+            return str.Remove(str.Length - 1);
         }
 
         public static string[] SafeSplit(this string str, params char[] separator)

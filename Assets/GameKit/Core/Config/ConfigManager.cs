@@ -115,6 +115,11 @@ namespace GameKit.Config
             m_DataProvider.ReadData(configAssetName, priority, userData);
         }
 
+        public void ReadExternalData(string configAssetName, int priority, object userData)
+        {
+            m_DataProvider.ReadExternalData(configAssetName, priority, userData);
+        }
+
         public bool ParseData(string configString)
         {
             return m_DataProvider.ParseData(configString);

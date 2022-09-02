@@ -101,6 +101,11 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public override bool ReadExternalData(ILocalizationManager localizationManager, string dictionaryAssetName, object userData)
+        {
+            return false;
+        }
+
         public override bool ParseData(ILocalizationManager localizationManager, string dictionaryString, object userData)
         {
             try

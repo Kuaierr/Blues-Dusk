@@ -1,20 +1,24 @@
+using System.IO.Compression;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using SceneInstance = UnityEngine.ResourceManagement.ResourceProviders.SceneInstance;
 #if PACKAGE_ADDRESSABLES
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+
 
 namespace GameKit
 {
     public class AddressableManager : SingletonBase<AddressableManager>
     {
-        private Dictionary<int, AsyncOperationHandle> m_cachedHandles;
+        private Dictionary<string, AsyncOperationHandle> m_cachedHandles;
         public AddressableManager()
         {
-            m_cachedHandles = new Dictionary<int, AsyncOperationHandle>();
+            m_cachedHandles = new Dictionary<string, AsyncOperationHandle>();
         }
 
         IEnumerator GetBinaryProcess(string keyName, UnityAction<byte[]> onSuccess, UnityAction onFail)
@@ -24,11 +28,45 @@ namespace GameKit
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 onSuccess?.Invoke(handle.Result.bytes);
-                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
-                    m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
+                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID().ToString()))
+                    m_cachedHandles.Add(handle.Result.GetInstanceID().ToString(), handle);
             }
             else
                 onFail?.Invoke();
+        }
+
+        IEnumerator LoadSceneProcess(string keyName, LoadSceneMode loadMode, bool activeOnLoad, UnityAction onSuccess, UnityAction onFail)
+        {
+            AsyncOperationHandle handle = Addressables.LoadSceneAsync(keyName, loadMode, activeOnLoad);
+            yield return handle;
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                onSuccess.Invoke();
+                if (!m_cachedHandles.ContainsKey(keyName))
+                    m_cachedHandles.Add(keyName, handle);
+            }
+            else
+                onFail?.Invoke();
+        }
+
+        IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
+        {
+            if (m_cachedHandles.ContainsKey(keyName))
+            {
+                AsyncOperationHandle handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+                yield return handle;
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    onSuccess.Invoke();
+                    if (!m_cachedHandles.ContainsKey(keyName))
+                        m_cachedHandles.Add(keyName, handle);
+                }
+                else
+                    onFail?.Invoke();
+            }
+            yield return null;
+            Utility.Debugger.LogFail("Try Unload invalid scene {0}", keyName);
+            onFail?.Invoke();
         }
 
         IEnumerator GetTextProcess(string keyName, UnityAction<string> onSuccess, UnityAction onFail)
@@ -38,8 +76,8 @@ namespace GameKit
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 onSuccess?.Invoke(handle.Result.text);
-                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
-                    m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
+                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID().ToString()))
+                    m_cachedHandles.Add(handle.Result.GetInstanceID().ToString(), handle);
             }
             else
                 onFail?.Invoke();
@@ -52,8 +90,8 @@ namespace GameKit
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 onSuccess?.Invoke(handle.Result as T);
-                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
-                    m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
+                if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID().ToString()))
+                    m_cachedHandles.Add(handle.Result.GetInstanceID().ToString(), handle);
             }
             else
                 onFail?.Invoke();
@@ -70,13 +108,23 @@ namespace GameKit
 
             yield return handle;
             callback?.Invoke(handle.Result as IList<T>);
-            if (!m_cachedHandles.ContainsKey(handle.Result.First().GetInstanceID()))
-                m_cachedHandles.Add(handle.Result.First().GetInstanceID(), handle);
+            if (!m_cachedHandles.ContainsKey(handle.Result.First().GetInstanceID().ToString()))
+                m_cachedHandles.Add(handle.Result.First().GetInstanceID().ToString(), handle);
         }
 
         public void GetAssetAsyn<T>(string keyName, UnityAction<T> onSuccess = null, UnityAction onFail = null) where T : Object
         {
-            QuickMonoManager.instance.StartCoroutine(GetAsynProcess<T>(keyName, onSuccess, onFail));  
+            QuickMonoManager.instance.StartCoroutine(GetAsynProcess<T>(keyName, onSuccess, onFail));
+        }
+
+        public void LoadSceneAsyn(string keyName, LoadSceneMode loadMode = LoadSceneMode.Additive, bool activeOnLoad = true, UnityAction onSuccess = null, UnityAction onFail = null)
+        {
+            QuickMonoManager.instance.StartCoroutine(LoadSceneProcess(keyName, loadMode, activeOnLoad, onSuccess, onFail));
+        }
+
+        public void UnloadSceneAsyn(string keyName, bool autoReleaseHanld = true, UnityAction onSuccess = null, UnityAction onFail = null)
+        {
+            QuickMonoManager.instance.StartCoroutine(UnloadSceneProcess(keyName, autoReleaseHanld, onSuccess, onFail));
         }
 
         public void GetBinaryAsyn(string keyName, UnityAction<byte[]> onSuccess = null, UnityAction onFail = null)
@@ -104,9 +152,8 @@ namespace GameKit
             AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(keyName);
             T result = handle.WaitForCompletion();
             action?.Invoke(result);
-            if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID()))
-                m_cachedHandles.Add(handle.Result.GetInstanceID(), handle);
-            
+            if (!m_cachedHandles.ContainsKey(handle.Result.GetInstanceID().ToString()))
+                m_cachedHandles.Add(handle.Result.GetInstanceID().ToString(), handle);
         }
 
         public void GetAssets<T>(IList<string> labels, UnityAction<IList<T>> action) where T : Object
@@ -114,8 +161,8 @@ namespace GameKit
             AsyncOperationHandle<IList<T>> handle = Addressables.LoadAssetsAsync<T>(labels, null);
             IList<T> result = handle.WaitForCompletion();
             action?.Invoke(result);
-            if (!m_cachedHandles.ContainsKey(handle.Result.First().GetInstanceID()))
-                m_cachedHandles.Add(handle.Result.First().GetInstanceID(), handle);
+            if (!m_cachedHandles.ContainsKey(handle.Result.First().GetInstanceID().ToString()))
+                m_cachedHandles.Add(handle.Result.First().GetInstanceID().ToString(), handle);
         }
 
         public override void Clear()
@@ -133,7 +180,7 @@ namespace GameKit
         public void ReleaseHandle(object obj)
         {
             Object monoObj = (Object)obj;
-            int instanceId = monoObj.GetInstanceID();
+            string instanceId = monoObj.GetInstanceID().ToString();
             if (m_cachedHandles.ContainsKey(instanceId))
             {
                 Utility.Debugger.LogSuccess("Release Asset Handle {0}.", monoObj.name);

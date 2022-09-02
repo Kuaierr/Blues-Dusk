@@ -1,9 +1,4 @@
-//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://GameKit.cn/
-// Feedback: mailto:ellan@GameKit.cn
-//------------------------------------------------------------
+
 
 using System.Collections.Generic;
 using UnityGameKit.Runtime;
@@ -84,7 +79,7 @@ public class ProcedureMain : ProcedureBase
         m_GotoMenuDelaySeconds += elapseSeconds;
         if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
         {
-            procedureOwner.SetData<VarInt32>("NextSceneId", GameKitCenter.Config.GetInt("Scene.Menu"));
+            procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Menu"));
             ChangeState<ProcedureChangeScene>(procedureOwner);  
         }
     }

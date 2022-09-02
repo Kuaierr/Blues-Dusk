@@ -59,13 +59,23 @@ public class ProcedurePreload : ProcedureBase
             }
         }
 
-        // procedureOwner.SetData<VarInt32>("NextSceneId", GameKitCenter.Config.GetInt("Scene.Menu"));
-        procedureOwner.SetData<VarString>("NextSceneName", "SceneMenu");
+        // procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Menu"));
+        procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMenu");
         ChangeState<ProcedureChangeScene>(procedureOwner);
     }
 
     private void PreloadResources()
     {
+        // for (int i = 0; i < DataTable.instance.GameConfigTable.; i++)
+        // {
+            
+        // }
+        // if(!GameKitCenter.Setting.HasSetting("GameProcedureSetting"))
+        // {
+        //     // GameKitCenter.Setting.SetString
+        // }
+        GameKitCenter.Config.ReadExternalData("TbGameConfig", null);
+        // GameKitCenter.
         // Preload configs
         LoadConfig("DefaultConfig");
 
@@ -84,9 +94,10 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadConfig(string configName)
     {
-        string configAssetName = AssetUtility.GetConfigAsset(configName, false);
-        m_LoadedFlag.Add(configAssetName, false);
-        GameKitCenter.Config.ReadData(configAssetName, this);
+        // string configAssetName = AssetUtility.GetConfigAsset(configName, false);
+        // m_LoadedFlag.Add(configAssetName, false);
+        // GameKitCenter.Config.ReadData(configAssetName, this);
+        
     }
 
     private void LoadDataTable(string dataTableName)
@@ -98,8 +109,8 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadDictionary(string dictionaryName)
     {
-        string dictionaryAssetName = AssetUtility.GetDictionaryAsset(dictionaryName, false);
-        m_LoadedFlag.Add(dictionaryAssetName, false);
+        // string dictionaryAssetName = AssetUtility.GetDictionaryAsset(dictionaryName, false);
+        // m_LoadedFlag.Add(dictionaryAssetName, false);
         // GameKitCenter.Localization.ReadData(dictionaryAssetName, this);
     }
 

@@ -44,23 +44,39 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public override bool ReadExternalData(DataTableBase dataTable, string dataTableData, object userData)
+        {
+            string rawData = DataTable.instance.GetRawString(dataTableData);
+            if (rawData == null)
+            {
+                Log.Fail("Can not to load external data {0}", dataTableData);
+                return false;
+            }
+            return dataTable.ParseData(rawData, userData);
+        }
+
         public override bool ParseData(DataTableBase dataTable, string dataTableString, object userData)
         {
             try
             {
                 int position = 0;
-                string dataRowString = null;
-                while ((dataRowString = dataTableString.ReadLine(ref position)) != null)
+                string configLineString = null;
+                while ((configLineString = dataTableString.ReadLine(ref position)) != null)
                 {
-                    if (dataRowString[0] == '#')
+                    configLineString = configLineString.RemoveBrackets().RemoveLast();
+                    Log.Info(configLineString);
+                    string[] splitedLine = configLineString.Split(',');
+                    for (int i = 0; i < splitedLine.Length; i++)
                     {
-                        continue;
-                    }
-
-                    if (!dataTable.AddDataRow(dataRowString, userData))
-                    {
-                        Log.Warning("Can not parse data row string '{0}'.", dataRowString);
-                        return false;
+                        string[] splitedField = splitedLine[i].Split(':');
+                        string dataRowName = splitedField[0].Correction();
+                        string dataRowValue = splitedField[1].Correction();
+                        Log.Info(dataRowName);
+                        if (!dataTable.AddDataRow(dataRowName, dataRowValue))
+                        {
+                            Log.Warning("Can not add config with config name '{0}' which may be invalid or duplicate.", dataRowName);
+                            return false;
+                        }
                     }
                 }
 
@@ -68,7 +84,7 @@ namespace UnityGameKit.Runtime
             }
             catch (Exception exception)
             {
-                Log.Warning("Can not parse data table string with exception '{0}'.", exception);
+                Log.Warning("Can not parse config string with exception '{0}'.", exception);
                 return false;
             }
         }

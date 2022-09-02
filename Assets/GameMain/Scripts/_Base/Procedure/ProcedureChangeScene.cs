@@ -7,7 +7,6 @@ using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 public class ProcedureChangeScene : ProcedureBase
 {
     private const int MenuSceneId = 1;
-
     private bool m_ChangeToMenu = false;
     private bool m_IsChangeSceneComplete = false;
     private int m_BackgroundMusicId = 0;
@@ -23,6 +22,8 @@ public class ProcedureChangeScene : ProcedureBase
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
         base.OnEnter(procedureOwner);
+
+        Log.Info(GameKitCenter.Config.GetBool("IsDavidDead"));
 
         m_IsChangeSceneComplete = false;
 
@@ -47,8 +48,8 @@ public class ProcedureChangeScene : ProcedureBase
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();
 
-        // int sceneId = procedureOwner.GetData<VarInt32>("NextSceneId");
-        string sceneName = procedureOwner.GetData<VarString>("NextSceneName");
+        // int sceneId = procedureOwner.GetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID);
+        string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
         // m_ChangeToMenu = sceneId == MenuSceneId;
         // IDataTable<DRScene> dtScene = GameKitCenter.DataTable.GetDataTable<DRScene>();
         // DRScene drScene = dtScene.GetDataRow(sceneId);

@@ -22,7 +22,7 @@ public class ProcedureSplash : ProcedureBase
         if (GameKitCenter.Core.EditorResourceMode)
         {
             // 编辑器模式
-            Log.Info("Editor resource mode detected.");
+            // Log.Info("Editor resource mode detected.");
             ChangeState<ProcedurePreload>(procedureOwner);
         }
         // else if (GameKitCenter.Resource.ResourceMode == ResourceMode.Package)

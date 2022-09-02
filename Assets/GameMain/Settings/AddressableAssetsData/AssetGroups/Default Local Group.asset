@@ -33,6 +33,14 @@ MonoBehaviour:
     m_Address: Assets/GameMain/UI/UIForms/UI_Dialog.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 89de9a6f8c9de114bbcdb8f9925ec730
+    m_Address: Assets/GameMain/Scenes/GameMenu.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2e86f317e4f1829459daac414a32a0f5
+    m_Address: Assets/GameMain/Scenes/GameChangeScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

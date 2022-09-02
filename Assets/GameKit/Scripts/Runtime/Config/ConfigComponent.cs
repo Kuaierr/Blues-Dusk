@@ -129,6 +129,11 @@ namespace UnityGameKit.Runtime
             m_ConfigManager.ReadData(configAssetName, priority, userData);
         }
 
+        public void ReadExternalData(string configName, object userData)
+        {
+            m_ConfigManager.ReadExternalData(configName, 0, userData);
+        }
+
         public bool ParseData(string configString)
         {
             return m_ConfigManager.ParseData(configString);
@@ -229,5 +234,7 @@ namespace UnityGameKit.Runtime
             Log.Warning("Load config failure, asset name '{0}', error message '{1}'.", e.DataAssetName, e.ErrorMessage);
             m_EventComponent.Fire(this, LoadConfigFailureEventArgs.Create(e));
         }
+
+
     }
 }

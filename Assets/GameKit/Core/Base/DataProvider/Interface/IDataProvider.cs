@@ -16,6 +16,8 @@ namespace GameKit
 
         void ReadData(string dataAssetName, int priority, object userData);
 
+        void ReadExternalData(string dataAssetName, int priority, object userData);
+
         bool ParseData(string dataString);
 
         bool ParseData(string dataString, object userData);

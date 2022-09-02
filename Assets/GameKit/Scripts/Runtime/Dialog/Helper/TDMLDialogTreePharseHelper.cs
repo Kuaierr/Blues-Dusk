@@ -160,7 +160,7 @@ namespace UnityGameKit.Runtime
                     {
                         data.IsCompleter = true;
                         // Utility.Debugger.Log(smallBracketRegex.Match(value));
-                        data.CompleteConditons = value.Trim().RemoveBracket().Split('&').ToList();
+                        data.CompleteConditons = value.Trim().RemoveParentheses().Split('&').ToList();
                         foreach (var condition in data.CompleteConditons)
                         {
                             if (!m_CachedDialogTree.LocalConditions.ContainsKey(condition))
@@ -179,7 +179,7 @@ namespace UnityGameKit.Runtime
                             return;
                         }
 
-                        data.DividerConditions = cparams[0].Trim().RemoveBracket().Split('&').ToList();
+                        data.DividerConditions = cparams[0].Trim().RemoveParentheses().Split('&').ToList();
                         // Utility.Debugger.Log(smallBracketRegex.Match(cparams[0]));
                         CachedLinkToDeclared(node, cparams[1]);
                         CachedLinkToDeclared(node, cparams[2]);

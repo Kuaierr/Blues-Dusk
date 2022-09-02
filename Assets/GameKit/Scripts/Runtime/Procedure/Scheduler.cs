@@ -34,6 +34,7 @@ namespace UnityGameKit.Runtime
         public bool HasScene(string name)
         {
             // SceneManager.
+            // SceneManager.
             return true;
         }
 

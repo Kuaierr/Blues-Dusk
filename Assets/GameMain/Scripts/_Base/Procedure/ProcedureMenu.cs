@@ -1,9 +1,4 @@
-//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://GameKit.cn/
-// Feedback: mailto:ellan@GameKit.cn
-//------------------------------------------------------------
+
 
 using GameKit.Event;
 using UnityGameKit.Runtime;
@@ -57,7 +52,7 @@ public class ProcedureMenu : ProcedureBase
 
         if (m_StartGame)
         {
-            procedureOwner.SetData<VarInt32>("NextSceneId", GameKitCenter.Config.GetInt("Scene.Main"));
+            procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Main"));
             // procedureOwner.SetData<VarByte>("GameMode", (byte)GameMode.Survival);
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }

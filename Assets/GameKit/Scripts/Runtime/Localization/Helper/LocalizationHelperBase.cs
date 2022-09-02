@@ -17,6 +17,8 @@ namespace UnityGameKit.Runtime
 
         public abstract bool ReadData(ILocalizationManager localizationManager, string dictionaryAssetName, byte[] dictionaryBytes, int startIndex, int length, object userData);
 
+        public abstract bool ReadExternalData(ILocalizationManager localizationManager, string rawData, object userData);
+
         public abstract bool ParseData(ILocalizationManager localizationManager, string dictionaryString, object userData);
 
         public abstract bool ParseData(ILocalizationManager localizationManager, byte[] dictionaryBytes, int startIndex, int length, object userData);

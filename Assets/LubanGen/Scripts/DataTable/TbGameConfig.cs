@@ -16,47 +16,37 @@ namespace LubanConfig.DataTable
 
 public sealed partial class TbGameConfig
 {
-    private readonly Dictionary<bool, DataTable.GameConfig> _dataMap;
-    private readonly List<DataTable.GameConfig> _dataList;
-    
+
+     private readonly DataTable.GameConfig _data;
+
     public TbGameConfig(JSONNode _json)
     {
-        _dataMap = new Dictionary<bool, DataTable.GameConfig>();
-        _dataList = new List<DataTable.GameConfig>();
-        
-        foreach(JSONNode _row in _json.Children)
+        if(!_json.IsArray)
         {
-            var _v = DataTable.GameConfig.DeserializeGameConfig(_row);
-            _dataList.Add(_v);
-            _dataMap.Add(_v.IsDavidDead, _v);
+            throw new SerializationException();
         }
+        if (_json.Count != 1) throw new SerializationException("table mode=one, but size != 1");
+        _data = DataTable.GameConfig.DeserializeGameConfig(_json[0]);
         PostInit();
     }
 
-    public Dictionary<bool, DataTable.GameConfig> DataMap => _dataMap;
-    public List<DataTable.GameConfig> DataList => _dataList;
-
-    public DataTable.GameConfig GetOrDefault(bool key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public DataTable.GameConfig Get(bool key) => _dataMap[key];
-    public DataTable.GameConfig this[bool key] => _dataMap[key];
+     public bool IsDavidDead => _data.IsDavidDead;
+     public bool IsRebellionStart => _data.IsRebellionStart;
+     public int CurrentDay => _data.CurrentDay;
+     public int CurrentWeekday => _data.CurrentWeekday;
+     public int CurrentWeek => _data.CurrentWeek;
 
     public void Resolve(Dictionary<string, object> _tables)
     {
-        foreach(var v in _dataList)
-        {
-            v.Resolve(_tables);
-        }
+        _data.Resolve(_tables);
         PostResolve();
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
-        foreach(var v in _dataList)
-        {
-            v.TranslateText(translator);
-        }
+        _data.TranslateText(translator);
     }
-    
+
     
     partial void PostInit();
     partial void PostResolve();

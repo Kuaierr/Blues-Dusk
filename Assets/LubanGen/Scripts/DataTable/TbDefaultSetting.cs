@@ -16,29 +16,29 @@ namespace LubanConfig.DataTable
 
 public sealed partial class TbDefaultSetting
 {
-    private readonly Dictionary<int, DataTable.DefaultSetting> _dataMap;
+    private readonly Dictionary<bool, DataTable.DefaultSetting> _dataMap;
     private readonly List<DataTable.DefaultSetting> _dataList;
     
     public TbDefaultSetting(JSONNode _json)
     {
-        _dataMap = new Dictionary<int, DataTable.DefaultSetting>();
+        _dataMap = new Dictionary<bool, DataTable.DefaultSetting>();
         _dataList = new List<DataTable.DefaultSetting>();
         
         foreach(JSONNode _row in _json.Children)
         {
             var _v = DataTable.DefaultSetting.DeserializeDefaultSetting(_row);
             _dataList.Add(_v);
-            _dataMap.Add(_v.GuildOpenLevel, _v);
+            _dataMap.Add(_v.IsDavidDead, _v);
         }
         PostInit();
     }
 
-    public Dictionary<int, DataTable.DefaultSetting> DataMap => _dataMap;
+    public Dictionary<bool, DataTable.DefaultSetting> DataMap => _dataMap;
     public List<DataTable.DefaultSetting> DataList => _dataList;
 
-    public DataTable.DefaultSetting GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public DataTable.DefaultSetting Get(int key) => _dataMap[key];
-    public DataTable.DefaultSetting this[int key] => _dataMap[key];
+    public DataTable.DefaultSetting GetOrDefault(bool key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public DataTable.DefaultSetting Get(bool key) => _dataMap[key];
+    public DataTable.DefaultSetting this[bool key] => _dataMap[key];
 
     public void Resolve(Dictionary<string, object> _tables)
     {

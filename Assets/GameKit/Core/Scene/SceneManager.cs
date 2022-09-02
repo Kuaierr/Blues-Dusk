@@ -254,8 +254,18 @@ namespace GameKit.Scene
 
             m_LoadingSceneAssetNames.Add(sceneAssetName);
 
-            m_SceneHelper.LoadScene(sceneAssetName, priority, m_LoadSceneCallbacks, userData);
+            // m_SceneHelper.LoadScene(sceneAssetName, priority, m_LoadSceneCallbacks, userData);
+
             // m_ResourceManager.LoadScene(sceneAssetName, priority, m_LoadSceneCallbacks, userData);
+
+            AddressableManager.instance.LoadSceneAsyn(sceneAssetName, onSuccess: () =>
+                {
+                    LoadSceneSuccessCallback(sceneAssetName, 0, null);
+                },
+                onFail: () =>
+                {
+                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", null);
+                });
         }
 
         public void UnloadScene(string sceneAssetName)
@@ -292,9 +302,17 @@ namespace GameKit.Scene
             }
 
             m_UnloadingSceneAssetNames.Add(sceneAssetName);
-            m_SceneHelper.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
-
+            // m_SceneHelper.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
             // m_ResourceManager.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
+
+            AddressableManager.instance.UnloadSceneAsyn(sceneAssetName, onSuccess: () =>
+                {
+                    LoadSceneSuccessCallback(sceneAssetName, 0, null);
+                },
+                onFail: () =>
+                {
+                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", null);
+                });
         }
 
         private void LoadSceneSuccessCallback(string sceneAssetName, float duration, object userData)

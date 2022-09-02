@@ -184,12 +184,22 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: S_Toilet
-    path: Assets/GameMain/Scenes/S_Toilet.unity
-  - name: S_Parlor
-    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_Dialog_DiceDev
+    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: Prototype_Dialog_UIandDice
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
+  - name: S_Parlor
+    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: GameMenu
+    path: Assets/GameMain/Scenes/GameMenu.unity
+  - name: AnimationTest
+    path: Assets/GameMain/Testing/AnimationTest/AnimationTest.unity
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
   - name: S_heya_toilet
@@ -212,13 +222,3 @@ MonoBehaviour:
     path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
   - name: Demo
     path: Assets/GamePrototype/Resources/Model/AnimeGirls/Casual1/Demo.unity
-  - name: Demo
-    path: Assets/GamePrototype/Prototype Kit 1/Demo.unity
-  - name: Testing
-    path: Assets/GameMain/Testing/Testing.unity
-  - name: Prototype_Inventory
-    path: Assets/GameMain/Scenes/Prototype_Inventory.unity
-  - name: Prototype_Dialog_DiceDev
-    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype_Dialog.unity

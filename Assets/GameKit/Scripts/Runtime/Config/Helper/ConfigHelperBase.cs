@@ -10,10 +10,14 @@ namespace UnityGameKit.Runtime
 
         public abstract bool ReadData(IConfigManager configManager, string configAssetName, byte[] configBytes, int startIndex, int length, object userData);
 
+        public abstract bool ReadExternalData(IConfigManager configManager, string configAssetName, object userData);
+
         public abstract bool ParseData(IConfigManager configManager, string configString, object userData);
 
         public abstract bool ParseData(IConfigManager configManager, byte[] configBytes, int startIndex, int length, object userData);
 
         public abstract void ReleaseDataAsset(IConfigManager configManager, object configAsset);
+
+
     }
 }

@@ -151,6 +151,54 @@ namespace GameKit
             }
         }
 
+
+        public void ReadExternalData(string dataAssetName, int priority, object userData)
+        {
+            // if (m_ResourceManager == null)
+            // {
+            //     throw new GameKitException("You must set resource manager first.");
+            // }
+
+            // HasAssetResult result = m_ResourceManager.HasAsset(dataAssetName);
+            // EnsureCachedBytesSize(dataLength);
+            // if (dataLength != m_ResourceManager.LoadBinaryFromFileSystem(dataAssetName, s_CachedBytes))
+            // {
+            //     throw new GameKitException(Utility.Text.Format("Load binary '{0}' from file system with internal error.", dataAssetName));
+            // }
+
+            if (m_DataProviderHelper == null)
+            {
+                throw new GameKitException("You must set data provider helper first.");
+            }
+
+            try
+            {
+                if (!m_DataProviderHelper.ReadExternalData(m_Owner, dataAssetName, userData))
+                {
+                    throw new GameKitException(Utility.Text.Format("Load data failure in data provider helper, data asset name '{0}'.", dataAssetName));
+                }
+
+                if (m_ReadDataSuccessEventHandler != null)
+                {
+                    ReadDataSuccessEventArgs loadDataSuccessEventArgs = ReadDataSuccessEventArgs.Create(dataAssetName, 0f, userData);
+                    m_ReadDataSuccessEventHandler(this, loadDataSuccessEventArgs);
+                    ReferencePool.Release(loadDataSuccessEventArgs);
+                }
+            }
+            catch (Exception exception)
+            {
+                if (m_ReadDataFailureEventHandler != null)
+                {
+                    ReadDataFailureEventArgs loadDataFailureEventArgs = ReadDataFailureEventArgs.Create(dataAssetName, exception.ToString(), userData);
+                    m_ReadDataFailureEventHandler(this, loadDataFailureEventArgs);
+                    ReferencePool.Release(loadDataFailureEventArgs);
+                    return;
+                }
+                throw;
+            }
+        }
+
+
         public bool ParseData(string dataString)
         {
             return ParseData(dataString, null);

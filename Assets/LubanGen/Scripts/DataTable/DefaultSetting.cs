@@ -18,19 +18,21 @@ public sealed partial class DefaultSetting :  Bright.Config.BeanBase
 {
     public DefaultSetting(JSONNode _json) 
     {
-        { if(!_json["guild_open_level"].IsNumber) { throw new SerializationException(); }  GuildOpenLevel = _json["guild_open_level"]; }
-        { if(!_json["bag_init_capacity"].IsNumber) { throw new SerializationException(); }  BagInitCapacity = _json["bag_init_capacity"]; }
-        { if(!_json["bag_max_capacity"].IsNumber) { throw new SerializationException(); }  BagMaxCapacity = _json["bag_max_capacity"]; }
-        { var __json0 = _json["newbie_tasks"]; if(!__json0.IsArray) { throw new SerializationException(); } NewbieTasks = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  NewbieTasks.Add(__v0); }   }
+        { if(!_json["is_david_dead"].IsBoolean) { throw new SerializationException(); }  IsDavidDead = _json["is_david_dead"]; }
+        { if(!_json["is_rebellion_start"].IsBoolean) { throw new SerializationException(); }  IsRebellionStart = _json["is_rebellion_start"]; }
+        { if(!_json["current_day"].IsNumber) { throw new SerializationException(); }  CurrentDay = _json["current_day"]; }
+        { if(!_json["current_weekday"].IsNumber) { throw new SerializationException(); }  CurrentWeekday = _json["current_weekday"]; }
+        { if(!_json["current_week"].IsNumber) { throw new SerializationException(); }  CurrentWeek = _json["current_week"]; }
         PostInit();
     }
 
-    public DefaultSetting(int guild_open_level, int bag_init_capacity, int bag_max_capacity, System.Collections.Generic.List<int> newbie_tasks ) 
+    public DefaultSetting(bool is_david_dead, bool is_rebellion_start, int current_day, int current_weekday, int current_week ) 
     {
-        this.GuildOpenLevel = guild_open_level;
-        this.BagInitCapacity = bag_init_capacity;
-        this.BagMaxCapacity = bag_max_capacity;
-        this.NewbieTasks = newbie_tasks;
+        this.IsDavidDead = is_david_dead;
+        this.IsRebellionStart = is_rebellion_start;
+        this.CurrentDay = current_day;
+        this.CurrentWeekday = current_weekday;
+        this.CurrentWeek = current_week;
         PostInit();
     }
 
@@ -40,21 +42,25 @@ public sealed partial class DefaultSetting :  Bright.Config.BeanBase
     }
 
     /// <summary>
-    /// desc1
+    /// 大卫死了吗
     /// </summary>
-    public int GuildOpenLevel { get; private set; }
+    public bool IsDavidDead { get; private set; }
     /// <summary>
-    /// desc 2
+    /// 暴动开始了吗
     /// </summary>
-    public int BagInitCapacity { get; private set; }
+    public bool IsRebellionStart { get; private set; }
     /// <summary>
-    /// desc 3
+    /// 游戏开始的第几天
     /// </summary>
-    public int BagMaxCapacity { get; private set; }
+    public int CurrentDay { get; private set; }
     /// <summary>
-    /// desc 4
+    /// 本周的第几天
     /// </summary>
-    public System.Collections.Generic.List<int> NewbieTasks { get; private set; }
+    public int CurrentWeekday { get; private set; }
+    /// <summary>
+    /// 游戏开始的第几周
+    /// </summary>
+    public int CurrentWeek { get; private set; }
 
     public const int __ID__ = -738060807;
     public override int GetTypeId() => __ID__;
@@ -71,10 +77,11 @@ public sealed partial class DefaultSetting :  Bright.Config.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "GuildOpenLevel:" + GuildOpenLevel + ","
-        + "BagInitCapacity:" + BagInitCapacity + ","
-        + "BagMaxCapacity:" + BagMaxCapacity + ","
-        + "NewbieTasks:" + Bright.Common.StringUtil.CollectionToString(NewbieTasks) + ","
+        + "IsDavidDead:" + IsDavidDead + ","
+        + "IsRebellionStart:" + IsRebellionStart + ","
+        + "CurrentDay:" + CurrentDay + ","
+        + "CurrentWeekday:" + CurrentWeekday + ","
+        + "CurrentWeek:" + CurrentWeek + ","
         + "}";
     }
     

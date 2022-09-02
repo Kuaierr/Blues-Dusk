@@ -41,25 +41,10 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase
         return new DataTable.GameConfig(_json);
     }
 
-    /// <summary>
-    /// 大卫死了吗
-    /// </summary>
     public bool IsDavidDead { get; private set; }
-    /// <summary>
-    /// 暴动开始了吗
-    /// </summary>
     public bool IsRebellionStart { get; private set; }
-    /// <summary>
-    /// 游戏开始的第几天
-    /// </summary>
     public int CurrentDay { get; private set; }
-    /// <summary>
-    /// 本周的第几天
-    /// </summary>
     public int CurrentWeekday { get; private set; }
-    /// <summary>
-    /// 游戏开始的第几周
-    /// </summary>
     public int CurrentWeek { get; private set; }
 
     public const int __ID__ = -2012855298;

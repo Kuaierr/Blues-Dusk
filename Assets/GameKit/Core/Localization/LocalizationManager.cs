@@ -137,6 +137,12 @@ namespace GameKit.Localization
             m_DataProvider.ReadData(dictionaryAssetName, priority);
         }
 
+        public void ReadExternalData(string dictionaryAssetName, int priority, object userData)
+        {
+            m_DataProvider.ReadExternalData(dictionaryAssetName, priority, userData);
+        }
+
+
         public void ReadData(string dictionaryAssetName, object userData)
         {
             m_DataProvider.ReadData(dictionaryAssetName, userData);
