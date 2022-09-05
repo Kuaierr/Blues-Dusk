@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class UI_DiceFace : MonoBehaviour
 {
-    private UI_DiceFaceBase_SO _data;
+    public Vector3 finalRotation = new Vector3();
     
+    private UI_DiceFaceBase_SO _data;
+
     private MeshRenderer _meshRenderer;
     private Texture _texture;
     
-    public Vector3 finalRotation = new Vector3();
-
     public Material CurrentMaterial
     {
         set
@@ -36,10 +36,5 @@ public class UI_DiceFace : MonoBehaviour
     public UI_DiceFaceBase_SO GetValue()
     {
         return _data;
-    }
-
-    public Vector3 GetFinalRotation()
-    {
-        return finalRotation;
     }
 }

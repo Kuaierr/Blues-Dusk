@@ -228,7 +228,7 @@ RectTransform:
   m_Children:
   - {fileID: 235607300}
   m_Father: {fileID: 733097149}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -481,8 +481,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 298602626}
   - {fileID: 357994386}
+  - {fileID: 298602626}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -767,6 +767,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1356560242229691047, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+      propertyPath: diceSystemAnimator
+      value: 
+      objectReference: {fileID: 946502604}
+    - target: {fileID: 1356560242229691047, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: _tempDiceList.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -966,13 +970,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7972011340671720295, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7972011340671720298, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972011341569639578, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: m_Name
       value: UI_Dialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972011341569639578, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972011341569639579, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: m_Pivot.x
@@ -984,7 +996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7972011341569639579, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972011341569639579, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1060,6 +1072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+--- !u!95 &946502604 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1356560242229691040, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+  m_PrefabInstance: {fileID: 946502603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1452855239
 GameObject:
   m_ObjectHideFlags: 1
