@@ -1,4 +1,9 @@
+using System.Transactions;
+using UnityEngine;
+using System.Collections;
 using GameKit.Event;
+using GameKit;
+using GameKit.Element;
 using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
@@ -9,6 +14,9 @@ public class ProcedureChangeScene : ProcedureBase
     private bool m_ChangeToMenu = false;
     private bool m_IsChangeSceneComplete = false;
     private int m_BackgroundMusicId = 0;
+    private Prototyper m_Prototyper;
+    private bool m_IsScenePreloaded;
+    private ProcedureOwner m_CachedOwner;
 
     public override bool UseNativeDialog
     {
@@ -18,11 +26,17 @@ public class ProcedureChangeScene : ProcedureBase
         }
     }
 
+    protected override void OnInit(ProcedureOwner procedureOwner)
+    {
+        base.OnInit(procedureOwner);
+        m_CachedOwner = procedureOwner;
+    }
+
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
         base.OnEnter(procedureOwner);
         m_IsChangeSceneComplete = false;
-
+        // QuickCinemachineCamera.Clear();
         GameKitCenter.Event.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         GameKitCenter.Event.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
 
@@ -35,28 +49,35 @@ public class ProcedureChangeScene : ProcedureBase
         GameKitCenter.Entity.HideAllLoadedEntities();
 
         // 卸载所有场景
-        string[] loadedSceneAssetNames = GameKitCenter.Scene.GetLoadedSceneAssetNames();
-        for (int i = 0; i < loadedSceneAssetNames.Length; i++)
-        {
-            GameKitCenter.Scene.UnloadScene(loadedSceneAssetNames[i]);
-        }
+        // string[] loadedSceneAssetNames = GameKitCenter.Scene.GetLoadedSceneAssetNames();
+        // for (int i = 0; i < loadedSceneAssetNames.Length; i++)
+        // {
+        //     GameKitCenter.Scene.UnloadScene(loadedSceneAssetNames[i]);
+        // }
 
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();
 
-        // int sceneId = procedureOwner.GetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID);
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
-        // m_ChangeToMenu = sceneId == MenuSceneId;
-        // IDataTable<DRScene> dtScene = GameKitCenter.DataTable.GetDataTable<DRScene>();
-        // DRScene drScene = dtScene.GetDataRow(sceneId);
-        // if (drScene == null)
-        // {
-        //     Log.Warning("Can not load scene '{0}' from data table.", sceneId.ToString());
-        //     return;
-        // }
-
-        GameKitCenter.Scene.LoadScene(AssetUtility.GetSceneAsset(sceneName), Constant.CorePriority.SceneAsset, this);
+        m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
+        if (!m_IsScenePreloaded)
+        {
+            GameKitCenter.Element.SaveAll();
+            if (GameKitCenter.Scheduler.SceneCount > 1)
+                GameKitCenter.Scheduler.SwitchSceneByDefault(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
+            else
+                GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
+        }
+        else
+        {
+            procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
+            OnSceneLoad();
+        }
         // m_BackgroundMusicId = drScene.BackgroundMusicId;
+        if (m_IsChangeSceneComplete)
+        {
+
+        }
     }
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
@@ -83,6 +104,43 @@ public class ProcedureChangeScene : ProcedureBase
         {
             ChangeState<ProcedureMain>(procedureOwner);
         }
+    }
+
+    public Transform GetEnterTransform()
+    {
+        DoorElement element = (DoorElement)GameKitCenter.Element.GetElement(GameKitCenter.Procedure.CachedDoorName);
+        if (element == null)
+            return null;
+        return element.EnterTranform;
+    }
+
+
+    public Transform GetDefaultTransform()
+    {
+        return GameObject.Find("DefaultSpawnPoint").transform;
+    }
+
+    private void OnSceneLoad()
+    {
+        Log.Success("OnSceneLoad");
+        GameKitCenter.Element.Clear();
+        GameKitCenter.Element.LoadAll();
+        AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Prototyper"), (GameObject obj) =>
+        {
+            GameObject realObj = GameObject.Instantiate(obj);
+            m_Prototyper = realObj.GetComponent<Prototyper>();
+            Transform targetTrans = GetEnterTransform();
+            if (targetTrans == null)
+                targetTrans = GetDefaultTransform();
+            m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
+            m_Prototyper.SetTransform(targetTrans);
+            // Debug.Log(targetTrans.position);
+            Debug.Log(m_Prototyper.transform.position);
+            // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
+            QuickCinemachineCamera.current.SetFollowTarget(m_Prototyper.transform);
+            m_IsChangeSceneComplete = true;
+
+        });
     }
 
     private void OnLoadSceneSuccess(object sender, GameEventArgs e)

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
-
+// 加载预制资源
 public class ProcedurePreload : ProcedureBase
 {
     private Dictionary<string, bool> m_LoadedFlag = new Dictionary<string, bool>();
@@ -42,14 +42,19 @@ public class ProcedurePreload : ProcedureBase
                 return;
             }
         }
-        procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMenu");
+
+        GameKitCenter.Scheduler.Init();
+        procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, GameKitCenter.Scheduler.StartScene);
+        if (GameKitCenter.Scheduler.SceneCount > 1)
+            procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, true);
         ChangeState<ProcedureChangeScene>(procedureOwner);
+
     }
 
     private void PreloadResources()
     {
         LoadFont("MainFont");
-        if(GameKitCenter.Data.DataTables == null)
+        if (GameKitCenter.Data.DataTables == null)
             Log.Fail("Preload resrouce fail.");
     }
 

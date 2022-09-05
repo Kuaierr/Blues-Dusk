@@ -34,7 +34,7 @@ public abstract class GameElementBase : ElementBase
         m_Outline.OutlineWidth = OutlineWidth;
         m_Outline.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Interactive");
-        OnLoad();
+        // OnLoad();
     }
 
     public override void OnLoad()
@@ -57,6 +57,8 @@ public abstract class GameElementBase : ElementBase
     public override void OnHighlightEnter()
     {
         base.OnHighlightEnter();
+        if (m_Outline == null)
+            Log.Warning(gameObject.name);
         if (!IsOutlineShown)
             m_Outline.enabled = true;
     }
@@ -64,6 +66,8 @@ public abstract class GameElementBase : ElementBase
     public override void OnHighlightExit()
     {
         base.OnHighlightExit();
+        if (m_Outline == null)
+            Log.Warning(gameObject.name);
         if (IsOutlineShown)
             m_Outline.enabled = false;
     }

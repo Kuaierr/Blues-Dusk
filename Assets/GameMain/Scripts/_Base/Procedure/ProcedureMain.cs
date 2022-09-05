@@ -13,6 +13,8 @@ public class ProcedureMain : ProcedureBase
     private bool m_GotoMenu = false;
     private float m_GotoMenuDelaySeconds = 0f;
 
+    private ProcedureOwner m_CachedOwner;
+
     public override bool UseNativeDialog
     {
         get
@@ -30,6 +32,7 @@ public class ProcedureMain : ProcedureBase
     {
         base.OnInit(procedureOwner);
         m_Games.Add(GameMode.PlotMode, new PlotGame());
+        m_CachedOwner = procedureOwner;
     }
 
     protected override void OnDestroy(ProcedureOwner procedureOwner)
@@ -43,9 +46,9 @@ public class ProcedureMain : ProcedureBase
         base.OnEnter(procedureOwner);
 
         m_GotoMenu = false;
-        GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
-        m_CurrentGame = m_Games[gameMode];
-        m_CurrentGame.Initialize();
+        // GameMode gameMode = (GameMode)procedureOwner.GetData<VarByte>("GameMode").Value;
+        // m_CurrentGame = m_Games[gameMode];
+        // m_CurrentGame.Initialize();
     }
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
@@ -69,18 +72,34 @@ public class ProcedureMain : ProcedureBase
             return;
         }
 
-        if (!m_GotoMenu)
-        {
-            m_GotoMenu = true;
-            m_GotoMenuDelaySeconds = 0;
-        }
+        // if (!m_GotoMenu)
+        // {
+        //     m_GotoMenu = true;
+        //     m_GotoMenuDelaySeconds = 0;
+        // }
 
-        m_GotoMenuDelaySeconds += elapseSeconds;
-        if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
+
+        // m_GotoMenuDelaySeconds += elapseSeconds;
+        // if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
+        // {
+        //     procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, Constant.Scene.Menu);
+        //     ChangeState<ProcedureChangeScene>(procedureOwner);  
+        // }
+    }
+
+    public bool SetNextSceneName(string sceneName)
+    {
+        if (m_CachedOwner != null)
         {
-            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMenu");
-            ChangeState<ProcedureChangeScene>(procedureOwner);  
+            m_CachedOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, sceneName);
+            return true;
         }
+        return false;
+    }
+
+    public void ExternalChangeState<T>() where T : ProcedureBase
+    {
+        ChangeState<T>(m_CachedOwner);
     }
 }
 

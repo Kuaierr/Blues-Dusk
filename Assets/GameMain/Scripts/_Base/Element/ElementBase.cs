@@ -11,7 +11,7 @@ public abstract class ElementBase : MonoBehaviour, IElement
     {
         get
         {
-            return string.Format("{0}-{1}", gameObject.name, gameObject.GetInstanceID());
+            return string.Format("{0}", gameObject.name);
         }
     }
     public int DataId
@@ -53,6 +53,11 @@ public abstract class ElementBase : MonoBehaviour, IElement
     public virtual void OnInteract()
     {
 
+    }
+
+    void OnDestroy()
+    {
+        GameKitCenter.Element.RemoveElement(this);
     }
 }
 

@@ -2,6 +2,7 @@
 using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
+// 决定资源加载模式
 public class ProcedureSplash : ProcedureBase
 {
     public override bool UseNativeDialog

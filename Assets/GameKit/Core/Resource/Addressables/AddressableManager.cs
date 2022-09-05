@@ -85,6 +85,7 @@ namespace GameKit
 
         IEnumerator GetAsynProcess<T>(string keyName, UnityAction<T> onSuccess, UnityAction onFail) where T : Object
         {
+            // Utility.Debugger.LogFail(keyName);
             AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(keyName);
             yield return handle;
             if (handle.Status == AsyncOperationStatus.Succeeded)

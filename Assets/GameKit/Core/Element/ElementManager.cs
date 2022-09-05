@@ -17,7 +17,7 @@ namespace GameKit.Element
 
         internal override void Shutdown()
         {
-            
+
         }
 
         public void RegisterElement(IElement element)
@@ -28,6 +28,17 @@ namespace GameKit.Element
         public void RemoveElement(IElement element)
         {
             m_CachedElements.Remove(element);
+        }
+
+        public IElement GetElement(string name)
+        {
+            for (int i = 0; i < m_CachedElements.Count; i++)
+            {
+                Utility.Debugger.LogSuccess(m_CachedElements[i].Name + ">>" + name);
+                if (m_CachedElements[i].Name == name)
+                    return m_CachedElements[i];
+            }
+            return null;
         }
 
         public void HighlightAll()

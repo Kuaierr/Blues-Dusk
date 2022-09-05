@@ -42,7 +42,7 @@ public class Prototyper : MonoBehaviour
     void Update()
     {
         navMeshAgent.updateRotation = !IsManuallyRoatating;
-        
+
         if (!navMeshAgent.updateRotation && m_CachedAngle == MAGIC_ANGLE && m_CachedTargetPos != MAGIC_TARGET_POS)
         {
             Vector2 faceDirection = m_CachedTargetPos.ToVector2() - transform.position.ToVector2();
@@ -79,7 +79,7 @@ public class Prototyper : MonoBehaviour
         animator.SetFloat("VelocityX", Mathf.Abs(navMeshAgent.velocity.x));
         animator.SetFloat("VelocityY", Mathf.Abs(navMeshAgent.velocity.y));
 
-        if (InputManager.instance.GetWorldMouseButtonDown(0))
+        if (InputManager.instance.GetWorldMouseButtonDown(0) && navMeshAgent != null)
         {
             MoveToDestination();
         }
@@ -127,7 +127,17 @@ public class Prototyper : MonoBehaviour
         Quaternion quaternion = Quaternion.LookRotation(position - transform.position);
         Quaternion clampQuaternion = Quaternion.Euler(quaternion.eulerAngles.IgnoreX().IgnoreZ());
         this.transform.rotation = Quaternion.Lerp(transform.rotation, clampQuaternion, RoateSpeed * roateMultipier * Time.deltaTime);
-        
+    }
+
+    public void SetTransform(Transform trans)
+    {
+        if (trans == null)
+        {
+            Log.Fatal("Start Tranform for player is null.");
+            return;
+        }
+        this.transform.position = new Vector3(trans.position.x, this.transform.position.y, trans.position.z);
+        this.transform.rotation = trans.rotation;
     }
 
     private void OnDrawGizmos()

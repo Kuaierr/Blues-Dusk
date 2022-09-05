@@ -5,6 +5,7 @@ namespace GameKit.Element
     {
         void RemoveElement(IElement element);
         void RegisterElement(IElement element);
+        IElement GetElement(string name);
         void HighlightAll();
         void StopHighlightAll();
         void SaveAll();

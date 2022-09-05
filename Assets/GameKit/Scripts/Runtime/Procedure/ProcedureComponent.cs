@@ -13,16 +13,15 @@ namespace UnityGameKit.Runtime
     {
         private IProcedureManager m_ProcedureManager = null;
         private ProcedureBase m_EntranceProcedure = null;
+        private GameObject m_DynamicParent = null;
 
         [SerializeField]
         private string[] m_AvailableProcedureTypeNames = null;
 
         [SerializeField]
         private string m_EntranceProcedureTypeName = null;
+        public string CachedDoorName;
 
-   
-   
-   
         public ProcedureBase CurrentProcedure
         {
             get
@@ -31,9 +30,6 @@ namespace UnityGameKit.Runtime
             }
         }
 
-   
-   
-   
         public float CurrentProcedureTime
         {
             get
@@ -42,9 +38,21 @@ namespace UnityGameKit.Runtime
             }
         }
 
-   
-   
-   
+        public Transform DynamicParent
+        {
+            get
+            {
+                if (m_DynamicParent == null)
+                {
+                    m_DynamicParent = GameObject.Find("Dynamic");
+                    if (m_DynamicParent == null)
+                        return null;
+                }
+                return m_DynamicParent.transform;
+            }
+        }
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -52,7 +60,7 @@ namespace UnityGameKit.Runtime
             m_ProcedureManager = GameKitModuleCenter.GetModule<IProcedureManager>();
             if (m_ProcedureManager == null)
             {
-                Log.Fail("Procedure manager is invalid.");
+                Log.Fatal("Procedure manager is invalid.");
                 return;
             }
         }
@@ -118,5 +126,21 @@ namespace UnityGameKit.Runtime
         {
             return m_ProcedureManager.GetProcedure(procedureType);
         }
+
+        public void StartProcedure<T>() where T : ProcedureBase
+        {
+            m_ProcedureManager.StartProcedure<T>();
+        }
+
+        public void StartProcedure(Type procedureType)
+        {
+            m_ProcedureManager.StartProcedure(procedureType);
+        }
+
+        public void SetExitDoorName(string doorName)
+        {
+            CachedDoorName = doorName;
+        }
+
     }
 }
