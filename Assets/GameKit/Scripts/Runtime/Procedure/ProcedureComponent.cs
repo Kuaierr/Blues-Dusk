@@ -137,6 +137,24 @@ namespace UnityGameKit.Runtime
             m_ProcedureManager.StartProcedure(procedureType);
         }
 
+        public void LoadScene<T>(string sceneName) where T : ProcedureBase
+        {
+            m_ProcedureManager.LoadScene<T>(sceneName);
+        }
+        public void LoadScene(string sceneName, Type procedureType)
+        {
+            m_ProcedureManager.LoadScene(sceneName, procedureType);
+        }
+
+        public void SetData<T>(string dataName) where T : Variable
+        {
+            m_ProcedureManager.SetData<T>(dataName);
+        }
+        public void SetData(string dataName, Type dataType)
+        {
+            m_ProcedureManager.SetData(dataName, dataType);
+        }
+
         public void SetExitDoorName(string doorName)
         {
             CachedDoorName = doorName;

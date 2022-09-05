@@ -10995,6 +10995,10 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4575728146776113080, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
+      propertyPath: m_UpdateMethod
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4575728147726365984, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: m_RootOrder
       value: 2

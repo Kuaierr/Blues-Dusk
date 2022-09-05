@@ -48,7 +48,7 @@ namespace UnityGameKit.Demo
 
         public void Reset()
         {
-
+            
         }
     }
 }

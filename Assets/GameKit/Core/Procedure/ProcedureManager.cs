@@ -151,5 +151,23 @@ namespace GameKit.Procedure
 
             return (ProcedureBase)m_ProcedureFsm.GetState(procedureType);
         }
+
+        public void LoadScene<T>(string sceneName) where T : ProcedureBase
+        {
+            // TODO: 基于全局状态机的LoadScene
+        }
+        public void LoadScene(string sceneName, Type procedureType)
+        {
+            // TODO: 基于全局状态机的LoadScene
+        }
+
+        public void SetData<T>(string dataName) where T : Variable
+        {
+            // TODO: 对外暴露的数据设置
+        }
+        public void SetData(string dataName, Type dataType)
+        {
+            // TODO: 对外暴露的数据设置
+        }
     }
 }

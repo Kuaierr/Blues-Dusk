@@ -33,7 +33,7 @@ namespace UnityGameKit.Runtime
 
         protected virtual void Awake()
         {
-            // Log.Success("{0} Singleton Is Successfully Initialized.", this.name);
+            Log.Success("{0} Singleton Is Successfully Initialized.", this.name);
             if (Current == null)
                 Current = this as T;
         }

@@ -114,7 +114,6 @@ public class ProcedureChangeScene : ProcedureBase
         return element.EnterTranform;
     }
 
-
     public Transform GetDefaultTransform()
     {
         return GameObject.Find("DefaultSpawnPoint").transform;
@@ -125,22 +124,26 @@ public class ProcedureChangeScene : ProcedureBase
         Log.Success("OnSceneLoad");
         GameKitCenter.Element.Clear();
         GameKitCenter.Element.LoadAll();
+        Transform targetTrans = GetEnterTransform();
+        if (targetTrans == null)
+            targetTrans = GetDefaultTransform();
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Prototyper"), (GameObject obj) =>
         {
             GameObject realObj = GameObject.Instantiate(obj);
             m_Prototyper = realObj.GetComponent<Prototyper>();
-            Transform targetTrans = GetEnterTransform();
-            if (targetTrans == null)
-                targetTrans = GetDefaultTransform();
             m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
             m_Prototyper.SetTransform(targetTrans);
             // Debug.Log(targetTrans.position);
-            Debug.Log(m_Prototyper.transform.position);
+            // Debug.Log(m_Prototyper.transform.position);
             // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
             QuickCinemachineCamera.current.SetFollowTarget(m_Prototyper.transform);
-            m_IsChangeSceneComplete = true;
-
+            OnSceneLoadEnd();
         });
+    }
+
+    private void OnSceneLoadEnd()
+    {
+        m_IsChangeSceneComplete = true;
     }
 
     private void OnLoadSceneSuccess(object sender, GameEventArgs e)
@@ -157,7 +160,6 @@ public class ProcedureChangeScene : ProcedureBase
         // {
         //     GameKitCenter.Sound.PlayMusic(m_BackgroundMusicId);
         // }
-
         m_IsChangeSceneComplete = true;
     }
 
