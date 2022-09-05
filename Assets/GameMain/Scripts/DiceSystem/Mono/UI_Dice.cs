@@ -14,7 +14,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 {
     private UnityAction<UI_Dice> onClick;
     
-    public UI_DiceData_SO diceData; //临时的数据源
+    private UI_DiceData_SO diceData;
 
     [SerializeField]
     private RectTransform diceCube;
@@ -29,12 +29,6 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     private Rigidbody _rb;
     
     [Space]
-    /*public UI_DiceFace up;
-    public UI_DiceFace down;
-    public UI_DiceFace right;
-    public UI_DiceFace left;
-    public UI_DiceFace forward;
-    public UI_DiceFace back;*/
     public List<UI_DiceFace> faces;
 
     [Space(15)]
@@ -49,6 +43,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
     public int Index { get; private set; } = -1;
 
+    
     public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback)
     {
         if (data == null)

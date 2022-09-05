@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_DiceInfoDisplay : MonoBehaviour
+public class UI_DiceInfoDisplay : UIFormChildBase
 {
 	[SerializeField]
 	private CanvasGroup _canvas;

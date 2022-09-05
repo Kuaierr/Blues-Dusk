@@ -184,12 +184,16 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+  - name: Prototype_Inventory
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: GameKitDemo_Main
+    path: Assets/GameKit/Demo/Procedure/GameKitDemo_Main.unity
   - name: Prototype_Dialog_DiceDev
     path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: Prototype_Dialog_UIandDice
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
   - name: S_Parlor
@@ -218,7 +222,3 @@ MonoBehaviour:
     path: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Examples/View States.unity
   - name: S_test
     path: Assets/GamePrototype/Scenes/S_test.unity
-  - name: S_heya_toilet
-    path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
-  - name: Demo
-    path: Assets/GamePrototype/Resources/Model/AnimeGirls/Casual1/Demo.unity
