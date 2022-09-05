@@ -73,8 +73,8 @@ namespace UnityGameKit.Runtime
 
         public void LoadAll()
         {
-            m_ElementManager.LoadAll();
             m_SettingManager.Load();
+            m_ElementManager.LoadAll();
         }
 
         private void Update()
@@ -107,6 +107,11 @@ namespace UnityGameKit.Runtime
                     m_CachedInteractiveElement = null;
                 }
             }
+        }
+
+        public void Clear()
+        {
+            m_CachedInteractiveElement = null;
         }
     }
 }

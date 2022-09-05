@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_VirtualCamera: {fileID: 8944438453484055846}
+  DefaultFollowPositionOffset: {x: 5, y: -7, z: -5}
 --- !u!1 &8944438453801143924
 GameObject:
   m_ObjectHideFlags: 0

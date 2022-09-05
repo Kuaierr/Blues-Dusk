@@ -79,7 +79,7 @@ public class Prototyper : MonoBehaviour
         animator.SetFloat("VelocityX", Mathf.Abs(navMeshAgent.velocity.x));
         animator.SetFloat("VelocityY", Mathf.Abs(navMeshAgent.velocity.y));
 
-        if (InputManager.instance.GetWorldMouseButtonDown(0))
+        if (InputManager.instance.GetWorldMouseButtonDown(0) && navMeshAgent != null)
         {
             MoveToDestination();
         }

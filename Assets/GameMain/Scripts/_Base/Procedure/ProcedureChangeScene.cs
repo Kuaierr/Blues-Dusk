@@ -1,5 +1,6 @@
 using System.Transactions;
 using UnityEngine;
+using System.Collections;
 using GameKit.Event;
 using GameKit;
 using GameKit.Element;
@@ -61,6 +62,7 @@ public class ProcedureChangeScene : ProcedureBase
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
         if (!m_IsScenePreloaded)
         {
+            GameKitCenter.Element.SaveAll();
             if (GameKitCenter.Scheduler.SceneCount > 1)
                 GameKitCenter.Scheduler.SwitchSceneByDefault(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
             else
@@ -121,6 +123,8 @@ public class ProcedureChangeScene : ProcedureBase
     private void OnSceneLoad()
     {
         Log.Success("OnSceneLoad");
+        GameKitCenter.Element.Clear();
+        GameKitCenter.Element.LoadAll();
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Prototyper"), (GameObject obj) =>
         {
             GameObject realObj = GameObject.Instantiate(obj);
@@ -130,15 +134,14 @@ public class ProcedureChangeScene : ProcedureBase
                 targetTrans = GetDefaultTransform();
             m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
             m_Prototyper.SetTransform(targetTrans);
-            Debug.Log(targetTrans.position);
+            // Debug.Log(targetTrans.position);
             Debug.Log(m_Prototyper.transform.position);
+            // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
             QuickCinemachineCamera.current.SetFollowTarget(m_Prototyper.transform);
             m_IsChangeSceneComplete = true;
+
         });
     }
-
-
-
 
     private void OnLoadSceneSuccess(object sender, GameEventArgs e)
     {
