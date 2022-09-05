@@ -20,7 +20,6 @@ namespace UnityGameKit.Runtime
 
         public static implicit operator bool(VarBoolean value)
         {
-            Log.Info(">> " + value);
             return value.Value;
         }
     }

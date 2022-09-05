@@ -51,22 +51,9 @@ namespace GameKit
 
         IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
         {
-            if (m_cachedHandles.ContainsKey(keyName))
-            {
-                AsyncOperationHandle handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
-                yield return handle;
-                if (handle.Status == AsyncOperationStatus.Succeeded)
-                {
-                    onSuccess.Invoke();
-                    if (!m_cachedHandles.ContainsKey(keyName))
-                        m_cachedHandles.Add(keyName, handle);
-                }
-                else
-                    onFail?.Invoke();
-            }
-            yield return null;
-            Utility.Debugger.LogFail("Try Unload invalid scene {0}", keyName);
-            onFail?.Invoke();
+            AsyncOperationHandle handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+            yield return handle;
+            onSuccess.Invoke();
         }
 
         IEnumerator GetTextProcess(string keyName, UnityAction<string> onSuccess, UnityAction onFail)

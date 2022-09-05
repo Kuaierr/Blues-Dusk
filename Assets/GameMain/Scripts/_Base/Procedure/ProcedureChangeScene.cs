@@ -59,11 +59,12 @@ public class ProcedureChangeScene : ProcedureBase
         GameKitCenter.Core.ResetNormalGameSpeed();
 
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
+        Log.Success(sceneName);
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
         if (!m_IsScenePreloaded)
         {
             GameKitCenter.Element.SaveAll();
-            if (GameKitCenter.Scheduler.SceneCount > 1)
+            if (GameKitCenter.Scheduler.MultiScene)
                 GameKitCenter.Scheduler.SwitchSceneByDefault(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
             else
                 GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
@@ -121,7 +122,7 @@ public class ProcedureChangeScene : ProcedureBase
 
     private void OnSceneLoad()
     {
-        Log.Success("OnSceneLoad");
+        Log.Success("Load Scene By Callback.");
         GameKitCenter.Element.Clear();
         GameKitCenter.Element.LoadAll();
         Transform targetTrans = GetEnterTransform();
@@ -149,18 +150,35 @@ public class ProcedureChangeScene : ProcedureBase
     private void OnLoadSceneSuccess(object sender, GameEventArgs e)
     {
         LoadSceneSuccessEventArgs ne = (LoadSceneSuccessEventArgs)e;
-        if (ne.UserData != this)
-        {
-            return;
-        }
+        // if (ne.UserData != this)
+        // {
+        //     return;
+        // }
 
-        Log.Info("Load scene '{0}' OK.", ne.SceneAssetName);
+        Log.Success("Load Scene '{0}' By Event.", ne.SceneAssetName);
+        GameKitCenter.Element.Clear();
+        GameKitCenter.Element.LoadAll();
+        Transform targetTrans = GetEnterTransform();
+        if (targetTrans == null)
+            targetTrans = GetDefaultTransform();
+        AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Prototyper"), (GameObject obj) =>
+        {
+            GameObject realObj = GameObject.Instantiate(obj);
+            m_Prototyper = realObj.GetComponent<Prototyper>();
+            m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
+            m_Prototyper.SetTransform(targetTrans);
+            // Debug.Log(targetTrans.position);
+            // Debug.Log(m_Prototyper.transform.position);
+            // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
+            QuickCinemachineCamera.current.SetFollowTarget(m_Prototyper.transform);
+            OnSceneLoadEnd();
+        });
 
         // if (m_BackgroundMusicId > 0)
         // {
         //     GameKitCenter.Sound.PlayMusic(m_BackgroundMusicId);
         // }
-        m_IsChangeSceneComplete = true;
+        // m_IsChangeSceneComplete = true;
     }
 
     private void OnLoadSceneFailure(object sender, GameEventArgs e)
@@ -172,6 +190,36 @@ public class ProcedureChangeScene : ProcedureBase
         }
 
         Log.Error("Load scene '{0}' failure, error message '{1}'.", ne.SceneAssetName, ne.ErrorMessage);
+    }
+
+
+        private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
+    {
+        UnloadSceneSuccessEventArgs ne = (UnloadSceneSuccessEventArgs)e;
+        // if (ne.UserData != this)
+        // {
+        //     return;
+        // }
+
+        Log.Success("Load Scene '{0}' By Event.", ne.SceneAssetName);
+
+
+        // if (m_BackgroundMusicId > 0)
+        // {
+        //     GameKitCenter.Sound.PlayMusic(m_BackgroundMusicId);
+        // }
+        // m_IsChangeSceneComplete = true;
+    }
+
+    private void OnUnloadSceneFailure(object sender, GameEventArgs e)
+    {
+        UnloadSceneFailureEventArgs ne = (UnloadSceneFailureEventArgs)e;
+        if (ne.UserData != this)
+        {
+            return;
+        }
+
+        Log.Error("Load scene '{0}' failure, error message '{1}'.", ne.SceneAssetName, ne.SceneAssetName);
     }
 }
 

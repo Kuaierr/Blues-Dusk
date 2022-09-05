@@ -34,7 +34,7 @@ namespace GameKit.Element
         {
             for (int i = 0; i < m_CachedElements.Count; i++)
             {
-                Utility.Debugger.LogSuccess(m_CachedElements[i].Name + ">>" + name);
+                // Utility.Debugger.LogSuccess(m_CachedElements[i].Name + ">>" + name);
                 if (m_CachedElements[i].Name == name)
                     return m_CachedElements[i];
             }

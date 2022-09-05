@@ -179,10 +179,10 @@ namespace UnityGameKit.Runtime
         public void Serialize(Stream stream)
         {
 
-            foreach (KeyValuePair<string, string> setting in m_Settings)
-            {
-                Log.Info(setting.Key + " : " + setting.Value);
-            }
+            // foreach (KeyValuePair<string, string> setting in m_Settings)
+            // {
+            //     Log.Info(setting.Key + " : " + setting.Value);
+            // }
 
             using (BinaryWriter binaryWriter = new BinaryWriter(stream, Encoding.UTF8))
             {
@@ -207,10 +207,10 @@ namespace UnityGameKit.Runtime
                 }
             }
 
-            foreach (KeyValuePair<string, string> setting in m_Settings)
-            {
-                Log.Info(setting.Key + " : " + setting.Value);
-            }
+            // foreach (KeyValuePair<string, string> setting in m_Settings)
+            // {
+            //     Log.Info(setting.Key + " : " + setting.Value);
+            // }
         }
     }
 }

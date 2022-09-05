@@ -335,6 +335,7 @@ namespace UnityGameKit.Runtime
 
         private void OnLoadSceneSuccess(object sender, GameKit.Scene.LoadSceneSuccessEventArgs e)
         {
+            Log.Info("GameKit.Scene.LoadSceneSuccessEventArgs");
             if (!m_SceneOrder.ContainsKey(e.SceneAssetName))
             {
                 m_SceneOrder.Add(e.SceneAssetName, 0);
@@ -352,8 +353,10 @@ namespace UnityGameKit.Runtime
 
         private void OnUnloadSceneSuccess(object sender, GameKit.Scene.UnloadSceneSuccessEventArgs e)
         {
+            Log.Info("GameKit.Scene.UnloadSceneSuccessEventArgs");
             m_EventComponent.Fire(this, UnloadSceneSuccessEventArgs.Create(e));
             m_SceneOrder.Remove(e.SceneAssetName);
+            Log.Info(m_SceneOrder.Count);
             RefreshSceneOrder();
         }
 

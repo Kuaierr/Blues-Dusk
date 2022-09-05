@@ -307,11 +307,11 @@ namespace GameKit.Scene
 
             AddressableManager.instance.UnloadSceneAsyn(sceneAssetName, onSuccess: () =>
                 {
-                    LoadSceneSuccessCallback(sceneAssetName, 0, userData);
+                    UnloadSceneSuccessCallback(sceneAssetName, userData);
                 },
                 onFail: () =>
                 {
-                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", userData);
+                    UnloadSceneFailureCallback(sceneAssetName, userData);
                 });
         }
 

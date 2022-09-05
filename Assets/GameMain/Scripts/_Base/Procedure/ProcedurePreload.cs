@@ -45,10 +45,11 @@ public class ProcedurePreload : ProcedureBase
 
         GameKitCenter.Scheduler.Init();
         procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, GameKitCenter.Scheduler.StartScene);
-        if (GameKitCenter.Scheduler.SceneCount > 1)
+        if (GameKitCenter.Scheduler.MultiScene)
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, true);
+        else
+            procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
         ChangeState<ProcedureChangeScene>(procedureOwner);
-
     }
 
     private void PreloadResources()

@@ -31,11 +31,12 @@ public partial class SchedulerComponent : GameKitComponent
     private EventHandler<DoTransitionCompleteEventArgs> m_SceneTransitEventHandler = null;
 
 
-    public int SceneCount
+    public bool MultiScene
     {
         get
         {
-            return SceneManager.sceneCount;
+
+            return SceneManager.sceneCount > 1;
         }
     }
 
@@ -43,16 +44,34 @@ public partial class SchedulerComponent : GameKitComponent
     {
         get
         {
-            if (SceneCount > 1)
+            if (MultiScene)
                 return SceneManager.GetSceneAt(1).name;
             return string.Empty;
         }
     }
 
+    // public string CurrentAssetName
+    // {
+    //     get
+    //     {
+    //         return AssetUtility.GetSceneAsset(CurrentScene);
+    //     }
+    // }
+
     public void Init()
     {
-        if (SceneCount > 1)
-            CurrentScene = ActiveSceneName;
+
+        if (MultiScene)
+        {
+            StartScene = ActiveSceneName;
+            CurrentScene = AssetUtility.GetSceneAsset(ActiveSceneName);
+        }
+        else
+        {
+            CurrentScene = AssetUtility.GetSceneAsset(StartScene);
+            // StartScene = AssetUtility.GetSceneAsset(StartScene);
+        }
+        Log.Info(ActiveSceneName);
         // else
         //     LoadSceneAsyn(StartScene, onSuccess: () => { CurrentScene = StartScene; });
     }
@@ -87,27 +106,27 @@ public partial class SchedulerComponent : GameKitComponent
             return;
         }
 
-        // m_EventComponent.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
-        // m_EventComponent.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
-        // m_EventComponent.Subscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
-        // m_EventComponent.Subscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
+        m_EventComponent.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
+        m_EventComponent.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
+        m_EventComponent.Subscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
+        m_EventComponent.Subscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
         // m_EventComponent.Subscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
         // m_EventComponent.Subscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
     }
 
     private void OnDestroy()
     {
-        // m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
-        // m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
-        // m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
-        // m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
+        m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
+        m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
+        m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
+        m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
         // m_EventComponent.Unsubscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
         // m_EventComponent.Unsubscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
     }
 
     public void LoadSceneWithProcedure(SceneTransitionType switchType = SceneTransitionType.None)
     {
-        
+
     }
 
     public void SwitchSceneByDefault(string name, UnityAction onSuccess = null, UnityAction onFail = null)
@@ -173,15 +192,15 @@ public partial class SchedulerComponent : GameKitComponent
         {
             UnloadSceneAsyn(CurrentScene, () =>
             {
-                LoadSceneAsyn(name, () =>
-                {
-                    CurrentScene = name;
-                    switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
-                    {
-                        switcher.gradienter.gameObject.SetActive(false);
-                    });
-                    onSuccess?.Invoke();
-                });
+                // LoadSceneAsyn(name, () =>
+                // {
+                //     CurrentScene = name;
+                //     switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
+                //     {
+                //         switcher.gradienter.gameObject.SetActive(false);
+                //     });
+                //     onSuccess?.Invoke();
+                // });
             });
         });
     }
@@ -231,18 +250,18 @@ public partial class SchedulerComponent : GameKitComponent
 
     public void LoadSceneAsyn(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        ScenesManager.instance.LoadSceneAsynAdd(name, onSuccess);
+        // Log.Info(name);
+        // ScenesManager.instance.LoadSceneAsynAdd(name, onSuccess);
         // AddressableManager.instance.LoadSceneAsyn(name, loadMode: LoadSceneMode.Additive, onSuccess: onSuccess, onFail: onFail);
+        GameKitCenter.Scene.LoadScene(name);
     }
-    public void LoadSceneAsynSingle(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-    {
-        ScenesManager.instance.LoadSceneAsyn(name, onSuccess);
-        // AddressableManager.instance.LoadSceneAsyn(name, loadMode: LoadSceneMode.Single, onSuccess: onSuccess, onFail: onFail);
-    }
+
     public void UnloadSceneAsyn(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        ScenesManager.instance.UnloadSceneAsyn(name, onSuccess);
+        // ScenesManager.instance.UnloadSceneAsyn(name, onSuccess);
         // AddressableManager.instance.UnloadSceneAsyn(name, onSuccess: onSuccess, onFail: onFail);
+        // Log.Warning(name);
+        GameKitCenter.Scene.UnloadScene(name);
     }
 
     public int GetActiveSceneNumber()
@@ -317,34 +336,36 @@ public partial class SchedulerComponent : GameKitComponent
     //     }
     // }
 
-    // private void OnLoadSceneSuccess(object sender, GameEventArgs e)
-    // {
-    //     LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
-    //     Debug.Log("Load Success");
-    // }
+    private void OnLoadSceneSuccess(object sender, GameEventArgs e)
+    {
+        LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
+        Debug.Log("Load Success");
+    }
 
-    // private void OnLoadSceneFailure(object sender, GameEventArgs e)
-    // {
-    //     LoadSceneFailureEventArgs args = (LoadSceneFailureEventArgs)e;
-    //     Debug.Log("Load Fail");
-    // }
+    private void OnLoadSceneFailure(object sender, GameEventArgs e)
+    {
+        LoadSceneFailureEventArgs args = (LoadSceneFailureEventArgs)e;
+        Debug.Log("Load Fail");
+    }
 
-    // private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
-    // {
-    //     UnloadSceneSuccessEventArgs args = (UnloadSceneSuccessEventArgs)e;
-    //     DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
-    //     if (transitionArgs != null)
-    //     {
-    //         m_SceneComponent.LoadScene(AssetUtility.GetSceneAsset(transitionArgs.TargetName), DefaultScenePrioty, this);
-    //         Debug.Log("UnLoad Success");
-    //     }
-    // }
+    private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
+    {
+        UnloadSceneSuccessEventArgs args = (UnloadSceneSuccessEventArgs)e;
+        Log.Warning(sender.GetType());
 
-    // private void OnUnloadSceneFailure(object sender, GameEventArgs e)
-    // {
-    //     UnloadSceneFailureEventArgs args = (UnloadSceneFailureEventArgs)e;
-    //     Debug.Log("UnLoad Fail");
-    // }
+        // DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
+        // if (transitionArgs != null)
+        // {
+        //     m_SceneComponent.LoadScene(AssetUtility.GetSceneAsset(transitionArgs.TargetName), DefaultScenePrioty, this);
+        //     Debug.Log("UnLoad Success");
+        // }
+    }
+
+    private void OnUnloadSceneFailure(object sender, GameEventArgs e)
+    {
+        UnloadSceneFailureEventArgs args = (UnloadSceneFailureEventArgs)e;
+        Debug.Log("UnLoad Fail");
+    }
 
     // private void OnDoTransitionComplete(object sender, GameEventArgs e)
     // {
