@@ -136,6 +136,17 @@ namespace UnityGameKit.Runtime
         {
             return (orgin - end).sqrMagnitude;
         }
+
+        public static Quaternion ToQuaternion(this Vector3 vector)
+        {
+            return Quaternion.Euler(vector);
+        }
+
+        public static Vector3 ToEuler(this Quaternion quaternion)
+        {
+            return quaternion.eulerAngles;
+        }
+
         #endregion
 
         #region Transform
@@ -307,6 +318,8 @@ namespace UnityGameKit.Runtime
                 transform.rotation = Quaternion.LookRotation(vector.normalized, Vector3.up);
             }
         }
+
+
 
         #endregion Transform
     }

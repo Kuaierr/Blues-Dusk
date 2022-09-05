@@ -260,11 +260,11 @@ namespace GameKit.Scene
 
             AddressableManager.instance.LoadSceneAsyn(sceneAssetName, onSuccess: () =>
                 {
-                    LoadSceneSuccessCallback(sceneAssetName, 0, null);
+                    LoadSceneSuccessCallback(sceneAssetName, 0, userData);
                 },
                 onFail: () =>
                 {
-                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", null);
+                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", userData);
                 });
         }
 
@@ -307,11 +307,11 @@ namespace GameKit.Scene
 
             AddressableManager.instance.UnloadSceneAsyn(sceneAssetName, onSuccess: () =>
                 {
-                    LoadSceneSuccessCallback(sceneAssetName, 0, null);
+                    LoadSceneSuccessCallback(sceneAssetName, 0, userData);
                 },
                 onFail: () =>
                 {
-                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", null);
+                    LoadSceneFailureCallback(sceneAssetName, "Load binary data fail", userData);
                 });
         }
 

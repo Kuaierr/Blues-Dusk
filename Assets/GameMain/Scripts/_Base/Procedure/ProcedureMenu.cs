@@ -4,7 +4,7 @@ using GameKit.Event;
 using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
-
+// 处于菜单
 public class ProcedureMenu : ProcedureBase
 {
     private bool m_StartGame = false;
@@ -52,7 +52,7 @@ public class ProcedureMenu : ProcedureBase
 
         if (m_StartGame)
         {
-            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMain");
+            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, Constant.Scene.Menu);
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }
     }

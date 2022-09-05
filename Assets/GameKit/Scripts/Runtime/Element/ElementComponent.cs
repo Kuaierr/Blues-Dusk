@@ -1,3 +1,4 @@
+using System;
 using System.Net.Sockets;
 using UnityEngine;
 using GameKit;
@@ -49,6 +50,11 @@ namespace UnityGameKit.Runtime
             m_ElementManager.RemoveElement(element);
         }
 
+        public IElement GetElement(string name)
+        {
+            return m_ElementManager.GetElement(name);
+        }
+
         public void HighLightAll()
         {
             m_ElementManager.HighlightAll();
@@ -77,7 +83,6 @@ namespace UnityGameKit.Runtime
             //     LoadAll();
             // if (Input.GetKeyDown(KeyCode.E))
             //     SaveAll();
-
 
             if (Input.GetMouseButton(1))
                 HighLightAll();

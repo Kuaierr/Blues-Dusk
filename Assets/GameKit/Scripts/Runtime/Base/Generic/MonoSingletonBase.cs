@@ -14,6 +14,10 @@ namespace UnityGameKit.Runtime
             {
                 return isActive;
             }
+            set
+            {
+                isActive = value;
+            }
         }
 
         private static T Current;
@@ -29,6 +33,7 @@ namespace UnityGameKit.Runtime
 
         protected virtual void Awake()
         {
+            // Log.Success("{0} Singleton Is Successfully Initialized.", this.name);
             if (Current == null)
                 Current = this as T;
         }
@@ -39,7 +44,10 @@ namespace UnityGameKit.Runtime
             Disable();
             DestroyImmediate(this.gameObject);
         }
-        public virtual void Clear() {}
+        public static void Clear()
+        {
+            Current = null;
+        }
     }
 }
 

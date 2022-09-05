@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using GameKit;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace UnityGameKit.Runtime
 
         private void Update()
         {
+            IsActive = Camera.main == null ? false : true;
             if (IsActive)
             {
                 if (m_CachedRaycastInfo.Count > 0)

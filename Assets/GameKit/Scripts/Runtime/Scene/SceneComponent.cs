@@ -118,7 +118,6 @@ namespace UnityGameKit.Runtime
             {
                 sceneName = sceneName.Substring(0, sceneNamePosition);
             }
-
             return sceneName;
         }
 

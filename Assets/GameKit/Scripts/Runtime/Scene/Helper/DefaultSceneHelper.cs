@@ -13,11 +13,11 @@ namespace UnityGameKit.Runtime
         }
         public override void LoadScene(string sceneAssetName, int priority, LoadSceneCallbacks loadSceneCallbacks, object userData = null)
         {
-            Scheduler.current.LoadSceneAsyn(sceneAssetName);
+            // Scheduler.current.LoadSceneAsyn(sceneAssetName);
         }
         public override void UnloadScene(string sceneAssetName, UnloadSceneCallbacks unloadSceneCallbacks, object userData = null)
         {
-            Scheduler.current.UnloadSceneAsyn(sceneAssetName);
+            // Scheduler.current.UnloadSceneAsyn(sceneAssetName);
         }
     }
 }
