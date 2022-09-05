@@ -19,7 +19,7 @@ public class CollectElement : GameElementBase, ICollective
     public override void OnInit()
     {
         base.OnInit();
-        m_configData = DataTable.instance.ItemTable.Get(m_DataId);
+        m_configData = GameKitCenter.Data.ItemTable.Get(m_DataId);
         if (m_configData == null)
         {
             Log.Fail("Incorrect Data Id for {0}", gameObject.name);

@@ -19,8 +19,6 @@ public sealed partial class {{name}}
     public {{table.full_name}} {{table.name}} {get; }
     {{~end~}}
 
-    public System.Collections.Generic.Dictionary<string, object> Table {get; private set;}
-
     public {{name}}(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
@@ -34,8 +32,6 @@ public sealed partial class {{name}}
         {{table.name}}.Resolve(tables); 
         {{~end~}}
         PostResolve();
-
-        Table = new System.Collections.Generic.Dictionary<string, object>(tables);
     }
 
     public void TranslateText(System.Func<string, string, string> translator)

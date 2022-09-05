@@ -154,13 +154,7 @@ public sealed partial class {{name}}
     /// {{field.escape_comment}}
     /// </summary>
 {{~end~}}
-     public {{cs_define_type field.ctype}} {{field.convention_name}}
-     {
-        get
-        {
-            return _data.{{field.convention_name}};
-        }
-     } 
+     public {{cs_define_type field.ctype}} {{field.convention_name}} => _data.{{field.convention_name}};
     {{~end~}}
 
     public void Resolve(Dictionary<string, object> _tables)

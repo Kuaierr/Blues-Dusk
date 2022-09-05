@@ -38,13 +38,13 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        public void RegisterElement(ElementBase element)
+        public void RegisterElement(IElement element)
         {
             m_ElementManager.RegisterElement(element);
             element.OnInit();
         }
 
-        public void RemoveElement(ElementBase element)
+        public void RemoveElement(IElement element)
         {
             m_ElementManager.RemoveElement(element);
         }

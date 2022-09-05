@@ -166,6 +166,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8482a8087cd6140a89d965d29ea676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &395272021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395272022}
+  - component: {fileID: 395272023}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395272022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395272021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1484156770}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &395272023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395272021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9db3e00f46a7a45be09d431eb6e768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScriptablePools:
+  - {fileID: 11400000, guid: 1ae28351a4336944c942e24cbd4f3863, type: 2}
 --- !u!1 &444044318
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,52 +429,6 @@ Transform:
   m_Father: {fileID: 1839777011}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &718956795
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 718956796}
-  - component: {fileID: 718956797}
-  m_Layer: 0
-  m_Name: Config
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &718956796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718956795}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &718956797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718956795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9164bf18c56c4dc499af4b2ed99a8f03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ConfigHelperTypeName: LubanConfigHelper
-  m_CustomConfigHelper: {fileID: 0}
-  m_CachedBytesSize: 0
 --- !u!1 &719977327
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +646,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &865538142
 MonoBehaviour:
@@ -663,52 +662,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SceneHelperTypeName: UnityGameKit.Runtime.DefaultSceneHelper
   m_CustomSceneHelper: {fileID: 0}
---- !u!1 &869626357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 869626358}
-  - component: {fileID: 869626359}
-  m_Layer: 0
-  m_Name: DataTable
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &869626358
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869626357}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &869626359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869626357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f35d8de9b2ac2e40b33f2f2dd6fdf31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DataTableHelperTypeName: UnityGameKit.Runtime.DefaultDataTableHelper
-  m_CustomDataTableHelper: {fileID: 0}
-  m_CachedBytesSize: 0
 --- !u!1 &956016388
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1149099945
 Transform:
   m_ObjectHideFlags: 0
@@ -857,7 +810,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AvailableProcedureTypeNames:
   - ProcedureChangeScene
-  - ProcedureInitResources
   - ProcedureLaunch
   - ProcedureMain
   - ProcedureMenu
@@ -894,7 +846,7 @@ Transform:
   m_Children:
   - {fileID: 956016389}
   m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1201495382
 MonoBehaviour:
@@ -940,7 +892,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1280435060
 MonoBehaviour:
@@ -1079,55 +1031,10 @@ Transform:
   - {fileID: 570993307}
   - {fileID: 1418555811}
   - {fileID: 2013133124}
+  - {fileID: 395272022}
   m_Father: {fileID: 1839777011}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1657603983
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1657603984}
-  - component: {fileID: 1657603985}
-  m_Layer: 0
-  m_Name: Localization
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1657603984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657603983}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7502916435143678050}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1657603985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657603983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922b26bfa386a5a4fb0ff1a7ab3369c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LocalizationHelperTypeName: UnityGameKit.Runtime.DefaultLocalizationHelper
-  m_CustomLocalizationHelper: {fileID: 0}
-  m_CachedBytesSize: 0
 --- !u!1 &1839777010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1443,6 @@ MonoBehaviour:
   m_CompressionHelperTypeName: UnityGameKit.Runtime.DefaultCompressionHelper
   m_JsonHelperTypeName: LitJsonHelper
   m_EditorResourceMode: 1
-  m_EditorLanguage: 0
   m_FrameRate: 60
   m_GameSpeed: 1
   m_RunInBackground: 0
@@ -1559,9 +1465,6 @@ Transform:
   - {fileID: 773984125}
   - {fileID: 1348460021}
   - {fileID: 444044319}
-  - {fileID: 869626358}
-  - {fileID: 718956796}
-  - {fileID: 1657603984}
   - {fileID: 865538141}
   - {fileID: 1280435059}
   - {fileID: 1201495381}

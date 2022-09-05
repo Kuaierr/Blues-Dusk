@@ -25,7 +25,7 @@ public class UI_Dialog : UIFormBase
     public Animator dialogAnimator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
-    
+
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
@@ -62,13 +62,15 @@ public class UI_Dialog : UIFormBase
     {
         base.OnClose(isShutdown, userData);
         CursorSystem.current.Enable();
-        DestroyFsm();
+        dialogAnimator.SetTrigger("FadeOut");
+        edgeAnimator.SetTrigger("FadeOut");
+        speakerAnimator.SetTrigger("FadeOut");
+
     }
 
     protected override void OnPause()
     {
         // base.OnPause();
-        
         CursorSystem.current.Enable();
         dialogAnimator.SetTrigger("FadeOut");
         edgeAnimator.SetTrigger("FadeOut");
@@ -149,7 +151,7 @@ public class UI_Dialog : UIFormBase
         stateList.Clear();
         fsm = null;
     }
-    
+
     public IDataNode ParseNode(int index = 0)
     {
         if (GameKitCenter.Dialog.CurrentTree == null)
@@ -248,7 +250,7 @@ public class UI_Dialog : UIFormBase
 
         if (data.Speaker != ">>")
         {
-            Character character = characterPool.FindCharacter(data.Speaker.Correction());
+            Character character = characterPool.GetData<Character>(data.Speaker.Correction());
             if (m_CurrentCharacter != character)
             {
                 m_CurrentCharacter = character;
@@ -293,6 +295,11 @@ public class UI_Dialog : UIFormBase
         fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
 
+
+    private void OnDestroy()
+    {
+        DestroyFsm();
+    }
 
     // private void LoadAnimator()
     // {

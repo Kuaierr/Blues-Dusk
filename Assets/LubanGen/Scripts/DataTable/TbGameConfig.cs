@@ -30,11 +30,41 @@ public sealed partial class TbGameConfig
         PostInit();
     }
 
-     public bool IsDavidDead => _data.IsDavidDead;
-     public bool IsRebellionStart => _data.IsRebellionStart;
-     public int CurrentDay => _data.CurrentDay;
-     public int CurrentWeekday => _data.CurrentWeekday;
-     public int CurrentWeek => _data.CurrentWeek;
+     public bool IsDavidDead
+     {
+        get
+        {
+            return _data.IsDavidDead;
+        }
+     } 
+     public bool IsRebellionStart
+     {
+        get
+        {
+            return _data.IsRebellionStart;
+        }
+     } 
+     public int CurrentDay
+     {
+        get
+        {
+            return _data.CurrentDay;
+        }
+     } 
+     public int CurrentWeekday
+     {
+        get
+        {
+            return _data.CurrentWeekday;
+        }
+     } 
+     public int CurrentWeek
+     {
+        get
+        {
+            return _data.CurrentWeek;
+        }
+     } 
 
     public void Resolve(Dictionary<string, object> _tables)
     {

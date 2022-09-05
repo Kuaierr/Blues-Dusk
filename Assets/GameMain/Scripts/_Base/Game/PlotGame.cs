@@ -1,5 +1,4 @@
 using GameKit;
-using GameKit.DataTable;
 using UnityEngine;
 
 public class PlotGame : GameBase

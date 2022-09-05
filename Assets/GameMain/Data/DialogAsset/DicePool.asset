@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1289507755c8042498d1992c357eb8fc, type: 3}
+  m_Name: DicePool
+  m_EditorClassIdentifier: 
+  diceData:
+  - {fileID: 11400000, guid: a3140a20cd2458746b7c76af0fbddea7, type: 2}
+  - {fileID: 11400000, guid: 0e44c7ae678649145a7ee54da4742641, type: 2}
+  - {fileID: 11400000, guid: 232d84d589633664780bcdd520aa2ed5, type: 2}
+  - {fileID: 11400000, guid: 06ab066b825f0c047b9e74a47b3c46ae, type: 2}
+  - {fileID: 11400000, guid: bab6a4b237f1c1048b3d3b65b91ce8bb, type: 2}
+  - {fileID: 11400000, guid: 5049a253fa7b71f41ad0bc80e72f0d36, type: 2}
+  - {fileID: 11400000, guid: 3bf50c2c34e6d8f4c883561f9f636247, type: 2}
+  - {fileID: 11400000, guid: 4ad63cdc6a8757d47ab2989d6175a8b7, type: 2}

@@ -52,8 +52,7 @@ public class ProcedureMenu : ProcedureBase
 
         if (m_StartGame)
         {
-            procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Main"));
-            // procedureOwner.SetData<VarByte>("GameMode", (byte)GameMode.Survival);
+            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMain");
             ChangeState<ProcedureChangeScene>(procedureOwner);
         }
     }

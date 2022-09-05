@@ -35,8 +35,7 @@ public class ProcedureMain : ProcedureBase
     protected override void OnDestroy(ProcedureOwner procedureOwner)
     {
         base.OnDestroy(procedureOwner);
-
-        // m_Games.Clear();
+        m_Games.Clear();
     }
 
     protected override void OnEnter(ProcedureOwner procedureOwner)
@@ -79,7 +78,7 @@ public class ProcedureMain : ProcedureBase
         m_GotoMenuDelaySeconds += elapseSeconds;
         if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
         {
-            procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Menu"));
+            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMenu");
             ChangeState<ProcedureChangeScene>(procedureOwner);  
         }
     }

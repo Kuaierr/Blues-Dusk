@@ -131,7 +131,7 @@ public static class UIExtension
 
     public static int? TryOpenUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)
     {
-        UiConfig uiConfig = DataTable.instance.UIConfigTable.GetByAssetName(uiFormName);
+        UiConfig uiConfig = GameKitCenter.Data.UIConfigTable.GetByAssetName(uiFormName);
         if (uiConfig == null)
         {
             Log.Warning("Can not load UI form '{0}' from data table.", uiFormName);
@@ -155,7 +155,7 @@ public static class UIExtension
 
     public static int? TryOpenUIForm(this UIComponent uiComponent, int uiFormId, object userData = null)
     {
-        UiConfig uiConfig = DataTable.instance.UIConfigTable.GetById(uiFormId);
+        UiConfig uiConfig = GameKitCenter.Data.UIConfigTable.GetById(uiFormId);
         // IDataTable<TbUIConfig> uiConfigTable = GameKitCenter.DataTable.GetDataTable<TbUIConfig>();
         if (uiConfig == null)
         {

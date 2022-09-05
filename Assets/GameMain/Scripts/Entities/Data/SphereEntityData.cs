@@ -11,7 +11,7 @@ public class SphereEntityData : EntityData
     private Item m_configData;
     public SphereEntityData(int entityId, int typeId) : base(entityId, typeId)
     {
-        m_configData = DataTable.instance.ItemTable.Get(typeId);
+        m_configData = GameKitCenter.Data.ItemTable.Get(typeId);
         m_cubeEntityData = "This Is Sphere Entity Data";
     }
 

@@ -1,5 +1,4 @@
 using GameKit;
-using GameKit.Localization;
 // using GameKit.Resource;
 using System;
 using UnityEngine;
@@ -33,9 +32,6 @@ namespace UnityGameKit.Runtime
         private bool m_EditorResourceMode = true;
 
         [SerializeField]
-        private Language m_EditorLanguage = Language.Unspecified;
-
-        [SerializeField]
         private int m_FrameRate = 30;
 
         [SerializeField]
@@ -56,18 +52,6 @@ namespace UnityGameKit.Runtime
             set
             {
                 m_EditorResourceMode = value;
-            }
-        }
-
-        public Language EditorLanguage
-        {
-            get
-            {
-                return m_EditorLanguage;
-            }
-            set
-            {
-                m_EditorLanguage = value;
             }
         }
 

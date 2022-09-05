@@ -76,7 +76,7 @@ public class ProcedureWorld : ProcedureBase
         m_GotoMenuDelaySeconds += elapseSeconds;
         if (m_GotoMenuDelaySeconds >= GameOverDelayedSeconds)
         {
-            procedureOwner.SetData<VarInt32>(ProcedureStateUtility.NEXT_SCENE_ID, GameKitCenter.Config.GetInt("Scene.Menu"));
+            procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, "GameMenu");
             ChangeState<ProcedureChangeScene>(procedureOwner);  
         }
     }

@@ -16,7 +16,7 @@ public class InventoryTest : MonoBehaviour
     {
         yield return null;
         inventorySystem = GameKitComponentCenter.GetComponent<InventoryComponent>();
-        Item item = DataTable.instance.ItemTable.Get(10001);
+        Item item = GameKitCenter.Data.ItemTable.Get(10001);
 
         inventorySystem.CreateInventory("TempInventory", 60);
         inventorySystem.AddToInventory<Item>("TempInventory", 10001, item.Name, item);

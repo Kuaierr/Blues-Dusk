@@ -1,4 +1,3 @@
-using GameKit.DataTable;
 using GameKit.Event;
 using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
@@ -22,9 +21,6 @@ public class ProcedureChangeScene : ProcedureBase
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
         base.OnEnter(procedureOwner);
-
-        Log.Info(GameKitCenter.Config.GetBool("IsDavidDead"));
-
         m_IsChangeSceneComplete = false;
 
         GameKitCenter.Event.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);

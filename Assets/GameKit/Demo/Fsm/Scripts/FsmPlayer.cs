@@ -31,13 +31,13 @@ namespace UnityGameKit.Demo
         {
             stateList.Add(new IdleState());
             stateList.Add(new MoveState());
-            fsm = GameKitCenter.Fsm.CreateFsm<FsmPlayer>(gameObject.name, this, stateList);
+            fsm = GameKitComponentCenter.GetComponent<FsmComponent>().CreateFsm<FsmPlayer>(gameObject.name, this, stateList);
             fsm.Start<IdleState>();
         }
 
         private void DestroyFsm()
         {
-            GameKitCenter.Fsm.DestroyFsm(fsm);
+            GameKitComponentCenter.GetComponent<FsmComponent>().DestroyFsm(fsm);
             stateList.Clear();
             fsm = null;
         }
