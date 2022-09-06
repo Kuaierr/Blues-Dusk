@@ -58,7 +58,7 @@ public abstract class GameElementBase : ElementBase
     {
         base.OnHighlightEnter();
         if (m_Outline == null)
-            Log.Warning(gameObject.name);
+            return;
         if (!IsOutlineShown)
             m_Outline.enabled = true;
     }
@@ -67,7 +67,7 @@ public abstract class GameElementBase : ElementBase
     {
         base.OnHighlightExit();
         if (m_Outline == null)
-            Log.Warning(gameObject.name);
+            return;
         if (IsOutlineShown)
             m_Outline.enabled = false;
     }

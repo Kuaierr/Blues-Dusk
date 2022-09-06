@@ -17,27 +17,27 @@ namespace GameKit
 
         public void AddUpdateListener(UnityAction func)
         {
-            controller.AddUpdateListener(func);
+            controller?.AddUpdateListener(func);
         }
 
         public void RemoveUpdateListener(UnityAction func)
         {
-            controller.RemoveUpdateListener(func);
+            controller?.RemoveUpdateListener(func);
         }
 
         public Coroutine StartCoroutine(IEnumerator routine)
         {
-            return controller.StartCoroutine(routine);
+            return controller?.StartCoroutine(routine);
         }
 
         public void StopCorroutie(Coroutine routine)
         {
-            controller.StopCoroutine(routine);
+            controller?.StopCoroutine(routine);
         }
 
         public Coroutine StartCoroutine(string methodName)
         {
-            return controller.StartCoroutine(methodName);
+            return controller?.StartCoroutine(methodName);
         }
 
         public void TryGetMonoObject(string name, out GameObject Object)
@@ -49,7 +49,5 @@ namespace GameKit
             }
             Object = globalObjects[name];
         }
-
-
     }
 }

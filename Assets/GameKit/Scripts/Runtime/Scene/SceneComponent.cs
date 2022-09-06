@@ -335,7 +335,7 @@ namespace UnityGameKit.Runtime
 
         private void OnLoadSceneSuccess(object sender, GameKit.Scene.LoadSceneSuccessEventArgs e)
         {
-            Log.Info("GameKit.Scene.LoadSceneSuccessEventArgs");
+            // Log.Info("GameKit.Scene.LoadSceneSuccessEventArgs");
             if (!m_SceneOrder.ContainsKey(e.SceneAssetName))
             {
                 m_SceneOrder.Add(e.SceneAssetName, 0);
@@ -347,22 +347,21 @@ namespace UnityGameKit.Runtime
 
         private void OnLoadSceneFailure(object sender, GameKit.Scene.LoadSceneFailureEventArgs e)
         {
-            Log.Warning("Load scene failure, scene asset name '{0}', error message '{1}'.", e.SceneAssetName, e.ErrorMessage);
+            // Log.Warning("Load scene failure, scene asset name '{0}', error message '{1}'.", e.SceneAssetName, e.ErrorMessage);
             m_EventComponent.Fire(this, LoadSceneFailureEventArgs.Create(e));
         }
 
         private void OnUnloadSceneSuccess(object sender, GameKit.Scene.UnloadSceneSuccessEventArgs e)
         {
-            Log.Info("GameKit.Scene.UnloadSceneSuccessEventArgs");
+            // Log.Info("GameKit.Scene.UnloadSceneSuccessEventArgs");
             m_EventComponent.Fire(this, UnloadSceneSuccessEventArgs.Create(e));
             m_SceneOrder.Remove(e.SceneAssetName);
-            Log.Info(m_SceneOrder.Count);
             RefreshSceneOrder();
         }
 
         private void OnUnloadSceneFailure(object sender, GameKit.Scene.UnloadSceneFailureEventArgs e)
         {
-            Log.Warning("Unload scene failure, scene asset name '{0}'.", e.SceneAssetName);
+            // Log.Warning("Unload scene failure, scene asset name '{0}'.", e.SceneAssetName);
             m_EventComponent.Fire(this, UnloadSceneFailureEventArgs.Create(e));
         }
     }

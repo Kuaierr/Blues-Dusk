@@ -35,11 +35,11 @@ public class ProcedureSelectScene : ProcedureBase
         GameKitCenter.Entity.HideAllLoadedEntities();
 
         // 卸载所有场景
-        string[] loadedSceneAssetNames = GameKitCenter.Scene.GetLoadedSceneAssetNames();
-        for (int i = 0; i < loadedSceneAssetNames.Length; i++)
-        {
-            GameKitCenter.Scene.UnloadScene(loadedSceneAssetNames[i]);
-        }
+        // string[] loadedSceneAssetNames = GameKitCenter.Scene.GetLoadedSceneAssetNames();
+        // for (int i = 0; i < loadedSceneAssetNames.Length; i++)
+        // {
+        //     GameKitCenter.Scene.UnloadScene(loadedSceneAssetNames[i]);
+        // }
 
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();

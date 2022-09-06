@@ -304,7 +304,7 @@ namespace GameKit.Scene
             m_UnloadingSceneAssetNames.Add(sceneAssetName);
             // m_SceneHelper.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
             // m_ResourceManager.UnloadScene(sceneAssetName, m_UnloadSceneCallbacks, userData);
-
+            // Utility.Debugger.LogWarning(userData.ToString());
             AddressableManager.instance.UnloadSceneAsyn(sceneAssetName, onSuccess: () =>
                 {
                     UnloadSceneSuccessCallback(sceneAssetName, userData);

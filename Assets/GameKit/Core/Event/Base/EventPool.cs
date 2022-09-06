@@ -203,8 +203,8 @@ namespace GameKit.Event
             {
                 noHandlerException = true;
             }
-
-            ReferencePool.Release(e);
+            if (!e.IsManuallyRelease)
+                ReferencePool.Release(e);
 
             if (noHandlerException)
             {

@@ -95,7 +95,7 @@ namespace UnityGameKit.Runtime
             IElement interactive = CursorSystem.current.GetHitComponent<IElement>(1 << LayerMask.NameToLayer("Interactive"));
             if (interactive != null)
             {
-                interactive.OnHighlightEnter();
+                interactive?.OnHighlightEnter();
                 if (m_CachedInteractiveElement != interactive)
                     m_CachedInteractiveElement = interactive;
             }
@@ -103,7 +103,7 @@ namespace UnityGameKit.Runtime
             {
                 if (m_CachedInteractiveElement != null)
                 {
-                    m_CachedInteractiveElement.OnHighlightExit();
+                    m_CachedInteractiveElement?.OnHighlightExit();
                     m_CachedInteractiveElement = null;
                 }
             }

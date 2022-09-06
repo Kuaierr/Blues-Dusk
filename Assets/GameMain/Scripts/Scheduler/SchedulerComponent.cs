@@ -25,11 +25,12 @@ public partial class SchedulerComponent : GameKitComponent
     public string LoadingScene = "GameKit_Loading";
 
     private const int DefaultScenePrioty = 0;
-    private Switcher switcher;
+    private Switcher m_Switcher;
     private SceneComponent m_SceneComponent = null;
     private EventComponent m_EventComponent = null;
     private EventHandler<DoTransitionCompleteEventArgs> m_SceneTransitEventHandler = null;
-
+    private List<string> m_CachedLoadScenes = null;
+    private List<string> m_CachedUnloadScenes = null;
 
     public bool MultiScene
     {
@@ -58,20 +59,21 @@ public partial class SchedulerComponent : GameKitComponent
     //     }
     // }
 
-    public void Init()
+    public void SetStartScene()
     {
 
         if (MultiScene)
         {
             StartScene = ActiveSceneName;
             CurrentScene = AssetUtility.GetSceneAsset(ActiveSceneName);
+            Log.Info(ActiveSceneName);
         }
         else
         {
             CurrentScene = AssetUtility.GetSceneAsset(StartScene);
             // StartScene = AssetUtility.GetSceneAsset(StartScene);
         }
-        Log.Info(ActiveSceneName);
+
         // else
         //     LoadSceneAsyn(StartScene, onSuccess: () => { CurrentScene = StartScene; });
     }
@@ -85,9 +87,9 @@ public partial class SchedulerComponent : GameKitComponent
     {
         base.Awake();
         IsActive = true;
-        // m_SceneTransitEventHandler += OnTransitScene;
-
-        switcher = GetComponentInChildren<Switcher>();
+        m_CachedLoadScenes = new List<string>();
+        m_CachedUnloadScenes = new List<string>();
+        m_Switcher = GetComponentInChildren<Switcher>();
     }
 
     private void Start()
@@ -110,23 +112,19 @@ public partial class SchedulerComponent : GameKitComponent
         m_EventComponent.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
         m_EventComponent.Subscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
         m_EventComponent.Subscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
-        // m_EventComponent.Subscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
-        // m_EventComponent.Subscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
+        m_EventComponent.Subscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
+        m_EventComponent.Subscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
     }
 
     private void OnDestroy()
     {
-        m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
+        
         m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
         m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
         m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
-        // m_EventComponent.Unsubscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
-        // m_EventComponent.Unsubscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
-    }
-
-    public void LoadSceneWithProcedure(SceneTransitionType switchType = SceneTransitionType.None)
-    {
-
+        m_EventComponent.Unsubscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
+        m_EventComponent.Unsubscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
+        m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
     }
 
     public void SwitchSceneByDefault(string name, UnityAction onSuccess = null, UnityAction onFail = null)
@@ -144,19 +142,19 @@ public partial class SchedulerComponent : GameKitComponent
     }
     public void SwitchSceneByAnimation(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        switcher.animator.gameObject.SetActive(true);
-        switcher.animator.SetTrigger("Swicth");
-        switcher.animator.OnComplete(1f, () =>
+        m_Switcher.animator.gameObject.SetActive(true);
+        m_Switcher.animator.SetTrigger("Swicth");
+        m_Switcher.animator.OnComplete(1f, () =>
         {
-            UnloadSceneAsyn(CurrentScene, () =>
+            UnloadSceneAsyn(CurrentScene, onSuccess: () =>
             {
-                LoadSceneAsyn(name, () =>
+                LoadSceneAsyn(name, onSuccess: () =>
                 {
                     CurrentScene = name;
-                    switcher.animator.SetTrigger("UnSwicth");
-                    switcher.animator.OnComplete(1f, () =>
+                    m_Switcher.animator.SetTrigger("UnSwicth");
+                    m_Switcher.animator.OnComplete(1f, () =>
                     {
-                        switcher.animator.gameObject.SetActive(false);
+                        m_Switcher.animator.gameObject.SetActive(false);
                     });
                     onSuccess?.Invoke();
                 });
@@ -166,18 +164,18 @@ public partial class SchedulerComponent : GameKitComponent
 
     public void SwitchSceneBySwipe(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        switcher.swiper.gameObject.SetActive(true);
-        switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+        m_Switcher.swiper.gameObject.SetActive(true);
+        m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
         {
-            UnloadSceneAsyn(CurrentScene, () =>
+            UnloadSceneAsyn(CurrentScene, onSuccess: () =>
             {
-                LoadSceneAsyn(name, () =>
+                LoadSceneAsyn(name, onSuccess: () =>
                 {
                     CurrentScene = name;
-                    switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
+                    m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
                     {
-                        switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
-                        switcher.swiper.gameObject.SetActive(false);
+                        m_Switcher.swiper.localPosition = new Vector3(2420f, m_Switcher.swiper.localPosition.y, m_Switcher.swiper.localPosition.z);
+                        m_Switcher.swiper.gameObject.SetActive(false);
                     });
                     onSuccess?.Invoke();
                 });
@@ -187,17 +185,17 @@ public partial class SchedulerComponent : GameKitComponent
 
     public void SwitchSceneByFade(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        switcher.gradienter.gameObject.SetActive(true);
-        switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+        m_Switcher.gradienter.gameObject.SetActive(true);
+        m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
         {
-            UnloadSceneAsyn(CurrentScene, () =>
+            UnloadSceneAsyn(CurrentScene, onSuccess: () =>
             {
                 // LoadSceneAsyn(name, () =>
                 // {
                 //     CurrentScene = name;
-                //     switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
+                //     m_Switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
                 //     {
-                //         switcher.gradienter.gameObject.SetActive(false);
+                //         m_Switcher.gradienter.gameObject.SetActive(false);
                 //     });
                 //     onSuccess?.Invoke();
                 // });
@@ -207,9 +205,9 @@ public partial class SchedulerComponent : GameKitComponent
 
     public void SwitchScene(string name, UnityAction onSuccess = null, UnityAction onFail = null)
     {
-        UnloadSceneAsyn(CurrentScene, () =>
+        UnloadSceneAsyn(CurrentScene, onSuccess: () =>
         {
-            LoadSceneAsyn(name, () =>
+            LoadSceneAsyn(name, onSuccess: () =>
             {
                 CurrentScene = name;
                 onSuccess?.Invoke();
@@ -219,17 +217,17 @@ public partial class SchedulerComponent : GameKitComponent
 
     public void ReloadCurrentSceneSwipe()
     {
-        switcher.swiper.gameObject.SetActive(true);
-        switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+        m_Switcher.swiper.gameObject.SetActive(true);
+        m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
         {
-            UnloadSceneAsyn(CurrentScene, () =>
+            UnloadSceneAsyn(CurrentScene, onSuccess: () =>
             {
-                LoadSceneAsyn(CurrentScene, () =>
+                LoadSceneAsyn(CurrentScene, onSuccess: () =>
                 {
-                    switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
+                    m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
                     {
-                        switcher.swiper.localPosition = new Vector3(2420f, switcher.swiper.localPosition.y, switcher.swiper.localPosition.z);
-                        switcher.swiper.gameObject.SetActive(false);
+                        m_Switcher.swiper.localPosition = new Vector3(2420f, m_Switcher.swiper.localPosition.y, m_Switcher.swiper.localPosition.z);
+                        m_Switcher.swiper.gameObject.SetActive(false);
                     });
                 });
             });
@@ -248,20 +246,21 @@ public partial class SchedulerComponent : GameKitComponent
         SwitchScene(LoadingScene, onSuccess);
     }
 
-    public void LoadSceneAsyn(string name, UnityAction onSuccess = null, UnityAction onFail = null)
+    public void LoadSceneAsyn(string name, SceneTransitionType transitionType = SceneTransitionType.Fade, UnityAction onSuccess = null, UnityAction onFail = null)
     {
         // Log.Info(name);
         // ScenesManager.instance.LoadSceneAsynAdd(name, onSuccess);
         // AddressableManager.instance.LoadSceneAsyn(name, loadMode: LoadSceneMode.Additive, onSuccess: onSuccess, onFail: onFail);
-        GameKitCenter.Scene.LoadScene(name);
+        // GameKitCenter.Scene.LoadScene(name, DoTransitionCompleteEventArgs.Create(name, transitionType, this));
+        GameKitCenter.Scene.LoadScene(name, null);
     }
 
-    public void UnloadSceneAsyn(string name, UnityAction onSuccess = null, UnityAction onFail = null)
+    public void UnloadSceneAsyn(string name, SceneTransitionType transitionType = SceneTransitionType.Fade, UnityAction onSuccess = null, UnityAction onFail = null)
     {
         // ScenesManager.instance.UnloadSceneAsyn(name, onSuccess);
         // AddressableManager.instance.UnloadSceneAsyn(name, onSuccess: onSuccess, onFail: onFail);
-        // Log.Warning(name);
-        GameKitCenter.Scene.UnloadScene(name);
+        // Log.Warning("UnloadSceneAsyn");
+        GameKitCenter.Scene.UnloadScene(name, null);
     }
 
     public int GetActiveSceneNumber()
@@ -279,127 +278,225 @@ public partial class SchedulerComponent : GameKitComponent
         return 0;
     }
 
-    // private void DoTransition(string name, SceneTransitionType switchType)
-    // {
-    //     if (switchType == SceneTransitionType.Swipe)
-    //     {
-    //         switcher.swiper.gameObject.SetActive(true);
-    //         switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
-    //         {
-    //             m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(name, switchType, this));
-    //         });
-    //     }
-    //     else if (switchType == SceneTransitionType.Fade)
-    //     {
-    //         switcher.gradienter.gameObject.SetActive(true);
-    //         switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
-    //         {
-    //             m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(name, switchType, this));
-    //         });
-    //     }
-    //     else if (switchType == SceneTransitionType.Animation)
-    //     {
-    //         switcher.animator.gameObject.SetActive(true);
-    //         switcher.animator.SetTrigger("Do");
-    //         switcher.animator.OnComplete(1f, () =>
-    //         {
-    //             m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(name, switchType, this));
-    //         });
-    //     }
-    //     else if (switchType == SceneTransitionType.LoadingScene)
-    //     {
-    //         switcher.gradienter.gameObject.SetActive(true);
-    //         switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
-    //         {
-    //             m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(name, switchType, this));
-    //         });
-    //     }
-    // }
-
-    // private void UndoTransition(string name, SceneTransitionType switchType)
-    // {
-    //     if (switchType == SceneTransitionType.Swipe)
-    //     {
-    //         // m_EventComponent.Fire(this, );
-    //     }
-    //     else if (switchType == SceneTransitionType.LoadingScene)
-    //     {
-
-    //     }
-    //     else if (switchType == SceneTransitionType.Fade)
-    //     {
-
-    //     }
-    //     else if (switchType == SceneTransitionType.Animation)
-    //     {
-
-    //     }
-    // }
-
-    private void OnLoadSceneSuccess(object sender, GameEventArgs e)
+    public void DoTransition(string loadName, List<string> unloadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
     {
-        LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
-        Debug.Log("Load Success");
+        m_CachedLoadScenes.Clear();
+        m_CachedLoadScenes.Add(loadName);
+        DoTransition(m_CachedLoadScenes, unloadNames, switchType);
     }
 
-    private void OnLoadSceneFailure(object sender, GameEventArgs e)
+    public void DoTransition(string loadName, string unloadName, SceneTransitionType switchType = SceneTransitionType.Fade)
     {
-        LoadSceneFailureEventArgs args = (LoadSceneFailureEventArgs)e;
-        Debug.Log("Load Fail");
+        m_CachedLoadScenes.Clear();
+        m_CachedUnloadScenes.Clear();
+        m_CachedLoadScenes.Add(loadName);
+        m_CachedUnloadScenes.Add(unloadName);
+        DoTransition(m_CachedLoadScenes, m_CachedUnloadScenes, switchType);
+    }
+
+    public void DoTransition(string loadName, SceneTransitionType switchType = SceneTransitionType.Fade)
+    {
+        m_CachedLoadScenes.Clear();
+        m_CachedUnloadScenes.Clear();
+        m_CachedLoadScenes.Add(loadName);
+        DoTransition(m_CachedLoadScenes, m_CachedUnloadScenes, switchType = SceneTransitionType.Fade);
+    }
+
+    public void DoTransition(List<string> loadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
+    {
+        m_CachedUnloadScenes.Clear();
+        DoTransition(loadNames, m_CachedUnloadScenes, switchType);
+    }
+
+    public void DoTransition(List<string> loadNames, List<string> unloadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
+    {
+        if (switchType == SceneTransitionType.Swipe)
+        {
+            m_Switcher.swiper.gameObject.SetActive(true);
+            m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+            {
+                m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
+            });
+        }
+        else if (switchType == SceneTransitionType.Fade)
+        {
+            m_Switcher.gradienter.gameObject.SetActive(true);
+            m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+            {
+                m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
+            });
+        }
+        else if (switchType == SceneTransitionType.Animation)
+        {
+            m_Switcher.animator.gameObject.SetActive(true);
+            m_Switcher.animator.SetTrigger("Do");
+            m_Switcher.animator.OnComplete(1f, () =>
+            {
+                m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
+            });
+        }
+        else if (switchType == SceneTransitionType.LoadingScene)
+        {
+            m_Switcher.gradienter.gameObject.SetActive(true);
+            m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+            {
+                m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
+            });
+        }
+    }
+
+    private void OnDoTransitionComplete(object sender, GameEventArgs e)
+    {
+        if (e == null)
+        {
+            Log.Warning("OnDoTransitionComplete is null");
+            return;
+        }
+
+        DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)e;
+        if (transitionArgs.UserData.GetType() != typeof(SchedulerComponent))
+        {
+            Log.Warning("OnDoTransitionComplete Not fired by Scheduler Component");
+            return;
+        }
+
+
+        SceneTransitionType transitionType = transitionArgs.TransitionType;
+        if (transitionArgs.RemoveAll)
+        {
+            m_SceneComponent.GetLoadedSceneAssetNames(m_CachedUnloadScenes);
+            transitionArgs.ManuallySetRemoveNames(m_CachedUnloadScenes);
+        }
+
+        for (int i = 0; i < transitionArgs.RemoveNames.Count; i++)
+        {
+            m_SceneComponent.UnloadScene(transitionArgs.RemoveNames[i], transitionArgs);
+        }
+
     }
 
     private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
     {
+        // sender 是 SceneComponent
+        // args.UserData 是 SchedulerComponent
+        // 只有通过scheduler加载和卸载才能出发回调
+        // 所有unload结束后才会开始load
         UnloadSceneSuccessEventArgs args = (UnloadSceneSuccessEventArgs)e;
-        Log.Warning(sender.GetType());
+        if (args.UserData == null)
+        {
+            Log.Warning("DoTransitionCompleteEventArgs is null");
+            return;
+        }
 
-        // DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
-        // if (transitionArgs != null)
-        // {
-        //     m_SceneComponent.LoadScene(AssetUtility.GetSceneAsset(transitionArgs.TargetName), DefaultScenePrioty, this);
-        //     Debug.Log("UnLoad Success");
-        // }
+        DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
+        if (transitionArgs.UserData == null)
+        {
+            Log.Warning("DoTransitionCompleteEventArgs is null when unload {0}", args.SceneAssetName);
+            return;
+        }
+
+        if (transitionArgs.UserData.GetType() == typeof(SchedulerComponent))
+        {
+            Log.Success("Unload {0} Success with transition.", args.SceneAssetName);
+            transitionArgs.RemoveNames.Remove(args.SceneAssetName);
+            if (transitionArgs.RemoveCount == 0)
+            {
+                for (int i = 0; i < transitionArgs.TargetNames.Count; i++)
+                {
+                    m_SceneComponent.LoadScene(transitionArgs.TargetNames[i], DefaultScenePrioty, transitionArgs);
+                }
+            }
+        }
+    }
+
+    private void OnLoadSceneSuccess(object sender, GameEventArgs e)
+    {
+        LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
+        if (args.UserData == null)
+        {
+            Log.Warning("LoadSceneSuccessEventArgs is null, scheduler will ignore the load");
+            return;
+        }
+
+        DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
+        if (transitionArgs.UserData == null)
+        {
+            Log.Warning("The transition is not fired by {0} when loading {1}", this.name, args.SceneAssetName);
+            return;
+        }
+
+        if (transitionArgs.UserData.GetType() == typeof(SchedulerComponent))
+        {
+            Log.Success("Load {0} Success with transition.", args.SceneAssetName);
+            transitionArgs.TargetNames.Remove(args.SceneAssetName);
+            if (transitionArgs.TargetCount == 0)
+            {
+                m_EventComponent.Fire(this, UndoTransitionCompleteEventArgs.Create(transitionArgs.TransitionType, transitionArgs));
+            }
+        }
+    }
+
+    private void OnUndoTransitionComplete(object sender, GameEventArgs e)
+    {
+        UndoTransitionCompleteEventArgs args = (UndoTransitionCompleteEventArgs)e;
+        DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
+        if (transitionArgs.GetType() != typeof(DoTransitionCompleteEventArgs))
+        {
+            Log.Warning("OnUndoTransitionComplete is fired without calling DoTransition");
+            return;
+        }
+        UndoTransition(args.TransitionType);
+        ReferencePool.Release(args);
+        ReferencePool.Release(transitionArgs);
+    }
+
+    private void UndoTransition(SceneTransitionType switchType)
+    {
+        if (switchType == SceneTransitionType.Swipe)
+        {
+            m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(HideSwitchSwiper);
+        }
+        else if (switchType == SceneTransitionType.Fade)
+        {
+            Log.Success("Fade");
+            m_Switcher.gradienter.SetAlpha(1f);
+            m_Switcher.gradienter.DOFade(0f, 5f).OnComplete(HideSwitchFader);
+        }
+        else if (switchType == SceneTransitionType.Animation)
+        {
+            m_Switcher.animator.SetTrigger("Undo");
+            m_Switcher.animator.OnComplete(1f, HideSwitchAnimator);
+        }
+    }
+
+
+
+    private void OnLoadSceneFailure(object sender, GameEventArgs e)
+    {
+        LoadSceneFailureEventArgs args = (LoadSceneFailureEventArgs)e;
+        Log.Fail("Load {0} Fail", args.SceneAssetName);
     }
 
     private void OnUnloadSceneFailure(object sender, GameEventArgs e)
     {
         UnloadSceneFailureEventArgs args = (UnloadSceneFailureEventArgs)e;
-        Debug.Log("UnLoad Fail");
+        Log.Fail("Unload {0} Fail", args.SceneAssetName);
     }
 
-    // private void OnDoTransitionComplete(object sender, GameEventArgs e)
-    // {
-    //     DoTransitionCompleteEventArgs args = (DoTransitionCompleteEventArgs)e;
-    //     if (args.UserData != this)
-    //     {
-    //         Log.Fail("OnDoTransitionComplete: Not fired by myself");
-    //         return;
-    //     }
 
-    //     SceneTransitionType transitionType = args.TransitionType;
-    //     string[] loadedSceneAssetNames = m_SceneComponent.GetLoadedSceneAssetNames();
-    //     for (int i = 0; i < loadedSceneAssetNames.Length; i++)
-    //         m_SceneComponent.UnloadScene(loadedSceneAssetNames[i]);
-    // }
+    private void HideSwitchAnimator()
+    {
+        m_Switcher.animator.gameObject.SetActive(false);
+    }
 
-    // private void OnUndoTransitionComplete(object sender, GameEventArgs e)
-    // {
-    //     UndoTransitionCompleteEventArgs args = (UndoTransitionCompleteEventArgs)e;
-    //     if (args.UserData != this)
-    //     {
-    //         Log.Fail("OnUndoTransitionComplete: Not fired by myself");
-    //         return;
-    //     }
-    // }
+    private void HideSwitchSwiper()
+    {
+        m_Switcher.swiper.localPosition = new Vector3(2420f, m_Switcher.swiper.localPosition.y, m_Switcher.swiper.localPosition.z);
+        m_Switcher.swiper.gameObject.SetActive(false);
+    }
 
-    // private void OnTransitScene(object sender, DoTransitionCompleteEventArgs e)
-    // {
-    //     if (e.UserData != this)
-    //     {
-    //         Log.Fail("OnDoTransitionComplete: Not fired by myself");
-    //         return;
-    //     }
-    //     SceneTransitionType transitionType = e.TransitionType;
-    //     m_SceneComponent.LoadScene(e.TargetName, DefaultScenePrioty, null);
-    // }
+    private void HideSwitchFader()
+    {
+        m_Switcher.gradienter.gameObject.SetActive(false);
+    }
 }

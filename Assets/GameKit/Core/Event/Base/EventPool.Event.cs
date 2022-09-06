@@ -28,7 +28,7 @@ namespace GameKit.Event
                     return m_EventArgs;
                 }
             }
-
+            
             public static Event Create(object sender, T e)
             {
                 Event eventNode = ReferencePool.Acquire<Event>();

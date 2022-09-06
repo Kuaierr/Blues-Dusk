@@ -12,7 +12,6 @@ namespace UnityGameKit.Runtime
         public UndoTransitionCompleteEventArgs()
         {
             TransitionType = SceneTransitionType.Immediately;
-            TargetName = string.Empty;
             UserData = null;
         }
 
@@ -30,23 +29,16 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public string TargetName
-        {
-            get;
-            private set;
-        }
-
         public object UserData
         {
             get;
             private set;
         }
 
-        public static UndoTransitionCompleteEventArgs Create(string targetName, SceneTransitionType transitionType, object userData)
+        public static UndoTransitionCompleteEventArgs Create(SceneTransitionType transitionType, object userData)
         {
             UndoTransitionCompleteEventArgs undoTransitionCompleteEventArgs = ReferencePool.Acquire<UndoTransitionCompleteEventArgs>();
             undoTransitionCompleteEventArgs.TransitionType = transitionType;
-            undoTransitionCompleteEventArgs.TargetName = targetName;
             undoTransitionCompleteEventArgs.UserData = userData;
             return undoTransitionCompleteEventArgs;
         }
@@ -54,7 +46,6 @@ namespace UnityGameKit.Runtime
         public override void Clear()
         {
             TransitionType = SceneTransitionType.Immediately;
-            TargetName = string.Empty;
             UserData = null;
         }
     }

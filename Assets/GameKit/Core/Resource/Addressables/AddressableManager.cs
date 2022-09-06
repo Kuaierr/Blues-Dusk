@@ -43,7 +43,10 @@ namespace GameKit
             {
                 onSuccess.Invoke();
                 if (!m_cachedHandles.ContainsKey(keyName))
+                {
+                    // Utility.Debugger.LogWarning("Add Unload Handle Key");
                     m_cachedHandles.Add(keyName, handle);
+                }
             }
             else
                 onFail?.Invoke();
@@ -52,6 +55,11 @@ namespace GameKit
         IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
         {
             AsyncOperationHandle handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+            if(autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
+            {
+                // Utility.Debugger.LogWarning("Remove Unload Handle Key");
+                m_cachedHandles.Remove(keyName);
+            }
             yield return handle;
             onSuccess.Invoke();
         }
