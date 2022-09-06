@@ -766,10 +766,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1356560242229691043, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -543.50006
+      objectReference: {fileID: 0}
     - target: {fileID: 1356560242229691047, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: diceSystemAnimator
       value: 
-      objectReference: {fileID: 946502604}
+      objectReference: {fileID: 0}
     - target: {fileID: 1356560242229691047, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
       propertyPath: _tempDiceList.Array.size
       value: 7
@@ -1072,11 +1076,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
---- !u!95 &946502604 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1356560242229691040, guid: 357be379c3c269e408a28ca1c5460251, type: 3}
-  m_PrefabInstance: {fileID: 946502603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1452855239
 GameObject:
   m_ObjectHideFlags: 1

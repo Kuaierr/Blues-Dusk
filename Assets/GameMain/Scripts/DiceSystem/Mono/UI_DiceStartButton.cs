@@ -38,6 +38,16 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
         onClick += onClickCallback;
     }
 
+    private void OnDisable()
+    {
+        onClick = null;
+    }
+
+    public void AddCallBack(UnityAction onClickCallback)
+    {
+        onClick += onClickCallback;
+    }
+
     public void Disable()
     {
         //TODO 字体颜色、外发光相关的调整

@@ -10,6 +10,8 @@ using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 public class DiceDialogChoosingState : FsmState<UI_Dialog>, IReference
 {
     private UI_Dialog fsmMaster;
+    private Dice_Result _result;
+    
     public void Clear()
     {
 
@@ -25,6 +27,9 @@ public class DiceDialogChoosingState : FsmState<UI_Dialog>, IReference
         base.OnEnter(updateFsm);
         Debug.Log("Enter ChoiceDiceroll State.");
         fsmMaster = updateFsm.User;
+        
+        _result = fsmMaster.GetFinalResult();
+        // 根据骰子结果刷新选项
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)

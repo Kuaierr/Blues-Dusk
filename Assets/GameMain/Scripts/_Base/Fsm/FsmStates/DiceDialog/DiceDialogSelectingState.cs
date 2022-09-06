@@ -10,6 +10,8 @@ using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
 {
     private UI_Dialog fsmMaster;
+    private FsmInterface _fsm;
+
     public void Clear() { }
 
     protected override void OnInit(FsmInterface fsm)
@@ -22,6 +24,11 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
         base.OnEnter(updateFsm);
         Debug.Log("Enter ChoiceDiceroll State.");
         fsmMaster = updateFsm.User;
+
+        _fsm = updateFsm;
+        updateFsm.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID,typeof(DiceDialogRollingState));
+        updateFsm.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID,fsmMaster.diceAnimator);
+        fsmMaster.AddCheckButtonCallback(FadeToRollingState);
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -37,5 +44,10 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
     protected override void OnDestroy(FsmInterface fsm)
     {
         base.OnDestroy(fsm);
+    }
+    
+    private void FadeToRollingState()
+    {
+        ChangeState<DiceDialogRollingState>(_fsm);
     }
 }
