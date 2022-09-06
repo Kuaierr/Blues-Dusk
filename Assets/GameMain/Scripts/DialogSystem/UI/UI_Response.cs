@@ -19,7 +19,7 @@ public class UI_Response : UIFormChildBase
     private int currentIndex = 0;
     private float animDistance = 0;
     private Vector2 selectorInitPos = Vector2.zero;
-    private Animator animator;
+    [SerializeField] private Animator m_MasterAnimator;
 
     public int CurIndex
     {
@@ -29,18 +29,19 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public Animator Animator
+    public Animator MasterAnimator
     {
         get
         {
-            return animator;
+            return m_MasterAnimator;
         }
     }
-    
+
     public override void OnInit(int parentDepth)
     {
         base.OnInit(parentDepth);
-        animator = GetComponent<Animator>();
+        if (m_MasterAnimator != null)
+            m_MasterAnimator = GetComponent<Animator>();
         verticalLayoutGroup = GetComponentInChildren<VerticalLayoutGroup>();
         ui_options = GetComponentsInChildren<UI_Option>(true).ToList();
         selectorSeq = DOTween.Sequence();
@@ -73,8 +74,8 @@ public class UI_Response : UIFormChildBase
 
     public override void OnShow(UnityAction callback = null)
     {
-        animator.SetTrigger("FadeIn");
-        animator.OnComplete(callback: callback);
+        m_MasterAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+        m_MasterAnimator.OnComplete(callback: callback);
         currentIndex = 0;
         selectorInitPos = SelectorTransform.anchoredPosition = ui_options.First().RectTransform.anchoredPosition;
         for (int i = 0; i < currentOptions.Count; i++)
@@ -93,8 +94,8 @@ public class UI_Response : UIFormChildBase
     public override void OnHide(UnityAction callback = null)
     {
         Log.Info("Response OnHide");
-        animator.SetTrigger("FadeOut");
-        animator.OnComplete(callback: callback);
+        m_MasterAnimator.SetTrigger("FadeOut");
+        m_MasterAnimator.OnComplete(callback: callback);
         currentOptions.Clear();
         foreach (var ui_option in ui_options)
         {

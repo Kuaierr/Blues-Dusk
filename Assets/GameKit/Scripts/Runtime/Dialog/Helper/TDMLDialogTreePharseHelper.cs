@@ -60,8 +60,6 @@ namespace UnityGameKit.Runtime
             {
                 IDataNode node = dialogTree.DataNodeManager.GetOrAddNode(i.ToString());
                 PhaseNode(node, lines[i]);
-                // m_DataNodeManager.SetData<DialogDataNodeVariable>(DialogDataNodeVariable.Create());
-                // DialogPhaser.PhaseNode(node, line);
             }
             ExcuteAllBufferCommand();
             OnBuildEnd();
@@ -105,7 +103,7 @@ namespace UnityGameKit.Runtime
             }
             else
             {
-                Utility.Debugger.LogFail("Unsupport content symbol \':\', please replace it.");
+                Log.Fatal("Unsupport content symbol \':\', please replace it.");
             }
 
             bool customLinking = true;

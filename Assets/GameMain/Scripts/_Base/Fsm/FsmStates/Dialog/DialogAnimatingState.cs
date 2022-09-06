@@ -26,8 +26,8 @@ public class DialogAnimatingState : FsmState<UI_Dialog>, IReference
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
-        m_CachedNextStateType = fsmOwner.GetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID);
-        m_CachedAnimator = fsmOwner.GetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID);
+        m_CachedNextStateType = fsmOwner.GetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING);
+        m_CachedAnimator = fsmOwner.GetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK);
         Log.Info("DialogAnimatingState");
     }
 
@@ -44,7 +44,7 @@ public class DialogAnimatingState : FsmState<UI_Dialog>, IReference
     protected override void OnExit(FsmInterface fsmOwner, bool isShutdown)
     {
         base.OnExit(fsmOwner, isShutdown);
-        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, null);
+        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, null);
         m_CachedNextStateType = null;
     }
 

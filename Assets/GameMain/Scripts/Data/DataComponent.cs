@@ -12,19 +12,19 @@ using UnityGameKit.Runtime;
 public partial class DataComponent : GameKitComponent
 {
     public List<PoolBase_SO> ScriptablePools;
-    private Dictionary<string, PoolBase_SO> m_ScriptablePoolDics;
+    private Dictionary<Type, PoolBase_SO> m_ScriptablePoolDics;
     private Tables m_DataTables;
     private VarString[] m_CachedStringParams;
     private VarInt32[] m_CachedIntParams;
-    public Dictionary<string, PoolBase_SO> Data_So
+    public Dictionary<Type, PoolBase_SO> Data_So
     {
         get
         {
             if (m_ScriptablePoolDics == null)
             {
-                m_ScriptablePoolDics = new Dictionary<string, PoolBase_SO>();
+                m_ScriptablePoolDics = new Dictionary<Type, PoolBase_SO>();
                 for (int i = 0; i < ScriptablePools.Count; i++)
-                    m_ScriptablePoolDics.Add(ScriptablePools[i].name, ScriptablePools[i]);
+                    m_ScriptablePoolDics.Add(ScriptablePools[i].GetType(), ScriptablePools[i]);
             }
             return m_ScriptablePoolDics;
 
@@ -54,6 +54,19 @@ public partial class DataComponent : GameKitComponent
         m_CachedStringParams = new VarString[1];
         m_CachedIntParams = new VarInt32[1];
 
+        if (m_ScriptablePoolDics == null)
+        {
+            m_ScriptablePoolDics = new Dictionary<Type, PoolBase_SO>();
+            for (int i = 0; i < ScriptablePools.Count; i++)
+                m_ScriptablePoolDics.Add(ScriptablePools[i].GetType(), ScriptablePools[i]);
+        }
+    }
+
+    public T GetDataSO<T>() where T : PoolBase_SO
+    {
+        if (m_ScriptablePoolDics.ContainsKey(typeof(T)))
+            return m_ScriptablePoolDics[typeof(T)] as T;
+        return null;
     }
 
     public T GetDataTable<T>() where T : class

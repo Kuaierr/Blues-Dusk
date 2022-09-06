@@ -8,18 +8,18 @@ using UnityEngine.EventSystems;
 using GameKit.QuickCode;
 using GameKit;
 
-[RequireComponent(typeof(CanvasGroup))]
+[RequireComponent(typeof(CanvasGroup), typeof(Animator))]
 public abstract class UIFormBase : UIFormLogic
 {
     public const int DepthFactor = 100;
     private const float FadeTime = 0.3f;
     private static Font s_MainFont = null;
-    private RectTransform m_RectTransform;
+    private RectTransform m_RectTransform = null;
     private Canvas m_CachedCanvas = null;
     private CanvasGroup m_CanvasGroup = null;
     private List<Canvas> m_CachedCanvasContainer = new List<Canvas>();
     private Dictionary<string, List<UIBehaviour>> m_UIFormChildren = new Dictionary<string, List<UIBehaviour>>();
-
+    [SerializeField] private Animator m_MasterAnimator = null;
     public int OriginalDepth
     {
         get;
@@ -31,6 +31,14 @@ public abstract class UIFormBase : UIFormLogic
         get
         {
             return m_CachedCanvas.sortingOrder;
+        }
+    }
+
+    public Animator MasterAnimator
+    {
+        get
+        {
+            return m_MasterAnimator;
         }
     }
 
@@ -74,7 +82,9 @@ public abstract class UIFormBase : UIFormLogic
         m_CachedCanvas = gameObject.GetOrAddComponent<Canvas>();
         m_CanvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
         gameObject.GetOrAddComponent<GraphicRaycaster>();
-        // InternalSetVisible(false);
+        if (m_MasterAnimator == null)
+            m_MasterAnimator = gameObject.GetOrAddComponent<Animator>();
+        InternalSetVisible(false);
     }
 
     public static void SetMainFont(Font mainFont)
@@ -120,32 +130,25 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void OnOpen(object userData)
     {
-        // Log.Warning("{0} OnOpen", gameObject.name);
         base.OnOpen(userData);
-        m_CanvasGroup.alpha = 0f;
-        StopAllCoroutines();
-        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
+        // m_CanvasGroup.alpha = 0f;
+        // StopAllCoroutines();
+        // StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
-        // Log.Warning("{0} OnClose", gameObject.name);
         base.OnClose(isShutdown, userData);
     }
 
     protected override void OnPause()
     {
-        // Log.Warning("{0} OnPause", gameObject.name);
         base.OnPause();
     }
 
     protected override void OnResume()
     {
-        // Log.Warning("{0} OnResume", gameObject.name);
         base.OnResume();
-        m_CanvasGroup.alpha = 0f;
-        StopAllCoroutines();
-        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
     }
 
     protected override void OnCover()
@@ -178,16 +181,33 @@ public abstract class UIFormBase : UIFormLogic
         {
             m_CachedCanvasContainer[i].sortingOrder += deltaDepth;
         }
-
         m_CachedCanvasContainer.Clear();
     }
 
     protected override void InternalSetVisible(bool visible)
     {
+        if (m_MasterAnimator != null && m_MasterAnimator.runtimeAnimatorController != null)
+        {
+            m_MasterAnimator.SetTrigger(visible ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
+            return;
+        }
         Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);
-        CanvasGroup.alpha = visible ? 1 : 0;
-        CanvasGroup.blocksRaycasts = visible;
-        CanvasGroup.interactable = visible;
+        // SetActiveByFading(visible);
+        SetActiveByAlpha(visible);
+    }
+
+    protected void SetActiveByFading(bool status)
+    {
+        m_CanvasGroup.alpha = status ? 0f : 1f;
+        StopAllCoroutines();
+        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f - m_CanvasGroup.alpha, FadeTime));
+    }
+
+    protected void SetActiveByAlpha(bool status)
+    {
+        CanvasGroup.alpha = status ? 1 : 0;
+        CanvasGroup.blocksRaycasts = status;
+        CanvasGroup.interactable = status;
     }
 
     private IEnumerator CloseCo(float duration)

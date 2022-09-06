@@ -30,13 +30,13 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
+        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START);
         if (m_DialogStarted && fsmMaster.CurrentTree != null)
         {
             fsmMaster.Resume();
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogTalkingState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.dialogAnimator);
-            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START_ID, true);
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.MasterAnimator);
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, true);
             fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
             fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode, false);
             ChangeState<DialogAnimatingState>(fsmOwner);

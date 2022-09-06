@@ -23,10 +23,9 @@ public class UI_Dialog : UIFormBase
     public TextMeshProUGUI t_SpeakerName;
     public TextMeshProUGUI t_Contents;
     public TextAnimatorPlayer TextAnimatorPlayer;
-    public Animator dialogAnimator;
-    public Animator speakerAnimator;
-    public Animator edgeAnimator;
-    public Animator diceAnimator;
+    public Animator SpeakerAnimator;
+    public Animator EdgeAnimator;
+    public Animator DiceAnimator;
 
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
@@ -45,12 +44,13 @@ public class UI_Dialog : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
         CreateFsm();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
         uI_Response.OnInit(Depth);
         uI_Character.OnInit(Depth);
         uI_Indicator.OnInit(Depth);
+        characterPool = GameKitCenter.Data.GetDataSO<CharacterPool>();
+        GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
     }
 
     protected override void OnOpen(object userData)
@@ -62,31 +62,22 @@ public class UI_Dialog : UIFormBase
 
     protected override void OnClose(bool isShutdown, object userData)
     {
-        base.OnClose(isShutdown, userData);
         CursorSystem.current.Enable();
-        dialogAnimator.SetTrigger("FadeOut");
-        edgeAnimator.SetTrigger("FadeOut");
-        speakerAnimator.SetTrigger("FadeOut");
-
+        base.OnClose(isShutdown, userData);
     }
 
     protected override void OnPause()
     {
-        // base.OnPause();
+        base.OnPause();
+        Log.Warning("{0} OnPause", gameObject.name);
         CursorSystem.current.Enable();
-        dialogAnimator.SetTrigger("FadeOut");
-        edgeAnimator.SetTrigger("FadeOut");
-        speakerAnimator.SetTrigger("FadeOut");
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        Log.Warning("OnResume");
+        Log.Warning("{0} OnResume", gameObject.name);
         CursorSystem.current.Disable();
-        dialogAnimator.SetTrigger("FadeIn");
-        dialogAnimator.SetTrigger("FadeIn");
-        edgeAnimator.SetTrigger("FadeIn");
     }
 
     protected override void OnRecycle()
@@ -127,8 +118,6 @@ public class UI_Dialog : UIFormBase
     {
         TextAnimatorPlayer.onTypewriterStart.AddListener(onTypewriterStart);
         TextAnimatorPlayer.onTextShowed.AddListener(onTextShowed);
-
-
     }
 
     private void CreateFsm()
@@ -153,7 +142,7 @@ public class UI_Dialog : UIFormBase
     private void StartFsm()
     {
         fsm.Start<DialogIdleState>();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
     }
 
     private void DestroyFsm()
@@ -239,13 +228,12 @@ public class UI_Dialog : UIFormBase
     private void ReachTheEndOfConversation()
     {
         Log.Info("Reach The End Of Conversation.");
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, false);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, false);
         GameKitCenter.Dialog.CurrentTree = null;
     }
 
     public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
     {
-
         TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         if (node == null || data.Speaker == "Default")
@@ -265,7 +253,7 @@ public class UI_Dialog : UIFormBase
             if (m_CurrentCharacter != character)
             {
                 m_CurrentCharacter = character;
-                speakerAnimator.SetTrigger("FadeIn");
+                SpeakerAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
             }
             // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
             uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
@@ -287,7 +275,6 @@ public class UI_Dialog : UIFormBase
     public void Resume()
     {
         OnResume();
-
     }
 
     public void Pause()
@@ -298,12 +285,15 @@ public class UI_Dialog : UIFormBase
     public void InternalVisible(bool status)
     {
         base.InternalSetVisible(status);
+        MasterAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
+        EdgeAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
+        SpeakerAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
     }
 
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
     {
         // Resume();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
+        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
     }
 
     #region DiceSystem
@@ -311,7 +301,7 @@ public class UI_Dialog : UIFormBase
     public void InitDiceSystem()
     {
         uI_DiceSystem.OnInit();
-        diceAnimator.SetTrigger("FadeIn");
+        DiceAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
     }
 
     public void RollActiveDices()

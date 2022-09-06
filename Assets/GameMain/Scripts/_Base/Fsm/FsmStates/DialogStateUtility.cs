@@ -1,7 +1,11 @@
 public static class DialogStateUtility
 {
-    public const string DIALOG_START_ID = "Dialog Start";
-    public const string DIALOG_FIRST_START_ID = "Dialog First Start";
-    public const string STATE_AFTER_ANIMATING_ID = "State After Animating";
-    public const string ANIMATOR_FOR_CHECK_ID = "Animator For Check";
+    // 对话启动
+    public const string DIALOG_START = "Dialog Start";
+    // 对话第一次启动
+    public const string DIALOG_FIRST_START = "Dialog First Start";
+    // Dialog Animating State的下一个状态
+    public const string STATE_AFTER_ANIMATING = "State After Animating";
+    // Dialog Animating State使用的Animator
+    public const string ANIMATOR_FOR_CHECK = "Animator For Check";
 }

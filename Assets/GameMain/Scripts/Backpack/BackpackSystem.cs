@@ -10,6 +10,7 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
     private const string PlayerBackpackName = "Player's Backpack";
     private UI_BackpackSystem uI_Backpack;
     private IInventory playerBackpack;
+    private int serialId;
     private void Start()
     {
         playerBackpack = GameKitCenter.Inventory.GetOrCreateInventory(PlayerBackpackName, 60);
@@ -19,7 +20,14 @@ public class BackpackSystem : MonoSingletonBase<BackpackSystem>
     {
         if (InputManager.instance.GetWorldKeyDown(KeyCode.I))
         {
-            GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: InventoryUIInitInfo.Create(KeyCode.I, playerBackpack));
+            var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: InventoryUIInitInfo.Create(KeyCode.I, playerBackpack));
+            if (uiForm != null)
+                serialId = (int)uiForm;
+        }
+
+        if (InputManager.instance.GetWorldKeyDown(KeyCode.H))
+        {
+            GameKitCenter.UI.CloseUIForm(serialId);
         }
     }
 

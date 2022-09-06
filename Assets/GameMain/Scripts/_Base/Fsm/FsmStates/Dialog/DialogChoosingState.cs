@@ -33,8 +33,8 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fsmMaster.MakeChoice();
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogTalkingState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.uI_Response.Animator);
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.uI_Response.MasterAnimator);
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }

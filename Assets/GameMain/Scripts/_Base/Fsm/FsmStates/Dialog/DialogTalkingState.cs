@@ -30,9 +30,9 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         Log.Info("DialogTalkingState");
         SetTextShowing();
 
-        if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START_ID))
+        if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START))
         {
-            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START_ID, false);
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, false);
             return;
         }
         fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
@@ -52,8 +52,8 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
 
                 if (m_CachedCurrentNode.IsBranch)
                 {
-                    fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogChoosingState));
-                    fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.uI_Response.Animator);
+                    fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogChoosingState));
+                    fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.uI_Response.MasterAnimator);
                     fsmMaster.UpdateOptionUI();
                     ChangeState<DialogAnimatingState>(fsmOwner);
                 }
@@ -67,11 +67,11 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                 InterruptDialogDisplayCallback();
         }
 
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID);
+        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START);
         if (!m_DialogStarted)
         {
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID, typeof(DialogIdleState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID, fsmMaster.dialogAnimator);
+            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogIdleState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.MasterAnimator);
             fsmMaster.Pause();
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
