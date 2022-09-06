@@ -16,7 +16,7 @@ namespace GameKit.Scene
 
         event EventHandler<UnloadSceneFailureEventArgs> UnloadSceneFailure;
 
-        
+
         void SetSceneHelper(ISceneHelper helper);
 
 
@@ -53,5 +53,7 @@ namespace GameKit.Scene
         void UnloadScene(string sceneAssetName);
 
         void UnloadScene(string sceneAssetName, object userData);
+
+        void AddPreloadedScene(string sceneAssetName);
     }
 }

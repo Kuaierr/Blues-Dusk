@@ -315,6 +315,12 @@ namespace GameKit.Scene
                 });
         }
 
+
+        public void AddPreloadedScene(string sceneAssetName)
+        {
+            m_LoadedSceneAssetNames.Add(sceneAssetName);
+        }
+
         private void LoadSceneSuccessCallback(string sceneAssetName, float duration, object userData)
         {
             m_LoadingSceneAssetNames.Remove(sceneAssetName);

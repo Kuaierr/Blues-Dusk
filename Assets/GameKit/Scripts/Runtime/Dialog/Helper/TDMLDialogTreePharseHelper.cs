@@ -71,13 +71,13 @@ namespace UnityGameKit.Runtime
         {
             if (text.Correction() == "\n" || text.Correction() == "")
             {
-                Utility.Debugger.LogWarning("[Phaser] Skip invalid node syntax.");
+                // Utility.Debugger.LogWarning("[Phaser] Skip invalid node syntax.");
                 return;
             }
 
             if (text.Substring(0, 2).Correction() == "//")
             {
-                Utility.Debugger.Log($"[Phaser] Detect comments.");
+                // Utility.Debugger.Log($"[Phaser] Detect comments.");
                 return;
             }
 

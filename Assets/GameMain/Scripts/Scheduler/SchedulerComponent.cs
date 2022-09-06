@@ -71,11 +71,7 @@ public partial class SchedulerComponent : GameKitComponent
         else
         {
             CurrentScene = AssetUtility.GetSceneAsset(StartScene);
-            // StartScene = AssetUtility.GetSceneAsset(StartScene);
         }
-
-        // else
-        //     LoadSceneAsyn(StartScene, onSuccess: () => { CurrentScene = StartScene; });
     }
 
     public bool HasScene(string name)
@@ -276,6 +272,11 @@ public partial class SchedulerComponent : GameKitComponent
         }
         Debug.LogWarning("No Active Level in Scene");
         return 0;
+    }
+
+    public void AddPreloadedScene(string sceneAssetName)
+    {
+        m_SceneComponent.AddPreloadedScene(sceneAssetName);
     }
 
     public void DoTransition(string loadName, List<string> unloadNames, SceneTransitionType switchType = SceneTransitionType.Fade)

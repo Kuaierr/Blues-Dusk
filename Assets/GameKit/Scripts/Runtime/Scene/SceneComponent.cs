@@ -211,7 +211,6 @@ namespace UnityGameKit.Runtime
                 Log.Error("Scene asset name '{0}' is invalid.", sceneAssetName);
                 return;
             }
-
             m_SceneManager.LoadScene(sceneAssetName, priority, userData);
         }
 
@@ -266,6 +265,12 @@ namespace UnityGameKit.Runtime
             }
 
             Log.Error("Scene '{0}' is not loaded or loading.", sceneAssetName);
+        }
+
+        public void AddPreloadedScene(string sceneAssetName)
+        {
+            m_SceneManager.AddPreloadedScene(sceneAssetName);
+            RefreshSceneOrder();
         }
 
         public void RefreshMainCamera()

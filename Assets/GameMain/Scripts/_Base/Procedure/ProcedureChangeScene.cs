@@ -70,6 +70,7 @@ public class ProcedureChangeScene : ProcedureBase
         }
         else
         {
+            GameKitCenter.Scheduler.AddPreloadedScene(AssetUtility.GetSceneAsset(sceneName));
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
             OnSceneLoad();
         }

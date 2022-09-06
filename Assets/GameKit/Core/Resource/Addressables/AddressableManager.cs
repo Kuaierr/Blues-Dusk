@@ -54,12 +54,22 @@ namespace GameKit
 
         IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
         {
-            AsyncOperationHandle handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
-            if(autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
+            // Utility.Debugger.LogWarning(keyName);
+            AsyncOperationHandle handle = new AsyncOperationHandle();
+            try
             {
-                // Utility.Debugger.LogWarning("Remove Unload Handle Key");
-                m_cachedHandles.Remove(keyName);
+                handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+                if (autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
+                {
+                    // Utility.Debugger.LogWarning("Remove Unload Handle Key");
+                    m_cachedHandles.Remove(keyName);
+                }
             }
+            catch (System.Exception)
+            {
+                SceneManager.UnloadSceneAsync(keyName);
+            }
+
             yield return handle;
             onSuccess.Invoke();
         }
