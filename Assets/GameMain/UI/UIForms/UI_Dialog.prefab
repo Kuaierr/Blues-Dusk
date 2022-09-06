@@ -2194,7 +2194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 224, y: -235}
+  m_AnchoredPosition: {x: 224, y: -126.970894}
   m_SizeDelta: {x: 1000, y: 1300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7972011341432228018
@@ -2246,6 +2246,7 @@ GameObject:
   - component: {fileID: 7972011341569639579}
   - component: {fileID: 5168099873758457546}
   - component: {fileID: 4610395997001113006}
+  - component: {fileID: 7619122729044232160}
   m_Layer: 5
   m_Name: UI_Dialog
   m_TagString: Untagged
@@ -2302,12 +2303,33 @@ MonoBehaviour:
   uI_Character: {fileID: 7972011341082261114}
   uI_Response: {fileID: 445772688209536866}
   uI_Indicator: {fileID: 8804770724350124083}
+  uI_DiceSystem: {fileID: 0}
   t_SpeakerName: {fileID: 2555152814791311098}
   t_Contents: {fileID: 4256737763785645157}
   TextAnimatorPlayer: {fileID: 286109655142115812}
   dialogAnimator: {fileID: 7972011340671720288}
   speakerAnimator: {fileID: 7972011340262737323}
   edgeAnimator: {fileID: 7972011341280392852}
+  diceAnimator: {fileID: 7619122729044232160}
+--- !u!95 &7619122729044232160
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7972011341569639578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d76c157bd3407c9418651f0ae6c9143e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7972011341577281917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,7 +2565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6339165297661244149
 RectTransform:
   m_ObjectHideFlags: 0

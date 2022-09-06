@@ -43,6 +43,8 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
     public int Index { get; private set; } = -1;
 
+    private Sequence resetSequence;
+    public bool IsComplete => resetSequence.IsComplete();
     
     public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback)
     {
@@ -120,10 +122,11 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         transform.SetParent(target);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
-        dice.DOMove(transform.position, 0.5f);
-        dice.DORotate(_finalRotation, 0.5f);
 
-        this.enabled = false;
+        resetSequence.Append(dice.DOMove(transform.position, 0.5f));
+        resetSequence.Insert(0, dice.DORotate(_finalRotation, 0.5f));
+
+        //this.enabled = false;
     }
 
     private void ChangeDiceMaterial(Material mat)

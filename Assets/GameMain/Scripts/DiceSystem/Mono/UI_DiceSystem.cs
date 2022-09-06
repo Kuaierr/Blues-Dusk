@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityGameKit.Runtime;
 
 public enum Dice_SuitType
@@ -44,9 +45,6 @@ public class UI_DiceSystem : UIFormChildBase
     private Transform _gridLayoutByOne;
 
     [Space]
-    public Animator diceSystemAnimator;
-
-    [Space]
     [SerializeField]
     private UI_DiceStartButton _startButton;
 
@@ -61,31 +59,36 @@ public class UI_DiceSystem : UIFormChildBase
     [SerializeField]
     private List<UI_DiceData_SO> _tempDiceList = new List<UI_DiceData_SO>(); //测试用的数据
 
-    public Dice_Result Result { get; private set; } = null; //保存结果的类
+    public Dice_Result Result { get; private set; } = new Dice_Result(); //保存结果的类
     
     private Dictionary<Dice_SuitType, RectTransform> _usedSheets = new Dictionary<Dice_SuitType, RectTransform>(); //相当于池子
 
-    /*public void OnInit()
+    public void OnInit()
     {
         _startButton.OnInit(OnStartButtonClicked);
         CreateDicesFromInventory();
-        Result = new Dice_Result();
-    }*/
+        Result.Clear();
+    }
+
+    public void Clear()
+    {
+        //clear sheets
+        //由于骰子是其子物体，所以会一起被清空
+        foreach (Dice_SuitType key in _usedSheets.Keys)
+        {
+            foreach (Transform child in _usedSheets[key].transform)
+                Destroy(child.gameObject);    
+        }
+        
+        _usedSheets.Clear();
+        _activedDices.Clear();
+        Result.Clear();
+    }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        //TODO 如果UI会长时间存在于场景中而非销毁再生成，需要手动初始化各个变量的位置
-        //1. 清空sheet的子物体 与字典
-        //2. 删除所有骰子 清空对应列表
-        //3. 清空各个layout下的子物体
-        //4. 清空结果
-        //后续可以用对象池优化
-    }
-
-    private void Start() //测试用的
-    {
-        StartCoroutine("WaitForFadeIn");
+        Clear();
     }
     
     private void CreateDicesFromInventory()
@@ -175,22 +178,16 @@ public class UI_DiceSystem : UIFormChildBase
     private void OnStartButtonClicked()
     {
         ResetActivedDiceParent();
-        ChangeStateToRolling();
+        RemoveUnSelectedDice();
     }
 
-    private void ChangeStateToRolling()
+    private void RemoveUnSelectedDice()
     {
-        for (int i = 0; i < _negativeDices.Count; i++)
-        {
-            /*var dice = _negativeDices[i];
-            _negativeDices.Remove(dice);*/
-            Destroy(_negativeDices[i].gameObject);
-            _negativeDices.RemoveAt(i);
-            i--;
-        }
-        
-        //diceSystemAnimator.SetTrigger("Fadeout");
-        StartCoroutine("WaitForFadeOut");
+        foreach (Transform child in _gridLayoutByOne.transform)
+            Destroy(child.gameObject);
+        foreach (Transform child in _gridLayoutByTwo.transform)
+            Destroy(child.gameObject);
+            
     }
 
     //这一项是防止CanvasGroup淡出后，让骰子一起消失，因此先将骰子置于最上层
@@ -200,9 +197,9 @@ public class UI_DiceSystem : UIFormChildBase
             dice.transform.SetParent(transform);
     }
 
-    private void RollActivedDices()
+    public void RollActivedDices()
     {
-        //TODO 优化
+        //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (UI_Dice dice in _activedDices)
             dice.Roll();
@@ -218,9 +215,18 @@ public class UI_DiceSystem : UIFormChildBase
         return true;
     }
 
+    public bool CheckIfFinishReseting()
+    {
+        foreach (UI_Dice dice in _activedDices)
+        {
+            if (!dice.IsComplete) return false;
+        }
+        return true;
+    }
+
     #endregion
 
-    #region ResetDicePosition
+    #region AfterRolling
 
     //骰子归位
     public void ResetDicePosition()
@@ -245,69 +251,69 @@ public class UI_DiceSystem : UIFormChildBase
         }
     }
 
-    #endregion
-    
-    #region GetResult
-
     //先将各个结果的数据存储起来，以备结算
-    public void GetSumResult()
+    public void AddDiceFaceToResultList()
     {
         foreach (UI_Dice dice in _activedDices)
             Result.Push(dice.GetResult());
     }
 
-    public void GetFinalResult()
+    public Dice_Result CaculateFinalResult()
     {
         Result.EffectsProcess();
+        Debug.Log(Result.ToString());
+        return Result;
     }
 
     #endregion
 
     #region FsmSimulate
 
-    private IEnumerator WaitForFadeIn()
+    /*private IEnumerator WaitForFadeIn()
     {
-        //相当于Init
-        CreateDicesFromInventory();
-        _startButton.OnInit(OnStartButtonClicked);
-        Result = new Dice_Result();
+        OnInit();
 
-        diceSystemAnimator.SetTrigger("Fadein");
+        //diceSystemAnimator.SetTrigger("Fadein");
         yield return 0;
         
-        while (!diceSystemAnimator.IsComplete())
+        //while (!diceSystemAnimator.IsComplete())
         {
             yield return 0;
         }
-    }
+    }*/
     
-    private IEnumerator WaitForFadeOut()
+    /*private IEnumerator WaitForFadeOut()
     {
-        diceSystemAnimator.SetTrigger("Fadeout");
+        //diceSystemAnimator.SetTrigger("Fadeout");
         yield return 0;
         
-        while (!diceSystemAnimator.IsComplete())
+        //while (!diceSystemAnimator.IsComplete())
         {
             yield return 0;
         }
         
         yield return Rolling();
-    }
+    }*/
     
     //暂时代替状态机与update
-    private IEnumerator Rolling()
+    /*private IEnumerator Rolling()
     {
         RollActivedDices();
         while (!CheckIfFinishRolling())
             yield return 0;
         
-        GetSumResult();
+        AddDiceFaceToResultList();
         ResetDicePosition();
         yield return new WaitForSeconds(0.5f);
-        GetFinalResult();
-    }
+        CaculateFinalResult();
+    }*/
 
     #endregion
+
+    public void AddStartButtonCallback(UnityAction callback)
+    {
+        _startButton.AddCallBack(callback);
+    }
     
 }
 
@@ -355,6 +361,7 @@ public class Dice_Result
         }
         
         Debug.Log(this.ToString());
+        results.Clear(); //防止重复调用时结果出错
     }
 
     public void BreakOut() => breakOut = true;
@@ -371,5 +378,13 @@ public class Dice_Result
                + "Grail: " + sum[Dice_SuitType.GRAIL].ToString() + "\n"
                + "Starcoin: " + sum[Dice_SuitType.STARCOIN].ToString() + "\n"
                + "Wand: " + sum[Dice_SuitType.WAND].ToString() + "\n";
+    }
+
+    public void Clear()
+    {
+        foreach (var key in sum.Keys)
+        {
+            sum[key] = 0;
+        }
     }
 }

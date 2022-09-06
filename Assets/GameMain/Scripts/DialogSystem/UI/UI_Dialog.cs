@@ -19,12 +19,14 @@ public class UI_Dialog : UIFormBase
     public UI_Character uI_Character;
     public UI_Response uI_Response;
     public UI_Indicator uI_Indicator;
+    public UI_DiceSystem uI_DiceSystem;
     public TextMeshProUGUI t_SpeakerName;
     public TextMeshProUGUI t_Contents;
     public TextAnimatorPlayer TextAnimatorPlayer;
     public Animator dialogAnimator;
     public Animator speakerAnimator;
     public Animator edgeAnimator;
+    public Animator diceAnimator;
 
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
@@ -136,6 +138,15 @@ public class UI_Dialog : UIFormBase
         stateList.Add(new DialogTalkingState());
         stateList.Add(new DialogChoosingState());
         stateList.Add(new DialogAnimatingState());
+
+        //可能不需要这么多状态
+        stateList.Add(new DiceDialogSelectingState());
+        stateList.Add(new DiceDialogCheckingState());
+        stateList.Add(new DiceDialogRollingState());
+        stateList.Add(new DiceDialogResetingState());
+        //如果对UI_Option进行扩展的话，这个状态可以不需要
+        stateList.Add(new DiceDialogChoosingState());
+
         fsm = GameKitCenter.Fsm.CreateFsm<UI_Dialog>(gameObject.name, this, stateList);
     }
 
@@ -294,6 +305,47 @@ public class UI_Dialog : UIFormBase
         // Resume();
         fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START_ID, true);
     }
+
+    #region DiceSystem
+
+    public void InitDiceSystem()
+    {
+        uI_DiceSystem.OnInit();
+        diceAnimator.SetTrigger("FadeIn");
+    }
+
+    public void RollActiveDices()
+    {
+        uI_DiceSystem.RollActivedDices();
+    }
+
+    public bool CheckIfFinishRolling()
+    {
+        return uI_DiceSystem.CheckIfFinishRolling();
+    }
+
+    public bool CheckIfFinishReseting()
+    {
+        return uI_DiceSystem.CheckIfFinishReseting();
+    }
+
+    public void OnFinishRolling()
+    {
+        uI_DiceSystem.ResetDicePosition();
+        uI_DiceSystem.AddDiceFaceToResultList();
+    }
+
+    public Dice_Result GetFinalResult()
+    {
+        return uI_DiceSystem.CaculateFinalResult();
+    }
+
+    public void AddCheckButtonCallback(UnityAction callback)
+    {
+        uI_DiceSystem.AddStartButtonCallback(callback);
+    }
+
+    #endregion
 
 
     private void OnDestroy()

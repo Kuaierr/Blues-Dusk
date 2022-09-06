@@ -7,6 +7,7 @@ using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 /// <summary>
 /// 长按「鉴定」按钮的状态
 /// 如果放开按钮，就切换回到Selecting状态
+/// 这个状态目前不是很必要，先用作进入鉴定系统的过渡
 /// </summary>
 public class DiceDialogCheckingState : FsmState<UI_Dialog>, IReference
 {
@@ -26,6 +27,13 @@ public class DiceDialogCheckingState : FsmState<UI_Dialog>, IReference
         base.OnEnter(updateFsm);
         Debug.Log("Enter ChoiceDiceroll State.");
         fsmMaster = updateFsm.User;
+        
+        fsmMaster.InitDiceSystem();
+        
+        fsmMaster.InitDiceSystem();
+        updateFsm.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING_ID,typeof(DiceDialogSelectingState));
+        updateFsm.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK_ID,fsmMaster.diceAnimator);
+        ChangeState<DialogAnimatingState>(updateFsm);
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
