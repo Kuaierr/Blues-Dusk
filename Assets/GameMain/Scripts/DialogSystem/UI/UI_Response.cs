@@ -76,7 +76,7 @@ public class UI_Response : UIFormChildBase
 
     public override void OnShow(UnityAction callback = null)
     {
-        m_MasterAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+        m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
         currentIndex = 0;
         selectorInitPos = SelectorTransform.anchoredPosition = UIOptions.First().RectTransform.anchoredPosition;
@@ -90,21 +90,18 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].OnReEnable(i);
             UIOptions[i].gameObject.SetActive(true);
             UIOptions[i].Content.text = m_CurrentOptions[i].Text;
-
-
-
         }
 
         if (m_CachedIsDiceCheck)
         {
-            m_DiceAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+            m_DiceAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         }
     }
 
     public override void OnHide(UnityAction callback = null)
     {
         Log.Info("Response OnHide");
-        m_MasterAnimator.SetTrigger(UIUtility.UNDO_ANIMATION_NAME);
+        m_MasterAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
         m_CurrentOptions.Clear();
         foreach (var ui_option in UIOptions)
@@ -114,7 +111,7 @@ public class UI_Response : UIFormChildBase
 
         if (m_CachedIsDiceCheck)
         {
-            m_DiceAnimator.SetTrigger(UIUtility.UNDO_ANIMATION_NAME);
+            m_DiceAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         }
     }
 
@@ -140,16 +137,18 @@ public class UI_Response : UIFormChildBase
         selectorSeq.Append(SelectorTransform.DOAnchorPosY(selectorInitPos.y - animDistance * index, 0.1f));
     }
 
+    // 共识： UIOptions 和  m_CurrentOptions 在 Index 上是一一对应的
     public void UpdateOptions(IDialogOptionSet optionSet, bool isDiceCheck = false)
     {
         m_CurrentOptions = optionSet.Options;
         m_CachedIsDiceCheck = isDiceCheck;
-        if(m_CachedIsDiceCheck)
+        if (m_CachedIsDiceCheck)
         {
             // 如果是筛检，则在现实Options时锁定所有选项
             for (int i = 0; i < UIOptions.Count; i++)
             {
                 UIOptions[i].Lock();
+                UIOptions[i].ShowDiceIndicator(optionSet.Options[i]);
             }
         }
     }
@@ -182,5 +181,10 @@ public class UI_Response : UIFormChildBase
                 UIOptions[i].Lock();
         }
         // m_CachedIsDiceCheck = result == null ? false : true;
+    }
+
+    private void UpdateOptionCharger()
+    {
+        
     }
 }

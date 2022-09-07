@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using GameKit;
+using UnityGameKit.Runtime;
 using UnityEngine.EventSystems;
-using GameKit.QuickCode;
+using GameKit.Dialog;
 [RequireComponent(typeof(Animator))]
 public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private int m_Index = 0;
+    public List<UI_OptionIndicator> OptionIndicators;
     private Animator m_Animator;
     private TextMeshProUGUI m_Content;
     private UI_Response m_Response;
+    private int m_Index = 0;
+    private int m_CurrentIndicatorIndex = 0;
     public TextMeshProUGUI Content
     {
         get
@@ -33,6 +36,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         this.m_Response = response;
         m_Animator = GetComponent<Animator>();
         m_Content = GetComponentInChildren<TextMeshProUGUI>();
+        ResetOptionIndicator();
         this.gameObject.SetActive(false);
     }
     public void OnReEnable(int Index)
@@ -53,19 +57,48 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         m_Response.OnOptionExit(this);
     }
 
+    public void ShowDiceIndicator(IDialogOption option)
+    {
+        ResetOptionIndicator();
+        foreach (var condition in option.DiceConditions)
+        {
+            if (condition.Value > 0)
+            {
+                for (int i = 0; i < condition.Value; i++)
+                {
+                    if (m_CurrentIndicatorIndex < OptionIndicators.Count)
+                        OptionIndicators[m_CurrentIndicatorIndex++].OnShow();
+                    else
+                        Log.Fatal("The num of option indicator is over maximum");
+                }
+            }
+        }
+    }
+
     public void Unlock()
     {
         if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
         {
-            m_Animator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+            m_Animator.SetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
         }
+        CanvasGroup.alpha = 1f;
     }
 
     public void Lock()
     {
         if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
         {
-            m_Animator.SetTrigger(UIUtility.UNDO_ANIMATION_NAME);
+            m_Animator.SetTrigger(UIUtility.DISABLE_ANIMATION_NAME);
+        }
+        CanvasGroup.alpha = 0.5f;
+    }
+
+    private void ResetOptionIndicator()
+    {
+        m_CurrentIndicatorIndex = 0;
+        for (int i = 0; i < OptionIndicators.Count; i++)
+        {
+            OptionIndicators[i].OnHide();
         }
     }
 }

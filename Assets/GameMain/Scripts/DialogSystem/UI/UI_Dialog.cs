@@ -25,7 +25,6 @@ public class UI_Dialog : UIFormBase
     public TextAnimatorPlayer TextAnimatorPlayer;
     public Animator SpeakerAnimator;
     public Animator EdgeAnimator;
-    public Animator DiceAnimator;
 
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
@@ -253,7 +252,7 @@ public class UI_Dialog : UIFormBase
             if (m_CurrentCharacter != character)
             {
                 m_CurrentCharacter = character;
-                SpeakerAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+                SpeakerAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
             }
             // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
             uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
@@ -290,9 +289,9 @@ public class UI_Dialog : UIFormBase
     public void InternalVisible(bool status)
     {
         base.InternalSetVisible(status);
-        MasterAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
-        EdgeAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
-        SpeakerAnimator.SetTrigger(status ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
+        MasterAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+        EdgeAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+        SpeakerAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
     }
 
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
@@ -306,7 +305,7 @@ public class UI_Dialog : UIFormBase
     public void InitDiceSystem()
     {
         uI_DiceSystem.OnInit();
-        // DiceAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+        // DiceAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
     }
 
     public void RollActiveDices()

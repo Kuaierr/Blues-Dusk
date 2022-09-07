@@ -971,7 +971,7 @@ MonoBehaviour:
   UIOptions: []
   isActive: 0
   m_MasterAnimator: {fileID: 7972011340069951140}
-  m_DiceAnimator: {fileID: 0}
+  m_DiceAnimator: {fileID: 3530403128158587461}
 --- !u!1 &7972011340194247415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,6 +2450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f11295293acfb840bb777868e4df6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3530403128158587461 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4358323184460029160, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
+  m_PrefabInstance: {fileID: 902229730592609965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3533535399167130892
 PrefabInstance:
   m_ObjectHideFlags: 0

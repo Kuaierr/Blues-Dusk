@@ -38,6 +38,14 @@ public abstract class UIFormChildBase : UIBehaviour
         }
     }
 
+    public CanvasGroup CanvasGroup
+    {
+        get
+        {
+            return m_CanvasGroup;
+        }
+    }
+
 
     protected override void Awake()
     {
@@ -60,22 +68,30 @@ public abstract class UIFormChildBase : UIBehaviour
 
     public virtual void OnShow(UnityAction callback = null)
     {
-        this.gameObject.SetActive(true);
+        // this.gameObject.SetActive(true);
+        m_CanvasGroup.alpha = 1;
+        m_CanvasGroup.interactable = true;
+        m_CanvasGroup.blocksRaycasts = true;
+        callback?.Invoke();
     }
 
     public virtual void OnHide(UnityAction callback = null)
     {
-        this.gameObject.SetActive(false);
+        // this.gameObject.SetActive(false);
+        m_CanvasGroup.alpha = 0;
+        m_CanvasGroup.interactable = false;
+        m_CanvasGroup.blocksRaycasts = false;
+        callback?.Invoke();
     }
 
     public virtual void OnPause(UnityAction callback = null)
     {
-
+        callback?.Invoke();
     }
 
     public virtual void OnResume(UnityAction callback = null)
     {
-
+        callback?.Invoke();
     }
 
     public virtual void OnUpdate()

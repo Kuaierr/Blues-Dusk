@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Events;
 using GameKit;
 using GameKit.QuickCode;
@@ -12,6 +12,7 @@ public class UI_Backpack : UIFormChildBase
 {
     private IInventory inventory;
     [SerializeField] private RectTransform content;
+    [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private UI_BackpackChunk chunkPrototype;
     private IStock m_CachedCurrentStock;
     private UI_BackpackInfo uI_StockInfo;
@@ -82,9 +83,13 @@ public class UI_Backpack : UIFormChildBase
         }
     }
 
-    public void SetInventory(IInventory newInventory)
+    public void SetInventory(IInventory newInventory, UI_BackpackType type)
     {
         inventory = newInventory;
+        if (type == UI_BackpackType.Store)
+            title.text = "商店";
+        else if (type == UI_BackpackType.Backpack)
+            title.text = "物品栏";
         UpdateChunks();
     }
 

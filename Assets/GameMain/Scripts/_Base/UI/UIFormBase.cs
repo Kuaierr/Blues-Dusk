@@ -188,7 +188,7 @@ public abstract class UIFormBase : UIFormLogic
     {
         if (m_MasterAnimator != null && m_MasterAnimator.runtimeAnimatorController != null)
         {
-            m_MasterAnimator.SetTrigger(visible ? UIUtility.DO_ANIMATION_NAME : UIUtility.UNDO_ANIMATION_NAME);
+            m_MasterAnimator.SetTrigger(visible ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
             return;
         }
         Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);

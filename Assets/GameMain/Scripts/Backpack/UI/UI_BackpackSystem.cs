@@ -19,7 +19,7 @@ public class UI_BackpackSystem : UIFormBase
 
     public void SetInventory(IInventory inventory, UI_BackpackType type)
     {
-        BackpackUI.SetInventory(inventory);
+        BackpackUI.SetInventory(inventory, type);
         StockInfoUI.SetInventoryType(type);
     }
 
