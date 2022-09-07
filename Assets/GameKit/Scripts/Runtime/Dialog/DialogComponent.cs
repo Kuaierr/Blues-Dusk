@@ -15,7 +15,6 @@ namespace UnityGameKit.Runtime
     [AddComponentMenu("Game Kit/GameKit Dialog Component")]
     public sealed class DialogComponent : GameKitComponent
     {
-
         private const int DefaultPriority = 0;
         private IDialogManager m_DialogManager = null;
         private EventComponent m_EventComponent = null;

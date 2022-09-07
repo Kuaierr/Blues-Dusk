@@ -144,7 +144,7 @@ public class UI_Response : UIFormChildBase
         m_CachedIsDiceCheck = isDiceCheck;
         if (m_CachedIsDiceCheck)
         {
-            // 如果是筛检，则在现实Options时锁定所有选项
+            // 如果是筛检，则在显示Options时锁定所有选项
             for (int i = 0; i < UIOptions.Count; i++)
             {
                 UIOptions[i].Lock();
@@ -185,6 +185,6 @@ public class UI_Response : UIFormChildBase
 
     private void UpdateOptionCharger()
     {
-        
+
     }
 }

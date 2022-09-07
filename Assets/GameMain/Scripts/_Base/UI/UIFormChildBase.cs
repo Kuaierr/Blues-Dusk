@@ -96,7 +96,7 @@ public abstract class UIFormChildBase : UIBehaviour
 
     public virtual void OnUpdate()
     {
-
+        
     }
 
     public virtual void OnDepthChanged(int depthInForm)

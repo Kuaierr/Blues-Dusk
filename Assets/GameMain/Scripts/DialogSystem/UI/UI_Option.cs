@@ -62,12 +62,38 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         ResetOptionIndicator();
         foreach (var condition in option.DiceConditions)
         {
+            // 如果有这个条件属性的要求
+            if (condition.Value > 0)
+            {
+                // 每个值显示一个对象
+                for (int i = 0; i < condition.Value; i++)
+                {
+                    // 添加的属性要求数目不大于预设值的OptionIndicators的数目
+                    if (m_CurrentIndicatorIndex < OptionIndicators.Count)
+                    {
+                        Color indicatorColor = DialogUtility.GetDiceAttributColor(condition.Key);
+                        OptionIndicators[m_CurrentIndicatorIndex].SetColor(indicatorColor);
+                        OptionIndicators[m_CurrentIndicatorIndex].OnShow();
+                        m_CurrentIndicatorIndex++;
+                    }
+                    else
+                        Log.Fatal("The num of option indicator is over maximum");
+                }
+            }
+        }
+    }
+
+    public void ChargeDiceIndicator(IDialogOption option)
+    {
+        ResetOptionIndicator();
+        foreach (var condition in option.DiceConditions)
+        {
             if (condition.Value > 0)
             {
                 for (int i = 0; i < condition.Value; i++)
                 {
                     if (m_CurrentIndicatorIndex < OptionIndicators.Count)
-                        OptionIndicators[m_CurrentIndicatorIndex++].OnShow();
+                        OptionIndicators[m_CurrentIndicatorIndex++].OnCharge();
                     else
                         Log.Fatal("The num of option indicator is over maximum");
                 }

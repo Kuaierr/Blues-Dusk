@@ -13,6 +13,7 @@ namespace GameKit.Dialog
         public bool IsDivider = false;
         public bool IsCompleter = false;
         public bool IsDiceCheckBranch = false;
+        public bool IsConditionalBranch = false;
         public bool IsDiceCheckOption = false;
         public List<string> DividerConditions;
         public List<string> CompleteConditons;
@@ -65,6 +66,29 @@ namespace GameKit.Dialog
             m_OnEnter = (DialogNodeCallback)System.Delegate.RemoveAll(m_OnEnter, m_OnEnter);
             m_OnUpdate = (DialogNodeCallback)System.Delegate.RemoveAll(m_OnUpdate, m_OnUpdate);
             m_OnExit = (DialogNodeCallback)System.Delegate.RemoveAll(m_OnExit, m_OnExit);
+            DiceConditions.Clear();
+            CompleteConditons.Clear();
+            DividerConditions.Clear();
+            IsFunctional = false;
+            IsDivider = false;
+            IsCompleter = false;
+            IsDiceCheckBranch = false;
+            IsConditionalBranch = false;
+            IsDiceCheckOption = false;
+            Speaker = "<Default>";
+            Contents = "<Default>";
+            MoodName = "<Default>";
+        }
+
+        public static Dictionary<string, int> GetDefaultDiceConditions()
+        {
+            return new Dictionary<string, int>()
+            {
+                {"SWORD",0},
+                {"GRAIL",0},
+                {"STARCOIN",0},
+                {"WAND",0}
+            };
         }
     }
 }

@@ -25,11 +25,12 @@ namespace UnityGameKit.Runtime
             "linkto",
             "mood",
             "cdivider",
-            "ccomplete"
+            "ccomplete",
+            "dbranch",
+            "doption"
         };
         private List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
         {
-            "enter",
             "ebranch",
             "linkfrom"
         };
@@ -39,7 +40,8 @@ namespace UnityGameKit.Runtime
             "name",
             "sbranch",
             "ebranch",
-            "cbranch"
+            "cbranch",
+            "dbranch"
         };
 
         static Regex smallBracketRegex;
@@ -69,13 +71,13 @@ namespace UnityGameKit.Runtime
         {
             if (text.Correction() == "\n" || text.Correction() == "")
             {
-                // Utility.Debugger.LogWarning("[Phaser] Skip invalid node syntax.");
+                Log.Warning("Skip invalid node syntax.");
                 return;
             }
 
             if (text.Substring(0, 2).Correction() == "//")
             {
-                // Utility.Debugger.Log($"[Phaser] Detect comments.");
+                Log.Warning("Detect comment at '{0}'.", text);
                 return;
             }
 
@@ -90,7 +92,6 @@ namespace UnityGameKit.Runtime
                 string contents = dialogInfo.Split('：').LastOrDefault().Trim();
                 data.Speaker = speaker;
                 data.Contents = contents;
-                // node.SetData(data);
             }
             else if (split.Length == 1)    // 对话选项节点
             {
@@ -121,27 +122,42 @@ namespace UnityGameKit.Runtime
                         customLinking = false;
 
                     if (!semantics.Contains(semantic))
-                        Utility.Debugger.LogWarning(string.Format("Invalid semantic {0} is used.", semantic));
+                        Log.Warning(string.Format("Invalid semantic {0} is used.", semantic));
 
                     if (semantic == "mood")
                     {
                         data.MoodName = value;
                     }
 
-                    if (semantic == "sbranch")
+                    if (semantic == "ebranch")
                     {
-                        RecordBranch(node);
                         node.ChangeName(value);
                         RecordDeclaredDataNode(node);
                     }
-                    else if (semantic == "ebranch")
+                    else if (semantic == "sbranch")
                     {
                         node.ChangeName(value);
+                        RecordBranch(node);
+                        RecordDeclaredDataNode(node);
+                    }
+                    else if (semantic == "cbranch")
+                    {
+                        data.IsConditionalBranch = true;
+                        node.ChangeName(value);
+                        RecordBranch(node);
+                        RecordDeclaredDataNode(node);
+                    }
+                    else if (semantic == "dbranch")
+                    {
+                        data.IsDiceCheckBranch = true;
+                        node.ChangeName(value);
+                        RecordBranch(node);
                         RecordDeclaredDataNode(node);
                     }
                     else if (semantic == "name")
                     {
                         node.ChangeName(value);
+                        RecordBranch(node);
                         RecordDeclaredDataNode(node);
                     }
 
@@ -181,6 +197,30 @@ namespace UnityGameKit.Runtime
                         // Utility.Debugger.Log(smallBracketRegex.Match(cparams[0]));
                         CachedLinkToDeclared(node, cparams[1]);
                         CachedLinkToDeclared(node, cparams[2]);
+                    }
+
+                    if (semantic == "doption")
+                    {
+                        data.IsDiceCheckOption = true;
+                        data.DiceConditions = DialogDataNodeVariable.GetDefaultDiceConditions();
+                        try
+                        {
+                            string[] diceAttributes = value.Trim().RemoveParentheses().Split(',');
+                            foreach (var diceAttribute in diceAttributes)
+                            {
+                                string[] paramsPair = diceAttribute.Split('=');
+                                string attributeName = paramsPair[0];
+                                string attributeRequirement = paramsPair[1];
+                                
+                                if(data.DiceConditions.ContainsKey(attributeName) && attributeRequirement!= string.Empty)
+                                    data.DiceConditions[attributeName] = int.Parse(attributeRequirement);
+                            }
+                        }
+                        catch (System.Exception e)
+                        {
+                            Log.Error(e.Message);
+                            throw;
+                        }
                     }
                 }
 
@@ -290,5 +330,6 @@ namespace UnityGameKit.Runtime
         {
             m_CachedDialogTree.Reset();
         }
+        
     }
 }
