@@ -1920,6 +1920,7 @@ GameObject:
   - component: {fileID: 2185975843900101642}
   - component: {fileID: 2185975843900101644}
   - component: {fileID: 2185975843900101647}
+  - component: {fileID: 4358323184460029160}
   m_Layer: 5
   m_Name: UI_DiceRoll
   m_TagString: Untagged
@@ -1972,7 +1973,6 @@ MonoBehaviour:
   _diceSlotPrefab: {fileID: 447287291869465965, guid: 00ec53db25022a0429f8d710c469b086, type: 3}
   _gridLayoutByTwo: {fileID: 2185975843594362813}
   _gridLayoutByOne: {fileID: 2185975843689689590}
-  diceSystemAnimator: {fileID: 0}
   _startButton: {fileID: 2185975843958162793}
   _selectPanel: {fileID: 2185975844435954364}
   _diceSheets:
@@ -2009,6 +2009,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2185975843900101649}
   m_CullTransparentMesh: 1
+--- !u!95 &4358323184460029160
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185975843900101649}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d76c157bd3407c9418651f0ae6c9143e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2185975843938294507
 GameObject:
   m_ObjectHideFlags: 0

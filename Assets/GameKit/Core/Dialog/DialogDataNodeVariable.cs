@@ -12,8 +12,11 @@ namespace GameKit.Dialog
         public bool IsFunctional = false;
         public bool IsDivider = false;
         public bool IsCompleter = false;
-        public List<string> CompleteConditons;
+        public bool IsDiceCheckBranch = false;
+        public bool IsDiceCheckOption = false;
         public List<string> DividerConditions;
+        public List<string> CompleteConditons;
+        public Dictionary<string, int> DiceConditions;
         public DialogNodeCallback m_OnEnter, m_OnUpdate, m_OnExit;
 
         public DialogDataNodeVariable()
@@ -23,6 +26,7 @@ namespace GameKit.Dialog
             this.MoodName = "<Default>";
             this.DividerConditions = new List<string>();
             this.CompleteConditons = new List<string>();
+            this.DiceConditions = new Dictionary<string, int>();
         }
 
         public override Type Type

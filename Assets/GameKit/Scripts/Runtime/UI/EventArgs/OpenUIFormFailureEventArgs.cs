@@ -2,11 +2,11 @@ using GameKit;
 using GameKit.Event;
 namespace UnityGameKit.Runtime
 {
-    public sealed class ShowUIFormFailureEventArgs : GameEventArgs
+    public sealed class OpenUIFormFailureEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(ShowUIFormFailureEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(OpenUIFormFailureEventArgs).GetHashCode();
 
-        public ShowUIFormFailureEventArgs()
+        public OpenUIFormFailureEventArgs()
         {
             SerialId = 0;
             UIFormAssetName = null;
@@ -60,9 +60,9 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static ShowUIFormFailureEventArgs Create(GameKit.UI.OpenUIFormFailureEventArgs e)
+        public static OpenUIFormFailureEventArgs Create(GameKit.UI.OpenUIFormFailureEventArgs e)
         {
-            ShowUIFormFailureEventArgs showUIFormFailureEventArgs = ReferencePool.Acquire<ShowUIFormFailureEventArgs>();
+            OpenUIFormFailureEventArgs showUIFormFailureEventArgs = ReferencePool.Acquire<OpenUIFormFailureEventArgs>();
             showUIFormFailureEventArgs.SerialId = e.SerialId;
             showUIFormFailureEventArgs.UIFormAssetName = e.UIFormAssetName;
             showUIFormFailureEventArgs.UIGroupName = e.UIGroupName;

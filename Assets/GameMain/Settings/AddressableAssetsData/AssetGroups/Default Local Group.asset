@@ -45,6 +45,10 @@ MonoBehaviour:
     m_Address: Assets/GameMain/Scenes/S_Toilet.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 2b986de395842dd4aa6df54744b3ac4b
+    m_Address: Assets/GameMain/Data/Dialog/Text/Raw
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

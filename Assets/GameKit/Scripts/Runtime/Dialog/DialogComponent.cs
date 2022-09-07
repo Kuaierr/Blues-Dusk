@@ -19,6 +19,7 @@ namespace UnityGameKit.Runtime
         private const int DefaultPriority = 0;
         private IDialogManager m_DialogManager = null;
         private EventComponent m_EventComponent = null;
+
         [SerializeField]
         private string m_DialogTreePharseHelperTypeName = "UnityGameKit.Runtime.TDMLDialogTreeParseHelper";
         [SerializeField]
@@ -85,9 +86,7 @@ namespace UnityGameKit.Runtime
                 Log.Fatal("Event component is invalid.");
                 return;
             }
-
             m_EventComponent.Subscribe(StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
-
             // if (coreComponent.EditorResourceMode)
             // {
             //     m_DialogManager.SetResourceManager(coreComponent.EditorResourceHelper);

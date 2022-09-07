@@ -65,7 +65,7 @@ public static class UIExtension
         return uiGroup.HasUIForm(uiFormId);
     }
 
-    public static UIFormBase GetUIForm(this UIComponent uiComponent, string uiFormName, string uiGroupName = null)
+    public static UIFormBase TryGetUIForm(this UIComponent uiComponent, string uiFormName, string uiGroupName = null)
     {
         string assetName = AssetUtility.GetUIFormAsset(uiFormName);
         UIForm uiForm = null;
@@ -95,7 +95,7 @@ public static class UIExtension
         return (UIFormBase)uiForm.Logic;
     }
 
-    public static UIFormBase GetUIForm(this UIComponent uiComponent, int uiFormId, string uiGroupName = null)
+    public static UIFormBase TryGetUIForm(this UIComponent uiComponent, int uiFormId, string uiGroupName = null)
     {
         UIForm uiForm = null;
         if (string.IsNullOrEmpty(uiGroupName))
@@ -105,7 +105,6 @@ public static class UIExtension
             {
                 return null;
             }
-
             return (UIFormBase)uiForm.Logic;
         }
 
@@ -124,9 +123,21 @@ public static class UIExtension
         return (UIFormBase)uiForm.Logic;
     }
 
-    public static void CloseUIForm(this UIComponent uiComponent, UIFormBase uiForm)
+    public static void TryCloseUIForm(this UIComponent uiComponent, UIFormBase uiForm)
     {
         uiComponent.CloseUIForm(uiForm.UIForm);
+    }
+
+    public static bool TryUpdateUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)
+    {
+        UIFormBase uIFormBase = uiComponent.TryGetUIForm(uiFormName);
+        if (uIFormBase != null)
+        {
+            uIFormBase.OnUpdateInfo(userData);
+            return true;
+        }
+        else
+            return false;
     }
 
     public static int? TryOpenUIForm(this UIComponent uiComponent, string uiFormName, object userData = null)

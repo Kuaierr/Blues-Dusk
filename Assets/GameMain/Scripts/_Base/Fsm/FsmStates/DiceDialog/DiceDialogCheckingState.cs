@@ -30,9 +30,9 @@ public class DiceDialogCheckingState : FsmState<UI_Dialog>, IReference
         
         fsmMaster.InitDiceSystem();
         
-        fsmMaster.InitDiceSystem();
-        updateFsm.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING,typeof(DiceDialogSelectingState));
-        updateFsm.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK,fsmMaster.DiceAnimator);
+        // fsmMaster.InitDiceSystem();
+        // updateFsm.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING,typeof(DiceDialogSelectingState));
+        // updateFsm.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK,fsmMaster.DiceAnimator);
         ChangeState<DialogAnimatingState>(updateFsm);
     }
 

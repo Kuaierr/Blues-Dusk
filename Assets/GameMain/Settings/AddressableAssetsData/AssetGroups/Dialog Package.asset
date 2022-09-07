@@ -42,10 +42,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - DialogPack
-  - m_GUID: 9d221616940a8f3429e4b3c523358f8c
-    m_Address: "Assets/GameMain/Data/Dialog/Text/Raw/\u5206\u652F\u6D4B\u8BD5.txt"
+  - m_GUID: f8ba0a5ed629ef742ae26275a64f0774
+    m_Address: "Assets/GameMain/Data/Dialog/Text/Scriptable/\u65E5\u5E38\u6D4B\u8BD5.asset"
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - DialogPack
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

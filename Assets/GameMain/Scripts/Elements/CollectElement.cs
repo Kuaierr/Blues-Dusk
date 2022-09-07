@@ -39,7 +39,7 @@ public class CollectElement : GameElementBase, ICollective
     {
         if (CanCollect)
         {
-            BackpackSystem.current.AddToBackpack(m_configData);
+            PlayerBackpack.current.CollectToBackpack(m_configData);
             // Destroy(this.gameObject);
             gameObject.SetActive(false);
         }

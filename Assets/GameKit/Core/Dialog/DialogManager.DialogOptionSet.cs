@@ -34,8 +34,12 @@ namespace GameKit.Dialog
                 for (int i = 0; i < nodes.Count; i++)
                 {
                     IDataNode dialogNode = nodes[i] as IDataNode;
-                    string contents = dialogNode.GetData<DialogDataNodeVariable>().Contents;
-                    dialogOptions.CreateOption(i, contents);
+                    DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
+                    string contents = data.Contents;
+                    if (data.IsDiceCheckOption)
+                        dialogOptions.CreateOption(i, contents, data.DiceConditions);
+                    else
+                        dialogOptions.CreateOption(i, contents);
                 }
                 return dialogOptions;
             }
@@ -46,15 +50,19 @@ namespace GameKit.Dialog
                 for (int i = 0; i < nodes.Length; i++)
                 {
                     IDataNode dialogNode = nodes[i] as IDataNode;
-                    string contents = dialogNode.GetData<DialogDataNodeVariable>().Contents;
-                    dialogOptions.CreateOption(i, contents);
+                    DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
+                    string contents = data.Contents;
+                    if (data.IsDiceCheckOption)
+                        dialogOptions.CreateOption(i, contents, data.DiceConditions);
+                    else
+                        dialogOptions.CreateOption(i, contents);
                 }
                 return dialogOptions;
             }
 
-            private void CreateOption(int index, string text)
+            private void CreateOption(int index, string text, Dictionary<string, int> diceConditions = null)
             {
-                DialogOption newOption = DialogOption.Create(index, text);
+                DialogOption newOption = DialogOption.Create(index, text, diceConditions);
                 m_Options.Add(newOption);
             }
 

@@ -45,6 +45,7 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
 
     public void AddCallBack(UnityAction onClickCallback)
     {
+        OnDisable();
         onClick += onClickCallback;
     }
 

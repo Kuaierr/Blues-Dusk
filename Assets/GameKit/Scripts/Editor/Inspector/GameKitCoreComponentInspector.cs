@@ -51,7 +51,7 @@ namespace UnityGameKit.Editor
                 m_EditorResourceMode.boolValue = EditorGUILayout.BeginToggleGroup("Editor Resource Mode", m_EditorResourceMode.boolValue);
                 {
                     EditorGUILayout.HelpBox("Editor resource mode option is only for editor mode. Game Kit use editor resource files which you should validate first.", MessageType.Info);
-                    EditorGUILayout.PropertyField(m_EditorLanguage);
+                    // EditorGUILayout.PropertyField(m_EditorLanguage);
                     EditorGUILayout.HelpBox("Editor language option is only use for localization test in editor mode.", MessageType.Info);
                 }
                 EditorGUILayout.EndToggleGroup();
@@ -174,7 +174,7 @@ namespace UnityGameKit.Editor
         private void OnEnable()
         {
             m_EditorResourceMode = serializedObject.FindProperty("m_EditorResourceMode");
-            m_EditorLanguage = serializedObject.FindProperty("m_EditorLanguage");
+            // m_EditorLanguage = serializedObject.FindProperty("m_EditorLanguage");
             m_TextHelperTypeName = serializedObject.FindProperty("m_TextHelperTypeName");
             m_VersionHelperTypeName = serializedObject.FindProperty("m_VersionHelperTypeName");
             m_LogHelperTypeName = serializedObject.FindProperty("m_LogHelperTypeName");

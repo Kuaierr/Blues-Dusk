@@ -3,11 +3,11 @@ using GameKit.Event;
 
 namespace UnityGameKit.Runtime
 {
-    public sealed class ShowUIFormSuccessEventArgs : GameEventArgs
+    public sealed class OpenUIFormSuccessEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(ShowUIFormSuccessEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(OpenUIFormSuccessEventArgs).GetHashCode();
 
-        public ShowUIFormSuccessEventArgs()
+        public OpenUIFormSuccessEventArgs()
         {
             UIForm = null;
             Duration = 0f;
@@ -40,9 +40,9 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static ShowUIFormSuccessEventArgs Create(GameKit.UI.OpenUIFormSuccessEventArgs e)
+        public static OpenUIFormSuccessEventArgs Create(GameKit.UI.OpenUIFormSuccessEventArgs e)
         {
-            ShowUIFormSuccessEventArgs showUIFormSuccessEventArgs = ReferencePool.Acquire<ShowUIFormSuccessEventArgs>();
+            OpenUIFormSuccessEventArgs showUIFormSuccessEventArgs = ReferencePool.Acquire<OpenUIFormSuccessEventArgs>();
             showUIFormSuccessEventArgs.UIForm = (UIForm)e.UIForm;
             showUIFormSuccessEventArgs.Duration = e.Duration;
             showUIFormSuccessEventArgs.UserData = e.UserData;

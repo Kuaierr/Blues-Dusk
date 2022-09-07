@@ -97,6 +97,11 @@ public abstract class UIFormBase : UIFormLogic
         s_MainFont = mainFont;
     }
 
+    public virtual void OnUpdateInfo(object userData)
+    {
+        
+    }
+
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
@@ -107,8 +112,6 @@ public abstract class UIFormBase : UIFormLogic
         transform.anchorMax = Vector2.one;
         transform.anchoredPosition = Vector2.zero;
         transform.sizeDelta = Vector2.zero;
-
-
 
         // FindChildrenByType<UIFormChildBase>();
 
@@ -131,9 +134,6 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        // m_CanvasGroup.alpha = 0f;
-        // StopAllCoroutines();
-        // StartCoroutine(m_CanvasGroup.FadeToAlpha(1f, FadeTime));
     }
 
     protected override void OnClose(bool isShutdown, object userData)
@@ -213,7 +213,7 @@ public abstract class UIFormBase : UIFormLogic
     private IEnumerator CloseCo(float duration)
     {
         yield return m_CanvasGroup.FadeToAlpha(0f, duration);
-        GameKitCenter.UI.CloseUIForm(this);
+        GameKitCenter.UI.TryCloseUIForm(this);
     }
 
     private void FindChildrenByType<T>() where T : UIBehaviour

@@ -4,11 +4,11 @@ using GameKit.Event;
 
 namespace UnityGameKit.Runtime
 {
-    public sealed class HideUIFormCompleteEventArgs : GameEventArgs
+    public sealed class CloseUIFormCompleteEventArgs : GameEventArgs
     {
-        public static readonly int EventId = typeof(HideUIFormCompleteEventArgs).GetHashCode();
+        public static readonly int EventId = typeof(CloseUIFormCompleteEventArgs).GetHashCode();
 
-        public HideUIFormCompleteEventArgs()
+        public CloseUIFormCompleteEventArgs()
         {
             SerialId = 0;
             UIFormAssetName = null;
@@ -48,9 +48,9 @@ namespace UnityGameKit.Runtime
             private set;
         }
 
-        public static HideUIFormCompleteEventArgs Create(GameKit.UI.CloseUIFormCompleteEventArgs e)
+        public static CloseUIFormCompleteEventArgs Create(GameKit.UI.CloseUIFormCompleteEventArgs e)
         {
-            HideUIFormCompleteEventArgs hideUIFormCompleteEventArgs = ReferencePool.Acquire<HideUIFormCompleteEventArgs>();
+            CloseUIFormCompleteEventArgs hideUIFormCompleteEventArgs = ReferencePool.Acquire<CloseUIFormCompleteEventArgs>();
             hideUIFormCompleteEventArgs.SerialId = e.SerialId;
             hideUIFormCompleteEventArgs.UIFormAssetName = e.UIFormAssetName;
             hideUIFormCompleteEventArgs.UIGroup = e.UIGroup;

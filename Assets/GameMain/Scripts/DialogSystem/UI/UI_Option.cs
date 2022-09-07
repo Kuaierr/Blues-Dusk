@@ -4,10 +4,12 @@ using TMPro;
 using GameKit;
 using UnityEngine.EventSystems;
 using GameKit.QuickCode;
+[RequireComponent(typeof(Animator))]
 public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private TextMeshProUGUI m_Content;
     private int m_Index = 0;
+    private Animator m_Animator;
+    private TextMeshProUGUI m_Content;
     private UI_Response m_Response;
     public TextMeshProUGUI Content
     {
@@ -25,10 +27,11 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         }
     }
 
-    public void OnInit(UI_Response m_Response)
+    public void OnInit(UI_Response response)
     {
-        base.OnInit(m_Response.Depth);
-        this.m_Response = m_Response;
+        base.OnInit(response.Depth);
+        this.m_Response = response;
+        m_Animator = GetComponent<Animator>();
         m_Content = GetComponentInChildren<TextMeshProUGUI>();
         this.gameObject.SetActive(false);
     }
@@ -48,5 +51,21 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     public void OnPointerExit(PointerEventData eventData)
     {
         m_Response.OnOptionExit(this);
+    }
+
+    public void Unlock()
+    {
+        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
+        {
+            m_Animator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+        }
+    }
+
+    public void Lock()
+    {
+        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
+        {
+            m_Animator.SetTrigger(UIUtility.UNDO_ANIMATION_NAME);
+        }
     }
 }

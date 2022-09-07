@@ -76,6 +76,19 @@ namespace GameKit.Inventory
             }
             return false;
         }
+
+        public bool RemoveFromeInventory<T>(string inventoryName, int id, string stockName, T data) where T : class
+        {
+            if (HasInventory(inventoryName))
+            {
+                if(inventories[inventoryName].HasStock(stockName))
+                {
+                    inventories[inventoryName].RemoveStock(stockName);
+                    return true; 
+                }
+            }
+            return false;
+        }
         public IInventory GetInventory(string inventoryName)
         {
             if (HasInventory(inventoryName))

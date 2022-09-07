@@ -5,7 +5,13 @@ namespace GameKit.Element
     internal sealed class ElementManager : GameKitModule, IElementManager
     {
         private readonly List<IElement> m_CachedElements;
-
+        public int ElementCount
+        {
+            get
+            {
+                return m_CachedElements.Count;
+            }
+        }
         public ElementManager()
         {
             m_CachedElements = new List<IElement>();

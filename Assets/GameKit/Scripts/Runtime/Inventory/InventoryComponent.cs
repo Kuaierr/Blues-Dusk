@@ -58,6 +58,12 @@ namespace UnityGameKit.Runtime
         {
             return InventoryManager.instance.AddToInventory<T>(inventoryName, id, stockName, data);
         }
+
+        public bool RemoveFromInventory<T>(string inventoryName, int id, string stockName, T data) where T : class
+        {
+            return InventoryManager.instance.RemoveFromeInventory<T>(inventoryName, id, stockName, data);
+        }
+
         public IInventory GetInventory(string inventoryName)
         {
             return InventoryManager.instance.GetInventory(inventoryName);

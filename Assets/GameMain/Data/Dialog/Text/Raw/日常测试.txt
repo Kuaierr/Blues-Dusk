@@ -1,0 +1,31 @@
+
+[mood-Happy]卓拉：开始复选测试
+
+[sbranch-A]卓拉：分支点A
+
+	// 第一个分支选A1
+
+	[name-A1, linkfrom-A]伊森：分支线A1
+
+	大卫：分支线A1后续
+
+	[linkto-A_end] 伊森：分支线A1结束
+	
+	// 第一个分支选A2
+
+	[name-A2, linkfrom-A] 伊森：分支线A2
+	
+	卓拉：分支线A2后续
+
+	[linkto-A_end] 卓拉：分支线A2结束
+	
+	// 第一个分支选A3
+
+	[name-A3, linkfrom-A] 伊森：分支线A3
+	
+	卓拉：分支线A3后续
+
+	[linkto-A_end] 卓拉：分支线A3结束
+
+[ebranch-A_end] 伊森：分支线A最终点
+

@@ -2,6 +2,7 @@ using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
 using GameKit.DataNode;
+using GameKit.Dialog;
 using UnityGameKit.Runtime;
 using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
@@ -50,18 +51,27 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                 if (m_CachedCurrentNode == null)
                     return;
 
+                DialogDataNodeVariable nodeData = m_CachedCurrentNode.GetData<DialogDataNodeVariable>();
                 if (m_CachedCurrentNode.IsBranch)
                 {
-                    fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogChoosingState));
                     fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.uI_Response.MasterAnimator);
-                    fsmMaster.UpdateOptionUI();
+
+                    if (nodeData.IsDiceCheckBranch)
+                    {
+                        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DiceDialogSelectingState));
+                        fsmMaster.UpdateOptionUI(isDiceCheck: true);
+                    }
+                    else
+                    {
+                        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogChoosingState));
+                        fsmMaster.UpdateOptionUI();
+                    }
                     ChangeState<DialogAnimatingState>(fsmOwner);
                 }
                 else
                 {
                     fsmMaster.UpdateDialogUI(m_CachedCurrentNode);
                 }
-
             }
             else
                 InterruptDialogDisplayCallback();

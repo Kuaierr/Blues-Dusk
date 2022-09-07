@@ -27,7 +27,7 @@ public class ProcedureMenu : ProcedureBase
     {
         base.OnEnter(procedureOwner);
 
-        GameKitCenter.Event.Subscribe(ShowUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
+        GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
         m_StartGame = false;
         // GameKitCenter.UI.OpenUIForm(UIFormId.MenuForm, this);
@@ -37,7 +37,7 @@ public class ProcedureMenu : ProcedureBase
     {
         base.OnExit(procedureOwner, isShutdown);
 
-        GameKitCenter.Event.Unsubscribe(ShowUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
+        GameKitCenter.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
         // if (m_MenuForm != null)
         // {
@@ -59,7 +59,7 @@ public class ProcedureMenu : ProcedureBase
 
     private void OnOpenUIFormSuccess(object sender, GameEventArgs e)
     {
-        ShowUIFormSuccessEventArgs ne = (ShowUIFormSuccessEventArgs)e;
+        OpenUIFormSuccessEventArgs ne = (OpenUIFormSuccessEventArgs)e;
         if (ne.UserData != this)
         {
             return;

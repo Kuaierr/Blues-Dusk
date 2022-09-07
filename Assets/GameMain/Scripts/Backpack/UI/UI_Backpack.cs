@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using GameKit;
 using GameKit.QuickCode;
 using GameKit.Inventory;
+using UnityGameKit.Runtime;
 
 public class UI_Backpack : UIFormChildBase
 {
@@ -18,7 +19,8 @@ public class UI_Backpack : UIFormChildBase
     public override void OnInit(int parentDepth)
     {
         base.OnInit(parentDepth);
-        EventManager.instance.AddEventListener<CollectItemSuccessEventArgs>(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
+        GameKitCenter.Event.Subscribe(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
+        GameKitCenter.Event.Subscribe(CollectItemFailEventArgs.EventId, OnCollectItemFail);
     }
 
     public override void OnShow(UnityAction callback = null)
@@ -56,7 +58,7 @@ public class UI_Backpack : UIFormChildBase
     private void UpdateChunks()
     {
         if (inventory != null)
-        {            
+        {
             if (inventory.Size < chunks.Count)
             {
                 for (int i = inventory.Size; i < chunks.Count; i++)
@@ -91,8 +93,14 @@ public class UI_Backpack : UIFormChildBase
         uI_StockInfo = StockInfo;
     }
 
-    private void OnCollectItemSuccess(CollectItemSuccessEventArgs CollectItemSuccessEventArgs)
+    private void OnCollectItemSuccess(object sender, GameKit.Event.GameEventArgs CollectItemSuccessEventArgs)
     {
+        Refresh();
+    }
+
+    private void OnCollectItemFail(object sender, GameKit.Event.GameEventArgs CollectItemFailEventArgs)
+    {
+        Log.Fail("Collect Item Fail");
         Refresh();
     }
 }

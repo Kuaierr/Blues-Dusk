@@ -16,6 +16,7 @@ public class UI_BackpackInfo : UIFormChildBase
     public TextMeshProUGUI stockPrice;
     public TextMeshProUGUI stockDesc;
     public Button interactButton;
+    public TextMeshProUGUI buttonText;
     private Item cachedData;
     private IStock m_CachedStock;
 
@@ -49,6 +50,28 @@ public class UI_BackpackInfo : UIFormChildBase
         stockDesc.text = cachedData.Desc.ToString();
         interactButton.onClick.RemoveAllListeners();
         interactButton.onClick.AddListener(Interact);
+    }
+
+    public void SetInventoryType(UI_BackpackType type)
+    {
+        if (type == UI_BackpackType.Backpack)
+        {
+            buttonText.text = "购买";
+            interactButton.onClick.AddListener(Purchase);
+        }
+        else if (type == UI_BackpackType.Store)
+        {
+            buttonText.text = "交互";
+            interactButton.onClick.AddListener(Interact);
+        }
+    }
+
+    public void Purchase()
+    {
+        if (m_CachedStock != null)
+            GameKitCenter.Event.Fire(DoPurchaseEventArgs.EventId, DoPurchaseEventArgs.Create(m_CachedStock, this));
+        else
+            Log.Fail("Can not purchase null item.");
     }
 
     private void Interact()

@@ -9,6 +9,8 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
 {
     private UI_Dialog fsmMaster;
     private int m_CurrentIndex;
+    private bool m_IsDiceChoosing;
+    private Dice_Result m_CachedDiceCondition;
     public void Clear()
     {
 
@@ -21,10 +23,16 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
         // GameKitCenter.Event.Subscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
     }
 
-    protected override void OnEnter(FsmInterface updateFsm)
+    protected override void OnEnter(FsmInterface fsmOwner)
     {
-        base.OnEnter(updateFsm);
+        base.OnEnter(fsmOwner);
+        m_IsDiceChoosing = fsmOwner.GetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING);
         Log.Info("DialogChoosingState");
+        if(m_IsDiceChoosing)
+        {
+            m_CachedDiceCondition = fsmMaster.GetFinalResult();
+            fsmMaster.UpdateOptionsPoint(m_CachedDiceCondition);
+        }
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -42,6 +50,8 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
     protected override void OnExit(FsmInterface fsm, bool isShutdown)
     {
         base.OnExit(fsm, isShutdown);
+        m_CachedDiceCondition = null;
+        m_IsDiceChoosing = false;
         // GameKitCenter.Event.Unsubscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
     }
 

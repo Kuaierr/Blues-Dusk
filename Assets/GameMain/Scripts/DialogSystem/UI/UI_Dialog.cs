@@ -262,14 +262,19 @@ public class UI_Dialog : UIFormBase
     }
 
 
-    public void UpdateOptionUI(UnityAction callback = null)
+    public void UpdateOptionUI(bool isDiceCheck = false, UnityAction callback = null)
     {
         IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (optionSet != null)
         {
-            uI_Response.UpdateOptions(optionSet);
+            uI_Response.UpdateOptions(optionSet, isDiceCheck);
             ShowResponse(callback);
         }
+    }
+
+    public void UpdateOptionsPoint(Dice_Result result)
+    {
+        uI_Response.UpdateOptionsPoint(result);
     }
 
     public void Resume()
@@ -301,7 +306,7 @@ public class UI_Dialog : UIFormBase
     public void InitDiceSystem()
     {
         uI_DiceSystem.OnInit();
-        DiceAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
+        // DiceAnimator.SetTrigger(UIUtility.DO_ANIMATION_NAME);
     }
 
     public void RollActiveDices()

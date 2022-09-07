@@ -323,6 +323,24 @@ public class Dice_Result
     //TODO 需要最终传输给对话系统，可以考虑做成静态的
     public Dictionary<Dice_SuitType, int> sum { get; private set; } = null;
 
+    private Dictionary<string, int> m_SerializableSum = null;
+
+    public Dictionary<string, int> SerializableSum
+    {
+        get
+        {
+            if(m_SerializableSum == null)
+            {
+                m_SerializableSum = new Dictionary<string, int>();
+                foreach (var diceResult in sum)
+                {
+                    m_SerializableSum.Add(System.Enum.GetName(typeof(Dice_SuitType), diceResult.Key), diceResult.Value);
+                }
+            }
+            return m_SerializableSum;
+        }
+    }
+
     //通过对这个列表进行操作，达到终止后续效果处理的效果
     public List<UI_DiceFaceBase_SO> results;
 

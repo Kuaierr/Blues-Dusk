@@ -22,6 +22,14 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        public int ElementCount
+        {
+            get
+            {
+                return m_ElementManager.ElementCount;
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();

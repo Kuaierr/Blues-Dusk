@@ -26,7 +26,6 @@ public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
         base.OnEnter(updateFsm);
         Debug.Log("Enter ChoiceDiceroll State.");
         fsmMaster = updateFsm.User;
-        
         fsmMaster.OnFinishRolling();
     }
 
@@ -35,7 +34,10 @@ public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
         
         if(fsmMaster.CheckIfFinishReseting())
+        {
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, true);
             ChangeState<DiceDialogChoosingState>(fsmOwner);
+        }
     }
 
     protected override void OnExit(FsmInterface fsm, bool isShutdown)

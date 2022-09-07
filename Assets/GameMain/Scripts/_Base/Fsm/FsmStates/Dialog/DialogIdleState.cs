@@ -18,6 +18,8 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
     {
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
+        fsmOwner.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, false);
+        fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, true);
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
@@ -36,7 +38,6 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
             fsmMaster.Resume();
             fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogTalkingState));
             fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.MasterAnimator);
-            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, true);
             fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
             fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode, false);
             ChangeState<DialogAnimatingState>(fsmOwner);

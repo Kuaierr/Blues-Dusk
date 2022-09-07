@@ -34,6 +34,7 @@ public class DialogAnimatingState : FsmState<UI_Dialog>, IReference
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
+        
         if (m_CachedNextStateType == null)
             ChangeState<DialogIdleState>(fsmOwner);
 

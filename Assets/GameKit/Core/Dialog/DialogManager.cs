@@ -152,16 +152,6 @@ namespace GameKit.Dialog
             return DialogOptionSet.Create(node.GetAllChild());
         }
 
-        // public List<Option> GetOptions()
-        // {
-        //     if (m_CurrentNode.Sons.Count > 1)
-        //     {
-        //         List<Option> options = DialogSelection.CreateSelection(m_CurrentNode.Sons);
-        //         return options;
-        //     }
-        //     return null;
-        // }
-
         internal override void Shutdown()
         {
             m_LoadingDialogAssetNames.Clear();

@@ -459,7 +459,7 @@ namespace UnityGameKit.Runtime
 
         private void OnOpenUIFormSuccess(object sender, GameKit.UI.OpenUIFormSuccessEventArgs e)
         {
-            m_EventComponent.Fire(this, ShowUIFormSuccessEventArgs.Create(e));
+            m_EventComponent.Fire(this, OpenUIFormSuccessEventArgs.Create(e));
         }
 
         private void OnOpenUIFormFailure(object sender, GameKit.UI.OpenUIFormFailureEventArgs e)
@@ -467,13 +467,13 @@ namespace UnityGameKit.Runtime
             Utility.Debugger.LogWarning("Open UI form failure, asset name '{0}', UI group name '{1}', pause covered UI form '{2}', error message '{3}'.", e.UIFormAssetName, e.UIGroupName, e.PauseCoveredUIForm, e.ErrorMessage);
             if (m_EnableOpenUIFormFailureEvent)
             {
-                m_EventComponent.Fire(this, ShowUIFormFailureEventArgs.Create(e));
+                m_EventComponent.Fire(this, OpenUIFormFailureEventArgs.Create(e));
             }
         }
 
         private void OnCloseUIFormComplete(object sender, GameKit.UI.CloseUIFormCompleteEventArgs e)
         {
-            m_EventComponent.Fire(this, HideUIFormCompleteEventArgs.Create(e));
+            m_EventComponent.Fire(this, CloseUIFormCompleteEventArgs.Create(e));
         }
     }
 }

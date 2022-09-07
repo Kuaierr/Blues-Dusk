@@ -7,47 +7,53 @@ using GameKit;
 
 public class UI_BackpackSystem : UIFormBase
 {
-    public UI_Backpack uI_Backpack;
-    public UI_BackpackInfo uI_StockInfo;
-    private KeyCode ChangeDisplayKeyCode = KeyCode.None;
+    public UI_Backpack BackpackUI;
+    public UI_BackpackInfo StockInfoUI;
+    private KeyCode m_ChangeDisplayKeyCode = KeyCode.None;
 
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        InventoryUIInitInfo initUIInfo = (InventoryUIInitInfo)userData;
-        uI_Backpack.SetStockInfoUI(uI_StockInfo);
-        uI_Backpack.SetInventory((IInventory)initUIInfo.UserData);
-        ChangeDisplayKeyCode = initUIInfo.ChangeDisplayKeyCode;
-        ReferencePool.Release(initUIInfo);
+        BackpackUI.SetStockInfoUI(StockInfoUI);
+    }
+
+    public void SetInventory(IInventory inventory, UI_BackpackType type)
+    {
+        BackpackUI.SetInventory(inventory);
+        StockInfoUI.SetInventoryType(type);
+    }
+
+    public void SetChangeKey(KeyCode keyCode)
+    {
+        m_ChangeDisplayKeyCode = keyCode;
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        // uI_Backpack.OnShow();
-        // CursorSystem.current.Disable();
-        OnResume();
+        BackpackUI.OnShow();
+        CursorSystem.current.Disable();
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         base.OnClose(isShutdown, userData);
-        uI_Backpack.OnHide();
-        CursorSystem.current.Enable();
-    }
-
-    protected override void OnPause()
-    {
-        base.OnPause();
-        uI_Backpack.OnHide();
+        BackpackUI.OnHide();
         CursorSystem.current.Enable();
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        uI_Backpack.OnShow();
+        BackpackUI.OnShow();
         CursorSystem.current.Disable();
+    }
+
+    protected override void OnPause()
+    {
+        base.OnPause();
+        BackpackUI.OnHide();
+        CursorSystem.current.Enable();
     }
 
     protected override void OnRecycle()
@@ -63,6 +69,6 @@ public class UI_BackpackSystem : UIFormBase
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
-        ChangeDisplayUpdate(ChangeDisplayKeyCode);
+        ChangeDisplayUpdate(m_ChangeDisplayKeyCode);
     }
 }
