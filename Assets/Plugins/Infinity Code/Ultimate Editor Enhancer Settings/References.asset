@@ -184,41 +184,27 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: Prototype_Inventory
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
-  - name: GameKitDemo_Main
-    path: Assets/GameKit/Demo/Procedure/GameKitDemo_Main.unity
   - name: Prototype_Dialog_DiceDev
     path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: Prototypr_PlayerController
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
-  - name: Prototype_Dialog_UIandDice
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
-  - name: S_Parlor
-    path: Assets/GameMain/Scenes/S_Parlor.unity
-  - name: GameMenu
-    path: Assets/GameMain/Scenes/GameMenu.unity
-  - name: AnimationTest
-    path: Assets/GameMain/Testing/AnimationTest/AnimationTest.unity
   - name: S_Toilet
     path: Assets/GameMain/Scenes/S_Toilet.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
-  - name: S_heya_toilet
-    path: Assets/GameMain/Scenes/S_heya_toilet.unity
-  - name: C1_Parlor
-    path: Assets/GameMain/Scenes/C1_Parlor.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Parlor
+    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: GameChangeScene
+    path: Assets/GameMain/Scenes/GameChangeScene.unity
   - name: Prototype_Dialog_UIandDice
-    path: Assets/GameMain/Scenes/Prototype_Dialog_UIandDice.unity
-  - name: GameMain
-    path: Assets/GameMain/Scenes/GameMain.unity
-  - name: GameKitDemo_Fsm
-    path: Assets/GameKit/Demo/Fsm/GameKitDemo_Fsm.unity
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
   - name: Prototype_Interact
-    path: Assets/GameMain/Scenes/Prototype_Interact.unity
-  - name: View States
-    path: Assets/Plugins/Infinity Code/Ultimate Editor Enhancer/Examples/View States.unity
-  - name: S_test
-    path: Assets/GamePrototype/Scenes/S_test.unity
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
+  - name: Prototype_Inventory
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
+  - name: GameMenu
+    path: Assets/GameMain/Scenes/GameMenu.unity
+  - name: GameKitDemo_Entity
+    path: Assets/GameKit/Demo/Entity/Scenes/GameKitDemo_Entity.unity

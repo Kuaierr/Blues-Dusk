@@ -2686,6 +2686,10 @@ PrefabInstance:
       value: -22.653553
       objectReference: {fileID: 0}
     - target: {fileID: 6300987788309395113, guid: 024aa34f39672c44f8e681bf11e90434, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300987788309395113, guid: 024aa34f39672c44f8e681bf11e90434, type: 3}
       propertyPath: IsManuallyRoatating
       value: 0
       objectReference: {fileID: 0}
