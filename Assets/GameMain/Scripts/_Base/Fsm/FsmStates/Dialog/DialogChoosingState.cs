@@ -25,10 +25,10 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
+        Log.Info("DialogChoosingState");
         base.OnEnter(fsmOwner);
         m_IsDiceChoosing = fsmOwner.GetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING);
-        Log.Info("DialogChoosingState");
-        if(m_IsDiceChoosing)
+        if (m_IsDiceChoosing)
         {
             m_CachedDiceCondition = fsmMaster.GetFinalResult();
             fsmMaster.UpdateOptionsPoint(m_CachedDiceCondition);
@@ -40,9 +40,11 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            fsmMaster.MakeChoice();
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogTalkingState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.uI_Response.MasterAnimator);
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);  
+            GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.GetNextNode(GameKitCenter.Dialog.CurrentTree.CurrentNode, fsmMaster.uI_Response.CurIndex);
+            // fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME, UIUtility.HIDE_ANIMATION_NAME);
+            fsmMaster.HideResponse();
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }

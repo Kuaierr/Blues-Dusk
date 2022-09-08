@@ -22,12 +22,12 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
     protected override void OnEnter(FsmInterface updateFsm)
     {
         base.OnEnter(updateFsm);
-        Debug.Log("Enter ChoiceDiceroll State.");
+        Log.Info("DiceDialogSelectingState.");
         fsmMaster = updateFsm.User;
 
         _fsm = updateFsm;
-        // updateFsm.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING,typeof(DiceDialogRollingState));
-        // updateFsm.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK,fsmMaster.DiceAnimator);
+        // updateFsm.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE,typeof(DiceDialogRollingState));
+        // updateFsm.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.DiceAnimator);
         fsmMaster.AddCheckButtonCallback(FadeToRollingState);
     }
 

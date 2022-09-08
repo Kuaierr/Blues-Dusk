@@ -10,15 +10,12 @@ using GameKit.Dialog;
 [RequireComponent(typeof(Animator))]
 public class UI_Response : UIFormChildBase
 {
-    public RectTransform SelectorTransform;
     public List<UI_Option> UIOptions = new List<UI_Option>();
     public bool isActive = false;
     private List<IDialogOption> m_CurrentOptions = new List<IDialogOption>();
     private VerticalLayoutGroup verticalLayoutGroup;
-    private Sequence selectorSeq;
-    private int currentIndex = 0;
-    private float animDistance = 0;
-    private Vector2 selectorInitPos = Vector2.zero;
+    private int m_CurrentIndex = 0;
+    private int m_LastIndex = -1;
     private bool m_CachedIsDiceCheck = false;
     [SerializeField] private Animator m_MasterAnimator;
     [SerializeField] private Animator m_DiceAnimator;
@@ -27,7 +24,7 @@ public class UI_Response : UIFormChildBase
     {
         get
         {
-            return currentIndex;
+            return m_CurrentIndex;
         }
     }
 
@@ -46,13 +43,9 @@ public class UI_Response : UIFormChildBase
             m_MasterAnimator = GetComponent<Animator>();
         verticalLayoutGroup = GetComponentInChildren<VerticalLayoutGroup>();
         UIOptions = GetComponentsInChildren<UI_Option>(true).ToList();
-        selectorSeq = DOTween.Sequence();
         for (int i = 0; i < UIOptions.Count; i++)
             UIOptions[i].OnInit(this);
-
-        selectorInitPos = SelectorTransform.anchoredPosition = UIOptions.First().RectTransform.anchoredPosition;
-        animDistance = verticalLayoutGroup.spacing + UIOptions.First().RectTransform.sizeDelta.y;
-        this.gameObject.SetActive(false);
+        m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
     public override void OnUpdate()
     {
@@ -64,22 +57,25 @@ public class UI_Response : UIFormChildBase
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            currentIndex = (currentIndex + 1) % m_CurrentOptions.Count;
-            MoveSelector(currentIndex);
+            m_LastIndex = m_CurrentIndex;
+            m_CurrentIndex = (m_CurrentIndex + 1) % m_CurrentOptions.Count;
+            MoveSelector(m_CurrentIndex);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            currentIndex = currentIndex - 1 == -1 ? m_CurrentOptions.Count - 1 : currentIndex - 1;
-            MoveSelector(currentIndex);
+            m_LastIndex = m_CurrentIndex;
+            m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_CurrentOptions.Count - 1 : m_CurrentIndex - 1;
+            MoveSelector(m_CurrentIndex);
         }
     }
 
     public override void OnShow(UnityAction callback = null)
     {
+        Log.Info("Response OnShow");
         m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
-        currentIndex = 0;
-        selectorInitPos = SelectorTransform.anchoredPosition = UIOptions.First().RectTransform.anchoredPosition;
+        isActive = true;
+        ResetCurIndex();
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
             if (i >= UIOptions.Count)
@@ -88,7 +84,7 @@ public class UI_Response : UIFormChildBase
                 continue;
             }
             UIOptions[i].OnReEnable(i);
-            UIOptions[i].gameObject.SetActive(true);
+            UIOptions[i].OnShow();
             UIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
 
@@ -96,6 +92,7 @@ public class UI_Response : UIFormChildBase
         {
             m_DiceAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         }
+        // MoveSelector(0);
     }
 
     public override void OnHide(UnityAction callback = null)
@@ -104,9 +101,11 @@ public class UI_Response : UIFormChildBase
         m_MasterAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
         m_CurrentOptions.Clear();
-        foreach (var ui_option in UIOptions)
+        ResetCurIndex();
+        isActive = false;
+        for (int i = 0; i < UIOptions.Count; i++)
         {
-            ui_option.gameObject.SetActive(false);
+            UIOptions[i].OnHide();
         }
 
         if (m_CachedIsDiceCheck)
@@ -117,13 +116,18 @@ public class UI_Response : UIFormChildBase
 
     public void OnOptionEnter(UI_Option option)
     {
-        currentIndex = option.Index;
-        MoveSelector(currentIndex);
+        // Log.Warning("OnOptionEnter");
+        // m_LastIndex = m_CurrentIndex;
+        // m_CurrentIndex = option.Index;
+        // MoveSelector(m_CurrentIndex);
     }
 
     public void OnOptionExit(UI_Option option)
     {
-
+        // Log.Warning("OnOptionExit");
+        // m_LastIndex = m_CurrentIndex;
+        // m_CurrentIndex = -1;
+        // MoveSelector(m_CurrentIndex);
     }
 
     public void OnOptionDown(UI_Option option)
@@ -133,8 +137,10 @@ public class UI_Response : UIFormChildBase
 
     private void MoveSelector(int index)
     {
-        selectorSeq.Kill();
-        selectorSeq.Append(SelectorTransform.DOAnchorPosY(selectorInitPos.y - animDistance * index, 0.1f));
+        if (m_LastIndex >= 0)
+            UIOptions[m_LastIndex].SetEmphasize(false);
+        if (index >= 0)
+            UIOptions[index].SetEmphasize(true);
     }
 
     // 共识： UIOptions 和  m_CurrentOptions 在 Index 上是一一对应的
@@ -144,8 +150,9 @@ public class UI_Response : UIFormChildBase
         m_CachedIsDiceCheck = isDiceCheck;
         if (m_CachedIsDiceCheck)
         {
+            // Log.Warning(optionSet.Options.Count + " >> " + UIOptions.Count);
             // 如果是筛检，则在显示Options时锁定所有选项
-            for (int i = 0; i < UIOptions.Count; i++)
+            for (int i = 0; i < optionSet.Options.Count; i++)
             {
                 UIOptions[i].Lock();
                 UIOptions[i].ShowDiceIndicator(optionSet.Options[i]);
@@ -186,5 +193,11 @@ public class UI_Response : UIFormChildBase
     private void UpdateOptionCharger()
     {
 
+    }
+
+    private void ResetCurIndex()
+    {
+        m_CurrentIndex = 0;
+        m_LastIndex = -1;
     }
 }

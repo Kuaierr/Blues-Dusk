@@ -8,7 +8,6 @@ using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 public class DialogIdleState : FsmState<UI_Dialog>, IReference
 {
     private UI_Dialog fsmMaster;
-    private bool m_DialogStarted;
     public void Clear()
     {
 
@@ -18,27 +17,23 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
     {
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
-        fsmOwner.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, false);
-        fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, true);
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
-        fsmMaster.InternalVisible(false);
         Log.Info("DialogIdleState");
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START);
-        if (m_DialogStarted && fsmMaster.CurrentTree != null)
+        if (fsmMaster.IsDialoging && fsmMaster.CurrentTree != null)
         {
-            fsmMaster.Resume();
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogTalkingState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.MasterAnimator);
-            fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogTalkingState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.MasterAnimator);
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.FIRST_TALKING, true);
+            fsmMaster.PassNode();
             fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode, false);
             ChangeState<DialogAnimatingState>(fsmOwner);
         }

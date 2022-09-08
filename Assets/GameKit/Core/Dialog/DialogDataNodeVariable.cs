@@ -90,5 +90,10 @@ namespace GameKit.Dialog
                 {"WAND",0}
             };
         }
+
+        public override string ToString()
+        {
+            return Speaker + ":" + Contents;
+        }
     }
 }

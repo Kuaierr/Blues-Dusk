@@ -23,9 +23,8 @@ public class DiceDialogRollingState : FsmState<UI_Dialog>, IReference
     protected override void OnEnter(FsmInterface updateFsm)
     {
         base.OnEnter(updateFsm);
-        Debug.Log("Enter ChoiceDiceroll State.");
+        Log.Info("DiceDialogRollingState.");
         fsmMaster = updateFsm.User;
-        
         fsmMaster.RollActiveDices();
     }
 

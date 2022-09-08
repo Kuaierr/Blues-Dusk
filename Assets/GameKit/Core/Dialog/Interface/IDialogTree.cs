@@ -14,7 +14,7 @@ namespace GameKit.Dialog
         IDataNode GetChildNode(int index = 0);
         IDataNode[] GetAllChildNodes();
         void Reset();
-        void Clear();
+        void Release();
         void Update(float elapseSeconds, float realElapseSeconds);
     }
 }

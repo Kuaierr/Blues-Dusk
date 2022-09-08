@@ -11,8 +11,8 @@ namespace GameKit.Dialog
         event EventHandler<FinishDialogCompleteEventArgs> FinishDialogComplete;
         IDialogOptionSet CreateOptionSet(IDataNode node);
         void SetDialogHelper(IDialogTreeParseHelper helper);
-        void GetOrCreatetDialogTree(string treeName);
-        void CreateDialogTree(string treeName, string content);
+        void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null);
+        void CreateDialogTree(string treeName, string content, object userData = null);
         string[] GetLoadedDialogAssetNames();
         IDialogTree GetDialogTree(string treeName);
     }

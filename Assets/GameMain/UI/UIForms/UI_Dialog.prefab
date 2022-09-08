@@ -772,9 +772,9 @@ GameObject:
   - component: {fileID: 7972011340025913564}
   - component: {fileID: 7972011340025913566}
   - component: {fileID: 7972011340025913565}
-  - component: {fileID: 7972011340025913567}
   - component: {fileID: 2650407551837337147}
   - component: {fileID: 8804770724350124083}
+  - component: {fileID: 7972011340025913567}
   m_Layer: 5
   m_Name: Indicator
   m_TagString: Untagged
@@ -839,25 +839,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &7972011340025913567
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7972011340025913539}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 98dda35647cde4a4b9cffd002641b5ed, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!225 &2650407551837337147
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -882,6 +863,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab4bdaafd7abdb4b8903849fcb8d810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7972011340025913567
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7972011340025913539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 502cc9a13d088b14a840fa6279d38821, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7972011340069951144
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +946,7 @@ Animator:
   m_GameObject: {fileID: 7972011340069951144}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8059115897e02114586bd29783ac1bbb, type: 2}
+  m_Controller: {fileID: 22100000, guid: 7a94c680db5bceb4f83e6b310187a34d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1191,7 +1191,7 @@ Animator:
   m_GameObject: {fileID: 7972011340262737320}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 09a635435ded0d341b5c1126ffcfd259, type: 2}
+  m_Controller: {fileID: 22100000, guid: 67f1466d6d454064fbcdb1b9bfe61bab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1715,7 +1715,7 @@ Animator:
   m_GameObject: {fileID: 7972011341280392858}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 75c09a833558ecc49b8c284e0a2e890f, type: 2}
+  m_Controller: {fileID: 22100000, guid: a5d3cc1393c6c6649a154e741731966a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1873,7 +1873,6 @@ MonoBehaviour:
   TextAnimatorPlayer: {fileID: 286109655142115812}
   SpeakerAnimator: {fileID: 7972011340262737323}
   EdgeAnimator: {fileID: 7972011341280392852}
-  DiceAnimator: {fileID: 7619122729044232160}
 --- !u!95 &7619122729044232160
 Animator:
   serializedVersion: 3
@@ -1884,7 +1883,7 @@ Animator:
   m_GameObject: {fileID: 7972011341569639578}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c6ab96fb745508469e57ddf9bc4a584, type: 2}
+  m_Controller: {fileID: 22100000, guid: f134186c2eafed24f8124d2c8a2f901e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -73,8 +73,17 @@ public abstract class UIFormBase : UIFormLogic
 
     public void Close()
     {
-        StopAllCoroutines();
-        StartCoroutine(CloseCo(FadeTime));
+        OnClose(false, null);
+    }
+
+    public void Pause()
+    {
+        OnPause();
+    }
+
+    public void Resume()
+    {
+        OnResume();
     }
 
     public void OnInstantiate()
@@ -84,7 +93,7 @@ public abstract class UIFormBase : UIFormLogic
         gameObject.GetOrAddComponent<GraphicRaycaster>();
         if (m_MasterAnimator == null)
             m_MasterAnimator = gameObject.GetOrAddComponent<Animator>();
-        InternalSetVisible(false);
+        // InternalSetVisible(false);
     }
 
     public static void SetMainFont(Font mainFont)
@@ -99,7 +108,7 @@ public abstract class UIFormBase : UIFormLogic
 
     public virtual void OnUpdateInfo(object userData)
     {
-        
+
     }
 
     protected override void OnInit(object userData)
@@ -186,26 +195,23 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void InternalSetVisible(bool visible)
     {
+        Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);
+        SetCanvasGroupBlock(visible);
         if (m_MasterAnimator != null && m_MasterAnimator.runtimeAnimatorController != null)
         {
             m_MasterAnimator.SetTrigger(visible ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
             return;
         }
-        Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);
-        // SetActiveByFading(visible);
         SetActiveByAlpha(visible);
-    }
-
-    protected void SetActiveByFading(bool status)
-    {
-        m_CanvasGroup.alpha = status ? 0f : 1f;
-        StopAllCoroutines();
-        StartCoroutine(m_CanvasGroup.FadeToAlpha(1f - m_CanvasGroup.alpha, FadeTime));
     }
 
     protected void SetActiveByAlpha(bool status)
     {
         CanvasGroup.alpha = status ? 1 : 0;
+    }
+
+    protected void SetCanvasGroupBlock(bool status)
+    {
         CanvasGroup.blocksRaycasts = status;
         CanvasGroup.interactable = status;
     }

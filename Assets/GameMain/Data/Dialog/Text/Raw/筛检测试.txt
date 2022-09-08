@@ -13,7 +13,7 @@
 	
 	// 第一个分支选A2
 
-	[name-A2, linkfrom-A, doption-(SWORD=1,GRAIL=1)] 伊森：筛检分支线A2
+	[name-A2, linkfrom-A, doption-(SWORD=1 GRAIL=1)] 伊森：筛检分支线A2
 	
 	卓拉：筛检分支线A2后续
 
@@ -21,7 +21,7 @@
 	
 	// 第一个分支选A3
 
-	[name-A3, linkfrom-A, doption-(SWORD=1,GRAIL=1,STARCOIN=1)] 伊森：筛检分支线A3
+	[name-A3, linkfrom-A, doption-(SWORD=1 GRAIL=1 STARCOIN=1)] 伊森：筛检分支线A3
 	
 	卓拉：筛检分支线A3后续
 

@@ -5,11 +5,13 @@ using TMPro;
 using UnityGameKit.Runtime;
 using UnityEngine.EventSystems;
 using GameKit.Dialog;
+using UnityEngine.Events;
+
 [RequireComponent(typeof(Animator))]
 public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public List<UI_OptionIndicator> OptionIndicators;
-    private Animator m_Animator;
+
     private TextMeshProUGUI m_Content;
     private UI_Response m_Response;
     private int m_Index = 0;
@@ -34,11 +36,12 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     {
         base.OnInit(response.Depth);
         this.m_Response = response;
-        m_Animator = GetComponent<Animator>();
+
         m_Content = GetComponentInChildren<TextMeshProUGUI>();
         ResetOptionIndicator();
-        this.gameObject.SetActive(false);
+        SetActive(false, isForce: true);
     }
+
     public void OnReEnable(int Index)
     {
         this.m_Index = Index;
@@ -103,20 +106,14 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     public void Unlock()
     {
-        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
-        {
-            m_Animator.SetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
-        }
-        CanvasGroup.alpha = 1f;
+        if (!SetEnable(true))
+            CanvasGroup.alpha = 1f;
     }
 
     public void Lock()
     {
-        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
-        {
-            m_Animator.SetTrigger(UIUtility.DISABLE_ANIMATION_NAME);
-        }
-        CanvasGroup.alpha = 0.5f;
+        if (!SetEnable(false))
+            CanvasGroup.alpha = 0.5f;
     }
 
     private void ResetOptionIndicator()

@@ -52,15 +52,26 @@ namespace UnityGameKit.Runtime
             m_LinkBuffer = new Queue<CommandBase>();
             smallBracketRegex = new Regex(@"\(\S+\)", RegexOptions.IgnoreCase);
         }
+
+        public void Clear()
+        {
+            
+            m_DeclaredNodes.Clear();
+            m_BranchNodes.Clear();
+            m_LinkBuffer.Clear();
+            m_CachedDialogTree = null;
+        }
+
         public override void Phase(string rawData, IDialogTree dialogTree)
         {
             // throw new System.NotImplementedException();
             Clear();
             string[] lines = rawData.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
             m_CachedDialogTree = dialogTree;
+            Log.Info("???" + dialogTree.Name);
             for (int i = 0; i < lines.Length; i++)
             {
-                IDataNode node = dialogTree.DataNodeManager.GetOrAddNode(i.ToString());
+                IDataNode node = dialogTree.DataNodeManager.GetOrAddNode(dialogTree.Name + i.ToString());
                 PhaseNode(node, lines[i]);
             }
             ExcuteAllBufferCommand();
@@ -205,14 +216,14 @@ namespace UnityGameKit.Runtime
                         data.DiceConditions = DialogDataNodeVariable.GetDefaultDiceConditions();
                         try
                         {
-                            string[] diceAttributes = value.Trim().RemoveParentheses().Split(',');
+                            string[] diceAttributes = value.Trim().RemoveParentheses().Split(' ');
                             foreach (var diceAttribute in diceAttributes)
                             {
                                 string[] paramsPair = diceAttribute.Split('=');
                                 string attributeName = paramsPair[0];
                                 string attributeRequirement = paramsPair[1];
-                                
-                                if(data.DiceConditions.ContainsKey(attributeName) && attributeRequirement!= string.Empty)
+
+                                if (data.DiceConditions.ContainsKey(attributeName) && attributeRequirement != string.Empty)
                                     data.DiceConditions[attributeName] = int.Parse(attributeRequirement);
                             }
                         }
@@ -233,14 +244,7 @@ namespace UnityGameKit.Runtime
             }
             node.SetData(data);
             m_CachedDialogTree.CurrentNode = node;
-        }
-
-        public void Clear()
-        {
-            m_DeclaredNodes.Clear();
-            m_BranchNodes.Clear();
-            m_LinkBuffer.Clear();
-            m_CachedDialogTree = null;
+            // Log.Info(data.Speaker + ">>" + data.Contents);
         }
 
         public void AddFromLast(IDataNode node)
@@ -330,6 +334,6 @@ namespace UnityGameKit.Runtime
         {
             m_CachedDialogTree.Reset();
         }
-        
+
     }
 }

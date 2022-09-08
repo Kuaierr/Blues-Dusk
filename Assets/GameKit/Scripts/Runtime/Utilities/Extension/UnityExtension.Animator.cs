@@ -29,7 +29,8 @@ namespace UnityGameKit.Runtime
         public static bool IsComplete(this Animator animator)
         {
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-            return info.normalizedTime >= 1;
+            // Log.Info(info.normalizedTime);
+            return info.normalizedTime >= 0.9f;
         }
     }
 }

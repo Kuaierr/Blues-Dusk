@@ -19,12 +19,13 @@ public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
     protected override void OnInit(FsmInterface fsm)
     {
         base.OnInit(fsm);
+        fsm.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, false);
     }
 
     protected override void OnEnter(FsmInterface updateFsm)
     {
         base.OnEnter(updateFsm);
-        Debug.Log("Enter ChoiceDiceroll State.");
+        Log.Info("DiceDialogResetingState.");
         fsmMaster = updateFsm.User;
         fsmMaster.OnFinishRolling();
     }

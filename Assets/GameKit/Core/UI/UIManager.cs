@@ -465,6 +465,8 @@ namespace GameKit.UI
 
             int serialId = ++m_Serial;
             UIFormObject uiFormInstanceObject = m_InstancePool.Spawn(uiFormAssetName);
+            if (uiFormInstanceObject != null)
+                Utility.Debugger.LogWarning(uiFormInstanceObject.ToString());
             if (uiFormInstanceObject == null)
             {
                 m_UIFormsBeingLoaded.Add(serialId, uiFormAssetName);
@@ -618,7 +620,7 @@ namespace GameKit.UI
             try
             {
                 IUIForm uiForm = m_UIFormHelper.CreateUIForm(uiFormInstance, uiGroup, userData);
-                
+
                 if (uiForm == null)
                 {
                     throw new GameKitException("Can not create UI form in UI form helper.");

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CanvasGroup))]
+[RequireComponent(typeof(CanvasGroup), typeof(Animator))]
 public abstract class UIFormChildBase : UIBehaviour
 {
     protected const int DepthFactor = 10;
@@ -15,6 +15,7 @@ public abstract class UIFormChildBase : UIBehaviour
     private RectTransform m_RectTransform;
     private Canvas m_CachedCanvas = null;
     private CanvasGroup m_CanvasGroup = null;
+    private Animator m_Animator;
     public int OriginalDepth
     {
         get;
@@ -46,6 +47,55 @@ public abstract class UIFormChildBase : UIBehaviour
         }
     }
 
+    public Animator Animator
+    {
+        get
+        {
+            return m_Animator;
+        }
+    }
+
+    public bool SetEmphasize(bool status, bool isForce = false)
+    {
+        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
+        {
+            if (isForce)
+                m_Animator.SetTrigger(status ? UIUtility.FORCE_DOEMPHASIZE_ANIMATION_NAME : UIUtility.FORCE_UNDOEMPHASIZE_ANIMATION_NAME);
+            else
+                m_Animator.SetTrigger(status ? UIUtility.DOEMPHASIZE_ANIMATION_NAME : UIUtility.UNDOEMPHASIZE_ANIMATION_NAME);
+            return true;
+        }
+        return false;
+    }
+
+    public bool SetEnable(bool status, bool isForce = false)
+    {
+        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
+        {
+            if (isForce)
+                m_Animator.SetTrigger(status ? UIUtility.FORCE_ENABLE_ANIMATION_NAME : UIUtility.FORCE_DISABLE_ANIMATION_NAME);
+            else
+                m_Animator.SetTrigger(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
+            return true;
+        }
+        return false;
+    }
+
+    public bool SetActive(bool status, bool isForce = false)
+    {
+        m_CanvasGroup.interactable = status ? true : false;
+        m_CanvasGroup.blocksRaycasts = status ? true : false;
+        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
+        {
+            if (isForce)
+                m_Animator.SetTrigger(status ? UIUtility.FORCE_ON_ANIMATION_NAME : UIUtility.FORCE_OFF_ANIMATION_NAME);
+            else
+                m_Animator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+            return true;
+        }
+        return false;
+    }
+
 
     protected override void Awake()
     {
@@ -53,6 +103,7 @@ public abstract class UIFormChildBase : UIBehaviour
         m_CachedCanvas.overrideSorting = true;
         OriginalDepth = m_CachedCanvas.sortingOrder;
         m_CanvasGroup = this.gameObject.GetOrAddComponent<CanvasGroup>();
+        m_Animator = GetComponent<Animator>();
         this.gameObject.GetOrAddComponent<GraphicRaycaster>();
     }
 
@@ -68,19 +119,22 @@ public abstract class UIFormChildBase : UIBehaviour
 
     public virtual void OnShow(UnityAction callback = null)
     {
-        // this.gameObject.SetActive(true);
-        m_CanvasGroup.alpha = 1;
-        m_CanvasGroup.interactable = true;
-        m_CanvasGroup.blocksRaycasts = true;
+
+        if (!SetActive(true))
+        {
+            // this.gameObject.SetActive(true);
+            m_CanvasGroup.alpha = 1;
+        }
         callback?.Invoke();
     }
 
     public virtual void OnHide(UnityAction callback = null)
     {
-        // this.gameObject.SetActive(false);
-        m_CanvasGroup.alpha = 0;
-        m_CanvasGroup.interactable = false;
-        m_CanvasGroup.blocksRaycasts = false;
+        if (!SetActive(false))
+        {
+            // this.gameObject.SetActive(false);
+            m_CanvasGroup.alpha = 0;
+        }
         callback?.Invoke();
     }
 
@@ -96,7 +150,7 @@ public abstract class UIFormChildBase : UIBehaviour
 
     public virtual void OnUpdate()
     {
-        
+
     }
 
     public virtual void OnDepthChanged(int depthInForm)

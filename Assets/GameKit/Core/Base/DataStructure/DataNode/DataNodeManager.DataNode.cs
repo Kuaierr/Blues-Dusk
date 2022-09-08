@@ -88,8 +88,8 @@ namespace GameKit.DataNode
                 get
                 {
                     if (m_Childs == null)
-                        return false;
-                    return ChildCount <= 0;
+                        return true;
+                    return ChildCount == 0;
                 }
             }
 

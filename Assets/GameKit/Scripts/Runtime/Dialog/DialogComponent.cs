@@ -111,38 +111,26 @@ namespace UnityGameKit.Runtime
             return m_DialogManager.GetLoadedDialogAssetNames();
         }
 
-        public void StartDialog(string name)
+        public void StartDialog(string name, string contents = "", object userData = null)
         {
             if (name == string.Empty)
             {
                 Log.Fail("Empty Dialog Name {0}", name);
                 return;
             }
-            m_DialogManager.GetOrCreatetDialogTree(name);
-        }
-
-        public void StartDialog(string name, string contents)
-        {
-            if (name == string.Empty)
-            {
-                Log.Fail("Empty Dialog Name {0}", name);
-                return;
-            }
-            m_DialogManager.CreateDialogTree(name, contents);
+            m_DialogManager.GetOrCreatetDialogTree(name, contents, userData);
         }
 
         private void OnStartDialogSuccess(object sender, GameEventArgs e)
         {
-            Log.Success("Fire StartDialogSuccessEventArg");
             StartDialogSuccessEventArgs ne = (StartDialogSuccessEventArgs)e;
             m_CachedCurrentTree = ne.DialogTree;
+            Log.Success(m_CachedCurrentTree.Name);
         }
 
         private void OnStartDialogSuccess(object sender, GameKit.Dialog.StartDialogSuccessEventArgs e)
         {
-            Log.Success("Fire GameKit.Dialog.StartDialogSuccessEventArg");
             m_EventComponent.Fire(this, StartDialogSuccessEventArgs.Create(e));
-            // StartCoroutine(FireNextFrame(sender, e));
         }
 
         private void OnStartDialogFailure(object sender, GameKit.Dialog.StartDialogFailureEventArgs e)

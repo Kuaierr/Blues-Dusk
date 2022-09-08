@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using GameKit.Fsm;
 using GameKit;
 using GameKit.DataNode;
@@ -12,7 +13,7 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     private UI_Dialog fsmMaster;
     private bool m_isTextShowing;
     private bool m_DialogStarted;
-    private IDataNode m_CachedCurrentNode;
+    private IDataNode m_SelectedChildNode;
     public void Clear()
     {
 
@@ -23,21 +24,23 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
         fsmMaster.AddTyperWriterListener(SetTextShowing, SetTextShown);
+        fsmOwner.SetData<VarBoolean>(DialogStateUtility.FIRST_TALKING, false);
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
         Log.Info("DialogTalkingState");
-        SetTextShowing();
-
-        if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START))
+        if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.FIRST_TALKING) == true)
         {
-            fsmOwner.SetData<VarBoolean>(DialogStateUtility.DIALOG_FIRST_START, false);
+            fsmOwner.SetData<VarBoolean>(DialogStateUtility.FIRST_TALKING, false);
             return;
         }
-        fsmMaster.ParseNode(fsmMaster.uI_Response.CurIndex);
+
+        // 如果是纯功能性节点，则自动处理并跳过
+        fsmMaster.CurrentTree.CurrentNode = fsmMaster.ExecuteNodeFunction(fsmMaster.CurrentTree.CurrentNode);
         fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
+        SetTextShowing();
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -47,42 +50,41 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         {
             if (m_isTextShowing == false)
             {
-                m_CachedCurrentNode = fsmMaster.ParseNode();
-                if (m_CachedCurrentNode == null)
-                    return;
-
-                DialogDataNodeVariable nodeData = m_CachedCurrentNode.GetData<DialogDataNodeVariable>();
-                if (m_CachedCurrentNode.IsBranch)
+                if (fsmMaster.CurrentTree != null)
                 {
-                    fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.uI_Response.MasterAnimator);
+                    Log.Info("ParseNext {0}", fsmMaster.uI_Response.CurIndex);
+                    IDataNode tmpSonNode = fsmMaster.GetNextNode(GameKitCenter.Dialog.CurrentTree.CurrentNode, 0);
+                    if (tmpSonNode == null)
+                        return;
 
-                    if (nodeData.IsDiceCheckBranch)
+                    GameKitCenter.Dialog.CurrentTree.CurrentNode = tmpSonNode;
+
+
+                    if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
                     {
-                        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DiceDialogSelectingState));
-                        fsmMaster.UpdateOptionUI(isDiceCheck: true);
+                        // 如果下一个节点是选择节点，则先显示对话
+                        fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+                        SetTextShowing();
+                        // 然后判断选择类型，转换状态
+                        MonoManager.instance.StartCoroutine(ParseBranch(fsmOwner));
+                        return;
                     }
-                    else
-                    {
-                        fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogChoosingState));
-                        fsmMaster.UpdateOptionUI();
-                    }
-                    ChangeState<DialogAnimatingState>(fsmOwner);
-                }
-                else
-                {
-                    fsmMaster.UpdateDialogUI(m_CachedCurrentNode);
+
+                    // 如果下一个节点是普通节点，则直接显示对话
+                    fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+                    SetTextShowing();
                 }
             }
             else
                 InterruptDialogDisplayCallback();
         }
 
-        m_DialogStarted = fsmOwner.GetData<VarBoolean>(DialogStateUtility.DIALOG_START);
-        if (!m_DialogStarted)
+        if (!fsmMaster.IsDialoging)
         {
-            fsmOwner.SetData<VarType>(DialogStateUtility.STATE_AFTER_ANIMATING, typeof(DialogIdleState));
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.ANIMATOR_FOR_CHECK, fsmMaster.MasterAnimator);
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogIdleState));
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.MasterAnimator);
             fsmMaster.Pause();
+            // fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME, UIUtility.HIDE_ANIMATION_NAME);
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }
@@ -111,6 +113,26 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     private void SetTextShowing()
     {
         m_isTextShowing = true;
+    }
+
+    private IEnumerator ParseBranch(FsmInterface fsmOwner)
+    { 
+        while (m_isTextShowing == true)
+            yield return null;
+        
+        DialogDataNodeVariable tmpSonNodeData = GameKitCenter.Dialog.CurrentTree.CurrentNode.GetData<DialogDataNodeVariable>();
+        fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
+        if (tmpSonNodeData.IsDiceCheckBranch)
+        {
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DiceDialogSelectingState));
+            fsmMaster.UpdateOptionUI(isDiceCheck: true);
+        }
+        else
+        {
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
+            fsmMaster.UpdateOptionUI();
+        }
+        ChangeState<DialogAnimatingState>(fsmOwner);
     }
 }
 
