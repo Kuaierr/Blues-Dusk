@@ -16,6 +16,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     private UI_Response m_Response;
     private int m_Index = 0;
     private int m_CurrentIndicatorIndex = 0;
+    private int m_CachedActiveIndicatorNum = 0;
     public TextMeshProUGUI Content
     {
         get
@@ -36,10 +37,14 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     {
         base.OnInit(response.Depth);
         this.m_Response = response;
-
+        OnDepthChanged(1);
         m_Content = GetComponentInChildren<TextMeshProUGUI>();
-        ResetOptionIndicator();
-        SetActive(false, isForce: true);
+        for (int i = 0; i < OptionIndicators.Count; i++)
+        {
+            OptionIndicators[i].OnInit(Depth);
+        }
+        // ResetOptionIndicator();
+        // SetActive(false, isForce: true);
     }
 
     public void OnReEnable(int Index)
@@ -62,7 +67,12 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     public void ShowDiceIndicator(IDialogOption option)
     {
-        ResetOptionIndicator();
+        // ResetOptionIndicator();
+        // foreach (var item in option.DiceConditions)
+        // {
+        //     Log.Warning("{0}-{1}", item.Key, item.Value);
+        // }
+        m_CachedActiveIndicatorNum = 0;
         foreach (var condition in option.DiceConditions)
         {
             // 如果有这个条件属性的要求
@@ -71,9 +81,11 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
                 // 每个值显示一个对象
                 for (int i = 0; i < condition.Value; i++)
                 {
+                    m_CachedActiveIndicatorNum++;
                     // 添加的属性要求数目不大于预设值的OptionIndicators的数目
                     if (m_CurrentIndicatorIndex < OptionIndicators.Count)
                     {
+                        // Log.Warning(m_CurrentIndicatorIndex);
                         Color indicatorColor = DialogUtility.GetDiceAttributColor(condition.Key);
                         OptionIndicators[m_CurrentIndicatorIndex].SetColor(indicatorColor);
                         OptionIndicators[m_CurrentIndicatorIndex].OnShow();
@@ -118,10 +130,21 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     private void ResetOptionIndicator()
     {
+        Log.Warning("ResetOptionIndicator");
         m_CurrentIndicatorIndex = 0;
+        m_CachedActiveIndicatorNum = 0;
         for (int i = 0; i < OptionIndicators.Count; i++)
         {
             OptionIndicators[i].OnHide();
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        for (int i = 0; i < m_CachedActiveIndicatorNum; i++)
+        {
+            OptionIndicators[i].OnUpdate();
         }
     }
 }

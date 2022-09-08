@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 namespace UnityGameKit.Runtime
 {
@@ -8,7 +9,7 @@ namespace UnityGameKit.Runtime
         private static Animator s_animator;
         private static UnityAction onFinish;
         private static float normalizedTime;
-        public static void OnComplete(this Animator animator, float checkTime = 1f, UnityAction callback = null)
+        public static void OnComplete(this Animator animator, float checkTime = 0.9f, UnityAction callback = null)
         {
             s_animator = animator;
             onFinish = callback;
@@ -31,6 +32,18 @@ namespace UnityGameKit.Runtime
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
             // Log.Info(info.normalizedTime);
             return info.normalizedTime >= 0.9f;
+        }
+
+        public static void SetTriggerOneTime(this Animator animator, string triggerName)
+        {
+            animator.SetTrigger(triggerName);
+            MonoManager.instance.StartCoroutine(ResetTrigger(animator, triggerName));
+        }
+
+        private static IEnumerator ResetTrigger(Animator animator, string triggerName)
+        {
+            yield return null;
+            animator.ResetTrigger(triggerName);
         }
     }
 }

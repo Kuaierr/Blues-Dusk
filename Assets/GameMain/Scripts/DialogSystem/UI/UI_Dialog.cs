@@ -48,6 +48,14 @@ public class UI_Dialog : UIFormBase
         }
     }
 
+    public Animator DiceAnimator
+    {
+        get
+        {
+            return uI_Response.DiceAnimator;
+        }
+    }
+
 
     #region Override
     protected override void OnInit(object userData)

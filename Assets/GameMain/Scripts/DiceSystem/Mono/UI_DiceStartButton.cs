@@ -46,6 +46,7 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
     public void AddCallBack(UnityAction onClickCallback)
     {
         OnDisable();
+        Debug.Log("Added");
         onClick += onClickCallback;
     }
 
@@ -99,7 +100,6 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
             _holdSlider.fillAmount = timer / _holdTimer;
             yield return 0;
         }
-
         onClick.Invoke();
     }
 }

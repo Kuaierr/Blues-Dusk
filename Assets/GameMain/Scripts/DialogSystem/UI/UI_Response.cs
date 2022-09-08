@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+// using DG.Tweening;
 using UnityGameKit.Runtime;
 using System.Linq;
 using UnityEngine.Events;
@@ -36,6 +36,14 @@ public class UI_Response : UIFormChildBase
         }
     }
 
+    public Animator DiceAnimator
+    {
+        get
+        {
+            return m_DiceAnimator;
+        }
+    }
+
     public override void OnInit(int parentDepth)
     {
         base.OnInit(parentDepth);
@@ -47,6 +55,7 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].OnInit(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
+    
     public override void OnUpdate()
     {
         if (!isActive)
@@ -73,7 +82,10 @@ public class UI_Response : UIFormChildBase
     {
         Log.Info("Response OnShow");
         m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
-        m_MasterAnimator.OnComplete(callback: callback);
+        m_MasterAnimator.OnComplete(callback: () =>
+        {
+            SetDiceActive(true);
+        });
         isActive = true;
         ResetCurIndex();
         for (int i = 0; i < m_CurrentOptions.Count; i++)
@@ -88,10 +100,9 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
 
-        if (m_CachedIsDiceCheck)
-        {
-            m_DiceAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
-        }
+
+        Log.Info(m_CachedIsDiceCheck);
+
         // MoveSelector(0);
     }
 
@@ -108,9 +119,15 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].OnHide();
         }
 
+        SetDiceActive(false);
+    }
+
+    public void SetDiceActive(bool status)
+    {
         if (m_CachedIsDiceCheck)
         {
-            m_DiceAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+            m_DiceAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+            m_MasterAnimator.SetTrigger(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
         }
     }
 

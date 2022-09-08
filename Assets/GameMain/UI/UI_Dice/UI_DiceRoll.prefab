@@ -3620,6 +3620,7 @@ GameObject:
   - component: {fileID: 2185975844745941077}
   - component: {fileID: 2185975844745941075}
   - component: {fileID: 2185975844745941074}
+  - component: {fileID: 4651568121284557549}
   m_Layer: 5
   m_Name: DiceRoll_Info
   m_TagString: Untagged
@@ -3685,6 +3686,25 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!95 &4651568121284557549
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185975844745941076}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2185975844835545347
 GameObject:
   m_ObjectHideFlags: 0
