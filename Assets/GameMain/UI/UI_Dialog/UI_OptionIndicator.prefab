@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2891845011139386591}
   - component: {fileID: 3773902830770169553}
   - component: {fileID: 8698152809692508207}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: I_Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7215208136306321435}
   - component: {fileID: 4079434443426251964}
   - component: {fileID: 3447250361122651398}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: I_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1750067274481140867}
   - component: {fileID: 2004656216314179134}
   - component: {fileID: 480206639426783497}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI_OptionIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ Animator:
   m_GameObject: {fileID: 7485599929535927594}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: bfe2e5abda04be949bf2e23a294e760c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

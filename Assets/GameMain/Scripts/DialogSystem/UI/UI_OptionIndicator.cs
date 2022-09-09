@@ -2,13 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Animator))]
 public class UI_OptionIndicator : UIFormChildBase
 {
     private Color m_CurrentColor;
     public Image Ring;
     public Image Core;
-    private Animator m_Animator;
 
     public void SetColor(Color color) => m_CurrentColor = color;
 
@@ -16,41 +14,29 @@ public class UI_OptionIndicator : UIFormChildBase
     {
         base.OnInit(parentDepth);
         m_CurrentColor = Color.white;
-        m_Animator = GetComponent<Animator>();
+        OnDepthChanged(1);
     }
 
     public override void OnShow(UnityAction callback = null)
     {
-        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
-        {
-            m_Animator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
-            return;
-        }
-        Ring.enabled = true;
-        Core.enabled = false;
+        // Ring.enabled = true;
+        // Core.enabled = false;
         base.OnShow(callback);
+        
+        // Animator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
     }
 
     public override void OnHide(UnityAction callback = null)
     {
         m_CurrentColor = Color.white;
-        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
-        {
-            m_Animator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
-            return;
-        }
-        Ring.enabled = false;
-        Core.enabled = false;
+        // Ring.enabled = false;
+        // Core.enabled = false;
         base.OnHide(callback);
+        // Animator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
     }
 
     public void OnCharge()
     {
-        if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
-        {
-            m_Animator.SetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
-            return;
-        }
         Core.enabled = true;
     }
 

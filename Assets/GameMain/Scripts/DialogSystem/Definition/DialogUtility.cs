@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using GameKit;
+using UnityGameKit.Runtime;
 
 public static class DialogUtility
 {
-    public static Color GetDiceAttributColor(String diceAttributeName)
+    public static Color GetDiceAttributColor(string diceAttributeName)
     {
         Color color;
         switch (diceAttributeName)
@@ -20,9 +22,6 @@ public static class DialogUtility
                 break;
             case "WAND":
                 ColorUtility.TryParseHtmlString("#DC143C", out color); // 猩红
-                break;
-            case "SPECIAL":
-                ColorUtility.TryParseHtmlString("#BA55D3", out color); // 适中的兰花紫
                 break;
             default:
                 return Color.white;

@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ public class UI_Dialog : UIFormBase
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
+    private bool m_IsDialoging = false;
 
     public IDialogTree CurrentTree
     {
@@ -38,13 +40,28 @@ public class UI_Dialog : UIFormBase
         }
     }
 
+    public bool IsDialoging
+    {
+        get
+        {
+            return m_IsDialoging;
+        }
+    }
+
+    public Animator DiceAnimator
+    {
+        get
+        {
+            return uI_Response.DiceAnimator;
+        }
+    }
+
 
     #region Override
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
         CreateFsm();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
         uI_Response.OnInit(Depth);
         uI_Character.OnInit(Depth);
         uI_Indicator.OnInit(Depth);
@@ -56,27 +73,29 @@ public class UI_Dialog : UIFormBase
     {
         base.OnOpen(userData);
         CursorSystem.current.Disable();
+        m_IsDialoging = true;
         StartFsm();
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         CursorSystem.current.Enable();
+        m_IsDialoging = false;
         base.OnClose(isShutdown, userData);
     }
 
     protected override void OnPause()
     {
-        base.OnPause();
-        Log.Warning("{0} OnPause", gameObject.name);
         CursorSystem.current.Enable();
+        m_IsDialoging = false;
+        base.OnPause();
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        Log.Warning("{0} OnResume", gameObject.name);
         CursorSystem.current.Disable();
+        m_IsDialoging = true;
     }
 
     protected override void OnRecycle()
@@ -110,8 +129,10 @@ public class UI_Dialog : UIFormBase
 
     public void MakeChoice()
     {
-        HideResponse();
+        // HideResponse();
+
     }
+
 
     public void AddTyperWriterListener(UnityAction onTypewriterStart, UnityAction onTextShowed)
     {
@@ -141,7 +162,6 @@ public class UI_Dialog : UIFormBase
     private void StartFsm()
     {
         fsm.Start<DialogIdleState>();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
     }
 
     private void DestroyFsm()
@@ -151,33 +171,40 @@ public class UI_Dialog : UIFormBase
         fsm = null;
     }
 
-    public IDataNode ParseNode(int index = 0)
+    public void PassNode()
     {
         if (GameKitCenter.Dialog.CurrentTree == null)
         {
             Log.Warning("Cached Current Tree is Empty");
-            return null;
+            return;
         }
-        IDataNode nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(index);
-        return ParseNode(nextNode);
+        GameKitCenter.Dialog.CurrentTree.CurrentNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(0);
     }
 
-    public IDataNode ParseNode(IDataNode currentNode)
+    public IDataNode GetNextNode(IDataNode currentNode, int index = 0)
     {
-        if (GameKitCenter.Dialog.CurrentTree == null)
+        string str = "";
+        for (int i = 0; i < currentNode.ChildCount; i++)
         {
-            Log.Warning("Cached Current Tree is Empty");
-            return null;
+            str += currentNode.GetChild(i).GetData<DialogDataNodeVariable>().ToString() + '\n';
         }
+        if (currentNode.ChildCount > 1)
+            Log.Info(str.RemoveLast());
 
-        IDataNode nextNode = null;
-        if (currentNode == null)
+        if (currentNode.IsLeaf)
         {
             ReachTheEndOfConversation();
             return null;
         }
 
-        DialogDataNodeVariable tempDialogData = currentNode.GetData<DialogDataNodeVariable>();
+        IDataNode sonNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(index);
+        return sonNode;
+    }
+
+    public IDataNode ExecuteNodeFunction(IDataNode sonNode)
+    {
+        IDataNode nextNode = sonNode;
+        DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
         if (tempDialogData.IsFunctional)
         {
             if (tempDialogData.IsCompleter)
@@ -202,23 +229,12 @@ public class UI_Dialog : UIFormBase
 
                 if (isComplete)
                 {
-                    nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(0);
+                    nextNode = sonNode.GetChild(0);
                 }
                 else
                 {
-                    nextNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(1);
+                    nextNode = sonNode.GetChild(1);
                 }
-            }
-        }
-        else
-        {
-            if (currentNode.IsBranch)
-            {
-                nextNode = currentNode;
-            }
-            else
-            {
-                nextNode = currentNode;
             }
         }
         return nextNode;
@@ -227,7 +243,8 @@ public class UI_Dialog : UIFormBase
     private void ReachTheEndOfConversation()
     {
         Log.Info("Reach The End Of Conversation.");
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, false);
+        m_IsDialoging = false;
+        GameKitCenter.Dialog.CurrentTree.Release();
         GameKitCenter.Dialog.CurrentTree = null;
     }
 
@@ -276,16 +293,6 @@ public class UI_Dialog : UIFormBase
         uI_Response.UpdateOptionsPoint(result);
     }
 
-    public void Resume()
-    {
-        OnResume();
-    }
-
-    public void Pause()
-    {
-        OnPause();
-    }
-
     public void InternalVisible(bool status)
     {
         base.InternalSetVisible(status);
@@ -294,10 +301,19 @@ public class UI_Dialog : UIFormBase
         SpeakerAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
     }
 
+    public void ForceVisibleOff()
+    {
+        MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        EdgeAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        SpeakerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+    }
+
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
     {
-        // Resume();
-        fsm.SetData<VarBoolean>(DialogStateUtility.DIALOG_START, true);
+        // UnityGameKit.Runtime.StartDialogSuccessEventArgs ne = (UnityGameKit.Runtime.StartDialogSuccessEventArgs)e;
+        // GameKitCenter.Dialog.CurrentTree = ne.DialogTree;
+        // GameKitCenter.Dialog.CurrentTree.Reset();
+        OnResume();
     }
 
     #region DiceSystem

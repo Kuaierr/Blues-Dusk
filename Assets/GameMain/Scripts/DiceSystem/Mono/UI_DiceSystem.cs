@@ -324,6 +324,7 @@ public class Dice_Result
     public Dictionary<Dice_SuitType, int> sum { get; private set; } = null;
 
     private Dictionary<string, int> m_SerializableSum = null;
+    private List<Dice_SuitType> m_CachedAttributeTypes; 
 
     public Dictionary<string, int> SerializableSum
     {
@@ -354,6 +355,10 @@ public class Dice_Result
           { Dice_SuitType.STARCOIN, 0 },
           { Dice_SuitType.WAND, 0 } };
         results = new List<UI_DiceFaceBase_SO>();
+        m_CachedAttributeTypes = new List<Dice_SuitType>()
+        {
+            Dice_SuitType.SWORD, Dice_SuitType.GRAIL, Dice_SuitType.STARCOIN, Dice_SuitType.WAND
+        };
     }
 
     public void Push(UI_DiceFaceBase_SO face)
@@ -400,9 +405,9 @@ public class Dice_Result
 
     public void Clear()
     {
-        foreach (var key in sum.Keys)
+        for (int i = 0; i < m_CachedAttributeTypes.Count; i++)
         {
-            sum[key] = 0;
+            sum[m_CachedAttributeTypes[i]] = 0;
         }
     }
 }

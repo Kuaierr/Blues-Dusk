@@ -29,9 +29,9 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
     private void OnBackpackUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)
     {
         OpenUIFormSuccessEventArgs args = (OpenUIFormSuccessEventArgs)e;
-        if (args.UserData == null || (PlayerBackpack)args.UserData != this)
+        if (args.UserData == null || args.UserData.GetType() != typeof(PlayerBackpack))
             return;
-        
+
         if (args.UIForm == null)
         {
             Log.Fail("Loaded Backpack UI Form  is null");

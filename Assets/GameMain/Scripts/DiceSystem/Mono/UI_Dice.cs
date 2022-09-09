@@ -122,10 +122,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         transform.SetParent(target);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
-
+        resetSequence = DOTween.Sequence();
         resetSequence.Append(dice.DOMove(transform.position, 0.5f));
         resetSequence.Insert(0, dice.DORotate(_finalRotation, 0.5f));
-
         //this.enabled = false;
     }
 

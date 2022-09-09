@@ -16,6 +16,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity"); }
         [MenuItem("Scenes/Prototype_Inventory")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Inventory_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity"); }
+        [MenuItem("Scenes/Prototypr_PlayerController")]
+        public static void Assets_GameMain_Scenes_Prototype_Prototypr_PlayerController_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity"); }
         [MenuItem("Scenes/Prototype_Dialog_DiceDev")]
         public static void Assets_GameMain_Scenes_Prototype_Dialog_DiceDev_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity"); }
         [MenuItem("Scenes/S_Parlor")]

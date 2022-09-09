@@ -97,7 +97,7 @@ namespace GameKit.Dialog
                 DialogTree tree = ReferencePool.Acquire<DialogTree>();
                 tree.m_DataNodeManager = GameKitModuleCenter.GetModule<IDataNodeManager>();
                 tree.m_Name = name;
-                tree.m_RootNode = tree.m_DataNodeManager.Root;
+                tree.m_RootNode = tree.DataNodeManager.GetOrAddNode(name);
                 tree.m_StartNode = tree.m_RootNode;
                 tree.m_CurrentNode = tree.m_RootNode;
                 tree.m_LocalConditions = new Dictionary<string, bool>();
@@ -114,8 +114,7 @@ namespace GameKit.Dialog
             {
                 if (m_CurrentNode.IsLeaf || index < 0 || index >= m_CurrentNode.ChildCount)
                     return null;
-                m_CurrentNode = m_CurrentNode.GetChild(index);
-                return m_CurrentNode as IDataNode;
+                return  m_CurrentNode.GetChild(index) as IDataNode;
             }
 
             public IDataNode[] GetAllChildNodes()
@@ -124,7 +123,6 @@ namespace GameKit.Dialog
                     return null;
                 return m_CurrentNode.GetAllChild();;
             }
-
 
             public void SetCondition(string predicate, bool status)
             {
@@ -144,6 +142,11 @@ namespace GameKit.Dialog
                 m_StartNode = null;
                 m_CurrentNode = null;
                 m_LocalConditions.Clear();
+            }
+
+            public void Release()
+            {
+                ReferencePool.Release(this);
             }
         }
     }
