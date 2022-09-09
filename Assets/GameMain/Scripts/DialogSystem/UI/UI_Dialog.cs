@@ -340,8 +340,8 @@ public class UI_Dialog : UIFormBase
 
     public void OnFinishRolling()
     {
-        uI_DiceSystem.ResetDicePosition();
         uI_DiceSystem.AddDiceFaceToResultList();
+        uI_DiceSystem.ResetDicePosition();
     }
 
     public Dice_Result GetFinalResult()
