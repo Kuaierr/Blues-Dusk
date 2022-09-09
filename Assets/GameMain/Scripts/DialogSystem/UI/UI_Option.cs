@@ -11,12 +11,12 @@ using UnityEngine.Events;
 public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public List<UI_OptionIndicator> OptionIndicators;
-
     private TextMeshProUGUI m_Content;
     private UI_Response m_Response;
     private int m_Index = 0;
     private int m_CurrentIndicatorIndex = 0;
     private int m_CachedActiveIndicatorNum = 0;
+    private bool m_IsLocked;
     public TextMeshProUGUI Content
     {
         get
@@ -33,6 +33,14 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         }
     }
 
+    public bool IsLocked
+    {
+        get
+        {
+            return m_IsLocked;
+        }
+    }
+
     public void OnInit(UI_Response response)
     {
         base.OnInit(response.Depth);
@@ -43,8 +51,12 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         {
             OptionIndicators[i].OnInit(Depth);
         }
-        // ResetOptionIndicator();
-        // SetActive(false, isForce: true);
+    }
+
+    public override void OnHide(UnityAction callback = null)
+    {
+        base.OnHide(callback);
+        ResetOptionIndicator();
     }
 
     public void OnReEnable(int Index)
@@ -73,22 +85,23 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         //     Log.Warning("{0}-{1}", item.Key, item.Value);
         // }
         m_CachedActiveIndicatorNum = 0;
-        foreach (var condition in option.DiceConditions)
+        foreach (var optionCondition in option.DiceConditions)
         {
             // 如果有这个条件属性的要求
-            if (condition.Value > 0)
+            if (optionCondition.Value > 0)
             {
                 // 每个值显示一个对象
-                for (int i = 0; i < condition.Value; i++)
+                for (int i = 0; i < optionCondition.Value; i++)
                 {
                     m_CachedActiveIndicatorNum++;
                     // 添加的属性要求数目不大于预设值的OptionIndicators的数目
                     if (m_CurrentIndicatorIndex < OptionIndicators.Count)
                     {
                         // Log.Warning(m_CurrentIndicatorIndex);
-                        Color indicatorColor = DialogUtility.GetDiceAttributColor(condition.Key);
+                        Color indicatorColor = DialogUtility.GetDiceAttributColor(optionCondition.Key);
+                        OptionIndicators[m_CurrentIndicatorIndex].SetDiceRequire(optionCondition.Key);
                         OptionIndicators[m_CurrentIndicatorIndex].SetColor(indicatorColor);
-                        OptionIndicators[m_CurrentIndicatorIndex].OnShow();
+                        OptionIndicators[m_CurrentIndicatorIndex].Show();
                         m_CurrentIndicatorIndex++;
                     }
                     else
@@ -98,19 +111,24 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         }
     }
 
-    public void ChargeDiceIndicator(IDialogOption option)
+    public void ChargeDiceIndicator(Dice_Result diceResult)
     {
-        ResetOptionIndicator();
-        foreach (var condition in option.DiceConditions)
+        // 读取结果
+        foreach (KeyValuePair<string, int> serialResult in diceResult.SerializableSum)
         {
-            if (condition.Value > 0)
+            // 如果有筛出当前面
+            if (serialResult.Value > 0)
             {
-                for (int i = 0; i < condition.Value; i++)
+                // 遍历这个面出现的数量
+                for (int i = 0; i < serialResult.Value; i++)
                 {
-                    if (m_CurrentIndicatorIndex < OptionIndicators.Count)
-                        OptionIndicators[m_CurrentIndicatorIndex++].OnCharge();
-                    else
-                        Log.Fatal("The num of option indicator is over maximum");
+                    // 对于每个打开的节点，尝试进行激活
+
+                    for (int j = 0; j < m_CachedActiveIndicatorNum; j++)
+                    {
+                        // Log.Info("{0} try charge Indicator '{1}' with {2}==?{3}.", this.gameObject.name, j, serialResult.Key, OptionIndicators[j].CachedType);
+                        OptionIndicators[j].Charge(serialResult.Key);
+                    }
                 }
             }
         }
@@ -118,12 +136,16 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     public void Unlock()
     {
+        Log.Success("Unlock {0}", this.gameObject.name);
+        m_IsLocked = false;
         if (!SetEnable(true))
             CanvasGroup.alpha = 1f;
     }
 
     public void Lock()
     {
+        Log.Success("Lock {0}", this.gameObject.name);
+        m_IsLocked = true;
         if (!SetEnable(false))
             CanvasGroup.alpha = 0.5f;
     }
@@ -135,11 +157,11 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         m_CachedActiveIndicatorNum = 0;
         for (int i = 0; i < OptionIndicators.Count; i++)
         {
-            OptionIndicators[i].OnHide();
+            OptionIndicators[i].Hide();
         }
     }
 
-    public override void OnUpdate()
+    public void Update()
     {
         base.OnUpdate();
         for (int i = 0; i < m_CachedActiveIndicatorNum; i++)

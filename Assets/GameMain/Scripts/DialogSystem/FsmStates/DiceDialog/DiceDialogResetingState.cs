@@ -37,7 +37,7 @@ public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
         if(fsmMaster.CheckIfFinishReseting())
         {
             fsmOwner.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, true);
-            ChangeState<DiceDialogChoosingState>(fsmOwner);
+            ChangeState<DialogChoosingState>(fsmOwner);
         }
     }
 

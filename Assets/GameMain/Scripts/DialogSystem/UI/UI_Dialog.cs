@@ -117,7 +117,6 @@ public class UI_Dialog : UIFormBase
 
     public void ShowResponse(UnityAction callback = null)
     {
-        uI_Response.isActive = true;
         uI_Response.gameObject.SetActive(true);
         uI_Response.OnShow(callback);
     }

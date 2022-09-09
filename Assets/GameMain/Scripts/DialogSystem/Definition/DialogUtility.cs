@@ -33,4 +33,5 @@ public static class DialogUtility
     {
         return GetDiceAttributColor(System.Enum.GetName(typeof(Dice_SuitType), type));
     }
+
 }

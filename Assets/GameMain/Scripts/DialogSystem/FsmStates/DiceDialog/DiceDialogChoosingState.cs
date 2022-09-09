@@ -28,7 +28,7 @@ public class DiceDialogChoosingState : FsmState<UI_Dialog>, IReference
         Debug.Log("Enter ChoiceDiceroll State.");
         fsmMaster = updateFsm.User;
         
-        _result = fsmMaster.GetFinalResult();
+        // _result = fsmMaster.GetFinalResult();
         // 根据骰子结果刷新选项
     }
 

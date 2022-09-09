@@ -60,7 +60,7 @@ public class UI_DiceSystem : UIFormChildBase
     private List<UI_DiceData_SO> _tempDiceList = new List<UI_DiceData_SO>(); //测试用的数据
 
     public Dice_Result Result { get; private set; } = new Dice_Result(); //保存结果的类
-    
+
     private Dictionary<Dice_SuitType, RectTransform> _usedSheets = new Dictionary<Dice_SuitType, RectTransform>(); //相当于池子
 
     public void OnInit()
@@ -77,9 +77,9 @@ public class UI_DiceSystem : UIFormChildBase
         foreach (Dice_SuitType key in _usedSheets.Keys)
         {
             foreach (Transform child in _usedSheets[key].transform)
-                Destroy(child.gameObject);    
+                Destroy(child.gameObject);
         }
-        
+
         _usedSheets.Clear();
         _activedDices.Clear();
         Result.Clear();
@@ -90,7 +90,7 @@ public class UI_DiceSystem : UIFormChildBase
         base.OnDisable();
         Clear();
     }
-    
+
     private void CreateDicesFromInventory()
     {
         Transform targetGrid = null;
@@ -187,7 +187,7 @@ public class UI_DiceSystem : UIFormChildBase
             Destroy(child.gameObject);
         foreach (Transform child in _gridLayoutByTwo.transform)
             Destroy(child.gameObject);
-            
+
     }
 
     //这一项是防止CanvasGroup淡出后，让骰子一起消失，因此先将骰子置于最上层
@@ -237,7 +237,7 @@ public class UI_DiceSystem : UIFormChildBase
             dice.ResetTransform(_usedSheets[dice.Result]);
         }
     }
-    
+
     private void ProvideSheet(Dice_SuitType type)
     {
         if (_usedSheets.ContainsKey(type))
@@ -281,7 +281,7 @@ public class UI_DiceSystem : UIFormChildBase
             yield return 0;
         }
     }*/
-    
+
     /*private IEnumerator WaitForFadeOut()
     {
         //diceSystemAnimator.SetTrigger("Fadeout");
@@ -294,7 +294,7 @@ public class UI_DiceSystem : UIFormChildBase
         
         yield return Rolling();
     }*/
-    
+
     //暂时代替状态机与update
     /*private IEnumerator Rolling()
     {
@@ -314,7 +314,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         _startButton.AddCallBack(callback);
     }
-    
+
 }
 
 //用于存储与输出结果，同时承担了结算的作用
@@ -324,15 +324,17 @@ public class Dice_Result
     public Dictionary<Dice_SuitType, int> sum { get; private set; } = null;
 
     private Dictionary<string, int> m_SerializableSum = null;
-    private List<Dice_SuitType> m_CachedAttributeTypes; 
+    private List<Dice_SuitType> m_CachedAttributeTypes;
 
     public Dictionary<string, int> SerializableSum
     {
         get
         {
-            if(m_SerializableSum == null)
-            {
+            if (m_SerializableSum == null)
                 m_SerializableSum = new Dictionary<string, int>();
+
+            if (m_SerializableSum.Count == 0)
+            {
                 foreach (var diceResult in sum)
                 {
                     m_SerializableSum.Add(System.Enum.GetName(typeof(Dice_SuitType), diceResult.Key), diceResult.Value);
@@ -346,7 +348,7 @@ public class Dice_Result
     public List<UI_DiceFaceBase_SO> results;
 
     private bool breakOut = false;
-    
+
     public Dice_Result()
     {
         sum = new Dictionary<Dice_SuitType, int>()
@@ -364,12 +366,12 @@ public class Dice_Result
     public void Push(UI_DiceFaceBase_SO face)
     {
         results.Add(face);
-        
+
         //给优先级排序 此处后续可优化
-        results.Sort((x, y) => 
-            { return x.Priority.CompareTo(y.Priority);});
+        results.Sort((x, y) =>
+            { return x.Priority.CompareTo(y.Priority); });
     }
-    
+
     //目前这种做法，如果有相同优先级的效果，似乎会按照选择时的顺序触发
     public void EffectsProcess()
     {
@@ -382,8 +384,8 @@ public class Dice_Result
                 break;
             }
         }
-        
-        Debug.Log(this.ToString());
+
+        // Debug.Log(this.ToString());
         results.Clear(); //防止重复调用时结果出错
     }
 
@@ -392,7 +394,7 @@ public class Dice_Result
     public int Get(Dice_SuitType type) => sum[type] > 0 ? sum[type] : 0;
 
     public void Add(Dice_SuitType type, int amount) => sum[type] += amount;
-    
+
     public void Set(Dice_SuitType type, int amount) => sum[type] = amount;
 
     public override string ToString()
@@ -409,5 +411,8 @@ public class Dice_Result
         {
             sum[m_CachedAttributeTypes[i]] = 0;
         }
+
+        if (m_SerializableSum != null)
+            m_SerializableSum.Clear();
     }
 }

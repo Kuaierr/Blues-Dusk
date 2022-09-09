@@ -1,43 +1,48 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityGameKit.Runtime;
+using GameKit;
 
 public class UI_OptionIndicator : UIFormChildBase
 {
     private Color m_CurrentColor;
     public Image Ring;
     public Image Core;
+    private string m_CachedDiceFaceType;
+    public string CachedType => m_CachedDiceFaceType;
 
     public void SetColor(Color color) => m_CurrentColor = color;
+    public void SetDiceRequire(string diceFaceType) 
+    {
+        m_CachedDiceFaceType = diceFaceType;
+    }
 
     public override void OnInit(int parentDepth)
     {
         base.OnInit(parentDepth);
         m_CurrentColor = Color.white;
+        m_CachedDiceFaceType = string.Empty;
         OnDepthChanged(1);
     }
 
-    public override void OnShow(UnityAction callback = null)
+    public void Show(UnityAction callback = null)
     {
-        // Ring.enabled = true;
-        // Core.enabled = false;
         base.OnShow(callback);
-        
-        // Animator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
     }
 
-    public override void OnHide(UnityAction callback = null)
+    public void Hide(UnityAction callback = null)
     {
-        m_CurrentColor = Color.white;
-        // Ring.enabled = false;
-        // Core.enabled = false;
         base.OnHide(callback);
-        // Animator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        m_CurrentColor = Color.white;
+        m_CachedDiceFaceType = string.Empty;
     }
 
-    public void OnCharge()
+    public void Charge(string diceFaceKeyName)
     {
-        Core.enabled = true;
+        if (m_CachedDiceFaceType == diceFaceKeyName)
+            Animator.SetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
     }
 
     public override void OnUpdate()

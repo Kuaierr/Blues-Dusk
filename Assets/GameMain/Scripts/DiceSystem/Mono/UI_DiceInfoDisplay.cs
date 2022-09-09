@@ -23,6 +23,10 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	public DiceFaceEvent_SO onDiceMouseEnter;
 	public NoParameterEvent_SO onDiceMouseExit;
 
+	protected override void Start() {
+		OnDepthChanged(2);
+	}
+
 	private void OnEnable()
 	{
 		onDiceMouseEnter.action += DisplayDiceInfo;

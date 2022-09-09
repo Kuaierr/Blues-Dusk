@@ -16,6 +16,7 @@ public class UI_Response : UIFormChildBase
     private VerticalLayoutGroup verticalLayoutGroup;
     private int m_CurrentIndex = 0;
     private int m_LastIndex = -1;
+    private int m_CachedActiveOptionNum = 0;
     private bool m_CachedIsDiceCheck = false;
     [SerializeField] private Animator m_MasterAnimator;
     [SerializeField] private Animator m_DiceAnimator;
@@ -55,38 +56,69 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].OnInit(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
-    
+
     public override void OnUpdate()
     {
         if (!isActive)
             return;
 
-        foreach (var ui_option in UIOptions)
-            ui_option.OnUpdate();
 
+        bool allOptionLocked = true;
+        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        {
+            UIOptions[i].Update();
+            allOptionLocked &= UIOptions[i].IsLocked;
+        }
+
+        if (allOptionLocked)
+            return;
+
+        int deadLoopPreventer = 0;
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            m_LastIndex = m_CurrentIndex;
-            m_CurrentIndex = (m_CurrentIndex + 1) % m_CurrentOptions.Count;
-            MoveSelector(m_CurrentIndex);
+            deadLoopPreventer = 0;
+            do
+            {
+                m_LastIndex = m_CurrentIndex;
+                m_CurrentIndex = (m_CurrentIndex + 1) % m_CurrentOptions.Count;
+                deadLoopPreventer++;
+                Log.Info(m_CurrentIndex + " >> " + UIOptions[m_CurrentIndex].IsLocked);
+                if (deadLoopPreventer > 20)
+                {
+                    Log.Warning("Has DeadLoop Down.");
+                    break;
+                }
+            } while (UIOptions[m_CurrentIndex].IsLocked);
+            EmphasizeSelectedOption(m_CurrentIndex);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            m_LastIndex = m_CurrentIndex;
-            m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_CurrentOptions.Count - 1 : m_CurrentIndex - 1;
-            MoveSelector(m_CurrentIndex);
+            deadLoopPreventer = 0;
+            do
+            {
+                m_LastIndex = m_CurrentIndex;
+                m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_CurrentOptions.Count - 1 : m_CurrentIndex - 1;
+                deadLoopPreventer++;
+                Log.Info(m_CurrentIndex + " >> " + UIOptions[m_CurrentIndex].IsLocked);
+                if (deadLoopPreventer > 20)
+                {
+                    Log.Warning("Has DeadLoop Up.");
+                    break;
+                }
+            } while (UIOptions[m_CurrentIndex].IsLocked);
+            EmphasizeSelectedOption(m_CurrentIndex);
         }
     }
 
     public override void OnShow(UnityAction callback = null)
     {
         Log.Info("Response OnShow");
+        isActive = true;
         m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: () =>
         {
             SetDiceActive(true);
         });
-        isActive = true;
         ResetCurIndex();
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
@@ -99,11 +131,8 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].OnShow();
             UIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
-
-
-        Log.Info(m_CachedIsDiceCheck);
-
-        // MoveSelector(0);
+        EmphasizeFirst();
+        // EmphasizeSelectedOption(0);
     }
 
     public override void OnHide(UnityAction callback = null)
@@ -114,11 +143,11 @@ public class UI_Response : UIFormChildBase
         m_CurrentOptions.Clear();
         ResetCurIndex();
         isActive = false;
+        m_CachedActiveOptionNum = 0;
         for (int i = 0; i < UIOptions.Count; i++)
         {
             UIOptions[i].OnHide();
         }
-
         SetDiceActive(false);
     }
 
@@ -136,7 +165,7 @@ public class UI_Response : UIFormChildBase
         // Log.Warning("OnOptionEnter");
         // m_LastIndex = m_CurrentIndex;
         // m_CurrentIndex = option.Index;
-        // MoveSelector(m_CurrentIndex);
+        // EmphasizeSelectedOption(m_CurrentIndex);
     }
 
     public void OnOptionExit(UI_Option option)
@@ -144,7 +173,7 @@ public class UI_Response : UIFormChildBase
         // Log.Warning("OnOptionExit");
         // m_LastIndex = m_CurrentIndex;
         // m_CurrentIndex = -1;
-        // MoveSelector(m_CurrentIndex);
+        // EmphasizeSelectedOption(m_CurrentIndex);
     }
 
     public void OnOptionDown(UI_Option option)
@@ -152,7 +181,7 @@ public class UI_Response : UIFormChildBase
 
     }
 
-    private void MoveSelector(int index)
+    private void EmphasizeSelectedOption(int index)
     {
         if (m_LastIndex >= 0)
             UIOptions[m_LastIndex].SetEmphasize(false);
@@ -165,15 +194,18 @@ public class UI_Response : UIFormChildBase
     {
         m_CurrentOptions = optionSet.Options;
         m_CachedIsDiceCheck = isDiceCheck;
-        if (m_CachedIsDiceCheck)
+        // Log.Warning(optionSet.Options.Count + " >> " + UIOptions.Count);
+        // 如果是筛检，则在显示Options时锁定所有选项
+        m_CachedActiveOptionNum = optionSet.Options.Count;
+        for (int i = 0; i < optionSet.Options.Count; i++)
         {
-            // Log.Warning(optionSet.Options.Count + " >> " + UIOptions.Count);
-            // 如果是筛检，则在显示Options时锁定所有选项
-            for (int i = 0; i < optionSet.Options.Count; i++)
+            if (m_CachedIsDiceCheck)
             {
                 UIOptions[i].Lock();
                 UIOptions[i].ShowDiceIndicator(optionSet.Options[i]);
             }
+            else if (UIOptions[i].IsLocked)
+                UIOptions[i].Unlock();
         }
     }
 
@@ -183,20 +215,25 @@ public class UI_Response : UIFormChildBase
     /// </summary>
     public void UpdateOptionsPoint(Dice_Result diceResult)
     {
-        Dictionary<string, int> result = diceResult.SerializableSum;
+        Dictionary<string, int> serialResults = diceResult.SerializableSum;
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
+            // 默认可以解锁
             bool canUnlock = true;
-            foreach (var condition in m_CurrentOptions[i].DiceConditions)
+            // 根据筛子结果给Option充电
+            UIOptions[i].ChargeDiceIndicator(diceResult);
+
+            // 遍历每一个解锁所需要的的条件
+            foreach (var optionCondition in m_CurrentOptions[i].DiceConditions)
             {
-                if (!result.ContainsKey(condition.Key))
+                if (!serialResults.ContainsKey(optionCondition.Key))
                 {
-                    Log.Warning("Dice Result has not condition name '{0}'", condition.Key);
+                    Log.Warning("Dice Result has not condition name '{0}'", optionCondition.Key);
                     Log.Warning(diceResult);
                     continue;
                 }
                 // 条件集合里只要有一个熟悉没有满足条件就不能解锁
-                if (result[condition.Key] < condition.Value)
+                if (serialResults[optionCondition.Key] < optionCondition.Value)
                     canUnlock = false;
             }
             if (canUnlock)
@@ -204,17 +241,31 @@ public class UI_Response : UIFormChildBase
             else
                 UIOptions[i].Lock();
         }
-        // m_CachedIsDiceCheck = result == null ? false : true;
-    }
-
-    private void UpdateOptionCharger()
-    {
-
+        EmphasizeFirst();
     }
 
     private void ResetCurIndex()
     {
         m_CurrentIndex = 0;
         m_LastIndex = -1;
+    }
+
+    private UI_Option FindFirstValidOption()
+    {
+        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        {
+            if (!UIOptions[i].IsLocked)
+            {
+                return UIOptions[i];
+            }
+        }
+        return null;
+    }
+
+    private void EmphasizeFirst()
+    {
+        UI_Option firstOption = FindFirstValidOption();
+        if (firstOption != null)
+            firstOption.SetEmphasize(true);
     }
 }

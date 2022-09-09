@@ -44,7 +44,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     public int Index { get; private set; } = -1;
 
     private Sequence resetSequence;
-    public bool IsComplete => resetSequence.IsComplete();
+    public bool IsComplete => !resetSequence.IsPlaying();
     
     public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback)
     {
