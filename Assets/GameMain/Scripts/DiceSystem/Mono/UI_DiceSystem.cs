@@ -80,6 +80,12 @@ public class UI_DiceSystem : UIFormChildBase
                 Destroy(child.gameObject);
         }
 
+        foreach (Transform diceSlot in _activedDiceSlots)
+        {
+            if(diceSlot.childCount>0) 
+                Destroy(diceSlot.GetChild(0).gameObject);
+        }
+
         _usedSheets.Clear();
         _activedDices.Clear();
         Result.Clear();

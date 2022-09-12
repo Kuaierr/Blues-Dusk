@@ -122,7 +122,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         dice.SetParent(transform.parent);
         transform.SetParent(target);
         //保证骰子实体会被销毁
-        dice.SetParent(transform);
+        //dice.SetParent(transform);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
         resetSequence = DOTween.Sequence();
