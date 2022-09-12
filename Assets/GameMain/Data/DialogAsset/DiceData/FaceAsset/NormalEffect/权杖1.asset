@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: "\u6743\u67561"
   m_EditorClassIdentifier: 
   name: "\u6743\u6756"
-  icon: {fileID: 21300000, guid: b6b68c8c37d5cf1419267a80c426ac83, type: 3}
+  icon: {fileID: 7415983261007516752, guid: 2507b0bddd5d7ce43b34ef26f8988a6a, type: 3}
   type: 3
   amount: 1

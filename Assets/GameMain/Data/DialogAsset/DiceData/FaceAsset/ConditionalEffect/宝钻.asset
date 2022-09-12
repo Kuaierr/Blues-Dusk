@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u5B9D\u94BB"
   m_EditorClassIdentifier: 
   name: 
-  icon: {fileID: 21300000, guid: 96fc5f977dbf5fb4db0aa05d8a7c193b, type: 3}
+  icon: {fileID: -8438446939328047076, guid: 2507b0bddd5d7ce43b34ef26f8988a6a, type: 3}
   priority: 1
   amount: 1
   conditionalTarget: {fileID: 11400000, guid: 00d7fdd489afc6540b1ea6084c6589b9, type: 2}
