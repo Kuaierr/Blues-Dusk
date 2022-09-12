@@ -16,7 +16,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   type:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   intensity:
     m_OverrideState: 1
     m_Value: 0.2
@@ -98,13 +98,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.96172786, z: 0.97867274, w: 0}
+    m_Value: {x: 0.97865355, y: 1, z: 0.9655008, w: 0}
   gamma:
-    m_OverrideState: 0
-    m_Value: {x: 0.94259214, y: 0.9745829, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 0.90812683, y: 0.957496, z: 1, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.95009774, y: 1, z: 0.9742459, w: 0}
+    m_Value: {x: 1, y: 0.85171145, z: 0.96581566, w: 0}
 --- !u!114 &-2822584058022466777
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.6
   contrast:
     m_OverrideState: 1
     m_Value: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile
+  m_Name: PPVolume_02
   m_EditorClassIdentifier: 
   components:
   - {fileID: -4020088728090610925}
@@ -207,12 +207,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.181
+    m_Value: 0.4
     min: 0
     max: 1
   smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
+    m_OverrideState: 1
+    m_Value: 0.05
     min: 0.01
     max: 1
   rounded:
@@ -252,8 +252,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.17142856
-          value: 0.17023814
+          time: 0.17824446
+          value: 0.23542863
           inSlope: 1.2871448
           outSlope: 1.2871448
           tangentMode: 0
@@ -261,8 +261,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.71204484
-          value: 0.8964286
+          time: 0.6386645
+          value: 0.8640001
           inSlope: 1
           outSlope: 1
           tangentMode: 0
