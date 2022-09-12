@@ -16,19 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 1a2a5aab8ac675342834c2261af9c2ae
-  m_SerializeEntries:
-  - m_GUID: dde8c77752be13b49be49d2a687d12c6
-    m_Address: Assets/Prototype/DialogSystem/Demo/Animation/AC_Eason.controller
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - CharacterAnimator
-    - Character Animator
-  - m_GUID: 7c72ec158a1d3e84598f4accd6055231
-    m_Address: Assets/Prototype/DialogSystem/Demo/Animation/AC_Zora.controller
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - CharacterAnimator
-    - Character Animator
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:
