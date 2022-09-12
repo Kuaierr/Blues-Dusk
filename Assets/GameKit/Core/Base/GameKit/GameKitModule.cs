@@ -1,7 +1,7 @@
 
 namespace GameKit
 {
-    internal abstract class GameKitModule
+    public abstract class GameKitModule
     {
         internal virtual int Priority
         {
