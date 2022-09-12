@@ -118,8 +118,11 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         _rb.isKinematic = true;
         
         var dice = _rb.transform;
+        // 防止直接修改父物体导致的错位
         dice.SetParent(transform.parent);
         transform.SetParent(target);
+        //保证骰子实体会被销毁
+        dice.SetParent(transform);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
         resetSequence = DOTween.Sequence();

@@ -26,8 +26,6 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
         fsmMaster = updateFsm.User;
         _fsm = updateFsm;
         fsmMaster.InitDiceSystem();
-        // updateFsm.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE,typeof(DiceDialogRollingState));
-        // updateFsm.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.DiceAnimator);
         fsmMaster.AddCheckButtonCallback(FadeToRollingState);
     }
 
@@ -48,7 +46,11 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
 
     private void FadeToRollingState()
     {
-        Log.Info("Change to DiceDialogRollingState");
-        ChangeState<DiceDialogRollingState>(_fsm);
+        Log.Info("Change to DialogAnimatingState");
+        fsmMaster.uI_Response.SetDiceActive(false);
+        _fsm.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE,typeof(DiceDialogRollingState));
+        _fsm.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.DiceAnimator);
+        
+        ChangeState<DialogAnimatingState>(_fsm);
     }
 }

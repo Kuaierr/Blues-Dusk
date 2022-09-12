@@ -52,6 +52,10 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
     protected override void OnExit(FsmInterface fsm, bool isShutdown)
     {
         base.OnExit(fsm, isShutdown);
+        
+        if(m_IsDiceChoosing)
+            fsmMaster.uI_DiceSystem.Clear();
+        
         m_CachedDiceCondition = null;
         m_IsDiceChoosing = false;
         // GameKitCenter.Event.Unsubscribe(ObtainDialogChoiceEventArgs.EventId, UpdateCurrentChoosenIndex);
