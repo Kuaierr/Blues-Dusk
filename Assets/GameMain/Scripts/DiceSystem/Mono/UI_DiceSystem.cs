@@ -76,7 +76,7 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void OnInit()
     {
-        _startButton.OnInit(OnStartButtonClicked);
+        _startButton.OnInit(OnStartButtonClickedCallback);
         CreateDicesFromInventory();
 //        _currentList = _negativeDices;
         Select(0, _negativeDices);
@@ -217,7 +217,7 @@ public class UI_DiceSystem : UIFormChildBase
 
     #region InRollingState
 
-    private void OnStartButtonClicked()
+    private void OnStartButtonClickedCallback()
     {
         ResetActivedDiceParent();
         RemoveUnSelectedDice();
@@ -243,13 +243,17 @@ public class UI_DiceSystem : UIFormChildBase
         //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (UI_Dice dice in _activedDices)
+        {
+            if(dice == null) continue;
             dice.Roll();
+        }
     }
 
     public bool CheckIfFinishRolling()
     {
         foreach (UI_Dice dice in _activedDices)
         {
+            if(dice == null) continue;
             if (!dice.Stopped) return false;
         }
 
@@ -260,6 +264,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
+            if(dice == null) continue;
             if (!dice.IsComplete) return false;
         }
 
@@ -275,6 +280,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
+            if(dice == null) continue;
             ProvideSheet(dice.Result);
             dice.ResetTransform(_usedSheets[dice.Result]);
         }
@@ -299,7 +305,10 @@ public class UI_DiceSystem : UIFormChildBase
     public void AddDiceFaceToResultList()
     {
         foreach (UI_Dice dice in _activedDices)
+        {
+            if(dice == null) continue;
             Result.Push(dice.GetResult());
+        }
     }
 
     public Dice_Result CaculateFinalResult()
@@ -361,16 +370,24 @@ public class UI_DiceSystem : UIFormChildBase
     {
         while (true)
         {
-            if (InputManager.instance.GetKeyDown(KeyCode.W))
-                OnUpKeyPressed();
-            if (InputManager.instance.GetKeyDown(KeyCode.S))
-                OnDownKeyPressed();
-            if (InputManager.instance.GetKeyDown(KeyCode.A))
-                OnLeftKeyPressed();
-            if (InputManager.instance.GetKeyDown(KeyCode.D))
-                OnRightKeyPressed();
-            if (InputManager.instance.GetKeyDown(KeyCode.Space))
-                OnConfirmKeyPressed();
+            if (InputManager.instance.GetKeyDown(KeyCode.LeftShift))
+                OnStartKeyPressed();
+            if (InputManager.instance.GetKeyUp(KeyCode.LeftShift))
+                OnStartKeyReleased();
+
+            if (!InputManager.instance.GetKey(KeyCode.LeftShift))
+            {
+                if (InputManager.instance.GetKeyDown(KeyCode.W))
+                    OnUpKeyPressed();
+                if (InputManager.instance.GetKeyDown(KeyCode.S))
+                    OnDownKeyPressed();
+                if (InputManager.instance.GetKeyDown(KeyCode.A))
+                    OnLeftKeyPressed();
+                if (InputManager.instance.GetKeyDown(KeyCode.D))
+                    OnRightKeyPressed();
+                if (InputManager.instance.GetKeyDown(KeyCode.Space))
+                    OnConfirmKeyPressed();
+            }
 
             yield return 0;
         }
@@ -592,6 +609,9 @@ public class UI_DiceSystem : UIFormChildBase
         }
     }
 
+    private void OnStartKeyPressed() => _startButton.OnButtonPressed();
+    private void OnStartKeyReleased() => _startButton.OnButtonReleased();
+
     private bool CheckIfSomeListEmpty()
     {
         if (_currentList == _activedDices)
@@ -615,14 +635,16 @@ public class UI_DiceSystem : UIFormChildBase
         int targetIndex = 0;
         if (_currentList == _activedDices)
         {
-            while (_negativeDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _negativeDiceSlots.Count &&_negativeDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
+            if (targetIndex >= _negativeDiceSlots.Count) return;
             Select(targetIndex, _negativeDices);
         }
         else
         {
-            while (_activedDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _activedDiceSlots.Count &&_activedDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
+            if (targetIndex >= _activedDiceSlots.Count) return;
             Select(targetIndex, _activedDices);
         }
     }
