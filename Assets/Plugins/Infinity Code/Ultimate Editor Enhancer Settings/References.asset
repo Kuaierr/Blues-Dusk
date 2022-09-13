@@ -188,6 +188,8 @@ MonoBehaviour:
     path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: S_test
+    path: Assets/GamePrototype/Scenes/S_test.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
   - name: GameKit_Launcher
