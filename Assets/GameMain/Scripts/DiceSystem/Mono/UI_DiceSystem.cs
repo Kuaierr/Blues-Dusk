@@ -39,11 +39,15 @@ public class UI_DiceSystem : UIFormChildBase
     [Space]
     [Header("LayoutComponents")]
     public int basicOffset = 70;
+
     public int lineOffset = 150;
+
     [SerializeField]
     private ScrollRect _scrollView;
+
     [SerializeField]
     private RectTransform _content;
+
     [SerializeField]
     private RectTransform _gridLayoutByTwo;
 
@@ -85,13 +89,19 @@ public class UI_DiceSystem : UIFormChildBase
         CreateDicesFromInventory();
         SelectDice(0, _negativeDices);
 
-        float height = basicOffset + _gridLayoutByTwo.childCount * lineOffset + basicOffset;
-        _content.sizeDelta = new Vector2(529,height);
+        float height = basicOffset +
+                       ((_gridLayoutByTwo.childCount + 1) / 2 + _gridLayoutByOne.childCount) * lineOffset;
+        _content.sizeDelta = new Vector2(529, height);
         Debug.Log(height);
 
         for (int i = 0; i < _activedDiceSlots.Count; i++)
             _activedDices.Add(null);
 
+        EnablePlayerInput();
+    }
+
+    public void EnablePlayerInput()
+    {
         StartCoroutine("KeybordInputCheck");
     }
 
@@ -251,7 +261,7 @@ public class UI_DiceSystem : UIFormChildBase
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (UI_Dice dice in _activedDices)
         {
-            if(dice == null) continue;
+            if (dice == null) continue;
             dice.Roll();
         }
     }
@@ -260,7 +270,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
-            if(dice == null) continue;
+            if (dice == null) continue;
             if (!dice.Stopped) return false;
         }
 
@@ -271,7 +281,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
-            if(dice == null) continue;
+            if (dice == null) continue;
             if (!dice.IsComplete) return false;
         }
 
@@ -287,7 +297,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
-            if(dice == null) continue;
+            if (dice == null) continue;
             ProvideSheet(dice.Result);
             dice.ResetTransform(_usedSheets[dice.Result]);
         }
@@ -313,7 +323,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (UI_Dice dice in _activedDices)
         {
-            if(dice == null) continue;
+            if (dice == null) continue;
             Result.Push(dice.GetResult());
         }
     }
@@ -403,7 +413,7 @@ public class UI_DiceSystem : UIFormChildBase
     private void SelectDice(int index, List<UI_Dice> list)
     {
         //Debug.Log(index + ", " + list.Count);
-        
+
         if (_currentDice != null)
             _currentDice.OnDisSelected();
 
@@ -412,6 +422,13 @@ public class UI_DiceSystem : UIFormChildBase
 
         _currentDiceIndex = index;
         _currentList = list;
+
+        if (_currentList == _negativeDices && _currentDiceIndex % 3 != 1)
+        {
+            float normalizedHeight = (float)_currentDiceIndex / (float)_negativeDices.Count;
+            Debug.Log(normalizedHeight);
+            _scrollView.normalizedPosition = new Vector2(0, 1 - normalizedHeight);
+        }
     }
 
     //TODO 优化逻辑，重复的代码块较多
@@ -643,14 +660,14 @@ public class UI_DiceSystem : UIFormChildBase
         int targetIndex = 0;
         if (_currentList == _activedDices)
         {
-            while (targetIndex < _negativeDiceSlots.Count &&_negativeDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
             if (targetIndex >= _negativeDiceSlots.Count) return;
             SelectDice(targetIndex, _negativeDices);
         }
         else
         {
-            while (targetIndex < _activedDiceSlots.Count &&_activedDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
             if (targetIndex >= _activedDiceSlots.Count) return;
             SelectDice(targetIndex, _activedDices);
