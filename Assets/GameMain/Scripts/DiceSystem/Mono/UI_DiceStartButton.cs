@@ -44,7 +44,7 @@ public class UI_DiceStartButton : UIFormChildBase, IPointerDownHandler, IPointer
         OnDepthChanged(10);
     }
 
-    private void OnDisable()
+    public void Clear()
     {
         onClick = null;
     }

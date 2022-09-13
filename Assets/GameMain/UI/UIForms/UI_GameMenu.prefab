@@ -780,6 +780,7 @@ GameObject:
   - component: {fileID: 5755130981747412377}
   - component: {fileID: 5382397023964673477}
   - component: {fileID: 8478225580066304018}
+  - component: {fileID: -1249681961661258773}
   m_Layer: 5
   m_Name: UI_GameMenu
   m_TagString: Untagged
@@ -848,3 +849,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1249681961661258773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5755130981747412381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e05f27ecfb184a4f95ce45a04334ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MasterAnimator: {fileID: 0}
