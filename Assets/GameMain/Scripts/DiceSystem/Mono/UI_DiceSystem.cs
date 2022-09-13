@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityGameKit.Runtime;
@@ -19,7 +20,7 @@ public class UI_DiceSystem : UIFormChildBase
 {
     [Header("Basic Elements")]
     //在背包里的骰子
-    private List<UI_Dice> _negativeDices = new List<UI_Dice>();
+    private List<UI_Dice> _negativeDices = new List<UI_Dice>(); //这些骰子最初是遵循排列规则的
 
     private List<UI_Dice> _activedDices = new List<UI_Dice>();
 
@@ -48,8 +49,8 @@ public class UI_DiceSystem : UIFormChildBase
     [SerializeField]
     private UI_DiceStartButton _startButton;
 
-    [SerializeField]
-    private CanvasGroup _selectPanel;
+    /*[SerializeField]
+    private CanvasGroup _selectPanel;*/
 
     [SerializeField]
     private List<RectTransform> _diceSheets = new List<RectTransform>(); //五种类型，五个栏位，手动赋值
@@ -61,13 +62,30 @@ public class UI_DiceSystem : UIFormChildBase
 
     public Dice_Result Result { get; private set; } = new Dice_Result(); //保存结果的类
 
-    private Dictionary<Dice_SuitType, RectTransform> _usedSheets = new Dictionary<Dice_SuitType, RectTransform>(); //相当于池子
+    private Dictionary<Dice_SuitType, RectTransform>
+        _usedSheets = new Dictionary<Dice_SuitType, RectTransform>(); //相当于池子
+
+    #region KeybordSelecter
+
+    private int _currentDiceIndex = -1;
+    private List<UI_Dice> _currentList;
+
+    private UI_Dice _currentDice;
+
+    #endregion
 
     public void OnInit()
     {
         _startButton.OnInit(OnStartButtonClicked);
         CreateDicesFromInventory();
+//        _currentList = _negativeDices;
+        Select(0, _negativeDices);
         Result.Clear();
+
+        for (int i = 0; i < _activedDiceSlots.Count; i++)
+            _activedDices.Add(null);
+
+        StartCoroutine("KeybordInputCheck");
     }
 
     public void Clear()
@@ -82,13 +100,15 @@ public class UI_DiceSystem : UIFormChildBase
 
         foreach (Transform diceSlot in _activedDiceSlots)
         {
-            if(diceSlot.childCount>0) 
+            if (diceSlot.childCount > 0)
                 Destroy(diceSlot.GetChild(0).gameObject);
         }
 
         _usedSheets.Clear();
         _activedDices.Clear();
         Result.Clear();
+
+        StopCoroutine("KeybordInputCheck");
     }
 
     protected override void OnDisable()
@@ -125,9 +145,8 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void OnDiceClicked(UI_Dice dice)
     {
-        if (_negativeDices.Contains(dice))
+        if (!_activedDices.Contains(dice))
         {
-            if (_activedDices.Count == _activedDiceSlots.Count) return;
             DiceSelected(dice);
         }
         else
@@ -143,8 +162,23 @@ public class UI_DiceSystem : UIFormChildBase
 
     private void DiceSelected(UI_Dice dice)
     {
-        _negativeDices.Remove(dice);
-        _activedDices.Add(dice);
+        //if (_activedDices.Count == _activedDiceSlots.Count) return;
+        //_negativeDices.Remove(dice);
+        //_activedDices.Add(dice);
+        for (int i = 0; i < _activedDiceSlots.Count; i++)
+        {
+            if (_activedDiceSlots[i].childCount == 0)
+            {
+                _activedDices[i] = dice;
+                break;
+            }
+            else if (i == _activedDiceSlots.Count - 1)
+            {
+                Debug.Log("Filled");
+                return;
+            }
+        }
+
         //替换材质，更改父物体
         dice.transform.SetParent(FindEmptyDiceSlot());
         dice.ChangeToDiceUIMaterial();
@@ -156,8 +190,10 @@ public class UI_DiceSystem : UIFormChildBase
 
     private void DiceUnSelected(UI_Dice dice)
     {
-        _negativeDices.Add(dice);
-        _activedDices.Remove(dice);
+        //_negativeDices.Add(dice);
+        //_activedDices.Remove(dice);
+        int index = _activedDices.IndexOf(dice);
+        _activedDices[index] = null;
 
         dice.transform.SetParent(_negativeDiceSlots[dice.Index]);
 
@@ -193,7 +229,6 @@ public class UI_DiceSystem : UIFormChildBase
             Destroy(child.gameObject);
         foreach (Transform child in _gridLayoutByTwo.transform)
             Destroy(child.gameObject);
-
     }
 
     //这一项是防止CanvasGroup淡出后，让骰子一起消失，因此先将骰子置于最上层
@@ -227,6 +262,7 @@ public class UI_DiceSystem : UIFormChildBase
         {
             if (!dice.IsComplete) return false;
         }
+
         return true;
     }
 
@@ -244,16 +280,18 @@ public class UI_DiceSystem : UIFormChildBase
         }
     }
 
+    //UpdateInfo 原本用一个移除一个的方法不可行，已修复
     private void ProvideSheet(Dice_SuitType type)
     {
         if (_usedSheets.ContainsKey(type))
             return;
         else
         {
-            if (_diceSheets.Count == 0)
+            if (_diceSheets.Count == _usedSheets.Count)
                 Debug.LogError("Lack Of Sheets");
-            _usedSheets.Add(type, _diceSheets[0]);
-            _diceSheets.RemoveAt(0);
+            _usedSheets.Add(type, _diceSheets[_usedSheets.Count]);
+            //BUG 这里会影响复用
+            //_diceSheets.RemoveAt(0);
         }
     }
 
@@ -316,11 +354,285 @@ public class UI_DiceSystem : UIFormChildBase
 
     #endregion
 
+    #region Keybord Input
+
+    //键盘输入检测的接口
+    private IEnumerator KeybordInputCheck()
+    {
+        while (true)
+        {
+            if (InputManager.instance.GetKeyDown(KeyCode.W))
+                OnUpKeyPressed();
+            if (InputManager.instance.GetKeyDown(KeyCode.S))
+                OnDownKeyPressed();
+            if (InputManager.instance.GetKeyDown(KeyCode.A))
+                OnLeftKeyPressed();
+            if (InputManager.instance.GetKeyDown(KeyCode.D))
+                OnRightKeyPressed();
+            if (InputManager.instance.GetKeyDown(KeyCode.Space))
+                OnConfirmKeyPressed();
+
+            yield return 0;
+        }
+    }
+
+    private void Select(int index, List<UI_Dice> list)
+    {
+        Debug.Log(index + ", " + list.Count);
+        if (_currentDice != null)
+            _currentDice.OnDisSelected();
+
+        _currentDice = list[index];
+        _currentDice.OnSelected();
+
+        _currentDiceIndex = index;
+        _currentList = list;
+    }
+
+    //TODO 优化逻辑，重复的代码块较多
+    //KEY 重新整理dice列表与slot列表的关系
+    private void OnUpKeyPressed()
+    {
+        int edge = 0;
+        int targetIndex = _currentDiceIndex;
+        if (_currentList == _negativeDices)
+        {
+            if ((_currentDiceIndex + 1) % 3 == 0)
+                targetIndex = _currentDiceIndex - 1;
+            else //if((_currentDiceIndex + 1) % 3 != 0)
+                targetIndex = _currentDiceIndex - (_currentDiceIndex + 1) % 3;
+
+            while (targetIndex >= edge && _negativeDiceSlots[targetIndex].childCount == 0)
+                --targetIndex;
+        }
+        else if (_currentList == _activedDices)
+        {
+            targetIndex = _currentDiceIndex - (_currentDiceIndex + 1) % 3;
+            while (targetIndex >= edge && _activedDiceSlots[targetIndex].childCount == 0)
+                --targetIndex;
+        }
+
+        if (targetIndex < edge)
+            Debug.Log("Top of list");
+        else
+            Select(targetIndex, _currentList);
+    }
+
+    private void OnDownKeyPressed()
+    {
+        int edge = 0;
+        int targetIndex = _currentDiceIndex;
+        if (_currentList == _negativeDices)
+        {
+            edge = _negativeDiceSlots.Count;
+
+            if ((_currentDiceIndex + 1) % 3 == 0)
+                targetIndex = _currentDiceIndex + 1;
+            else //if((_currentDiceIndex + 1) % 3 != 0)
+                targetIndex = _currentDiceIndex + (3 - (_currentDiceIndex + 1) % 3);
+
+            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].childCount == 0)
+                ++targetIndex;
+        }
+        else if (_currentList == _activedDices)
+        {
+            edge = _activedDiceSlots.Count;
+
+            targetIndex = _currentDiceIndex + (3 - (_currentDiceIndex + 0) % 3);
+            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].childCount == 0)
+                ++targetIndex;
+        }
+
+        if (targetIndex >= _currentList.Count)
+            Debug.Log("Buttom of list");
+        else
+            Select(targetIndex, _currentList);
+    }
+
+    private void OnRightKeyPressed()
+    {
+        int edge = 0;
+        int targetIndex = _currentDiceIndex;
+        var targetList = _currentList;
+
+        if (_currentList == _negativeDices)
+        {
+            if ((_currentDiceIndex + 1) % 3 == 1)
+            {
+                targetIndex = _currentDiceIndex + 1;
+                if (targetIndex >= _currentList.Count || _negativeDiceSlots[targetIndex].childCount == 0)
+                {
+                    /*targetIndex = 0;
+                    targetList = _activedDices;*/
+                    SwitchList();
+                    return;
+                }
+            }
+            else
+            {
+                /*targetIndex = 0;
+                targetList = _activedDices;*/
+                SwitchList();
+                return;
+            }
+
+            edge = _negativeDices.Count;
+        }
+        else
+        {
+            edge = _activedDices.Count;
+            if ((_currentDiceIndex + 1) % 3 == 0)
+            {
+                targetIndex = _currentDiceIndex;
+                targetList = _currentList;
+            }
+            else
+            {
+                targetIndex = _currentDiceIndex + 1;
+            }
+        }
+
+        if (targetList.Count <= 0 || targetIndex >= edge)
+            Debug.Log("Nothing in TargetList");
+        else
+            Select(targetIndex, targetList);
+    }
+
+    private void OnLeftKeyPressed()
+    {
+        int edge = 0;
+        int targetIndex = _currentDiceIndex;
+        var targetList = _currentList;
+        if (_currentList == _negativeDices)
+        {
+            edge = 0;
+            if ((_currentDiceIndex + 1) % 3 == 2)
+            {
+                targetIndex = _currentDiceIndex - 1;
+                if (_negativeDiceSlots[targetIndex].childCount == 0)
+                    targetIndex = _currentDiceIndex;
+            }
+            else { }
+        }
+        else
+        {
+            if ((_currentDiceIndex + 1) % 3 == 1)
+            {
+                /*targetIndex = 0;
+                targetList = _negativeDices;*/
+                SwitchList();
+                return;
+            }
+            else
+                targetIndex = _currentDiceIndex - 1;
+
+            while (_activedDiceSlots[targetIndex].childCount == 0)
+            {
+                if ((targetIndex + 1) % 3 == 1)
+                {
+                    targetIndex = 0;
+                    targetList = _negativeDices;
+                    break;
+                }
+
+                --targetIndex;
+            }
+
+            edge = targetIndex - 1;
+        }
+
+        if (targetList.Count <= 0 || targetIndex < edge)
+            Debug.Log("Nothing in TargetList");
+        else
+            Select(targetIndex, targetList);
+    }
+
+    private void OnConfirmKeyPressed()
+    {
+        if (_currentList == null) return;
+
+        var currentDice = _currentList[_currentDiceIndex];
+        if (currentDice != null)
+            OnDiceClicked(currentDice);
+
+        //currentList不可能等于0
+        if (CheckIfSomeListEmpty())
+            SwitchList();
+        else
+        {
+            int targetIndex = _currentDiceIndex;
+            if (_currentList == _negativeDices)
+            {
+                while (targetIndex < _currentList.Count && _negativeDiceSlots[targetIndex].childCount == 0)
+                    ++targetIndex;
+
+                if (targetIndex >= _currentList.Count)
+                {
+                    targetIndex = _currentDiceIndex - 1;
+                    while (targetIndex >= 0 && _negativeDiceSlots[targetIndex].childCount == 0)
+                        --targetIndex;
+                }
+            }
+            else
+            {
+                //Bug activedDice并不是按照视觉上的顺序排列的，因此会出错
+                //Key 最直接的解决方案或许是将视觉与逻辑同步，需要修改的将是DiceSelected()方法
+                while (targetIndex < _currentList.Count && _activedDiceSlots[targetIndex].childCount == 0)
+                    ++targetIndex;
+
+                if (targetIndex >= _currentList.Count)
+                {
+                    targetIndex = _currentDiceIndex - 1;
+                    while (targetIndex >= 0 && _activedDiceSlots[targetIndex].childCount == 0)
+                        --targetIndex;
+                }
+            }
+
+            Select(targetIndex, _currentList);
+        }
+    }
+
+    private bool CheckIfSomeListEmpty()
+    {
+        if (_currentList == _activedDices)
+        {
+            foreach (Transform slot in _activedDiceSlots)
+                if (slot.childCount != 0)
+                    return false;
+        }
+        else
+        {
+            foreach (Transform slot in _negativeDiceSlots)
+                if (slot.childCount != 0)
+                    return false;
+        }
+
+        return true;
+    }
+
+    private void SwitchList()
+    {
+        int targetIndex = 0;
+        if (_currentList == _activedDices)
+        {
+            while (_negativeDiceSlots[targetIndex].childCount == 0)
+                ++targetIndex;
+            Select(targetIndex, _negativeDices);
+        }
+        else
+        {
+            while (_activedDiceSlots[targetIndex].childCount == 0)
+                ++targetIndex;
+            Select(targetIndex, _activedDices);
+        }
+    }
+
+    #endregion
+
     public void AddStartButtonCallback(UnityAction callback)
     {
         _startButton.AddCallBack(callback);
     }
-
 }
 
 //用于存储与输出结果，同时承担了结算的作用
@@ -346,6 +658,7 @@ public class Dice_Result
                     m_SerializableSum.Add(System.Enum.GetName(typeof(Dice_SuitType), diceResult.Key), diceResult.Value);
                 }
             }
+
             return m_SerializableSum;
         }
     }
@@ -364,9 +677,7 @@ public class Dice_Result
           { Dice_SuitType.WAND, 0 } };
         results = new List<UI_DiceFaceBase_SO>();
         m_CachedAttributeTypes = new List<Dice_SuitType>()
-        {
-            Dice_SuitType.SWORD, Dice_SuitType.GRAIL, Dice_SuitType.STARCOIN, Dice_SuitType.WAND
-        };
+        { Dice_SuitType.SWORD, Dice_SuitType.GRAIL, Dice_SuitType.STARCOIN, Dice_SuitType.WAND };
     }
 
     public void Push(UI_DiceFaceBase_SO face)
@@ -374,8 +685,7 @@ public class Dice_Result
         results.Add(face);
 
         //给优先级排序 此处后续可优化
-        results.Sort((x, y) =>
-            { return x.Priority.CompareTo(y.Priority); });
+        results.Sort((x, y) => { return x.Priority.CompareTo(y.Priority); });
     }
 
     //目前这种做法，如果有相同优先级的效果，似乎会按照选择时的顺序触发

@@ -10,12 +10,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler*/
 {
     private UnityAction<UI_Dice> onClick;
     
     private UI_DiceData_SO diceData;
 
+    [SerializeField]
+    private Image _selectedMark;
+    
     [SerializeField]
     private RectTransform diceCube;
 
@@ -41,6 +44,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     public bool Stopped => _rb.velocity == Vector3.zero;
     private Vector3 _finalRotation;
 
+    /// <summary>
+    /// 用于确定在背包中的位置，是在所有骰子中的序号
+    /// </summary>
     public int Index { get; private set; } = -1;
 
     private Sequence resetSequence;
@@ -57,6 +63,8 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
         Index = index;
         onClick += onClickCallback;
+        
+        OnDisSelected();
 
         return this;
     }
@@ -143,20 +151,42 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         diceMat.material.mainTexture = diceTex;
     }
 
-    //需要一个Image作为鼠标判定的范围
-    public void OnPointerEnter(PointerEventData eventData)
+    #region DiceInfoDisplay
+
+    public void OnSelected()
     {
         onDiceMouseEnter.Raise(diceData);
+        _selectedMark.color = Color.white;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    //Problem 选中一个之后，默认的选择指向下一个？
+    public void OnConfirmed()
     {
         onClick.Invoke(this);
         onDiceMouseExit.Raise();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnDisSelected()
     {
         onDiceMouseExit.Raise();
+        _selectedMark.color=Color.clear;
     }
+
+    #endregion
+
+    //需要一个Image作为鼠标判定的范围
+    /*public void OnPointerEnter(PointerEventData eventData)
+    {
+        OnSelected();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnConfirmed();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        OnDisSelected();
+    }*/
 }
