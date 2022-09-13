@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityGameKit.Runtime;
+using UnityEngine.UI;
 
 public enum Dice_SuitType
 {
@@ -38,12 +37,18 @@ public class UI_DiceSystem : UIFormChildBase
     private UnityEngine.UI.Image _diceSlotPrefab; //仅仅是用于规范骰子的位置，防止在反复的点选中丢失位置
 
     [Space]
-    [Header("ChildComponents")]
+    [Header("LayoutComponents")]
+    public int basicOffset = 70;
+    public int lineOffset = 150;
     [SerializeField]
-    private Transform _gridLayoutByTwo;
+    private ScrollRect _scrollView;
+    [SerializeField]
+    private RectTransform _content;
+    [SerializeField]
+    private RectTransform _gridLayoutByTwo;
 
     [SerializeField]
-    private Transform _gridLayoutByOne;
+    private RectTransform _gridLayoutByOne;
 
     [Space]
     [SerializeField]
@@ -78,9 +83,11 @@ public class UI_DiceSystem : UIFormChildBase
     {
         _startButton.OnInit(OnStartButtonClickedCallback);
         CreateDicesFromInventory();
-//        _currentList = _negativeDices;
-        Select(0, _negativeDices);
-        Result.Clear();
+        SelectDice(0, _negativeDices);
+
+        float height = basicOffset + _gridLayoutByTwo.childCount * lineOffset + basicOffset;
+        _content.sizeDelta = new Vector2(529,height);
+        Debug.Log(height);
 
         for (int i = 0; i < _activedDiceSlots.Count; i++)
             _activedDices.Add(null);
@@ -393,9 +400,10 @@ public class UI_DiceSystem : UIFormChildBase
         }
     }
 
-    private void Select(int index, List<UI_Dice> list)
+    private void SelectDice(int index, List<UI_Dice> list)
     {
-        Debug.Log(index + ", " + list.Count);
+        //Debug.Log(index + ", " + list.Count);
+        
         if (_currentDice != null)
             _currentDice.OnDisSelected();
 
@@ -432,7 +440,7 @@ public class UI_DiceSystem : UIFormChildBase
         if (targetIndex < edge)
             Debug.Log("Top of list");
         else
-            Select(targetIndex, _currentList);
+            SelectDice(targetIndex, _currentList);
     }
 
     private void OnDownKeyPressed()
@@ -463,7 +471,7 @@ public class UI_DiceSystem : UIFormChildBase
         if (targetIndex >= _currentList.Count)
             Debug.Log("Buttom of list");
         else
-            Select(targetIndex, _currentList);
+            SelectDice(targetIndex, _currentList);
     }
 
     private void OnRightKeyPressed()
@@ -512,7 +520,7 @@ public class UI_DiceSystem : UIFormChildBase
         if (targetList.Count <= 0 || targetIndex >= edge)
             Debug.Log("Nothing in TargetList");
         else
-            Select(targetIndex, targetList);
+            SelectDice(targetIndex, targetList);
     }
 
     private void OnLeftKeyPressed()
@@ -561,7 +569,7 @@ public class UI_DiceSystem : UIFormChildBase
         if (targetList.Count <= 0 || targetIndex < edge)
             Debug.Log("Nothing in TargetList");
         else
-            Select(targetIndex, targetList);
+            SelectDice(targetIndex, targetList);
     }
 
     private void OnConfirmKeyPressed()
@@ -605,7 +613,7 @@ public class UI_DiceSystem : UIFormChildBase
                 }
             }
 
-            Select(targetIndex, _currentList);
+            SelectDice(targetIndex, _currentList);
         }
     }
 
@@ -638,14 +646,14 @@ public class UI_DiceSystem : UIFormChildBase
             while (targetIndex < _negativeDiceSlots.Count &&_negativeDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
             if (targetIndex >= _negativeDiceSlots.Count) return;
-            Select(targetIndex, _negativeDices);
+            SelectDice(targetIndex, _negativeDices);
         }
         else
         {
             while (targetIndex < _activedDiceSlots.Count &&_activedDiceSlots[targetIndex].childCount == 0)
                 ++targetIndex;
             if (targetIndex >= _activedDiceSlots.Count) return;
-            Select(targetIndex, _activedDices);
+            SelectDice(targetIndex, _activedDices);
         }
     }
 
