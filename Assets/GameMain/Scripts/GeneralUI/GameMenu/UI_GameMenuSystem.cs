@@ -22,15 +22,14 @@ public class UI_GameMenuSystem : UIFormBase
         base.OnInit(userData);
         SetChangeKey(KeyCode.Escape);
 
-        InitGameMenuButtons(null, null, null);
+        InitGameMenuButtons();
     }
 
-    public void InitGameMenuButtons(UnityAction dicepackCallback, UnityAction backpackCallback,
-        UnityAction settingCallback)
+    public void InitGameMenuButtons()
     {
-        buttons[0].OnInit(dicepackCallback);
-        buttons[1].OnInit(backpackCallback);
-        buttons[2].OnInit(settingCallback);
+        buttons[0].OnInit(OnDiceInventoryButtonPressed);
+        buttons[1].OnInit(OnPlayerBackpackButtonPressed);
+        //buttons[2].OnInit(settingCallback);
     }
 
     private IEnumerator KeybordControlling()
@@ -50,7 +49,6 @@ public class UI_GameMenuSystem : UIFormBase
 
     public void SetChangeKey(KeyCode keyCode)
     {
-        Debug.Log(keyCode);
         _changeDisplayKeyCode = keyCode;
     }
 
@@ -98,8 +96,20 @@ public class UI_GameMenuSystem : UIFormBase
         else if (index < 0)
             index = buttons.Count - 1;
 
-        Debug.Log(index);
+        //Debug.Log(index);
         buttons[index].OnSelected();
         _currentIndex = index;
+    }
+
+    private void OnPlayerBackpackButtonPressed()
+    {
+        OnOpenPlayerBackpackEventArgs args = OnOpenPlayerBackpackEventArgs.Create(this);
+        GameKitCenter.Event.Fire(OnOpenPlayerBackpackEventArgs.EnentId,args);
+    }
+
+    private void OnDiceInventoryButtonPressed()
+    {
+        OnOpenDiceInventoryEventArgs args = OnOpenDiceInventoryEventArgs.Create(this);
+        GameKitCenter.Event.Fire(OnOpenDiceInventoryEventArgs.EventId,args);
     }
 }
