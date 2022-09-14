@@ -14,9 +14,10 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
         m_PlayerBackpack = GameKitCenter.Inventory.GetOrCreateInventory(PlayerBackpackName, 60);
         GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnBackpackUIOpenSuccess);
         GameKitCenter.Event.Subscribe(OpenUIFormFailureEventArgs.EventId, OnBackpackUIOpenFailure);
+        GameKitCenter.Event.Subscribe(OnOpenPlayerBackpackEventArgs.EnentId,OnOpenPlayerBackpack);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (InputManager.instance.GetWorldKeyDown(KeyCode.I))
         {
@@ -24,6 +25,13 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
             if (uiForm != null)
                 m_CachedUiId = (int)uiForm;
         }
+    }*/
+
+    private void OnOpenPlayerBackpack(object sender, GameKit.Event.GameEventArgs e)
+    {
+        var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: this);
+        if (uiForm != null)
+            m_CachedUiId = (int)uiForm;
     }
 
     private void OnBackpackUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)

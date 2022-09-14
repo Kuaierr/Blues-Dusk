@@ -9,17 +9,16 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 {
 	private void Start()
 	{
-		//似乎需要专门写一个args  GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId,OnGameMenuUIOpenSuccess);
 		GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
 	}
 
-	private void Update()
+	/*private void Update()
 	{
-		/*if (InputManager.instance.GetKeyDown(KeyCode.Escape) || InputManager.instance.GetMouseButtonDown(1))
-			GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);*/
-	}
+		if (InputManager.instance.GetKeyDown(KeyCode.Escape) || InputManager.instance.GetMouseButtonDown(1))
+			GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
+	}*/
 
-	private void OnGameMenuUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)
+	/*private void OnGameMenuUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)
 	{
 		OpenUIFormSuccessEventArgs args = (OpenUIFormSuccessEventArgs)e;
 		if (args.UserData == null || args.UserData.GetType() != typeof(PlayerBackpack))
@@ -33,5 +32,10 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 
 		UI_GameMenuSystem uI_GameMenu = (UI_GameMenuSystem)args.UIForm.Logic;
 		uI_GameMenu.SetChangeKey(KeyCode.Escape);
-	}
+	}*/
+
+	/*private void OnPlayerBackpackButtonPressed(object sender, GameKit.Event.GameEventArgs e)
+	{
+		
+	}*/
 }

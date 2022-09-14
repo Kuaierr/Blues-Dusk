@@ -53,6 +53,10 @@ MonoBehaviour:
     m_Address: Assets/GameMain/UI/UIForms/UI_GameMenu.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3bec87d315789824bbbe7f590991c480
+    m_Address: Assets/GameMain/UI/UIForms/UI_DiceInventory.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: 7fed6aa9c6c302f468f8560d3f14da35
     m_Address: Assets/GameMain/Arts/Test
     m_ReadOnly: 0

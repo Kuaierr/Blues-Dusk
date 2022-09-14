@@ -107,8 +107,6 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void Clear()
     {
-        //clear sheets
-        //由于骰子是其子物体，所以会一起被清空
         foreach (Dice_SuitType key in _usedSheets.Keys)
         {
             foreach (Transform child in _usedSheets[key].transform)
@@ -237,7 +235,7 @@ public class UI_DiceSystem : UIFormChildBase
 
     private void OnStartButtonClickedCallback()
     {
-        ResetActivedDiceParent();
+        //ResetActivedDiceParent();
         RemoveUnSelectedDice();
     }
 
@@ -252,8 +250,8 @@ public class UI_DiceSystem : UIFormChildBase
     //这一项是防止CanvasGroup淡出后，让骰子一起消失，因此先将骰子置于最上层
     private void ResetActivedDiceParent()
     {
-        foreach (UI_Dice dice in _activedDices)
-            dice.transform.SetParent(transform);
+        /*foreach (UI_Dice dice in _activedDices)
+            dice.transform.SetParent(transform);*/
     }
 
     public void RollActivedDices()

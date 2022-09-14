@@ -6,6 +6,8 @@ public abstract class UI_DiceFaceBase_SO : ScriptableObject
 {
 	public new string name;
 	public Sprite icon;
+	[TextArea]
+	public string description;
 
 	public abstract int Priority { get; }
 

@@ -40,5 +40,12 @@
     "ui_group_name": "Default",
     "allow_multi_instance": false,
     "pause_covered_ui_form": false
+  },
+  {
+    "id": 1003,
+    "asset_name": "UI_DiceInventory",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
   }
 ]
