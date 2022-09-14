@@ -148,26 +148,26 @@ namespace GameKit.Procedure
             {
                 throw new GameKitException("You must initialize procedure first.");
             }
-
             return (ProcedureBase)m_ProcedureFsm.GetState(procedureType);
         }
 
-        public void LoadScene<T>(string sceneName) where T : ProcedureBase
+        public void SetData<T>(string dataName, T data) where T : Variable
         {
-            // TODO: 基于全局状态机的LoadScene
+            m_ProcedureFsm.SetData<T>(dataName, data);
         }
-        public void LoadScene(string sceneName, Type procedureType)
+        public void SetData(string dataName, Variable data)
         {
-            // TODO: 基于全局状态机的LoadScene
+            m_ProcedureFsm.SetData(dataName, data);
         }
 
-        public void SetData<T>(string dataName) where T : Variable
+        public T GetData<T>(string dataName) where T : Variable
         {
-            // TODO: 对外暴露的数据设置
+            return m_ProcedureFsm.GetData<T>(dataName);
         }
-        public void SetData(string dataName, Type dataType)
+
+        public Variable GetData(string dataName)
         {
-            // TODO: 对外暴露的数据设置
+            return m_ProcedureFsm.GetData(dataName);
         }
     }
 }

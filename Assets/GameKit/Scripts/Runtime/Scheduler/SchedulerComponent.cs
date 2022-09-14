@@ -18,11 +18,10 @@ namespace UnityGameKit.Runtime
         public SceneTransitionType defaultSwitchType = SceneTransitionType.Swipe;
         [Tooltip("初始场景")]
         public string StartScene = "GameKit_Main";
-        [Tooltip("当前激活场景")]
-        public string CurrentScene = "GameKit_Main";
         [Tooltip("加载过场场景")]
         public string LoadScene = "GameKit_Loading";
-
+        [SerializeField] private string m_ScenesPath = "";
+        [SerializeField] private string m_MultiScenesPath = "";
         private const int DefaultScenePrioty = 0;
         private Switcher m_Switcher;
         private SceneComponent m_SceneComponent = null;
@@ -50,25 +49,11 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        // public string CurrentAssetName
-        // {
-        //     get
-        //     {
-        //         return AssetUtility.GetSceneAsset(CurrentScene);
-        //     }
-        // }
-
         public void SetStartScene()
         {
-
             if (MultiScene)
             {
                 StartScene = ActiveSceneName;
-                CurrentScene = AssetUtility.GetSceneAsset(ActiveSceneName);
-            }
-            else
-            {
-                CurrentScene = AssetUtility.GetSceneAsset(StartScene);
             }
         }
 
@@ -112,7 +97,6 @@ namespace UnityGameKit.Runtime
 
         private void OnDestroy()
         {
-
             m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
             m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
             m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
@@ -121,155 +105,16 @@ namespace UnityGameKit.Runtime
             m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         }
 
-        public void SwitchSceneByDefault(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            if (defaultSwitchType == SceneTransitionType.Swipe)
-                SwitchSceneBySwipe(name, onSuccess, onFail);
-            else if (defaultSwitchType == SceneTransitionType.LoadingScene)
-                SwitchSceneByLoadingScene(name, onSuccess, onFail);
-            else if (defaultSwitchType == SceneTransitionType.Fade)
-                SwitchSceneByFade(name, onSuccess, onFail);
-            else if (defaultSwitchType == SceneTransitionType.Animation)
-                SwitchSceneByAnimation(name, onSuccess, onFail);
-            else if (defaultSwitchType == SceneTransitionType.Immediately)
-                SwitchScene(name, onSuccess, onFail);
-        }
-        public void SwitchSceneByAnimation(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            m_Switcher.animator.gameObject.SetActive(true);
-            m_Switcher.animator.SetTrigger("Swicth");
-            m_Switcher.animator.OnComplete(1f, () =>
-            {
-                UnloadSceneAsyn(CurrentScene, onSuccess: () =>
-                {
-                    LoadSceneAsyn(name, onSuccess: () =>
-                    {
-                        CurrentScene = name;
-                        m_Switcher.animator.SetTrigger("UnSwicth");
-                        m_Switcher.animator.OnComplete(1f, () =>
-                        {
-                            m_Switcher.animator.gameObject.SetActive(false);
-                        });
-                        onSuccess?.Invoke();
-                    });
-                });
-            });
-        }
-
-        public void SwitchSceneBySwipe(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            m_Switcher.swiper.gameObject.SetActive(true);
-            m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
-            {
-                UnloadSceneAsyn(CurrentScene, onSuccess: () =>
-                {
-                    LoadSceneAsyn(name, onSuccess: () =>
-                    {
-                        CurrentScene = name;
-                        m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
-                        {
-                            m_Switcher.swiper.localPosition = new Vector3(2420f, m_Switcher.swiper.localPosition.y, m_Switcher.swiper.localPosition.z);
-                            m_Switcher.swiper.gameObject.SetActive(false);
-                        });
-                        onSuccess?.Invoke();
-                    });
-                });
-            });
-        }
-
-        public void SwitchSceneByFade(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            m_Switcher.gradienter.gameObject.SetActive(true);
-            m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
-            {
-                UnloadSceneAsyn(CurrentScene, onSuccess: () =>
-                {
-                    // LoadSceneAsyn(name, () =>
-                    // {
-                    //     CurrentScene = name;
-                    //     m_Switcher.gradienter.DOFade(0f, 0.5f).OnComplete(() =>
-                    //     {
-                    //         m_Switcher.gradienter.gameObject.SetActive(false);
-                    //     });
-                    //     onSuccess?.Invoke();
-                    // });
-                });
-            });
-        }
-
-        public void SwitchScene(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            UnloadSceneAsyn(CurrentScene, onSuccess: () =>
-            {
-                LoadSceneAsyn(name, onSuccess: () =>
-                {
-                    CurrentScene = name;
-                    onSuccess?.Invoke();
-                });
-            });
-        }
-
-        public void ReloadCurrentSceneSwipe()
-        {
-            m_Switcher.swiper.gameObject.SetActive(true);
-            m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
-            {
-                UnloadSceneAsyn(CurrentScene, onSuccess: () =>
-                {
-                    LoadSceneAsyn(CurrentScene, onSuccess: () =>
-                    {
-                        m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(() =>
-                        {
-                            m_Switcher.swiper.localPosition = new Vector3(2420f, m_Switcher.swiper.localPosition.y, m_Switcher.swiper.localPosition.z);
-                            m_Switcher.swiper.gameObject.SetActive(false);
-                        });
-                    });
-                });
-            });
-        }
-
-        public void SwitchSceneByLoadingScene(string name, UnityAction onSuccess = null, UnityAction onFail = null)
-        {
-            ScenesManager.instance.TryGetScene(name, out Scene scene);
-
-            if (scene == null)
-            {
-                Debug.LogError("No such scene in build settings.");
-                return;
-            }
-            SwitchScene(LoadScene, onSuccess);
-        }
-
         public void LoadSceneAsyn(string name, SceneTransitionType transitionType = SceneTransitionType.Fade, UnityAction onSuccess = null, UnityAction onFail = null)
         {
             // Log.Info(name);
-            // ScenesManager.instance.LoadSceneAsynAdd(name, onSuccess);
-            // AddressableManager.instance.LoadSceneAsyn(name, loadMode: LoadSceneMode.Additive, onSuccess: onSuccess, onFail: onFail);
-            // GameKitCenter.Scene.LoadScene(name, DoTransitionCompleteEventArgs.Create(name, transitionType, this));
             m_SceneComponent.LoadScene(name, null);
         }
 
         public void UnloadSceneAsyn(string name, SceneTransitionType transitionType = SceneTransitionType.Fade, UnityAction onSuccess = null, UnityAction onFail = null)
         {
-            // ScenesManager.instance.UnloadSceneAsyn(name, onSuccess);
-            // AddressableManager.instance.UnloadSceneAsyn(name, onSuccess: onSuccess, onFail: onFail);
             // Log.Warning("UnloadSceneAsyn");
             m_SceneComponent.UnloadScene(name, null);
-        }
-
-        public int GetActiveSceneNumber()
-        {
-            if (SceneManager.sceneCount > 1)
-            {
-                int order = 0;
-                string[] levelSplit = SceneManager.GetSceneAt(1).name.Split('_');
-                if (levelSplit.Length <= 1)
-                    return 0;
-                System.Int32.TryParse(levelSplit[1], out order);
-                return order;
-            }
-            Debug.LogWarning("No Active Level in Scene");
-            return 0;
         }
 
         public string[] GetLoadedSceneAssetNames()

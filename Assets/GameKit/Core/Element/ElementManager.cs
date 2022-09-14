@@ -36,6 +36,11 @@ namespace GameKit.Element
             m_CachedElements.Remove(element);
         }
 
+        public IElement[] GetAllElements()
+        {
+            return m_CachedElements.ToArray();
+        }
+
         public IElement GetElement(string name)
         {
             for (int i = 0; i < m_CachedElements.Count; i++)

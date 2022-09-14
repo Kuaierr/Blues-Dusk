@@ -53,6 +53,10 @@ MonoBehaviour:
     m_Address: Assets/GameMain/UI/UIForms/UI_GameMenu.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 7fed6aa9c6c302f468f8560d3f14da35
+    m_Address: Assets/GameMain/Arts/Test
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f3c766b324be3154789a35ae2b9702bb, type: 2}
   m_SchemaSet:

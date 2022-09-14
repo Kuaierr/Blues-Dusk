@@ -184,25 +184,29 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: GameMenu
-    path: Assets/GameMain/Scenes/GameMenu.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
-  - name: S_test
-    path: Assets/GamePrototype/Scenes/S_test.unity
-  - name: S_Toilet
-    path: Assets/GameMain/Scenes/S_Toilet.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Station
+    path: Assets/GameMain/Scenes/S_Station.unity
+  - name: S_Template
+    path: Assets/GameMain/Scenes/S_Template.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: S_Tower
+    path: Assets/GameMain/Scenes/S_Tower.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
+  - name: S_Parlor_Night
+    path: Assets/GameMain/Scenes/S_Parlor_Night.unity
+  - name: S_Weekend
+    path: Assets/GameMain/Scenes/Dynamic/S_Weekend.unity
+  - name: S_NightLighting
+    path: Assets/GameMain/Scenes/Lighting/S_NightLighting.unity
+  - name: S_MorningLighting
+    path: Assets/GameMain/Scenes/Lighting/S_MorningLighting.unity
+  - name: S_NoonLighting
+    path: Assets/GameMain/Scenes/Lighting/S_NoonLighting.unity
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
-  - name: S_heya_toilet
-    path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
-  - name: Prototype_Inventory
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
-  - name: Prototype_Interact
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
-  - name: Prototype_Dialog_DiceDev
-    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: GameMenu
+    path: Assets/GameMain/Scenes/GameMenu.unity

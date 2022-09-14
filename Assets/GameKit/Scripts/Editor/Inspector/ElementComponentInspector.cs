@@ -1,6 +1,7 @@
 
 
 using GameKit;
+using UnityEngine;
 using GameKit.Element;
 using UnityEditor;
 using UnityGameKit.Runtime;
@@ -26,6 +27,14 @@ namespace UnityGameKit.Editor
             if (EditorApplication.isPlaying && IsPrefabInHierarchy(t.gameObject))
             {
                 EditorGUILayout.LabelField("Element Count ", t.ElementCount.ToString());
+                IElement[] elements = t.GetAllElements();
+                for (int i = 0; i < elements.Length; i++)
+                {
+                    if (GUILayout.Button(elements[i].Name))
+                    {
+                        elements[i].OnInteract();
+                    }
+                }
             }
             serializedObject.ApplyModifiedProperties();
             Repaint();

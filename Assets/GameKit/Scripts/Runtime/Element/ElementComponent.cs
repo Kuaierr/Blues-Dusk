@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.Net.Sockets;
 using UnityEngine;
@@ -61,6 +62,11 @@ namespace UnityGameKit.Runtime
         public IElement GetElement(string name)
         {
             return m_ElementManager.GetElement(name);
+        }
+
+        public IElement[] GetAllElements()
+        {
+            return m_ElementManager.GetAllElements();
         }
 
         public void HighLightAll()
