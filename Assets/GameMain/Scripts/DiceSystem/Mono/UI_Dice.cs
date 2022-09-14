@@ -10,12 +10,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler*/
 {
     private UnityAction<UI_Dice> onClick;
     
     private UI_DiceData_SO diceData;
 
+    [SerializeField]
+    private Image _selectedMark;
+    
     [SerializeField]
     private RectTransform diceCube;
 
@@ -37,10 +40,14 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     public NoParameterEvent_SO onDiceMouseExit;
 
     public Dice_SuitType Result { get; private set; }
+    //public RectTransform RectTransform { get; private set; }
 
     public bool Stopped => _rb.velocity == Vector3.zero;
     private Vector3 _finalRotation;
 
+    /// <summary>
+    /// 用于确定在背包中的位置，是在所有骰子中的序号
+    /// </summary>
     public int Index { get; private set; } = -1;
 
     private Sequence resetSequence;
@@ -50,6 +57,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     {
         if (data == null)
             Debug.LogError("DiceData is null");
+        
         diceData = data;
 
         for (int i = 0; i < data.faceDatas.Count; i++)
@@ -57,6 +65,8 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
         Index = index;
         onClick += onClickCallback;
+
+        OnDisSelected();
 
         return this;
     }
@@ -118,8 +128,11 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         _rb.isKinematic = true;
         
         var dice = _rb.transform;
+        // 防止直接修改父物体导致的错位
         dice.SetParent(transform.parent);
         transform.SetParent(target);
+        //保证骰子实体会被销毁
+        //dice.SetParent(transform);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(target);
         resetSequence = DOTween.Sequence();
@@ -140,20 +153,42 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         diceMat.material.mainTexture = diceTex;
     }
 
-    //需要一个Image作为鼠标判定的范围
-    public void OnPointerEnter(PointerEventData eventData)
+    #region DiceInfoDisplay
+
+    public void OnSelected()
     {
         onDiceMouseEnter.Raise(diceData);
+        _selectedMark.color = Color.white;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    //Problem 选中一个之后，默认的选择指向下一个？
+    public void OnConfirmed()
     {
         onClick.Invoke(this);
         onDiceMouseExit.Raise();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnDisSelected()
     {
         onDiceMouseExit.Raise();
+        _selectedMark.color=Color.clear;
     }
+
+    #endregion
+
+    //需要一个Image作为鼠标判定的范围
+    /*public void OnPointerEnter(PointerEventData eventData)
+    {
+        OnSelected();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnConfirmed();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        OnDisSelected();
+    }*/
 }

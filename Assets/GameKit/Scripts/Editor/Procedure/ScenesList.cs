@@ -8,6 +8,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_GameChangeScene_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/GameChangeScene.unity"); }
         [MenuItem("Scenes/GameMenu")]
         public static void Assets_GameMain_Scenes_GameMenu_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/GameMenu.unity"); }
+        [MenuItem("Scenes/Prototype_Card")]
+        public static void Assets_GameMain_Scenes_Prototype_Prototype_Card_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Card.unity"); }
         [MenuItem("Scenes/Prototype_Dialog")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Dialog_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity"); }
         [MenuItem("Scenes/Prototype_Dialog_UIandDice")]

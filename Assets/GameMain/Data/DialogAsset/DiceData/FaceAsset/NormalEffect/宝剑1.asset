@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: "\u5B9D\u52511"
   m_EditorClassIdentifier: 
   name: "\u5B9D\u5251"
-  icon: {fileID: 21300000, guid: 66bf9157a68771e4a82bdfe968f08212, type: 3}
-  targetType: 0
+  icon: {fileID: 21300000, guid: b52a6518c74e1db4ea1b20c3c844fa11, type: 3}
+  type: 0
   amount: 1

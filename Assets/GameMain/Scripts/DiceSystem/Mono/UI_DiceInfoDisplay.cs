@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UpdateInfo 在当前的调整下，该面板不再需要关闭/隐藏
+/// </summary>
 public class UI_DiceInfoDisplay : UIFormChildBase
 {
 	[SerializeField]
@@ -24,24 +27,25 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	public NoParameterEvent_SO onDiceMouseExit;
 
 	protected override void Start() {
-		OnDepthChanged(2);
+		OnDepthChanged(10);
 	}
 
-	private void OnEnable()
+	protected override void OnEnable()
 	{
+		base.OnEnable();
 		onDiceMouseEnter.action += DisplayDiceInfo;
 		onDiceMouseExit.action += HideDiceInfo;
 	}
 
-	private void OnDisable()
+	protected override void OnDisable()
 	{
+		base.OnDisable();
 		onDiceMouseEnter.action -= DisplayDiceInfo;
 		onDiceMouseExit.action -= HideDiceInfo;
 	}
 
-	//TODO 后续应该会改为使用动画机控制，临时用Dotween凑合一下
 	public void DisplayDiceInfo(UI_DiceData_SO data)
-	{ // TODO 可能需要一些延时
+	{ 
 		_canvas.DOComplete();
 
 		_diceName.text = data.name;
@@ -57,8 +61,9 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 
 	public void HideDiceInfo()
 	{
-		_canvas.DOKill();
+		//updateinfo 不再需要 但考虑到信息表现不应该生硬的切换，增加动效时需要用到Hide方法
+		/*_canvas.DOKill();
 
-		_canvas.DOFade(0, 0.5f);
+		_canvas.DOFade(0, 0.5f);*/
 	}
 }

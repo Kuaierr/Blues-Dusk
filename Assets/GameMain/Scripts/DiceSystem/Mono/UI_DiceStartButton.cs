@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
+public class UI_DiceStartButton : UIFormChildBase, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {
     private UnityAction onClick;
 
@@ -38,7 +38,13 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
         onClick += onClickCallback;
     }
 
-    private void OnDisable()
+    protected override void Start()
+    {
+        base.Start();
+        OnDepthChanged(10);
+    }
+
+    public void Clear()
     {
         onClick = null;
     }
@@ -66,27 +72,36 @@ public class UI_DiceStartButton : MonoBehaviour, IPointerDownHandler, IPointerUp
         enabled = true;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnButtonPressed()
     {
         if (enabled)
             StartCoroutine("HoldStartButton");
     }
 
+    public void OnButtonReleased()
+    {
+        StopCoroutine("HoldStartButton");
+        _holdSlider.fillAmount = 0;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnButtonPressed();
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (enabled)
+        //if (enabled)
         {
-            StopCoroutine("HoldStartButton");
-            _holdSlider.fillAmount = 0;
+            OnButtonReleased();
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (enabled)
+        //if (enabled)
         {
-            StopCoroutine("HoldStartButton");
-            _holdSlider.fillAmount = 0;
+            OnButtonReleased();
         }
     }
 
