@@ -25,6 +25,8 @@ public class UI_Tip : UIFormBase
         Cancel.onClick.RemoveAllListeners();
         Confirm.onClick.AddListener(Hide);
         Cancel.onClick.AddListener(Hide);
+
+        Log.Info(confirmCallback);
         
         if (confirm != "<None>")
             ConfirmText.text = confirm;
@@ -36,6 +38,23 @@ public class UI_Tip : UIFormBase
             Confirm.onClick.AddListener(confirmCallback);
         if (cancelCallback != null)
             Cancel.onClick.AddListener(cancelCallback);
+    }
+
+    protected override void OnOpen(object userData)
+    {
+        base.OnOpen(userData);
+    }
+
+    protected override void OnResume()
+    {
+        base.OnResume();
+        CursorSystem.current.Disable();
+    }
+
+    protected override void OnPause()
+    {
+        CursorSystem.current.Enable();
+        base.OnPause();
     }
 
     public void Hide()

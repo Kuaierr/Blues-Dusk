@@ -19,14 +19,14 @@ public sealed partial class SceneConfig :  Bright.Config.BeanBase
     public SceneConfig(JSONNode _json) 
     {
         { if(!_json["scene_asset_name"].IsString) { throw new SerializationException(); }  SceneAssetName = _json["scene_asset_name"]; }
-        { if(!_json["is_unlock"].IsBoolean) { throw new SerializationException(); }  IsUnlock = _json["is_unlock"]; }
+        { if(!_json["is_unlocked"].IsString) { throw new SerializationException(); }  IsUnlocked = _json["is_unlocked"]; }
         PostInit();
     }
 
-    public SceneConfig(string scene_asset_name, bool is_unlock ) 
+    public SceneConfig(string scene_asset_name, string is_unlocked ) 
     {
         this.SceneAssetName = scene_asset_name;
-        this.IsUnlock = is_unlock;
+        this.IsUnlocked = is_unlocked;
         PostInit();
     }
 
@@ -42,7 +42,7 @@ public sealed partial class SceneConfig :  Bright.Config.BeanBase
     /// <summary>
     /// 是否解锁
     /// </summary>
-    public bool IsUnlock { get; private set; }
+    public string IsUnlocked { get; private set; }
 
     public const int __ID__ = 476376580;
     public override int GetTypeId() => __ID__;
@@ -60,7 +60,7 @@ public sealed partial class SceneConfig :  Bright.Config.BeanBase
     {
         return "{ "
         + "SceneAssetName:" + SceneAssetName + ","
-        + "IsUnlock:" + IsUnlock + ","
+        + "IsUnlocked:" + IsUnlocked + ","
         + "}";
     }
     

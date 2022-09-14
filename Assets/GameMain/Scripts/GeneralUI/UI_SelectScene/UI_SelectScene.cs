@@ -13,11 +13,11 @@ using UnityGameKit.Runtime;
 
 public class UI_SelectScene : UIFormBase
 {
-    public List<UI_ScenePreview> uI_ScenePreviews;
+    [SerializeField] private List<UI_ScenePreview> m_ScenePreviews;
     private int m_CurrentIndex = 0;
     private int m_LastIndex = -1;
     private bool m_IsActive = false;
-    public int ScenesCount => uI_ScenePreviews.Count;
+    private List<UI_ScenePreview> m_ActiveScenePreviews;
     public void UpdateScenes(List<string> avaibleScenes)
     {
         if (avaibleScenes == null)
@@ -25,34 +25,48 @@ public class UI_SelectScene : UIFormBase
 
         for (int i = 0; i < avaibleScenes.Count; i++)
         {
-            for (int j = 0; j < uI_ScenePreviews.Count; j++)
+            for (int j = 0; j < m_ScenePreviews.Count; j++)
             {
-                if (uI_ScenePreviews[j].SceneName == avaibleScenes[i])
+                // Log.Info(m_ScenePreviews[j].SceneAssetName.Correction() + " >> " + avaibleScenes[i].Correction());
+                if (m_ScenePreviews[j].SceneAssetName.Correction() == avaibleScenes[i].Correction())
                 {
-                    uI_ScenePreviews[j].Show();
+                    m_ScenePreviews[j].Show();
+                    m_ActiveScenePreviews.Add(m_ScenePreviews[j]);
                     continue;
                 }
             }
         }
+
+        if (m_ActiveScenePreviews.Count > 0)
+            m_ActiveScenePreviews[0].Selected();
+    }
+
+    protected override void OnInit(object userData)
+    {
+        base.OnInit(userData);
+        if (m_ActiveScenePreviews == null)
+            m_ActiveScenePreviews = new List<UI_ScenePreview>();
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
         m_IsActive = true;
-        uI_ScenePreviews[0].ForceSelected();
     }
 
     protected override void OnResume()
     {
         base.OnResume();
+        Clear();
         m_IsActive = true;
-        uI_ScenePreviews[0].ForceSelected();
+        if (m_ActiveScenePreviews.Count > 0)
+            m_ActiveScenePreviews[0].Selected();
     }
 
     protected override void OnPause()
     {
         m_IsActive = false;
+        Clear();
         base.OnPause();
     }
 
@@ -65,19 +79,21 @@ public class UI_SelectScene : UIFormBase
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             m_LastIndex = m_CurrentIndex;
-            m_CurrentIndex += (m_CurrentIndex + 1) % ScenesCount;
+            m_CurrentIndex = m_CurrentIndex - 1 <= -1 ? (m_ActiveScenePreviews.Count - 1) : (m_CurrentIndex - 1);
+            SelectScene(m_CurrentIndex);
+
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             m_LastIndex = m_CurrentIndex;
-            m_CurrentIndex = m_CurrentIndex - 1 == -1 ? ScenesCount - 1 : m_CurrentIndex - 1;
+            m_CurrentIndex = (m_CurrentIndex + 1) % (m_ActiveScenePreviews.Count);
+            SelectScene(m_CurrentIndex);
         }
-        SelectScene(m_CurrentIndex);
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameKitCenter.Procedure.ChangeSceneBySelect(uI_ScenePreviews[m_CurrentIndex].SceneAssetName);
-            Clear();
+            GameKitCenter.Procedure.ChangeSceneBySelect(m_ActiveScenePreviews[m_CurrentIndex].SceneAssetName);
             OnPause();
         }
 
@@ -89,16 +105,17 @@ public class UI_SelectScene : UIFormBase
 
     public void Clear()
     {
-        m_LastIndex = -1;
+        m_LastIndex = 0;
         m_CurrentIndex = 0;
+        m_ActiveScenePreviews.Clear();
     }
 
     private void SelectScene(int index)
     {
         if (m_LastIndex >= 0)
-            uI_ScenePreviews[m_LastIndex].UnSelected();
+            m_ActiveScenePreviews[m_LastIndex].UnSelected();
         if (index >= 0)
-            uI_ScenePreviews[index].Selected();
+            m_ActiveScenePreviews[index].Selected();
     }
 
     public void Show()

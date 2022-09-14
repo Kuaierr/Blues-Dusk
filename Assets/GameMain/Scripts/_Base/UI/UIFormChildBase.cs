@@ -60,9 +60,9 @@ public abstract class UIFormChildBase : UIBehaviour
         if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
         {
             if (isForce)
-                m_Animator.SetTrigger(status ? UIUtility.FORCE_DOEMPHASIZE_ANIMATION_NAME : UIUtility.FORCE_UNDOEMPHASIZE_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.FORCE_DOEMPHASIZE_ANIMATION_NAME : UIUtility.FORCE_UNDOEMPHASIZE_ANIMATION_NAME);
             else
-                m_Animator.SetTrigger(status ? UIUtility.DOEMPHASIZE_ANIMATION_NAME : UIUtility.UNDOEMPHASIZE_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.DOEMPHASIZE_ANIMATION_NAME : UIUtility.UNDOEMPHASIZE_ANIMATION_NAME);
             return true;
         }
         return false;
@@ -73,9 +73,9 @@ public abstract class UIFormChildBase : UIBehaviour
         if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
         {
             if (isForce)
-                m_Animator.SetTrigger(status ? UIUtility.FORCE_ENABLE_ANIMATION_NAME : UIUtility.FORCE_DISABLE_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.FORCE_ENABLE_ANIMATION_NAME : UIUtility.FORCE_DISABLE_ANIMATION_NAME);
             else
-                m_Animator.SetTrigger(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
             return true;
         }
         return false;
@@ -88,9 +88,9 @@ public abstract class UIFormChildBase : UIBehaviour
         if (m_Animator != null && m_Animator.runtimeAnimatorController != null)
         {
             if (isForce)
-                m_Animator.SetTrigger(status ? UIUtility.FORCE_ON_ANIMATION_NAME : UIUtility.FORCE_OFF_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.FORCE_ON_ANIMATION_NAME : UIUtility.FORCE_OFF_ANIMATION_NAME);
             else
-                m_Animator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+                m_Animator.SetTriggerOneTime(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
             return true;
         }
         return false;

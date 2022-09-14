@@ -1,22 +1,22 @@
 [
   {
-    "scene_asset_name": "S_Tower",
-    "is_unlock": false
-  },
-  {
     "scene_asset_name": "S_Parlor",
-    "is_unlock": true
-  },
-  {
-    "scene_asset_name": "S_FengHospital",
-    "is_unlock": false
+    "is_unlocked": "True"
   },
   {
     "scene_asset_name": "S_Station",
-    "is_unlock": true
+    "is_unlocked": "True"
   },
   {
     "scene_asset_name": "S_Bar",
-    "is_unlock": true
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_FengHospital",
+    "is_unlocked": "False"
+  },
+  {
+    "scene_asset_name": "S_Tower",
+    "is_unlocked": "False"
   }
 ]

@@ -14,6 +14,7 @@ public class UI_ScenePreview : UIFormChildBase
     public void Show()
     {
         SetActive(true);
+        Picture.sprite = Sprite;
     }
 
     public void Hide()

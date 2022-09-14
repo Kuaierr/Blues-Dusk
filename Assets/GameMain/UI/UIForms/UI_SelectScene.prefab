@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MasterAnimator: {fileID: 0}
-  uI_ScenePreviews:
+  m_ScenePreviews:
   - {fileID: 286964716756161044}
   - {fileID: 5418135722966266217}
   - {fileID: 5418135722170020734}

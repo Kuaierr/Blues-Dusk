@@ -920,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1753084732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,6 +1400,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8909ff40c920331499926f80f3b251db, type: 3}
+--- !u!1001 &3688531847678483355
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3282635
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351008, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946404361331351011, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
+      propertyPath: m_Name
+      value: LeaveDoorElement
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d6df3f9b7c17364dbb62d85e788f401, type: 3}
 --- !u!1001 &3788016632573891149
 PrefabInstance:
   m_ObjectHideFlags: 0

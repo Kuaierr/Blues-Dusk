@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameKit.Event;
 using UnityEngine.Events;
@@ -21,6 +22,8 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
         m_CachedTipContent = string.Empty;
         m_CachedTipConfirm = string.Empty;
         m_CachedTipCancel = string.Empty;
+        m_CachedConfirmCallback = null;
+        m_CachedCancelCallback = null;
         m_CachedAvailiableScenes = new List<string>();
     }
 
@@ -54,13 +57,14 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
             return;
         }
 
-        if (args.UserData.GetType() == typeof(UI_Tip))
+        if (args.UserData.Equals(typeof(UI_Tip)))
         {
             m_CachedUITip = (UI_Tip)args.UIForm.Logic;
             m_CachedUITip.UpdateTip(m_CachedTipContent, m_CachedConfirmCallback, m_CachedCancelCallback, m_CachedTipConfirm, m_CachedTipCancel);
             ClearTipCache();
         }
-        else if (args.UserData.GetType() == typeof(UI_SelectScene))
+        
+        if (args.UserData.Equals(typeof(UI_SelectScene)))
         {
             m_CachedUISelectScene = (UI_SelectScene)args.UIForm.Logic;
             m_CachedUISelectScene.UpdateScenes(m_CachedAvailiableScenes);
@@ -73,6 +77,8 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
         m_CachedTipContent = string.Empty;
         m_CachedTipConfirm = string.Empty;
         m_CachedTipCancel = string.Empty;
+        m_CachedConfirmCallback = null;
+        m_CachedCancelCallback = null;
     }
 
     public void ClearAvailiableScenes()

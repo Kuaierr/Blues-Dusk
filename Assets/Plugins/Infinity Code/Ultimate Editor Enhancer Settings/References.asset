@@ -184,16 +184,18 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: S_Station
-    path: Assets/GameMain/Scenes/S_Station.unity
-  - name: S_Template
-    path: Assets/GameMain/Scenes/S_Template.unity
-  - name: S_Parlor
-    path: Assets/GameMain/Scenes/S_Parlor.unity
-  - name: S_Tower
-    path: Assets/GameMain/Scenes/S_Tower.unity
+  - name: S_FengHospital
+    path: Assets/GameMain/Scenes/S_FengHospital.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Station
+    path: Assets/GameMain/Scenes/S_Station.unity
+  - name: S_Tower
+    path: Assets/GameMain/Scenes/S_Tower.unity
+  - name: S_Parlor
+    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: S_Template
+    path: Assets/GameMain/Scenes/S_Template.unity
   - name: S_Toilet
     path: Assets/GameMain/Scenes/S_Toilet.unity
   - name: S_Parlor_Night
