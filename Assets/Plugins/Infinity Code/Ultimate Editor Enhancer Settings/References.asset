@@ -184,6 +184,18 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_Inventory
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
+  - name: Prototypr_PlayerController
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+  - name: Prototype_Dialog_DiceDev
+    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
+  - name: Prototype_Interact
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
   - name: GameMenu
     path: Assets/GameMain/Scenes/GameMenu.unity
   - name: S_heya_parlor
@@ -192,17 +204,7 @@ MonoBehaviour:
     path: Assets/GamePrototype/Scenes/S_test.unity
   - name: S_Toilet
     path: Assets/GameMain/Scenes/S_Toilet.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: S_heya_toilet
     path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
-  - name: Prototype_Inventory
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
-  - name: Prototype_Interact
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
-  - name: Prototype_Dialog_DiceDev
-    path: Assets/GameMain/Scenes/Prototype_Dialog_DiceDev.unity
