@@ -72,6 +72,7 @@ public class UI_DiceInventorySystem : UIFormBase
         {
             Destroy(trans.gameObject);
         }
+        _uIDices.Clear();
     }
     
     public void SetChangeDisplayKeyCode(KeyCode key)
