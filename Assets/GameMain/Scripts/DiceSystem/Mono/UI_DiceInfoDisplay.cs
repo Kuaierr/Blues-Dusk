@@ -27,7 +27,7 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	public NoParameterEvent_SO onDiceMouseExit;
 
 	protected override void Start() {
-		OnDepthChanged(10);
+		OnDepthChanged(100);
 	}
 
 	protected override void OnEnable()

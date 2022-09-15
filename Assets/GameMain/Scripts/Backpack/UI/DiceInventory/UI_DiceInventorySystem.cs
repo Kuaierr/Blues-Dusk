@@ -16,6 +16,8 @@ public class UI_DiceInventorySystem : UIFormBase
     private int _currentIndex = -1;
     private List<UI_Dice> _uIDices = new List<UI_Dice>();
 
+    private KeyCode _changeDisplayKeyCode;
+    
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
@@ -50,7 +52,15 @@ public class UI_DiceInventorySystem : UIFormBase
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         if (Visible)
+        {
             KeybordControlling();
+            ChangeDisplayUpdate(_changeDisplayKeyCode);
+        }
+    }
+
+    public void SetChangeDisplayKeyCode(KeyCode key)
+    {
+        _changeDisplayKeyCode = key;
     }
 
     private void KeybordControlling()

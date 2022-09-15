@@ -69,6 +69,9 @@ public class UI_BackpackSystem : UIFormBase
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
-        ChangeDisplayUpdate(m_ChangeDisplayKeyCode);
+        if (Visible)
+        {
+            ChangeDisplayUpdate(m_ChangeDisplayKeyCode);
+        }
     }
 }

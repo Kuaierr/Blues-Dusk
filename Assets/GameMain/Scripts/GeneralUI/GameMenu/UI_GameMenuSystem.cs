@@ -20,7 +20,7 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        SetChangeKey(KeyCode.Escape);
+        SetChangeKey(KeyCode.Tab);
 
         InitGameMenuButtons();
     }
@@ -68,7 +68,9 @@ public class UI_GameMenuSystem : UIFormBase
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         ChangeDisplayUpdate(_changeDisplayKeyCode);
         if(Visible)
+        {
             KeybordControlling();
+        }
     }
 
     protected override void InternalSetVisible(bool visible)

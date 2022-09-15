@@ -156,11 +156,15 @@ public class UI_DiceSystem : UIFormChildBase
             _negativeDices.Add(dice);
             _negativeDiceSlots.Add(parent);
         }*/
-        
+        List<UI_DiceData_SO> datas = new List<UI_DiceData_SO>();
         for (int i = 0; i < inventory.StockMap.Length; i++)
         {
             if(inventory.StockMap[i] == null) continue;
-            
+            datas.Add((UI_DiceData_SO)inventory.StockMap[i].Data);
+        }
+        
+        for (int i = 0; i < datas.Count; i++)
+        {
             //按照2121进行排列
             if ((i + 1) % 3 == 0)
                 targetGrid = _gridLayoutByOne;
@@ -169,7 +173,7 @@ public class UI_DiceSystem : UIFormChildBase
 
 
             parent = Instantiate(_diceSlotPrefab, targetGrid).transform;
-            dice = Instantiate(_dicePrefab, parent).OnInit((UI_DiceData_SO)inventory.StockMap[i].Data, i, OnDiceClicked);
+            dice = Instantiate(_dicePrefab, parent).OnInit(datas[i], i, OnDiceClicked);
 
             _negativeDices.Add(dice);
             _negativeDiceSlots.Add(parent);
