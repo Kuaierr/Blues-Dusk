@@ -28,12 +28,16 @@ namespace UnityGameKit.Runtime
             "ccomplete",
             "dbranch",
             "doption",
-            "ddoption"
+            "ddoption",
+            "idoption",
+            "gdivider",
+            "gcomplete"
         };
         private List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
         {
             "ebranch",
-            "linkfrom"
+            "linkfrom",
+            "notuplink"
         };
 
         private List<string> declareSemantics = new List<string>() // 该语法集合声明节点名称
@@ -56,7 +60,7 @@ namespace UnityGameKit.Runtime
 
         public void Clear()
         {
-            
+
             m_DeclaredNodes.Clear();
             m_BranchNodes.Clear();
             m_LinkBuffer.Clear();
@@ -182,9 +186,32 @@ namespace UnityGameKit.Runtime
                         CachedLinkToDeclared(node, value);
                     }
 
+                    if (semantic == "gcomplete")
+                    {
+                        data.IsGlobalCompleter = true;
+                        data.GlobalCompleteConditons = value.Trim().RemoveParentheses().Split('&').ToList();
+                    }
+
+                    if (semantic == "gdivider")
+                    {
+                        data.IsGlobalDivider = true;
+                        data.IsFunctional = true;
+                        string[] cparams = value.Split(' ');
+                        if (cparams.Length < 3)
+                        {
+                            Utility.Debugger.LogError($"[Phaser] cdivider command require at least 3 parameters");
+                            return;
+                        }
+
+                        data.GlobalDividerConditions = cparams[0].Trim().RemoveParentheses().Split('&').ToList();
+                        // Utility.Debugger.Log(smallBracketRegex.Match(cparams[0]));
+                        CachedLinkToDeclared(node, cparams[1]);
+                        CachedLinkToDeclared(node, cparams[2]);
+                    }
+
                     if (semantic == "ccomplete")
                     {
-                        data.IsCompleter = true;
+                        data.IsLocalCompleter = true;
                         // Utility.Debugger.Log(smallBracketRegex.Match(value));
                         data.CompleteConditons = value.Trim().RemoveParentheses().Split('&').ToList();
                         foreach (var condition in data.CompleteConditons)
@@ -196,7 +223,7 @@ namespace UnityGameKit.Runtime
 
                     if (semantic == "cdivider")
                     {
-                        data.IsDivider = true;
+                        data.IsLocalDivider = true;
                         data.IsFunctional = true;
                         string[] cparams = value.Split(' ');
                         if (cparams.Length < 3)
