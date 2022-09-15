@@ -135,11 +135,13 @@ public class UI_DiceSystem : UIFormChildBase
 
     private void CreateDicesFromInventory()
     {
+        var inventory = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
+        
         Transform targetGrid = null;
         Transform parent = null;
         UI_Dice dice = null;
         //生成骰子
-        for (int i = 0; i < _tempDiceList.Count; i++)
+        /*for (int i = 0; i < _tempDiceList.Count; i++)
         {
             //按照2121进行排列
             if ((i + 1) % 3 == 0)
@@ -150,6 +152,24 @@ public class UI_DiceSystem : UIFormChildBase
 
             parent = Instantiate(_diceSlotPrefab, targetGrid).transform;
             dice = Instantiate(_dicePrefab, parent).OnInit(_tempDiceList[i], i, OnDiceClicked);
+
+            _negativeDices.Add(dice);
+            _negativeDiceSlots.Add(parent);
+        }*/
+        
+        for (int i = 0; i < inventory.StockMap.Length; i++)
+        {
+            if(inventory.StockMap[i] == null) continue;
+            
+            //按照2121进行排列
+            if ((i + 1) % 3 == 0)
+                targetGrid = _gridLayoutByOne;
+            else
+                targetGrid = _gridLayoutByTwo;
+
+
+            parent = Instantiate(_diceSlotPrefab, targetGrid).transform;
+            dice = Instantiate(_dicePrefab, parent).OnInit((UI_DiceData_SO)inventory.StockMap[i].Data, i, OnDiceClicked);
 
             _negativeDices.Add(dice);
             _negativeDiceSlots.Add(parent);

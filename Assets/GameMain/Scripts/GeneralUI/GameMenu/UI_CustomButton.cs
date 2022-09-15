@@ -22,7 +22,6 @@ public class UI_CustomButton : MonoBehaviour
 	
 	public void OnClicked()
 	{
-		Debug.Log(gameObject.name + " Clicked");
 		onClicked?.Invoke();
 		//TODO 这里可以播放按钮动画
 	}
