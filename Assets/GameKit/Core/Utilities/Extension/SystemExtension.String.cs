@@ -29,6 +29,11 @@ namespace GameKit
             return str.Replace("[", "").Replace("]", "");
         }
 
+        public static string RemoveEmptySpaceLine(this string str)
+        {
+            return str.Replace(" ", "").Replace("\n", "").Replace("\t", "");
+        }
+
         public static string RemoveLast(this string str)
         {
             return str.Remove(str.Length - 1);

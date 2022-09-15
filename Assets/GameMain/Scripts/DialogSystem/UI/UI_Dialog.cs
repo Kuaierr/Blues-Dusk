@@ -204,22 +204,56 @@ public class UI_Dialog : UIFormBase
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
+
+        if (tempDialogData.IsLocalCompleter)
+        {
+            for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
+            {
+                GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.CompleteConditons[j]] = true;
+            }
+        }
+
+        if (tempDialogData.IsGlobalCompleter)
+        {
+            for (int j = 0; j < tempDialogData.GlobalCompleteConditons.Count; j++)
+            {
+                GameSettings.current.SetBool(tempDialogData.GlobalCompleteConditons[j], true);
+                Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
+            }
+        }
+
         if (tempDialogData.IsFunctional)
         {
-            if (tempDialogData.IsCompleter)
-            {
-                for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
-                {
-                    GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.CompleteConditons[j]] = true;
-                }
-            }
-
-            if (tempDialogData.IsDivider)
+            if (tempDialogData.IsLocalDivider)
             {
                 bool isComplete = true;
                 for (int j = 0; j < tempDialogData.DividerConditions.Count; j++)
                 {
                     if (!GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.DividerConditions[j]])
+                    {
+                        isComplete = false;
+                        break;
+                    }
+                }
+
+                if (isComplete)
+                {
+                    nextNode = sonNode.GetChild(0);
+                }
+                else
+                {
+                    nextNode = sonNode.GetChild(1);
+                }
+            }
+
+            if (tempDialogData.IsGlobalDivider)
+            {
+
+                bool isComplete = true;
+                for (int j = 0; j < tempDialogData.GlobalDividerConditions.Count; j++)
+                {
+
+                    if (!GameSettings.current.GetBool(tempDialogData.GlobalDividerConditions[j]))
                     {
                         isComplete = false;
                         break;

@@ -7,13 +7,19 @@
 
 	[name-A1, linkfrom-A]伊森：分支线A1
 
-	[mood-work_laugh]卓拉：分支线A1后续，我笑了
+	[mood-work_laugh, gcomplete-(IsDavidDead)]卓拉：分支线A1后续，我笑了
 	[mood-work_anger]卓拉：姐姐我啊，可是要生气了
 	[mood-work_thinking]卓拉：让我想一想吧
 	[mood-work_Loss]卓拉：是吗原来是这样啊。
 	[mood-work_laugh]卓拉：呵呵哈哈哈，笑死我了
 
-	[linkto-A_end] 伊森：分支线A1结束
+	[gdivider-(IsDavidDead) DavidDead DavidNotDead]
+
+	[name-DavidDead, notuplink]卓拉：淦，大卫死了
+	
+	[name-DavidNotDead, notuplink]卓拉：还行，大卫还没死呢
+
+	[linkto-A_end, linkfrom-DavidDead, linkfrom-DavidNotDead] 伊森：分支线A1结束
 	
 	// 第一个分支选A2
 

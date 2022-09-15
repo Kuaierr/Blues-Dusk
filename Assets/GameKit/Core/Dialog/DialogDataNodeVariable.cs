@@ -10,14 +10,18 @@ namespace GameKit.Dialog
         public string Contents;
         public string MoodName;
         public bool IsFunctional = false;
-        public bool IsDivider = false;
-        public bool IsCompleter = false;
+        public bool IsLocalDivider = false;
+        public bool IsLocalCompleter = false;
+        public bool IsGlobalDivider = false;
+        public bool IsGlobalCompleter = false;
         public bool IsConditionalBranch = false;
         public bool IsDiceCheckBranch = false;
         public bool IsDiceCheckOption = false;
         public bool IsDiceDefaultOption = false;
         public List<string> DividerConditions;
         public List<string> CompleteConditons;
+        public List<string> GlobalCompleteConditons;
+        public List<string> GlobalDividerConditions;
         public Dictionary<string, int> DiceConditions;
         public DialogNodeCallback m_OnEnter, m_OnUpdate, m_OnExit;
 
@@ -26,8 +30,11 @@ namespace GameKit.Dialog
             this.Speaker = "<Default>";
             this.Contents = "<Default>";
             this.MoodName = "<Default>";
+
             this.DividerConditions = new List<string>();
             this.CompleteConditons = new List<string>();
+            this.GlobalCompleteConditons = new List<string>();
+            this.GlobalDividerConditions = new List<string>();
             this.DiceConditions = new Dictionary<string, int>();
         }
 
@@ -70,13 +77,17 @@ namespace GameKit.Dialog
             DiceConditions.Clear();
             CompleteConditons.Clear();
             DividerConditions.Clear();
+            GlobalDividerConditions.Clear();
+            GlobalCompleteConditons.Clear();
             IsFunctional = false;
-            IsDivider = false;
-            IsCompleter = false;
+            IsLocalDivider = false;
+            IsLocalCompleter = false;
             IsDiceCheckBranch = false;
             IsConditionalBranch = false;
             IsDiceCheckOption = false;
             IsDiceDefaultOption = false;
+            IsGlobalDivider = false;
+            IsGlobalCompleter = false;
             Speaker = "<Default>";
             Contents = "<Default>";
             MoodName = "<Default>";

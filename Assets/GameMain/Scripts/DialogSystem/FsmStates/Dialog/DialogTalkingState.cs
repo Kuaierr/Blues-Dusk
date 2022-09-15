@@ -58,8 +58,8 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                         return;
 
                     GameKitCenter.Dialog.CurrentTree.CurrentNode = tmpSonNode;
-
-
+                    // 如果是功能节点，就跳过
+                    GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.ExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
                     if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
                     {
                         // 如果下一个节点是选择节点，则先显示对话
@@ -69,6 +69,8 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                         MonoManager.instance.StartCoroutine(ParseBranch(fsmOwner));
                         return;
                     }
+
+
 
                     // 如果下一个节点是普通节点，则直接显示对话
                     fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
