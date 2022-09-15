@@ -21,26 +21,19 @@ public class UI_DiceInventorySystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-
-        var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
-        for (int i = 0; i < data.StockMap.Length; i++)
-        {
-            if(data.StockMap[i] == null) continue;
-            var dice = Instantiate(dicePrefab, diceContent).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null);
-            _uIDices.Add(dice);
-        }
-
-        Select(0);
+        
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
+        InitDiceInventoryUI();
     }
 
     protected override void OnResume()
     {
         base.OnResume();
+        InitDiceInventoryUI();
     }
 
     protected override void OnPause()
@@ -58,6 +51,29 @@ public class UI_DiceInventorySystem : UIFormBase
         }
     }
 
+    private void InitDiceInventoryUI()
+    {
+        ClearDices();
+        
+        var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
+        for (int i = 0; i < data.StockMap.Length; i++)
+        {
+            if(data.StockMap[i] == null) continue;
+            var dice = Instantiate(dicePrefab, diceContent).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null);
+            _uIDices.Add(dice);
+        }
+
+        Select(0);
+    }
+
+    private void ClearDices()
+    {
+        foreach (Transform trans in diceContent.transform)
+        {
+            Destroy(trans.gameObject);
+        }
+    }
+    
     public void SetChangeDisplayKeyCode(KeyCode key)
     {
         _changeDisplayKeyCode = key;

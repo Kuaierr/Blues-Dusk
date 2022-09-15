@@ -237,6 +237,10 @@ public class UI_DiceSystem : UIFormChildBase
 
         dice.transform.SetParent(_negativeDiceSlots[dice.Index]);
 
+        //自动卷动UI到指定位置
+        float normalizedHeight = (float)dice.Index / (float)_negativeDices.Count;
+        _scrollView.normalizedPosition = new Vector2(0, 1 - normalizedHeight);
+        
         //回到原本的位置
         dice.DOComplete();
         dice.transform.DOMove(_negativeDiceSlots[dice.Index].position, 0.5f)
@@ -449,7 +453,6 @@ public class UI_DiceSystem : UIFormChildBase
         if (_currentList == _negativeDices && _currentDiceIndex % 3 != 1)
         {
             float normalizedHeight = (float)_currentDiceIndex / (float)_negativeDices.Count;
-            Debug.Log(normalizedHeight);
             _scrollView.normalizedPosition = new Vector2(0, 1 - normalizedHeight);
         }
     }
