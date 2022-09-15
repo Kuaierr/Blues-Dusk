@@ -41,7 +41,7 @@ public class UI_DiceStartButton : UIFormChildBase, IPointerDownHandler, IPointer
     protected override void Start()
     {
         base.Start();
-        OnDepthChanged(10);
+        OnDepthChanged(100);
     }
 
     public void Clear()

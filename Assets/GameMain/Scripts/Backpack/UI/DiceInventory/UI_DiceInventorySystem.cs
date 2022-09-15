@@ -16,48 +16,59 @@ public class UI_DiceInventorySystem : UIFormBase
     private int _currentIndex = -1;
     private List<UI_Dice> _uIDices = new List<UI_Dice>();
 
+    private KeyCode _changeDisplayKeyCode;
+    
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
 
         var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
-        for (int i = 0; i < data.Count; i++)
+        for (int i = 0; i < data.StockMap.Length; i++)
         {
+            if(data.StockMap[i] == null) continue;
             var dice = Instantiate(dicePrefab, diceContent).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null);
             _uIDices.Add(dice);
         }
+
+        Select(0);
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        StartCoroutine("KeybordControlling");
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        StartCoroutine("KeybordControlling");
     }
 
     protected override void OnPause()
     {
         base.OnPause();
-        StopCoroutine("KeybordControlling");
     }
 
-    private IEnumerator KeybordControlling()
+    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
-        yield return 0;
-        Select(0);
-        while (true)
+        base.OnUpdate(elapseSeconds, realElapseSeconds);
+        if (Visible)
         {
-            if (GetKeyDown(KeyCode.W) || GetKeyDown(KeyCode.A))
-                Select(_currentIndex - 1);
-            if (GetKeyDown(KeyCode.S) || GetKeyDown(KeyCode.D))
-                Select(_currentIndex + 1);
-            yield return 0;
+            KeybordControlling();
+            ChangeDisplayUpdate(_changeDisplayKeyCode);
         }
+    }
+
+    public void SetChangeDisplayKeyCode(KeyCode key)
+    {
+        _changeDisplayKeyCode = key;
+    }
+
+    private void KeybordControlling()
+    {
+        if (GetKeyDown(KeyCode.W) || GetKeyDown(KeyCode.A))
+            Select(_currentIndex - 1);
+        if (GetKeyDown(KeyCode.S) || GetKeyDown(KeyCode.D))
+            Select(_currentIndex + 1);
     }
 
     private void Select(int index)

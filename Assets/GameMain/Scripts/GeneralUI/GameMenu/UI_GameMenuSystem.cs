@@ -20,7 +20,7 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        SetChangeKey(KeyCode.Escape);
+        SetChangeKey(KeyCode.Tab);
 
         InitGameMenuButtons();
     }
@@ -32,19 +32,14 @@ public class UI_GameMenuSystem : UIFormBase
         //buttons[2].OnInit(settingCallback);
     }
 
-    private IEnumerator KeybordControlling()
+    private void KeybordControlling()
     {
-        while (true)
-        {
-            if (InputManager.instance.GetKeyDown(KeyCode.A))
-                Select(_currentIndex-1);
-            if(InputManager.instance.GetKeyDown(KeyCode.D))
-                Select(_currentIndex+1);
-            if(InputManager.instance.GetKeyDown(KeyCode.Space))
-                buttons[_currentIndex].OnClicked();
-
-                yield return 0;
-        }
+        if (InputManager.instance.GetKeyDown(KeyCode.A))
+            Select(_currentIndex - 1);
+        if (InputManager.instance.GetKeyDown(KeyCode.D))
+            Select(_currentIndex + 1);
+        if (InputManager.instance.GetKeyDown(KeyCode.Space))
+            buttons[_currentIndex].OnClicked();
     }
 
     public void SetChangeKey(KeyCode keyCode)
@@ -61,19 +56,21 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnPause()
     {
         base.OnPause();
-        StopCoroutine("KeybordControlling");
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        StartCoroutine("KeybordControlling");
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         ChangeDisplayUpdate(_changeDisplayKeyCode);
+        if(Visible)
+        {
+            KeybordControlling();
+        }
     }
 
     protected override void InternalSetVisible(bool visible)
@@ -89,7 +86,7 @@ public class UI_GameMenuSystem : UIFormBase
 
     private void Select(int index)
     {
-        if (_currentIndex >= 0) 
+        if (_currentIndex >= 0)
             buttons[_currentIndex].OnReleased();
         if (index >= buttons.Count)
             index = 0;
@@ -104,12 +101,16 @@ public class UI_GameMenuSystem : UIFormBase
     private void OnPlayerBackpackButtonPressed()
     {
         OnOpenPlayerBackpackEventArgs args = OnOpenPlayerBackpackEventArgs.Create(this);
-        GameKitCenter.Event.Fire(OnOpenPlayerBackpackEventArgs.EnentId,args);
+        GameKitCenter.Event.Fire(OnOpenPlayerBackpackEventArgs.EnentId, args);
+        
+        OnPause();
     }
 
     private void OnDiceInventoryButtonPressed()
     {
         OnOpenDiceInventoryEventArgs args = OnOpenDiceInventoryEventArgs.Create(this);
-        GameKitCenter.Event.Fire(OnOpenDiceInventoryEventArgs.EventId,args);
+        GameKitCenter.Event.Fire(OnOpenDiceInventoryEventArgs.EventId, args);
+        
+        OnPause();
     }
 }
