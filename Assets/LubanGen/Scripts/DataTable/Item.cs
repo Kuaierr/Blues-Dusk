@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.DataTable
 {
 
-public sealed partial class Item :  Bright.Config.BeanBase 
+public sealed partial class Item :  Bright.Config.BeanBase, System.ICloneable 
 {
     public Item(JSONNode _json) 
     {
@@ -110,6 +110,11 @@ public sealed partial class Item :  Bright.Config.BeanBase
         + "Color:" + Color + ","
         + "InteractCallback:" + Bright.Common.StringUtil.CollectionToString(InteractCallback) + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new Item(this.Id, this.Name, this.ZhName, this.Desc, this.Type, this.Price, this.MaxOverlap, this.UpgradeToItemId, this.Icon, this.CloseUp, this.CanInteract, this.Color, this.InteractCallback);
     }
     
     partial void PostInit();

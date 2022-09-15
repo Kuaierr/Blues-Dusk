@@ -18,7 +18,7 @@ namespace {{x.namespace_with_top_module}}
 /// {{x.escape_comment}}
 /// </summary>
 {{~end~}}
-public {{x.cs_class_modifier}} partial class {{name}} : {{if parent_def_type}} {{parent}} {{else}} Bright.Config.BeanBase {{end}}
+public {{x.cs_class_modifier}} partial class {{name}} : {{if parent_def_type}} {{parent}} {{else}} Bright.Config.BeanBase, System.ICloneable {{end}}
 {
     public {{name}}(JSONNode _json) {{if parent_def_type}} : base(_json) {{end}}
     {
@@ -120,6 +120,11 @@ public {{x.cs_class_modifier}} partial class {{name}} : {{if parent_def_type}} {
         + "{{field.convention_name}}:" + {{cs_to_string field.convention_name field.ctype}} + ","
     {{~end~}}
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new {{name}}({{~ for field in export_fields ~}}this.{{field.convention_name}}{{if !for.last}}, {{end}}{{~end~}});
     }
     
     partial void PostInit();

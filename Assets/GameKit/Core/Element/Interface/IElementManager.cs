@@ -10,7 +10,5 @@ namespace GameKit.Element
         IElement[] GetAllElements();
         void HighlightAll();
         void StopHighlightAll();
-        void SaveAll();
-        void LoadAll();
     }
 }

@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.DataTable
 {
 
-public sealed partial class SceneConfig :  Bright.Config.BeanBase 
+public sealed partial class SceneConfig :  Bright.Config.BeanBase, System.ICloneable 
 {
     public SceneConfig(JSONNode _json) 
     {
@@ -62,6 +62,11 @@ public sealed partial class SceneConfig :  Bright.Config.BeanBase
         + "SceneAssetName:" + SceneAssetName + ","
         + "IsUnlocked:" + IsUnlocked + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new SceneConfig(this.SceneAssetName, this.IsUnlocked);
     }
     
     partial void PostInit();

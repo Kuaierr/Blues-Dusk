@@ -55,7 +55,8 @@ public class ProcedureChangeScene : ProcedureBase
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
         if (!m_IsScenePreloaded)
         {
-            GameKitCenter.Element.SaveAll();
+            GameKitCenter.Event.Fire(this, SaveSettingsEventArgs.Create(null));
+            GameKitCenter.Setting.Save();
             if (GameKitCenter.Scheduler.MultiScene)
                 GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName));
             else
@@ -116,7 +117,8 @@ public class ProcedureChangeScene : ProcedureBase
     private void OnSceneLoad()
     {
         GameKitCenter.Element.Clear();
-        GameKitCenter.Element.LoadAll();
+        GameKitCenter.Setting.Load();
+        GameKitCenter.Event.Fire(this, LoadSettingsEventArgs.Create(null));
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
@@ -129,7 +131,7 @@ public class ProcedureChangeScene : ProcedureBase
             // Debug.Log(targetTrans.position);
             // Debug.Log(m_Prototyper.transform.position);
             // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
-            QuickCinemachineCamera.current.SetFollowTarget(m_Prototyper.transform);
+            QuickCinemachineCamera.current.SetFollow(m_Prototyper.transform);
             OnSceneLoadEnd();
         });
     }

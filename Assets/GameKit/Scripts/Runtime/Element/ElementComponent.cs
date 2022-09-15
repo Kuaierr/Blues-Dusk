@@ -79,16 +79,9 @@ namespace UnityGameKit.Runtime
             m_ElementManager.StopHighlightAll();
         }
 
-        public void SaveAll()
-        {
-            m_ElementManager.SaveAll();
-            m_SettingManager.Save();
-        }
-
         public void LoadAll()
         {
             m_SettingManager.Load();
-            m_ElementManager.LoadAll();
         }
 
         private void Update()

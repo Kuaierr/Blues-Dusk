@@ -29,6 +29,7 @@ namespace UnityGameKit.Runtime
         private EventHandler<DoTransitionCompleteEventArgs> m_SceneTransitEventHandler = null;
         private List<string> m_CachedLoadScenes = null;
         private List<string> m_CachedUnloadScenes = null;
+        private Sequence m_TransitionSequence;
 
         public bool MultiScene
         {
@@ -69,6 +70,7 @@ namespace UnityGameKit.Runtime
             m_CachedLoadScenes = new List<string>();
             m_CachedUnloadScenes = new List<string>();
             m_Switcher = GetComponentInChildren<Switcher>();
+            m_TransitionSequence = DOTween.Sequence();
         }
 
         private void Start()
@@ -159,21 +161,22 @@ namespace UnityGameKit.Runtime
 
         public void DoTransition(List<string> loadNames, List<string> unloadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
         {
+            m_TransitionSequence.Kill();
             if (switchType == SceneTransitionType.Swipe)
             {
                 m_Switcher.swiper.gameObject.SetActive(true);
-                m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
+                m_TransitionSequence.Append(m_Switcher.swiper.DOLocalMoveX(0, 0.5f).OnComplete(() =>
                 {
                     m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
-                });
+                }));
             }
             else if (switchType == SceneTransitionType.Fade)
             {
                 m_Switcher.gradienter.gameObject.SetActive(true);
-                m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+                m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
                 {
                     m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
-                });
+                }));
             }
             else if (switchType == SceneTransitionType.Animation)
             {
@@ -187,10 +190,10 @@ namespace UnityGameKit.Runtime
             else if (switchType == SceneTransitionType.LoadingScene)
             {
                 m_Switcher.gradienter.gameObject.SetActive(true);
-                m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+                m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
                 {
                     m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
-                });
+                }));
             }
         }
 
@@ -301,15 +304,16 @@ namespace UnityGameKit.Runtime
 
         private void UndoTransition(SceneTransitionType switchType)
         {
+            m_TransitionSequence.Kill();
             if (switchType == SceneTransitionType.Swipe)
             {
-                m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(HideSwitchSwiper);
+                m_TransitionSequence.Append(m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(HideSwitchSwiper));
             }
             else if (switchType == SceneTransitionType.Fade)
             {
                 Log.Success("Fade");
                 m_Switcher.gradienter.SetAlpha(1f);
-                m_Switcher.gradienter.DOFade(0f, 5f).OnComplete(HideSwitchFader);
+                m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(0f, 5f).OnComplete(HideSwitchFader));
             }
             else if (switchType == SceneTransitionType.Animation)
             {

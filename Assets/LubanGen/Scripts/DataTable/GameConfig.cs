@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.DataTable
 {
 
-public sealed partial class GameConfig :  Bright.Config.BeanBase 
+public sealed partial class GameConfig :  Bright.Config.BeanBase, System.ICloneable 
 {
     public GameConfig(JSONNode _json) 
     {
@@ -68,6 +68,11 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase
         + "CurrentWeekday:" + CurrentWeekday + ","
         + "CurrentWeek:" + CurrentWeek + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new GameConfig(this.IsDavidDead, this.IsRebellionStart, this.CurrentDay, this.CurrentWeekday, this.CurrentWeek);
     }
     
     partial void PostInit();
