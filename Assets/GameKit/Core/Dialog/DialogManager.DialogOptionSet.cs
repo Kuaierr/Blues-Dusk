@@ -37,9 +37,11 @@ namespace GameKit.Dialog
                     DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
                     string contents = data.Contents;
                     if (data.IsDiceCheckOption)
-                        dialogOptions.CreateOption(i, contents, data.DiceConditions);
+                        dialogOptions.CreateOption(i, contents, true, data.DiceConditions);
+                    else if(data.IsDiceDefaultOption)
+                        dialogOptions.CreateOption(i, contents, false);
                     else
-                        dialogOptions.CreateOption(i, contents);
+                        dialogOptions.CreateOption(i, contents, true);
                 }
                 return dialogOptions;
             }
@@ -53,16 +55,18 @@ namespace GameKit.Dialog
                     DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
                     string contents = data.Contents;
                     if (data.IsDiceCheckOption)
-                        dialogOptions.CreateOption(i, contents, data.DiceConditions);
+                        dialogOptions.CreateOption(i, contents, true, data.DiceConditions);
+                    else if(data.IsDiceDefaultOption)
+                        dialogOptions.CreateOption(i, contents, false);
                     else
-                        dialogOptions.CreateOption(i, contents);
+                        dialogOptions.CreateOption(i, contents, true);
                 }
                 return dialogOptions;
             }
 
-            private void CreateOption(int index, string text, Dictionary<string, int> diceConditions = null)
+            private void CreateOption(int index, string text, bool canShow, Dictionary<string, int> diceConditions = null)
             {
-                DialogOption newOption = DialogOption.Create(index, text, diceConditions);
+                DialogOption newOption = DialogOption.Create(index, text, canShow, diceConditions);
                 m_Options.Add(newOption);
             }
 

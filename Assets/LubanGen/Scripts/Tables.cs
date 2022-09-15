@@ -18,6 +18,7 @@ public sealed partial class Tables
     public DataTable.TbDefaultSetting TbDefaultSetting {get; }
     public DataTable.TbGameConfig TbGameConfig {get; }
     public DataTable.TbUIConfig TbUIConfig {get; }
+    public DataTable.TbSceneConfig TbSceneConfig {get; }
 
     public System.Collections.Generic.Dictionary<string, object> Table {get; private set;}
 
@@ -34,6 +35,8 @@ public sealed partial class Tables
         tables.Add("DataTable.TbGameConfig", TbGameConfig);
         TbUIConfig = new DataTable.TbUIConfig(loader("datatable_tbuiconfig")); 
         tables.Add("DataTable.TbUIConfig", TbUIConfig);
+        TbSceneConfig = new DataTable.TbSceneConfig(loader("datatable_tbsceneconfig")); 
+        tables.Add("DataTable.TbSceneConfig", TbSceneConfig);
         PostInit();
 
         TbItem.Resolve(tables); 
@@ -41,6 +44,7 @@ public sealed partial class Tables
         TbDefaultSetting.Resolve(tables); 
         TbGameConfig.Resolve(tables); 
         TbUIConfig.Resolve(tables); 
+        TbSceneConfig.Resolve(tables); 
         PostResolve();
 
         Table = new System.Collections.Generic.Dictionary<string, object>(tables);
@@ -53,6 +57,7 @@ public sealed partial class Tables
         TbDefaultSetting.TranslateText(translator); 
         TbGameConfig.TranslateText(translator); 
         TbUIConfig.TranslateText(translator); 
+        TbSceneConfig.TranslateText(translator); 
     }
     
     partial void PostInit();

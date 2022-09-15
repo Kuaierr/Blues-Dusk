@@ -12,9 +12,10 @@ namespace GameKit.Dialog
         public bool IsFunctional = false;
         public bool IsDivider = false;
         public bool IsCompleter = false;
-        public bool IsDiceCheckBranch = false;
         public bool IsConditionalBranch = false;
+        public bool IsDiceCheckBranch = false;
         public bool IsDiceCheckOption = false;
+        public bool IsDiceDefaultOption = false;
         public List<string> DividerConditions;
         public List<string> CompleteConditons;
         public Dictionary<string, int> DiceConditions;
@@ -75,6 +76,7 @@ namespace GameKit.Dialog
             IsDiceCheckBranch = false;
             IsConditionalBranch = false;
             IsDiceCheckOption = false;
+            IsDiceDefaultOption = false;
             Speaker = "<Default>";
             Contents = "<Default>";
             MoodName = "<Default>";

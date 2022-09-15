@@ -13,14 +13,7 @@ public class DoorElement : GameElementBase
         base.OnInteract();
         if (CanPass && TargetScene != "<None>")
         {
-            // CursorSystem.current.Disable();
-            ProcedureMain changeScene = (ProcedureMain)GameKitCenter.Procedure.GetProcedure<ProcedureMain>();
-            changeScene.SetNextSceneName(TargetScene);
-            GameKitCenter.Procedure.SetExitDoorName(Name);
-            changeScene.ExternalChangeState<ProcedureChangeScene>();
-            // GameKitCenter.Procedure.StartProcedure<ProcedureChangeScene>();
-            // CursorSystem.current.Enable();
-            // GameKitCenter.Scheduler.SwitchSceneByDefault(TargetScene, onSuccess: () => { CursorSystem.current.Enable(); });
+            GameKitCenter.Procedure.ChangeSceneByDoor(TargetScene, Name);
         }
         else if (TargetScene != "<None>")
         {

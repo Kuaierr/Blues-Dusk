@@ -11,13 +11,13 @@ using GameKit.Dialog;
 public class UI_Response : UIFormChildBase
 {
     public List<UI_Option> UIOptions = new List<UI_Option>();
-    public bool isActive = false;
+    private List<UI_Option> m_ActiveUIOptions = new List<UI_Option>();
     private List<IDialogOption> m_CurrentOptions = new List<IDialogOption>();
-    private VerticalLayoutGroup verticalLayoutGroup;
+    private int m_CachedDefaultOptionIndex = 0;
     private int m_CurrentIndex = 0;
     private int m_LastIndex = -1;
-    private int m_CachedActiveOptionNum = 0;
     private bool m_CachedIsDiceCheck = false;
+    private bool m_IsActive = false;
     [SerializeField] private Animator m_MasterAnimator;
     [SerializeField] private Animator m_DiceAnimator;
 
@@ -26,6 +26,14 @@ public class UI_Response : UIFormChildBase
         get
         {
             return m_CurrentIndex;
+        }
+    }
+
+    public int DefaultOptionIndex
+    {
+        get
+        {
+            return m_CachedDefaultOptionIndex;
         }
     }
 
@@ -45,26 +53,38 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public override void OnInit(int parentDepth)
+    public bool AllLocked
+    {
+        get
+        {
+            for (int i = 0; i < m_ActiveUIOptions.Count; i++)
+            {
+                if (!m_ActiveUIOptions[i].IsLocked)
+                    return false;
+            }
+            return true;
+        }
+    }
+
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
         if (m_MasterAnimator != null)
             m_MasterAnimator = GetComponent<Animator>();
-        verticalLayoutGroup = GetComponentInChildren<VerticalLayoutGroup>();
         UIOptions = GetComponentsInChildren<UI_Option>(true).ToList();
         for (int i = 0; i < UIOptions.Count; i++)
-            UIOptions[i].OnInit(this);
+            UIOptions[i].Init(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        m_ActiveUIOptions = new List<UI_Option>();
     }
 
     public override void OnUpdate()
     {
-        if (!isActive)
+        if (!m_IsActive)
             return;
 
-
         bool allOptionLocked = true;
-        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
         {
             UIOptions[i].Update();
             allOptionLocked &= UIOptions[i].IsLocked;
@@ -80,15 +100,15 @@ public class UI_Response : UIFormChildBase
             do
             {
                 m_LastIndex = m_CurrentIndex;
-                m_CurrentIndex = (m_CurrentIndex + 1) % m_CurrentOptions.Count;
+                m_CurrentIndex = (m_CurrentIndex + 1) % m_ActiveUIOptions.Count;
                 deadLoopPreventer++;
-                Log.Info(m_CurrentIndex + " >> " + UIOptions[m_CurrentIndex].IsLocked);
+                Log.Info(m_CurrentIndex + " >> " + m_ActiveUIOptions[m_CurrentIndex].IsLocked);
                 if (deadLoopPreventer > 20)
                 {
                     Log.Warning("Has DeadLoop Down.");
                     break;
                 }
-            } while (UIOptions[m_CurrentIndex].IsLocked);
+            } while (m_ActiveUIOptions[m_CurrentIndex].IsLocked);
             EmphasizeSelectedOption(m_CurrentIndex);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -97,56 +117,53 @@ public class UI_Response : UIFormChildBase
             do
             {
                 m_LastIndex = m_CurrentIndex;
-                m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_CurrentOptions.Count - 1 : m_CurrentIndex - 1;
+                m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_ActiveUIOptions.Count - 1 : m_CurrentIndex - 1;
                 deadLoopPreventer++;
-                Log.Info(m_CurrentIndex + " >> " + UIOptions[m_CurrentIndex].IsLocked);
+                Log.Info(m_CurrentIndex + " >> " + m_ActiveUIOptions[m_CurrentIndex].IsLocked);
                 if (deadLoopPreventer > 20)
                 {
                     Log.Warning("Has DeadLoop Up.");
                     break;
                 }
-            } while (UIOptions[m_CurrentIndex].IsLocked);
+            } while (m_ActiveUIOptions[m_CurrentIndex].IsLocked);
             EmphasizeSelectedOption(m_CurrentIndex);
         }
     }
 
-    public override void OnShow(UnityAction callback = null)
+    public void Show(UnityAction callback = null)
     {
         Log.Info("Response OnShow");
-        isActive = true;
+        m_IsActive = true;
         m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: () =>
         {
             SetDiceActive(true);
         });
         ResetCurIndex();
-        for (int i = 0; i < m_CurrentOptions.Count; i++)
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
         {
-            if (i >= UIOptions.Count)
-            {
-                Log.Fatal("Too many options.");
+            if (i >= m_ActiveUIOptions.Count)
                 continue;
-            }
-            UIOptions[i].OnReEnable(i);
-            UIOptions[i].OnShow();
-            UIOptions[i].Content.text = m_CurrentOptions[i].Text;
+            m_ActiveUIOptions[i].Register(i);
+            m_ActiveUIOptions[i].Show();
+            m_ActiveUIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
         EmphasizeFirst();
         // EmphasizeSelectedOption(0);
     }
 
-    public override void OnHide(UnityAction callback = null)
+    public void Hide(UnityAction callback = null)
     {
         Log.Info("Response OnHide");
         m_MasterAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
         m_CurrentOptions.Clear();
         ResetCurIndex();
-        isActive = false;
-        m_CachedActiveOptionNum = 0;
+        m_IsActive = false;
+        m_ActiveUIOptions.Clear();
         for (int i = 0; i < UIOptions.Count; i++)
         {
-            UIOptions[i].OnHide();
+            UIOptions[i].Hide();
         }
         SetDiceActive(false);
     }
@@ -192,20 +209,26 @@ public class UI_Response : UIFormChildBase
     // 共识： UIOptions 和  m_CurrentOptions 在 Index 上是一一对应的
     public void UpdateOptions(IDialogOptionSet optionSet, bool isDiceCheck = false)
     {
+        m_ActiveUIOptions.Clear();
         m_CurrentOptions = optionSet.Options;
         m_CachedIsDiceCheck = isDiceCheck;
         // Log.Warning(optionSet.Options.Count + " >> " + UIOptions.Count);
         // 如果是筛检，则在显示Options时锁定所有选项
-        m_CachedActiveOptionNum = optionSet.Options.Count;
-        for (int i = 0; i < optionSet.Options.Count; i++)
+        for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
-            if (m_CachedIsDiceCheck)
+            if (m_CurrentOptions[i].CanShow)
             {
-                UIOptions[i].Lock();
-                UIOptions[i].ShowDiceIndicator(optionSet.Options[i]);
+                m_ActiveUIOptions.Add(UIOptions[i]);
+                if (m_CachedIsDiceCheck)
+                {
+                    UIOptions[i].Lock();
+                    UIOptions[i].ShowDiceIndicator(m_CurrentOptions[i]);
+                }
+                else if (UIOptions[i].IsLocked)
+                    UIOptions[i].Unlock();
             }
-            else if (UIOptions[i].IsLocked)
-                UIOptions[i].Unlock();
+            else
+                m_CachedDefaultOptionIndex = i;
         }
     }
 
@@ -218,6 +241,8 @@ public class UI_Response : UIFormChildBase
         Dictionary<string, int> serialResults = diceResult.SerializableSum;
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
+            if (!m_CurrentOptions[i].CanShow)
+                continue;
             // 默认可以解锁
             bool canUnlock = true;
             // 根据筛子结果给Option充电
@@ -252,9 +277,9 @@ public class UI_Response : UIFormChildBase
 
     private UI_Option FindFirstValidOption()
     {
-        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
         {
-            if (!UIOptions[i].IsLocked)
+            if (!UIOptions[i].IsLocked && m_CurrentOptions[i].CanShow)
             {
                 return UIOptions[i];
             }

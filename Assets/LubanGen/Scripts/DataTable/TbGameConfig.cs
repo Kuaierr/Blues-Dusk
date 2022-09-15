@@ -17,7 +17,8 @@ namespace LubanConfig.DataTable
 public sealed partial class TbGameConfig
 {
 
-     private readonly DataTable.GameConfig _data;
+    private readonly DataTable.GameConfig _data;
+    public DataTable.GameConfig Data => _data;
 
     public TbGameConfig(JSONNode _json)
     {

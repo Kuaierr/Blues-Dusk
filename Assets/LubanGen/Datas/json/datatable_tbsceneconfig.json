@@ -1,0 +1,22 @@
+[
+  {
+    "scene_asset_name": "S_Parlor",
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_Station",
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_Bar",
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_FengHospital",
+    "is_unlocked": "False"
+  },
+  {
+    "scene_asset_name": "S_Tower",
+    "is_unlocked": "False"
+  }
+]

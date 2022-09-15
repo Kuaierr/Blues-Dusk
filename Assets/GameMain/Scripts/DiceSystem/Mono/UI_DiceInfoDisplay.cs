@@ -30,14 +30,16 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 		OnDepthChanged(10);
 	}
 
-	private void OnEnable()
+	protected override void OnEnable()
 	{
+		base.OnEnable();
 		onDiceMouseEnter.action += DisplayDiceInfo;
 		onDiceMouseExit.action += HideDiceInfo;
 	}
 
-	private void OnDisable()
+	protected override void OnDisable()
 	{
+		base.OnDisable();
 		onDiceMouseEnter.action -= DisplayDiceInfo;
 		onDiceMouseExit.action -= HideDiceInfo;
 	}

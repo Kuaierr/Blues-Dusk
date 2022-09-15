@@ -1,7 +1,7 @@
 using GameKit.Setting;
 namespace GameKit.Element
 {
-    public interface IElement : ISaveable
+    public interface IElement
     {
         string Name { get; }
         int DataId { get; }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using GameKit.Element;
 using GameKit.Setting;
+using GameKit.Event;
 using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 
@@ -34,17 +35,22 @@ public abstract class GameElementBase : ElementBase
         m_Outline.OutlineWidth = OutlineWidth;
         m_Outline.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Interactive");
-        // OnLoad();
+        GameKitCenter.Event.Subscribe(SaveSettingsEventArgs.EventId, OnSave);
+        GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
-    public override void OnLoad()
+    public void OnLoad(object sender, GameEventArgs e)
     {
+        if (this == null)
+            return;
         bool b_active = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "Is Active"), true);
         gameObject.SetActive(b_active);
     }
 
-    public override void OnSave()
+    public void OnSave(object sender, GameEventArgs e)
     {
+        if (this == null)
+            return;
         GameKitCenter.Setting.SetBool(string.Format("{0}({1})", Name, "Is Active"), gameObject.activeSelf);
     }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.Net.Sockets;
 using UnityEngine;
@@ -63,6 +64,11 @@ namespace UnityGameKit.Runtime
             return m_ElementManager.GetElement(name);
         }
 
+        public IElement[] GetAllElements()
+        {
+            return m_ElementManager.GetAllElements();
+        }
+
         public void HighLightAll()
         {
             m_ElementManager.HighlightAll();
@@ -73,16 +79,9 @@ namespace UnityGameKit.Runtime
             m_ElementManager.StopHighlightAll();
         }
 
-        public void SaveAll()
-        {
-            m_ElementManager.SaveAll();
-            m_SettingManager.Save();
-        }
-
         public void LoadAll()
         {
             m_SettingManager.Load();
-            m_ElementManager.LoadAll();
         }
 
         private void Update()

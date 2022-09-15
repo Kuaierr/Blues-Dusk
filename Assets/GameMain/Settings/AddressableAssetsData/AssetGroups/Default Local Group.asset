@@ -21,32 +21,44 @@ MonoBehaviour:
     m_Address: Assets/LubanGen/Datas/json
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 2981c93a161a18f4c912aa5a30ad1994
-    m_Address: Assets/GameKit/Entity/Demo/Reousrce/Prefab/CubeDemo.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 4480cb6d9cc3f4f469f63bca4bcfb3f8
-    m_Address: Assets/GameMain/UI/UIForms/UI_Backpack.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 357be379c3c269e408a28ca1c5460251
-    m_Address: Assets/GameMain/UI/UIForms/UI_Dialog.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 024aa34f39672c44f8e681bf11e90434
     m_Address: Assets/GameMain/Elements/Prototyper.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: a416c05d7ba37fe48a1f3c987425d562
-    m_Address: Assets/GameMain/Scenes/S_Parlor.unity
+  - m_GUID: 92b5dce7095cc964994f0dcabf28fb00
+    m_Address: Assets/GameMain/Scenes/S_FengHospital.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2d2ace501e0d8b54e8e894c95e92d417
+    m_Address: Assets/GameMain/Scenes/S_Station.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2b986de395842dd4aa6df54744b3ac4b
+    m_Address: Assets/GameMain/Data/Dialog/Text/Raw
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7fed6aa9c6c302f468f8560d3f14da35
+    m_Address: Assets/GameMain/Arts/Test
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c8956367e8cb1646a101c29ed37eb05
+    m_Address: Assets/GameMain/UI/UIForms
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51db12ad1e5768f4cada1532ce7aabae
+    m_Address: Assets/GameMain/Scenes/S_Tower.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e2208c0c6953dd49922725d63d757da
+    m_Address: Assets/GameMain/Scenes/S_Template.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9fc0d4010bbf28b4594072e72b8655ab
     m_Address: Assets/GameMain/Scenes/S_Toilet.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 2b986de395842dd4aa6df54744b3ac4b
-    m_Address: Assets/GameMain/Data/Dialog/Text/Raw
+  - m_GUID: a416c05d7ba37fe48a1f3c987425d562
+    m_Address: Assets/GameMain/Scenes/S_Parlor.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

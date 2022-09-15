@@ -22,9 +22,6 @@ public abstract class ElementBase : MonoBehaviour, IElement
         }
     }
     public abstract void OnInit();
-    public abstract void OnLoad();
-    public abstract void OnSave();
-
     private void Start()
     {
         GameKitCenter.Element.RegisterElement(this);

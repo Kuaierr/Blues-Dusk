@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.DataTable
 {
 
-public sealed partial class UIConfig :  Bright.Config.BeanBase 
+public sealed partial class UIConfig :  Bright.Config.BeanBase, System.ICloneable 
 {
     public UIConfig(JSONNode _json) 
     {
@@ -83,6 +83,11 @@ public sealed partial class UIConfig :  Bright.Config.BeanBase
         + "AllowMultiInstance:" + AllowMultiInstance + ","
         + "PauseCoveredUiForm:" + PauseCoveredUiForm + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new UIConfig(this.Id, this.AssetName, this.UiGroupName, this.AllowMultiInstance, this.PauseCoveredUiForm);
     }
     
     partial void PostInit();

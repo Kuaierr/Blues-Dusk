@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.ItemBean
 {
 
-public sealed partial class InteractCallback :  Bright.Config.BeanBase 
+public sealed partial class InteractCallback :  Bright.Config.BeanBase, System.ICloneable 
 {
     public InteractCallback(JSONNode _json) 
     {
@@ -69,6 +69,11 @@ public sealed partial class InteractCallback :  Bright.Config.BeanBase
         + "CallbackType:" + CallbackType + ","
         + "CallbackArgs:" + CallbackArgs + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new InteractCallback(this.Id, this.CallbackType, this.CallbackArgs);
     }
     
     partial void PostInit();

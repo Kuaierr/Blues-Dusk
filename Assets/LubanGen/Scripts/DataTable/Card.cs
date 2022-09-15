@@ -14,7 +14,7 @@ using SimpleJSON;
 namespace LubanConfig.DataTable
 {
 
-public sealed partial class Card :  Bright.Config.BeanBase 
+public sealed partial class Card :  Bright.Config.BeanBase, System.ICloneable 
 {
     public Card(JSONNode _json) 
     {
@@ -76,6 +76,11 @@ public sealed partial class Card :  Bright.Config.BeanBase
         + "ZhName:" + ZhName + ","
         + "Desc:" + Desc + ","
         + "}";
+    }
+
+    public object Clone()
+    {
+        return new Card(this.Id, this.EnName, this.ZhName, this.Desc);
     }
     
     partial void PostInit();

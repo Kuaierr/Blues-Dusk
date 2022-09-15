@@ -33,13 +33,16 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
     
     [Space]
     public List<UI_DiceFace> faces;
-
+    
     [Space(15)]
     public DiceFaceEvent_SO onDiceMouseEnter;
 
     public NoParameterEvent_SO onDiceMouseExit;
 
     public Dice_SuitType Result { get; private set; }
+
+    public UI_DiceData_SO Data => diceData;
+    //public RectTransform RectTransform { get; private set; }
 
     public bool Stopped => _rb.velocity == Vector3.zero;
     private Vector3 _finalRotation;
@@ -56,6 +59,7 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
     {
         if (data == null)
             Debug.LogError("DiceData is null");
+        
         diceData = data;
 
         for (int i = 0; i < data.faceDatas.Count; i++)
@@ -63,7 +67,7 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
 
         Index = index;
         onClick += onClickCallback;
-        
+
         OnDisSelected();
 
         return this;

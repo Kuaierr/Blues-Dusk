@@ -18,6 +18,12 @@ public sealed class DefaultInventoryHelper : InventoryHelperBase
             }
             return stock;
         }
+        else if(data.GetType() == typeof(UI_DiceData_SO)) // UpdateInfo 临时加的
+        {
+            stock.OnHelperInit(1, 1);
+            
+            return stock;
+        }
         return stock;
     }
 

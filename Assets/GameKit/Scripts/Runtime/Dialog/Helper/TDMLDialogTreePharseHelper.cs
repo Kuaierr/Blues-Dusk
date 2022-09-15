@@ -27,7 +27,8 @@ namespace UnityGameKit.Runtime
             "cdivider",
             "ccomplete",
             "dbranch",
-            "doption"
+            "doption",
+            "ddoption"
         };
         private List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
         {
@@ -232,6 +233,11 @@ namespace UnityGameKit.Runtime
                             Log.Error(e.Message);
                             throw;
                         }
+                    }
+
+                    if (semantic == "ddoption")
+                    {
+                        data.IsDiceDefaultOption = true;
                     }
                 }
 

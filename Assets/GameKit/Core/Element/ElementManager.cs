@@ -36,6 +36,11 @@ namespace GameKit.Element
             m_CachedElements.Remove(element);
         }
 
+        public IElement[] GetAllElements()
+        {
+            return m_CachedElements.ToArray();
+        }
+
         public IElement GetElement(string name)
         {
             for (int i = 0; i < m_CachedElements.Count; i++)
@@ -60,22 +65,6 @@ namespace GameKit.Element
             for (int i = 0; i < m_CachedElements.Count; i++)
             {
                 m_CachedElements[i].OnHighlightExit();
-            }
-        }
-
-        public void SaveAll()
-        {
-            for (int i = 0; i < m_CachedElements.Count; i++)
-            {
-                m_CachedElements[i].OnSave();
-            }
-        }
-
-        public void LoadAll()
-        {
-            for (int i = 0; i < m_CachedElements.Count; i++)
-            {
-                m_CachedElements[i].OnLoad();
             }
         }
     }

@@ -14,6 +14,7 @@ public partial class DataComponent : GameKitComponent
     private TbCard m_CardTable;
     private TbUIConfig m_UIConfigTable;
     private TbGameConfig m_GameConfigTable;
+    private TbSceneConfig m_SceneConfigTable;
     public TbItem ItemTable
     {
         get
@@ -51,6 +52,16 @@ public partial class DataComponent : GameKitComponent
             if (m_GameConfigTable == null)
                 m_GameConfigTable = DataTables.TbGameConfig;
             return m_GameConfigTable;
+        }
+    }
+
+    public TbSceneConfig SceneConfigTable
+    {
+        get
+        {
+            if (m_SceneConfigTable == null)
+                m_SceneConfigTable = DataTables.TbSceneConfig;
+            return m_SceneConfigTable;
         }
     }
 }

@@ -7,9 +7,8 @@ namespace GameKit.Element
         void RemoveElement(IElement element);
         void RegisterElement(IElement element);
         IElement GetElement(string name);
+        IElement[] GetAllElements();
         void HighlightAll();
         void StopHighlightAll();
-        void SaveAll();
-        void LoadAll();
     }
 }

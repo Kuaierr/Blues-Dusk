@@ -41,7 +41,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         }
     }
 
-    public void OnInit(UI_Response response)
+    public void Init(UI_Response response)
     {
         base.OnInit(response.Depth);
         this.m_Response = response;
@@ -49,17 +49,22 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
         m_Content = GetComponentInChildren<TextMeshProUGUI>();
         for (int i = 0; i < OptionIndicators.Count; i++)
         {
-            OptionIndicators[i].OnInit(Depth);
+            OptionIndicators[i].Init(Depth);
         }
     }
 
-    public override void OnHide(UnityAction callback = null)
+    public void Hide(UnityAction callback = null)
     {
         base.OnHide(callback);
         ResetOptionIndicator();
     }
 
-    public void OnReEnable(int Index)
+    public void Show(UnityAction callback = null)
+    {
+        base.OnShow(callback);
+    }
+
+    public void Register(int Index)
     {
         this.m_Index = Index;
     }

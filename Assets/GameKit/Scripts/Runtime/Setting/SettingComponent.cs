@@ -181,8 +181,7 @@ namespace UnityGameKit.Runtime
         }
 
         public void SetObject(string settingName, object obj)
-        {
-            
+        { 
             m_SettingManager.SetObject(settingName, obj);
         }
     }

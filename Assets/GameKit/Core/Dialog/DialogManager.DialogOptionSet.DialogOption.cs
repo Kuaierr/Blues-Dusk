@@ -10,6 +10,7 @@ namespace GameKit.Dialog
                 private Dictionary<string, int> m_DiceConditions;
                 private int m_SerialId;
                 private string m_Text;
+                private bool m_CanShow;
                 public int Id
                 {
                     get
@@ -25,11 +26,11 @@ namespace GameKit.Dialog
                     }
                 }
 
-                public bool HasCondition
+                public bool CanShow
                 {
                     get
                     {
-                        return m_DiceConditions.Count > 0;
+                        return m_CanShow;
                     }
                 }
 
@@ -48,11 +49,12 @@ namespace GameKit.Dialog
                     this.m_DiceConditions = new Dictionary<string, int>();
                 }
 
-                public static DialogOption Create(int index, string text, Dictionary<string, int> diceConditions = null)
+                public static DialogOption Create(int index, string text, bool canShow, Dictionary<string, int> diceConditions = null)
                 {
                     DialogOption dialogOption = ReferencePool.Acquire<DialogOption>();
                     dialogOption.m_SerialId = index;
                     dialogOption.m_Text = text;
+                    dialogOption.m_CanShow = canShow;
                     if (diceConditions != null)
                         dialogOption.m_DiceConditions = diceConditions;
                     return dialogOption;

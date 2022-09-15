@@ -135,7 +135,8 @@ public sealed partial class {{name}}
 
     {{~else~}}
 
-     private readonly {{cs_define_type value_type}} _data;
+    private readonly {{cs_define_type value_type}} _data;
+    public {{cs_define_type value_type}} Data => _data;
 
     public {{name}}(JSONNode _json)
     {

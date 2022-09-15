@@ -4,7 +4,7 @@ using GameKit.Element;
 using LubanConfig.DataTable;
 [DisallowMultipleComponent]
 [AddComponentMenu("BluesDusk/Collect Object")]
-public class CollectElement : GameElementBase, ICollective
+public class CollectElement : GameElementBase
 {
     public bool CanCollect = true;
     private Item m_configData;
@@ -40,7 +40,6 @@ public class CollectElement : GameElementBase, ICollective
         if (CanCollect)
         {
             PlayerBackpack.current.CollectToBackpack(m_configData);
-            // Destroy(this.gameObject);
             gameObject.SetActive(false);
         }
     }

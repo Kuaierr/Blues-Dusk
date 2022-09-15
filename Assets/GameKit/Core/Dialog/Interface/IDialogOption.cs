@@ -6,7 +6,7 @@ namespace GameKit.Dialog
     {
         int Id { get; }
         string Text { get; }
-        bool HasCondition { get; }
+        bool CanShow { get; }
         Dictionary<string, int> DiceConditions { get; }
     }
 }
