@@ -243,7 +243,7 @@ public class UI_Dialog : UIFormBase
     {
         Log.Info("Reach The End Of Conversation.");
         m_IsDialoging = false;
-        GameKitCenter.Dialog.CurrentTree.Release();
+        GameKitCenter.Dialog.CurrentTree.Reset();
         GameKitCenter.Dialog.CurrentTree = null;
     }
 

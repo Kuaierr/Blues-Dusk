@@ -27,5 +27,7 @@
 
 	[linkto-A_end] 卓拉：筛检分支线A3结束
 
+	[name-A4Default, linkfrom-A, linkto-A_end, ddoption] 伊森：我表示无话可说
+
 [ebranch-A_end] 伊森：筛检分支线A最终点
 

@@ -97,12 +97,12 @@ namespace UnityGameKit.Runtime
 
         private void OnDestroy()
         {
-            m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
-            m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
-            m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
-            m_EventComponent.Unsubscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
-            m_EventComponent.Unsubscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
-            m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
+            // m_EventComponent.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
+            // m_EventComponent.Unsubscribe(UnloadSceneSuccessEventArgs.EventId, OnUnloadSceneSuccess);
+            // m_EventComponent.Unsubscribe(UnloadSceneFailureEventArgs.EventId, OnUnloadSceneFailure);
+            // m_EventComponent.Unsubscribe(DoTransitionCompleteEventArgs.EventId, OnDoTransitionComplete);
+            // m_EventComponent.Unsubscribe(UndoTransitionCompleteEventArgs.EventId, OnUndoTransitionComplete);
+            // m_EventComponent.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         }
 
         public void LoadSceneAsyn(string name, SceneTransitionType transitionType = SceneTransitionType.Fade, UnityAction onSuccess = null, UnityAction onFail = null)
