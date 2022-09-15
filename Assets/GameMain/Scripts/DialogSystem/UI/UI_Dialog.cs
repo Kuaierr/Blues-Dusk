@@ -62,9 +62,9 @@ public class UI_Dialog : UIFormBase
     {
         base.OnInit(userData);
         CreateFsm();
-        uI_Response.OnInit(Depth);
-        uI_Character.OnInit(Depth);
-        uI_Indicator.OnInit(Depth);
+        uI_Response.Init(Depth);
+        uI_Character.Init(Depth);
+        uI_Indicator.Init(Depth);
         characterPool = GameKitCenter.Data.GetDataSO<CharacterPool>();
         GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
     }
@@ -118,12 +118,12 @@ public class UI_Dialog : UIFormBase
     public void ShowResponse(UnityAction callback = null)
     {
         uI_Response.gameObject.SetActive(true);
-        uI_Response.OnShow(callback);
+        uI_Response.Show(callback);
     }
 
     public void HideResponse(UnityAction callback = null)
     {
-        uI_Response.OnHide(callback);
+        uI_Response.Hide(callback);
     }
 
     public void MakeChoice()

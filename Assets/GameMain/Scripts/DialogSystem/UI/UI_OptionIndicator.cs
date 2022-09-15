@@ -19,7 +19,7 @@ public class UI_OptionIndicator : UIFormChildBase
         m_CachedDiceFaceType = diceFaceType;
     }
 
-    public override void OnInit(int parentDepth)
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
         m_CurrentColor = Color.white;

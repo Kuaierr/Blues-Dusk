@@ -17,20 +17,20 @@ public class UI_Backpack : UIFormChildBase
     private IStock m_CachedCurrentStock;
     private UI_BackpackInfo uI_StockInfo;
     private List<UI_BackpackChunk> chunks = new List<UI_BackpackChunk>();
-    public override void OnInit(int parentDepth)
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
         GameKitCenter.Event.Subscribe(CollectItemSuccessEventArgs.EventId, OnCollectItemSuccess);
         GameKitCenter.Event.Subscribe(CollectItemFailEventArgs.EventId, OnCollectItemFail);
     }
 
-    public override void OnShow(UnityAction callback = null)
+    public void Show(UnityAction callback = null)
     {
         base.OnShow(callback);
         UpdateChunks();
     }
 
-    public override void OnHide(UnityAction callback = null)
+    public void Hide(UnityAction callback = null)
     {
         base.OnHide(callback);
     }

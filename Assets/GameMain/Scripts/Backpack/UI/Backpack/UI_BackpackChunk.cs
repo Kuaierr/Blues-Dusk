@@ -65,7 +65,7 @@ public class UI_BackpackChunk : MonoBehaviour
         if (m_CachedStock != null)
         {
             uI_Info.UpdateInfo(m_CachedStock);
-            uI_Info.OnShow();
+            uI_Info.Show();
         }
     }
 }

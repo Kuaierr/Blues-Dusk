@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UI_Indicator : UIFormChildBase
 {
-    public override void OnInit(int parentDepth)
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
     }

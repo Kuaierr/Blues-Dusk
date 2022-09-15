@@ -11,13 +11,13 @@ using GameKit.Dialog;
 public class UI_Response : UIFormChildBase
 {
     public List<UI_Option> UIOptions = new List<UI_Option>();
-    public bool isActive = false;
+    private List<UI_Option> m_ActiveUIOptions = new List<UI_Option>();
     private List<IDialogOption> m_CurrentOptions = new List<IDialogOption>();
-    private VerticalLayoutGroup verticalLayoutGroup;
     private int m_CurrentIndex = 0;
     private int m_LastIndex = -1;
     private int m_CachedActiveOptionNum = 0;
     private bool m_CachedIsDiceCheck = false;
+    private bool m_IsActive = false;
     [SerializeField] private Animator m_MasterAnimator;
     [SerializeField] private Animator m_DiceAnimator;
 
@@ -45,26 +45,25 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public override void OnInit(int parentDepth)
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
         if (m_MasterAnimator != null)
             m_MasterAnimator = GetComponent<Animator>();
-        verticalLayoutGroup = GetComponentInChildren<VerticalLayoutGroup>();
         UIOptions = GetComponentsInChildren<UI_Option>(true).ToList();
         for (int i = 0; i < UIOptions.Count; i++)
-            UIOptions[i].OnInit(this);
+            UIOptions[i].Init(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        m_ActiveUIOptions = new List<UI_Option>();
     }
 
     public override void OnUpdate()
     {
-        if (!isActive)
+        if (!m_IsActive)
             return;
 
-
         bool allOptionLocked = true;
-        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
         {
             UIOptions[i].Update();
             allOptionLocked &= UIOptions[i].IsLocked;
@@ -110,10 +109,10 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public override void OnShow(UnityAction callback = null)
+    public void Show(UnityAction callback = null)
     {
         Log.Info("Response OnShow");
-        isActive = true;
+        m_IsActive = true;
         m_MasterAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: () =>
         {
@@ -127,26 +126,26 @@ public class UI_Response : UIFormChildBase
                 Log.Fatal("Too many options.");
                 continue;
             }
-            UIOptions[i].OnReEnable(i);
-            UIOptions[i].OnShow();
+            UIOptions[i].Register(i);
+            UIOptions[i].Show();
             UIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
         EmphasizeFirst();
         // EmphasizeSelectedOption(0);
     }
 
-    public override void OnHide(UnityAction callback = null)
+    public void Hide(UnityAction callback = null)
     {
         Log.Info("Response OnHide");
         m_MasterAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         m_MasterAnimator.OnComplete(callback: callback);
         m_CurrentOptions.Clear();
         ResetCurIndex();
-        isActive = false;
-        m_CachedActiveOptionNum = 0;
+        m_IsActive = false;
+        m_ActiveUIOptions.Clear();
         for (int i = 0; i < UIOptions.Count; i++)
         {
-            UIOptions[i].OnHide();
+            UIOptions[i].Hide();
         }
         SetDiceActive(false);
     }
@@ -196,9 +195,9 @@ public class UI_Response : UIFormChildBase
         m_CachedIsDiceCheck = isDiceCheck;
         // Log.Warning(optionSet.Options.Count + " >> " + UIOptions.Count);
         // 如果是筛检，则在显示Options时锁定所有选项
-        m_CachedActiveOptionNum = optionSet.Options.Count;
         for (int i = 0; i < optionSet.Options.Count; i++)
         {
+            m_ActiveUIOptions.Add(UIOptions[i]);
             if (m_CachedIsDiceCheck)
             {
                 UIOptions[i].Lock();
@@ -252,7 +251,7 @@ public class UI_Response : UIFormChildBase
 
     private UI_Option FindFirstValidOption()
     {
-        for (int i = 0; i < m_CachedActiveOptionNum; i++)
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
         {
             if (!UIOptions[i].IsLocked)
             {

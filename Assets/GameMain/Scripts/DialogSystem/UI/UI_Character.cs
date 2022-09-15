@@ -10,7 +10,7 @@ public class UI_Character : UIFormChildBase
 {
     public Animator animator;
     public Image avatar;
-    public override void OnInit(int parentDepth)
+    public void Init(int parentDepth)
     {
         base.OnInit(parentDepth);
         animator = GetComponent<Animator>();

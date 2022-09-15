@@ -107,17 +107,12 @@ public abstract class UIFormChildBase : UIBehaviour
         this.gameObject.GetOrAddComponent<GraphicRaycaster>();
     }
 
-    public void Close()
-    {
-        m_CanvasGroup.alpha = 0;
-    }
-
-    public virtual void OnInit(int parentDepth)
+    protected virtual void OnInit(int parentDepth)
     {
         ParentDepth = parentDepth;
     }
 
-    public virtual void OnShow(UnityAction callback = null)
+    protected virtual void OnShow(UnityAction callback = null)
     {
 
         if (!SetActive(true))
@@ -128,7 +123,7 @@ public abstract class UIFormChildBase : UIBehaviour
         callback?.Invoke();
     }
 
-    public virtual void OnHide(UnityAction callback = null)
+    protected virtual void OnHide(UnityAction callback = null)
     {
         if (!SetActive(false))
         {
@@ -138,24 +133,24 @@ public abstract class UIFormChildBase : UIBehaviour
         callback?.Invoke();
     }
 
-    public virtual void OnPause(UnityAction callback = null)
+    protected virtual void OnPause(UnityAction callback = null)
     {
         callback?.Invoke();
     }
 
-    public virtual void OnResume(UnityAction callback = null)
+    protected virtual void OnResume(UnityAction callback = null)
     {
         callback?.Invoke();
+    }
+
+    protected virtual void OnDepthChanged(int depthInForm)
+    {
+        int deltaDepth = ParentDepth + DepthFactor * depthInForm + OriginalDepth;
+        m_CachedCanvas.sortingOrder = deltaDepth;
     }
 
     public virtual void OnUpdate()
     {
 
-    }
-
-    public virtual void OnDepthChanged(int depthInForm)
-    {
-        int deltaDepth = ParentDepth + DepthFactor * depthInForm + OriginalDepth;
-        m_CachedCanvas.sortingOrder = deltaDepth;
     }
 }

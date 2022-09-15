@@ -31,28 +31,28 @@ public class UI_BackpackSystem : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        BackpackUI.OnShow();
+        BackpackUI.Show();
         CursorSystem.current.Disable();
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         base.OnClose(isShutdown, userData);
-        BackpackUI.OnHide();
+        BackpackUI.Hide();
         CursorSystem.current.Enable();
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        BackpackUI.OnShow();
+        BackpackUI.Show();
         CursorSystem.current.Disable();
     }
 
     protected override void OnPause()
     {
         base.OnPause();
-        BackpackUI.OnHide();
+        BackpackUI.Hide();
         CursorSystem.current.Enable();
     }
 
