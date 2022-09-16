@@ -200,7 +200,8 @@ public class UI_Dialog : UIFormBase
         return sonNode;
     }
 
-    public IDataNode ExecuteNodeFunction(IDataNode sonNode)
+    // 每次访问节点都会尝试调用该方法
+    public IDataNode TryExecuteNodeFunction(IDataNode sonNode)
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
@@ -225,7 +226,7 @@ public class UI_Dialog : UIFormBase
         }
 
         // 如果该节点是仓检的选项
-        if(tempDialogData.IsInventoryCheckOption)
+        if (tempDialogData.IsInventoryCheckOption)
         {
             // tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致
             // tempDialogData.CachedInventoryName 有检测背包的名称
