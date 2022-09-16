@@ -16,4 +16,24 @@ MonoBehaviour:
   _favoriteWindows: []
   _headerRules: []
   _quickAccessItems: []
-  _sceneHistory: []
+  _sceneHistory:
+  - name: S_Week
+    path: Assets/GameMain/Scenes/Dynamic/S_Week.unity
+  - name: S_Template
+    path: Assets/GameMain/Scenes/S_Template.unity
+  - name: S_Station
+    path: Assets/GameMain/Scenes/S_Station.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Tower
+    path: Assets/GameMain/Scenes/S_Tower.unity
+  - name: S_Parlor
+    path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: S_heya_parlor
+    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
+  - name: S_FengHospital
+    path: Assets/GameMain/Scenes/S_FengHospital.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity

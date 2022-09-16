@@ -4,7 +4,6 @@ namespace GameKit.Element
     public interface IElement
     {
         string Name { get; }
-        int DataId { get; }
         void OnInit();
         void Show();
         void Hide();
