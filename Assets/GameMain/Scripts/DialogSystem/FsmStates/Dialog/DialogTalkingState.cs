@@ -129,6 +129,22 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DiceDialogSelectingState));
             fsmMaster.UpdateOptionUI(isDiceCheck: true);
         }
+        else if (tmpSonNodeData.IsInventoryCheckOption)
+        {
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
+            if (tmpSonNodeData.CachedInventoryName == "Player's Backpack")
+            {
+                fsmMaster.UpdatePlayerInventoryCheckOptionUI(tmpSonNodeData.CachedStockConditions);
+            }
+            else if (tmpSonNodeData.CachedInventoryName == "Dice Inventory")
+            {
+                fsmMaster.UpdateDiceInventoryCheckOptionUI(tmpSonNodeData.CachedStockConditions);
+            }
+            else
+            {
+                Debug.LogError("Inventory not exist");
+            }
+        }
         else
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));

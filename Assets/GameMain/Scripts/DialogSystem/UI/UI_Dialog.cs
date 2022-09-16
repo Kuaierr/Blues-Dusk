@@ -229,8 +229,15 @@ public class UI_Dialog : UIFormBase
         // 如果该节点是仓检的选项
         if (tempDialogData.IsInventoryCheckOption)
         {
-            // tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致
-            // tempDialogData.CachedInventoryName 有检测背包的名称
+            //Info tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致 
+            //Info tempDialogData.CachedInventoryName 有检测背包的名称
+            /*if(tempDialogData.CachedInventoryName == DiceInventory.current.Name)*/
+            for (int i = 0; i < tempDialogData.CachedStockConditions.Count; i++)
+            {
+                bool completed = GameKitCenter.Inventory.GetStockFromInventory(tempDialogData.CachedInventoryName, tempDialogData.CachedStockConditions[i]) != null;
+                //TODO 改为缓存到UI_Dialog中
+                GameSettings.current.SetBool(tempDialogData.CachedStockConditions[i],completed);
+            }
         }
 
         // 如果是纯功能节点
@@ -331,6 +338,26 @@ public class UI_Dialog : UIFormBase
         if (optionSet != null)
         {
             uI_Response.UpdateOptions(optionSet, isDiceCheck);
+            ShowResponse(callback);
+        }
+    }
+
+    public void UpdatePlayerInventoryCheckOptionUI(List<string> conditions,UnityAction callback = null)
+    {
+        IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (optionSet != null)
+        {
+            uI_Response.UpdateAsPlayerInventoryCheckOptions(optionSet, conditions);
+            ShowResponse(callback);
+        }
+    }
+
+    public void UpdateDiceInventoryCheckOptionUI(List<string> conditions, UnityAction callback = null)
+    {
+        IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (optionSet != null)
+        {
+            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet, conditions);
             ShowResponse(callback);
         }
     }
