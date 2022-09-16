@@ -6,13 +6,12 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/NPC")]
 public class NPCElement : GameElementBase
 {
-    public TextAsset DialogAsset;
-    public string DialogName = "<None>";
-
+    [UnityGameKit.Editor.Dialog] public string DialogName = "<None>";
     public override void OnInit()
     {
         base.OnInit();
     }
+    
     public override void OnInteract()
     {
         base.OnInteract();

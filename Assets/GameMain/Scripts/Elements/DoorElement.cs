@@ -5,8 +5,8 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/Door Object")]
 public class DoorElement : GameElementBase
 {
+    [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
-    public string TargetScene = "<None>";
     public Transform EnterTranform;
     public override void OnInteract()
     {

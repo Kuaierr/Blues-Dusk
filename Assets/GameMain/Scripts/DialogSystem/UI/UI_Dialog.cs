@@ -200,11 +200,13 @@ public class UI_Dialog : UIFormBase
         return sonNode;
     }
 
-    public IDataNode ExecuteNodeFunction(IDataNode sonNode)
+    // 每次访问节点都会尝试调用该方法
+    public IDataNode TryExecuteNodeFunction(IDataNode sonNode)
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
 
+        // 如果本次对话中有可完成得条件
         if (tempDialogData.IsLocalCompleter)
         {
             for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
@@ -213,6 +215,7 @@ public class UI_Dialog : UIFormBase
             }
         }
 
+        // 如果全局设置中有可完成得条件
         if (tempDialogData.IsGlobalCompleter)
         {
             for (int j = 0; j < tempDialogData.GlobalCompleteConditons.Count; j++)
@@ -222,8 +225,17 @@ public class UI_Dialog : UIFormBase
             }
         }
 
+        // 如果该节点是仓检的选项
+        if (tempDialogData.IsInventoryCheckOption)
+        {
+            // tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致
+            // tempDialogData.CachedInventoryName 有检测背包的名称
+        }
+
+        // 如果是纯功能节点
         if (tempDialogData.IsFunctional)
         {
+            // 如果是基于本次对话条件的纯分支点
             if (tempDialogData.IsLocalDivider)
             {
                 bool isComplete = true;
@@ -246,6 +258,7 @@ public class UI_Dialog : UIFormBase
                 }
             }
 
+            // 如果是全局条件的纯分支点
             if (tempDialogData.IsGlobalDivider)
             {
 

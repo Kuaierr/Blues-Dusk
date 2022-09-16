@@ -6,8 +6,8 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/LeaveDoor Object")]
 public class LeaveDoorElement : GameElementBase
 {
+    [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
-    public string TargetScene = "<None>";
     public Transform EnterTranform;
     public override void OnInteract()
     {

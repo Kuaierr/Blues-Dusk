@@ -6,6 +6,7 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/Collect Object")]
 public class CollectElement : GameElementBase
 {
+    [SerializeField] protected int m_DataId = 0;
     public bool CanCollect = true;
     private Item m_configData;
     public Item Data
@@ -16,6 +17,14 @@ public class CollectElement : GameElementBase
         }
     }
 
+    public int DataId
+    {
+        get
+        {
+            return m_DataId;
+        }
+    }
+    
     public override void OnInit()
     {
         base.OnInit();

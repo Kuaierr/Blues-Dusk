@@ -6,7 +6,6 @@ using UnityGameKit.Runtime;
 [System.Serializable]
 public abstract class ElementBase : MonoBehaviour, IElement
 {
-    [SerializeField] protected int m_DataId = 0;
     public string Name
     {
         get
@@ -14,13 +13,7 @@ public abstract class ElementBase : MonoBehaviour, IElement
             return string.Format("{0}", gameObject.name);
         }
     }
-    public int DataId
-    {
-        get
-        {
-            return m_DataId;
-        }
-    }
+
     public abstract void OnInit();
     private void Start()
     {

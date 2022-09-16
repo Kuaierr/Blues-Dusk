@@ -162,6 +162,7 @@ namespace UnityGameKit.Runtime
         public void DoTransition(List<string> loadNames, List<string> unloadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
         {
             m_TransitionSequence.Kill();
+            m_TransitionSequence = DOTween.Sequence();
             if (switchType == SceneTransitionType.Swipe)
             {
                 m_Switcher.swiper.gameObject.SetActive(true);
@@ -305,6 +306,7 @@ namespace UnityGameKit.Runtime
         private void UndoTransition(SceneTransitionType switchType)
         {
             m_TransitionSequence.Kill();
+            m_TransitionSequence = DOTween.Sequence();
             if (switchType == SceneTransitionType.Swipe)
             {
                 m_TransitionSequence.Append(m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(HideSwitchSwiper));
