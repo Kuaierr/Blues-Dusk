@@ -20,9 +20,10 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        SetChangeKey(KeyCode.Tab);
+        //SetChangeKey(KeyCode.Tab);
 
         InitGameMenuButtons();
+        Debug.Log("Init GameMenu Succeed");
     }
 
     public void InitGameMenuButtons()

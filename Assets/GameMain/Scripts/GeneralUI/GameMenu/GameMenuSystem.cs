@@ -9,6 +9,7 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 {
 	private void Start()
 	{
+		GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnGameMenuUIOpenSuccess);
 		GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
 	}
 
@@ -18,10 +19,10 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 			GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
 	}*/
 
-	/*private void OnGameMenuUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)
+	private void OnGameMenuUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)
 	{
 		OpenUIFormSuccessEventArgs args = (OpenUIFormSuccessEventArgs)e;
-		if (args.UserData == null || args.UserData.GetType() != typeof(PlayerBackpack))
+		if (args.UserData == null || args.UserData.GetType() != typeof(GameMenuSystem))
 			return;
 
 		if (args.UIForm == null)
@@ -31,8 +32,9 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 		}
 
 		UI_GameMenuSystem uI_GameMenu = (UI_GameMenuSystem)args.UIForm.Logic;
-		uI_GameMenu.SetChangeKey(KeyCode.Escape);
-	}*/
+		uI_GameMenu.SetChangeKey(KeyCode.Tab);
+		Debug.Log("Open GameMenu Succeed");
+	}
 
 	/*private void OnPlayerBackpackButtonPressed(object sender, GameKit.Event.GameEventArgs e)
 	{
