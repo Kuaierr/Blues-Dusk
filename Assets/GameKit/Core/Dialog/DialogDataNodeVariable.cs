@@ -18,6 +18,9 @@ namespace GameKit.Dialog
         public bool IsDiceCheckBranch = false;
         public bool IsDiceCheckOption = false;
         public bool IsDiceDefaultOption = false;
+        public bool IsInventoryCheckOption = false;
+        public string CachedInventoryName;
+        public List<string> CachedStockConditions;
         public List<string> DividerConditions;
         public List<string> CompleteConditons;
         public List<string> GlobalCompleteConditons;
@@ -30,11 +33,12 @@ namespace GameKit.Dialog
             this.Speaker = "<Default>";
             this.Contents = "<Default>";
             this.MoodName = "<Default>";
-
+            this.CachedInventoryName = "<Default>";
             this.DividerConditions = new List<string>();
             this.CompleteConditons = new List<string>();
             this.GlobalCompleteConditons = new List<string>();
             this.GlobalDividerConditions = new List<string>();
+            this.CachedStockConditions = new List<string>();
             this.DiceConditions = new Dictionary<string, int>();
         }
 
@@ -79,6 +83,7 @@ namespace GameKit.Dialog
             DividerConditions.Clear();
             GlobalDividerConditions.Clear();
             GlobalCompleteConditons.Clear();
+            CachedStockConditions.Clear();
             IsFunctional = false;
             IsLocalDivider = false;
             IsLocalCompleter = false;
@@ -88,6 +93,7 @@ namespace GameKit.Dialog
             IsDiceDefaultOption = false;
             IsGlobalDivider = false;
             IsGlobalCompleter = false;
+            IsInventoryCheckOption = false;
             Speaker = "<Default>";
             Contents = "<Default>";
             MoodName = "<Default>";
