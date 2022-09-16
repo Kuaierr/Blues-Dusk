@@ -20,6 +20,7 @@ public class UI_Dialog : UIFormBase
     public UI_Character uI_Character;
     public UI_Response uI_Response;
     public UI_Indicator uI_Indicator;
+    public UI_SpeakerName uI_SpeakerName;
     public UI_DiceSystem uI_DiceSystem;
     public TextMeshProUGUI t_SpeakerName;
     public TextMeshProUGUI t_Contents;
@@ -308,8 +309,8 @@ public class UI_Dialog : UIFormBase
         else
             t_SpeakerName.text = data.Speaker;
         t_Contents.text = data.Contents;
-
-        if (data.Speaker != ">>")
+        uI_SpeakerName.ToEason(data.Speaker != "伊森");
+        if (data.Speaker != ">>" && data.Speaker != "伊森")
         {
             Character character = characterPool.GetData<Character>(data.Speaker.Correction());
             if (m_CurrentCharacter != character)
