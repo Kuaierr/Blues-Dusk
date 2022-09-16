@@ -7,7 +7,7 @@ using UnityGameKit.Runtime;
 
 public class DiceInventory : MonoSingletonBase<DiceInventory>
 {
-	private const string DiceInventoryName = "Dice Inventory";
+	private const string DiceInventoryName = "DiceInventory";
 	private IInventory m_DiceInventory;
 
 	public string Name => DiceInventoryName;

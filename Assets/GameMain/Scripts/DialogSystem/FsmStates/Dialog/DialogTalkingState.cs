@@ -132,11 +132,11 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         else if (tmpSonNodeData.IsInventoryCheckOption)
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
-            if (tmpSonNodeData.CachedInventoryName == "Player's Backpack")
+            if (tmpSonNodeData.CachedInventoryName == "PlayerBackpack")
             {
                 fsmMaster.UpdatePlayerInventoryCheckOptionUI(tmpSonNodeData.CachedStockConditions);
             }
-            else if (tmpSonNodeData.CachedInventoryName == "Dice Inventory")
+            else if (tmpSonNodeData.CachedInventoryName == "DiceInventory")
             {
                 fsmMaster.UpdateDiceInventoryCheckOptionUI(tmpSonNodeData.CachedStockConditions);
             }

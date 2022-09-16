@@ -6,7 +6,7 @@ using GameKit.Inventory;
 
 public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
 {
-    private const string PlayerBackpackName = "Player's Backpack";
+    private const string PlayerBackpackName = "PlayerBackpack";
     private IInventory m_PlayerBackpack;
     private int m_CachedUiId;
     private void Start()

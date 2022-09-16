@@ -3978,7 +3978,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OutlineWidth: 3
-  DialogName: "\u5206\u652F\u6D4B\u8BD5"
+  DialogName: "\u4ED3\u68C0\u6D4B\u8BD5"
 --- !u!4 &1369116521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe5609a897f3e2a40bb9e7172a50fade, type: 3}
