@@ -42,6 +42,7 @@ namespace GameKit.Dialog
                         dialogOptions.CreateOption(i, contents, false);
                     else
                         dialogOptions.CreateOption(i, contents, true);
+                    //TODO 骰检加在这里 直接改canshow
                 }
                 return dialogOptions;
             }

@@ -5,6 +5,7 @@ using GameKit;
 using System.Text.RegularExpressions;
 using System.Linq;
 using GameKit.DataStructure;
+using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
@@ -272,6 +273,7 @@ namespace UnityGameKit.Runtime
                         data.IsInventoryCheckOption = true;
                         try
                         {
+                            Debug.Log(data.Contents);
                             string[] diceAttributes = value.Trim().RemoveParentheses().Split(' ');
                             string inventoryName = diceAttributes[0];
                             string[] stockList = diceAttributes[1].Split('&');

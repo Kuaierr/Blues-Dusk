@@ -19,7 +19,7 @@
 	
 	// 第一个分支选A3
 
-	[name-A3, linkfrom-A, ioption-(PlayerBackpack NormalKey)] 伊森：【交出钥匙】给你吧
+	[name-A3, linkfrom-A, idoption-(PlayerBackpack NormalKey)] 伊森：【交出钥匙】给你吧
 	
 	[mood-work_doubt]卓拉：分支线A3后续，我不信
 

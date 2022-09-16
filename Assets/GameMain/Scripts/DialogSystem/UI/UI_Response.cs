@@ -238,14 +238,15 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public void UpdateAsPlayerInventoryCheckOptions(IDialogOptionSet optionSet, List<string> conditions)
+    public void UpdateAsPlayerInventoryCheckOptions(IDialogOptionSet optionSet, List<bool> conditions)
     {
+        //BUG 现在的congditions是错误的
         m_ActiveUIOptions.Clear();
         m_CurrentOptions = optionSet.Options;
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
             m_ActiveUIOptions.Add(UIOptions[i]);
-            if (GameSettings.current.GetBool(conditions[i]) == true)
+            if (conditions[i] == true)
             {
                 UIOptions[i].SetActive(true);
                 UIOptions[i].Unlock();
@@ -258,14 +259,14 @@ public class UI_Response : UIFormChildBase
         }
     }
 
-    public void UpdateAsDiceInventoryCheckOption(IDialogOptionSet optionSet, List<string> conditions)
+    public void UpdateAsDiceInventoryCheckOption(IDialogOptionSet optionSet, List<bool> conditions)
     {
         m_ActiveUIOptions.Clear();
         m_CurrentOptions = optionSet.Options;
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
             m_ActiveUIOptions.Add(UIOptions[i]);
-            if (GameSettings.current.GetBool(conditions[i]) == true)
+            if (conditions[i] == true)
             {
                 UIOptions[i].SetActive(true);
                 UIOptions[i].Unlock();

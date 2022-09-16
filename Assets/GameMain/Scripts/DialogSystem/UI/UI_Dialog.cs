@@ -32,6 +32,7 @@ public class UI_Dialog : UIFormBase
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
     private bool m_IsDialoging = false;
+    private List<bool> m_CachedCheckResults = new List<bool>();
 
     public IDialogTree CurrentTree
     {
@@ -207,6 +208,8 @@ public class UI_Dialog : UIFormBase
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
 
+        Debug.Log(tempDialogData.Contents);
+        
         // 如果本次对话中有可完成得条件
         if (tempDialogData.IsLocalCompleter)
         {
@@ -225,18 +228,22 @@ public class UI_Dialog : UIFormBase
                 Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
             }
         }
-
+        Debug.Log(tempDialogData.IsInventoryCheckOption);
         // 如果该节点是仓检的选项
         if (tempDialogData.IsInventoryCheckOption)
         {
             //Info tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致 
             //Info tempDialogData.CachedInventoryName 有检测背包的名称
-            /*if(tempDialogData.CachedInventoryName == DiceInventory.current.Name)*/
+            Debug.Log("Dialog -- IsInventoryCheckOption");
+            m_CachedCheckResults.Clear();
             for (int i = 0; i < tempDialogData.CachedStockConditions.Count; i++)
             {
                 bool completed = GameKitCenter.Inventory.GetStockFromInventory(tempDialogData.CachedInventoryName, tempDialogData.CachedStockConditions[i]) != null;
-                //TODO 改为缓存到UI_Dialog中
-                GameSettings.current.SetBool(tempDialogData.CachedStockConditions[i],completed);
+                m_CachedCheckResults.Add(completed);
+                //BUG CachedStockConditions中存储的是同一个选项需要的物品
+                Debug.Log("InventoryName: " + tempDialogData.CachedInventoryName +"\n" +
+                          "TargetItemName: " + tempDialogData.CachedStockConditions[i] +"\n" +
+                          "Result: " + completed);
             }
         }
 
@@ -342,22 +349,22 @@ public class UI_Dialog : UIFormBase
         }
     }
 
-    public void UpdatePlayerInventoryCheckOptionUI(List<string> conditions,UnityAction callback = null)
+    public void UpdatePlayerInventoryCheckOptionUI(UnityAction callback = null)
     {
         IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (optionSet != null)
         {
-            uI_Response.UpdateAsPlayerInventoryCheckOptions(optionSet, conditions);
+            uI_Response.UpdateAsPlayerInventoryCheckOptions(optionSet, m_CachedCheckResults);
             ShowResponse(callback);
         }
     }
 
-    public void UpdateDiceInventoryCheckOptionUI(List<string> conditions, UnityAction callback = null)
+    public void UpdateDiceInventoryCheckOptionUI(UnityAction callback = null)
     {
         IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (optionSet != null)
         {
-            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet, conditions);
+            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet, m_CachedCheckResults);
             ShowResponse(callback);
         }
     }
