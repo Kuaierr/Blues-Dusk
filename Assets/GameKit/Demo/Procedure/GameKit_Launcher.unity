@@ -386,7 +386,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1484156770}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &395272023
 MonoBehaviour:
@@ -1217,8 +1217,8 @@ MonoBehaviour:
   defaultSwitchType: 1
   StartScene: S_Parlor
   LoadScene: S_Parlor
-  m_ScenesPath: Assets/GameMain/Scenes
-  m_MultiScenesPath: Assets/GameMain/Data/MultiScenesWorkflow
+  m_ScenesPath: 
+  m_MultiScenesPath: 
 --- !u!1 &1280435058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,8 +1385,8 @@ Transform:
   m_Children:
   - {fileID: 1201495381}
   - {fileID: 570993307}
-  - {fileID: 395272022}
   - {fileID: 1889010949}
+  - {fileID: 395272022}
   - {fileID: 2013133124}
   m_Father: {fileID: 1839777011}
   m_RootOrder: 1
@@ -1523,7 +1523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1484156770}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1889010951
 MonoBehaviour:
@@ -1922,12 +1922,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bb0f60a22ac0f439f6b102db1db851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EditorResourceMode: 1
+  m_EditorLanguage: 0
   m_TextHelperTypeName: UnityGameKit.Runtime.DefaultTextHelper
   m_VersionHelperTypeName: UnityGameKit.Runtime.DefaultVersionHelper
   m_LogHelperTypeName: UnityGameKit.Runtime.DefaultLogHelper
   m_CompressionHelperTypeName: UnityGameKit.Runtime.DefaultCompressionHelper
   m_JsonHelperTypeName: LitJsonHelper
-  m_EditorResourceMode: 1
   m_FrameRate: 60
   m_GameSpeed: 1
   m_RunInBackground: 0

@@ -10,10 +10,10 @@ namespace GameKit
         private readonly string m_Tag;
         private readonly int m_Priority;
         private readonly object m_UserData;
-        private readonly TaskExecuteStatus m_Status;
+        private readonly TaskStatus m_Status;
         private readonly string m_Description;
 
-        public TaskInfo(int serialId, string tag, int priority, object userData, TaskExecuteStatus status, string description)
+        public TaskInfo(int serialId, string tag, int priority, object userData, TaskStatus status, string description)
         {
             m_IsValid = true;
             m_SerialId = serialId;
@@ -84,7 +84,7 @@ namespace GameKit
             }
         }
 
-        public TaskExecuteStatus Status
+        public TaskStatus Status
         {
             get
             {

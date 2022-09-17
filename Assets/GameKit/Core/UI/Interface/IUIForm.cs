@@ -13,8 +13,6 @@ namespace GameKit.UI
         int DepthInUIGroup { get; }
 
         bool PauseCoveredUIForm { get; }
-
-        void OnInstantiate(object userData);
         
         void OnInit(int serialId, string uiFormAssetName, IUIGroup uiGroup, bool pauseCoveredUIForm, bool isNewInstance, object userData);
 

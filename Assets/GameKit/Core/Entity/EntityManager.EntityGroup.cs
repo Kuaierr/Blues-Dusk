@@ -12,7 +12,7 @@ namespace GameKit.Entity
             private readonly string m_Name;
             private readonly IEntityGroupHelper m_EntityGroupHelper;
             private readonly IObjectPool<EntityObject> m_InstancePool;
-            private readonly CachedLinkedList<IEntity> m_Entities;
+            private readonly GameKitLinkedList<IEntity> m_Entities;
             private LinkedListNode<IEntity> m_CachedNode;
 
             public EntityGroup(string name, float instanceAutoReleaseInterval, int instanceCapacity, float instanceExpireTime, int instancePriority, IEntityGroupHelper entityGroupHelper, IObjectPoolManager objectPoolManager)
@@ -26,7 +26,7 @@ namespace GameKit.Entity
                 m_InstancePool = objectPoolManager.CreateSingleSpawnObjectPool<EntityObject>(Utility.Text.Format("Entity Instance Pool ({0})", name), instanceCapacity, instanceExpireTime, instancePriority);
                 m_InstancePool.AutoReleaseInterval = instanceAutoReleaseInterval;
                 m_EntityGroupHelper = entityGroupHelper;
-                m_Entities = new CachedLinkedList<IEntity>();
+                m_Entities = new GameKitLinkedList<IEntity>();
                 m_CachedNode = null;
             }
 

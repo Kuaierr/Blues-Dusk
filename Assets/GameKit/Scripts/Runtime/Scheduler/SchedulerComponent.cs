@@ -198,7 +198,7 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        private void OnDoTransitionComplete(object sender, GameEventArgs e)
+        private void OnDoTransitionComplete(object sender, BaseEventArgs e)
         {
             if (e == null)
             {
@@ -228,7 +228,7 @@ namespace UnityGameKit.Runtime
 
         }
 
-        private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
+        private void OnUnloadSceneSuccess(object sender, BaseEventArgs e)
         {
             // sender 是 SceneComponent
             // args.UserData 是 SchedulerComponent
@@ -262,7 +262,7 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        private void OnLoadSceneSuccess(object sender, GameEventArgs e)
+        private void OnLoadSceneSuccess(object sender, BaseEventArgs e)
         {
             LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
             if (args.UserData == null)
@@ -289,7 +289,7 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        private void OnUndoTransitionComplete(object sender, GameEventArgs e)
+        private void OnUndoTransitionComplete(object sender, BaseEventArgs e)
         {
             UndoTransitionCompleteEventArgs args = (UndoTransitionCompleteEventArgs)e;
             DoTransitionCompleteEventArgs transitionArgs = (DoTransitionCompleteEventArgs)args.UserData;
@@ -324,13 +324,13 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        private void OnLoadSceneFailure(object sender, GameEventArgs e)
+        private void OnLoadSceneFailure(object sender, BaseEventArgs e)
         {
             LoadSceneFailureEventArgs args = (LoadSceneFailureEventArgs)e;
             Log.Fail("Load {0} Fail", args.SceneAssetName);
         }
 
-        private void OnUnloadSceneFailure(object sender, GameEventArgs e)
+        private void OnUnloadSceneFailure(object sender, BaseEventArgs e)
         {
             UnloadSceneFailureEventArgs args = (UnloadSceneFailureEventArgs)e;
             Log.Fail("Unload {0} Fail", args.SceneAssetName);

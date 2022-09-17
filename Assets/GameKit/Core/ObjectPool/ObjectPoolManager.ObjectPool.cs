@@ -9,7 +9,7 @@ namespace GameKit.ObjectPool
     {
         private sealed class ObjectPool<T> : ObjectPoolBase, IObjectPool<T> where T : ObjectBase
         {
-            private readonly MultiDictionary<string, Object<T>> m_Objects;
+            private readonly GameKitMultiDictionary<string, Object<T>> m_Objects;
             private readonly Dictionary<object, Object<T>> m_ObjectMap;
             private readonly ReleaseObjectFilterCallback<T> m_DefaultReleaseObjectFilterCallback;
             private readonly List<T> m_CachedCanReleaseObjects;
@@ -24,7 +24,7 @@ namespace GameKit.ObjectPool
             public ObjectPool(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority)
                 : base(name)
             {
-                m_Objects = new MultiDictionary<string, Object<T>>();
+                m_Objects = new GameKitMultiDictionary<string, Object<T>>();
                 m_ObjectMap = new Dictionary<object, Object<T>>();
                 m_DefaultReleaseObjectFilterCallback = DefaultReleaseObjectFilterCallback;
                 m_CachedCanReleaseObjects = new List<T>();
@@ -170,7 +170,7 @@ namespace GameKit.ObjectPool
                     throw new GameKitException("Name is invalid.");
                 }
 
-                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
+                GameKitLinkedListRange<Object<T>> objectRange = default(GameKitLinkedListRange<Object<T>>);
                 if (m_Objects.TryGetValue(name, out objectRange))
                 {
                     foreach (Object<T> internalObject in objectRange)
@@ -197,7 +197,7 @@ namespace GameKit.ObjectPool
                     throw new GameKitException("Name is invalid.");
                 }
 
-                LinkedListRange<Object<T>> objectRange = default(LinkedListRange<Object<T>>);
+                GameKitLinkedListRange<Object<T>> objectRange = default(GameKitLinkedListRange<Object<T>>);
                 if (m_Objects.TryGetValue(name, out objectRange))
                 {
                     foreach (Object<T> internalObject in objectRange)
@@ -396,7 +396,7 @@ namespace GameKit.ObjectPool
             public override ObjectInfo[] GetAllObjectInfos()
             {
                 List<ObjectInfo> results = new List<ObjectInfo>();
-                foreach (KeyValuePair<string, LinkedListRange<Object<T>>> objectRanges in m_Objects)
+                foreach (KeyValuePair<string, GameKitLinkedListRange<Object<T>>> objectRanges in m_Objects)
                 {
                     foreach (Object<T> internalObject in objectRanges.Value)
                     {

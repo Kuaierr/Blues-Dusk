@@ -6,7 +6,7 @@ namespace GameKit
 {
     public static class GameKitModuleCenter
     {
-        private static readonly CachedLinkedList<GameKitModule> s_gameKitModules = new CachedLinkedList<GameKitModule>();
+        private static readonly GameKitLinkedList<GameKitModule> s_gameKitModules = new GameKitLinkedList<GameKitModule>();
 
         public static void Update(float elapseSeconds, float realElapseSeconds)
         {

@@ -13,7 +13,7 @@ namespace GameKit
 
         void Shutdown();
 
-        TaskStartStatus Start(T task);
+        StartTaskStatus Start(T task);
 
         void Reset();
     }

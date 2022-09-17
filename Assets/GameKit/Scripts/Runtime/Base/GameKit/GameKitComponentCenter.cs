@@ -15,7 +15,7 @@ namespace UnityGameKit.Runtime
 
     public static class GameKitComponentCenter
     {
-        private static readonly CachedLinkedList<GameKitComponent> s_GameKitComponents = new CachedLinkedList<GameKitComponent>();
+        private static readonly GameKitLinkedList<GameKitComponent> s_GameKitComponents = new GameKitLinkedList<GameKitComponent>();
         internal const int GameKitSceneId = 0;
 
         public static T GetComponent<T>() where T : GameKitComponent
@@ -100,7 +100,7 @@ namespace UnityGameKit.Runtime
 
             if (shutdownType == ShutdownType.Restart)
             {
-                // SceneManager.LoadScene(GameFrameworkSceneId);
+                // SceneManager.LoadScene(GameKitSceneId);
                 return;
             }
 

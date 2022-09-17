@@ -121,7 +121,7 @@ namespace UnityGameKit.Runtime
             m_DialogManager.GetOrCreatetDialogTree(name, contents, userData);
         }
 
-        private void OnStartDialogSuccess(object sender, GameEventArgs e)
+        private void OnStartDialogSuccess(object sender, BaseEventArgs e)
         {
             StartDialogSuccessEventArgs ne = (StartDialogSuccessEventArgs)e;
             m_CachedCurrentTree = ne.DialogTree;

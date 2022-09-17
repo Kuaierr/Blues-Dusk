@@ -109,7 +109,7 @@ namespace GameKit.DataStructure
 
         public Node(ITree tree = null, bool isRoot = false)
         {
-            this.Id = Utility.Random.GetRandomID();
+            // this.Id = Utility.Random.GetRandomID();
             this.sons = new List<INode>();
             this.siblings = new List<INode>();
             this.tree = tree;

@@ -42,7 +42,7 @@ public class UIFormBaseHelper : UIFormHelperBase
 
     private void Start()
     {
-        // m_ResourceComponent = GameEntry.GetComponent<ResourceComponent>();
+        // m_ResourceComponent = GameKitComponentCenter.GetComponent<ResourceComponent>();
         // if (m_ResourceComponent == null)
         // {
         //     Log.Fatal("Resource component is invalid.");

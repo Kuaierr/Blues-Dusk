@@ -1,11 +1,14 @@
+﻿
 using System;
 using System.Collections.Generic;
-
 
 namespace GameKit
 {
     public static partial class Utility
     {
+        /// <summary>
+        /// 程序集相关的实用函数。
+        /// </summary>
         public static class Assembly
         {
             private static readonly System.Reflection.Assembly[] s_Assemblies = null;
@@ -16,11 +19,19 @@ namespace GameKit
                 s_Assemblies = AppDomain.CurrentDomain.GetAssemblies();
             }
 
+            /// <summary>
+            /// 获取已加载的程序集。
+            /// </summary>
+            /// <returns>已加载的程序集。</returns>
             public static System.Reflection.Assembly[] GetAssemblies()
             {
                 return s_Assemblies;
             }
 
+            /// <summary>
+            /// 获取已加载的程序集中的所有类型。
+            /// </summary>
+            /// <returns>已加载的程序集中的所有类型。</returns>
             public static Type[] GetTypes()
             {
                 List<Type> results = new List<Type>();
@@ -32,6 +43,10 @@ namespace GameKit
                 return results.ToArray();
             }
 
+            /// <summary>
+            /// 获取已加载的程序集中的所有类型。
+            /// </summary>
+            /// <param name="results">已加载的程序集中的所有类型。</param>
             public static void GetTypes(List<Type> results)
             {
                 if (results == null)
@@ -46,6 +61,11 @@ namespace GameKit
                 }
             }
 
+            /// <summary>
+            /// 获取已加载的程序集中的指定类型。
+            /// </summary>
+            /// <param name="typeName">要获取的类型名。</param>
+            /// <returns>已加载的程序集中的指定类型。</returns>
             public static Type GetType(string typeName)
             {
                 if (string.IsNullOrEmpty(typeName))

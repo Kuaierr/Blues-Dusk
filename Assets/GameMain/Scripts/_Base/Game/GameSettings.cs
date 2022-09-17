@@ -11,7 +11,7 @@ public class GameSettings : MonoSingletonBase<GameSettings>
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
-    public void OnLoad(object sender, GameEventArgs e)
+    public void OnLoad(object sender, BaseEventArgs e)
     {
         Log.Success("GameSettings Loaded");
         bool hasGameSettings = GameKitCenter.Setting.GetBool("GameSettings", false);

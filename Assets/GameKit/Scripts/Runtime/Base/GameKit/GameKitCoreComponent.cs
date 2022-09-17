@@ -1,10 +1,14 @@
 using GameKit;
-// using GameKit.Resource;
+using GameKit.Localization;
+using GameKit.Resource;
 using System;
 using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
+    /// <summary>
+    /// 基础组件。
+    /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Core Component")]
     public sealed class GameKitCoreComponent : GameKitComponent
@@ -12,6 +16,12 @@ namespace UnityGameKit.Runtime
         private const int DefaultDpi = 96;  // default windows dpi
 
         private float m_GameSpeedBeforePause = 1f;
+
+        [SerializeField]
+        private bool m_EditorResourceMode = true;
+
+        [SerializeField]
+        private Language m_EditorLanguage = Language.Unspecified;
 
         [SerializeField]
         private string m_TextHelperTypeName = "UnityGameKit.Runtime.DefaultTextHelper";
@@ -29,9 +39,6 @@ namespace UnityGameKit.Runtime
         private string m_JsonHelperTypeName = "UnityGameKit.Runtime.DefaultJsonHelper";
 
         [SerializeField]
-        private bool m_EditorResourceMode = true;
-
-        [SerializeField]
         private int m_FrameRate = 30;
 
         [SerializeField]
@@ -43,6 +50,9 @@ namespace UnityGameKit.Runtime
         [SerializeField]
         private bool m_NeverSleep = true;
 
+        /// <summary>
+        /// 获取或设置是否使用编辑器资源模式（仅编辑器内有效）。
+        /// </summary>
         public bool EditorResourceMode
         {
             get
@@ -55,12 +65,33 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取或设置编辑器语言（仅编辑器内有效）。
+        /// </summary>
+        public Language EditorLanguage
+        {
+            get
+            {
+                return m_EditorLanguage;
+            }
+            set
+            {
+                m_EditorLanguage = value;
+            }
+        }
+
+        /// <summary>
+        /// 获取或设置编辑器资源辅助器。
+        /// </summary>
         public IResourceManager EditorResourceHelper
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 获取或设置游戏帧率。
+        /// </summary>
         public int FrameRate
         {
             get
@@ -73,6 +104,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取或设置游戏速度。
+        /// </summary>
         public float GameSpeed
         {
             get
@@ -85,6 +119,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取游戏是否暂停。
+        /// </summary>
         public bool IsGamePaused
         {
             get
@@ -93,6 +130,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取是否正常游戏速度。
+        /// </summary>
         public bool IsNormalGameSpeed
         {
             get
@@ -101,6 +141,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取或设置是否允许后台运行。
+        /// </summary>
         public bool RunInBackground
         {
             get
@@ -113,6 +156,9 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 获取或设置是否禁止休眠。
+        /// </summary>
         public bool NeverSleep
         {
             get
@@ -126,18 +172,23 @@ namespace UnityGameKit.Runtime
             }
         }
 
+        /// <summary>
+        /// 游戏框架组件初始化。
+        /// </summary>
         protected override void Awake()
         {
             base.Awake();
 
+            InitTextHelper();
             InitVersionHelper();
             InitLogHelper();
+            Log.Info("Game Kit Version: {0}", GameKit.Version.GameKitVersion);
+            Log.Info("Game Version: {0} ({1})", GameKit.Version.GameVersion, GameKit.Version.InternalGameVersion);
+            Log.Info("Unity Version: {0}", Application.unityVersion);
+
+#if UNITY_5_3_OR_NEWER || UNITY_5_3
             InitCompressionHelper();
             InitJsonHelper();
-
-            Log.Info("<b><color=#87CEFA>GameKit Version</color></b>: {0}", GameKit.Version.GameKitVersion);
-            Log.Info("<b><color=#87CEFA>Game Version</color></b>: {0} ({1})", GameKit.Version.GameVersion, GameKit.Version.InternalGameVersion.ToString());
-            Log.Info("<b><color=#87CEFA>Unity Version:</color></b> {0}", Application.unityVersion);
 
             Utility.Converter.ScreenDpi = Screen.dpi;
             if (Utility.Converter.ScreenDpi <= 0)
@@ -148,20 +199,24 @@ namespace UnityGameKit.Runtime
             m_EditorResourceMode &= Application.isEditor;
             if (m_EditorResourceMode)
             {
-                Log.Info("<b><color=#87CEFA>Game Resource Mode:</color></b> Game Kit use editor resource files.");
+                Log.Info("During this run, Game Kit will use editor resource files, which you should validate first.");
             }
 
             Application.targetFrameRate = m_FrameRate;
             Time.timeScale = m_GameSpeed;
             Application.runInBackground = m_RunInBackground;
             Screen.sleepTimeout = m_NeverSleep ? SleepTimeout.NeverSleep : SleepTimeout.SystemSetting;
+#else
+            Log.Error("Game Kit only applies with Unity 5.3 and above, but current Unity version is {0}.", Application.unityVersion);
+            GameKitComponentCenter.Shutdown(ShutdownType.Quit);
+#endif
+#if UNITY_5_6_OR_NEWER
             Application.lowMemory += OnLowMemory;
-
+#endif
         }
 
         private void Start()
         {
-
         }
 
         private void Update()
@@ -169,18 +224,22 @@ namespace UnityGameKit.Runtime
             GameKitModuleCenter.Update(Time.deltaTime, Time.unscaledDeltaTime);
         }
 
+        private void OnApplicationQuit()
+        {
+#if UNITY_5_6_OR_NEWER
+            Application.lowMemory -= OnLowMemory;
+#endif
+            StopAllCoroutines();
+        }
+
         private void OnDestroy()
         {
             GameKitModuleCenter.Shutdown();
         }
 
-        internal void Shutdown()
-        {
-            Destroy(this.gameObject);
-        }
-
-
-        #region PUBLIC
+        /// <summary>
+        /// 暂停游戏。
+        /// </summary>
         public void PauseGame()
         {
             if (IsGamePaused)
@@ -192,6 +251,9 @@ namespace UnityGameKit.Runtime
             GameSpeed = 0f;
         }
 
+        /// <summary>
+        /// 恢复游戏。
+        /// </summary>
         public void ResumeGame()
         {
             if (!IsGamePaused)
@@ -202,23 +264,22 @@ namespace UnityGameKit.Runtime
             GameSpeed = m_GameSpeedBeforePause;
         }
 
-
+        /// <summary>
+        /// 重置为正常游戏速度。
+        /// </summary>
         public void ResetNormalGameSpeed()
         {
             if (IsNormalGameSpeed)
             {
                 return;
             }
+
             GameSpeed = 1f;
         }
-        #endregion
 
-        #region PRIVATE
-
-        private void OnApplicationQuit()
+        internal void Shutdown()
         {
-            Application.lowMemory -= OnLowMemory;
-            StopAllCoroutines();
+            Destroy(gameObject);
         }
 
         private void InitTextHelper()
@@ -337,7 +398,6 @@ namespace UnityGameKit.Runtime
             Utility.Json.SetJsonHelper(jsonHelper);
         }
 
-
         private void OnLowMemory()
         {
             Log.Info("Low memory reported...");
@@ -348,15 +408,11 @@ namespace UnityGameKit.Runtime
                 objectPoolComponent.ReleaseAllUnused();
             }
 
-            // 清空为使用的资源
-            // AddressableManager.instance.ReleaseHandle();
-
-            // ResourceComponent resourceCompoent = GameKitComponentCenter.GetComponent<ResourceComponent>();
-            // if (resourceCompoent != null)
-            // {
-            //     resourceCompoent.ForceUnloadUnusedAssets(true);
-            // }
+            ResourceComponent resourceCompoent = GameKitComponentCenter.GetComponent<ResourceComponent>();
+            if (resourceCompoent != null)
+            {
+                resourceCompoent.ForceUnloadUnusedAssets(true);
+            }
         }
-        #endregion
     }
 }

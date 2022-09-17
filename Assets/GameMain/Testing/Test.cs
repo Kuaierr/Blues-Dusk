@@ -29,7 +29,7 @@ public class Test : MonoBehaviour
         }
     }
 
-    // private void OnReadConfigSuccess(object sender, GameEventArgs e)
+    // private void OnReadConfigSuccess(object sender, BaseEventArgs e)
     // {
 
     //     LoadConfigSuccessEventArgs args = (LoadConfigSuccessEventArgs)e;

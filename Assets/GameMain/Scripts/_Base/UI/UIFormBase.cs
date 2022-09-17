@@ -130,7 +130,7 @@ public abstract class UIFormBase : UIFormLogic
         //     texts[i].font = s_MainFont;
         //     // if (!string.IsNullOrEmpty(texts[i].text))
         //     // {
-        //     //     // texts[i].text = GameEntry.Localization.GetString(texts[i].text);
+        //     //     // texts[i].text = GameKitCenter.Localization.GetString(texts[i].text);
         //     // }
         // }
     }
@@ -143,11 +143,13 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
+        Log.Warning("Open {0}", gameObject.name);
     }
 
     protected override void OnClose(bool isShutdown, object userData)
     {
         base.OnClose(isShutdown, userData);
+        Log.Warning("Close {0}", gameObject.name);
     }
 
     protected override void OnPause()
@@ -195,7 +197,7 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void InternalSetVisible(bool visible)
     {
-        Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);
+        // Log.Warning("{0} InternalSetVisible {1}", gameObject.name, visible);
         SetCanvasGroupBlock(visible);
         if (m_MasterAnimator != null && m_MasterAnimator.runtimeAnimatorController != null)
         {

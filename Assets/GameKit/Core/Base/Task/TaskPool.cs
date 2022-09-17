@@ -11,8 +11,8 @@ namespace GameKit
     public sealed class TaskPool<T> where T : TaskBase
     {
         private readonly Stack<ITaskAgent<T>> m_FreeAgents;
-        private readonly CachedLinkedList<ITaskAgent<T>> m_WorkingAgents;
-        private readonly CachedLinkedList<T> m_WaitingTasks;
+        private readonly GameKitLinkedList<ITaskAgent<T>> m_WorkingAgents;
+        private readonly GameKitLinkedList<T> m_WaitingTasks;
         private bool m_Paused;
 
         /// <summary>
@@ -21,8 +21,8 @@ namespace GameKit
         public TaskPool()
         {
             m_FreeAgents = new Stack<ITaskAgent<T>>();
-            m_WorkingAgents = new CachedLinkedList<ITaskAgent<T>>();
-            m_WaitingTasks = new CachedLinkedList<T>();
+            m_WorkingAgents = new GameKitLinkedList<ITaskAgent<T>>();
+            m_WaitingTasks = new GameKitLinkedList<T>();
             m_Paused = false;
         }
 
@@ -141,7 +141,7 @@ namespace GameKit
                 T workingTask = workingAgent.Task;
                 if (workingTask.SerialId == serialId)
                 {
-                    return new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskExecuteStatus.Done : TaskExecuteStatus.Doing, workingTask.Description);
+                    return new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskStatus.Done : TaskStatus.Doing, workingTask.Description);
                 }
             }
 
@@ -149,7 +149,7 @@ namespace GameKit
             {
                 if (waitingTask.SerialId == serialId)
                 {
-                    return new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskExecuteStatus.Todo, waitingTask.Description);
+                    return new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskStatus.Todo, waitingTask.Description);
                 }
             }
 
@@ -186,7 +186,7 @@ namespace GameKit
                 T workingTask = workingAgent.Task;
                 if (workingTask.Tag == tag)
                 {
-                    results.Add(new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskExecuteStatus.Done : TaskExecuteStatus.Doing, workingTask.Description));
+                    results.Add(new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskStatus.Done : TaskStatus.Doing, workingTask.Description));
                 }
             }
 
@@ -194,7 +194,7 @@ namespace GameKit
             {
                 if (waitingTask.Tag == tag)
                 {
-                    results.Add(new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskExecuteStatus.Todo, waitingTask.Description));
+                    results.Add(new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskStatus.Todo, waitingTask.Description));
                 }
             }
         }
@@ -210,12 +210,12 @@ namespace GameKit
             foreach (ITaskAgent<T> workingAgent in m_WorkingAgents)
             {
                 T workingTask = workingAgent.Task;
-                results[index++] = new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskExecuteStatus.Done : TaskExecuteStatus.Doing, workingTask.Description);
+                results[index++] = new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskStatus.Done : TaskStatus.Doing, workingTask.Description);
             }
 
             foreach (T waitingTask in m_WaitingTasks)
             {
-                results[index++] = new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskExecuteStatus.Todo, waitingTask.Description);
+                results[index++] = new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskStatus.Todo, waitingTask.Description);
             }
 
             return results;
@@ -236,12 +236,12 @@ namespace GameKit
             foreach (ITaskAgent<T> workingAgent in m_WorkingAgents)
             {
                 T workingTask = workingAgent.Task;
-                results.Add(new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskExecuteStatus.Done : TaskExecuteStatus.Doing, workingTask.Description));
+                results.Add(new TaskInfo(workingTask.SerialId, workingTask.Tag, workingTask.Priority, workingTask.UserData, workingTask.Done ? TaskStatus.Done : TaskStatus.Doing, workingTask.Description));
             }
 
             foreach (T waitingTask in m_WaitingTasks)
             {
-                results.Add(new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskExecuteStatus.Todo, waitingTask.Description));
+                results.Add(new TaskInfo(waitingTask.SerialId, waitingTask.Tag, waitingTask.Priority, waitingTask.UserData, TaskStatus.Todo, waitingTask.Description));
             }
         }
 
@@ -414,20 +414,20 @@ namespace GameKit
                 LinkedListNode<ITaskAgent<T>> agentNode = m_WorkingAgents.AddLast(agent);
                 T task = current.Value;
                 LinkedListNode<T> next = current.Next;
-                TaskStartStatus status = agent.Start(task);
-                if (status == TaskStartStatus.Done || status == TaskStartStatus.HasToWait || status == TaskStartStatus.UnknownError)
+                StartTaskStatus status = agent.Start(task);
+                if (status == StartTaskStatus.Done || status == StartTaskStatus.HasToWait || status == StartTaskStatus.UnknownError)
                 {
                     agent.Reset();
                     m_FreeAgents.Push(agent);
                     m_WorkingAgents.Remove(agentNode);
                 }
 
-                if (status == TaskStartStatus.Done || status == TaskStartStatus.CanResume || status == TaskStartStatus.UnknownError)
+                if (status == StartTaskStatus.Done || status == StartTaskStatus.CanResume || status == StartTaskStatus.UnknownError)
                 {
                     m_WaitingTasks.Remove(current);
                 }
 
-                if (status == TaskStartStatus.Done || status == TaskStartStatus.UnknownError)
+                if (status == StartTaskStatus.Done || status == StartTaskStatus.UnknownError)
                 {
                     ReferencePool.Release(task);
                 }

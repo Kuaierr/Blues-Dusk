@@ -142,7 +142,7 @@ public class ProcedureChangeScene : ProcedureBase
         m_IsChangeSceneComplete = true;
     }
 
-    private void OnLoadSceneSuccess(object sender, GameEventArgs e)
+    private void OnLoadSceneSuccess(object sender, BaseEventArgs e)
     {
         LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
         if (args.UserData == null)
@@ -174,7 +174,7 @@ public class ProcedureChangeScene : ProcedureBase
         // m_IsChangeSceneComplete = true;
     }
 
-    private void OnLoadSceneFailure(object sender, GameEventArgs e)
+    private void OnLoadSceneFailure(object sender, BaseEventArgs e)
     {
         LoadSceneFailureEventArgs ne = (LoadSceneFailureEventArgs)e;
         if (ne.UserData != this)
@@ -186,7 +186,7 @@ public class ProcedureChangeScene : ProcedureBase
     }
 
 
-    private void OnUnloadSceneSuccess(object sender, GameEventArgs e)
+    private void OnUnloadSceneSuccess(object sender, BaseEventArgs e)
     {
         UnloadSceneSuccessEventArgs ne = (UnloadSceneSuccessEventArgs)e;
         // if (ne.UserData != this)
@@ -204,7 +204,7 @@ public class ProcedureChangeScene : ProcedureBase
         // m_IsChangeSceneComplete = true;
     }
 
-    private void OnUnloadSceneFailure(object sender, GameEventArgs e)
+    private void OnUnloadSceneFailure(object sender, BaseEventArgs e)
     {
         UnloadSceneFailureEventArgs ne = (UnloadSceneFailureEventArgs)e;
         if (ne.UserData != this)

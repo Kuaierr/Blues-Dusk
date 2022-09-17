@@ -389,7 +389,7 @@ public class UI_Dialog : UIFormBase
         SpeakerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
-    private void OnStartDialogSuccess(object sender, GameEventArgs e)
+    private void OnStartDialogSuccess(object sender, BaseEventArgs e)
     {
         // UnityGameKit.Runtime.StartDialogSuccessEventArgs ne = (UnityGameKit.Runtime.StartDialogSuccessEventArgs)e;
         // GameKitCenter.Dialog.CurrentTree = ne.DialogTree;

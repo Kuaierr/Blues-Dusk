@@ -12,7 +12,7 @@ namespace GameKit.UI
             private int m_Depth;
             private bool m_Pause;
             private readonly IUIGroupHelper m_UIGroupHelper;
-            private readonly CachedLinkedList<UIFormInfo> m_UIFormInfos;
+            private readonly GameKitLinkedList<UIFormInfo> m_UIFormInfos;
             private LinkedListNode<UIFormInfo> m_CachedNode;
 
             public UIGroup(string name, int depth, IUIGroupHelper uiGroupHelper)
@@ -30,7 +30,7 @@ namespace GameKit.UI
                 m_Name = name;
                 m_Pause = false;
                 m_UIGroupHelper = uiGroupHelper;
-                m_UIFormInfos = new CachedLinkedList<UIFormInfo>();
+                m_UIFormInfos = new GameKitLinkedList<UIFormInfo>();
                 m_CachedNode = null;
                 Depth = depth;
             }

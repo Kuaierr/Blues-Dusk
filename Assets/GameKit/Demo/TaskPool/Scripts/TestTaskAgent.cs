@@ -31,13 +31,13 @@ namespace UnityGameKit.Demo
 
         }
 
-        public TaskStartStatus Start(TestTaskBase task)
+        public StartTaskStatus Start(TestTaskBase task)
         {
             m_Task = task;
             m_Task.Done = false;
             taskAgentHelper.CallHelper("Helper Arg");
             task.OnTaskStart(this, "Start Arg");
-            return TaskStartStatus.CanResume;
+            return StartTaskStatus.CanResume;
         }
 
         public void Update(float elapseSeconds, float realElapseSeconds)

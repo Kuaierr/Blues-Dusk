@@ -12,7 +12,7 @@ public class ModuleTesting : MonoBehaviour
     public List<DebugButton> moduleButtons;
     private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
-    private IResourceManager resourceManager;
+    // private IResourceManager resourceManager;
     private bool isShown = false;
     private void Start()
     {

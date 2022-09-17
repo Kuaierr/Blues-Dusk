@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using GameKit.DataStructure;
 
 
-namespace GameKit.Event
+namespace GameKit
 {
-    internal sealed partial class EventPool<T> where T : GameEventArgs
+    internal sealed partial class EventPool<T> where T : BaseEventArgs
     {
-        private readonly MultiDictionary<int, EventHandler<T>> m_EventHandlers;
+        private readonly GameKitMultiDictionary<int, EventHandler<T>> m_EventHandlers;
         private readonly Queue<Event> m_Events;
         private readonly Dictionary<object, LinkedListNode<EventHandler<T>>> m_CachedNodes;
         private readonly Dictionary<object, LinkedListNode<EventHandler<T>>> m_TempNodes;
@@ -16,7 +16,7 @@ namespace GameKit.Event
 
         public EventPool(EventPoolMode mode)
         {
-            m_EventHandlers = new MultiDictionary<int, EventHandler<T>>();
+            m_EventHandlers = new GameKitMultiDictionary<int, EventHandler<T>>();
             m_Events = new Queue<Event>();
             m_CachedNodes = new Dictionary<object, LinkedListNode<EventHandler<T>>>();
             m_TempNodes = new Dictionary<object, LinkedListNode<EventHandler<T>>>();
@@ -72,7 +72,7 @@ namespace GameKit.Event
 
         public int Count(int id)
         {
-            LinkedListRange<EventHandler<T>> range = default(LinkedListRange<EventHandler<T>>);
+            GameKitLinkedListRange<EventHandler<T>> range = default(GameKitLinkedListRange<EventHandler<T>>);
             if (m_EventHandlers.TryGetValue(id, out range))
             {
                 return range.Count;
@@ -182,7 +182,7 @@ namespace GameKit.Event
         private void HandleEvent(object sender, T e)
         {
             bool noHandlerException = false;
-            LinkedListRange<EventHandler<T>> range = default(LinkedListRange<EventHandler<T>>);
+            GameKitLinkedListRange<EventHandler<T>> range = default(GameKitLinkedListRange<EventHandler<T>>);
             if (m_EventHandlers.TryGetValue(e.Id, out range))
             {
                 LinkedListNode<EventHandler<T>> current = range.First;

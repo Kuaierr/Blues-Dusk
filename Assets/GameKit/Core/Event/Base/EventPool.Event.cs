@@ -1,6 +1,6 @@
-namespace GameKit.Event
+namespace GameKit
 {
-    internal sealed partial class EventPool<T> where T : GameEventArgs
+    internal sealed partial class EventPool<T> where T : BaseEventArgs
     {
         private sealed class Event : IReference
         {

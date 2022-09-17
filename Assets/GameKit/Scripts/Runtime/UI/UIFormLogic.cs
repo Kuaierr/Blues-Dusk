@@ -127,10 +127,6 @@ namespace UnityGameKit.Runtime
 
         protected internal virtual void OnDepthChanged(int uiGroupDepth, int depthInUIGroup)
         {
-        }
-
-        protected internal virtual void OnInstantiate(object userData)
-        {
             
         }
 
