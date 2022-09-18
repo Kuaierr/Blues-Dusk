@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 using UnityGameKit.Runtime;
+using UnityGameKit.Editor;
 using LitJson;
 using GameKit;
 using GameKit.Event;
@@ -10,25 +11,27 @@ using DG.Tweening;
 
 public class Test : MonoBehaviour
 {
+    [Dialog] public string TestData;
     private void Start()
     {
         // GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnReadConfigSuccess);
         // GameKitCenter.Config.ReadData(AssetUtility.GetConfigAsset("datatable_tbgameconfig"));
         // StartCoroutine(DOIT());
-        
+
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Log.Info(">>>>!! " + GameSettings.current.GetBool("IsDavidDead"));
+            // Log.Info(">>>>!! " + GameSettings.current.GetBool("IsDavidDead"));
+            Debug.Log(TestData);
         }
     }
-    
+
     // private void OnReadConfigSuccess(object sender, GameEventArgs e)
     // {
-        
+
     //     LoadConfigSuccessEventArgs args = (LoadConfigSuccessEventArgs)e;
     //     // Log.Warning(args.ConfigAssetName);
     // }

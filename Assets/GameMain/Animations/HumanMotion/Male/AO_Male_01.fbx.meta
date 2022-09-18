@@ -8,13 +8,13 @@ ModelImporter:
     second: An_Idle_noraml_01
   - first:
       74: 5052348608223836149
-    second: An_LeftTurn90_01
+    second: An_RightTurn90_01
   - first:
       74: 6151974089611579586
     second: An__Interactive_01
   - first:
       74: -998496362607748373
-    second: Take 001
+    second: An_LeftTurn90_01
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -87,7 +87,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: An_LeftTurn90_01
+      name: An_RightTurn90_01
       takeName: Take 001
       internalID: 0
       firstFrame: 101
@@ -145,7 +145,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Take 001
+      name: An_LeftTurn90_01
       takeName: Take 001
       internalID: 0
       firstFrame: 101

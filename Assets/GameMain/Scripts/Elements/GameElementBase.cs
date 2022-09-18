@@ -9,8 +9,8 @@ using LubanConfig.DataTable;
 
 public abstract class GameElementBase : ElementBase
 {
-    public float OutlineWidth = 3f;
     public UnityEvent InteractCallback;
+    public float OutlineWidth = 3f;
     private Outline m_Outline;
     private Transform m_InteractTrans;
     public Vector3 InteractPosition

@@ -7,6 +7,7 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
 {
     public CinemachineVirtualCamera m_VirtualCamera;
     public Vector3 DefaultFollowPositionOffset;
+    public Vector3 DefaultRotation;
     private bool SetFollowTarget(Transform transform)
     {
         if (m_VirtualCamera == null)
@@ -15,20 +16,12 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
             return false;
         }
         m_VirtualCamera.Follow = transform;
-
         return true;
     }
 
     public void SetFollow(Transform transform)
     {
-        this.transform.position = transform.position - DefaultFollowPositionOffset;
-        StartCoroutine(FollowTarget(transform));
-        Log.Info(this.transform.position);
-    }
-
-    IEnumerator FollowTarget(Transform transform)
-    {
-        yield return null;
+        m_VirtualCamera.ForceCameraPosition(transform.position - DefaultFollowPositionOffset, DefaultRotation.ToQuaternion());
         SetFollowTarget(transform);
     }
 }

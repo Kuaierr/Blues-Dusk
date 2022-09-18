@@ -38,7 +38,7 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         }
 
         // 如果是纯功能性节点，则自动处理并跳过
-        fsmMaster.CurrentTree.CurrentNode = fsmMaster.ExecuteNodeFunction(fsmMaster.CurrentTree.CurrentNode);
+        fsmMaster.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(fsmMaster.CurrentTree.CurrentNode);
         fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
         SetTextShowing();
     }
@@ -59,7 +59,7 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
 
                     GameKitCenter.Dialog.CurrentTree.CurrentNode = tmpSonNode;
                     // 如果是功能节点，就跳过
-                    GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.ExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+                    GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
                     if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
                     {
                         // 如果下一个节点是选择节点，则先显示对话
@@ -128,6 +128,22 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DiceDialogSelectingState));
             fsmMaster.UpdateOptionUI(isDiceCheck: true);
+        }
+        else if (tmpSonNodeData.IsInventoryCheckOption)
+        {
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
+            if (tmpSonNodeData.CachedInventoryName == "PlayerBackpack")
+            {
+                fsmMaster.UpdatePlayerInventoryCheckOptionUI();
+            }
+            else if (tmpSonNodeData.CachedInventoryName == "DiceInventory")
+            {
+                fsmMaster.UpdateDiceInventoryCheckOptionUI();
+            }
+            else
+            {
+                Debug.LogError("Inventory not exist");
+            }
         }
         else
         {

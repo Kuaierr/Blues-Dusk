@@ -6,6 +6,8 @@ using UnityGameKit.Runtime;
 using System.Linq;
 using UnityEngine.Events;
 using GameKit.Dialog;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using Log = UnityGameKit.Runtime.Log;
 
 [RequireComponent(typeof(Animator))]
 public class UI_Response : UIFormChildBase
@@ -221,14 +223,68 @@ public class UI_Response : UIFormChildBase
                 m_ActiveUIOptions.Add(UIOptions[i]);
                 if (m_CachedIsDiceCheck)
                 {
+                    UIOptions[i].SetActive(true);
                     UIOptions[i].Lock();
                     UIOptions[i].ShowDiceIndicator(m_CurrentOptions[i]);
                 }
                 else if (UIOptions[i].IsLocked)
+                {
+                    UIOptions[i].SetActive(true);
                     UIOptions[i].Unlock();
+                }
             }
             else
                 m_CachedDefaultOptionIndex = i;
+        }
+    }
+
+    public void UpdateAsPlayerInventoryCheckOptions(IDialogOptionSet optionSet, Dictionary<string,bool> conditions)
+    {
+        m_ActiveUIOptions.Clear();
+        m_CurrentOptions = optionSet.Options;
+        for (int i = 0; i < m_CurrentOptions.Count; i++)
+        {
+            m_ActiveUIOptions.Add(UIOptions[i]);
+            if (conditions[optionSet.Options[i].Text] == true)
+            {
+                UIOptions[i].SetActive(true);
+                UIOptions[i].Unlock();
+            }
+            else
+            {
+                UIOptions[i].SetActive(true);
+                UIOptions[i].Lock();
+            }
+        }
+    }
+
+    public void UpdateAsDiceInventoryCheckOption(IDialogOptionSet optionSet/*, List<bool> conditions*/)
+    {
+        m_ActiveUIOptions.Clear();
+        m_CurrentOptions = optionSet.Options;
+        for (int i = 0; i < m_CurrentOptions.Count; i++)
+        {
+            /*m_ActiveUIOptions.Add(UIOptions[i]);
+            if (conditions[i] == true)
+            {
+                UIOptions[i].SetActive(true);
+                UIOptions[i].Unlock();
+            }
+            else
+            {
+                UIOptions[i].SetActive(false);
+                UIOptions[i].Lock();
+            }*/
+            if (optionSet.Options[i].CanShow)
+            {
+                UIOptions[i].SetActive(true);
+                UIOptions[i].Unlock();
+            }
+            else
+            {
+                UIOptions[i].SetActive(false);
+                UIOptions[i].Unlock();
+            }
         }
     }
 

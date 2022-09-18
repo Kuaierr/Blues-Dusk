@@ -20,6 +20,7 @@ public class UI_Dialog : UIFormBase
     public UI_Character uI_Character;
     public UI_Response uI_Response;
     public UI_Indicator uI_Indicator;
+    public UI_SpeakerName uI_SpeakerName;
     public UI_DiceSystem uI_DiceSystem;
     public TextMeshProUGUI t_SpeakerName;
     public TextMeshProUGUI t_Contents;
@@ -31,6 +32,8 @@ public class UI_Dialog : UIFormBase
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
     private bool m_IsDialoging = false;
+    //private List<bool> m_CachedCheckResults = new List<bool>();
+    private Dictionary<string, bool> m_CachedCheckResults = new Dictionary<string, bool>();
 
     public IDialogTree CurrentTree
     {
@@ -200,11 +203,16 @@ public class UI_Dialog : UIFormBase
         return sonNode;
     }
 
-    public IDataNode ExecuteNodeFunction(IDataNode sonNode)
+    // 每次访问节点都会尝试调用该方法
+    public IDataNode TryExecuteNodeFunction(IDataNode sonNode)
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
 
+        //Info 这里的数据是特定的一个选项 
+        //Debug.Log(tempDialogData.Contents);
+        
+        // 如果本次对话中有可完成得条件
         if (tempDialogData.IsLocalCompleter)
         {
             for (int j = 0; j < tempDialogData.CompleteConditons.Count; j++)
@@ -213,6 +221,7 @@ public class UI_Dialog : UIFormBase
             }
         }
 
+        // 如果全局设置中有可完成得条件
         if (tempDialogData.IsGlobalCompleter)
         {
             for (int j = 0; j < tempDialogData.GlobalCompleteConditons.Count; j++)
@@ -221,9 +230,34 @@ public class UI_Dialog : UIFormBase
                 Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
             }
         }
+        Debug.Log(tempDialogData.IsInventoryCheckOption);
+        // 如果该节点是仓检的选项
+        if (tempDialogData.IsInventoryCheckOption && tempDialogData.CachedInventoryName != "DiceInventory")
+        {
+            //Info tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致 
+            //Info tempDialogData.CachedInventoryName 有检测背包的名称
+            Debug.Log("Dialog -- IsInventoryCheckOption --");
+            m_CachedCheckResults.Clear();
+            bool clear = true;
+            for (int i = 0; i < tempDialogData.CachedStockConditions.Count; i++)
+            {
+                if (GameKitCenter.Inventory.GetStockFromInventory(tempDialogData.CachedInventoryName,
+                    tempDialogData.CachedStockConditions[i]) == null)
+                {
+                    clear = false;
+                    break;
+                }
+                m_CachedCheckResults.Add(tempDialogData.Contents, clear);
+                Debug.Log("InventoryName: " + tempDialogData.CachedInventoryName +"\n" +
+                          "TargetItemName: " + tempDialogData.CachedStockConditions[i] +"\n" +
+                          "Result: " + clear);
+            }
+        }
 
+        // 如果是纯功能节点
         if (tempDialogData.IsFunctional)
         {
+            // 如果是基于本次对话条件的纯分支点
             if (tempDialogData.IsLocalDivider)
             {
                 bool isComplete = true;
@@ -246,6 +280,7 @@ public class UI_Dialog : UIFormBase
                 }
             }
 
+            // 如果是全局条件的纯分支点
             if (tempDialogData.IsGlobalDivider)
             {
 
@@ -295,8 +330,8 @@ public class UI_Dialog : UIFormBase
         else
             t_SpeakerName.text = data.Speaker;
         t_Contents.text = data.Contents;
-
-        if (data.Speaker != ">>")
+        uI_SpeakerName.ToEason(data.Speaker != "伊森");
+        if (data.Speaker != ">>" && data.Speaker != "伊森")
         {
             Character character = characterPool.GetData<Character>(data.Speaker.Correction());
             if (m_CurrentCharacter != character)
@@ -317,6 +352,28 @@ public class UI_Dialog : UIFormBase
         if (optionSet != null)
         {
             uI_Response.UpdateOptions(optionSet, isDiceCheck);
+            ShowResponse(callback);
+        }
+    }
+
+    public void UpdatePlayerInventoryCheckOptionUI(UnityAction callback = null)
+    {
+        IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (optionSet != null)
+        {
+            uI_Response.UpdateAsPlayerInventoryCheckOptions(optionSet, m_CachedCheckResults);
+            ShowResponse(callback);
+        }
+        
+        m_CachedCheckResults.Clear();
+    }
+
+    public void UpdateDiceInventoryCheckOptionUI(UnityAction callback = null)
+    {
+        IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (optionSet != null)
+        {
+            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet/*, m_CachedCheckResults*/);
             ShowResponse(callback);
         }
     }

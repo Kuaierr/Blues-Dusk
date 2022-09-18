@@ -5,6 +5,7 @@ using GameKit;
 using System.Text.RegularExpressions;
 using System.Linq;
 using GameKit.DataStructure;
+using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
@@ -265,6 +266,30 @@ namespace UnityGameKit.Runtime
                     if (semantic == "ddoption")
                     {
                         data.IsDiceDefaultOption = true;
+                    }
+
+                    if (semantic == "idoption")
+                    {
+                        data.IsInventoryCheckOption = true;
+                        try
+                        {
+                            //Debug.Log(data.Contents);
+                            string[] diceAttributes = value.Trim().RemoveParentheses().Split(' ');
+                            string inventoryName = diceAttributes[0];
+                            string[] stockList = diceAttributes[1].Split('&');
+
+                            data.CachedInventoryName = inventoryName;
+                            data.CachedStockConditions.Clear();
+                            for (int j = 0; j < stockList.Length; j++)
+                            {
+                                data.CachedStockConditions.Add(stockList[j]);
+                            }
+                        }
+                        catch (System.Exception e)
+                        {
+                            Log.Error(e.Message);
+                            throw;
+                        }
                     }
                 }
 

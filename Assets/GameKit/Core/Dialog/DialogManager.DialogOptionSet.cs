@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using GameKit;
 using GameKit.DataNode;
 using GameKit.DataStructure;
+using GameKit.Inventory;
 
 
 namespace GameKit.Dialog
@@ -40,6 +41,21 @@ namespace GameKit.Dialog
                         dialogOptions.CreateOption(i, contents, true, data.DiceConditions);
                     else if(data.IsDiceDefaultOption)
                         dialogOptions.CreateOption(i, contents, false);
+                    else if(data.IsInventoryCheckOption && data.CachedInventoryName == "DiceInventory")
+                    {
+                        //TODO 骰检加在这里 直接改canshow
+                        bool clear = true;
+                        foreach (string condition in data.CachedStockConditions)
+                        {
+                            if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
+                                condition) == null)
+                            {
+                                clear = false;
+                                break;
+                            }
+                        }
+                        dialogOptions.CreateOption(i,contents,clear);
+                    }
                     else
                         dialogOptions.CreateOption(i, contents, true);
                 }

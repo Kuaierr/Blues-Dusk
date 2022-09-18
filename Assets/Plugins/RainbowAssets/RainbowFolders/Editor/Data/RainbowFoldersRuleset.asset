@@ -437,7 +437,7 @@ MonoBehaviour:
     Key: Assets/GameMain/UI/UIForms
     Ordinal: 35
     Priority: 0
-    IconType: 0
+    IconType: 130
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0

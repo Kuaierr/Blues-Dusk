@@ -8,32 +8,27 @@ public class UI_DiceInventorySystem : UIFormBase
     public UI_DiceInventory uI_DiceInventory;
     public UI_DiceInventoryInfo uI_DiceInventoryInfo;
 
-    [Space]
-    public RectTransform diceContent;
-
-    public UI_Dice dicePrefab;
-
     private int _currentIndex = -1;
-    private List<UI_Dice> _uIDices = new List<UI_Dice>();
 
     private KeyCode _changeDisplayKeyCode;
     
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        
     }
 
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        InitDiceInventoryUI();
+        uI_DiceInventory.InitDiceInventoryUI();
+        Select(0);
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        InitDiceInventoryUI();
+        uI_DiceInventory.InitDiceInventoryUI();
+        Select(0);
     }
 
     protected override void OnPause()
@@ -51,29 +46,7 @@ public class UI_DiceInventorySystem : UIFormBase
         }
     }
 
-    private void InitDiceInventoryUI()
-    {
-        ClearDices();
-        
-        var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
-        for (int i = 0; i < data.StockMap.Length; i++)
-        {
-            if(data.StockMap[i] == null) continue;
-            var dice = Instantiate(dicePrefab, diceContent).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null);
-            _uIDices.Add(dice);
-        }
-
-        Select(0);
-    }
-
-    private void ClearDices()
-    {
-        foreach (Transform trans in diceContent.transform)
-        {
-            Destroy(trans.gameObject);
-        }
-        _uIDices.Clear();
-    }
+    
     
     public void SetChangeDisplayKeyCode(KeyCode key)
     {
@@ -90,19 +63,9 @@ public class UI_DiceInventorySystem : UIFormBase
 
     private void Select(int index)
     {
-        if (index < 0 || index >= _uIDices.Count) return;
-
-        if (_currentIndex >= 0 && _currentIndex < _uIDices.Count)
-            _uIDices[_currentIndex].OnDisSelected();
-
-        _uIDices[index].OnSelected();
-        _currentIndex = index;
-        UpdateDiceInventoryInfo(_uIDices[index].Data);
-    }
-
-    private void UpdateDiceInventoryInfo(UI_DiceData_SO data)
-    {
-        uI_DiceInventoryInfo.UpdateDiceInfoDesplay(data);
+        var data = uI_DiceInventory.Select(ref _currentIndex,index);
+        if(data != null)
+            uI_DiceInventoryInfo.UpdateDiceInfoDesplay(data);
     }
 
     private bool GetKeyDown(KeyCode key)
