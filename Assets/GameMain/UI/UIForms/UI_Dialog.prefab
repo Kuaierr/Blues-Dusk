@@ -285,8 +285,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 53453a6687acf6148a007379371b0007, type: 2}
   m_sharedMaterial: {fileID: -1281335672025755325, guid: 53453a6687acf6148a007379371b0007, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
+  m_sharedMaterial: {fileID: 7855280157549297167, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
+>>>>>>> 888181e3ba8319d7884cea49972d2d9bce44399f
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -575,8 +580,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
+<<<<<<< HEAD
   m_fontAsset: {fileID: 11400000, guid: 53453a6687acf6148a007379371b0007, type: 2}
   m_sharedMaterial: {fileID: -1281335672025755325, guid: 53453a6687acf6148a007379371b0007, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
+  m_sharedMaterial: {fileID: 7855280157549297167, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
+>>>>>>> 888181e3ba8319d7884cea49972d2d9bce44399f
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2180,10 +2190,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 2185975843050964898, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_text
       value: "\u9AB0\u5B50\u7C7B\u578B"
       objectReference: {fileID: 0}
+=======
+>>>>>>> 888181e3ba8319d7884cea49972d2d9bce44399f
     - target: {fileID: 2185975843193502451, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2504,6 +2517,7 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 6575673052318072672, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_text
       value: "\u610F\u8BC6\u8C03\u5EA6"
@@ -2516,6 +2530,8 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -1281335672025755325, guid: 53453a6687acf6148a007379371b0007, type: 2}
+=======
+>>>>>>> 888181e3ba8319d7884cea49972d2d9bce44399f
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
 --- !u!95 &3530403128158587461 stripped
