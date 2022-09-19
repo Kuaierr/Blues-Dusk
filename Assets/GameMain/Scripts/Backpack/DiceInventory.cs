@@ -26,13 +26,13 @@ public class DiceInventory : MonoSingletonBase<DiceInventory>
 		var testData3 = GameKitCenter.Data.Data_So[typeof(UI_DiceDataPool_SO)].GetData<UI_DiceData_SO>("二元辩证法");
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 001, testData1.name, testData1);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 002, testData2.name, testData2);
-		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 003, testData3.name, testData3);
+		/*GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 003, testData3.name, testData3);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 001, testData1.name, testData1);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 002, testData2.name, testData2);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 003, testData3.name, testData3);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 001, testData1.name, testData1);
 		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 002, testData2.name, testData2);
-		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 003, testData3.name, testData3);
+		GameKitCenter.Inventory.AddToInventory<UI_DiceData_SO>(DiceInventoryName, 003, testData3.name, testData3);*/
 	}
 
 	private void OnOpenDiceInventory(object sender, GameKit.Event.GameEventArgs e)

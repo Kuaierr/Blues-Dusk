@@ -18,6 +18,7 @@ public enum Dice_SuitType
 public class UI_DiceSystem : UIFormChildBase
 {
     [Header("Basic Elements")]
+    public Animator diceAnimator;
     //在背包里的骰子
     private List<UI_Dice> _negativeDices = new List<UI_Dice>(); //这些骰子最初是遵循排列规则的
 
@@ -124,6 +125,7 @@ public class UI_DiceSystem : UIFormChildBase
         Result.Clear();
         _startButton.Clear();
 
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         StopCoroutine("KeybordInputCheck");
     }
 
@@ -294,6 +296,9 @@ public class UI_DiceSystem : UIFormChildBase
             if (dice == null) continue;
             dice.Roll();
         }
+
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        StopCoroutine("KeybordInputCheck");
     }
 
     public bool CheckIfFinishRolling()
@@ -415,8 +420,15 @@ public class UI_DiceSystem : UIFormChildBase
     //键盘输入检测的接口
     private IEnumerator KeybordInputCheck()
     {
+        var aniState = diceAnimator.GetCurrentAnimatorStateInfo(0);
         while (true)
         {
+            if(!aniState.IsName("ON"))
+            {
+                yield return 0;
+                continue;
+            }
+            
             if (InputManager.instance.GetKeyDown(KeyCode.LeftShift))
                 OnStartKeyPressed();
             if (InputManager.instance.GetKeyUp(KeyCode.LeftShift))

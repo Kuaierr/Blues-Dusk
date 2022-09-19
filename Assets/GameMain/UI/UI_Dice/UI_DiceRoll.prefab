@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2185975844259830867}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.96830827
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1859,11 +1859,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f11295293acfb840bb777868e4df6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceAnimator: {fileID: 4358323184460029160}
   _activedDiceSlots:
   - {fileID: 6223071262496768384}
   - {fileID: 2549773150574386676}
   - {fileID: 2549773149347755838}
-  - {fileID: 0}
   _dicePrefab: {fileID: 2474449547994766563, guid: 6bc18ed47bd456f4ea03a14a8f54d9da, type: 3}
   _diceSlotPrefab: {fileID: 447287291869465965, guid: 00ec53db25022a0429f8d710c469b086, type: 3}
   basicOffset: 70
@@ -3372,7 +3372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00027466, y: 0.02346544}
+  m_AnchoredPosition: {x: 0.00027466, y: 0.000118025535}
   m_SizeDelta: {x: 0, y: 311.9771}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2185975844684121138

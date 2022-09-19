@@ -2170,11 +2170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2185975843711534829, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_Size
-      value: 0.9999976
-      objectReference: {fileID: 0}
-    - target: {fileID: 2185975843900101642, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
-      propertyPath: _activedDiceSlots.Array.size
-      value: 3
+      value: 0.9999767
       objectReference: {fileID: 0}
     - target: {fileID: 2185975843900101646, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_Pivot.x
@@ -2272,9 +2268,13 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2185975844619710462, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2185975844658084351, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000032859632
+      value: -0.000020795806
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c5952aa476dfc408b77051e8cb85ce, type: 3}
