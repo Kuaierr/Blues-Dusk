@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using GameKit.QuickCode;
 using UnityEngine;
@@ -289,6 +290,7 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void RollActivedDices()
     {
+        //await Task.Delay(500);
         //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (UI_Dice dice in _activedDices)
@@ -420,11 +422,8 @@ public class UI_DiceSystem : UIFormChildBase
     //键盘输入检测的接口
     private IEnumerator KeybordInputCheck()
     {
-        var aniState = diceAnimator.GetCurrentAnimatorClipInfo(0);
         while (true)
         {
-            //if(diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
-            Debug.Log(diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name == ("An_DiceSystem_On"));
             if(diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name != ("An_DiceSystem_On"))
             {
                 yield return 0;
@@ -789,6 +788,7 @@ public class Dice_Result
     {
         for (int i = 0; i < results.Count; i++)
         {
+            Debug.Log(i+": " + results[i].name);
             results[i].Effect(this);
             if (breakOut)
             {
