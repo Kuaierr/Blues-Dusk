@@ -92,6 +92,9 @@ public class UI_Dialog : UIFormBase
         CursorSystem.current.Enable();
         m_IsDialoging = false;
         base.OnPause();
+        
+        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+        GameKitCenter.Event.Fire(this, args);
     }
 
     protected override void OnResume()
@@ -99,6 +102,8 @@ public class UI_Dialog : UIFormBase
         base.OnResume();
         CursorSystem.current.Disable();
         m_IsDialoging = true;
+        
+        GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
     }
 
     protected override void OnRecycle()

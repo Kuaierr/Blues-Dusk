@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using GameKit.Event;
 using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityGameKit.Runtime;
 
 public class UI_GameMenuSystem : UIFormBase
 {
@@ -23,6 +26,8 @@ public class UI_GameMenuSystem : UIFormBase
         //SetChangeKey(KeyCode.Tab);
 
         InitGameMenuButtons();
+        
+        GameKitCenter.Event.Subscribe(ReFocusGameMenuEventArgs.EventId,ReOpenGameMenu);
         Debug.Log("Init GameMenu Succeed");
     }
 
@@ -62,6 +67,11 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnResume()
     {
         base.OnResume();
+    }
+
+    protected override void OnRefocus(object userData)
+    {
+        base.OnRefocus(userData);
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -113,5 +123,15 @@ public class UI_GameMenuSystem : UIFormBase
         GameKitCenter.Event.Fire(OnOpenDiceInventoryEventArgs.EventId, args);
         
         OnPause();
+    }
+
+    private void ReOpenGameMenu(object sender,GameEventArgs e)
+    {
+        GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
+        
+        MasterAnimator.ResetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        MasterAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        //OnPause();
     }
 }
