@@ -60,6 +60,7 @@ public class UI_DiceStartButton : UIFormChildBase, IPointerDownHandler, IPointer
         //TODO 字体颜色、外发光相关的调整
         _buttonText.text = "至少放置一个";
         _buttonImage.sprite = _disabledSprite;
+        _holdSlider.fillAmount = 0;
 
         enabled = false;
     }

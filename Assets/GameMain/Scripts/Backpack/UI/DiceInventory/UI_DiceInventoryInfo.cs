@@ -16,7 +16,7 @@ public class UI_DiceInventoryInfo : UIFormChildBase
 
 	public void UpdateDiceInfoDesplay(UI_DiceData_SO data)
 	{
-		diceName.text = data.name;
+		diceName.text = data.DiceName;
 		diceType.text = data.type;
 		diceDescription.text = data.description;
 

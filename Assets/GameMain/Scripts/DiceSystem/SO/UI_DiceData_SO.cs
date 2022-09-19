@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Dice",menuName = "GameMain/DiceData/DiceAsset")]
 public class UI_DiceData_SO : ScriptableObject
 {
-	public new string name;
+	public string DiceName;
 	
 	[TextArea]
 	public string description;

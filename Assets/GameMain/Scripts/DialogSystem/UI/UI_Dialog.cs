@@ -152,11 +152,11 @@ public class UI_Dialog : UIFormBase
 
         //可能不需要这么多状态
         stateList.Add(new DiceDialogSelectingState());
-        stateList.Add(new DiceDialogCheckingState());
+        //stateList.Add(new DiceDialogCheckingState());
         stateList.Add(new DiceDialogRollingState());
         stateList.Add(new DiceDialogResetingState());
         //如果对UI_Option进行扩展的话，这个状态可以不需要
-        stateList.Add(new DiceDialogChoosingState());
+        //stateList.Add(new DiceDialogChoosingState());
 
         fsm = GameKitCenter.Fsm.CreateFsm<UI_Dialog>(gameObject.name, this, stateList);
     }

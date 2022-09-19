@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using GameKit.QuickCode;
 using UnityEngine;
@@ -18,6 +19,7 @@ public enum Dice_SuitType
 public class UI_DiceSystem : UIFormChildBase
 {
     [Header("Basic Elements")]
+    public Animator diceAnimator;
     //在背包里的骰子
     private List<UI_Dice> _negativeDices = new List<UI_Dice>(); //这些骰子最初是遵循排列规则的
 
@@ -91,7 +93,7 @@ public class UI_DiceSystem : UIFormChildBase
 
         float height = basicOffset +
                        ((_gridLayoutByTwo.childCount + 1) / 2 + _gridLayoutByOne.childCount) * lineOffset;
-        _content.sizeDelta = new Vector2(529, height);
+        _content.sizeDelta = new Vector2(460, height);
         //Debug.Log(height);
 
         for (int i = 0; i < _activedDiceSlots.Count; i++)
@@ -124,6 +126,7 @@ public class UI_DiceSystem : UIFormChildBase
         Result.Clear();
         _startButton.Clear();
 
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         StopCoroutine("KeybordInputCheck");
     }
 
@@ -287,6 +290,7 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void RollActivedDices()
     {
+        //await Task.Delay(500);
         //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         foreach (UI_Dice dice in _activedDices)
@@ -294,6 +298,9 @@ public class UI_DiceSystem : UIFormChildBase
             if (dice == null) continue;
             dice.Roll();
         }
+
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        StopCoroutine("KeybordInputCheck");
     }
 
     public bool CheckIfFinishRolling()
@@ -417,6 +424,12 @@ public class UI_DiceSystem : UIFormChildBase
     {
         while (true)
         {
+            if(diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name != ("An_DiceSystem_On"))
+            {
+                yield return 0;
+                continue;
+            }
+            
             if (InputManager.instance.GetKeyDown(KeyCode.LeftShift))
                 OnStartKeyPressed();
             if (InputManager.instance.GetKeyUp(KeyCode.LeftShift))
@@ -775,6 +788,7 @@ public class Dice_Result
     {
         for (int i = 0; i < results.Count; i++)
         {
+            Debug.Log(i+": " + results[i].name);
             results[i].Effect(this);
             if (breakOut)
             {

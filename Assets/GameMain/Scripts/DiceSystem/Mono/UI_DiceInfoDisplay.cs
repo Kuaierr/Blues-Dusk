@@ -48,7 +48,7 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	{ 
 		_canvas.DOComplete();
 
-		_diceName.text = data.name;
+		_diceName.text = data.DiceName;
 		_diceType.text = data.type;
 
 		for (int i = 0; i < 6; i++)

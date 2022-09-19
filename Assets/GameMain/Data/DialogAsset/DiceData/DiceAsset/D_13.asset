@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb496bf31631bf40980952f1a92a358, type: 3}
-  m_Name: "\u7687\u51A0"
+  m_Name: D_13
   m_EditorClassIdentifier: 
-  name: "\u7687\u51A0"
-  description: 
+  DiceName: "\u72AC\u5112\u4E3B\u4E49 "
+  description: "\u5FEB\u4E50\u5C31\u591F\u4E86\uFF0C\u8FDC\u79BB\u6B32\u671B\u3002\r\n"
   consume: 0
   faceDatas:
   - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
   - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
   - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
-  - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
-  - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
-  - {fileID: 11400000, guid: 063ed5d6d5e67b143b5f32f9e6933090, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
+  - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb496bf31631bf40980952f1a92a358, type: 3}
-  m_Name: MoonDice
+  m_Name: D_12
   m_EditorClassIdentifier: 
-  name: EMO
-  description: "\u611F\u89C9\u4EBA\u751F\u6BEB\u65E0\u4EF7\u503C"
+  DiceName: "\u7A7A\u60F3\u65E0\u7528\u4E3B\u4E49 "
+  description: "\u4E3A\u7269\u7406\u6216\u7269\u8D28\u4E16\u754C\u53EF\u4EE5\u5F71\u54CD\u4EBA\u7684\u5185\u5FC3\u548C\u7CBE\u795E\u4E16\u754C\uFF0C\u4F46\u662F\u53CD\u8FC7\u6765\u5374\u4E0D\u884C\u3002\r\n"
   consume: 0
   faceDatas:
-  - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}
-  - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}
-  - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}
+  - {fileID: 11400000, guid: d04f53e907b1b374aa2984f44ab028fa, type: 2}
+  - {fileID: 11400000, guid: d04f53e907b1b374aa2984f44ab028fa, type: 2}
+  - {fileID: 11400000, guid: d04f53e907b1b374aa2984f44ab028fa, type: 2}
   - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}
   - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}
   - {fileID: 11400000, guid: 4eeb5b82d3d8e0542b4c8e93ab429495, type: 2}

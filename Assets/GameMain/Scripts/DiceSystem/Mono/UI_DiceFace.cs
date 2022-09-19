@@ -27,6 +27,12 @@ public class UI_DiceFace : MonoBehaviour
 
     public void OnInit(UI_DiceFaceBase_SO faceBaseData)
     {
+        if (faceBaseData == null)
+        {
+            Debug.LogError("骰子花色未配置");
+            return;
+        }
+        
         _data = faceBaseData;
 
         _meshRenderer = GetComponent<MeshRenderer>();
