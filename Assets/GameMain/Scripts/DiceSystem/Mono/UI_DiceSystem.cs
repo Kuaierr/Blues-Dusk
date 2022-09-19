@@ -423,7 +423,7 @@ public class UI_DiceSystem : UIFormChildBase
         var aniState = diceAnimator.GetCurrentAnimatorStateInfo(0);
         while (true)
         {
-            if(!aniState.IsName("ON"))
+            if(aniState.normalizedTime < 1)
             {
                 yield return 0;
                 continue;
