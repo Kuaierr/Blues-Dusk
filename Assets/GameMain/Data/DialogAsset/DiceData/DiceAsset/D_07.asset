@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb496bf31631bf40980952f1a92a358, type: 3}
   m_Name: D_07
   m_EditorClassIdentifier: 
-  name: "\u65AF\u591A\u845B\u4E3B\u4E49"
+  DiceName: "\u65AF\u591A\u845B\u4E3B\u4E49 "
   description: "\u8BF4\u5B9E\u8BDD\uFF0C\u6C89\u9ED8\u662F\u91D1\u3002\r\n"
   consume: 0
   faceDatas:
