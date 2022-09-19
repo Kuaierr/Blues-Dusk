@@ -20,7 +20,7 @@ public class UI_DiceDataPool_SO : PoolBase_SO
         // return null;
         for (int i = 0; i < diceData.Count; i++)
         {
-            if (diceData[i].name == name)
+            if (diceData[i].DiceName == name)
             {
                 return diceData[i] as UI_DiceData_SO;
             }

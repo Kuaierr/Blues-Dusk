@@ -230,7 +230,7 @@ public class UI_Dialog : UIFormBase
                 Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
             }
         }
-        Debug.Log(tempDialogData.IsInventoryCheckOption);
+        //Debug.Log(tempDialogData.IsInventoryCheckOption);
         // 如果该节点是仓检的选项
         if (tempDialogData.IsInventoryCheckOption && tempDialogData.CachedInventoryName != "DiceInventory")
         {

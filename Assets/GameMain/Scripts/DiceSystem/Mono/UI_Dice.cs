@@ -123,6 +123,12 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
         Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
         int force = Random.Range(25, 40);
         _rb.velocity = dir * force;
+        
+        //Info 闪念/消耗
+        if (Data.consume)
+        {
+            GameKitCenter.Inventory.RemoveFromInventory("DiceInventory", 0, Data.DiceName, Data);
+        }
     }
 
     public void ResetTransform(RectTransform target)

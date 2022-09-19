@@ -92,7 +92,7 @@ public class UI_DiceSystem : UIFormChildBase
 
         float height = basicOffset +
                        ((_gridLayoutByTwo.childCount + 1) / 2 + _gridLayoutByOne.childCount) * lineOffset;
-        _content.sizeDelta = new Vector2(529, height);
+        _content.sizeDelta = new Vector2(460, height);
         //Debug.Log(height);
 
         for (int i = 0; i < _activedDiceSlots.Count; i++)
@@ -420,10 +420,12 @@ public class UI_DiceSystem : UIFormChildBase
     //键盘输入检测的接口
     private IEnumerator KeybordInputCheck()
     {
-        var aniState = diceAnimator.GetCurrentAnimatorStateInfo(0);
+        var aniState = diceAnimator.GetCurrentAnimatorClipInfo(0);
         while (true)
         {
-            if(aniState.normalizedTime < 1)
+            //if(diceAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+            Debug.Log(diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name == ("An_DiceSystem_On"));
+            if(diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name != ("An_DiceSystem_On"))
             {
                 yield return 0;
                 continue;
