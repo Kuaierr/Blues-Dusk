@@ -92,7 +92,7 @@ public class UI_DiceSystem : UIFormChildBase
         float height = basicOffset +
                        ((_gridLayoutByTwo.childCount + 1) / 2 + _gridLayoutByOne.childCount) * lineOffset;
         _content.sizeDelta = new Vector2(529, height);
-        Debug.Log(height);
+        //Debug.Log(height);
 
         for (int i = 0; i < _activedDiceSlots.Count; i++)
             _activedDices.Add(null);
@@ -115,8 +115,8 @@ public class UI_DiceSystem : UIFormChildBase
 
         foreach (Transform diceSlot in _activedDiceSlots)
         {
-            if (diceSlot.childCount > 0)
-                Destroy(diceSlot.GetChild(0).gameObject);
+            if (diceSlot.childCount > 1)
+                Destroy(diceSlot.GetChild(1).gameObject);
         }
 
         _usedSheets.Clear();
@@ -136,7 +136,7 @@ public class UI_DiceSystem : UIFormChildBase
     private void CreateDicesFromInventory()
     {
         var inventory = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
-        
+
         Transform targetGrid = null;
         Transform parent = null;
         UI_Dice dice = null;
@@ -159,10 +159,10 @@ public class UI_DiceSystem : UIFormChildBase
         List<UI_DiceData_SO> datas = new List<UI_DiceData_SO>();
         for (int i = 0; i < inventory.StockMap.Length; i++)
         {
-            if(inventory.StockMap[i] == null) continue;
+            if (inventory.StockMap[i] == null) continue;
             datas.Add((UI_DiceData_SO)inventory.StockMap[i].Data);
         }
-        
+
         for (int i = 0; i < datas.Count; i++)
         {
             //按照2121进行排列
@@ -207,7 +207,8 @@ public class UI_DiceSystem : UIFormChildBase
         //_activedDices.Add(dice);
         for (int i = 0; i < _activedDiceSlots.Count; i++)
         {
-            if (_activedDiceSlots[i].childCount == 0)
+            //if (_activedDiceSlots[i].childCount == 0)
+            if (!_activedDiceSlots[i].GetComponentInChildren<UI_Dice>())
             {
                 _activedDices[i] = dice;
                 break;
@@ -238,9 +239,11 @@ public class UI_DiceSystem : UIFormChildBase
         dice.transform.SetParent(_negativeDiceSlots[dice.Index]);
 
         //自动卷动UI到指定位置
-        float normalizedHeight = (float)dice.Index / (float)_negativeDices.Count;
+        float lineIndex = _currentDiceIndex;
+        if (_currentDiceIndex % 3 == 1) --lineIndex;
+        float normalizedHeight = (float)lineIndex / (float)_negativeDices.Count;
         _scrollView.normalizedPosition = new Vector2(0, 1 - normalizedHeight);
-        
+
         //回到原本的位置
         dice.DOComplete();
         dice.transform.DOMove(_negativeDiceSlots[dice.Index].position, 0.5f)
@@ -251,7 +254,7 @@ public class UI_DiceSystem : UIFormChildBase
     {
         foreach (Transform slot in _activedDiceSlots)
         {
-            if (slot.childCount == 0) return slot;
+            if (slot.GetComponentInChildren<UI_Dice>() == null) return slot;
         }
 
         return null;
@@ -452,13 +455,14 @@ public class UI_DiceSystem : UIFormChildBase
 
         if (_currentList == _negativeDices && _currentDiceIndex % 3 != 1)
         {
-            float normalizedHeight = (float)_currentDiceIndex / (float)_negativeDices.Count;
+            float lineIndex = _currentDiceIndex;
+            if (_currentDiceIndex % 3 == 1) --lineIndex;
+            float normalizedHeight = (float)lineIndex / (float)_negativeDices.Count;
             _scrollView.normalizedPosition = new Vector2(0, 1 - normalizedHeight);
         }
     }
 
     //TODO 优化逻辑，重复的代码块较多
-    //KEY 重新整理dice列表与slot列表的关系
     private void OnUpKeyPressed()
     {
         int edge = 0;
@@ -470,13 +474,13 @@ public class UI_DiceSystem : UIFormChildBase
             else //if((_currentDiceIndex + 1) % 3 != 0)
                 targetIndex = _currentDiceIndex - (_currentDiceIndex + 1) % 3;
 
-            while (targetIndex >= edge && _negativeDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex >= edge && _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 --targetIndex;
         }
         else if (_currentList == _activedDices)
         {
             targetIndex = _currentDiceIndex - (_currentDiceIndex + 1) % 3;
-            while (targetIndex >= edge && _activedDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex >= edge && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 --targetIndex;
         }
 
@@ -499,7 +503,7 @@ public class UI_DiceSystem : UIFormChildBase
             else //if((_currentDiceIndex + 1) % 3 != 0)
                 targetIndex = _currentDiceIndex + (3 - (_currentDiceIndex + 1) % 3);
 
-            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 ++targetIndex;
         }
         else if (_currentList == _activedDices)
@@ -507,7 +511,7 @@ public class UI_DiceSystem : UIFormChildBase
             edge = _activedDiceSlots.Count;
 
             targetIndex = _currentDiceIndex + (3 - (_currentDiceIndex + 0) % 3);
-            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 ++targetIndex;
         }
 
@@ -528,7 +532,7 @@ public class UI_DiceSystem : UIFormChildBase
             if ((_currentDiceIndex + 1) % 3 == 1)
             {
                 targetIndex = _currentDiceIndex + 1;
-                if (targetIndex >= _currentList.Count || _negativeDiceSlots[targetIndex].childCount == 0)
+                if (targetIndex >= _currentList.Count || _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 {
                     /*targetIndex = 0;
                     targetList = _activedDices;*/
@@ -558,8 +562,13 @@ public class UI_DiceSystem : UIFormChildBase
             {
                 targetIndex = _currentDiceIndex + 1;
             }
-        }
 
+            while (targetIndex < edge && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
+            {
+                ++targetIndex;
+            }
+        }
+        
         if (targetList.Count <= 0 || targetIndex >= edge)
             Debug.Log("Nothing in TargetList");
         else
@@ -577,7 +586,7 @@ public class UI_DiceSystem : UIFormChildBase
             if ((_currentDiceIndex + 1) % 3 == 2)
             {
                 targetIndex = _currentDiceIndex - 1;
-                if (_negativeDiceSlots[targetIndex].childCount == 0)
+                if (_negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                     targetIndex = _currentDiceIndex;
             }
             else { }
@@ -594,7 +603,7 @@ public class UI_DiceSystem : UIFormChildBase
             else
                 targetIndex = _currentDiceIndex - 1;
 
-            while (_activedDiceSlots[targetIndex].childCount == 0)
+            while (_activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
             {
                 if ((targetIndex + 1) % 3 == 1)
                 {
@@ -631,13 +640,13 @@ public class UI_DiceSystem : UIFormChildBase
             int targetIndex = _currentDiceIndex;
             if (_currentList == _negativeDices)
             {
-                while (targetIndex < _currentList.Count && _negativeDiceSlots[targetIndex].childCount == 0)
+                while (targetIndex < _currentList.Count && _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                     ++targetIndex;
 
                 if (targetIndex >= _currentList.Count)
                 {
                     targetIndex = _currentDiceIndex - 1;
-                    while (targetIndex >= 0 && _negativeDiceSlots[targetIndex].childCount == 0)
+                    while (targetIndex >= 0 && _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                         --targetIndex;
                 }
             }
@@ -645,13 +654,13 @@ public class UI_DiceSystem : UIFormChildBase
             {
                 //Bug activedDice并不是按照视觉上的顺序排列的，因此会出错
                 //Key 最直接的解决方案或许是将视觉与逻辑同步，需要修改的将是DiceSelected()方法
-                while (targetIndex < _currentList.Count && _activedDiceSlots[targetIndex].childCount == 0)
+                while (targetIndex < _currentList.Count && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                     ++targetIndex;
 
                 if (targetIndex >= _currentList.Count)
                 {
                     targetIndex = _currentDiceIndex - 1;
-                    while (targetIndex >= 0 && _activedDiceSlots[targetIndex].childCount == 0)
+                    while (targetIndex >= 0 && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                         --targetIndex;
                 }
             }
@@ -668,13 +677,13 @@ public class UI_DiceSystem : UIFormChildBase
         if (_currentList == _activedDices)
         {
             foreach (Transform slot in _activedDiceSlots)
-                if (slot.childCount != 0)
+                if (slot.GetComponentInChildren<UI_Dice>() != null)
                     return false;
         }
         else
         {
             foreach (Transform slot in _negativeDiceSlots)
-                if (slot.childCount != 0)
+                if (slot.GetComponentInChildren<UI_Dice>() != null)
                     return false;
         }
 
@@ -686,14 +695,14 @@ public class UI_DiceSystem : UIFormChildBase
         int targetIndex = 0;
         if (_currentList == _activedDices)
         {
-            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _negativeDiceSlots.Count && _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 ++targetIndex;
             if (targetIndex >= _negativeDiceSlots.Count) return;
             SelectDice(targetIndex, _negativeDices);
         }
         else
         {
-            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].childCount == 0)
+            while (targetIndex < _activedDiceSlots.Count && _activedDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
                 ++targetIndex;
             if (targetIndex >= _activedDiceSlots.Count) return;
             SelectDice(targetIndex, _activedDices);

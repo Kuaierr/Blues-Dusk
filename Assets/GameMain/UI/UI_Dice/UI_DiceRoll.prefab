@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2185975844259830867}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.96830827
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1670,8 +1670,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u8BF7\u81F3\u5C11\u653E\u7F6E\u4E00\u4E2A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
-  m_sharedMaterial: {fileID: 7855280157549297167, guid: ba25b6ffee04b1f4ca0dfd6eeedbd228, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 53453a6687acf6148a007379371b0007, type: 2}
+  m_sharedMaterial: {fileID: -1281335672025755325, guid: 53453a6687acf6148a007379371b0007, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3372,7 +3372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00027466, y: 0.00020664702}
+  m_AnchoredPosition: {x: 0.00027466, y: 0.02346544}
   m_SizeDelta: {x: 0, y: 311.9771}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2185975844684121138
