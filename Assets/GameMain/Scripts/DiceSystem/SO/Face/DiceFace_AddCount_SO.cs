@@ -13,6 +13,7 @@ public class DiceFace_AddCount_SO : UI_DiceFaceBase_SO
 	public int amount = 0;
 	public override void Effect(Dice_Result result)
 	{
+		if (type == Dice_SuitType.SPECIAL) return;
 		result.Add(Type,amount);
 	}
 }

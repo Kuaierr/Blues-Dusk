@@ -122,9 +122,11 @@ public class UI_DiceSystem : UIFormChildBase
         }
 
         _usedSheets.Clear();
+        _negativeDices.Clear();
         _activedDices.Clear();
         Result.Clear();
         _startButton.Clear();
+        _currentDice = null;
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         StopCoroutine("KeybordInputCheck");
@@ -293,6 +295,8 @@ public class UI_DiceSystem : UIFormChildBase
         //await Task.Delay(500);
         //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+        _currentDice = null;
+        
         foreach (UI_Dice dice in _activedDices)
         {
             if (dice == null) continue;
@@ -788,7 +792,6 @@ public class Dice_Result
     {
         for (int i = 0; i < results.Count; i++)
         {
-            Debug.Log(i+": " + results[i].name);
             results[i].Effect(this);
             if (breakOut)
             {
