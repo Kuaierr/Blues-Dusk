@@ -17,9 +17,13 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_heya_parlor 1
+    path: Assets/GameMain/Scenes/S_heya_parlor 1.unity
+  - name: S_heya_parlor
+    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity

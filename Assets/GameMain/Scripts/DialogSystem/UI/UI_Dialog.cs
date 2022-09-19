@@ -208,9 +208,6 @@ public class UI_Dialog : UIFormBase
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
-
-        //Info 这里的数据是特定的一个选项 
-        //Debug.Log(tempDialogData.Contents);
         
         // 如果本次对话中有可完成得条件
         if (tempDialogData.IsLocalCompleter)
@@ -230,7 +227,6 @@ public class UI_Dialog : UIFormBase
                 Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
             }
         }
-        Debug.Log(tempDialogData.IsInventoryCheckOption);
         // 如果该节点是仓检的选项
         if (tempDialogData.IsInventoryCheckOption && tempDialogData.CachedInventoryName != "DiceInventory")
         {
@@ -320,10 +316,15 @@ public class UI_Dialog : UIFormBase
     {
         TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
+        data.Speaker = data.Speaker.Correction();
+        data.Contents = data.Contents.Correction();
+
+        // Log.Warning(data.Contents);
+
         if (node == null || data.Speaker == "Default")
             return;
 
-        if (data.Speaker == ">>")
+        if (data.Speaker == ">>" || data.Speaker == "")
             t_SpeakerName.text = "";
         else if (data.Speaker == "??")
             t_SpeakerName.text = "未知";
@@ -331,7 +332,7 @@ public class UI_Dialog : UIFormBase
             t_SpeakerName.text = data.Speaker;
         t_Contents.text = data.Contents;
         uI_SpeakerName.ToEason(data.Speaker != "伊森");
-        if (data.Speaker != ">>" && data.Speaker != "伊森")
+        if (data.Speaker != ">>" && data.Speaker != "伊森" && data.Speaker != "")
         {
             Character character = characterPool.GetData<Character>(data.Speaker.Correction());
             if (m_CurrentCharacter != character)

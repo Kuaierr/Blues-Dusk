@@ -10,7 +10,6 @@ public class ModuleTesting : MonoBehaviour
     public DebugButton debugButtonPrototype;
     // private DialogSystem dialogSystem;
     public List<DebugButton> moduleButtons;
-    private List<DialogAsset> dialogAssets;
     private CanvasGroup canvasGroup;
     // private IResourceManager resourceManager;
     private bool isShown = false;
@@ -46,39 +45,20 @@ public class ModuleTesting : MonoBehaviour
 
     public void DialogTest()
     {
-
-        if (dialogAssets == null || dialogAssets.Count == 0)
-        {
-
-            AddressableManager.instance.GetAssetsAsyn<DialogAsset>(new List<string> { "DialogPack" }, callback: (IList<DialogAsset> assets) =>
-            {
-                dialogAssets = new List<DialogAsset>(assets);
-                Debug.Log($"CreateModuleUnits");
-                HideAllModules();
-                for (int i = 0; i < dialogAssets.Count; i++)
-                {
-                    int index = i;
-                    CreateModuleUnits(dialogAssets[index].title, () =>
-                    {
-                        DialogSystem.current.StartDialog(dialogAssets[index].title);
-                        ChangeDisplay(false);
-                    });
-                }
-            });
-        }
-        else
+        AddressableManager.instance.GetTextAsyn("Assets/GameMain/Configs/DialogCollection.txt", onSuccess: (string data) =>
         {
             HideAllModules();
-            for (int i = 0; i < dialogAssets.Count; i++)
+            string[] splits = data.Split(',');
+            for (int i = 0; i < splits.Length; i++)
             {
                 int index = i;
-                CreateModuleUnits(dialogAssets[index].title, () =>
+                CreateModuleUnits(splits[index], () =>
                 {
-                    DialogSystem.current.StartDialog(dialogAssets[index].title);
+                    DialogSystem.current.StartDialog(splits[index]);
                     ChangeDisplay(false);
                 });
             }
-        }
+        });
     }
     private void HideAllModules()
     {

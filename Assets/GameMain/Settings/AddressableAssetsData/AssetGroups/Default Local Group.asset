@@ -57,8 +57,12 @@ MonoBehaviour:
     m_Address: Assets/GameMain/Scenes/S_Toilet.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: a416c05d7ba37fe48a1f3c987425d562
+  - m_GUID: 98716365d24a17d48a751cfea231800e
     m_Address: Assets/GameMain/Scenes/S_Parlor.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7718476c35f23e541bd585131d325e23
+    m_Address: Assets/GameMain/Configs/DialogCollection.txt
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

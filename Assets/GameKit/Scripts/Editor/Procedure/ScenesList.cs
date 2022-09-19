@@ -28,8 +28,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototypr_PlayerController_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity"); }
         [MenuItem("Scenes/S_FengHospital")]
         public static void Assets_GameMain_Scenes_S_FengHospital_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_FengHospital.unity"); }
-        [MenuItem("Scenes/S_Parlor")]
-        public static void Assets_GameMain_Scenes_S_Parlor_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor.unity"); }
+        [MenuItem("Scenes/S_heya_parlor 1")]
+        public static void Assets_GameMain_Scenes_S_heya_parlor_1_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_heya_parlor 1.unity"); }
         [MenuItem("Scenes/S_Station")]
         public static void Assets_GameMain_Scenes_S_Station_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Station.unity"); }
         [MenuItem("Scenes/S_Template")]

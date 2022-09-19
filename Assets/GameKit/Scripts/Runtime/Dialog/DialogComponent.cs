@@ -69,6 +69,8 @@ namespace UnityGameKit.Runtime
             m_DialogManager.SetDialogHelper(DialogHelper);
         }
 
+        
+
 
         private void Start()
         {
@@ -99,6 +101,16 @@ namespace UnityGameKit.Runtime
         public void GetOrCreatetDialogTree(string treeName)
         {
             m_DialogManager.GetOrCreatetDialogTree(treeName);
+        }
+
+        public void PreloadDialogAsset(string dialogAssetName, string rawData)
+        {
+            m_DialogManager.PreloadDialogAsset(dialogAssetName, rawData);
+        }
+
+        public IDialogTree CreateDialogTree(string treeName)
+        {
+            return m_DialogManager.CreateDialogTree(treeName);
         }
 
         public IDialogOptionSet CreateOptionSet(IDataNode node)

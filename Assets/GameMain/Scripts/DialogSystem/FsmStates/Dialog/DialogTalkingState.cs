@@ -52,7 +52,6 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
             {
                 if (fsmMaster.CurrentTree != null)
                 {
-                    Log.Info("ParseNext {0}", fsmMaster.uI_Response.CurIndex);
                     IDataNode tmpSonNode = fsmMaster.GetNextNode(GameKitCenter.Dialog.CurrentTree.CurrentNode, 0);
                     if (tmpSonNode == null)
                         return;
