@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb496bf31631bf40980952f1a92a358, type: 3}
-  m_Name: AllWand2
+  m_Name: D_09
   m_EditorClassIdentifier: 
-  name: "\u6025\u6025\u7687\u5E1D"
-  description: "\u6025 \u5F88\u6025 \u975E\u5E38\u6025 \u8981\u6025\u6B7B\u4E86"
+  name: "\u6012\u4ECE\u5FC3\u8D77 "
+  description: "\u867D\u7136\u8FD9\u79CD\u60C5\u51B5\u5F88\u5C11\uFF0C\u4F46\u6B64\u523B\u7740\u5B9E\u6124\u6012\u3002\r\n"
   consume: 0
   faceDatas:
   - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
   - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
-  - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
-  - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
-  - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
-  - {fileID: 11400000, guid: 3809bc60ac4a2eb4b8bdd49707bb28db, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}

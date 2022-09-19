@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb496bf31631bf40980952f1a92a358, type: 3}
-  m_Name: TestDice
+  m_Name: D_02
   m_EditorClassIdentifier: 
-  name: "\u4E8C\u5143\u8FA9\u8BC1\u6CD5"
-  description: "\u6240\u6709\u4E8B\u7269\u90FD\u53EF\u4EE5\u7531\u5BF9\u7ACB\u4E24\u9762\u6784\u6210\u7684\u3002"
-  consume: 1
+  name: "\u591A\u6101\u5584\u611F "
+  description: "\u6211\u8BE5\u591A\u66FF\u4ED6\u7740\u60F3\u3002\r\n"
+  consume: 0
   faceDatas:
   - {fileID: 11400000, guid: 409d6ebe75b928c4b98a024f4a0a2147, type: 2}
   - {fileID: 11400000, guid: 409d6ebe75b928c4b98a024f4a0a2147, type: 2}
-  - {fileID: 11400000, guid: 5f070f5ce69c367449b9e1b8084a53c9, type: 2}
-  - {fileID: 11400000, guid: 5f070f5ce69c367449b9e1b8084a53c9, type: 2}
-  - {fileID: 11400000, guid: 55ef67f38dc03b240a37e212f31fc1a8, type: 2}
-  - {fileID: 11400000, guid: 55ef67f38dc03b240a37e212f31fc1a8, type: 2}
+  - {fileID: 11400000, guid: 409d6ebe75b928c4b98a024f4a0a2147, type: 2}
+  - {fileID: 11400000, guid: 1b1328b101a85764f9d8c6c2d3800502, type: 2}
+  - {fileID: 11400000, guid: 1b1328b101a85764f9d8c6c2d3800502, type: 2}
+  - {fileID: 11400000, guid: 03891b6713a0c654bb7044e0e9b5d445, type: 2}
