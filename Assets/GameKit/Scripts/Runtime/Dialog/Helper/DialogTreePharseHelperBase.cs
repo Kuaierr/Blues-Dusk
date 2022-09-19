@@ -6,5 +6,6 @@ namespace UnityGameKit.Runtime
     public abstract class DialogTreePharseHelperBase: MonoBehaviour, IDialogTreeParseHelper
     {
         public abstract void Phase(string rawData, IDialogTree dialogTree);
+        public abstract void PhaseAllDialogs(string dialogAssetName, string rawData);
     }
 }

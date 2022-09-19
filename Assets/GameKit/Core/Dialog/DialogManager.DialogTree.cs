@@ -107,7 +107,7 @@ namespace GameKit.Dialog
             public void Reset()
             {
                 m_CurrentNode = m_StartNode;
-                Utility.Debugger.LogSuccess("Reset Tree {0}", m_Name);
+                // Utility.Debugger.LogSuccess("Reset Tree {0}", m_Name);
             }
 
             public IDataNode GetChildNode(int index = 0)

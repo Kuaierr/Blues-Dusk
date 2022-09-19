@@ -55,6 +55,7 @@ public class ProcedurePreload : ProcedureBase
     private void PreloadResources()
     {
         LoadFont("MainFont");
+        LoadDialog();
         if (GameKitCenter.Data.DataTables == null)
             Log.Fail("Preload resrouce fail.");
     }
@@ -74,6 +75,18 @@ public class ProcedurePreload : ProcedureBase
         //     {
         //         Log.Error("Can not load font '{0}' from '{1}' with error message '{2}'.", fontName, assetName, errorMessage);
         //     }));
+    }
+
+    private void LoadDialog()
+    {
+        AddressableManager.instance.GetAssetsAsyn<TextAsset>(new List<string> { "DialogPack" }, callback: (IList<TextAsset> assets) =>
+        {
+            for (int i = 0; i < assets.Count; i++)
+            {
+                string path = AssetUtility.GetDialogAsset(assets[i].name);
+                GameKitCenter.Dialog.PreloadDialogAsset(assets[i].name, assets[i].text);
+            }
+        });
     }
 }
 

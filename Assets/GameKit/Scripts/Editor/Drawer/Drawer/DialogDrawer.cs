@@ -23,11 +23,12 @@ namespace UnityGameKit.Editor
                 CustomOptionName
             };
 
-            foreach (string sceneGuid in AssetDatabase.FindAssets("t:TextAsset", new string[] { "Assets/GameMain/Data/Dialog/Text/Raw" }))
+
+            TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameMain/Configs/DialogCollection.txt");
+            string[] splits = textAsset.text.Split(',');
+            for (int i = 0; i < splits.Length; i++)
             {
-                string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
-                string sceneName = Path.GetFileNameWithoutExtension(scenePath);
-                m_TempSceneNames.Add(sceneName);
+                m_TempSceneNames.Add(splits[i]);
             }
 
             m_SceneNames = m_TempSceneNames.ToArray();

@@ -1,3 +1,4 @@
+using System.Text;
 using GameKit.DataNode;
 using System.Collections.Generic;
 using GameKit.Dialog;
@@ -15,7 +16,8 @@ namespace UnityGameKit.Runtime
         private List<IDataNode> m_DeclaredNodes;
         private List<IDataNode> m_BranchNodes;
         private IDialogTree m_CachedDialogTree;
-
+        private DialogComponent m_DialogComponent;
+        private string m_LastTreeName;
         private List<string> semantics = new List<string>()
         {
             "name",
@@ -56,25 +58,76 @@ namespace UnityGameKit.Runtime
             m_BranchNodes = new List<IDataNode>();
             m_DeclaredNodes = new List<IDataNode>();
             m_LinkBuffer = new Queue<CommandBase>();
+            m_DialogComponent = GameKitComponentCenter.GetComponent<DialogComponent>();
             smallBracketRegex = new Regex(@"\(\S+\)", RegexOptions.IgnoreCase);
+            m_LastTreeName = string.Empty;
+        }
+
+        private void Start()
+        {
+
         }
 
         public void Clear()
         {
-
             m_DeclaredNodes.Clear();
             m_BranchNodes.Clear();
             m_LinkBuffer.Clear();
             m_CachedDialogTree = null;
+            m_LastTreeName = string.Empty;
+        }
+
+        public override void PhaseAllDialogs(string dialogAssetName, string rawData)
+        {
+            string[] lines = rawData.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string nodeInfo = Regex.Match(lines[i], @"(?i)(?<=\[)(.*)(?=\])").Value.Trim(); 
+                string semanic = nodeInfo.Split('-').First().Correction();
+                string value = nodeInfo.Split('-').Last().Correction();
+
+                if (semanic == "title")
+                {
+                    if (m_LastTreeName != string.Empty)
+                    {
+                        string dialogText = stringBuilder.ToString().Correction();
+                        if (dialogText.Length > 0 && dialogText != string.Empty)
+                        {
+                            Phase(dialogText, m_DialogComponent.CreateDialogTree(string.Format("({0}){1}", dialogAssetName, m_LastTreeName)));
+                        }
+                    }
+                    m_LastTreeName = value;
+                    stringBuilder.Clear();
+                }
+                else
+                {
+                    stringBuilder.Append(lines[i]);
+                    stringBuilder.Append("\n");
+                }
+
+                if (i == lines.Length - 1)
+                {
+                    if (m_LastTreeName != string.Empty)
+                    {
+                        string dialogText = stringBuilder.ToString().Correction();
+                        if (dialogText.Length > 0 && dialogText != string.Empty)
+                        {
+                            Phase(dialogText, m_DialogComponent.CreateDialogTree(string.Format("({0}){1}", dialogAssetName, m_LastTreeName)));
+                        }
+                    }
+                    m_LastTreeName = string.Empty;
+                    stringBuilder.Clear();
+                }
+            }
         }
 
         public override void Phase(string rawData, IDialogTree dialogTree)
         {
-            // throw new System.NotImplementedException();
+            // Log.Warning(dialogTree.Name);
             Clear();
             string[] lines = rawData.Replace(((char)13).ToString(), "").Replace("\t", "").Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
             m_CachedDialogTree = dialogTree;
-            Log.Info("???" + dialogTree.Name);
             for (int i = 0; i < lines.Length; i++)
             {
                 IDataNode node = dialogTree.DataNodeManager.GetOrAddNode(dialogTree.Name + i.ToString());
@@ -86,15 +139,16 @@ namespace UnityGameKit.Runtime
 
         private void PhaseNode(IDataNode node, string text)
         {
+            // Log.Warning(text);
             if (text.Correction() == "\n" || text.Correction() == "")
             {
                 Log.Warning("Skip invalid node syntax.");
                 return;
             }
 
-            if (text.Substring(0, 2).Correction() == "//")
+            if (text.RemoveEmptySpaceLine().Substring(0, 2).Correction() == "//")
             {
-                Log.Warning("Detect comment at '{0}'.", text);
+                // Log.Warning("Detect comment at '{0}'.", text);
                 return;
             }
 
@@ -126,7 +180,7 @@ namespace UnityGameKit.Runtime
 
             bool customLinking = true;
 
-            if (nodeInfo != "")
+            if (nodeInfo.Correction() != "")
             {
                 string[] parameters = nodeInfo.Split(',');
 

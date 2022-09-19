@@ -14,6 +14,8 @@ namespace GameKit.Dialog
         void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null);
         void CreateDialogTree(string treeName, string content, object userData = null);
         string[] GetLoadedDialogAssetNames();
+        void PreloadDialogAsset(string dialogAssetName, string rawData);
+        IDialogTree CreateDialogTree(string treeName, object userData = null);
         IDialogTree GetDialogTree(string treeName);
     }
 }

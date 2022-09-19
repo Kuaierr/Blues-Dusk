@@ -114,6 +114,11 @@ namespace GameKit.Dialog
             return null;
         }
 
+        public void PreloadDialogAsset(string dialogAssetName, string rawData)
+        {
+            m_DialogTreeParseHelper.PhaseAllDialogs(dialogAssetName, rawData);
+        }
+
         public void CreateDialogTree(string treeName, string content, object userData = null)
         {
             m_CachedCurrentTreeName = treeName;
@@ -127,8 +132,29 @@ namespace GameKit.Dialog
             LoadDialogSuccessCallback(content, userData);
         }
 
+        public IDialogTree CreateDialogTree(string treeName, object userData = null)
+        {
+            Utility.Debugger.LogWarning("Create: " + treeName);
+            m_CachedCurrentTreeName = treeName;
+            if (HasDialogTree(treeName))
+            {
+                m_CachedCurrentTree = m_DialogTrees[treeName];
+                m_CachedCurrentTree.Reset();
+                return m_CachedCurrentTree;
+            }
+            m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName);
+            AddDialogTree(m_CachedCurrentTree);
+            return m_CachedCurrentTree;
+        }
+
         public void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null)
         {
+            Utility.Debugger.LogWarning("Get: " + treeName);
+            foreach (var item in m_DialogTrees)
+            {
+                Utility.Debugger.LogSuccess(item.Key);
+            }
+
             if (HasDialogTree(treeName))
             {
                 m_CachedCurrentTree = m_DialogTrees[treeName];
@@ -136,14 +162,14 @@ namespace GameKit.Dialog
                 InternalStartDialog(m_CachedCurrentTree, userData);
                 return;
             }
-            
+
             m_CachedCurrentTreeName = treeName;
             if (content != string.Empty && content != "")
             {
                 CreateDialogTree(treeName, content);
                 return;
             }
-            
+
             AddressableManager.instance.GetTextAsyn(treeName,
             (string data) =>
             {
@@ -159,6 +185,8 @@ namespace GameKit.Dialog
         {
             return DialogOptionSet.Create(node.GetAllChild());
         }
+
+
 
         internal override void Shutdown()
         {
@@ -186,7 +214,7 @@ namespace GameKit.Dialog
 
         private void LoadDialogSuccessCallback(string rawData, object userData)
         {
-            Utility.Debugger.LogWarning("Create {0}", m_CachedCurrentTreeName);
+            // Utility.Debugger.LogWarning("Create {0}", m_CachedCurrentTreeName);
             m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName);
             m_DialogTreeParseHelper.Phase(rawData, m_CachedCurrentTree);
             AddDialogTree(m_CachedCurrentTree);

@@ -25,7 +25,13 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             // Log.Info(">>>>!! " + GameSettings.current.GetBool("IsDavidDead"));
-            Debug.Log(TestData);
+            // GameKitCenter.Dialog.PreloadDialogAsset(AssetUtility.GetDialogAsset("复合对话测试"));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            // Log.Info(">>>>!! " + GameSettings.current.GetBool("IsDavidDead"));
+            // DialogSystem.current.StartRawDialog("第二对话树");
         }
     }
 

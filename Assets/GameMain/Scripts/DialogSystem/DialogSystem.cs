@@ -7,16 +7,10 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
     {
         GameKitCenter.Event.Subscribe(StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
     }
+
     public void StartDialog(string dialogName)
     {
-        string dialogAssetName = AssetUtility.GetDialogAsset(dialogName);
-        GameKitCenter.Dialog.StartDialog(dialogAssetName, userData: this);
-    }
-
-    public void StartDialog(string dialogName, string dialogContent)
-    {
-        string dialogAssetName = AssetUtility.GetDialogAsset(dialogName);
-        GameKitCenter.Dialog.StartDialog(dialogAssetName, dialogContent, userData: this);
+        GameKitCenter.Dialog.StartDialog(dialogName, userData: this);
     }
 
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
@@ -28,9 +22,11 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
             Log.Warning("UserData is null.");
             return;
         }
-        if (args.UserData.GetType() != typeof(DialogSystem))
-            return;
-            
-        GameKitCenter.UI.TryOpenUIForm("UI_Dialog", this);
+        if (args.UserData.GetType() == typeof(DialogSystem))
+        {
+            GameKitCenter.UI.TryOpenUIForm("UI_Dialog", this);
+        }
+
+
     }
 }
