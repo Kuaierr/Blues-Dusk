@@ -19,6 +19,8 @@ public class CustomElement : SceneElementBase
     {
         if (Dialog != string.Empty && Dialog != "<None>" && !m_IsDialoged)
         {
+            Vector3 middlePos = (Player.Current.transform.position + this.transform.position) / 2;
+            QuickCinemachineCamera.current.SetFocus(middlePos);
             DialogSystem.current.StartDialog(Dialog);
             if (IsDisposable)
                 m_IsDialoged = true;

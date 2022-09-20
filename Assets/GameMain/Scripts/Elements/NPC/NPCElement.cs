@@ -23,6 +23,8 @@ public class NPCElement : NPCElementBase
         {
             if (Dialog != "<None>")
             {
+                Vector3 middlePos = (Player.Current.transform.position + this.transform.position) / 2;
+                QuickCinemachineCamera.current.SetFocus(middlePos);
                 DialogSystem.current.StartDialog(Dialog);
                 if (IsDisposable)
                     m_IsDialoged = true;
@@ -32,6 +34,8 @@ public class NPCElement : NPCElementBase
         {
             if (AfterDialog != "<None>")
             {
+                Vector3 middlePos = (Player.Current.transform.position + this.transform.position) / 2;
+                QuickCinemachineCamera.current.SetFocus(middlePos);
                 DialogSystem.current.StartDialog(AfterDialog);
             }
         }

@@ -49,6 +49,13 @@ namespace UnityGameKit.Editor
 
         private void Draw(SerializedProperty serializedProperty, List<string> tempList)
         {
+            if (EditorApplication.isPlaying)
+            {
+                EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
+                EditorGUILayout.TextField(string.Format("{0}: {1}", fieldInfo.Name, serializedProperty.stringValue));
+                return;
+            }
+
             if (!string.IsNullOrEmpty(serializedProperty.stringValue))
             {
                 m_SceneNameIndex = tempList.IndexOf(serializedProperty.stringValue);
@@ -59,13 +66,17 @@ namespace UnityGameKit.Editor
                 }
             }
 
-            int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
-
-            if (selectedIndex != m_SceneNameIndex)
+            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
             {
-                m_SceneNameIndex = selectedIndex;
-                serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
+                int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
+                if (selectedIndex != m_SceneNameIndex)
+                {
+                    m_SceneNameIndex = selectedIndex;
+                    serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
+                }
             }
+            EditorGUI.EndDisabledGroup();
+
         }
     }
 

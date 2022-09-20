@@ -63,6 +63,7 @@ public class UI_Dialog : UIFormBase
     #region Override
     protected override void OnInit(object userData)
     {
+        
         base.OnInit(userData);
         CreateFsm();
         uI_Response.Init(Depth);
@@ -133,13 +134,6 @@ public class UI_Dialog : UIFormBase
     {
         uI_Response.Hide(callback);
     }
-
-    public void MakeChoice()
-    {
-        // HideResponse();
-
-    }
-
 
     public void AddTyperWriterListener(UnityAction onTypewriterStart, UnityAction onTextShowed)
     {

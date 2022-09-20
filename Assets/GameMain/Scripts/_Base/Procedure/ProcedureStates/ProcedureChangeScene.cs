@@ -132,7 +132,7 @@ public class ProcedureChangeScene : ProcedureBase
             // Debug.Log(m_Prototyper.transform.position);
             // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
             // Log.Warning(m_Prototyper.transform.position);
-            QuickCinemachineCamera.current.SetFollow(m_Prototyper.transform);
+            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
             OnSceneLoadEnd();
         });
     }

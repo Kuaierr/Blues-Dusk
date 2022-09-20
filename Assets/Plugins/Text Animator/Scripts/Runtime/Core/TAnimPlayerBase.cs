@@ -61,7 +61,7 @@ namespace Febucci.UI.Core
                     return _textAnimator;
 
 #if UNITY_2019_2_OR_NEWER
-                if(!TryGetComponent(out _textAnimator))
+                if (!TryGetComponent(out _textAnimator))
                 {
                     Debug.LogError($"TextAnimator: Text Animator component is null on GameObject {gameObject.name}");
                 }
@@ -79,7 +79,7 @@ namespace Febucci.UI.Core
         /// <c>true</c> if the typewriter is currently showing letters.
         /// </summary>
         protected bool isBaseInsideRoutine => isInsideRoutine;
-        
+
         /// <summary>
         /// <c>true</c> if the typewriter is waiting for the player input in the 'waitinput' action tag
         /// </summary>
@@ -350,7 +350,7 @@ namespace Febucci.UI.Core
         public void ShowText(string text)
         {
             StopShowingText();
-
+            
             if (string.IsNullOrEmpty(text))
             {
                 textToShow = string.Empty;
@@ -359,7 +359,7 @@ namespace Febucci.UI.Core
             }
 
             textToShow = text;
-            
+
             isWaitingForPlayerInput = false;
             wantsToSkip = false;
 
@@ -367,7 +367,7 @@ namespace Febucci.UI.Core
             textAnimator.firstVisibleCharacter = 0;
 
             isDisappearing = false;
-
+            
             if (!useTypeWriter)
             {
                 onTextShowed?.Invoke();
@@ -379,6 +379,9 @@ namespace Febucci.UI.Core
                     StartShowingText();
                 }
             }
+
+            
+            
         }
 
         #region Typewriter
@@ -491,21 +494,21 @@ namespace Febucci.UI.Core
             isDisappearing = true;
             float t = 0;
             float deltaTime = 0;
-            
+
             void UpdateDeltaTime()
             {
                 deltaTime = textAnimator.time.deltaTime * typewriterPlayerSpeed;
             }
 
             UpdateDeltaTime();
-            
+
             bool CanDisappear() => isDisappearing && textAnimator.firstVisibleCharacter <= textAnimator.maxVisibleCharacters && textAnimator.maxVisibleCharacters > 0;
 
             IEnumerator WaitFor(float timeToWait)
             {
                 if (timeToWait <= 0)
                     yield break;
-                
+
                 while (t < timeToWait) //waits 
                 {
                     t += deltaTime;
@@ -515,16 +518,16 @@ namespace Febucci.UI.Core
 
                 t %= timeToWait;
             }
-            
+
             if (disappearanceOrientation == DisappearanceOrientation.SameAsTypewriter)
             {
                 var charInfo = textAnimator.tmproText.textInfo.characterInfo;
-                while (CanDisappear() && textAnimator.firstVisibleCharacter<charInfo.Length)
+                while (CanDisappear() && textAnimator.firstVisibleCharacter < charInfo.Length)
                 {
                     textAnimator.firstVisibleCharacter++;
 
                     float timeToWait = GetWaitDisappearanceTimeOf(charInfo[textAnimator.firstVisibleCharacter - 1].character);
-                    
+
                     //waiting less time than a frame, we don't wait yet
                     if (timeToWait < deltaTime)
                     {
@@ -536,7 +539,7 @@ namespace Febucci.UI.Core
                             t %= deltaTime;
                         }
                     }
-                    else 
+                    else
                         yield return WaitFor(timeToWait);
                 }
 
@@ -546,7 +549,7 @@ namespace Febucci.UI.Core
                 while (CanDisappear())
                 {
                     textAnimator.maxVisibleCharacters--;
-                    
+
                     float timeToWait = GetWaitDisappearanceTimeOf(textAnimator.latestCharacterShown.character);
 
                     //waiting less time than a frame, we don't wait yet

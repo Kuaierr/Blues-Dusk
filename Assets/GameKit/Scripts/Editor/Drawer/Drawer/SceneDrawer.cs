@@ -16,6 +16,13 @@ namespace UnityGameKit.Editor
         private int m_SceneNameIndex;
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent content)
         {
+            if (EditorApplication.isPlaying)
+            {
+                EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
+                EditorGUILayout.TextField(string.Format("{0}: {1}", fieldInfo.Name, property.stringValue));
+                return;
+            }
+
             SceneAttribute attr = (attribute as SceneAttribute);
 
             List<string> m_TempSceneNames = new List<string>
@@ -43,14 +50,17 @@ namespace UnityGameKit.Editor
                 }
             }
 
-            int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
 
-            if (selectedIndex != m_SceneNameIndex)
+            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
             {
-                m_SceneNameIndex = selectedIndex;
-                property.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
+                int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
+                if (selectedIndex != m_SceneNameIndex)
+                {
+                    m_SceneNameIndex = selectedIndex;
+                    property.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
+                }
             }
-
+            EditorGUI.EndDisabledGroup();
             // EditorGUI.PropertyField(position, property, content);
         }
     }

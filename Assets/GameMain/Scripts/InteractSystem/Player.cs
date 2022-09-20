@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private LayerMask layerMask;
     private UnityAction m_OnArrived;
     private PlayerMovement m_Movement;
+    public static Player Current;
     [SerializeField] private bool m_UpdateRotation = true;
 
     private void Start()
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
         m_Movement.OnInit();
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
         m_NavMeshAgent.updatePosition = m_UpdateRotation;
+        Current = this;
     }
     void Update()
     {
@@ -64,7 +66,8 @@ public class Player : MonoBehaviour
         {
             Vector3 pos = CursorSystem.current.GetPositionFromRaycast(hitInfo);
             m_CachedTargetPos = pos;
-            m_Movement.SetDestination(m_CachedTargetPos);
+            if (m_CachedTargetPos != Vector3.zero)
+                m_Movement.SetDestination(m_CachedTargetPos);
             // m_NavMeshAgent.destination = m_CachedTargetPos;
         }
         else
