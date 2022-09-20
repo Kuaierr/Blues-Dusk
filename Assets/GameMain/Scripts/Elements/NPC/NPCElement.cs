@@ -8,6 +8,7 @@ public class NPCElement : NPCElementBase
 {
     [UnityGameKit.Editor.Dialog] public string Dialog = "<None>";
     [UnityGameKit.Editor.Dialog] public string AfterDialog = "<None>";
+    public bool IsDisposable = false;
     [SerializeField] private bool m_IsDialoged;
     public override void OnInit()
     {
@@ -23,7 +24,8 @@ public class NPCElement : NPCElementBase
             if (Dialog != "<None>")
             {
                 DialogSystem.current.StartDialog(Dialog);
-                m_IsDialoged = true;
+                if (IsDisposable)
+                    m_IsDialoged = true;
             }
         }
         else
@@ -31,7 +33,6 @@ public class NPCElement : NPCElementBase
             if (AfterDialog != "<None>")
             {
                 DialogSystem.current.StartDialog(AfterDialog);
-                m_IsDialoged = true;
             }
         }
     }

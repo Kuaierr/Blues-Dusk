@@ -9,6 +9,7 @@ using GameKit.QuickCode;
 using DG.Tweening;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
     public float RoateSpeed = 5;
@@ -19,12 +20,15 @@ public class Player : MonoBehaviour
     private GameElementBase m_CachedInteractive;
     private LayerMask layerMask;
     private UnityAction m_OnArrived;
+    private PlayerMovement m_Movement;
     [SerializeField] private bool m_UpdateRotation = true;
 
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        m_Movement = GetComponent<PlayerMovement>();
+        m_Movement.OnInit();
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
         m_NavMeshAgent.updatePosition = m_UpdateRotation;
     }
@@ -36,6 +40,7 @@ public class Player : MonoBehaviour
         {
             MoveToDestination();
         }
+        m_Movement.OnUpdate();
     }
 
     public void SetTransform(Transform trans)
@@ -51,13 +56,16 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
         m_OnArrived -= RotateAction;
+        if (!CursorSystem.current.IsActive)
+            return;
         RaycastHit hitInfo = CursorSystem.current.GetHitInfo(layerMask);
         GameElementBase interactive = CursorSystem.current.GetComponentFromRaycast<GameElementBase>(hitInfo);
         if (interactive == null)
         {
             Vector3 pos = CursorSystem.current.GetPositionFromRaycast(hitInfo);
             m_CachedTargetPos = pos;
-            m_NavMeshAgent.destination = m_CachedTargetPos;
+            m_Movement.SetDestination(m_CachedTargetPos);
+            // m_NavMeshAgent.destination = m_CachedTargetPos;
         }
         else
         {
@@ -65,17 +73,16 @@ public class Player : MonoBehaviour
             m_CachedInteractivePos = interactive.transform.position;
             m_CachedInteractive = interactive;
             m_CachedTargetPos = interactive.InteractPosition;
-            m_NavMeshAgent.destination = m_CachedTargetPos;
+            // m_NavMeshAgent.destination = m_CachedTargetPos;
+            m_Movement.SetDestination(m_CachedTargetPos);
             m_NavMeshAgent.velocity = Vector3.one.IgnoreY() * 0.0001f; // 提供基础初速度，避免跳过速度检测
             m_OnArrived += RotateAction;
             StopAction();
         }
-
     }
 
     private void RotateAction() => StartCoroutine(RotateToElement(m_CachedInteractivePos));
     private void StopAction() => StartCoroutine(StopCallback());
-
     private void RotateTo(Vector3 position, float roateMultipier = 1)
     {
         Quaternion quaternion = Quaternion.LookRotation(position - transform.position);
@@ -102,8 +109,9 @@ public class Player : MonoBehaviour
         do
         {
             yield return null;
-        } while (m_NavMeshAgent.velocity != Vector3.zero);
+        } while (!m_Movement.IsStop);
         m_OnArrived?.Invoke();
+        Log.Success("Arrived");
     }
 
 
@@ -112,7 +120,7 @@ public class Player : MonoBehaviour
     /// </summary>
 
 
-    
+
     private void OnDrawGizmos()
     {
         Vector2 faceDirection = m_CachedInteractivePos.ToVector2() - transform.position.ToVector2();

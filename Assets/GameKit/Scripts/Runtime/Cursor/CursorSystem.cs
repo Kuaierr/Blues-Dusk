@@ -17,7 +17,7 @@ namespace UnityGameKit.Runtime
 
         private void Update()
         {
-            IsActive = Camera.main == null ? false : true;
+            IsActive = (Camera.main == null ? false : true) && IsActive;
             if (IsActive)
             {
                 if (m_CachedRaycastInfo.Count > 0)
@@ -110,7 +110,7 @@ namespace UnityGameKit.Runtime
             
             if (component == null)
                 component = raycastHit.transform.GetComponentInParent<T>();
-            Debug.Log(component);
+            // Debug.Log(component);
             return component;
         }
 

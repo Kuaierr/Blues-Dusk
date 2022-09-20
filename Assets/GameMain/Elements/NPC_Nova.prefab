@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374079944110595685}
   - component: {fileID: 8719827982888303780}
+  - component: {fileID: 493478670071615489}
   m_Layer: 0
   m_Name: M_Body
   m_TagString: Untagged
@@ -104,6 +105,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.21755937, y: 0.012077533, z: -0.00003938377}
     m_Extent: {x: 0.49884066, y: 0.25209323, z: 0.43509454}
   m_DirtyAABB: 0
+--- !u!114 &493478670071615489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493478670071615488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &581406632060723202
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8346144020341741333}
   - component: {fileID: 7156989972687564700}
+  - component: {fileID: 2068972244750238257}
   m_Layer: 0
   m_Name: M_Hair
   m_TagString: Untagged
@@ -380,6 +400,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.46079695, y: 0.052066952, z: 0.00177899}
     m_Extent: {x: 0.25172317, y: 0.21704113, z: 0.15406269}
   m_DirtyAABB: 0
+--- !u!114 &2068972244750238257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068972244750238256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2112496514939044595
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,11 +846,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3488231957433850973}
   - component: {fileID: 7388327465619244583}
-  - component: {fileID: 5150775354980038682}
-  - component: {fileID: 5399918477962517650}
-  - component: {fileID: 4617486326755903520}
+  - component: {fileID: 4059586919642620158}
+  - component: {fileID: 1788747554970199613}
+  - component: {fileID: 1934342837764607024}
+  - component: {fileID: 2657050429261611664}
   m_Layer: 0
-  m_Name: Player_Ethan
+  m_Name: NPC_Nova
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -846,7 +885,7 @@ Animator:
   m_GameObject: {fileID: 4261356150159754983}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d4b21c6d8ecba544191b4c7f91747cb7, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7d8ea7bd68bc67f4fa48ddcca7f0cd4b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2e46a390e47c7a347b10256a23a18d80, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -855,29 +894,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!195 &5150775354980038682
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4261356150159754983}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &5399918477962517650
+--- !u!114 &4059586919642620158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -886,34 +903,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 4261356150159754983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06090f10ded553f4bbbfc7b718810c66, type: 3}
+  m_Script: {fileID: 11500000, guid: c4d2980e4d9398b449a4cec2bd42fc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoateSpeed: 5
-  m_UpdateRotation: 1
---- !u!114 &4617486326755903520
-MonoBehaviour:
+  InteractCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  OutlineWidth: 3
+  Dialog: 
+  AfterDialog: 
+  m_IsDialoged: 0
+--- !u!64 &1788747554970199613
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4261356150159754983}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39faad528b348ca43958d1cd0a3af51c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SmoothingLength: 0.25
-  SmoothingSections: 3
-  SmoothingFactor: 0
-  PathLocations: []
-  Smoothing: 0.25
-  RotateSpeed: 1.5
-  TargetDirection: {x: 0, y: 0, z: 0}
-  MovementVector: {x: 0, y: 0, z: 0}
-  FloorLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 944108219114825711, guid: d4b21c6d8ecba544191b4c7f91747cb7, type: 3}
+--- !u!64 &1934342837764607024
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261356150159754983}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4416296319404438618, guid: d4b21c6d8ecba544191b4c7f91747cb7, type: 3}
+--- !u!64 &2657050429261611664
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261356150159754983}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1401183990967535377, guid: d4b21c6d8ecba544191b4c7f91747cb7, type: 3}
 --- !u!1 &4530270359376975269
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +965,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8259232406983141069}
   - component: {fileID: 7633087966201090451}
+  - component: {fileID: 4530270359376975270}
   m_Layer: 0
   m_Name: M_Lower
   m_TagString: Untagged
@@ -1008,6 +1050,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.672162, y: 0.107904315, z: -0.030595362}
     m_Extent: {x: 0.78201073, y: 0.5091545, z: 0.24273917}
   m_DirtyAABB: 0
+--- !u!114 &4530270359376975270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530270359376975269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5148214076042897748
 GameObject:
   m_ObjectHideFlags: 0

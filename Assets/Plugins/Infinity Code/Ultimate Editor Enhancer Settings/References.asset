@@ -17,15 +17,21 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Bar_Main
+    path: Assets/GameMain/Scenes/S_Bar_Main.unity
+  - name: S_Menu
+    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+  - name: S_Parlor_Main
+    path: Assets/GameMain/Scenes/S_Parlor_Main.unity
   - name: S_Station
     path: Assets/GameMain/Scenes/S_Station.unity
-  - name: S_Toilet
-    path: Assets/GameMain/Scenes/S_Toilet.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity

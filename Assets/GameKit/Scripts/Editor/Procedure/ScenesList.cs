@@ -26,16 +26,20 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Inventory_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity"); }
         [MenuItem("Scenes/Prototypr_PlayerController")]
         public static void Assets_GameMain_Scenes_Prototype_Prototypr_PlayerController_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity"); }
+        [MenuItem("Scenes/S_Bar_Kitchen")]
+        public static void Assets_GameMain_Scenes_S_Bar_Kitchen_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Bar_Kitchen.unity"); }
+        [MenuItem("Scenes/S_Bar_Main")]
+        public static void Assets_GameMain_Scenes_S_Bar_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Bar_Main.unity"); }
         [MenuItem("Scenes/S_FengHospital")]
         public static void Assets_GameMain_Scenes_S_FengHospital_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_FengHospital.unity"); }
-        [MenuItem("Scenes/S_Parlor")]
-        public static void Assets_GameMain_Scenes_S_Parlor_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor.unity"); }
+        [MenuItem("Scenes/S_Parlor_Main")]
+        public static void Assets_GameMain_Scenes_S_Parlor_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor_Main.unity"); }
+        [MenuItem("Scenes/S_Parlor_Toilet")]
+        public static void Assets_GameMain_Scenes_S_Parlor_Toilet_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor_Toilet.unity"); }
         [MenuItem("Scenes/S_Station")]
         public static void Assets_GameMain_Scenes_S_Station_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Station.unity"); }
         [MenuItem("Scenes/S_Template")]
         public static void Assets_GameMain_Scenes_S_Template_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Template.unity"); }
-        [MenuItem("Scenes/S_Toilet")]
-        public static void Assets_GameMain_Scenes_S_Toilet_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Toilet.unity"); }
         [MenuItem("Scenes/S_Tower")]
         public static void Assets_GameMain_Scenes_S_Tower_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Tower.unity"); }
     }

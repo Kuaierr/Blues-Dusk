@@ -45,6 +45,7 @@ public abstract class GameElementBase : ElementBase
     public override void OnInteract()
     {
         base.OnInteract();
+        // Log.Info("Interact");
         InteractCallback?.Invoke();
     }
 

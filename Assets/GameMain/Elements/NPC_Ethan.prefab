@@ -910,7 +910,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OutlineWidth: 3
-  DialogName: 
+  Dialog: 
+  AfterDialog: 
+  m_IsDialoged: 0
 --- !u!64 &1788747554970199613
 MeshCollider:
   m_ObjectHideFlags: 0
