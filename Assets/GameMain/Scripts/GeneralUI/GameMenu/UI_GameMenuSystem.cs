@@ -128,10 +128,11 @@ public class UI_GameMenuSystem : UIFormBase
     private void ReOpenGameMenu(object sender,GameEventArgs e)
     {
         GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
-        
+
+        /*Visible = false;
         MasterAnimator.ResetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
         MasterAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
-        MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);*/
         //OnPause();
     }
 }

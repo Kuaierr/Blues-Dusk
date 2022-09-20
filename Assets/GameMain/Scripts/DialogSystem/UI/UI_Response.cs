@@ -172,8 +172,15 @@ public class UI_Response : UIFormChildBase
 
     public void SetDiceActive(bool status)
     {
+        Debug.Log("Test m_CachedIsDiceCheck :" + m_CachedIsDiceCheck);
         if (m_CachedIsDiceCheck)
         {
+            //Info 第二次进入鉴定时，保留了Hide的trigger，引发了不具合。此处是应急措施
+            m_DiceAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+            m_DiceAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+            m_MasterAnimator.ResetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
+            m_MasterAnimator.ResetTrigger(UIUtility.DISABLE_ANIMATION_NAME);
+            
             m_DiceAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
             m_MasterAnimator.SetTrigger(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
         }
