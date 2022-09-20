@@ -34,6 +34,10 @@ public class UI_DiceInventorySystem : UIFormBase
     protected override void OnPause()
     {
         base.OnPause();
+        uI_DiceInventory.ClearDices();
+
+        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+        GameKitCenter.Event.Fire(this, args);
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

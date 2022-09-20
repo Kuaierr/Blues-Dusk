@@ -25,8 +25,6 @@ public class UI_DiceInventory : UIFormChildBase
     
     public void InitDiceInventoryUI()
     {
-        ClearDices();
-        
         var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
         for (int i = 0; i < data.StockMap.Length; i++)
         {
@@ -40,7 +38,7 @@ public class UI_DiceInventory : UIFormChildBase
 
     }
 
-    private void ClearDices()
+    public void ClearDices()
     {
         foreach (Transform trans in _layoutGroup.transform)
         {
@@ -59,9 +57,9 @@ public class UI_DiceInventory : UIFormChildBase
         _uIDices[index].OnSelected();
         _currentIndex = index;
 
-        Debug.Log(index + ";" + _uIDices.Count);
+        //Debug.Log(index + ";" + _uIDices.Count);
         float normalizedHeight = (1 - (float)(index) / (float)_uIDices.Count);
-        Debug.Log(normalizedHeight);
+        //Debug.Log(normalizedHeight);
         _scrollRect.normalizedPosition = new Vector2(0, normalizedHeight);
         
         return _uIDices[index].Data;

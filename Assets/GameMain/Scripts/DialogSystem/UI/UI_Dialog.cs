@@ -92,6 +92,9 @@ public class UI_Dialog : UIFormBase
         CursorSystem.current.Enable();
         m_IsDialoging = false;
         base.OnPause();
+        
+        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+        GameKitCenter.Event.Fire(this, args);
     }
 
     protected override void OnResume()
@@ -99,6 +102,8 @@ public class UI_Dialog : UIFormBase
         base.OnResume();
         CursorSystem.current.Disable();
         m_IsDialoging = true;
+        
+        GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
     }
 
     protected override void OnRecycle()
@@ -232,6 +237,7 @@ public class UI_Dialog : UIFormBase
         {
             //Info tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致 
             //Info tempDialogData.CachedInventoryName 有检测背包的名称
+            //Bug 这里没有用处，不会被执行，因为仓检是被标记在选项中的
             Debug.Log("Dialog -- IsInventoryCheckOption --");
             m_CachedCheckResults.Clear();
             bool clear = true;
@@ -357,7 +363,7 @@ public class UI_Dialog : UIFormBase
         }
     }
 
-    public void UpdatePlayerInventoryCheckOptionUI(UnityAction callback = null)
+    /*public void UpdatePlayerInventoryCheckOptionUI(UnityAction callback = null)
     {
         IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (optionSet != null)
@@ -374,10 +380,10 @@ public class UI_Dialog : UIFormBase
         IDialogOptionSet optionSet = GameKitCenter.Dialog.CreateOptionSet(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (optionSet != null)
         {
-            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet/*, m_CachedCheckResults*/);
+            uI_Response.UpdateAsDiceInventoryCheckOption(optionSet/*, m_CachedCheckResults#1#);
             ShowResponse(callback);
         }
-    }
+    }*/
 
     public void UpdateOptionsPoint(Dice_Result result)
     {

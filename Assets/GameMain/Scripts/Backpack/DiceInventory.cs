@@ -30,9 +30,11 @@ public class DiceInventory : MonoSingletonBase<DiceInventory>
 
 	private void OnOpenDiceInventory(object sender, GameKit.Event.GameEventArgs e)
 	{
-		if(GameKitCenter.UI.GetUIForm(m_CachedUiId))
+		UIForm uiFormInstanse = GameKitCenter.UI.GetUIForm(m_CachedUiId);
+		if(uiFormInstanse != null)
 		{
-			GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
+			uiFormInstanse.OnResume();
+			GameKitCenter.UI.RefocusUIForm(uiFormInstanse);
 		}
 		else
 		{
@@ -40,6 +42,7 @@ public class DiceInventory : MonoSingletonBase<DiceInventory>
 			if (uiForm != null)
 				m_CachedUiId = (int)uiForm;
 		}
+		
 	}
 
 	private void OnDiceInventoryUIOpenSuccess(object sender, GameKit.Event.GameEventArgs e)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //似乎不需要配表了 继续沿用这个用法？
-//TODO 如何接入背包
+//Info 目前直接将这个数据存入背包，通过DataPool来获取，以文件名为键值
 [CreateAssetMenu(fileName = "New Dice",menuName = "GameMain/DiceData/DiceAsset")]
 public class UI_DiceData_SO : ScriptableObject
 {
