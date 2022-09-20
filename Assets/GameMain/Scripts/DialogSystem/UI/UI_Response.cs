@@ -234,7 +234,6 @@ public class UI_Response : UIFormChildBase
                 }
                 else if (optionSet.Options[i].DiceConditions.ContainsKey("result"))
                 {
-                    Debug.Log(optionSet.Options[i].DiceConditions["result"]);
                     if(optionSet.Options[i].DiceConditions["result"] == 1)
                         UIOptions[i].Unlock();
                     else

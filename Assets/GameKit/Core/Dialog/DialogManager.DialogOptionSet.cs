@@ -123,11 +123,9 @@ namespace GameKit.Dialog
                             Dictionary<string, int> result = new Dictionary<string, int>();
                             for (int j = 0; j < data.CachedStockConditions.Count; j++)
                             {
-                                Debug.Log(data.CachedStockConditions[j]);
                                 if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
                                     data.CachedStockConditions[j]) == null)
                                 {
-                                    Debug.Log("break");
                                     clear = false;
                                     break;
                                 }
