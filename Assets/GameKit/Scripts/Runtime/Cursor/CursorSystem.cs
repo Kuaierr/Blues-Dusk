@@ -104,13 +104,13 @@ namespace UnityGameKit.Runtime
                 return null;
             if (raycastHit.transform == null || raycastHit.transform.gameObject == null)
             {
-                // Utility.Debugger.LogWarning("No Hit Target Exsit.");
                 return null;
             }
             T component = raycastHit.transform.GetComponent<T>();
-            // if (component == null)
-            //     Utility.Debugger.LogWarning("Hit Target Has No {0} Component.", typeof(T).Name);
-
+            
+            if (component == null)
+                component = raycastHit.transform.GetComponentInParent<T>();
+            Debug.Log(component);
             return component;
         }
 

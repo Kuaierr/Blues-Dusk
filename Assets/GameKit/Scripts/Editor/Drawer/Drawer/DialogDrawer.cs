@@ -34,13 +34,28 @@ namespace UnityGameKit.Editor
             m_SceneNames = m_TempSceneNames.ToArray();
             m_SceneNameIndex = 0;
 
-            if (!string.IsNullOrEmpty(property.stringValue))
+            // if (property.isArray)
+            // {
+            //     Debug.Log(property.arraySize);
+            //     for (int i = 0; i < property.arraySize; i++)
+            //     {
+            //         SerializedProperty singelProperty = property.GetArrayElementAtIndex(i);
+            //         Draw(singelProperty, m_TempSceneNames);
+            //     }
+            // }
+            // else
+            Draw(property, m_TempSceneNames);
+        }
+
+        private void Draw(SerializedProperty serializedProperty, List<string> tempList)
+        {
+            if (!string.IsNullOrEmpty(serializedProperty.stringValue))
             {
-                m_SceneNameIndex = m_TempSceneNames.IndexOf(property.stringValue);
+                m_SceneNameIndex = tempList.IndexOf(serializedProperty.stringValue);
                 if (m_SceneNameIndex <= 0)
                 {
                     m_SceneNameIndex = 0;
-                    property.stringValue = null;
+                    serializedProperty.stringValue = null;
                 }
             }
 
@@ -49,10 +64,10 @@ namespace UnityGameKit.Editor
             if (selectedIndex != m_SceneNameIndex)
             {
                 m_SceneNameIndex = selectedIndex;
-                property.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
+                serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
             }
-
-            // EditorGUI.PropertyField(position, property, content);
         }
     }
+
+
 }

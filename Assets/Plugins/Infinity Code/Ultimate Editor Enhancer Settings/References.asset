@@ -21,6 +21,10 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Station
+    path: Assets/GameMain/Scenes/S_Station.unity
+  - name: S_Toilet
+    path: Assets/GameMain/Scenes/S_Toilet.unity
   - name: S_Parlor
     path: Assets/GameMain/Scenes/S_Parlor.unity
   - name: S_heya_parlor

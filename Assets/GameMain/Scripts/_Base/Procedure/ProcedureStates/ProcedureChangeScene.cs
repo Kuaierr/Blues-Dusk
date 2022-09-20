@@ -14,7 +14,7 @@ public class ProcedureChangeScene : ProcedureBase
     private bool m_ChangeToMenu = false;
     private bool m_IsChangeSceneComplete = false;
     private int m_BackgroundMusicId = 0;
-    private Prototyper m_Prototyper;
+    private Player m_Prototyper;
     private bool m_IsScenePreloaded;
     private ProcedureOwner m_CachedOwner;
 
@@ -122,10 +122,10 @@ public class ProcedureChangeScene : ProcedureBase
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
-        AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Prototyper"), (GameObject obj) =>
+        AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
             GameObject realObj = GameObject.Instantiate(obj);
-            m_Prototyper = realObj.GetComponent<Prototyper>();
+            m_Prototyper = realObj.GetComponent<Player>();
             m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
             m_Prototyper.SetTransform(targetTrans);
             // Debug.Log(targetTrans.position);
