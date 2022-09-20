@@ -127,8 +127,8 @@ public class UI_GameMenuSystem : UIFormBase
 
     private void ReOpenGameMenu(object sender,GameEventArgs e)
     {
+        //似乎会导致OnPause被调用两次，进而这个逻辑也会被调用两次
         GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
-        Debug.Log(Visible);
         
         Visible = false;
         MasterAnimator.ResetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
