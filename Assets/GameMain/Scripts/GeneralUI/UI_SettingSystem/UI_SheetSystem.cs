@@ -32,7 +32,10 @@ public class UI_SheetSystem : MonoBehaviour
             _customButtons[i].OnInit(() => { SelectSheet(temp); });
         }
 
-        _customSheets[0].OnInit(_configData.BasicConfigOptions);
+        for (int i = 0; i < _customSheets.Count; i++)
+        {
+            _customSheets[i].OnInit(_configData.ConfigOptions[i]);
+        }
 
         SelectSheet(0);
     }

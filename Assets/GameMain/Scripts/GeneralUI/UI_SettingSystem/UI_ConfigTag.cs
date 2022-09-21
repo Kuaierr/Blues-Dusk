@@ -25,13 +25,11 @@ public class UI_ConfigTag : MonoBehaviour
         {
             config.Minus(); 
             UpdateCurrentConfigDisplay();
-            Debug.Log("Left");
         });
         _right.onClick.AddListener(() =>
         {
             config.Add();
             UpdateCurrentConfigDisplay();
-            Debug.Log("Right");
         });
         
         UpdateCurrentConfigDisplay();
