@@ -209,11 +209,12 @@ namespace UnityGameKit.Editor.ResourceTools
 
         public bool Load()
         {
+            Debug.Log(m_ConfigurationPath);
             if (!File.Exists(m_ConfigurationPath))
             {
                 return false;
             }
-
+            
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
@@ -546,7 +547,10 @@ namespace UnityGameKit.Editor.ResourceTools
             tempGuids.ExceptWith(AssetDatabase.FindAssets(SourceAssetExceptTypeFilter, sourceAssetSearchPaths));
             tempGuids.ExceptWith(AssetDatabase.FindAssets(SourceAssetExceptLabelFilter, sourceAssetSearchPaths));
 
+
+
             string[] guids = new List<string>(tempGuids).ToArray();
+            Debug.Log(guids.Length);
             foreach (string guid in guids)
             {
                 string fullPath = AssetDatabase.GUIDToAssetPath(guid);

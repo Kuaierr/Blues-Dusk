@@ -8,7 +8,7 @@ namespace UnityGameKit.Editor
     public class SpriteSplit
     {
 
-        [MenuItem(GameKitConfigs.EDITORTOOL_PATH + "Sprite Split")]
+        [MenuItem("Game Kit/Sprite Split")]
         public static void DoSplitTexture()
         {
             Texture2D selectedImg = Selection.activeObject as Texture2D;

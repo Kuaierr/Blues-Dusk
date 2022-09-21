@@ -1,11 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://GameKit.cn/
-// Feedback: mailto:ellan@GameKit.cn
-//------------------------------------------------------------
-
-using GameKit.DataNode;
+﻿using GameKit.DataNode;
 using UnityEditor;
 using UnityGameKit.Runtime;
 
