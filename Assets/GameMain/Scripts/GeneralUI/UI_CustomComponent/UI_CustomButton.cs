@@ -5,18 +5,19 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class UI_CustomButton : UI_CustomBase, IPointerClickHandler
 {
 	public Sprite normalSprite;
 	public Sprite selectedSprite;
 	//public Sprite clickedSprite;
-	[Space]
-	public Image image;
-	
+	private Image _image;
 	private UnityAction onClicked;
 
 	public void OnInit(UnityAction callback)
 	{
+		_image = GetComponent<Image>();
+		
 		onClicked += callback;
 		OnReleased();
 	}
@@ -30,13 +31,13 @@ public class UI_CustomButton : UI_CustomBase, IPointerClickHandler
 	public void OnSelected()
 	{
 		if(selectedSprite != null)
-			image.sprite = selectedSprite;
+			_image.sprite = selectedSprite;
 	}
 
 	public void OnReleased()
 	{
 		if(normalSprite != null)
-			image.sprite = normalSprite;
+			_image.sprite = normalSprite;
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
