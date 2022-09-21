@@ -1,5 +1,5 @@
 using GameKit.ObjectPool;
-// using GameKit.Resource;
+using GameKit.Resource;
 
 using System;
 using System.Collections.Generic;
@@ -12,8 +12,9 @@ namespace GameKit.UI
         private readonly Dictionary<int, string> m_UIFormsBeingLoaded;
         private readonly HashSet<int> m_UIFormsToReleaseOnLoad;
         private readonly Queue<IUIForm> m_RecycleQueue;
+        private readonly LoadAssetCallbacks m_LoadAssetCallbacks;
         private IObjectPoolManager m_ObjectPoolManager;
-        // private IResourceManager m_ResourceManager;
+        private IResourceManager m_ResourceManager;
         private IObjectPool<UIFormObject> m_InstancePool;
         private IUIFormHelper m_UIFormHelper;
         private int m_Serial;
@@ -28,6 +29,7 @@ namespace GameKit.UI
             m_UIFormsBeingLoaded = new Dictionary<int, string>();
             m_UIFormsToReleaseOnLoad = new HashSet<int>();
             m_RecycleQueue = new Queue<IUIForm>();
+            m_LoadAssetCallbacks = new LoadAssetCallbacks(LoadAssetSuccessCallback, LoadAssetFailureCallback);
             m_ObjectPoolManager = null;
             m_InstancePool = null;
             m_UIFormHelper = null;
@@ -166,15 +168,15 @@ namespace GameKit.UI
             m_InstancePool = m_ObjectPoolManager.CreateSingleSpawnObjectPool<UIFormObject>("UI Instance Pool");
         }
 
-        // public void SetResourceManager(IResourceManager resourceManager)
-        // {
-        //     if (resourceManager == null)
-        //     {
-        //         throw new GameKitException("Resource manager is invalid.");
-        //     }
+        public void SetResourceManager(IResourceManager resourceManager)
+        {
+            if (resourceManager == null)
+            {
+                throw new GameKitException("Resource manager is invalid.");
+            }
 
-        //     m_ResourceManager = resourceManager;
-        // }
+            m_ResourceManager = resourceManager;
+        }
 
         public void SetUIFormHelper(IUIFormHelper uiFormHelper)
         {
@@ -437,10 +439,10 @@ namespace GameKit.UI
 
         public int OpenUIForm(string uiFormAssetName, string uiGroupName, int priority, bool pauseCoveredUIForm, object userData)
         {
-            // if (m_ResourceManager == null)
-            // {
-            //     throw new GameKitException("You must set resource manager first.");
-            // }
+            if (m_ResourceManager == null)
+            {
+                throw new GameKitException("You must set resource manager first.");
+            }
 
             if (m_UIFormHelper == null)
             {
@@ -470,15 +472,7 @@ namespace GameKit.UI
             if (uiFormInstanceObject == null)
             {
                 m_UIFormsBeingLoaded.Add(serialId, uiFormAssetName);
-                AddressableManager.instance.GetAssetAsyn(uiFormAssetName, (UnityEngine.Object obj) =>
-                {
-                    LoadAssetSuccessCallback(uiFormAssetName, obj, 0f, OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
-                },
-                () =>
-                {
-                    LoadAssetFailureCallback(uiFormAssetName, "Load UI Fail", OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
-                });
-                // m_ResourceManager.LoadAsset(uiFormAssetName, priority, m_LoadAssetCallbacks, OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
+                m_ResourceManager.LoadAsset(uiFormAssetName, priority, m_LoadAssetCallbacks, OpenUIFormInfo.Create(serialId, uiGroup, pauseCoveredUIForm, userData));
             }
             else
             {
@@ -677,7 +671,7 @@ namespace GameKit.UI
             ReferencePool.Release(openUIFormInfo);
         }
 
-        private void LoadAssetFailureCallback(string uiFormAssetName, string errorMessage, object userData)
+        private void LoadAssetFailureCallback(string uiFormAssetName, LoadResourceStatus status, string errorMessage, object userData)
         {
             OpenUIFormInfo openUIFormInfo = (OpenUIFormInfo)userData;
             if (openUIFormInfo == null)
@@ -692,7 +686,7 @@ namespace GameKit.UI
             }
 
             m_UIFormsBeingLoaded.Remove(openUIFormInfo.SerialId);
-            string appendErrorMessage = Utility.Text.Format("Load UI form failure, asset name '{0}', error message '{1}'.", uiFormAssetName, errorMessage);
+            string appendErrorMessage = Utility.Text.Format("Load UI form failure, asset name '{0}', status '{1}', error message '{2}'.", uiFormAssetName, status, errorMessage);
             if (m_OpenUIFormFailureEventHandler != null)
             {
                 OpenUIFormFailureEventArgs openUIFormFailureEventArgs = OpenUIFormFailureEventArgs.Create(openUIFormInfo.SerialId, uiFormAssetName, openUIFormInfo.UIGroup.Name, openUIFormInfo.PauseCoveredUIForm, appendErrorMessage, openUIFormInfo.UserData);

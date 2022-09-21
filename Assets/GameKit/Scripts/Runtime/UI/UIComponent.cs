@@ -1,5 +1,6 @@
 using GameKit;
 using GameKit.ObjectPool;
+using GameKit.Resource;
 using GameKit.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -153,14 +154,14 @@ namespace UnityGameKit.Runtime
                 return;
             }
 
-            // if (baseComponent.EditorResourceMode)
-            // {
-            //     m_UIManager.SetResourceManager(baseComponent.EditorResourceHelper);
-            // }
-            // else
-            // {
-            //     m_UIManager.SetResourceManager(GameKitModuleCenter.GetModule<IResourceManager>());
-            // }
+            if (baseComponent.EditorResourceMode)
+            {
+                m_UIManager.SetResourceManager(baseComponent.EditorResourceHelper);
+            }
+            else
+            {
+                m_UIManager.SetResourceManager(GameKitModuleCenter.GetModule<IResourceManager>());
+            }
 
             m_UIManager.SetObjectPoolManager(GameKitModuleCenter.GetModule<IObjectPoolManager>());
             m_UIManager.InstanceAutoReleaseInterval = m_InstanceAutoReleaseInterval;
