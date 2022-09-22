@@ -5,7 +5,7 @@ using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_SettingSystem : MonoBehaviour
+public class UI_SettingSystem : UIFormBase
 {
     public UI_SheetSystem ui_SheetSystem;
 
@@ -14,14 +14,29 @@ public class UI_SettingSystem : MonoBehaviour
 
     public ConfigData ConfigData { get; private set; }
 
-    private void Start()
+    protected override void OnInit(object userData)
+    {
+        base.OnInit(userData);
+        
+        ConfigData = new ConfigData();
+        ui_SheetSystem.OnInit(ConfigData);
+    }
+
+    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+    {
+        base.OnUpdate(elapseSeconds, realElapseSeconds);
+        KeybordControlling();
+    }
+    
+    public void ResetConfigData()
     {
         ConfigData = new ConfigData();
         ui_SheetSystem.OnInit(ConfigData);
-        //OnConfirmKeyPeressed();
     }
 
-    private void Update()
+    #region KeybordInput
+
+    private void KeybordControlling()
     {
         if (InputManager.instance.GetKeyDown(KeyCode.W))
             OnUpKeyPeressed();
@@ -36,8 +51,6 @@ public class UI_SettingSystem : MonoBehaviour
         if (InputManager.instance.GetKeyDown(KeyCode.Escape))
             OnBackKeyPeressed();
     }
-
-    #region KeybordInput
 
     private void OnUpKeyPeressed()
     {
@@ -92,4 +105,11 @@ public class UI_SettingSystem : MonoBehaviour
     }
 
     #endregion
+
+    protected override void OnPause()
+    {
+        base.OnPause();
+        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+        GameKitCenter.Event.Fire(this, args);
+    }
 }

@@ -10,10 +10,6 @@ using UnityGameKit.Runtime;
 
 public class UI_GameMenuSystem : UIFormBase
 {
-    /*public Button diceBackpackButton;
-    public Button playerBackpackButton;
-    public Button gameSettingButton;*/
-
     public List<UI_CustomButton> buttons = new List<UI_CustomButton>();
 
     private int _currentIndex = -1;
@@ -35,9 +31,9 @@ public class UI_GameMenuSystem : UIFormBase
     {
         buttons[0].OnInit(0,OnDiceInventoryButtonPressed, SetCurrentIndex);
         buttons[1].OnInit(1,OnPlayerBackpackButtonPressed,SetCurrentIndex);
-        buttons[2].OnInit(2,null,SetCurrentIndex);
+        buttons[2].OnInit(2,OnSettingButtonPressed,SetCurrentIndex);
     }
-
+    
     private void KeybordControlling()
     {
         if (InputManager.instance.GetKeyDown(KeyCode.A))
@@ -117,7 +113,7 @@ public class UI_GameMenuSystem : UIFormBase
     private void OnPlayerBackpackButtonPressed()
     {
         OnOpenPlayerBackpackEventArgs args = OnOpenPlayerBackpackEventArgs.Create(this);
-        GameKitCenter.Event.Fire(OnOpenPlayerBackpackEventArgs.EnentId, args);
+        GameKitCenter.Event.Fire(this, args);
         
         OnPause();
     }
@@ -125,10 +121,19 @@ public class UI_GameMenuSystem : UIFormBase
     private void OnDiceInventoryButtonPressed()
     {
         OnOpenDiceInventoryEventArgs args = OnOpenDiceInventoryEventArgs.Create(this);
-        GameKitCenter.Event.Fire(OnOpenDiceInventoryEventArgs.EventId, args);
+        GameKitCenter.Event.Fire(this, args);
         
         OnPause();
     }
+    
+    private void OnSettingButtonPressed()
+    {
+        OpenSettingUIEventArgs args = OpenSettingUIEventArgs.Create(this);
+        GameKitCenter.Event.Fire(this, args);
+        
+        OnPause();
+    }
+
 
     private void ReOpenGameMenu(object sender,GameEventArgs e)
     {

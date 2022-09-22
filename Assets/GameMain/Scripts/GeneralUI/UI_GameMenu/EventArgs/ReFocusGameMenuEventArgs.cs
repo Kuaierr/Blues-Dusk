@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameKit;
 using UnityEngine;
 
 public class ReFocusGameMenuEventArgs : GameKit.Event.GameEventArgs
@@ -20,7 +21,7 @@ public class ReFocusGameMenuEventArgs : GameKit.Event.GameEventArgs
 
 	public static ReFocusGameMenuEventArgs Create(object user)
 	{
-		ReFocusGameMenuEventArgs args = new ReFocusGameMenuEventArgs();
+		ReFocusGameMenuEventArgs args = ReferencePool.Acquire<ReFocusGameMenuEventArgs>();
 		args.UserData = user;
 		return args;
 	}

@@ -186,9 +186,11 @@ MonoBehaviour:
   _sceneHistory:
   - name: Prototype_MainMenu
     path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
-  - name: S_Bar_Main
-    path: Assets/GameMain/Scenes/S_Bar_Main.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Menu
+    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+  - name: S_Bar_Main
+    path: Assets/GameMain/Scenes/S_Bar_Main.unity
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
