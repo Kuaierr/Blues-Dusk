@@ -214,39 +214,6 @@ public class ConfigData
     }
 }
 
-/*public enum TextLanguageType
-{
-    SC = 0,
-    TC = 1,
-    JP = 2,
-    EN = 3
-}
-
-public enum AudioLanguageType
-{
-    EN = 0,
-    JP = 1
-}
-
-public enum AutoPlay
-{
-    OFF = 0,
-    ON = 1
-}
-
-public enum TextSpeed
-{
-    SLOW = 0,
-    NORMAL = 1,
-    FAST = 2
-}
-
-public enum HandleVibration
-{
-    ON = 0,
-    OFF = 1
-}*/
-
 public class CustomConfigOptionSet
 {
     private List<CustomConfigUnit> _units = new List<CustomConfigUnit>();

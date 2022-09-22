@@ -25,7 +25,7 @@ public class UI_CustomButton : UI_CustomBase,IPointerEnterHandler ,IPointerClick
 		Index = index;
 		
 		_image = GetComponent<Image>();
-		
+
 		onClicked += onClickedCallback;
 		onSelected += onSelectedCallback;
 		OnReleased();
@@ -53,7 +53,6 @@ public class UI_CustomButton : UI_CustomBase,IPointerEnterHandler ,IPointerClick
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		Debug.Log("Clicked");
 		OnClicked();
 	}
 

@@ -12,24 +12,20 @@ public class UI_SheetSystem : MonoBehaviour
     [SerializeField]
     private List<UI_ConfigSheet> _customSheets = new List<UI_ConfigSheet>();
 
-    private int _currentIndex = 0;
+    private int _currentButtonIndex = 0;
+    private int _currentSheetIndex = 0;
     private ConfigData _configData;
 
-    private void Start()
+    public void OnInit(ConfigData configData)
     {
-        OnInit();
-    }
+        _configData = configData;
 
-    public void OnInit()
-    {
-        _configData = new ConfigData();
-        
         if (_customButtons.Count != _customSheets.Count)
             Debug.LogError("Buttons and Sheets do not Match");
         for (int i = 0; i < _customButtons.Count; i++)
         {
             int temp = i;
-            _customButtons[i].OnInit(i,() => { SelectSheet(temp); }, SetCurrentIndex);
+            _customButtons[i].OnInit(i, () => { SelectSheet(temp); }, SetCurrentIndex);
         }
 
         for (int i = 0; i < _customSheets.Count; i++)
@@ -38,61 +34,90 @@ public class UI_SheetSystem : MonoBehaviour
         }
 
         SelectSheet(0);
+        SelectButton(0);
     }
-
-    /*private void Update()
-    {
-        if(InputManager.instance.GetKeyDown(KeyCode.W))
-            Debug.Log("上移");
-        if(InputManager.instance.GetKeyDown(KeyCode.S))
-            Debug.Log("下移");
-        if(InputManager.instance.GetKeyDown(KeyCode.A))
-            Debug.Log("切换设置选项");
-        if(InputManager.instance.GetKeyDown(KeyCode.D))
-            Debug.Log("切换设置选项");
-        if(InputManager.instance.GetKeyDown(KeyCode.Space))
-            Debug.Log("确认按钮");
-        if(InputManager.instance.GetKeyDown(KeyCode.Escape))
-            Debug.Log("返回");
-    }*/
 
     private void SelectSheet(int index)
     {
+        if(index<0 || index >= _customSheets.Count) return;
+        
         UnSelectCurrentSheet();
-        SelectCurrentSheet(index);
+        SwitchCurrentSheet(index);
     }
 
-    private void SelectCurrentSheet(int index)
+    private void SwitchCurrentSheet(int index)
     {
-        if (index >= 0 && index < _customButtons.Count)
+        if (index >= 0 && index < _customSheets.Count)
         {
             _customSheets[index].OnOpen();
-            _currentIndex = index;
+            _currentSheetIndex = index;
         }
     }
 
     private void UnSelectCurrentSheet()
     {
-        if (_currentIndex >= 0 && _currentIndex < _customButtons.Count)
+        if (_currentSheetIndex >= 0 && _currentSheetIndex < _customSheets.Count)
         {
-            _customButtons[_currentIndex].OnReleased();
-            _customSheets[_currentIndex].OnClose();
+            _customButtons[_currentSheetIndex].OnReleased();
+            _customSheets[_currentSheetIndex].OnClose();
         }
     }
 
-    /*#region KeybordInput
-
-    private void UpKeyPeressed()
-    {
-        
-    }
-
-    #endregion*/
-    
-    
-    
     private void SetCurrentIndex(int index)
     {
-        SelectSheet(index);
+        SelectButton(index);
     }
+
+    private void SelectButton(int index)
+    {
+        if(index < 0 || index >= _customButtons.Count) return;
+        
+        ReleaseCurrentButton();
+        SelectCurrentButton(index);
+    }
+
+    private void ReleaseCurrentButton()
+    {
+        if (_currentButtonIndex >= 0 && _currentButtonIndex < _customButtons.Count)
+            _customButtons[_currentButtonIndex].OnReleased();
+    }
+
+    private void SelectCurrentButton(int index)
+    {
+        if (index >= 0 && index < _customButtons.Count)
+        {
+            _customButtons[index].OnSelected();
+            _currentButtonIndex = index;
+        }
+    }
+
+    #region KeybordInput
+
+    public void OnUpKeyPeressed()
+    {
+        SelectButton(_currentButtonIndex - 1);
+    }
+
+    public void OnDownKeyPeressed()
+    {
+        SelectButton(_currentButtonIndex + 1);
+    }
+
+    public void OnLeftKeyPeressed() { }
+    public void OnRightKeyPeressed() { }
+
+    public UI_ConfigSheet OnConfirmKeyPeressed()
+    {
+        SelectSheet(_currentButtonIndex);
+        ReleaseCurrentButton();
+
+        return _customSheets[_currentSheetIndex];
+    }
+
+    public void OnBackKeyPeressed()
+    {
+        SelectButton(_currentButtonIndex);
+    }
+
+    #endregion
 }

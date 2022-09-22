@@ -33,6 +33,7 @@ public class UI_ConfigTag : MonoBehaviour,IPointerEnterHandler
         _right.onClick.AddListener(RightClicked);
         
         UpdateCurrentConfigDisplay();
+        OnReleased();
 
         return this;
     }
