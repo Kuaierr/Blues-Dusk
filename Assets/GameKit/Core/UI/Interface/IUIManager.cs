@@ -79,6 +79,5 @@ namespace GameKit.UI
 
         void SetUIFormInstancePriority(object uiFormInstance, int priority);
 
-        void SetResourceManager(IResourceManager resourceManager);
     }
 }
