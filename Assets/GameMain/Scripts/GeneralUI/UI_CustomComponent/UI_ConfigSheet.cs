@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UI_CustomSheet : UI_CustomBase
+public class UI_ConfigSheet : UI_CustomBase
 {
 	private CanvasGroup _canvas;
-	
+	private List<UI_ConfigTag> _tags = new List<UI_ConfigTag>();
+	private int _currentIndex;
+
 	[SerializeField]
 	private UI_ConfigTag _configTag;
 	
@@ -22,9 +24,9 @@ public class UI_CustomSheet : UI_CustomBase
 		
 	}
 
-	private void InitConfigTag(CustomConfigOptionSet optionSet)
+	private UI_ConfigTag InitConfigTag(CustomConfigOptionSet optionSet)
 	{
-		Instantiate(_configTag, this.transform).OnInit(optionSet);
+		return Instantiate(_configTag, this.transform).OnInit(optionSet);
 	}
 	
 	public void OnOpen()
@@ -32,6 +34,8 @@ public class UI_CustomSheet : UI_CustomBase
 		_canvas.alpha = 1;
 		_canvas.blocksRaycasts = true;
 		_canvas.interactable = true;
+		
+		Select(0);
 	}
 
 	public void OnClose()
@@ -39,5 +43,16 @@ public class UI_CustomSheet : UI_CustomBase
 		_canvas.alpha = 0;
 		_canvas.blocksRaycasts = false;
 		_canvas.interactable = false;
+	}
+
+	public void Select(int index)
+	{
+		if(_currentIndex>=0 && _currentIndex<_tags.Count)
+			_tags[index].OnReleased();
+		if(index>=0 && _currentIndex<_tags.Count)
+		{
+			_tags[index].OnSelected();
+			_currentIndex = index;
+		}	
 	}
 }

@@ -64,10 +64,10 @@ namespace GameKit.Dialog
                         {
                             Dictionary<string, int> result = new Dictionary<string, int>();
                             Debug.Log("Inventory Check");
-                            for (int j = 0; i < data.CachedStockConditions.Count; i++)
+                            for (int j = 0; j < data.CachedStockConditions.Count; j++)
                             {
                                 if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
-                                    data.CachedStockConditions[i]) == null)
+                                    data.CachedStockConditions[j]) == null)
                                 {
                                     clear = false;
                                     break;

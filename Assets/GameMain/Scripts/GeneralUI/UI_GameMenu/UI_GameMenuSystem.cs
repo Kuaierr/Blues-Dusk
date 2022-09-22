@@ -33,9 +33,9 @@ public class UI_GameMenuSystem : UIFormBase
 
     public void InitGameMenuButtons()
     {
-        buttons[0].OnInit(OnDiceInventoryButtonPressed);
-        buttons[1].OnInit(OnPlayerBackpackButtonPressed);
-        //buttons[2].OnInit(settingCallback);
+        buttons[0].OnInit(0,OnDiceInventoryButtonPressed, SetCurrentIndex);
+        buttons[1].OnInit(1,OnPlayerBackpackButtonPressed,SetCurrentIndex);
+        buttons[2].OnInit(2,null,SetCurrentIndex);
     }
 
     private void KeybordControlling()
@@ -107,6 +107,11 @@ public class UI_GameMenuSystem : UIFormBase
         //Debug.Log(index);
         buttons[index].OnSelected();
         _currentIndex = index;
+    }
+
+    private void SetCurrentIndex(int index)
+    {
+        Select(index);
     }
 
     private void OnPlayerBackpackButtonPressed()

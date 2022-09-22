@@ -10,7 +10,7 @@ public class UI_SheetSystem : MonoBehaviour
     private List<UI_CustomButton> _customButtons = new List<UI_CustomButton>();
 
     [SerializeField]
-    private List<UI_CustomSheet> _customSheets = new List<UI_CustomSheet>();
+    private List<UI_ConfigSheet> _customSheets = new List<UI_ConfigSheet>();
 
     private int _currentIndex = 0;
     private ConfigData _configData;
@@ -29,7 +29,7 @@ public class UI_SheetSystem : MonoBehaviour
         for (int i = 0; i < _customButtons.Count; i++)
         {
             int temp = i;
-            _customButtons[i].OnInit(() => { SelectSheet(temp); });
+            _customButtons[i].OnInit(i,() => { SelectSheet(temp); }, SetCurrentIndex);
         }
 
         for (int i = 0; i < _customSheets.Count; i++)
@@ -88,4 +88,11 @@ public class UI_SheetSystem : MonoBehaviour
     }
 
     #endregion*/
+    
+    
+    
+    private void SetCurrentIndex(int index)
+    {
+        SelectSheet(index);
+    }
 }
