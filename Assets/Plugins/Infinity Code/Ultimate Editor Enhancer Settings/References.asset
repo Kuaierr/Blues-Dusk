@@ -194,29 +194,39 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Tower_Top
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity
+  - name: S_Tower_Under
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
+  - name: S_Shire_Restaurant
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
+  - name: S_Shire_Lounge
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+  - name: S_Shire_Kitchen
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+  - name: S_Shire_Corridor
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Corridor.unity
+  - name: S_Shire_Backyard
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity
+  - name: S_Bookstore_Instore
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity
+  - name: S_Apartment_Living
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+  - name: S_Apartment_Balcony
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
+  - name: S_Apartment_Toilet
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity
   - name: S_Template
     path: Assets/GameMain/Scenes/S_Template.unity
+  - name: S_Shire_Corridor
+    path: Assets/GameMain/Scenes/S_Shire_Corridor.unity
+  - name: S_Shire_Backyard
+    path: Assets/GameMain/Scenes/S_Shire_Backyard.unity
+  - name: S_Bookstore_Instore
+    path: Assets/GameMain/Scenes/S_Bookstore_Instore.unity
   - name: S_Bar_Main
     path: Assets/GameMain/Scenes/S_Bar_Main.unity
-  - name: S_Parlor_Toilet
-    path: Assets/GameMain/Scenes/S_Parlor_Toilet.unity
-  - name: S_Parlor_Main
-    path: Assets/GameMain/Scenes/S_Parlor_Main.unity
-  - name: S_FengHospital
-    path: Assets/GameMain/Scenes/S_FengHospital.unity
-  - name: S_Bar_Kitchen
-    path: Assets/GameMain/Scenes/S_Bar_Kitchen.unity
-  - name: S_Week
-    path: Assets/GameMain/Scenes/Dynamic/S_Week.unity
-  - name: S_Weekend
-    path: Assets/GameMain/Scenes/Dynamic/S_Weekend.unity
-  - name: S_LoadingScene
-    path: Assets/GameMain/Scenes/Main/S_LoadingScene.unity
-  - name: S_Menu
-    path: Assets/GameMain/Scenes/Main/S_Menu.unity
-  - name: Prototypr_PlayerController
-    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
-  - name: Prototype_Dialog
-    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: S_Apartment_Living
+    path: Assets/GameMain/Scenes/S_Apartment_Living.unity
+  - name: M_Apartment_Toilet
+    path: Assets/GameMain/Scenes/M_Apartment_Toilet.unity

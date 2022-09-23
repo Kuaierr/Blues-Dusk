@@ -16,6 +16,7 @@ namespace GameKit
     public class AddressableManager : SingletonBase<AddressableManager>
     {
         private Dictionary<string, AsyncOperationHandle> m_cachedHandles;
+        public string CachedStartScene = string.Empty;
 
         public AddressableManager()
         {
@@ -54,23 +55,22 @@ namespace GameKit
                 onFail?.Invoke();
         }
 
-        IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess,
-            UnityAction onFail)
+        IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
         {
-            // Utility.Debugger.LogWarning(keyName);
-            /*AsyncOperationHandle handle = new AsyncOperationHandle();
-
-            handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
-            if (autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
-            {
-                // Utility.Debugger.LogWarning("Remove Unload Handle Key");
-                m_cachedHandles.Remove(keyName);
-            }*/
-            if(m_cachedHandles.ContainsKey(keyName))
+            if (m_cachedHandles.ContainsKey(keyName))
                 Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
             else
-                SceneManager.UnloadSceneAsync(keyName);
-            
+            {
+                if (CachedStartScene != string.Empty)
+                {
+                    SceneManager.UnloadSceneAsync(CachedStartScene);
+                    CachedStartScene = string.Empty;
+                }
+                else
+                    SceneManager.UnloadSceneAsync(keyName);
+            }
+
+
             yield return null;
             onSuccess.Invoke();
         }

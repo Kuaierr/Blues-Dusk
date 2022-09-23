@@ -1292,10 +1292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActive: 0
   defaultSwitchType: 1
-  StartScene: S_Parlor
-  LoadScene: S_Parlor
-  m_ScenesPath: 
-  m_MultiScenesPath: 
+  StartScene: 
+  LoadScene: 
+  m_ScenesPath: Assets/GameMain/
+  m_MultiScenesPath: Assets/GameMain/
 --- !u!1 &1280435058
 GameObject:
   m_ObjectHideFlags: 0

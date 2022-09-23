@@ -257,6 +257,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286964717284989200}
     m_Modifications:
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_text
+      value: "\u8C2C\u8BBA\u4E66\u5E97"
+      objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -345,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FengHospital
       objectReference: {fileID: 0}
+    - target: {fileID: 5245168922156902183, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: Sprite
       value: 
@@ -386,6 +394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286964717284989200}
     m_Modifications:
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_text
+      value: "\u590F\u5C14\u4E4B\u5BB6"
+      objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
