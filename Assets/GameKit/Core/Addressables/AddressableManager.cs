@@ -16,6 +16,7 @@ namespace GameKit
     public class AddressableManager : SingletonBase<AddressableManager>
     {
         private Dictionary<string, AsyncOperationHandle> m_cachedHandles;
+
         public AddressableManager()
         {
             m_cachedHandles = new Dictionary<string, AsyncOperationHandle>();
@@ -35,7 +36,8 @@ namespace GameKit
                 onFail?.Invoke();
         }
 
-        IEnumerator LoadSceneProcess(string keyName, LoadSceneMode loadMode, bool activeOnLoad, UnityAction onSuccess, UnityAction onFail)
+        IEnumerator LoadSceneProcess(string keyName, LoadSceneMode loadMode, bool activeOnLoad, UnityAction onSuccess,
+            UnityAction onFail)
         {
             AsyncOperationHandle handle = Addressables.LoadSceneAsync(keyName, loadMode, activeOnLoad);
             yield return handle;
@@ -52,25 +54,24 @@ namespace GameKit
                 onFail?.Invoke();
         }
 
-        IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
+        IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess,
+            UnityAction onFail)
         {
             // Utility.Debugger.LogWarning(keyName);
-            AsyncOperationHandle handle = new AsyncOperationHandle();
-            try
-            {
-                handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
-                if (autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
-                {
-                    // Utility.Debugger.LogWarning("Remove Unload Handle Key");
-                    m_cachedHandles.Remove(keyName);
-                }
-            }
-            catch (System.Exception)
-            {
-                SceneManager.UnloadSceneAsync(keyName);
-            }
+            /*AsyncOperationHandle handle = new AsyncOperationHandle();
 
-            yield return handle;
+            handle = Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+            if (autoReleaseHanlde && m_cachedHandles.ContainsKey(keyName))
+            {
+                // Utility.Debugger.LogWarning("Remove Unload Handle Key");
+                m_cachedHandles.Remove(keyName);
+            }*/
+            if(m_cachedHandles.ContainsKey(keyName))
+                Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+            else
+                SceneManager.UnloadSceneAsync(keyName);
+            
+            yield return null;
             onSuccess.Invoke();
         }
 
@@ -103,14 +104,12 @@ namespace GameKit
                 onFail?.Invoke();
         }
 
-        IEnumerator GetAsynProcessByLabel<T>(IList<string> labels, UnityAction<T> eachCall, UnityAction<IList<T>> callback) where T : Object
+        IEnumerator GetAsynProcessByLabel<T>(IList<string> labels, UnityAction<T> eachCall,
+            UnityAction<IList<T>> callback) where T : Object
         {
             AsyncOperationHandle<IList<T>> handle =
                 Addressables.LoadAssetsAsync<T>(labels,
-                    obj =>
-                    {
-                        eachCall?.Invoke(obj as T);
-                    }, Addressables.MergeMode.Union, false);
+                    obj => { eachCall?.Invoke(obj as T); }, Addressables.MergeMode.Union, false);
 
             yield return handle;
             callback?.Invoke(handle.Result as IList<T>);
@@ -118,17 +117,21 @@ namespace GameKit
                 m_cachedHandles.Add(handle.Result.First().GetInstanceID().ToString(), handle);
         }
 
-        public void GetAssetAsyn<T>(string keyName, UnityAction<T> onSuccess = null, UnityAction onFail = null) where T : Object
+        public void GetAssetAsyn<T>(string keyName, UnityAction<T> onSuccess = null, UnityAction onFail = null)
+            where T : Object
         {
             QuickMonoManager.instance.StartCoroutine(GetAsynProcess<T>(keyName, onSuccess, onFail));
         }
 
-        public void LoadSceneAsyn(string keyName, LoadSceneMode loadMode = LoadSceneMode.Additive, bool activeOnLoad = true, UnityAction onSuccess = null, UnityAction onFail = null)
+        public void LoadSceneAsyn(string keyName, LoadSceneMode loadMode = LoadSceneMode.Additive,
+            bool activeOnLoad = true, UnityAction onSuccess = null, UnityAction onFail = null)
         {
-            QuickMonoManager.instance.StartCoroutine(LoadSceneProcess(keyName, loadMode, activeOnLoad, onSuccess, onFail));
+            QuickMonoManager.instance.StartCoroutine(LoadSceneProcess(keyName, loadMode, activeOnLoad, onSuccess,
+                onFail));
         }
 
-        public void UnloadSceneAsyn(string keyName, bool autoReleaseHanld = true, UnityAction onSuccess = null, UnityAction onFail = null)
+        public void UnloadSceneAsyn(string keyName, bool autoReleaseHanld = true, UnityAction onSuccess = null,
+            UnityAction onFail = null)
         {
             QuickMonoManager.instance.StartCoroutine(UnloadSceneProcess(keyName, autoReleaseHanld, onSuccess, onFail));
         }
@@ -148,7 +151,8 @@ namespace GameKit
             GetAssetAsyn<Object>(keyName, onSuccess, onFail);
         }
 
-        public void GetAssetsAsyn<T>(IList<string> labels, UnityAction<T> eachCall = null, UnityAction<IList<T>> callback = null) where T : Object
+        public void GetAssetsAsyn<T>(IList<string> labels, UnityAction<T> eachCall = null,
+            UnityAction<IList<T>> callback = null) where T : Object
         {
             QuickMonoManager.instance.StartCoroutine(GetAsynProcessByLabel<T>(labels, eachCall, callback));
         }
@@ -199,4 +203,3 @@ namespace GameKit
     }
 }
 #endif
-
