@@ -8,6 +8,7 @@ using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 public class DialogIdleState : FsmState<UI_Dialog>, IReference
 {
     private UI_Dialog fsmMaster;
+    private bool m_FirstInit;
     public void Clear()
     {
 
@@ -17,12 +18,17 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
     {
         base.OnInit(fsmOwner);
         fsmMaster = fsmOwner.User;
+        m_FirstInit = true;
     }
 
     protected override void OnEnter(FsmInterface fsmOwner)
     {
         base.OnEnter(fsmOwner);
         Log.Info("DialogIdleState");
+        if (m_FirstInit)
+            m_FirstInit = false;
+        else
+            QuickCinemachineCamera.current.ResetFocus();
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)

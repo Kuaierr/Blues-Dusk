@@ -13,6 +13,7 @@ public partial class GameKitCenter : MonoBehaviour
     public static EventComponent Event { get; private set; }
     public static SettingComponent Setting { get; private set; }
     public static SceneComponent Scene { get; private set; }
+    public static ResourceComponent Resource { get; private set; }
 
     private static void InitComponents()
     {
@@ -26,6 +27,7 @@ public partial class GameKitCenter : MonoBehaviour
         Event = GameKitComponentCenter.GetComponent<EventComponent>();
         Setting = GameKitComponentCenter.GetComponent<SettingComponent>();
         Scene = GameKitComponentCenter.GetComponent<SceneComponent>();
+        Resource = GameKitComponentCenter.GetComponent<ResourceComponent>();
     }
 }
 

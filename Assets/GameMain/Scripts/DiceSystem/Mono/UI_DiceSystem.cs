@@ -123,6 +123,7 @@ public class UI_DiceSystem : UIFormChildBase
 
         _usedSheets.Clear();
         _negativeDices.Clear();
+        _negativeDiceSlots.Clear();
         _activedDices.Clear();
         Result.Clear();
         _startButton.Clear();

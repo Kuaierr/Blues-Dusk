@@ -61,5 +61,12 @@
     "ui_group_name": "General",
     "allow_multi_instance": false,
     "pause_covered_ui_form": true
+  },
+  {
+    "id": 1006,
+    "asset_name": "UI_SettingSystem",
+    "ui_group_name": "Default",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": true
   }
 ]

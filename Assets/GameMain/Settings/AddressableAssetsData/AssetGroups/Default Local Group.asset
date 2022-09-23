@@ -21,8 +21,8 @@ MonoBehaviour:
     m_Address: Assets/LubanGen/Datas/json
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 024aa34f39672c44f8e681bf11e90434
-    m_Address: Assets/GameMain/Elements/Prototyper.prefab
+  - m_GUID: 8985dc01444f87b4faa2eb043ae9aeb7
+    m_Address: Assets/GameMain/Elements/Player_Ethan.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 92b5dce7095cc964994f0dcabf28fb00
