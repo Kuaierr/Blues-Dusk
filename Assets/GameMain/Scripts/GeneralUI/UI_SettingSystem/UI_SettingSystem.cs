@@ -17,7 +17,7 @@ public class UI_SettingSystem : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        
+
         ConfigData = new ConfigData();
         ui_SheetSystem.OnInit(ConfigData);
     }
@@ -27,7 +27,7 @@ public class UI_SettingSystem : UIFormBase
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         KeybordControlling();
     }
-    
+
     public void ResetConfigData()
     {
         ConfigData = new ConfigData();
@@ -101,6 +101,12 @@ public class UI_SettingSystem : UIFormBase
             _isOnSheet = false;
             ui_SheetSystem.OnBackKeyPeressed();
             _currentSheet = null;
+        }
+        else
+        {
+            OnPause();
+            ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+            GameKitCenter.Event.Fire(this, args);
         }
     }
 

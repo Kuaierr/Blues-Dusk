@@ -29,11 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_DiceDev.unity
     guid: e8f11323ca279954aa9884b5d5c94f70
-  - enabled: 0
-    path: Assets/GameMain/Scenes/S_Parlor.unity
-    guid: a416c05d7ba37fe48a1f3c987425d562
-  - enabled: 0
-    path: Assets/GameMain/Scenes/S_Apartment_Balcony.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
+    guid: 660cd756353de1a40a31d22495c2017d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 82ad0f0119a9f3245ac7d6eba34afa08, type: 2}
