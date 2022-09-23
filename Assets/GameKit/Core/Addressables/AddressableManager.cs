@@ -58,7 +58,10 @@ namespace GameKit
         IEnumerator UnloadSceneProcess(string keyName, bool autoReleaseHanlde, UnityAction onSuccess, UnityAction onFail)
         {
             if (m_cachedHandles.ContainsKey(keyName))
+            {
                 Addressables.UnloadSceneAsync(m_cachedHandles[keyName], autoReleaseHanlde);
+                m_cachedHandles.Remove(keyName);
+            }
             else
             {
                 if (CachedStartScene != string.Empty)
@@ -69,8 +72,6 @@ namespace GameKit
                 else
                     SceneManager.UnloadSceneAsync(keyName);
             }
-
-
             yield return null;
             onSuccess.Invoke();
         }

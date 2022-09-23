@@ -51,8 +51,8 @@ namespace UnityGameKit.Editor
         {
             if (EditorApplication.isPlaying)
             {
-                EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
-                EditorGUILayout.TextField(string.Format("{0}: {1}", fieldInfo.Name, serializedProperty.stringValue));
+                // EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
+                EditorGUILayout.TagField(string.Format("{0}: {1}", fieldInfo.Name, serializedProperty.stringValue));
                 return;
             }
 

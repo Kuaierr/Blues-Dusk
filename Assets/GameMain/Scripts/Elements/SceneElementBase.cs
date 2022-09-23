@@ -7,7 +7,7 @@ using GameKit.Event;
 using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 
-[RequireComponent(typeof(Outline))]
+[RequireComponent(typeof(Outline),typeof(MeshCollider))]
 public abstract class SceneElementBase : GameElementBase
 {
     public float OutlineWidth = 3f;

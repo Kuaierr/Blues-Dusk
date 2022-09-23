@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private PlayerMovement m_Movement;
     public static Player Current;
     [SerializeField] private bool m_UpdateRotation = true;
-
+    [SerializeField] private bool m_StartMove;
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
@@ -33,16 +33,21 @@ public class Player : MonoBehaviour
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
         m_NavMeshAgent.updatePosition = m_UpdateRotation;
         Current = this;
+        m_StartMove = false;
     }
     void Update()
     {
         // m_Animator.SetFloat("VelocityX", Mathf.Abs(m_NavMeshAgent.velocity.x));
         // m_Animator.SetFloat("VelocityY", Mathf.Abs(m_NavMeshAgent.velocity.y));
+
         if (InputManager.instance.GetWorldMouseButtonDown(0))
         {
             MoveToDestination();
+            m_StartMove = true;
         }
-        m_Movement.OnUpdate();
+
+        if (m_StartMove)
+            m_Movement.OnUpdate();
     }
 
     public void SetTransform(Transform trans)
