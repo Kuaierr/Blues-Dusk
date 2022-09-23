@@ -20,8 +20,8 @@ public class SettingSystem : MonoSingletonBase<SettingSystem>
 		if (GameKitCenter.UI.GetUIForm(m_CachedUiId))
 		{
 			//GameKitCenter.UI.TryGetUIForm("UI_Backpack").Resume();
-			//GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
-			GameKitCenter.UI.RefocusUIForm(GameKitCenter.UI.GetUIForm(m_CachedUiId));
+			GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
+			//GameKitCenter.UI.RefocusUIForm(GameKitCenter.UI.GetUIForm(m_CachedUiId));
 		}
         
 		var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_SettingSystem", userData: this);

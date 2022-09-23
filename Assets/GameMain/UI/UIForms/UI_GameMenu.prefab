@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -256,7 +256,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSprite: {fileID: 3936965911005375695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
   selectedSprite: {fileID: 4739136875920000438, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  image: {fileID: 993841137074491206}
 --- !u!114 &993841137074491206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,7 +424,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSprite: {fileID: 8835811552207077880, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
   selectedSprite: {fileID: -134078210552325949, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  image: {fileID: 993841137812626196}
 --- !u!114 &993841137812626196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSprite: {fileID: 3444463884197001060, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
   selectedSprite: {fileID: -3758175530029238695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  image: {fileID: 993841138329974584}
 --- !u!114 &993841138329974584
 MonoBehaviour:
   m_ObjectHideFlags: 0

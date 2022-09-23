@@ -39,7 +39,7 @@
     "asset_name": "UI_GameMenu",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1003,
