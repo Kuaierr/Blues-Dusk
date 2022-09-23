@@ -174,12 +174,6 @@ public class UI_Response : UIFormChildBase
     {
         if (m_CachedIsDiceCheck)
         {
-            //Info 第二次进入鉴定时，保留了Hide的trigger，引发了不具合。此处是应急措施
-            m_DiceAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
-            m_DiceAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
-            m_MasterAnimator.ResetTrigger(UIUtility.ENABLE_ANIMATION_NAME);
-            m_MasterAnimator.ResetTrigger(UIUtility.DISABLE_ANIMATION_NAME);
-            
             m_DiceAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
             m_MasterAnimator.SetTrigger(status ? UIUtility.ENABLE_ANIMATION_NAME : UIUtility.DISABLE_ANIMATION_NAME);
         }
@@ -229,46 +223,42 @@ public class UI_Response : UIFormChildBase
                 m_ActiveUIOptions.Add(UIOptions[i]);
                 if (m_CachedIsDiceCheck)
                 {
+                    UIOptions[i].SetActive(true);
                     UIOptions[i].Lock();
                     UIOptions[i].ShowDiceIndicator(m_CurrentOptions[i]);
                 }
-                else if (optionSet.Options[i].DiceConditions.ContainsKey("result"))
+                else if (UIOptions[i].IsLocked)
                 {
-                    if(optionSet.Options[i].DiceConditions["result"] == 1)
-                        UIOptions[i].Unlock();
-                    else
-                        UIOptions[i].Lock();
+                    UIOptions[i].SetActive(true);
+                    UIOptions[i].Unlock();
                 }
-                /*else if (UIOptions[i].IsLocked)
-                    UIOptions[i].Unlock();*/
             }
             else
                 m_CachedDefaultOptionIndex = i;
         }
     }
 
-    //TODO 需要将仓检和骰检合并到普通选项的情况中
-    /*public void UpdateAsPlayerInventoryCheckOptions(IDialogOptionSet optionSet, Dictionary<string,bool> conditions)
+    public void UpdateAsPlayerInventoryCheckOptions(IDialogOptionSet optionSet, Dictionary<string,bool> conditions)
     {
         m_ActiveUIOptions.Clear();
         m_CurrentOptions = optionSet.Options;
         for (int i = 0; i < m_CurrentOptions.Count; i++)
         {
             m_ActiveUIOptions.Add(UIOptions[i]);
-            //if (conditions[optionSet.Options[i].Text] == true)
-            if(optionSet.Options[i].DiceConditions["result"] == 1)
+            if (conditions[optionSet.Options[i].Text] == true)
             {
+                UIOptions[i].SetActive(true);
                 UIOptions[i].Unlock();
             }
             else
             {
+                UIOptions[i].SetActive(true);
                 UIOptions[i].Lock();
             }
         }
-    }*/
+    }
 
-    //Info 仅仅是根据CanShow进行的配置，没有单独列出来的必要，也不知道在哪调用它
-    /*public void UpdateAsDiceInventoryCheckOption(IDialogOptionSet optionSet/*, List<bool> conditions#1#)
+    public void UpdateAsDiceInventoryCheckOption(IDialogOptionSet optionSet/*, List<bool> conditions*/)
     {
         m_ActiveUIOptions.Clear();
         m_CurrentOptions = optionSet.Options;
@@ -284,13 +274,19 @@ public class UI_Response : UIFormChildBase
             {
                 UIOptions[i].SetActive(false);
                 UIOptions[i].Lock();
-            }#1#
+            }*/
             if (optionSet.Options[i].CanShow)
+            {
                 UIOptions[i].SetActive(true);
+                UIOptions[i].Unlock();
+            }
             else
+            {
                 UIOptions[i].SetActive(false);
+                UIOptions[i].Unlock();
+            }
         }
-    }*/
+    }
 
     // 共识： UIOptions 和  m_CurrentOptions 在 Index 上是一一对应的
     /// <summary>

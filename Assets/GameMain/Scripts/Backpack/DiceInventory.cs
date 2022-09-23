@@ -34,8 +34,7 @@ public class DiceInventory : MonoSingletonBase<DiceInventory>
 		if(uiFormInstanse != null)
 		{
 			uiFormInstanse.OnResume();
-			//GameKitCenter.UI.RefocusUIForm(uiFormInstanse);
-			GameKitCenter.UI.RefocusUIForm(GameKitCenter.UI.GetUIForm(m_CachedUiId));
+			GameKitCenter.UI.RefocusUIForm(uiFormInstanse);
 		}
 		else
 		{

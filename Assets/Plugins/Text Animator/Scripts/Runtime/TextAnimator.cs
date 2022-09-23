@@ -124,7 +124,7 @@ namespace Febucci.UI
 #else
             attachedInputField = gameObject.GetComponentInParent<TMP_InputField>();
 #endif
-
+            
 #if INTEGRATE_NANINOVEL
             reveablelText = GetComponent<Naninovel.UI.IRevealableText>();
             isNaninovelPresent = reveablelText != null;
@@ -153,7 +153,7 @@ namespace Febucci.UI
                     return _tAnimPlayer;
 
 #if UNITY_2019_2_OR_NEWER
-                if (!TryGetComponent(out _tAnimPlayer))
+                if(!TryGetComponent(out _tAnimPlayer))
                 {
                     Debug.LogError($"Text Animator component is null on GameObject {gameObject.name}");
                 }
@@ -207,7 +207,7 @@ namespace Febucci.UI
         [SerializeField, Tooltip("True if you want effects time to be reset when a new text is set (default option), false otherwise.")]
         public bool isResettingEffectsOnNewText = true;
 
-
+        
         #endregion
 
         #region Public Variables
@@ -225,7 +225,7 @@ namespace Febucci.UI
                     return _tmproText;
 
 #if UNITY_2019_2_OR_NEWER
-                if (!TryGetComponent(out _tmproText))
+                if(!TryGetComponent(out _tmproText))
                 {
                     Debug.LogError("TextAnimator: TMproText component is null.");
                 }
@@ -298,21 +298,21 @@ namespace Febucci.UI
                 {
                     return characters[index].data.passedTime > 0;
                 }
-
+                
                 //searches for the first character or the last one first, since they're most probably the first ones to be shown (based on orientation)
-                if (IsCharacterVisible(0) || IsCharacterVisible(tmproText.textInfo.characterCount - 1))
+                if (IsCharacterVisible(0) || IsCharacterVisible(tmproText.textInfo.characterCount-1))
                     return true;
-
+                
                 //searches for the other, which might still be running their appearance/disappearance
-                for (int i = 1; i < tmproText.textInfo.characterCount - 1; i++)
+                for(int i=1;i<tmproText.textInfo.characterCount-1;i++)
                     if (IsCharacterVisible(i))
                         return true;
 
                 return false;
             }
-
+            
         }
-
+            
         /// <summary>
         /// The latest TextMeshPro character shown by the typewriter.
         /// </summary>
@@ -321,8 +321,8 @@ namespace Febucci.UI
         #endregion
 
         #region Managament variables
-
-
+        
+        
         /// <summary>
         /// Contains TextAnimator's current time values.
         /// </summary>
@@ -374,7 +374,7 @@ namespace Febucci.UI
 
         void AssertCharacterTimes()
         {
-
+            
             bool IsCharacterShown(int i)
             {
                 return i <= textInfo.characterCount
@@ -728,7 +728,7 @@ namespace Febucci.UI
                     var tags = tagsToConvert[i].Split(' ');
                     string actualEffect = tags[0]; //removes probable modifiers
 
-                    foreach (var effect in temp_fallbackEffects)
+                    foreach(var effect in temp_fallbackEffects)
                     {
                         if (effect.regionManager.entireRichTextTag.Equals(tagsToConvert[i])) continue; //same effect has already been added
                     }
@@ -908,7 +908,7 @@ namespace Febucci.UI
             }
         }
 
-        void TryProcessingModifier<T>(string[] tags, ref T effect) where T : EffectsBase
+        void TryProcessingModifier<T>(string [] tags, ref T effect) where T : EffectsBase
         {
             int equalsIndex;
             //Searches for modifiers inside the effect region (after the first tag, which we used to check the type of effect to add)
@@ -1094,8 +1094,8 @@ namespace Febucci.UI
             skipAppearanceEffects = false;
             hasActions = false;
             noparseEnabled = false;
-
-            if (isResettingEffectsOnNewText)
+            
+            if(isResettingEffectsOnNewText)
                 m_time.ResetData(); //resets time
 
             behaviorEffects.Clear();
@@ -1352,7 +1352,7 @@ namespace Febucci.UI
                 //--generates mesh and text info--
                 if (attachedInputField) attachedInputField.text = text; //renders input field
                 else tmproText.text = text; //<-- sets the text
-
+                
                 tmproText.ForceMeshUpdate(true);
 
                 textInfo = tmproText.GetTextInfo(tmproText.text);
@@ -1575,8 +1575,8 @@ namespace Febucci.UI
                 // be different than the basic tmp font size value 
                 intensity *= charSize / referenceFontSize;
             }
-
-            void SetEffectsIntensity<T>(List<T> effects) where T : EffectsBase
+            
+            void SetEffectsIntensity<T>(List<T> effects) where T: EffectsBase
             {
                 foreach (T effect in effects)
                 {
@@ -1774,7 +1774,6 @@ namespace Febucci.UI
         private void Update()
         {
             //TMPRO's text changed, setting the text again
-            
             if (!tmproText.text.Equals(text))
             {
                 if (hasParentCanvas && !parentCanvas.isActiveAndEnabled)
@@ -1790,12 +1789,11 @@ namespace Febucci.UI
 
                     //temp fix, opening and closing this TMPro tag (which won't be showed in the text, acting like they aren't there) because otherwise
                     //there isn't any way to trigger that the text has changed, if it's actually the same as the previous one.
-                    
+
                     if (tmproText.text.Length <= 0) //forces clearing the mesh during the tempFix, without the <noparse> tags
                         tAnimPlayer.ShowText("");
                     else
                         tAnimPlayer.ShowText($"<noparse></noparse>{tmproText.text}");
-
 #endif
 
                 }
@@ -1806,23 +1804,23 @@ namespace Febucci.UI
 
                 return;
             }
-            
-            
+
             if (!hasText)
                 return;
+
             //applies effects
             UpdateEffectsToMesh();
         }
 
         void UpdateEffectsToMesh()
         {
-
+            
 
             m_time.UpdateDeltaTime(timeScale);
             m_time.IncreaseTime();
 
             #region Effects Calculation
-
+            
             for (int i = 0; i < behaviorEffects.Count; i++)
             {
                 behaviorEffects[i].SetAnimatorData(m_time);
@@ -1840,7 +1838,7 @@ namespace Febucci.UI
             }
             #endregion
 
-
+            
             for (int i = 0; i < textInfo.characterCount && i < characters.Length; i++)
             {
 
@@ -1884,11 +1882,11 @@ namespace Febucci.UI
 
                 characters[i].ResetColors();
                 characters[i].ResetVertices();
-
+                
                 //Updates again the effects intensity, since this character might have a different font size
                 //compared to the others (e.g. modified by TMPRO's size tag)
                 UpdateEffectIntensityWithSize(textInfo.characterInfo[i].pointSize);
-
+                
                 //character is appearing
                 if (!characters[i].isDisappearing)
                 {
@@ -1965,10 +1963,10 @@ namespace Febucci.UI
         {
             //The mesh might have changed when the gameObject was disabled (eg. change of "autoSize")
             forceMeshRefresh = true;
-
+            
             textInfo = tmproText.textInfo;
             UpdateEffectsToMesh();
-
+            
 #if UNITY_EDITOR
             TAnim_EditorHelper.onChangesApplied += EDITORONLY_ResetEffects;
 #endif
@@ -2025,7 +2023,7 @@ namespace Febucci.UI
             if (!Application.isPlaying)
                 return;
 
-            if (behaviorEffects != null && appearanceEffects != null && disappearanceEffects != null)
+            if (behaviorEffects != null && appearanceEffects != null && disappearanceEffects != null) 
             {
                 //---sets intensity---
                 for (int i = 0; i < behaviorEffects.Count; i++)

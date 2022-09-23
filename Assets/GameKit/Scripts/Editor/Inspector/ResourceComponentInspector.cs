@@ -1,4 +1,11 @@
-﻿using GameKit;
+﻿//------------------------------------------------------------
+// Game Framework
+// Copyright © 2013-2021 Jiang Yin. All rights reserved.
+// Homepage: https://GameKit.cn/
+// Feedback: mailto:ellan@GameKit.cn
+//------------------------------------------------------------
+
+using GameKit;
 using System;
 using System.IO;
 using System.Reflection;

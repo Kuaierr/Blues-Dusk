@@ -4,7 +4,7 @@ using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 [DisallowMultipleComponent]
 [AddComponentMenu("BluesDusk/LeaveDoor Object")]
-public class LeaveDoorElement : SceneElementBase
+public class LeaveDoorElement : GameElementBase
 {
     [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
@@ -35,17 +35,5 @@ public class LeaveDoorElement : SceneElementBase
     private void OpenSelectUI()
     {
         GeneralSystem.current.OpenSelectSceneUI(new List<string>() { "S_Parlor", "S_Tower", "S_FengHospital" });
-    }
-
-    protected override void OnValidate()
-    {
-        base.OnValidate();
-        if (this.transform.Find("EnterTranformation") == null)
-        {
-            Debug.Log("Generate EnterTranformation");
-            Object enterTransform = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>("Assets/GameMain/Elements/Utility/EnterTranformation.prefab");
-            enterTransform = UnityEditor.PrefabUtility.InstantiatePrefab(enterTransform, this.transform);
-            enterTransform.name = "EnterTranformation";
-        }
     }
 }

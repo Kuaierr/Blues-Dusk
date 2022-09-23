@@ -4,7 +4,7 @@ using LubanConfig.DataTable;
 
 [DisallowMultipleComponent]
 [AddComponentMenu("BluesDusk/Muse Object")]
-public class MuseElement : SceneElementBase
+public class MuseElement : GameElementBase
 {
     public override void OnInteract()
     {

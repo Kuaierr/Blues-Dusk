@@ -29,8 +29,8 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
     {
         if (GameKitCenter.UI.GetUIForm(m_CachedUiId))
         {
-            //GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
-            GameKitCenter.UI.RefocusUIForm(GameKitCenter.UI.GetUIForm(m_CachedUiId));
+            //GameKitCenter.UI.TryGetUIForm("UI_Backpack").Resume();
+            GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
         }
         
         var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: this);

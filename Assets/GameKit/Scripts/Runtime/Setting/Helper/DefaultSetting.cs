@@ -76,12 +76,12 @@ namespace UnityGameKit.Runtime
 
         public bool GetBool(string settingName, bool defaultValue)
         {
-            if (!m_Settings.ContainsKey(settingName))
+            string value = null;
+            if (!m_Settings.TryGetValue(settingName, out value))
             {
-                Log.Warning("Setting '{0}' is not exist.", settingName);
                 return defaultValue;
             }
-            return Convert.ToBoolean(m_Settings[settingName]);
+            return int.Parse(value) != 0;
         }
 
         public void SetBool(string settingName, bool value)

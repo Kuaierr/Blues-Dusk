@@ -17,7 +17,7 @@ namespace UnityGameKit.Runtime
 
         private void Update()
         {
-            IsActive = (Camera.main == null ? false : true) && IsActive;
+            IsActive = Camera.main == null ? false : true;
             if (IsActive)
             {
                 if (m_CachedRaycastInfo.Count > 0)
@@ -104,13 +104,13 @@ namespace UnityGameKit.Runtime
                 return null;
             if (raycastHit.transform == null || raycastHit.transform.gameObject == null)
             {
+                // Utility.Debugger.LogWarning("No Hit Target Exsit.");
                 return null;
             }
             T component = raycastHit.transform.GetComponent<T>();
-            
-            if (component == null)
-                component = raycastHit.transform.GetComponentInParent<T>();
-            // Debug.Log(component);
+            // if (component == null)
+            //     Utility.Debugger.LogWarning("Hit Target Has No {0} Component.", typeof(T).Name);
+
             return component;
         }
 

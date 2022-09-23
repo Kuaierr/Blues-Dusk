@@ -34,51 +34,25 @@ namespace UnityGameKit.Editor
             m_SceneNames = m_TempSceneNames.ToArray();
             m_SceneNameIndex = 0;
 
-            // if (property.isArray)
-            // {
-            //     Debug.Log(property.arraySize);
-            //     for (int i = 0; i < property.arraySize; i++)
-            //     {
-            //         SerializedProperty singelProperty = property.GetArrayElementAtIndex(i);
-            //         Draw(singelProperty, m_TempSceneNames);
-            //     }
-            // }
-            // else
-            Draw(property, m_TempSceneNames);
-        }
-
-        private void Draw(SerializedProperty serializedProperty, List<string> tempList)
-        {
-            if (EditorApplication.isPlaying)
+            if (!string.IsNullOrEmpty(property.stringValue))
             {
-                EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
-                EditorGUILayout.TextField(string.Format("{0}: {1}", fieldInfo.Name, serializedProperty.stringValue));
-                return;
-            }
-
-            if (!string.IsNullOrEmpty(serializedProperty.stringValue))
-            {
-                m_SceneNameIndex = tempList.IndexOf(serializedProperty.stringValue);
+                m_SceneNameIndex = m_TempSceneNames.IndexOf(property.stringValue);
                 if (m_SceneNameIndex <= 0)
                 {
                     m_SceneNameIndex = 0;
-                    serializedProperty.stringValue = null;
+                    property.stringValue = null;
                 }
             }
 
-            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+            int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
+
+            if (selectedIndex != m_SceneNameIndex)
             {
-                int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
-                if (selectedIndex != m_SceneNameIndex)
-                {
-                    m_SceneNameIndex = selectedIndex;
-                    serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
-                }
+                m_SceneNameIndex = selectedIndex;
+                property.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
             }
-            EditorGUI.EndDisabledGroup();
 
+            // EditorGUI.PropertyField(position, property, content);
         }
     }
-
-
 }

@@ -4,7 +4,7 @@ using GameKit.Element;
 using LubanConfig.DataTable;
 [DisallowMultipleComponent]
 [AddComponentMenu("BluesDusk/Collect Object")]
-public class CollectElement : SceneElementBase
+public class CollectElement : GameElementBase
 {
     [SerializeField] protected int m_DataId = 0;
     public bool CanCollect = true;

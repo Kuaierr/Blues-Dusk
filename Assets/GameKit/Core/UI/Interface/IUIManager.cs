@@ -1,5 +1,4 @@
 using GameKit.ObjectPool;
-using GameKit.Resource;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +7,6 @@ namespace GameKit.UI
     public interface IUIManager
     {
         int UIGroupCount { get; }
-
         float InstanceAutoReleaseInterval { get; set; }
 
         int InstanceCapacity { get; set; }
@@ -78,6 +76,5 @@ namespace GameKit.UI
         void SetUIFormInstanceLocked(object uiFormInstance, bool locked);
 
         void SetUIFormInstancePriority(object uiFormInstance, int priority);
-
     }
 }

@@ -1,4 +1,11 @@
-﻿using UnityEditor;
+﻿//------------------------------------------------------------
+// Game Framework
+// Copyright © 2013-2021 Jiang Yin. All rights reserved.
+// Homepage: https://GameKit.cn/
+// Feedback: mailto:ellan@GameKit.cn
+//------------------------------------------------------------
+
+using UnityEditor;
 using UnityEngine;
 using UnityGameKit.Runtime;
 

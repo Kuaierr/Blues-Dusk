@@ -28,8 +28,6 @@ namespace GameKit
 
         public Coroutine StartCoroutine(IEnumerator routine)
         {
-            if (controller == null)
-                return null;
             return controller?.StartCoroutine(routine);
         }
 
@@ -43,5 +41,14 @@ namespace GameKit
             return controller?.StartCoroutine(methodName);
         }
 
+        public void TryGetMonoObject(string name, out GameObject Object)
+        {
+            if (!globalObjects.ContainsKey(name))
+            {
+                GameObject obj = GameObject.Find(name);
+                globalObjects.Add(name, obj);
+            }
+            Object = globalObjects[name];
+        }
     }
 }

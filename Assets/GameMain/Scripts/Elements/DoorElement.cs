@@ -3,7 +3,7 @@ using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
 [DisallowMultipleComponent]
 [AddComponentMenu("BluesDusk/Door Object")]
-public class DoorElement : SceneElementBase
+public class DoorElement : GameElementBase
 {
     [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
@@ -22,18 +22,6 @@ public class DoorElement : SceneElementBase
         else
         {
             Log.Fail("Door for {0} can not pass.", gameObject.name);
-        }
-    }
-
-    protected override void OnValidate()
-    {
-        base.OnValidate();
-        if(this.transform.Find("EnterTranformation") == null)
-        {
-            Debug.Log("Generate EnterTranformation");
-            Object enterTransform = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>("Assets/GameMain/Elements/Utility/EnterTranformation.prefab");
-            enterTransform = UnityEditor.PrefabUtility.InstantiatePrefab(enterTransform, this.transform);
-            enterTransform.name = "EnterTranformation";
         }
     }
 }

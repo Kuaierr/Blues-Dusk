@@ -5,7 +5,6 @@ using GameKit;
 using GameKit.DataNode;
 using GameKit.DataStructure;
 using GameKit.Inventory;
-using UnityEngine;
 
 
 namespace GameKit.Dialog
@@ -38,49 +37,24 @@ namespace GameKit.Dialog
                     IDataNode dialogNode = nodes[i] as IDataNode;
                     DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
                     string contents = data.Contents;
-                    
                     if (data.IsDiceCheckOption)
                         dialogOptions.CreateOption(i, contents, true, data.DiceConditions);
                     else if(data.IsDiceDefaultOption)
                         dialogOptions.CreateOption(i, contents, false);
-                    else if(data.IsInventoryCheckOption)
+                    else if(data.IsInventoryCheckOption && data.CachedInventoryName == "DiceInventory")
                     {
+                        //TODO 骰检加在这里 直接改canshow
                         bool clear = true;
-                        if(data.CachedInventoryName == "DiceInventory") // 骰检
+                        foreach (string condition in data.CachedStockConditions)
                         {
-                            foreach (string condition in data.CachedStockConditions)
+                            if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
+                                condition) == null)
                             {
-                                if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
-                                    condition) == null)
-                                {
-                                    clear = false;
-                                    break;
-                                }
+                                clear = false;
+                                break;
                             }
-
-                            dialogOptions.CreateOption(i, contents, clear);
                         }
-                        else //仓检
-                        {
-                            Dictionary<string, int> result = new Dictionary<string, int>();
-                            Debug.Log("Inventory Check");
-                            for (int j = 0; j < data.CachedStockConditions.Count; j++)
-                            {
-                                if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
-                                    data.CachedStockConditions[j]) == null)
-                                {
-                                    clear = false;
-                                    break;
-                                }
-                                
-                                result.Add("result", clear? 1:0);
-                                /*Debug.Log("InventoryName: " + data.CachedInventoryName +"\n" +
-                                          "TargetItemName: " + data.CachedStockConditions[i] +"\n" +
-                                          "Result: " + clear);*/
-                            }
-                            
-                            dialogOptions.CreateOption(i, contents, true, result);
-                        }
+                        dialogOptions.CreateOption(i,contents,clear);
                     }
                     else
                         dialogOptions.CreateOption(i, contents, true);
@@ -96,44 +70,10 @@ namespace GameKit.Dialog
                     IDataNode dialogNode = nodes[i] as IDataNode;
                     DialogDataNodeVariable data = dialogNode.GetData<DialogDataNodeVariable>();
                     string contents = data.Contents;
-                    
                     if (data.IsDiceCheckOption)
                         dialogOptions.CreateOption(i, contents, true, data.DiceConditions);
                     else if(data.IsDiceDefaultOption)
                         dialogOptions.CreateOption(i, contents, false);
-                    else if(data.IsInventoryCheckOption)
-                    {
-                        bool clear = true;
-                        if(data.CachedInventoryName == "DiceInventory") // 骰检
-                        {
-                            foreach (string condition in data.CachedStockConditions)
-                            {
-                                if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
-                                    condition) == null)
-                                {
-                                    clear = false;
-                                    break;
-                                }
-                            }
-
-                            dialogOptions.CreateOption(i, contents, clear);
-                        }
-                        else //仓检
-                        {
-                            Dictionary<string, int> result = new Dictionary<string, int>();
-                            for (int j = 0; j < data.CachedStockConditions.Count; j++)
-                            {
-                                if (InventoryManager.instance.GetStockFromInventory(data.CachedInventoryName,
-                                    data.CachedStockConditions[j]) == null)
-                                {
-                                    clear = false;
-                                    break;
-                                }
-                            }
-                            result.Add("result", clear? 1:0);
-                            dialogOptions.CreateOption(i, contents, true, result);
-                        }
-                    }
                     else
                         dialogOptions.CreateOption(i, contents, true);
                 }
