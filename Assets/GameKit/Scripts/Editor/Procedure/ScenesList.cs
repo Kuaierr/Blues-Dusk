@@ -12,8 +12,6 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Main_S_LoadingScene_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Main/S_LoadingScene.unity"); }
         [MenuItem("Scenes/S_Menu")]
         public static void Assets_GameMain_Scenes_Main_S_Menu_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Main/S_Menu.unity"); }
-        [MenuItem("Scenes/Prototype_Card")]
-        public static void Assets_GameMain_Scenes_Prototype_Prototype_Card_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Card.unity"); }
         [MenuItem("Scenes/Prototype_Dialog")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Dialog_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity"); }
         [MenuItem("Scenes/Prototype_Dialog_DiceDev")]

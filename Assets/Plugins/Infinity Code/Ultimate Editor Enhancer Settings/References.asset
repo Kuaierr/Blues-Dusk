@@ -184,10 +184,12 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
-  - name: Prototype_MainMenu
-    path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: Prototype_MainMenu
+    path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
   - name: S_Menu
     path: Assets/GameMain/Scenes/Main/S_Menu.unity
   - name: S_Bar_Main
