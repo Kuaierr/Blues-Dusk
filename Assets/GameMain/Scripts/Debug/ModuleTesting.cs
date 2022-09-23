@@ -60,6 +60,7 @@ public class ModuleTesting : MonoBehaviour
             }
         });
     }
+
     private void HideAllModules()
     {
         for (int i = 0; i < moduleButtons.Count; i++)

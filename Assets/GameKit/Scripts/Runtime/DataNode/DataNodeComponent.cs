@@ -1,11 +1,4 @@
-﻿//------------------------------------------------------------
-// Game Framework
-// Copyright © 2013-2021 Jiang Yin. All rights reserved.
-// Homepage: https://GameKit.cn/
-// Feedback: mailto:ellan@GameKit.cn
-//------------------------------------------------------------
-
-using GameKit;
+﻿using GameKit;
 using GameKit.DataNode;
 using UnityEngine;
 
@@ -15,7 +8,7 @@ namespace UnityGameKit.Runtime
     /// 数据结点组件。
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("Game Framework/Data Node")]
+    [AddComponentMenu("Game Kit/Data Node")]
     public sealed class DataNodeComponent : GameKitComponent
     {
         private IDataNodeManager m_DataNodeManager = null;

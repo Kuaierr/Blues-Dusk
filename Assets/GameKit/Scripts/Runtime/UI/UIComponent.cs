@@ -1,5 +1,6 @@
 using GameKit;
 using GameKit.ObjectPool;
+using GameKit.Resource;
 using GameKit.UI;
 using System.Collections.Generic;
 using UnityEngine;

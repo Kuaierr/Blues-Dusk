@@ -16,15 +16,15 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private LayerMask layerMask;
 
-    //º½µã
+    //ï¿½ï¿½ï¿½ï¿½
     [Header("Bezier Config")]
     [SerializeField]
-    private float SmoothingLength = 0.25f;  //handler Ó°ÏìÇúÂÊ
+    private float SmoothingLength = 0.25f;  //handler Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
-    private int SmoothingSections = 10;  //points in each section Ã¿Á½¸öwaypointÖ®¼äÉú³ÉµÄµãÊý
+    private int SmoothingSections = 10;  //points in each section Ã¿ï¿½ï¿½ï¿½ï¿½waypointÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄµï¿½ï¿½ï¿½
     [SerializeField]
     [Range(-1, 1)]
-    private float SmoothingFactor = 0;  //ÒÆ¶¯µÄ×î´ó¼Ð½Ç
+    private float SmoothingFactor = 0;  //ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½
 
     private NavMeshPath CurrentPath;
     public Vector3[] PathLocations = new Vector3[0];
@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Config")]
     [SerializeField]
     [Range(0, 0.99f)]
-    private float Smoothing = 0.25f; //Æ½»¬ÏµÊý
+    private float Smoothing = 0.25f; //Æ½ï¿½ï¿½Ïµï¿½ï¿½
     [SerializeField]
-    private float RotateSpeed = 1; //Ðý×ªËÙ¶ÈÏµÊý
+    private float RotateSpeed = 1; //ï¿½ï¿½×ªï¿½Ù¶ï¿½Ïµï¿½ï¿½
     [SerializeField]
     private Vector3 TargetDirection;
     [SerializeField]
@@ -104,30 +104,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    //private void MoveToDestination()
-    //{
-    //    RaycastHit hitInfo = CursorSystem.current.GetHitInfo(layerMask);
-    //    GameElementBase interactive = CursorSystem.current.GetComponentFromRaycast<GameElementBase>(hitInfo);
-    //    if (interactive == null)
-    //    {
-    //        Vector3 pos = CursorSystem.current.GetPositionFromRaycast(hitInfo);
-    //        if (pos != CursorSystem.MAGIC_POS)
-    //        {
-    //            //navMeshAgent.destination = pos;
-    //            Vector3 position = pos;
-    //            SetDestination(position);
-    //            Debug.Log("Destination1" + position);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        //navMeshAgent.destination = interactive.InteractPosition;
-    //        Vector3 position = interactive.InteractPosition;
-    //        SetDestination(position);
-    //        Debug.Log("Destination2" + position);
-    //    }
-    //}
 
     private void MoveCharacter()
     {

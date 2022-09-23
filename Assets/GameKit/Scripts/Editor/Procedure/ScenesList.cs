@@ -24,18 +24,26 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity"); }
         [MenuItem("Scenes/Prototype_Inventory")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Inventory_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity"); }
+        [MenuItem("Scenes/Prototype_MainMenu")]
+        public static void Assets_GameMain_Scenes_Prototype_Prototype_MainMenu_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity"); }
+        [MenuItem("Scenes/Prototype_Timeline")]
+        public static void Assets_GameMain_Scenes_Prototype_Prototype_Timeline_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Timeline.unity"); }
         [MenuItem("Scenes/Prototypr_PlayerController")]
         public static void Assets_GameMain_Scenes_Prototype_Prototypr_PlayerController_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity"); }
+        [MenuItem("Scenes/S_Bar_Kitchen")]
+        public static void Assets_GameMain_Scenes_S_Bar_Kitchen_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Bar_Kitchen.unity"); }
+        [MenuItem("Scenes/S_Bar_Main")]
+        public static void Assets_GameMain_Scenes_S_Bar_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Bar_Main.unity"); }
         [MenuItem("Scenes/S_FengHospital")]
         public static void Assets_GameMain_Scenes_S_FengHospital_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_FengHospital.unity"); }
-        [MenuItem("Scenes/S_heya_parlor 1")]
-        public static void Assets_GameMain_Scenes_S_heya_parlor_1_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_heya_parlor 1.unity"); }
+        [MenuItem("Scenes/S_Parlor_Main")]
+        public static void Assets_GameMain_Scenes_S_Parlor_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor_Main.unity"); }
+        [MenuItem("Scenes/S_Parlor_Toilet")]
+        public static void Assets_GameMain_Scenes_S_Parlor_Toilet_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Parlor_Toilet.unity"); }
         [MenuItem("Scenes/S_Station")]
         public static void Assets_GameMain_Scenes_S_Station_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Station.unity"); }
         [MenuItem("Scenes/S_Template")]
         public static void Assets_GameMain_Scenes_S_Template_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Template.unity"); }
-        [MenuItem("Scenes/S_Toilet")]
-        public static void Assets_GameMain_Scenes_S_Toilet_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Toilet.unity"); }
         [MenuItem("Scenes/S_Tower")]
         public static void Assets_GameMain_Scenes_S_Tower_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Tower.unity"); }
     }
