@@ -184,6 +184,7 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
+<<<<<<< Updated upstream
   - name: S_Shire_Lounge
     path: Assets/GameMain/Scenes/S_Shire_Lounge.unity
   - name: S_Shire_Kitchen
@@ -220,3 +221,7 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+=======
+  - name: Prototypr_PlayerController
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+>>>>>>> Stashed changes
