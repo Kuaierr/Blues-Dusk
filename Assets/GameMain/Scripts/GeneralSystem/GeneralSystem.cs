@@ -30,21 +30,30 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
     public void OpenTipUI(string contentText, UnityAction confirmCallback, UnityAction cancelCallback = null, string confirmText = "<None>", string cancelText = "<None>")
     {
         GameKitCenter.UI.TryOpenUIForm("UI_Tip", userData: typeof(UI_Tip));
-        if (m_CachedUITip != null)
-            m_CachedUITip.Show();
+
         m_CachedTipContent = contentText;
         m_CachedTipConfirm = confirmText;
         m_CachedTipCancel = cancelText;
         m_CachedConfirmCallback = confirmCallback;
         m_CachedCancelCallback = cancelCallback;
+        if (m_CachedUITip != null)
+        {
+            m_CachedUITip.Show();
+            m_CachedUITip.UpdateTip(m_CachedTipContent, m_CachedConfirmCallback, m_CachedCancelCallback, m_CachedTipConfirm, m_CachedTipCancel);
+        }
     }
 
     public void OpenSelectSceneUI(List<string> availaibleScene)
     {
         GameKitCenter.UI.TryOpenUIForm("UI_SelectScene", userData: typeof(UI_SelectScene));
-        if (m_CachedUISelectScene != null)
-            m_CachedUISelectScene.Show();
+        
         m_CachedAvailiableScenes = availaibleScene;
+        if (m_CachedUISelectScene != null)
+        {
+            m_CachedUISelectScene.Show();
+            m_CachedUISelectScene.UpdateScenes(m_CachedAvailiableScenes);
+            ClearAvailiableScenes();
+        }   
     }
 
     private void OnOpenUISuccess(object sender, GameEventArgs e)
@@ -63,7 +72,7 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
             m_CachedUITip.UpdateTip(m_CachedTipContent, m_CachedConfirmCallback, m_CachedCancelCallback, m_CachedTipConfirm, m_CachedTipCancel);
             ClearTipCache();
         }
-        
+
         if (args.UserData.Equals(typeof(UI_SelectScene)))
         {
             m_CachedUISelectScene = (UI_SelectScene)args.UIForm.Logic;
