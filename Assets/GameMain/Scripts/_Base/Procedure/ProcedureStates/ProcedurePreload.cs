@@ -58,6 +58,7 @@ public class ProcedurePreload : ProcedureBase
     {
         LoadFont("MainFont");
         LoadDialog();
+        Febucci.UI.Core.TAnimBuilder.InitializeGlobalDatabase();
         if (GameKitCenter.Data.DataTables == null)
             Log.Fail("Preload resrouce fail.");
     }

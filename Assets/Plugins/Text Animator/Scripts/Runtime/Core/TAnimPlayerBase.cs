@@ -350,7 +350,7 @@ namespace Febucci.UI.Core
         public void ShowText(string text)
         {
             StopShowingText();
-            
+
             if (string.IsNullOrEmpty(text))
             {
                 textToShow = string.Empty;
@@ -367,7 +367,7 @@ namespace Febucci.UI.Core
             textAnimator.firstVisibleCharacter = 0;
 
             isDisappearing = false;
-            
+
             if (!useTypeWriter)
             {
                 onTextShowed?.Invoke();
@@ -379,9 +379,6 @@ namespace Febucci.UI.Core
                     StartShowingText();
                 }
             }
-
-            
-            
         }
 
         #region Typewriter
