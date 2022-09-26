@@ -184,6 +184,10 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
+  - name: S_heya_parlor
+    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
+  - name: S_Shire_Restaurant
+    path: Assets/GameMain/Scenes/S_Shire_Restaurant.unity
   - name: S_Shire_Lounge
     path: Assets/GameMain/Scenes/S_Shire_Lounge.unity
   - name: S_Shire_Kitchen
@@ -218,5 +222,3 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
