@@ -131,11 +131,6 @@ public class ProcedureChangeScene : ProcedureBase
             Debug.Log(targetTrans.position);
             GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
             m_Prototyper = realObj.GetComponent<Player>();
-            // m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
-            // m_Prototyper.SetTransform(targetTrans);
-            // Debug.Log(m_Prototyper.transform.position);
-            // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
-            // Log.Warning(m_Prototyper.transform.position);
             QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
             OnSceneLoadEnd();
         });

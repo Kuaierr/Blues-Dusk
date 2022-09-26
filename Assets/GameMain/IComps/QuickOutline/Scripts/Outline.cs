@@ -197,9 +197,9 @@ public class Outline : MonoBehaviour {
       // Combine submeshes
       var renderer = meshFilter.GetComponent<Renderer>();
 
-      if (renderer != null) {
-        CombineSubmeshes(meshFilter.sharedMesh, renderer.sharedMaterials);
-      }
+      // if (renderer != null) {
+      //   CombineSubmeshes(meshFilter.sharedMesh, renderer.sharedMaterials);
+      // }
     }
 
     // Clear UV3 on skinned mesh renderers
@@ -214,13 +214,17 @@ public class Outline : MonoBehaviour {
       skinnedMeshRenderer.sharedMesh.uv4 = new Vector2[skinnedMeshRenderer.sharedMesh.vertexCount];
 
       // Combine submeshes
-      CombineSubmeshes(skinnedMeshRenderer.sharedMesh, skinnedMeshRenderer.sharedMaterials);
+      // CombineSubmeshes(skinnedMeshRenderer.sharedMesh, skinnedMeshRenderer.sharedMaterials);
     }
   }
 
   List<Vector3> SmoothNormals(Mesh mesh) {
 
     // Group vertices by location
+    if(!mesh.isReadable)
+    {
+      Debug.Log(mesh.name);
+    }
     var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);
 
     // Copy normals to a new list
