@@ -21,5 +21,11 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Tower_Under
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
   - name: S_Shire_Kitchen
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+  - name: Prototypr_PlayerController
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+  - name: S_Apartment_Balcony
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity

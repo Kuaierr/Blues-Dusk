@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         m_Movement = GetComponent<PlayerMovement>();
         m_Movement.OnInit();
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
-        m_NavMeshAgent.updatePosition = m_UpdateRotation;
+        m_NavMeshAgent.updateRotation = m_UpdateRotation;
         Current = this;
         // m_NavMeshAgent.enabled = false;
         // m_CachedTargetPos = this.transform.position;
