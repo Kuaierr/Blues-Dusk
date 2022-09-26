@@ -58,7 +58,9 @@ public class ProcedureChangeScene : ProcedureBase
             GameKitCenter.Event.Fire(this, SaveSettingsEventArgs.Create(null));
             GameKitCenter.Setting.Save();
             if (GameKitCenter.Scheduler.MultiScene)
+            {
                 GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName));
+            }
             else
                 GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
         }
