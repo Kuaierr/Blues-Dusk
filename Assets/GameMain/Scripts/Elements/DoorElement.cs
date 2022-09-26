@@ -5,10 +5,10 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/Door Object")]
 public class DoorElement : SceneElementBase
 {
-    [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
+    [Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
     public Transform EnterTranform;
-    [UnityGameKit.Editor.Dialog] public string Dialog;
+    [Dialog] public string Dialog;
     [SerializeField] private bool m_HasDialoged = false;
     [SerializeField] private bool m_CanRepeatDialog = false;
 
@@ -36,6 +36,7 @@ public class DoorElement : SceneElementBase
     protected override void OnValidate()
     {
         base.OnValidate();
+        #if UNITY_EDITOR
         if (this.transform.Find("EnterTranformation") == null)
         {
             Debug.Log("Generate EnterTranformation");
@@ -44,6 +45,7 @@ public class DoorElement : SceneElementBase
             enterTransform.name = "EnterTranformation";
             EnterTranform = ((GameObject)enterTransform).transform;
         }
+        #endif
     }
 
     private void OnDialogFinish(object sender, GameKit.Event.GameEventArgs e)

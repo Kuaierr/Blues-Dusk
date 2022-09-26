@@ -34,6 +34,7 @@ public class LeaveDoorElement : SceneElementBase
     protected override void OnValidate()
     {
         base.OnValidate();
+        #if UNITY_EDITOR
         if (this.transform.Find("EnterTranformation") == null)
         {
             Debug.Log("Generate EnterTranformation");
@@ -41,5 +42,6 @@ public class LeaveDoorElement : SceneElementBase
             enterTransform = UnityEditor.PrefabUtility.InstantiatePrefab(enterTransform, this.transform);
             enterTransform.name = "EnterTranformation";
         }
+        #endif
     }
 }

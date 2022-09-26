@@ -2,7 +2,6 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 using UnityGameKit.Runtime;
-using UnityGameKit.Editor;
 using LitJson;
 using GameKit;
 using GameKit.Event;
@@ -11,7 +10,7 @@ using DG.Tweening;
 
 public class Test : MonoBehaviour
 {
-    [Dialog] public string TestData;
+    public string TestData;
     private void Start()
     {
         // GameKitCenter.Event.Subscribe(LoadConfigSuccessEventArgs.EventId, OnReadConfigSuccess);

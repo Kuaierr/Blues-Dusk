@@ -25,10 +25,6 @@ MonoBehaviour:
     m_Address: Assets/GameMain/Elements/Player_Ethan.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 92b5dce7095cc964994f0dcabf28fb00
-    m_Address: Assets/GameMain/Scenes/S_FengHospital.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 2d2ace501e0d8b54e8e894c95e92d417
     m_Address: Assets/GameMain/Scenes/S_Station.unity
     m_ReadOnly: 0

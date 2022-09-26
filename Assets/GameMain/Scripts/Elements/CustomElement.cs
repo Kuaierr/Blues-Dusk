@@ -5,7 +5,7 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/Custom Object")]
 public class CustomElement : SceneElementBase
 {
-    [UnityGameKit.Editor.Dialog] public string Dialog;
+    public string Dialog;
     public bool IsDisposable = false;
     [SerializeField] private bool m_IsDialoged;
 

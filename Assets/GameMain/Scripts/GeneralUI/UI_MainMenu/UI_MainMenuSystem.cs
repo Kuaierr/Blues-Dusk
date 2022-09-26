@@ -14,7 +14,7 @@ public class UI_MainMenuSystem : MonoBehaviour
     public Button _quitButton;
 
     [Space]
-    [UnityGameKit.Editor.Scene] public string targetSceneName;
+    [Scene] public string targetSceneName;
     
     private void Start()
     {

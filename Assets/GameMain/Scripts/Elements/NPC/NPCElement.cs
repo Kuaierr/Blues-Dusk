@@ -6,8 +6,8 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/NPC")]
 public class NPCElement : NPCElementBase
 {
-    [UnityGameKit.Editor.Dialog] public string Dialog = "<None>";
-    [UnityGameKit.Editor.Dialog] public string AfterDialog = "<None>";
+    [Dialog] public string Dialog = "<None>";
+    [Dialog] public string AfterDialog = "<None>";
     public bool IsDisposable = false;
     [SerializeField] private bool m_IsDialoged;
     public override void OnInit()

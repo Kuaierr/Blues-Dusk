@@ -137,7 +137,9 @@ public abstract class UIFormBase : UIFormLogic
 
     protected override void OnRecycle()
     {
+        
         base.OnRecycle();
+        Log.Warning("Recycle {0}", gameObject.name);
     }
 
     protected override void OnOpen(object userData)
@@ -155,11 +157,13 @@ public abstract class UIFormBase : UIFormLogic
     protected override void OnPause()
     {
         base.OnPause();
+        Log.Warning("OnPause {0}", gameObject.name);
     }
 
     protected override void OnResume()
     {
         base.OnResume();
+        Log.Warning("OnResume {0}", gameObject.name);
     }
 
     protected override void OnCover()
