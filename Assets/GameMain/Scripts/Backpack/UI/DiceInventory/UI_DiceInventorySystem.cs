@@ -20,14 +20,14 @@ public class UI_DiceInventorySystem : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
-        uI_DiceInventory.InitDiceInventoryUI();
+        uI_DiceInventory.InitDiceInventoryUI(Select);
         Select(0);
     }
 
     protected override void OnResume()
     {
         base.OnResume();
-        uI_DiceInventory.InitDiceInventoryUI();
+        uI_DiceInventory.InitDiceInventoryUI(Select);
         Select(0);
     }
 

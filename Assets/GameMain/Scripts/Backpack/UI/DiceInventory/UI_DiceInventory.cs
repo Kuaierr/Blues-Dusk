@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UI_DiceInventory : UIFormChildBase
@@ -22,14 +23,14 @@ public class UI_DiceInventory : UIFormChildBase
     
     private List<UI_Dice> _uIDices = new List<UI_Dice>();
 
-    
-    public void InitDiceInventoryUI()
+
+    public void InitDiceInventoryUI(UnityAction<int> onSelectCallback)
     {
         var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
         for (int i = 0; i < data.StockMap.Length; i++)
         {
             if(data.StockMap[i] == null) continue;
-            var dice = Instantiate(_dicePrefab, _layoutGroup).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null);
+            var dice = Instantiate(_dicePrefab, _layoutGroup).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null, onSelectCallback);
             _uIDices.Add(dice);
         }
 
@@ -46,6 +47,8 @@ public class UI_DiceInventory : UIFormChildBase
         }
         _uIDices.Clear();
     }
+    
+    
     
     public UI_DiceData_SO Select(ref int _currentIndex,int index)
     {
