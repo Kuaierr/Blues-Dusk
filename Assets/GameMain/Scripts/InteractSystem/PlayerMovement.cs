@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("VelocityZ", 0, 0.1f, Time.deltaTime);
             return;
         }
+        
         if (Vector3.Distance(transform.position, PathLocations[PathIndex] + (navMeshAgent.baseOffset * Vector3.up)) <= navMeshAgent.radius)
         {
             PathIndex++;

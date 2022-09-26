@@ -13,6 +13,11 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         GameKitCenter.Dialog.StartDialog(dialogName, userData: this);
     }
 
+    public void StopDialog(string dialogName)
+    {
+        GameKitCenter.Dialog.StopDialog(dialogName, userData: this);
+    }
+
     private void OnStartDialogSuccess(object sender, GameEventArgs e)
     {
         // Log.Success("DialogSystem detect dialog started.");

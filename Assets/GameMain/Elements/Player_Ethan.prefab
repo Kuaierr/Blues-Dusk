@@ -814,7 +814,7 @@ GameObject:
   m_Layer: 0
   m_Name: Player_Ethan
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -849,7 +849,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7d8ea7bd68bc67f4fa48ddcca7f0cd4b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -864,7 +864,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4261356150159754983}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -873,10 +873,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &5399918477962517650
 MonoBehaviour:
   m_ObjectHideFlags: 0

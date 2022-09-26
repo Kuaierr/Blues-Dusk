@@ -184,27 +184,41 @@ MonoBehaviour:
     alignWindowToBar: 1
     windowMode: 0
   _sceneHistory:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - name: S_Shire_Lounge
     path: Assets/GameMain/Scenes/S_Shire_Lounge.unity
+=======
+  - name: S_Shire_Corridor
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Corridor.unity
+>>>>>>> d5c3143fced973eefa25becb186b98661f57b056
   - name: S_Shire_Kitchen
-    path: Assets/GameMain/Scenes/S_Shire_Kitchen.unity
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+  - name: S_Bookstore_Instore
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity
+  - name: S_Shire_Lounge
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+  - name: S_Apartment_Toilet
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity
   - name: S_Tower_Under
-    path: Assets/GameMain/Scenes/S_Tower_Under.unity
-  - name: Prototype_MainMenu
-    path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
+  - name: S_Shire_Restaurant
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
+  - name: S_Shire_Backyard
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity
+  - name: S_Apartment_Living
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+  - name: S_Apartment_Balcony
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
   - name: S_Template
     path: Assets/GameMain/Scenes/S_Template.unity
-  - name: S_Bar_Main
-    path: Assets/GameMain/Scenes/S_Bar_Main.unity
-  - name: S_Parlor_Toilet
-    path: Assets/GameMain/Scenes/S_Parlor_Toilet.unity
-  - name: S_Parlor_Main
-    path: Assets/GameMain/Scenes/S_Parlor_Main.unity
+  - name: S_Tower_Top
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity
+  - name: S_Station
+    path: Assets/GameMain/Scenes/S_Station.unity
   - name: S_FengHospital
     path: Assets/GameMain/Scenes/S_FengHospital.unity
+<<<<<<< HEAD
   - name: S_Bar_Kitchen
     path: Assets/GameMain/Scenes/S_Bar_Kitchen.unity
   - name: S_Week
@@ -225,3 +239,15 @@ MonoBehaviour:
   - name: Prototypr_PlayerController
     path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
 >>>>>>> Stashed changes
+=======
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Bar_Main
+    path: Assets/GameMain/Scenes/S_Bar_Main.unity
+  - name: S_Shire_Restaurant
+    path: Assets/GameMain/Scenes/S_Shire_Restaurant.unity
+  - name: S_Tower_Underd
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Underd.unity
+  - name: S_Shire_Lounge
+    path: Assets/GameMain/Scenes/S_Shire_Lounge.unity
+>>>>>>> d5c3143fced973eefa25becb186b98661f57b056

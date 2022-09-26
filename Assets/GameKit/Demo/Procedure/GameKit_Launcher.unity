@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.15
+    agentRadius: 0.1
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.05
+    cellSize: 0.033333335
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1292,10 +1292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActive: 0
   defaultSwitchType: 1
-  StartScene: S_Parlor
-  LoadScene: S_Parlor
-  m_ScenesPath: 
-  m_MultiScenesPath: 
+  StartScene: S_Shire_Kitchen
+  LoadScene: 
+  m_ScenesPath: Assets/GameMain/ProcedureMain/
+  m_MultiScenesPath: Assets/GameMain/
 --- !u!1 &1280435058
 GameObject:
   m_ObjectHideFlags: 0

@@ -308,7 +308,8 @@ public class UI_Dialog : UIFormBase
     {
         Log.Info("Reach The End Of Conversation.");
         m_IsDialoging = false;
-        GameKitCenter.Dialog.CurrentTree.Reset();
+        // GameKitCenter.Dialog.CurrentTree.Reset();
+        DialogSystem.current.StopDialog(GameKitCenter.Dialog.CurrentTree.Name);
         GameKitCenter.Dialog.CurrentTree = null;
     }
 

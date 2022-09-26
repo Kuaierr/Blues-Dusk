@@ -69,7 +69,7 @@ namespace UnityGameKit.Runtime
             m_DialogManager.SetDialogHelper(DialogHelper);
         }
 
-        
+
 
 
         private void Start()
@@ -131,6 +131,16 @@ namespace UnityGameKit.Runtime
                 return;
             }
             m_DialogManager.GetOrCreatetDialogTree(name, contents, userData);
+        }
+
+        public void StopDialog(string name, object userData = null)
+        {
+            if (name == string.Empty)
+            {
+                Log.Fail("Empty Dialog Name {0}", name);
+                return;
+            }
+            m_DialogManager.StopDialog(name, userData);
         }
 
         private void OnStartDialogSuccess(object sender, BaseEventArgs e)

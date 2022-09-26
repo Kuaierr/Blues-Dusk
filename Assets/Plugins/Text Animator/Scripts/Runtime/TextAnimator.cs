@@ -679,9 +679,7 @@ namespace Febucci.UI
 
             if (databaseBuilt)
                 return;
-
             TAnimBuilder.InitializeGlobalDatabase();
-
             databaseBuilt = true;
 
             #region Global built-in effects values
@@ -1078,6 +1076,9 @@ namespace Febucci.UI
         void _SetText(string text, ShowTextMode showTextMode)
         {
             //Prevents to calculate everything for an empty text
+            
+
+            
             if (text.Length <= 0)
             {
                 hasText = false;
@@ -1106,6 +1107,7 @@ namespace Febucci.UI
             latestTriggeredEvent = 0;
             latestTriggeredAction = 0;
             internalEventActionIndex = 0;
+            
 
             #endregion
 
@@ -1130,6 +1132,7 @@ namespace Febucci.UI
             #endregion
 
             _ApplyTextToCharacters(_FormatText(text, 0));
+            
 
             //--------
             //Decides how many characters to show
@@ -1774,7 +1777,6 @@ namespace Febucci.UI
         private void Update()
         {
             //TMPRO's text changed, setting the text again
-            
             if (!tmproText.text.Equals(text))
             {
                 if (hasParentCanvas && !parentCanvas.isActiveAndEnabled)
@@ -1790,11 +1792,16 @@ namespace Febucci.UI
 
                     //temp fix, opening and closing this TMPro tag (which won't be showed in the text, acting like they aren't there) because otherwise
                     //there isn't any way to trigger that the text has changed, if it's actually the same as the previous one.
-                    
+
                     if (tmproText.text.Length <= 0) //forces clearing the mesh during the tempFix, without the <noparse> tags
+                    {
                         tAnimPlayer.ShowText("");
+                    }
                     else
-                        tAnimPlayer.ShowText($"<noparse></noparse>{tmproText.text}");
+                    {
+                        tAnimPlayer.ShowText(string.Format("<noparse></noparse>{0}", tmproText.text));
+                    }
+
 
 #endif
 
@@ -1804,12 +1811,13 @@ namespace Febucci.UI
                     _SetText(tmproText.text, ShowTextMode.UserTyping);
                 }
 
+
                 return;
             }
-            
-            
+
             if (!hasText)
                 return;
+
             //applies effects
             UpdateEffectsToMesh();
         }

@@ -6,40 +6,35 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/LeaveDoor Object")]
 public class LeaveDoorElement : SceneElementBase
 {
-    [UnityGameKit.Editor.Scene] public string TargetScene = "<None>";
     public bool CanPass = true;
     public Transform EnterTranform;
+    public override void OnInit()
+    {
+        base.OnInit();
+        if (EnterTranform == null)
+        {
+            EnterTranform = transform.Find("EnterTranformation");
+        }
+    }
+    
     public override void OnInteract()
     {
         base.OnInteract();
-        if (CanPass && TargetScene != "<None>")
+        if (CanPass)
         {
             GeneralSystem.current.OpenTipUI("你想要此离开场景吗？", OpenSelectUI);
         }
-        else if (TargetScene != "<None>")
-        {
-            Log.Fail("Target Scene for {0} has not set.", gameObject.name);
-        }
-        else
-        {
-            Log.Fail("Door for {0} can not pass.", gameObject.name);
-        }
-    }
-
-
-    private void ChangeScene()
-    {
-        GameKitCenter.Procedure.ChangeSceneBySelect(TargetScene);
     }
 
     private void OpenSelectUI()
     {
-        GeneralSystem.current.OpenSelectSceneUI(new List<string>() { "S_Parlor", "S_Tower", "S_FengHospital" });
+        GeneralSystem.current.OpenSelectSceneUI(new List<string>() { "S_Tower_Under", "S_Apartment_Living", "S_Bookstore_Instore", "S_Shire_Restaurant" });
     }
 
     protected override void OnValidate()
     {
         base.OnValidate();
+        #if UNITY_EDITOR
         if (this.transform.Find("EnterTranformation") == null)
         {
             Debug.Log("Generate EnterTranformation");
@@ -47,5 +42,6 @@ public class LeaveDoorElement : SceneElementBase
             enterTransform = UnityEditor.PrefabUtility.InstantiatePrefab(enterTransform, this.transform);
             enterTransform.name = "EnterTranformation";
         }
+        #endif
     }
 }

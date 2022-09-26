@@ -25,10 +25,6 @@ MonoBehaviour:
     m_Address: Assets/GameMain/Elements/Player_Ethan.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 92b5dce7095cc964994f0dcabf28fb00
-    m_Address: Assets/GameMain/Scenes/S_FengHospital.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 2d2ace501e0d8b54e8e894c95e92d417
     m_Address: Assets/GameMain/Scenes/S_Station.unity
     m_ReadOnly: 0
@@ -46,7 +42,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 51db12ad1e5768f4cada1532ce7aabae
-    m_Address: Assets/GameMain/Scenes/S_Tower.unity
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 8e2208c0c6953dd49922725d63d757da
@@ -54,15 +50,47 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9fc0d4010bbf28b4594072e72b8655ab
-    m_Address: Assets/GameMain/Scenes/S_Toilet.unity
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 98716365d24a17d48a751cfea231800e
-    m_Address: Assets/GameMain/Scenes/S_Parlor.unity
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 7718476c35f23e541bd585131d325e23
     m_Address: Assets/GameMain/Configs/DialogCollection.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c10f9af8fa078f43b7cbc1064dda494
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 08bb37568095fcc46a8d1f5e702d3743
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 975a1a08b0f9388498ee2e62bd7ec450
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9cbca5d5dd142194f921e9ca22341cde
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 89f1acf370bce87428cff4fce9ea8d99
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e710050e4484ae848aec941406c2de20
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d720a3d22758c08479819d9b64080182
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2f60b3ee7dd3d1c4aac2f9c0c4cd06f4
+    m_Address: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Corridor.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

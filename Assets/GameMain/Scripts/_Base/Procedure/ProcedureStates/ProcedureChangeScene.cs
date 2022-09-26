@@ -122,13 +122,13 @@ public class ProcedureChangeScene : ProcedureBase
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
+        
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
             GameObject realObj = GameObject.Instantiate(obj);
             m_Prototyper = realObj.GetComponent<Player>();
             m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
             m_Prototyper.SetTransform(targetTrans);
-            // Debug.Log(targetTrans.position);
             // Debug.Log(m_Prototyper.transform.position);
             // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
             // Log.Warning(m_Prototyper.transform.position);
