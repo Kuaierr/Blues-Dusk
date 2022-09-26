@@ -23,8 +23,7 @@ public class UI_GameMenuSystem : UIFormBase
 
         InitGameMenuButtons();
         
-        GameKitCenter.Event.Subscribe(ReFocusGameMenuEventArgs.EventId,ReOpenGameMenu);
-        Debug.Log("Init GameMenu Succeed");
+        //GameKitCenter.Event.Subscribe(ReFocusGameMenuEventArgs.EventId,ReOpenGameMenu);
     }
 
     public void InitGameMenuButtons()
@@ -68,6 +67,12 @@ public class UI_GameMenuSystem : UIFormBase
     protected override void OnRefocus(object userData)
     {
         base.OnRefocus(userData);
+        
+        Visible = false;
+        MasterAnimator.ResetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        MasterAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        MasterAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -135,7 +140,7 @@ public class UI_GameMenuSystem : UIFormBase
     }
 
 
-    private void ReOpenGameMenu(object sender,GameEventArgs e)
+    /*private void ReOpenGameMenu(object sender,GameEventArgs e)
     {
         //似乎会导致OnPause被调用两次，进而这个逻辑也会被调用两次
         GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
@@ -145,5 +150,5 @@ public class UI_GameMenuSystem : UIFormBase
         MasterAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         MasterAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
         MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
-    }
+    }*/
 }
