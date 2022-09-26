@@ -290,6 +290,7 @@ namespace GameKit.UI
             public void RefocusUIForm(IUIForm uiForm, object userData)
             {
                 UIFormInfo uiFormInfo = GetUIFormInfo(uiForm);
+                UnityEngine.Debug.Log("Debug Before:\n"+uiFormInfo.ToString());
                 if (uiFormInfo == null)
                 {
                     throw new GameKitException("Can not find UI form info.");
@@ -297,6 +298,8 @@ namespace GameKit.UI
 
                 m_UIFormInfos.Remove(uiFormInfo);
                 m_UIFormInfos.AddFirst(uiFormInfo);
+                Refresh();
+                UnityEngine.Debug.Log("Debug After:\n"+uiFormInfo.ToString());
             }
 
             public void Refresh()

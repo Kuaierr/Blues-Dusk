@@ -10,10 +10,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler*/
+public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
-    private UnityAction<UI_Dice> onClick;
-    
+    private UnityAction<UI_Dice> onClicked;
+    private UnityAction<int> onSelected;
+
     private UI_DiceData_SO diceData;
 
     [SerializeField]
@@ -55,7 +56,7 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
     private Sequence resetSequence;
     public bool IsComplete => !resetSequence.IsPlaying();
     
-    public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback)
+    public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback, UnityAction<int> onSelectCallback)
     {
         if (data == null)
             Debug.LogError("DiceData is null");
@@ -66,7 +67,8 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
             faces[i].OnInit(data.faceDatas[i]);
 
         Index = index;
-        onClick += onClickCallback;
+        onClicked += onClickCallback;
+        onSelected += onSelectCallback;
 
         OnDisSelected();
 
@@ -172,7 +174,7 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
     //Problem 选中一个之后，默认的选择指向下一个？
     public void OnConfirmed()
     {
-        onClick.Invoke(this);
+        onClicked?.Invoke(this);
         onDiceMouseExit.Raise();
     }
 
@@ -185,18 +187,20 @@ public class UI_Dice : UIData/*, IPointerEnterHandler, IPointerClickHandler, IPo
     #endregion
 
     //需要一个Image作为鼠标判定的范围
-    /*public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        OnSelected();
+        //OnSelected();
+        onSelected?.Invoke(Index);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnConfirmed();
+        //OnConfirmed();
+        onClicked?.Invoke(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OnDisSelected();
-    }*/
+        //OnDisSelected();
+    }
 }

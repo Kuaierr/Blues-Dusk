@@ -71,6 +71,13 @@ namespace GameKit.UI
                     m_Paused = false;
                     m_Covered = false;
                 }
+
+                public override string ToString()
+                {
+                    return "UI_Form: " + m_UIForm.UIFormAssetName + "\n" +
+                           "Paused:" + Paused + "\n" +
+                           "Covered: " + m_Covered;
+                }
             }
         }
     }

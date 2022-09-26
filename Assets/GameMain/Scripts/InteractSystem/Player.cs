@@ -22,8 +22,7 @@ public class Player : MonoBehaviour
     private UnityAction m_OnArrived;
     private PlayerMovement m_Movement;
     public static Player Current;
-    [SerializeField] private bool m_UpdateRotation = true;
-
+    [SerializeField] private bool m_UpdateRotation = false;
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
@@ -31,19 +30,38 @@ public class Player : MonoBehaviour
         m_Movement = GetComponent<PlayerMovement>();
         m_Movement.OnInit();
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
-        m_NavMeshAgent.updatePosition = m_UpdateRotation;
+        m_NavMeshAgent.updateRotation = m_UpdateRotation;
         Current = this;
+        // m_NavMeshAgent.enabled = false;
+        // m_CachedTargetPos = this.transform.position;
+        // m_CachedInteractivePos = this.transform.position;
     }
     void Update()
     {
         // m_Animator.SetFloat("VelocityX", Mathf.Abs(m_NavMeshAgent.velocity.x));
         // m_Animator.SetFloat("VelocityY", Mathf.Abs(m_NavMeshAgent.velocity.y));
+
         if (InputManager.instance.GetWorldMouseButtonDown(0))
         {
             MoveToDestination();
         }
         m_Movement.OnUpdate();
     }
+
+    // public bool TestNavigation(Vector3 targetPosition)
+    // {
+    //     if (m_NavMeshAgent.isOnNavMesh)
+    //     {
+    //         NavMeshHit navigationHit;
+    //         if (NavMesh.SamplePosition(targetPosition, out navigationHit, 15, m_NavMeshAgent.areaMask))
+    //             return m_NavMeshAgent.SetDestination(navigationHit.position);
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         return m_NavMeshAgent.Warp(warpPosition);
+    //     }
+    // }
 
     public void SetTransform(Transform trans)
     {
@@ -66,13 +84,12 @@ public class Player : MonoBehaviour
         {
             Vector3 pos = CursorSystem.current.GetPositionFromRaycast(hitInfo);
             m_CachedTargetPos = pos;
-            if (m_CachedTargetPos != Vector3.zero)
+            if (m_CachedTargetPos != this.transform.position)
                 m_Movement.SetDestination(m_CachedTargetPos);
             // m_NavMeshAgent.destination = m_CachedTargetPos;
         }
         else
         {
-            Log.Warning("MoveToDestination");
             m_CachedInteractivePos = interactive.transform.position;
             m_CachedInteractive = interactive;
             m_CachedTargetPos = interactive.InteractPosition;

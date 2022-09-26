@@ -134,7 +134,7 @@ namespace GameKit.Dialog
 
         public IDialogTree CreateDialogTree(string treeName, object userData = null)
         {
-            Utility.Debugger.LogWarning("Create: " + treeName);
+            // Utility.Debugger.LogWarning("Create: " + treeName);
             m_CachedCurrentTreeName = treeName;
             if (HasDialogTree(treeName))
             {
@@ -145,6 +145,12 @@ namespace GameKit.Dialog
             m_CachedCurrentTree = DialogTree.Create(m_CachedCurrentTreeName);
             AddDialogTree(m_CachedCurrentTree);
             return m_CachedCurrentTree;
+        }
+
+        public void StopDialog(string treeName, object userData = null)
+        {
+            m_CachedCurrentTree.Reset();
+            FinishDialogCompleteCallback(m_CachedCurrentTreeName, userData);
         }
 
         public void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null)
@@ -222,11 +228,11 @@ namespace GameKit.Dialog
         }
 
 
-        private void FinishDialogCompleteCallback()
+        private void FinishDialogCompleteCallback(string treeName, object userData)
         {
             if (m_FinishDialogCompleteEventHandler != null)
             {
-                FinishDialogCompleteEventArgs finishDialogCompleteEventArgs = FinishDialogCompleteEventArgs.Create(m_CachedCurrentTreeName, null);
+                FinishDialogCompleteEventArgs finishDialogCompleteEventArgs = FinishDialogCompleteEventArgs.Create(treeName, userData);
                 m_FinishDialogCompleteEventHandler.Invoke(this, finishDialogCompleteEventArgs);
                 ReferencePool.Release(finishDialogCompleteEventArgs);
             }

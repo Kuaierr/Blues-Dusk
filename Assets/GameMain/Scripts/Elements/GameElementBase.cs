@@ -29,17 +29,17 @@ public abstract class GameElementBase : ElementBase
 
     public virtual void OnLoad(object sender, GameEventArgs e)
     {
-        if (this == null)
-            return;
-        bool b_active = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "Is Active"), true);
-        gameObject.SetActive(b_active);
+        // if (this == null)
+        //     return;
+        // bool b_active = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "Is Active"), true);
+        // gameObject.SetActive(b_active);
     }
 
     public virtual void OnSave(object sender, GameEventArgs e)
     {
-        if (this == null)
-            return;
-        GameKitCenter.Setting.SetBool(string.Format("{0}({1})", Name, "Is Active"), gameObject.activeSelf);
+        // if (this == null)
+        //     return;
+        // GameKitCenter.Setting.SetBool(string.Format("{0}({1})", Name, "Is Active"), gameObject.activeSelf);
     }
 
     public override void OnInteract()
@@ -51,6 +51,7 @@ public abstract class GameElementBase : ElementBase
 
     protected virtual void OnValidate() 
     {
+        #if UNITY_EDITOR
         if(this.transform.Find("Destination") == null)
         {
             Debug.Log("Generate Destination");
@@ -58,5 +59,6 @@ public abstract class GameElementBase : ElementBase
             destination = UnityEditor.PrefabUtility.InstantiatePrefab(destination, this.transform);
             destination.name = "Destination";
         }
+        #endif
     }
 }

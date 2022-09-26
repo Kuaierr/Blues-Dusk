@@ -34,7 +34,8 @@ namespace UnityGameKit.Runtime
             "ddoption",
             "idoption",
             "gdivider",
-            "gcomplete"
+            "gcomplete",
+            "notuplink"
         };
         private List<string> prioritizedSemantics = new List<string>() // 该语法集合不会自动上链
         {
@@ -189,7 +190,7 @@ namespace UnityGameKit.Runtime
                     string semantic = parameters[i].Split('-').FirstOrDefault().Correction();
                     string value = parameters[i].Split('-').LastOrDefault().Correction();
 
-                    if (prioritizedSemantics.Contains(semantic))
+                    if (prioritizedSemantics.Contains(semantic) || semantic == "notuplink")
                         customLinking = false;
 
                     if (!semantics.Contains(semantic))

@@ -6,7 +6,7 @@ public class UI_ScenePreview : UIFormChildBase
     public Image Frame;
     public Image Picture;
     public Sprite Sprite;
-    public string SceneAssetName;
+    [Scene] public string SceneAssetName;
     public string SceneName;
     [TextArea]
     public string SceneDesc;

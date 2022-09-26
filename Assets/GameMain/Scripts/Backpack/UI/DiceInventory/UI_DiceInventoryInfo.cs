@@ -20,7 +20,7 @@ public class UI_DiceInventoryInfo : UIFormChildBase
 		diceType.text = data.type;
 		diceDescription.text = data.description;
 
-		diceModel.OnInit(data, -1, null);
+		diceModel.OnInit(data, -1, null, null);
 
 		for (int i = 0; i < 6; i++)
 		{

@@ -43,6 +43,7 @@ public class UI_Tip : UIFormBase
     protected override void OnOpen(object userData)
     {
         base.OnOpen(userData);
+        CursorSystem.current.Disable();
     }
 
     protected override void OnResume()
@@ -59,11 +60,19 @@ public class UI_Tip : UIFormBase
 
     public void Hide()
     {
-        OnPause();
+        // OnPause();
     }
 
     public void Show()
     {
         OnResume();
+    }
+    protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+    {
+        base.OnUpdate(elapseSeconds, realElapseSeconds);
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Confirm.onClick.Invoke();
+        }
     }
 }

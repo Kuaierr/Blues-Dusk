@@ -47,7 +47,7 @@ public class ProcedureChangeScene : ProcedureBase
         // 隐藏所有实体
         GameKitCenter.Entity.HideAllLoadingEntities();
         GameKitCenter.Entity.HideAllLoadedEntities();
-        
+
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();
 
@@ -122,16 +122,15 @@ public class ProcedureChangeScene : ProcedureBase
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
+
+        if (targetTrans == null)
+            return;
+
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
-            GameObject realObj = GameObject.Instantiate(obj);
+            Debug.Log(targetTrans.position);
+            GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
             m_Prototyper = realObj.GetComponent<Player>();
-            m_Prototyper.transform.SetParent(GameKitCenter.Procedure.DynamicParent);
-            m_Prototyper.SetTransform(targetTrans);
-            // Debug.Log(targetTrans.position);
-            // Debug.Log(m_Prototyper.transform.position);
-            // QuickCinemachineCamera.current.SetFollowPostion(m_Prototyper.transform.position);
-            // Log.Warning(m_Prototyper.transform.position);
             QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
             OnSceneLoadEnd();
         });

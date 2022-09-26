@@ -14,211 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bookmarks: []
   _favoriteWindows: []
-  _headerRules:
-  - condition: 0
-    value: --
-    trimChars: -=
-    backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textAlign: 1
-    textStyle: 1
-  _quickAccessItems:
-  - tooltip: Open Scene
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.SceneTools.QuickAccessActions.OpenAction
-    intSettings: 
-    type: 7
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: 
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Save Scenes
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.SceneTools.QuickAccessActions.SaveAction
-    intSettings: 
-    type: 7
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: 
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Hierarchy
-    expanded: 0
-    settings:
-    - UnityEditor.SceneHierarchyWindow, UnityEditor.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 1
-    icon: 0
-    iconScale: 1
-    iconSettings: Assets\Plugins\Infinity Code\Ultimate Editor Enhancer/Icons/Hierarchy2.png
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Project
-    expanded: 0
-    settings:
-    - UnityEditor.ProjectBrowser, UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 1
-    icon: 0
-    iconScale: 1
-    iconSettings: Assets\Plugins\Infinity Code\Ultimate Editor Enhancer/Icons/Project.png
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Inspector
-    expanded: 0
-    settings:
-    - UnityEditor.InspectorWindow, UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 1
-    icon: 0
-    iconScale: 1
-    iconSettings: Assets\Plugins\Infinity Code\Ultimate Editor Enhancer/Icons/Inspector.png
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Bookmarks
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.Windows.Bookmarks, UltimateEditorEnhancer-Editor,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 0
-    icon: 0
-    iconScale: 1
-    iconSettings: Assets\Plugins\Infinity Code\Ultimate Editor Enhancer/Icons/Star-White.png
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: View Gallery
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.Windows.ViewGallery, UltimateEditorEnhancer-Editor,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: d_ViewToolOrbit
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Distance Tool
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.Windows.DistanceTool, UltimateEditorEnhancer-Editor,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 0
-    icon: 0
-    iconScale: 1
-    iconSettings: Assets\Plugins\Infinity Code\Ultimate Editor Enhancer/Icons/Rule.png
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: 
-    expanded: 1
-    settings: []
-    intSettings: 
-    type: 5
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: 
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Edit Items
-    expanded: 0
-    settings:
-    - Project/Ultimate Editor Enhancer/Scene View/Quick Access Bar
-    intSettings: 
-    type: 6
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: d_Settings
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
-  - tooltip: Info
-    expanded: 0
-    settings:
-    - InfinityCode.UltimateEditorEnhancer.Windows.Welcome, UltimateEditorEnhancer-Editor,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    intSettings: 
-    type: 0
-    visibleRules: 0
-    icon: 1
-    iconScale: 1
-    iconSettings: _Help
-    useCustomWindowSize: 0
-    customWindowSize: {x: 400, y: 300}
-    alignWindowToBar: 1
-    windowMode: 0
+  _headerRules: []
+  _quickAccessItems: []
   _sceneHistory:
   - name: S_heya_parlor
     path: Assets/GamePrototype/Scenes/S_heya_parlor.unity
   - name: S_Shire_Restaurant
     path: Assets/GameMain/Scenes/S_Shire_Restaurant.unity
   - name: S_Shire_Lounge
-    path: Assets/GameMain/Scenes/S_Shire_Lounge.unity
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
   - name: S_Shire_Kitchen
-    path: Assets/GameMain/Scenes/S_Shire_Kitchen.unity
-  - name: S_Tower_Under
-    path: Assets/GameMain/Scenes/S_Tower_Under.unity
-  - name: Prototype_MainMenu
-    path: Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+  - name: S_Shire_Restaurant
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
-  - name: S_Template
-    path: Assets/GameMain/Scenes/S_Template.unity
-  - name: S_Bar_Main
-    path: Assets/GameMain/Scenes/S_Bar_Main.unity
-  - name: S_Parlor_Toilet
-    path: Assets/GameMain/Scenes/S_Parlor_Toilet.unity
-  - name: S_Parlor_Main
-    path: Assets/GameMain/Scenes/S_Parlor_Main.unity
-  - name: S_FengHospital
-    path: Assets/GameMain/Scenes/S_FengHospital.unity
-  - name: S_Bar_Kitchen
-    path: Assets/GameMain/Scenes/S_Bar_Kitchen.unity
-  - name: S_Week
-    path: Assets/GameMain/Scenes/Dynamic/S_Week.unity
-  - name: S_Weekend
-    path: Assets/GameMain/Scenes/Dynamic/S_Weekend.unity
-  - name: S_LoadingScene
-    path: Assets/GameMain/Scenes/Main/S_LoadingScene.unity
-  - name: S_Menu
-    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+  - name: S_Tower_Under
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
   - name: Prototypr_PlayerController
     path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+<<<<<<< HEAD
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+=======
+  - name: S_Apartment_Balcony
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
+>>>>>>> de9ef64826db88ccdfd96a28c6f2f75f5edb2760
