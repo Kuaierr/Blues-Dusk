@@ -48,6 +48,21 @@ public class Player : MonoBehaviour
         m_Movement.OnUpdate();
     }
 
+    // public bool TestNavigation(Vector3 targetPosition)
+    // {
+    //     if (m_NavMeshAgent.isOnNavMesh)
+    //     {
+    //         NavMeshHit navigationHit;
+    //         if (NavMesh.SamplePosition(targetPosition, out navigationHit, 15, m_NavMeshAgent.areaMask))
+    //             return m_NavMeshAgent.SetDestination(navigationHit.position);
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         return m_NavMeshAgent.Warp(warpPosition);
+    //     }
+    // }
+
     public void SetTransform(Transform trans)
     {
         if (trans == null)
