@@ -55,7 +55,7 @@ public class ProcedureChangeScene : ProcedureBase
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
         if (!m_IsScenePreloaded)
         {
-            GameKitCenter.Event.Fire(this, SaveSettingsEventArgs.Create(null));
+            GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));
             GameKitCenter.Setting.Save();
             if (GameKitCenter.Scheduler.MultiScene)
             {
@@ -120,7 +120,7 @@ public class ProcedureChangeScene : ProcedureBase
     {
         GameKitCenter.Element.Clear();
         GameKitCenter.Setting.Load();
-        GameKitCenter.Event.Fire(this, LoadSettingsEventArgs.Create(null));
+        GameKitCenter.Event.FireNow(this, LoadSettingsEventArgs.Create(null));
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
@@ -130,7 +130,7 @@ public class ProcedureChangeScene : ProcedureBase
 
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
-            Debug.Log(targetTrans.position);
+            // Debug.Log(targetTrans.position);
             GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
             m_Prototyper = realObj.GetComponent<Player>();
             QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);

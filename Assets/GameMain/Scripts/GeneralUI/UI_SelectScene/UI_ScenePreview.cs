@@ -1,11 +1,13 @@
 using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class UI_ScenePreview : UIFormChildBase
 {
     public Image Frame;
     public Image Picture;
-    public Sprite Sprite;
+    public TextMeshProUGUI Title;
+    [SerializeField] private Sprite Sprite;
     [Scene] public string SceneAssetName;
     public string SceneName;
     [TextArea]
@@ -15,6 +17,7 @@ public class UI_ScenePreview : UIFormChildBase
     {
         SetActive(true);
         Picture.sprite = Sprite;
+        Title.text = SceneName;
     }
 
     public void Hide()

@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Frame: {fileID: 5245168922734057322}
   Picture: {fileID: 5245168921314864132}
+  Title: {fileID: 269503711956925759}
   Sprite: {fileID: 0}
   SceneAssetName: 
   SceneName: 

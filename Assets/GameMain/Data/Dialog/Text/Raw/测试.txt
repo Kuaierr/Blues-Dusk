@@ -61,7 +61,7 @@
 
 [title-仓检测试]
 
-[mood-Happy]卓拉：开始复选测试
+[mood-Happy]卓拉：开始仓检测试
 
 [sbranch-A,mood-work_normal]卓拉：分支点A还有我是正常状态，以及的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多
 
@@ -124,4 +124,42 @@
 	[name-A4Default, linkfrom-A, linkto-A_end, ddoption] 伊森：我表示无话可说
 
 [ebranch-A_end] 伊森：筛检分支线A最终点
+
+[title-本地条件测试]
+
+[mood-Happy]卓拉：开始本地条件复选测试
+
+[sbranch-A]卓拉：分支点A
+
+	// 第一个分支选A1
+
+	[name-A1, linkfrom-A]伊森：分支线A1
+
+	大卫：分支线A1后续
+
+	伊森：分支线A1结束
+	
+	[cdivider-(1&2&3) A_end A, ccomplete-(1)]
+	
+	// 第一个分支选A2
+
+	[name-A2, linkfrom-A] 伊森：分支线A2
+	
+	卓拉：分支线A2后续
+
+	卓拉：分支线A2结束
+
+	[cdivider-(1&2&3) A_end A, ccomplete-(2)]
+	
+	// 第一个分支选A3
+
+	[name-A3, linkfrom-A] 伊森：分支线A3
+	
+	卓拉：分支线A3后续
+
+	卓拉：分支线A3结束
+	
+	[cdivider-(1&2&3) A_end A, ccomplete-(3)]
+
+[ebranch-A_end] 伊森：分支线A最终点
 

@@ -32,6 +32,7 @@ public class UI_Dialog : UIFormBase
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
     private bool m_IsDialoging = false;
+    private bool m_IsShowingText = true;
     //private List<bool> m_CachedCheckResults = new List<bool>();
     private Dictionary<string, bool> m_CachedCheckResults = new Dictionary<string, bool>();
 
@@ -63,7 +64,7 @@ public class UI_Dialog : UIFormBase
     #region Override
     protected override void OnInit(object userData)
     {
-        
+
         base.OnInit(userData);
         CreateFsm();
         uI_Response.Init(Depth);
@@ -93,7 +94,7 @@ public class UI_Dialog : UIFormBase
         CursorSystem.current.Enable();
         m_IsDialoging = false;
         base.OnPause();
-        
+
         ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
         GameKitCenter.Event.Fire(this, args);
     }
@@ -103,7 +104,7 @@ public class UI_Dialog : UIFormBase
         base.OnResume();
         CursorSystem.current.Disable();
         m_IsDialoging = true;
-        
+
         GameKitCenter.UI.RefocusUIForm(GetComponent<UIForm>());
     }
 
@@ -189,8 +190,11 @@ public class UI_Dialog : UIFormBase
         {
             str += currentNode.GetChild(i).GetData<DialogDataNodeVariable>().ToString() + '\n';
         }
+
         if (currentNode.ChildCount > 1)
+        {
             Log.Info(str.RemoveLast());
+        }
 
         if (currentNode.IsLeaf)
         {
@@ -207,7 +211,7 @@ public class UI_Dialog : UIFormBase
     {
         IDataNode nextNode = sonNode;
         DialogDataNodeVariable tempDialogData = sonNode.GetData<DialogDataNodeVariable>();
-        
+
         // 如果本次对话中有可完成得条件
         if (tempDialogData.IsLocalCompleter)
         {
@@ -223,7 +227,7 @@ public class UI_Dialog : UIFormBase
             for (int j = 0; j < tempDialogData.GlobalCompleteConditons.Count; j++)
             {
                 GameSettings.current.SetBool(tempDialogData.GlobalCompleteConditons[j], true);
-                Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
+                // Log.Warning(tempDialogData.GlobalCompleteConditons[j] + " >> " + GameSettings.current.GetBool(tempDialogData.GlobalCompleteConditons[j]));
             }
         }
         // 如果该节点是仓检的选项
@@ -244,8 +248,8 @@ public class UI_Dialog : UIFormBase
                     break;
                 }
                 m_CachedCheckResults.Add(tempDialogData.Contents, clear);
-                Debug.Log("InventoryName: " + tempDialogData.CachedInventoryName +"\n" +
-                          "TargetItemName: " + tempDialogData.CachedStockConditions[i] +"\n" +
+                Debug.Log("InventoryName: " + tempDialogData.CachedInventoryName + "\n" +
+                          "TargetItemName: " + tempDialogData.CachedStockConditions[i] + "\n" +
                           "Result: " + clear);
             }
         }
@@ -259,6 +263,10 @@ public class UI_Dialog : UIFormBase
                 bool isComplete = true;
                 for (int j = 0; j < tempDialogData.DividerConditions.Count; j++)
                 {
+                    // foreach (var item in GameKitCenter.Dialog.CurrentTree.LocalConditions)
+                    // {
+                    //     Log.Info(item.Key + " >> " + item.Value);
+                    // }
                     if (!GameKitCenter.Dialog.CurrentTree.LocalConditions[tempDialogData.DividerConditions[j]])
                     {
                         isComplete = false;
@@ -266,6 +274,11 @@ public class UI_Dialog : UIFormBase
                     }
                 }
 
+                // Log.Info(isComplete);
+                // for (int i = 0; i < nextNode.ChildCount; i++)
+                // {
+                //     Log.Info(nextNode.Name + " > > " + nextNode.GetChild(i).Name);
+                // }
                 if (isComplete)
                 {
                     nextNode = sonNode.GetChild(0);
@@ -301,6 +314,13 @@ public class UI_Dialog : UIFormBase
                 }
             }
         }
+
+        // Debug.Log(nextNode.Name);
+        // Debug.Log("IsFunctional: " + nextNode.GetData<DialogDataNodeVariable>().IsFunctional);
+        if (nextNode.GetData<DialogDataNodeVariable>().IsFunctional)
+        {
+            nextNode = TryExecuteNodeFunction(nextNode);
+        }
         return nextNode;
     }
 
@@ -309,7 +329,7 @@ public class UI_Dialog : UIFormBase
         Log.Info("Reach The End Of Conversation.");
         m_IsDialoging = false;
         // GameKitCenter.Dialog.CurrentTree.Reset();
-        DialogSystem.current.StopDialog(GameKitCenter.Dialog.CurrentTree.Name);
+        DialogSystem.current.StopDialog(CurrentTree.Name);
         GameKitCenter.Dialog.CurrentTree = null;
     }
 
