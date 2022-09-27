@@ -78,6 +78,15 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].Init(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
         m_ActiveUIOptions = new List<UI_Option>();
+
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
+        {
+            if (!m_ActiveUIOptions[i].IsLocked)
+            {
+                EmphasizeSelectedOption(i);
+                break;
+            }
+        }
     }
 
     public override void OnUpdate()
@@ -101,7 +110,7 @@ public class UI_Response : UIFormChildBase
             deadLoopPreventer = 0;
             do
             {
-                m_LastIndex = m_CurrentIndex;
+                //m_LastIndex = m_CurrentIndex;
                 m_CurrentIndex = (m_CurrentIndex + 1) % m_ActiveUIOptions.Count;
                 deadLoopPreventer++;
                 Log.Info(m_CurrentIndex + " >> " + m_ActiveUIOptions[m_CurrentIndex].IsLocked);
@@ -118,7 +127,7 @@ public class UI_Response : UIFormChildBase
             deadLoopPreventer = 0;
             do
             {
-                m_LastIndex = m_CurrentIndex;
+                //m_LastIndex = m_CurrentIndex;
                 m_CurrentIndex = m_CurrentIndex - 1 == -1 ? m_ActiveUIOptions.Count - 1 : m_CurrentIndex - 1;
                 deadLoopPreventer++;
                 Log.Info(m_CurrentIndex + " >> " + m_ActiveUIOptions[m_CurrentIndex].IsLocked);
@@ -208,10 +217,14 @@ public class UI_Response : UIFormChildBase
 
     private void EmphasizeSelectedOption(int index)
     {
+        Debug.Log(m_LastIndex+", "+index);
         if (m_LastIndex >= 0)
             UIOptions[m_LastIndex].SetEmphasize(false);
         if (index >= 0)
+        {
             UIOptions[index].SetEmphasize(true);
+            m_LastIndex = m_CurrentIndex;
+        }
     }
 
     // 共识： UIOptions 和  m_CurrentOptions 在 Index 上是一一对应的
