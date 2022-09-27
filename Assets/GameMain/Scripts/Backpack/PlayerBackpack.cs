@@ -40,7 +40,6 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
             var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: this);
             if (uiForm != null)
                 m_CachedUiId = (int)uiForm;
-            Debug.Log(m_CachedUiId);
         }
     }
 

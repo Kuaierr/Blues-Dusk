@@ -60,7 +60,7 @@ public class UI_Tip : UIFormBase
 
     public void Hide()
     {
-        // OnPause();
+        OnPause();
     }
 
     public void Show()
