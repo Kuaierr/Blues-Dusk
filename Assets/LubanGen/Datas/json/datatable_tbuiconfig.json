@@ -4,35 +4,35 @@
     "asset_name": "UI_Menu",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 101,
     "asset_name": "UI_Setting",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 102,
     "asset_name": "UI_About",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1000,
     "asset_name": "UI_Dialog",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1001,
     "asset_name": "UI_Backpack",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1002,
@@ -46,27 +46,27 @@
     "asset_name": "UI_DiceInventory",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1004,
     "asset_name": "UI_Tip",
     "ui_group_name": "General",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1005,
     "asset_name": "UI_SelectScene",
     "ui_group_name": "General",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   },
   {
     "id": 1006,
     "asset_name": "UI_SettingSystem",
     "ui_group_name": "Default",
     "allow_multi_instance": false,
-    "pause_covered_ui_form": true
+    "pause_covered_ui_form": false
   }
 ]
