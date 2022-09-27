@@ -26,7 +26,7 @@ public abstract class UIFormChildBase : UIBehaviour
     {
         get
         {
-            return m_CachedCanvas.sortingOrder;
+            return 0;
         }
     }
     public RectTransform RectTransform
@@ -99,12 +99,12 @@ public abstract class UIFormChildBase : UIBehaviour
 
     protected override void Awake()
     {
-        m_CachedCanvas = this.gameObject.GetOrAddComponent<Canvas>();
-        m_CachedCanvas.overrideSorting = true;
-        OriginalDepth = m_CachedCanvas.sortingOrder;
+        // m_CachedCanvas = this.gameObject.GetOrAddComponent<Canvas>();
+        // m_CachedCanvas.overrideSorting = true;
+        // OriginalDepth = m_CachedCanvas.sortingOrder;
         m_CanvasGroup = this.gameObject.GetOrAddComponent<CanvasGroup>();
         m_Animator = GetComponent<Animator>();
-        this.gameObject.GetOrAddComponent<GraphicRaycaster>();
+        // this.gameObject.GetOrAddComponent<GraphicRaycaster>();
     }
 
     protected virtual void OnInit(int parentDepth)
@@ -146,7 +146,7 @@ public abstract class UIFormChildBase : UIBehaviour
     protected virtual void OnDepthChanged(int depthInForm)
     {
         int deltaDepth = ParentDepth + DepthFactor * depthInForm + OriginalDepth;
-        m_CachedCanvas.sortingOrder = deltaDepth;
+        // m_CachedCanvas.sortingOrder = deltaDepth;
     }
 
     public virtual void OnUpdate()

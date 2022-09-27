@@ -104,7 +104,7 @@ public class UI_SettingSystem : UIFormBase
         }
         else
         {
-            OnPause();
+            Visible = false;
             ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
             GameKitCenter.Event.Fire(this, args);
         }
@@ -115,7 +115,5 @@ public class UI_SettingSystem : UIFormBase
     protected override void OnPause()
     {
         base.OnPause();
-        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
-        GameKitCenter.Event.Fire(this, args);
     }
 }

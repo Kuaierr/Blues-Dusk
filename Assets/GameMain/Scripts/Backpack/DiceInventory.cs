@@ -42,7 +42,6 @@ public class DiceInventory : MonoSingletonBase<DiceInventory>
 			var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_DiceInventory", this);
 			if (uiForm != null)
 				m_CachedUiId = (int)uiForm;
-			Debug.Log(m_CachedUiId);
 		}
 		
 	}

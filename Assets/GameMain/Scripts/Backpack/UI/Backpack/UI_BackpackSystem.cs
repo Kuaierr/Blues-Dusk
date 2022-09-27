@@ -54,9 +54,6 @@ public class UI_BackpackSystem : UIFormBase
         base.OnPause();
         BackpackUI.Hide();
         CursorSystem.current.Enable();
-        
-        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
-        GameKitCenter.Event.Fire(this, args);
     }
 
     protected override void OnRecycle()
@@ -74,7 +71,7 @@ public class UI_BackpackSystem : UIFormBase
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         if (Visible)
         {
-            ChangeDisplayUpdate(m_ChangeDisplayKeyCode);
+            ReOpenGameMenu(m_ChangeDisplayKeyCode);
         }
     }
 }

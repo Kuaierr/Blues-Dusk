@@ -37,6 +37,8 @@ public class UI_OptionIndicator : UIFormChildBase
         base.OnHide(callback);
         m_CurrentColor = Color.white;
         m_CachedDiceFaceType = string.Empty;
+        
+        Animator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
     public void Charge(string diceFaceKeyName)

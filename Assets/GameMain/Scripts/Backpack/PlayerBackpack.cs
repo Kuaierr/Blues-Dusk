@@ -17,13 +17,13 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
         GameKitCenter.Event.Subscribe(OnOpenPlayerBackpackEventArgs.EnentId,OnOpenPlayerBackpack);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (InputManager.instance.GetWorldKeyDown(KeyCode.M))
         {
             GameKitCenter.UI.CloseUIForm(m_CachedUiId, userData: this);
         }
-    }
+    }*/
 
     private void OnOpenPlayerBackpack(object sender, GameKit.Event.GameEventArgs e)
     {
@@ -40,7 +40,6 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
             var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_Backpack", userData: this);
             if (uiForm != null)
                 m_CachedUiId = (int)uiForm;
-            Debug.Log(m_CachedUiId);
         }
     }
 
