@@ -365,6 +365,10 @@ public class UI_Dialog : UIFormBase
             uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
             // character.animator.runtimeAnimatorController = charaAnimator;
         }
+        else
+        {
+            SpeakerAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        }
     }
 
 

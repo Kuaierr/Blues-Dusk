@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActive: 0
   defaultSwitchType: 1
-  StartScene: S_Shire_Restaurant
+  StartScene: S_Shire_Kitchen
   LoadScene: 
   m_ScenesPath: Assets/GameMain/ProcedureMain/
   m_MultiScenesPath: Assets/GameMain/

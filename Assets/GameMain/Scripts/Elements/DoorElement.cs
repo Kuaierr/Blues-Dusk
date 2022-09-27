@@ -21,7 +21,9 @@ public class DoorElement : SceneElementBase
     {
         base.OnLoad(sender, e);
         m_HasDialoged = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "HasDialoged"), false);
+        Log.Info(CanPass);
         CanPass = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "CanPass"), CanPass);
+        Log.Warning(CanPass);
     }
 
     public override void OnSave(object sender, GameEventArgs e)
@@ -35,10 +37,10 @@ public class DoorElement : SceneElementBase
     {
         base.OnInit();
         if (CanPassCondition != "<None>" && CanPassCondition != string.Empty)
-        {
-            // Log.Warning(CanPassCondition);
+        {  
             CanPass = false;
         }
+        
         GameKitCenter.Event.Subscribe(FinishDialogCompleteEventArgs.EventId, OnDialogFinish);
         if (EnterTranform == null)
         {
