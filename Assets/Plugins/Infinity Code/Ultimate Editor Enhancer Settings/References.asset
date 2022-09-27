@@ -17,10 +17,12 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
-  - name: S_Apartment_Living
-    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+  - name: Prototype_Dialog
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Apartment_Living
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
   - name: S_Shire_Restaurant
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
   - name: S_Tower_Under

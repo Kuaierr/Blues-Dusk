@@ -36,9 +36,9 @@ namespace GameKit.UI
                     set
                     {
                         m_Paused = value;
-                        UnityEngine.Debug.Log("Debug: \n " +
+                        /*UnityEngine.Debug.Log("Debug: \n " +
                                               "Name: " + m_UIForm.UIFormAssetName +
-                                              "\n Covered: " + m_Paused);
+                                              "\n Covered: " + m_Paused);*/
                     }
                 }
 
@@ -51,9 +51,9 @@ namespace GameKit.UI
                     set
                     {
                         m_Covered = value;
-                        UnityEngine.Debug.Log("Debug: \n " +
+                        /*UnityEngine.Debug.Log("Debug: \n " +
                                               "Name: " + m_UIForm.UIFormAssetName +
-                                              "\n Covered: " + m_Covered);
+                                              "\n Covered: " + m_Covered);*/
                     }
                 }
 
