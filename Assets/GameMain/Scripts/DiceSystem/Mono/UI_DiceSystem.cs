@@ -201,7 +201,17 @@ public class UI_DiceSystem : UIFormChildBase
             DiceUnSelected(dice);
         }
 
-        if (_activedDices.Count > 0)
+        bool canCheck = false;
+        foreach (UI_Dice uiDice in _activedDices)
+        {
+            if (uiDice != null)
+            {
+                canCheck = true;
+                break;
+            }
+        }
+
+        if (canCheck)
             _startButton.Enable();
         else
             _startButton.Disable();
