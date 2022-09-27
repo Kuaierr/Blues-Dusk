@@ -16,16 +16,18 @@ public class SettingSystem : MonoSingletonBase<SettingSystem>
 
 	private void OpenSettingUI(object sender, GameEventArgs e)
 	{
-		Debug.Log("OpenSettingSystem");
-		if (GameKitCenter.UI.GetUIForm(m_CachedUiId))
+		UIForm uiFormInstanse = GameKitCenter.UI.GetUIForm(m_CachedUiId);
+		if(uiFormInstanse != null)
 		{
-			//GameKitCenter.UI.TryGetUIForm("UI_Backpack").Resume();
-			GameKitCenter.UI.GetUIForm(m_CachedUiId).OnResume();
-			//GameKitCenter.UI.RefocusUIForm(GameKitCenter.UI.GetUIForm(m_CachedUiId));
+			//GameKitCenter.UI.RefocusUIForm(uiFormInstanse);
+			GameKitCenter.UI.RefocusUIForm(uiFormInstanse);
+			uiFormInstanse.OnResume();
 		}
-        
-		var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_SettingSystem", userData: this);
-		if (uiForm != null)
-			m_CachedUiId = (int)uiForm;
+		else
+		{
+			var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_SettingSystem", this);
+			if (uiForm != null)
+				m_CachedUiId = (int)uiForm;
+		}
 	}
 }
