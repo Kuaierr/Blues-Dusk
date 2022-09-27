@@ -31,16 +31,19 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     {
         base.OnEnter(fsmOwner);
         Log.Info("DialogTalkingState");
+        HandleCurrentNode(fsmOwner);
         if (fsmOwner.GetData<VarBoolean>(DialogStateUtility.FIRST_TALKING) == true)
         {
             fsmOwner.SetData<VarBoolean>(DialogStateUtility.FIRST_TALKING, false);
             return;
         }
 
-        // 如果是纯功能性节点，则自动处理并跳过
-        fsmMaster.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(fsmMaster.CurrentTree.CurrentNode);
-        fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
-        SetTextShowing();
+        // HandleCurrentNode(fsmOwner);
+        // // 如果是纯功能性节点，则自动处理并跳过
+        // fsmMaster.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(fsmMaster.CurrentTree.CurrentNode);
+
+        // fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode);
+        // SetTextShowing();
     }
 
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
@@ -57,23 +60,7 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                         return;
 
                     GameKitCenter.Dialog.CurrentTree.CurrentNode = tmpSonNode;
-                    // 如果是功能节点，就跳过
-                    GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
-                    if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
-                    {
-                        // 如果下一个节点是选择节点，则先显示对话
-                        fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
-                        SetTextShowing();
-                        // 然后判断选择类型，转换状态
-                        MonoManager.instance.StartCoroutine(ParseBranch(fsmOwner));
-                        return;
-                    }
-
-
-
-                    // 如果下一个节点是普通节点，则直接显示对话
-                    fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
-                    SetTextShowing();
+                    HandleCurrentNode(fsmOwner);
                 }
             }
             else
@@ -117,10 +104,10 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     }
 
     private IEnumerator ParseBranch(FsmInterface fsmOwner)
-    { 
+    {
         while (m_isTextShowing == true)
             yield return null;
-        
+
         DialogDataNodeVariable tmpSonNodeData = GameKitCenter.Dialog.CurrentTree.CurrentNode.GetData<DialogDataNodeVariable>();
         fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
         if (tmpSonNodeData.IsDiceCheckBranch)
@@ -151,6 +138,26 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
             fsmMaster.UpdateOptionUI();
         }
         ChangeState<DialogAnimatingState>(fsmOwner);
+    }
+
+    private void HandleCurrentNode(FsmInterface fsmOwner)
+    {
+        // 如果是功能节点，就跳过
+        GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+        if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
+        {
+            // 如果下一个节点是选择节点，则先显示对话
+            fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+            SetTextShowing();
+            // 然后判断选择类型，转换状态
+            MonoManager.instance.StartCoroutine(ParseBranch(fsmOwner));
+        }
+        else
+        {
+            // 如果下一个节点是普通节点，则直接显示对话
+            fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
+            SetTextShowing();
+        }
     }
 }
 

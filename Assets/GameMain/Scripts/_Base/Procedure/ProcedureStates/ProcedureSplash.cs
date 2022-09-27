@@ -17,11 +17,12 @@ public class ProcedureSplash : ProcedureBase
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
-        if (GameKitCenter.Core.EditorResourceMode)
-        {
-            // 编辑器模式
-            ChangeState<ProcedurePreload>(procedureOwner);
-        }
+        // if (GameKitCenter.Core.EditorResourceMode)
+        // {
+        //     // 编辑器模式
+            
+        // }
+        ChangeState<ProcedurePreload>(procedureOwner);
         // else if (GameKitCenter.Resource.ResourceMode == ResourceMode.Package)
         // {
         //     // 单机模式

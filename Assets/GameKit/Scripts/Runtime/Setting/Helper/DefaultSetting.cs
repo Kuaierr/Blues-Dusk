@@ -68,7 +68,7 @@ namespace UnityGameKit.Runtime
         {
             if (!m_Settings.ContainsKey(settingName))
             {
-                Log.Warning("Setting '{0}' is not exist.", settingName);
+                // Log.Warning("Setting '{0}' is not exist.", settingName);
                 return false;
             }
             return Convert.ToBoolean(m_Settings[settingName]);
@@ -78,7 +78,7 @@ namespace UnityGameKit.Runtime
         {
             if (!m_Settings.ContainsKey(settingName))
             {
-                Log.Warning("Setting '{0}' is not exist.", settingName);
+                // Log.Warning("Setting '{0}' is not exist.", settingName);
                 return defaultValue;
             }
             return Convert.ToBoolean(m_Settings[settingName]);

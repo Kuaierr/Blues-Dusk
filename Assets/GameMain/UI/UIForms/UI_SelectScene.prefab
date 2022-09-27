@@ -369,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: SceneAssetName
-      value: S_FengHospital
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
@@ -1034,7 +1034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: SceneAssetName
-      value: S_Tower_Under
+      value: S_Bookstore_Instore
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}

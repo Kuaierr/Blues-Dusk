@@ -146,7 +146,7 @@ namespace GameKit
 
             if (!m_EventHandlers.Remove(id, handler))
             {
-                throw new GameKitException(Utility.Text.Format("Event '{0}' not exists specified handler.", id));
+                // throw new GameKitException(Utility.Text.Format("Event '{0}' not exists specified handler.", id));
             }
         }
 

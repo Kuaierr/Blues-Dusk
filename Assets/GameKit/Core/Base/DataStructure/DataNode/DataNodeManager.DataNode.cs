@@ -325,7 +325,7 @@ namespace GameKit.DataNode
             {
                 m_Name = null;
                 m_Parent = null;
-                Clear();
+                // Clear();
             }
         }
     }

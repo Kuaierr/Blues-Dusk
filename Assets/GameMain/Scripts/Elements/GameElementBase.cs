@@ -9,7 +9,7 @@ using UnityGameKit.Runtime;
 
 public abstract class GameElementBase : ElementBase
 {
-    public UnityEvent InteractCallback;
+    public UnityEvent OnInteractBegin;
     private Transform m_InteractTrans;
     public Vector3 InteractPosition
     {
@@ -27,38 +27,61 @@ public abstract class GameElementBase : ElementBase
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
+    private void OnDestroy() {
+        GameKitCenter.Element.RemoveElement(this);
+        GameKitCenter.Event.Unsubscribe(SaveSettingsEventArgs.EventId, OnSave);
+        GameKitCenter.Event.Unsubscribe(LoadSettingsEventArgs.EventId, OnLoad);
+    }
+
     public virtual void OnLoad(object sender, GameEventArgs e)
     {
-        // if (this == null)
-        //     return;
-        // bool b_active = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "Is Active"), true);
-        // gameObject.SetActive(b_active);
+        bool b_active = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "Is Active"), true);
+        gameObject.SetActive(b_active);
     }
 
     public virtual void OnSave(object sender, GameEventArgs e)
     {
-        // if (this == null)
-        //     return;
-        // GameKitCenter.Setting.SetBool(string.Format("{0}({1})", Name, "Is Active"), gameObject.activeSelf);
+        GameKitCenter.Setting.SetBool(string.Format("{0}({1})", Name, "Is Active"), gameObject.activeSelf);
     }
 
     public override void OnInteract()
     {
         base.OnInteract();
         // Log.Info("Interact");
-        InteractCallback?.Invoke();
+        OnInteractBegin?.Invoke();
     }
 
-    protected virtual void OnValidate() 
+    public void EnableSetting(string settingName)
     {
-        #if UNITY_EDITOR
-        if(this.transform.Find("Destination") == null)
+        GameSettings.current.SetBool(settingName, true);
+    }
+
+    public void DisableSetting(string settingName)
+    {
+        GameSettings.current.SetBool(settingName, false);
+    }
+
+    public void SwitchSetting(string settingName)
+    {
+        bool origin = GameSettings.current.GetBool(settingName);
+        GameSettings.current.SetBool(settingName, !origin);
+    }
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
+    protected virtual void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (this.transform.Find("Destination") == null)
         {
             Debug.Log("Generate Destination");
             Object destination = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>("Assets/GameMain/Elements/Utility/Destination.prefab");
             destination = UnityEditor.PrefabUtility.InstantiatePrefab(destination, this.transform);
             destination.name = "Destination";
         }
-        #endif
+#endif
     }
 }

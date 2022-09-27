@@ -46,14 +46,14 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
     public void OpenSelectSceneUI(List<string> availaibleScene)
     {
         GameKitCenter.UI.TryOpenUIForm("UI_SelectScene", userData: typeof(UI_SelectScene));
-        
+
         m_CachedAvailiableScenes = availaibleScene;
         if (m_CachedUISelectScene != null)
         {
             m_CachedUISelectScene.Show();
             m_CachedUISelectScene.UpdateScenes(m_CachedAvailiableScenes);
             ClearAvailiableScenes();
-        }   
+        }
     }
 
     private void OnOpenUISuccess(object sender, GameEventArgs e)

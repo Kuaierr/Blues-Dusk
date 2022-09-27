@@ -37,7 +37,7 @@ namespace UnityGameKit.Editor
             }
             else
             {
-                if (GUILayout.Button("生成对话配置表"))
+                if (GUILayout.Button("生成对话编辑器配置表"))
                 {
                     GenerateTable();
                 }

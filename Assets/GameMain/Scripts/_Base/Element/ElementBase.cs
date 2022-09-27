@@ -44,10 +44,5 @@ public abstract class ElementBase : MonoBehaviour, IElement
     {
 
     }
-
-    void OnDestroy()
-    {
-        GameKitCenter.Element.RemoveElement(this);
-    }
 }
 

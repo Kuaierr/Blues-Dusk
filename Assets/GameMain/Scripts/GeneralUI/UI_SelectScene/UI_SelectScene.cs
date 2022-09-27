@@ -17,6 +17,7 @@ public class UI_SelectScene : UIFormBase
     private int m_LastIndex = -1;
     private bool m_IsActive = false;
     private List<UI_ScenePreview> m_ActiveScenePreviews;
+
     public void UpdateScenes(List<string> avaibleScenes)
     {
         if (avaibleScenes == null)
@@ -51,6 +52,7 @@ public class UI_SelectScene : UIFormBase
     {
         base.OnOpen(userData);
         m_IsActive = true;
+        CursorSystem.current.Disable();
     }
 
     protected override void OnResume()
@@ -60,6 +62,7 @@ public class UI_SelectScene : UIFormBase
         m_IsActive = true;
         if (m_ActiveScenePreviews.Count > 0)
             m_ActiveScenePreviews[0].Selected();
+        CursorSystem.current.Disable();
     }
 
     protected override void OnPause()
@@ -67,6 +70,7 @@ public class UI_SelectScene : UIFormBase
         m_IsActive = false;
         Clear();
         base.OnPause();
+        CursorSystem.current.Enable();
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)

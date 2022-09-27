@@ -40,7 +40,7 @@ public class DialogIdleState : FsmState<UI_Dialog>, IReference
             fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.MasterAnimator);
             fsmOwner.SetData<VarBoolean>(DialogStateUtility.FIRST_TALKING, true);
             fsmMaster.PassNode();
-            fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode, false);
+            // fsmMaster.UpdateDialogUI(fsmMaster.CurrentTree.CurrentNode, false);
             ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }

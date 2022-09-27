@@ -66,6 +66,13 @@ public sealed partial class TbGameConfig
             return _data.CurrentWeek;
         }
      } 
+     public bool WearTie
+     {
+        get
+        {
+            return _data.WearTie;
+        }
+     } 
 
     public void Resolve(Dictionary<string, object> _tables)
     {
