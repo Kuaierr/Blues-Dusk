@@ -8,19 +8,23 @@ public class UI_DiceInventory : UIFormChildBase
 {
     [SerializeField]
     private int _basicOffset = 80;
+
     [SerializeField]
     private int _diceOffset = 175;
+
     [Space]
     [SerializeField]
     private ScrollRect _scrollRect;
+
     [SerializeField]
     private RectTransform _contentSize;
+
     [SerializeField]
     private RectTransform _layoutGroup;
 
     [SerializeField]
     private UI_Dice _dicePrefab;
-    
+
     private List<UI_Dice> _uIDices = new List<UI_Dice>();
 
 
@@ -29,14 +33,14 @@ public class UI_DiceInventory : UIFormChildBase
         var data = GameKitCenter.Inventory.GetInventory(DiceInventory.current.Name);
         for (int i = 0; i < data.StockMap.Length; i++)
         {
-            if(data.StockMap[i] == null) continue;
-            var dice = Instantiate(_dicePrefab, _layoutGroup).OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null, onSelectCallback);
+            if (data.StockMap[i] == null) continue;
+            var dice = Instantiate(_dicePrefab, _layoutGroup)
+                .OnInit((UI_DiceData_SO)data.StockMap[i].Data, i, null, onSelectCallback);
             _uIDices.Add(dice);
         }
 
         float height = _basicOffset + _uIDices.Count * _diceOffset;
         _contentSize.sizeDelta = new Vector2(_contentSize.sizeDelta.x, height);
-
     }
 
     public void ClearDices()
@@ -45,12 +49,12 @@ public class UI_DiceInventory : UIFormChildBase
         {
             Destroy(trans.gameObject);
         }
+
         _uIDices.Clear();
     }
-    
-    
-    
-    public UI_DiceData_SO Select(ref int _currentIndex,int index)
+
+
+    public UI_DiceData_SO Select(ref int _currentIndex, int index)
     {
         if (index < 0 || index >= _uIDices.Count) return null;
 
@@ -64,7 +68,7 @@ public class UI_DiceInventory : UIFormChildBase
         float normalizedHeight = (1 - (float)(index) / (float)_uIDices.Count);
         //Debug.Log(normalizedHeight);
         _scrollRect.normalizedPosition = new Vector2(0, normalizedHeight);
-        
+
         return _uIDices[index].Data;
     }
 }

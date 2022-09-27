@@ -71,6 +71,16 @@ public abstract class UIFormBase : UIFormLogic
         }
     }
 
+    public void ReOpenGameMenu(KeyCode keyCode)
+    {
+        if (InputManager.instance.GetKeyDown(keyCode))
+        {
+            Visible = false;
+            ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
+            GameKitCenter.Event.Fire(this, args);
+        }
+    }
+
     public void Close()
     {
         OnClose(false, null);

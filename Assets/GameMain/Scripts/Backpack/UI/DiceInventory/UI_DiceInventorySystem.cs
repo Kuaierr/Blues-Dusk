@@ -35,9 +35,6 @@ public class UI_DiceInventorySystem : UIFormBase
     {
         base.OnPause();
         uI_DiceInventory.ClearDices();
-
-        ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
-        GameKitCenter.Event.Fire(this, args);
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -46,7 +43,8 @@ public class UI_DiceInventorySystem : UIFormBase
         if (Visible)
         {
             KeybordControlling();
-            ChangeDisplayUpdate(_changeDisplayKeyCode);
+            ReOpenGameMenu(_changeDisplayKeyCode);
+            //ChangeDisplayUpdate(_changeDisplayKeyCode);
         }
     }
 

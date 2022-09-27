@@ -389,7 +389,7 @@ RectTransform:
   - {fileID: 225310237447878377}
   - {fileID: 225310238018642385}
   m_Father: {fileID: 225310237880970290}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1388,10 +1388,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 225310238298064885}
-  - {fileID: 225310237476985069}
-  - {fileID: 225310238176352037}
   - {fileID: 8939784846721050544}
   - {fileID: 5769326533801303201}
+  - {fileID: 225310237476985069}
+  - {fileID: 225310238176352037}
   m_Father: {fileID: 225310238825681984}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2410,7 +2410,7 @@ RectTransform:
   m_Children:
   - {fileID: 225310238732617584}
   m_Father: {fileID: 225310237880970290}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2686,7 +2686,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 225310238291008051}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2763,8 +2763,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 225310238444611772}
   - {fileID: 225310238245026191}
+  - {fileID: 225310238444611772}
   m_Father: {fileID: 225310238825681984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3079,7 +3079,7 @@ RectTransform:
   - {fileID: 225310237667126685}
   - {fileID: 225310237909717901}
   m_Father: {fileID: 225310238291008051}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3787,7 +3787,7 @@ GameObject:
   - component: {fileID: 225310238825681997}
   - component: {fileID: 225310238825681986}
   - component: {fileID: 6348400787740855357}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI_Backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4033,7 +4033,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 225310237880970290}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4108,7 +4108,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 225310237880970290}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}

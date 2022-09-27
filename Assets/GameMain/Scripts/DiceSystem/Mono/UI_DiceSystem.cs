@@ -67,11 +67,6 @@ public class UI_DiceSystem : UIFormChildBase
     [SerializeField]
     private List<RectTransform> _diceSheets = new List<RectTransform>(); //五种类型，五个栏位，手动赋值
 
-    [Space]
-    [Header("Temp Data")]
-    [SerializeField]
-    private List<UI_DiceData_SO> _tempDiceList = new List<UI_DiceData_SO>(); //测试用的数据
-
     public Dice_Result Result { get; private set; } = new Dice_Result(); //保存结果的类
 
     private Dictionary<Dice_SuitType, RectTransform>
@@ -201,7 +196,17 @@ public class UI_DiceSystem : UIFormChildBase
             DiceUnSelected(dice);
         }
 
-        if (_activedDices.Count > 0)
+        bool canCheck = false;
+        foreach (UI_Dice uiDice in _activedDices)
+        {
+            if (uiDice != null)
+            {
+                canCheck = true;
+                break;
+            }
+        }
+
+        if (canCheck)
             _startButton.Enable();
         else
             _startButton.Disable();
@@ -247,7 +252,8 @@ public class UI_DiceSystem : UIFormChildBase
 
         //移动到目标格子
         dice.DOComplete();
-        dice.transform.DOMove(dice.transform.parent.position, 0.5f);
+        dice.enabled = false;
+        dice.transform.DOMove(dice.transform.parent.position, 0.5f).OnComplete(() => { dice.enabled = true; });
     }
 
     private void DiceUnSelected(UI_Dice dice)
@@ -267,8 +273,13 @@ public class UI_DiceSystem : UIFormChildBase
 
         //回到原本的位置
         dice.DOComplete();
+        dice.enabled = false;
         dice.transform.DOMove(_negativeDiceSlots[dice.Index].position, 0.5f)
-            .OnComplete(() => { dice.ChangeToDiceMaskMaterial(); });
+            .OnComplete(() =>
+            {
+                dice.ChangeToDiceMaskMaterial();
+                dice.enabled = true;
+            });
     }
 
     private Transform FindEmptyDiceSlot()
@@ -486,7 +497,7 @@ public class UI_DiceSystem : UIFormChildBase
         _currentDiceIndex = index;
         _currentList = list;
 
-        if (_currentList == _negativeDices && _currentDiceIndex % 3 != 1)
+        if (_currentList == _negativeDices)
         {
             float lineIndex = _currentDiceIndex;
             if (_currentDiceIndex % 3 == 1) --lineIndex;
