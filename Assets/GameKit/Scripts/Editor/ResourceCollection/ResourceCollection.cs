@@ -18,7 +18,8 @@ namespace UnityGameKit.Editor.ResourceTools
     public sealed class ResourceCollection
     {
         private const string SceneExtension = ".unity";
-        private static readonly Regex ResourceNameRegex = new Regex(@"^([A-Za-z0-9\._-]+/)*[A-Za-z0-9\._-]+$");
+        private static readonly Regex ResourceNameRegex = new Regex(@"^[\u4e00-\u9fa5A-Za-z0-9/\._-]+$");
+        // @"^([A-Za-z0-9\._-]+/)*[A-Za-z0-9\._-]+$")
         private static readonly Regex ResourceVariantRegex = new Regex(@"^[a-z0-9_-]+$");
 
         private readonly string m_ConfigurationPath;
@@ -555,6 +556,7 @@ namespace UnityGameKit.Editor.ResourceTools
 
             if (!ResourceNameRegex.IsMatch(name))
             {
+                Debug.Log(ResourceNameRegex.IsMatch("草你妈的123ASD1a"));
                 return false;
             }
 
