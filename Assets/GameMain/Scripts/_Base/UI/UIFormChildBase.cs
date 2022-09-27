@@ -26,7 +26,7 @@ public abstract class UIFormChildBase : UIBehaviour
     {
         get
         {
-            return m_CachedCanvas.sortingOrder;
+            return 0;
         }
     }
     public RectTransform RectTransform

@@ -75,6 +75,7 @@ public abstract class UIFormBase : UIFormLogic
     {
         if (InputManager.instance.GetKeyDown(keyCode))
         {
+            Visible = false;
             ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
             GameKitCenter.Event.Fire(this, args);
         }

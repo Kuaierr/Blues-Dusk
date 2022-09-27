@@ -35,6 +35,8 @@ public class UI_DiceInventorySystem : UIFormBase
     {
         base.OnPause();
         uI_DiceInventory.ClearDices();
+        
+        Debug.Log("OnPause");
     }
 
     protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -44,6 +46,7 @@ public class UI_DiceInventorySystem : UIFormBase
         {
             KeybordControlling();
             ReOpenGameMenu(_changeDisplayKeyCode);
+            //ChangeDisplayUpdate(_changeDisplayKeyCode);
         }
     }
 
@@ -51,6 +54,7 @@ public class UI_DiceInventorySystem : UIFormBase
     
     public void SetChangeDisplayKeyCode(KeyCode key)
     {
+        Debug.Log(key);
         _changeDisplayKeyCode = key;
     }
 
