@@ -17,13 +17,13 @@ public class PlayerBackpack : MonoSingletonBase<PlayerBackpack>
         GameKitCenter.Event.Subscribe(OnOpenPlayerBackpackEventArgs.EnentId,OnOpenPlayerBackpack);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (InputManager.instance.GetWorldKeyDown(KeyCode.M))
         {
             GameKitCenter.UI.CloseUIForm(m_CachedUiId, userData: this);
         }
-    }
+    }*/
 
     private void OnOpenPlayerBackpack(object sender, GameKit.Event.GameEventArgs e)
     {

@@ -56,7 +56,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     public void Hide(UnityAction callback = null)
     {
         base.OnHide(callback);
-        ResetOptionIndicator(); //Info 既然这里有处理，那么第二次进入时数据保留是因为记录在了对话信息中吧
+        ResetOptionIndicator();
         
         Unlock();
         //SetActive(true);

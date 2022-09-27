@@ -257,7 +257,8 @@ public class UI_DiceSystem : UIFormChildBase
 
         //移动到目标格子
         dice.DOComplete();
-        dice.transform.DOMove(dice.transform.parent.position, 0.5f);
+        dice.enabled = false;
+        dice.transform.DOMove(dice.transform.parent.position, 0.5f).OnComplete(() => { dice.enabled = true; });
     }
 
     private void DiceUnSelected(UI_Dice dice)
@@ -277,8 +278,13 @@ public class UI_DiceSystem : UIFormChildBase
 
         //回到原本的位置
         dice.DOComplete();
+        dice.enabled = false;
         dice.transform.DOMove(_negativeDiceSlots[dice.Index].position, 0.5f)
-            .OnComplete(() => { dice.ChangeToDiceMaskMaterial(); });
+            .OnComplete(() =>
+            {
+                dice.ChangeToDiceMaskMaterial();
+                dice.enabled = true;
+            });
     }
 
     private Transform FindEmptyDiceSlot()
