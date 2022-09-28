@@ -18,9 +18,6 @@ namespace UnityGameKit.Runtime
         [SerializeField]
         private SettingHelperBase m_CustomSettingHelper = null;
 
-        public int CurrentSaveIndex { get; private set; } = 0;
-        private const string _currentSaveIndex = "CurrentSaveIndex"; 
-
         public int Count
         {
             get { return m_SettingManager.Count; }
@@ -60,22 +57,14 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        public void Load()
+        public bool Load()
         {
-            m_SettingManager.Load();
+            return m_SettingManager.Load();
         }
 
         public void Save()
         {
             m_SettingManager.Save();
-            PlayerPrefs.SetInt(_currentSaveIndex, CurrentSaveIndex);
-        }
-
-        public void SetCurrentSaveIndex(int i)
-        {
-            if (i < 0 && i > 3) 
-                Debug.LogError("SaveData Out of Index");
-            CurrentSaveIndex = i;
         }
 
         public string[] GetAllSettingNames()

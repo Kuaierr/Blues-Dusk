@@ -10,7 +10,21 @@ namespace UnityGameKit.Runtime
     {
         private const string SettingFileName = "GameKitSetting.dat";
 
-        private string m_FilePath = null;
+        private int m_CurrentSaveIndex = -1;
+
+        private string m_FilePath
+        {
+            get
+            {
+                if(!PlayerPrefs.HasKey("CurrentSaveDataIndex"))
+                    return Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
+
+                string fileName = "SaveData_" + PlayerPrefs.GetInt("CurrentSaveDataIndex").ToString("00") + SettingFileName;
+                Debug.Log(Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, fileName)));
+                return Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, fileName));
+            }
+        } //= null;
+
         private DefaultSetting m_Settings = null;
         private DefaultSettingSerializer m_Serializer = null;
 
@@ -48,7 +62,7 @@ namespace UnityGameKit.Runtime
 
         private void Awake()
         {
-            m_FilePath = Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
+            //m_FilePath = Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
             m_Settings = new DefaultSetting();
             m_Serializer = new DefaultSettingSerializer();
             m_Serializer.RegisterSerializeCallback(0, SerializeDefaultSettingCallback);
@@ -61,7 +75,7 @@ namespace UnityGameKit.Runtime
             {
                 if (!File.Exists(m_FilePath))
                 {
-                    return true;
+                    return false;
                 }
 
                 using (FileStream fileStream = new FileStream(m_FilePath, FileMode.Open, FileAccess.Read))
