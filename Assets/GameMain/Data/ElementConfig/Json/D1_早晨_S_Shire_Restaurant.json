@@ -1,0 +1,136 @@
+{
+    "Day": 1,
+    "Stage": "早晨",
+    "ElementDatas": [
+        {
+            "Name": "NPC_Noah",
+            "Position": {
+                "x": 2.3388984203338625,
+                "y": 0.0,
+                "z": 1.4936349391937256
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 323.10626220703127,
+                "z": 0.0
+            },
+            "ElementType": "NPCElement",
+            "Prefab": {
+                "instanceID": 29254
+            },
+            "NPC_Posture": "<None>",
+            "NPC_Dialog": "(P1_场景)与进门的诺阿交谈",
+            "Item_Dialog": "",
+            "Door_CanPass": false,
+            "Door_CanPassCondition": "",
+            "Door_TargetScene": "",
+            "Custom_Dialog": "",
+            "Custom_CanRepeatDialog": false,
+            "Custom_HasDialoged": false
+        },
+        {
+            "Name": "Custom",
+            "Position": {
+                "x": 0.6899999976158142,
+                "y": 0.656000018119812,
+                "z": 4.139999866485596
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "ElementType": "CustomElement",
+            "Prefab": {
+                "instanceID": 0
+            },
+            "NPC_Posture": "",
+            "NPC_Dialog": "",
+            "Item_Dialog": "",
+            "Door_CanPass": false,
+            "Door_CanPassCondition": "",
+            "Door_TargetScene": "",
+            "Custom_Dialog": "(P1_场景)诺阿催伊森快点",
+            "Custom_CanRepeatDialog": false,
+            "Custom_HasDialoged": false
+        },
+        {
+            "Name": "Door_Shire_Restaurant-Kitchen",
+            "Position": {
+                "x": 4.139274597167969,
+                "y": 1.2625629901885987,
+                "z": 0.027278073132038118
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "ElementType": "DoorElement",
+            "Prefab": {
+                "instanceID": 0
+            },
+            "NPC_Posture": "",
+            "NPC_Dialog": "",
+            "Item_Dialog": "",
+            "Door_CanPass": true,
+            "Door_CanPassCondition": "<None>",
+            "Door_TargetScene": "S_Shire_Kitchen",
+            "Custom_Dialog": "",
+            "Custom_CanRepeatDialog": false,
+            "Custom_HasDialoged": false
+        },
+        {
+            "Name": "LeaveDoor_ShireRestaurant",
+            "Position": {
+                "x": -3.905658721923828,
+                "y": 1.2625629901885987,
+                "z": 6.12460994720459
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "ElementType": "LeaveDoorElement",
+            "Prefab": {
+                "instanceID": 0
+            },
+            "NPC_Posture": "",
+            "NPC_Dialog": "",
+            "Item_Dialog": "",
+            "Door_CanPass": false,
+            "Door_CanPassCondition": "",
+            "Door_TargetScene": "",
+            "Custom_Dialog": "",
+            "Custom_CanRepeatDialog": false,
+            "Custom_HasDialoged": false
+        },
+        {
+            "Name": "Door_Shire_Restaurant-Corridor",
+            "Position": {
+                "x": 7.424042224884033,
+                "y": 1.2625629901885987,
+                "z": 1.0874181985855103
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "ElementType": "DoorElement",
+            "Prefab": {
+                "instanceID": 0
+            },
+            "NPC_Posture": "",
+            "NPC_Dialog": "",
+            "Item_Dialog": "",
+            "Door_CanPass": true,
+            "Door_CanPassCondition": "<None>",
+            "Door_TargetScene": "S_Shire_Corridor",
+            "Custom_Dialog": "",
+            "Custom_CanRepeatDialog": false,
+            "Custom_HasDialoged": false
+        }
+    ]
+}

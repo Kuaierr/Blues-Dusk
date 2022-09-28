@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
         m_Movement.OnUpdate();
     }
 
+    public void CollectItem(UnityAction callback)
+    {
+        m_Animator.SetTrigger("Collect");
+        m_Animator.OnComplete(callback: callback);
+    }
+
     // public bool TestNavigation(Vector3 targetPosition)
     // {
     //     if (m_NavMeshAgent.isOnNavMesh)

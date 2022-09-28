@@ -15,15 +15,12 @@ public class DoorElement : SceneElementBase
     [Dialog] public string Dialog;
     [SerializeField] private bool m_HasDialoged = false;
     [SerializeField] private bool m_CanRepeatDialog = false;
-    public UnityEvent OnInteractAfter;
-
+    
     public override void OnLoad(object sender, GameEventArgs e)
     {
         base.OnLoad(sender, e);
         m_HasDialoged = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "HasDialoged"), false);
-        Log.Info(CanPass);
         CanPass = GameKitCenter.Setting.GetBool(string.Format("{0}({1})", Name, "CanPass"), CanPass);
-        Log.Warning(CanPass);
     }
 
     public override void OnSave(object sender, GameEventArgs e)

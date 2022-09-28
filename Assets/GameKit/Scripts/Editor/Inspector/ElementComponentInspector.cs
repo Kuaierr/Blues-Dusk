@@ -14,7 +14,6 @@ namespace UnityGameKit.Editor
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
             if (!EditorApplication.isPlaying)
             {
                 EditorGUILayout.HelpBox("Available during runtime only.", MessageType.Info);
@@ -36,6 +35,7 @@ namespace UnityGameKit.Editor
                     }
                 }
             }
+
             serializedObject.ApplyModifiedProperties();
             Repaint();
         }

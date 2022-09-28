@@ -7,20 +7,19 @@ using UnityEngine.Events;
 public class CustomElement : SceneElementBase
 {
     [Dialog] public string Dialog;
-    public bool m_CanRepeatDialog = false;
-    [SerializeField] private bool m_HasDialoged;
-    public UnityEvent OnInteractAfter;
+    public bool CanRepeatDialog = false;
+    public bool HasDialoged;
 
     public override void OnInit()
     {
         base.OnInit();
-        m_HasDialoged = false;
+        HasDialoged = false;
         GameKitCenter.Event.Subscribe(FinishDialogCompleteEventArgs.EventId, OnDialogFinish);
     }
 
     public override void OnInteract()
     {
-        if (Dialog != string.Empty && Dialog != "<None>" && !m_HasDialoged)
+        if (Dialog != string.Empty && Dialog != "<None>" && !HasDialoged)
         {
             Vector3 middlePos = (Player.Current.transform.position + this.transform.position) / 2;
             QuickCinemachineCamera.current.SetFocus(middlePos);
@@ -39,8 +38,8 @@ public class CustomElement : SceneElementBase
             if (eventArgs.AssetName == Dialog)
             {   
                 OnInteractAfter?.Invoke();
-                if (m_CanRepeatDialog)
-                    m_HasDialoged = true;
+                if (CanRepeatDialog)
+                    HasDialoged = true;
             }
         }
     }

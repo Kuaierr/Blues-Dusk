@@ -10,7 +10,7 @@ using LubanConfig.DataTable;
 [RequireComponent(typeof(Outline), typeof(MeshCollider))]
 public abstract class SceneElementBase : GameElementBase
 {
-    public float OutlineWidth = 3f;
+    private float OutlineWidth = 2f;
     private Outline m_Outline;
     public bool IsOutlineShown
     {

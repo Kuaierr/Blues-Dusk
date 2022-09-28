@@ -8,7 +8,7 @@ using UnityGameKit.Runtime;
 
 public abstract class NPCElementBase : GameElementBase
 {
-    public float OutlineWidth = 3f;
+    private float OutlineWidth = 2f;
     private Outline[] m_Outlines;
     public bool IsOutlineShown
     {

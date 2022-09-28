@@ -320,6 +320,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8944438453484055846, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
+      propertyPath: m_Priority
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: DefaultRotation.x
       value: 45
@@ -415,6 +419,7 @@ MonoBehaviour:
   ScriptablePools:
   - {fileID: 11400000, guid: 1ae28351a4336944c942e24cbd4f3863, type: 2}
   - {fileID: 11400000, guid: 63ffa300485b2524ca5d122ebb4c6174, type: 2}
+  - {fileID: 11400000, guid: e7fbddff77f01904fb05c47199a228ea, type: 2}
 --- !u!1 &444044318
 GameObject:
   m_ObjectHideFlags: 0
