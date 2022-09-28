@@ -20,9 +20,9 @@ MonoBehaviour:
   define_xml: Luban/Config/Defines/__root__.xml
   input_data_dir: Luban/Config/Datas
   gen_types: 1028
-  service: all
+  service: client
   output_data_dir: Assets/LubanGen/Datas/json
-  output_code_dir: Assets/LubanGen/Scripts
+  output_code_dir: Assets/LubanGen/Scripts/
   output_data_resources_list_file: 
   output_exclude_tags: 
   output_data_file_extension: 
