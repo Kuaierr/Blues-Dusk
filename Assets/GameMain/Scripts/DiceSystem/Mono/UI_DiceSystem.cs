@@ -274,11 +274,13 @@ public class UI_DiceSystem : UIFormChildBase
         //回到原本的位置
         dice.DOComplete();
         dice.enabled = false;
-        dice.transform.DOMove(_negativeDiceSlots[dice.Index].position, 0.5f)
+        dice.transform.DOMove(dice.transform.parent.position, 0.5f)
             .OnComplete(() =>
             {
                 dice.ChangeToDiceMaskMaterial();
                 dice.enabled = true;
+                if (dice.transform.position != dice.transform.parent.position)
+                    dice.transform.DOMove(dice.transform.parent.position, 0.2f);
             });
     }
 
@@ -484,6 +486,7 @@ public class UI_DiceSystem : UIFormChildBase
         }
     }
 
+    //Info CurrentList & CurrentIndex 均在这里改变
     private void SelectDice(int index, List<UI_Dice> list)
     {
         //Debug.Log(index + ", " + list.Count);
@@ -681,7 +684,7 @@ public class UI_DiceSystem : UIFormChildBase
 
         //currentList不可能等于0
         if (CheckIfSomeListEmpty())
-            SwitchList();
+            SwitchList(currentDice);
         else
         {
             int targetIndex = _currentDiceIndex;
@@ -740,15 +743,21 @@ public class UI_DiceSystem : UIFormChildBase
         return true;
     }
 
-    private void SwitchList()
+    private void SwitchList(UI_Dice currentDice = null)
     {
         int targetIndex = 0;
         if (_currentList == _activedDices)
         {
-            while (targetIndex < _negativeDiceSlots.Count &&
-                   _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
-                ++targetIndex;
-            if (targetIndex >= _negativeDiceSlots.Count) return;
+            if (currentDice == null)
+            {
+                while (targetIndex < _negativeDiceSlots.Count &&
+                       _negativeDiceSlots[targetIndex].GetComponentInChildren<UI_Dice>() == null)
+                    ++targetIndex;
+                if (targetIndex >= _negativeDiceSlots.Count) return;
+            }
+            else
+                targetIndex = _negativeDices.IndexOf(currentDice);
+
             SelectDice(targetIndex, _negativeDices);
         }
         else

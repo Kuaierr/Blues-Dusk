@@ -5,7 +5,7 @@ using GameKit.Event;
 using UnityEngine;
 using UnityGameKit.Runtime;
 
-public class SettingSystem : MonoSingletonBase<SettingSystem>
+public class ConfigSystem : MonoSingletonBase<ConfigSystem>
 {	
 	private int m_CachedUiId;
 
@@ -25,7 +25,7 @@ public class SettingSystem : MonoSingletonBase<SettingSystem>
 		}
 		else
 		{
-			var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_SettingSystem", this);
+			var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_ConfigSystem", this);
 			if (uiForm != null)
 				m_CachedUiId = (int)uiForm;
 		}

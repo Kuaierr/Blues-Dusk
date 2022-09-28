@@ -78,15 +78,6 @@ public class UI_Response : UIFormChildBase
             UIOptions[i].Init(this);
         m_MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
         m_ActiveUIOptions = new List<UI_Option>();
-
-        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
-        {
-            if (!m_ActiveUIOptions[i].IsLocked)
-            {
-                EmphasizeSelectedOption(i);
-                break;
-            }
-        }
     }
 
     public override void OnUpdate()
@@ -217,7 +208,6 @@ public class UI_Response : UIFormChildBase
 
     private void EmphasizeSelectedOption(int index)
     {
-        Debug.Log(m_LastIndex+", "+index);
         if (m_LastIndex >= 0)
             UIOptions[m_LastIndex].SetEmphasize(false);
         if (index >= 0)
@@ -362,8 +352,16 @@ public class UI_Response : UIFormChildBase
 
     private void EmphasizeFirst()
     {
-        UI_Option firstOption = FindFirstValidOption();
+        /*UI_Option firstOption = FindFirstValidOption();
         if (firstOption != null)
-            firstOption.SetEmphasize(true);
+            firstOption.SetEmphasize(true);*/
+        for (int i = 0; i < m_ActiveUIOptions.Count; i++)
+        {
+            if (!m_ActiveUIOptions[i].IsLocked)
+            {
+                EmphasizeSelectedOption(i);
+                break;
+            }
+        }
     }
 }

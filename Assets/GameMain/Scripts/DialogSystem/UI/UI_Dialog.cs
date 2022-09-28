@@ -231,7 +231,7 @@ public class UI_Dialog : UIFormBase
             }
         }
         // 如果该节点是仓检的选项
-        if (tempDialogData.IsInventoryCheckOption && tempDialogData.CachedInventoryName != "DiceInventory")
+        /*if (tempDialogData.IsInventoryCheckOption && tempDialogData.CachedInventoryName != "DiceInventory")
         {
             //Info tempDialogData.CachedStockConditions 有需要检测物品名，物品名与陪标中的name一致 
             //Info tempDialogData.CachedInventoryName 有检测背包的名称
@@ -252,7 +252,7 @@ public class UI_Dialog : UIFormBase
                           "TargetItemName: " + tempDialogData.CachedStockConditions[i] + "\n" +
                           "Result: " + clear);
             }
-        }
+        }*/
 
         // 如果是纯功能节点
         if (tempDialogData.IsFunctional)
