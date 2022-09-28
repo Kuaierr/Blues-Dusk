@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
-
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Setting Component")]
     public sealed class SettingComponent : GameKitComponent
@@ -19,12 +18,12 @@ namespace UnityGameKit.Runtime
         [SerializeField]
         private SettingHelperBase m_CustomSettingHelper = null;
 
+        public int CurrentSaveIndex { get; private set; } = 0;
+        private const string _currentSaveIndex = "CurrentSaveIndex"; 
+
         public int Count
         {
-            get
-            {
-                return m_SettingManager.Count;
-            }
+            get { return m_SettingManager.Count; }
         }
 
         protected override void Awake()
@@ -60,6 +59,7 @@ namespace UnityGameKit.Runtime
                 Log.Error("Load settings failure.");
             }
         }
+
         public void Load()
         {
             m_SettingManager.Load();
@@ -68,6 +68,14 @@ namespace UnityGameKit.Runtime
         public void Save()
         {
             m_SettingManager.Save();
+            PlayerPrefs.SetInt(_currentSaveIndex, CurrentSaveIndex);
+        }
+
+        public void SetCurrentSaveIndex(int i)
+        {
+            if (i < 0 && i > 3) 
+                Debug.LogError("SaveData Out of Index");
+            CurrentSaveIndex = i;
         }
 
         public string[] GetAllSettingNames()
@@ -181,7 +189,7 @@ namespace UnityGameKit.Runtime
         }
 
         public void SetObject(string settingName, object obj)
-        { 
+        {
             m_SettingManager.SetObject(settingName, obj);
         }
     }

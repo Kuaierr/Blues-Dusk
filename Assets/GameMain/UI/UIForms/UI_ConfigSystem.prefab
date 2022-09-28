@@ -1646,7 +1646,7 @@ GameObject:
   - component: {fileID: 2532226095066353769}
   - component: {fileID: 8821381297706467794}
   m_Layer: 5
-  m_Name: UI_SettingSystem
+  m_Name: UI_ConfigSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: 5556622771579289440}
   - component: {fileID: 5556622771579289441}
   m_Layer: 5
-  m_Name: UI_SettingSheets
+  m_Name: UI_ConfigSheets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

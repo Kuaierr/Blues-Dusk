@@ -5,7 +5,7 @@ using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_SettingSystem : UIFormBase
+public class UI_ConfigSystem : UIFormBase
 {
     public UI_SheetSystem ui_SheetSystem;
 
