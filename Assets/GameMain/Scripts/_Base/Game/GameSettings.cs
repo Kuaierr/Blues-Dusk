@@ -252,7 +252,8 @@ public class GameSettings : MonoSingletonBase<GameSettings>
 
     private static void ConfigToElemnt(GameElementBase elementBase, ElementData elementData)
     {
-        elementBase.InteractTrans.position = elementData.DestinationPosition;
+        //bug 编译错误
+        elementBase.InteractPosition = elementData.DestinationPosition;
         if (elementBase.GetType() == typeof(NPCElement))
         {
             ((NPCElement)elementBase).Dialog = elementData.NPC_Dialog;
