@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_SaveDataSlot : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
@@ -11,6 +12,8 @@ public class UI_SaveDataSlot : MonoBehaviour, IPointerEnterHandler, IPointerClic
     public TMP_Text index;
     public TMP_Text detail;
 
+    public Button deleteButton;
+    
     private UnityAction<int> onClicked;
 
     public void OnInit(int index, UnityAction<int> onClickCallback)
@@ -24,6 +27,9 @@ public class UI_SaveDataSlot : MonoBehaviour, IPointerEnterHandler, IPointerClic
         if (GameKitCenter.Setting.Load())
         {
             detail.text = "Has Data";
+            Debug.Log(GameKitCenter.Setting.Count);
+            
+            deleteButton.onClick.AddListener(DeleteCurrentData);
         }
         else
         {
@@ -36,9 +42,9 @@ public class UI_SaveDataSlot : MonoBehaviour, IPointerEnterHandler, IPointerClic
         onClicked?.Invoke(Index);
     }
 
-    public void DeleteSaveData()
+    private void DeleteCurrentData()
     {
-        Debug.Log("Delete SaveData");
+        GameKitCenter.Setting.RemoveAllSettings();
     }
 
     public void OnPointerEnter(PointerEventData eventData) { }
