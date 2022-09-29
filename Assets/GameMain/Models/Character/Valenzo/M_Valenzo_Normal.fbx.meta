@@ -1,0 +1,480 @@
+fileFormatVersion: 2
+guid: cda034ffde1eda744b87e3239517c7f3
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ma_Valenzo_Normal
+    second: {fileID: 2100000, guid: 543b5b43a3502b347a7d702eab42e97d, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Valenzo_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Valenzo_Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint3
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint2
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint4
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: M_Valenzo_Normal(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Valenzo_Normal
+      parentName: M_Valenzo_Normal(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Head
+      parentName: M_Valenzo_Normal
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Body
+      parentName: M_Valenzo_Normal
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Chain
+      parentName: M_Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Cloth
+      parentName: M_Valenzo_Normal
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Reference
+      parentName: M_Valenzo_Normal(Clone)
+      position: {x: -0, y: -0.0033563091, z: -0.01780986}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Hips
+      parentName: Valenzo_Reference
+      position: {x: -0, y: 1.280549, z: 0.03074693}
+      rotation: {x: 0.48755714, y: -0.51214063, z: -0.48755714, w: 0.51214063}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftUpLeg
+      parentName: Valenzo_Hips
+      position: {x: 0.013434298, y: -0.010383127, z: 0.10650146}
+      rotation: {x: -0.004319387, y: 0.00029263983, z: 0.9977035, w: 0.06759472}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftLeg
+      parentName: Valenzo_LeftUpLeg
+      position: {x: -0.4584572, y: 1.2490009e-16, z: -1.3877788e-17}
+      rotation: {x: -0.000250569, y: -0.0021934838, z: 0.03876641, w: 0.9992459}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftFoot
+      parentName: Valenzo_LeftLeg
+      position: {x: -0.6707215, y: 1.3877788e-17, z: 0}
+      rotation: {x: -0.0102598835, y: 0.02261141, z: 0.3598137, w: 0.9326937}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftToeBase
+      parentName: Valenzo_LeftFoot
+      position: {x: -0.1551157, y: -1.6653345e-16, z: 1.3877788e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightUpLeg
+      parentName: Valenzo_Hips
+      position: {x: 0.013434298, y: -0.010383127, z: -0.10650146}
+      rotation: {x: 0.00029263983, y: 0.004319387, z: -0.06759472, w: 0.9977035}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightLeg
+      parentName: Valenzo_RightUpLeg
+      position: {x: 0.4584572, y: -2.7755576e-17, z: 1.3877788e-17}
+      rotation: {x: -0.000250569, y: -0.0021934838, z: 0.03876641, w: 0.9992459}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightFoot
+      parentName: Valenzo_RightLeg
+      position: {x: 0.6707215, y: 0, z: -1.3877788e-17}
+      rotation: {x: -0.0102598835, y: 0.02261141, z: 0.3598137, w: 0.9326937}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightToeBase
+      parentName: Valenzo_RightFoot
+      position: {x: 0.1551157, y: 1.6653345e-16, z: 0}
+      rotation: {x: 0.000025417168, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Spine
+      parentName: Valenzo_Hips
+      position: {x: -0.11137544, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.022434006, w: 0.99974835}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Spine1
+      parentName: Valenzo_Spine
+      position: {x: -0.1092211, y: -2.7755576e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.0047804173, w: 0.9999886}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Spine2
+      parentName: Valenzo_Spine1
+      position: {x: -0.121546976, y: 4.1633363e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.002651472, w: 0.9999965}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftShoulder
+      parentName: Valenzo_Spine2
+      position: {x: -0.18943731, y: -0.0102869095, z: 0.08462872}
+      rotation: {x: -0.4798184, y: 0.51939803, z: 0.4798184, w: 0.51939803}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftArm
+      parentName: Valenzo_LeftShoulder
+      position: {x: -0.12694308, y: -2.220446e-16, z: 3.469447e-17}
+      rotation: {x: 0.7070631, y: 0.020131813, z: -0.007864195, w: 0.7068202}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftForeArm
+      parentName: Valenzo_LeftArm
+      position: {x: -0.29049736, y: -2.0816682e-17, z: 0}
+      rotation: {x: -0.00012241826, y: -0.0088455565, z: 0.014391539, w: 0.9998573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_LeftHand
+      parentName: Valenzo_LeftForeArm
+      position: {x: -0.26129425, y: 6.938894e-18, z: -2.220446e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint1
+      parentName: Valenzo_LeftHand
+      position: {x: -0.1122643, y: -0.0043886905, z: -0.004170605}
+      rotation: {x: -0.7070958, y: -0.0037019586, z: 0.0039427443, w: 0.7070971}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint3
+      parentName: Valenzo_LeftHand
+      position: {x: -0.074895576, y: 0.08346016, z: -0.00418333}
+      rotation: {x: -0.7070958, y: -0.0037019586, z: 0.0039427443, w: 0.7070971}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightShoulder
+      parentName: Valenzo_Spine2
+      position: {x: -0.18943731, y: -0.0102869095, z: -0.08462872}
+      rotation: {x: 0.51939803, y: 0.4798184, z: -0.51939803, w: 0.4798184}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightArm
+      parentName: Valenzo_RightShoulder
+      position: {x: 0.12694308, y: 2.220446e-16, z: -3.469447e-17}
+      rotation: {x: 0.7070631, y: 0.020131813, z: -0.007864195, w: 0.7068202}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightForeArm
+      parentName: Valenzo_RightArm
+      position: {x: 0.29049736, y: 2.0816682e-17, z: -2.220446e-16}
+      rotation: {x: -0.00012241826, y: -0.0088455565, z: 0.014391539, w: 0.9998573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_RightHand
+      parentName: Valenzo_RightForeArm
+      position: {x: 0.26129425, y: -6.938894e-18, z: 2.220446e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: Valenzo_RightHand
+      position: {x: 0.1122643, y: 0.0043886905, z: 0.004170605}
+      rotation: {x: -0.7070958, y: -0.0037019586, z: 0.0039427443, w: 0.7070971}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint4
+      parentName: Valenzo_RightHand
+      position: {x: 0.074895576, y: -0.08346016, z: 0.00418333}
+      rotation: {x: -0.7070958, y: -0.0037019586, z: 0.0039427443, w: 0.7070971}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Neck
+      parentName: Valenzo_Spine2
+      position: {x: -0.27217764, y: -4.1633363e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.062155344, w: 0.9980665}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Valenzo_Head
+      parentName: Valenzo_Neck
+      position: {x: -0.12683202, y: 2.7755576e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
