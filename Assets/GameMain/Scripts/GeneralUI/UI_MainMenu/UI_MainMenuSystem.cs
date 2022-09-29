@@ -29,39 +29,63 @@ public class UI_MainMenuSystem : MonoBehaviour
         _newGameButton.onClick.AddListener(NewGame);
         _loadGameButton.onClick.AddListener(LoadGame);
         _settingButton.onClick.AddListener(OpenSettingPanel);
-        
+
         saveDataArea.SetActive(false);
-        _continueButton.gameObject.SetActive(PlayerPrefs.HasKey(CurrentSaveDataKey));
-        
-        if(PlayerPrefs.HasKey(CurrentSaveDataKey))
-            PlayerPrefs.SetInt(CurrentSaveDataKey,-1);
+
+        RefreshContinueButton();
+        if (!PlayerPrefs.HasKey(CurrentSaveDataKey))
+            PlayerPrefs.SetInt(CurrentSaveDataKey, 00);
     }
 
     private void Update()
     {
-        if(InputManager.instance.GetKeyDown(KeyCode.Escape))
+        if (InputManager.instance.GetKeyDown(KeyCode.Escape))
+        {
             saveDataArea.SetActive(false);
+            RefreshContinueButton();
+        }
     }
 
     private void ContinueLastGame()
     {
         int index = PlayerPrefs.GetInt(CurrentSaveDataKey);
+        LoadData(index);
     }
 
     private void NewGame()
     {
+        int currentIndex = -1;
+        if (PlayerPrefs.HasKey(CurrentSaveDataKey))
+            currentIndex = PlayerPrefs.GetInt(CurrentSaveDataKey);
         for (int i = 0; i < saveDataSlots.Count; i++)
-            saveDataSlots[i].OnInit(i, StartNewData);
+            saveDataSlots[i].OnInit(i + 1, OpenUITip);
+        if (currentIndex != -1)
+            PlayerPrefs.SetInt(CurrentSaveDataKey, currentIndex);
 
         saveDataArea.SetActive(true);
+
+        void OpenUITip(int index)
+        {
+            GeneralSystem.current.OpenTipUI("从这里开始吗？", () => { StartNewData(index); });
+        }
     }
 
     private void LoadGame()
     {
+        int currentIndex = -1;
+        if (PlayerPrefs.HasKey(CurrentSaveDataKey))
+            currentIndex = PlayerPrefs.GetInt(CurrentSaveDataKey);
         for (int i = 0; i < saveDataSlots.Count; i++)
-            saveDataSlots[i].OnInit(i, LoadData);
-        
+            saveDataSlots[i].OnInit(i + 1, OpenUITip);
+        if (currentIndex != -1)
+            PlayerPrefs.SetInt(CurrentSaveDataKey, currentIndex);
+
         saveDataArea.SetActive(true);
+
+        void OpenUITip(int index)
+        {
+            GeneralSystem.current.OpenTipUI("读取这个进度吗？", () => { LoadData(index); });
+        }
     }
 
     private void OpenSettingPanel()
@@ -70,12 +94,20 @@ public class UI_MainMenuSystem : MonoBehaviour
         GameKitCenter.Event.Fire(this, args);
     }
 
+    private void RefreshContinueButton()
+    {
+        if (PlayerPrefs.HasKey(CurrentSaveDataKey) && PlayerPrefs.GetInt(CurrentSaveDataKey) != 0)
+            _continueButton.gameObject.SetActive(true);
+        else
+            _continueButton.gameObject.SetActive(false);
+    }
+
     public void StartNewData(int index)
     {
         PlayerPrefs.SetInt(CurrentSaveDataKey, index);
         //TODO 通过UI_Tip确认
         //如果有数据，就删除
-        if(GameKitCenter.Setting.Load())
+        if (GameKitCenter.Setting.Load())
             GameKitCenter.Setting.RemoveAllSettings();
         //开始新游戏
         GameKitCenter.Setting.Save();
@@ -86,11 +118,13 @@ public class UI_MainMenuSystem : MonoBehaviour
     {
         PlayerPrefs.SetInt(CurrentSaveDataKey, index);
         //如果有数据，则读取
-        if(!GameKitCenter.Setting.Load())
+        if (!GameKitCenter.Setting.Load())
             return;
-        else 
-            Debug.Log("");
-            
-        
+        else
+        {
+            //TODO 读取上次存档时的场景和位置信息，加载场景
+            Debug.Log("Load GameData");
+            GameKitCenter.Procedure.ChangeSceneBySelect(StartSceneName);
+        }
     }
 }
