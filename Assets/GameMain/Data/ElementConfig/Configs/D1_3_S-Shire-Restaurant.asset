@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6c842a2ca7f24eb52a1120d9ac9ba, type: 3}
+  m_Name: D1_3_S-Shire-Restaurant
+  m_EditorClassIdentifier: 
+  Day: 1
+  Stage: 3
+  SceneName: S_Shire_Restaurant
+  ElementDatas:
+  - Name: NPC_Zola
+    DestinationPosition: {x: 1.35, y: 0, z: -2.77}
+    Position: {x: 1.35, y: 0, z: -2.77}
+    Rotation: {x: -0, y: 270, z: 0}
+    ElementType: NPCElement
+    Prefab: {fileID: 8263724039467737132, guid: a911866fe5bb46149821a6a0710e095a, type: 3}
+    NPC_Posture: <None>
+    NPC_Dialog: "(P1_\u573A\u666F)\u5353\u62C9_\u9152\u9986\u9910\u996E\u533A"
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: Coffee
+    DestinationPosition: {x: 1.94, y: 1.732, z: 0.3899998}
+    Position: {x: 1.94, y: 1.63, z: -0.79}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: CustomElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: "(\u6D4B\u8BD5)\u5206\u652F\u6D4B\u8BD5"
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: NPC_Noah
+    DestinationPosition: {x: 2.385, y: 1.04, z: 1.098}
+    Position: {x: 2.385, y: 0, z: 0.574}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: NPCElement
+    Prefab: {fileID: 377934222220900978, guid: 865da8ca1d0cca64888c2a5a7318a51f, type: 3}
+    NPC_Posture: <None>
+    NPC_Dialog: "(P1_\u573A\u666F)\u8BFA\u963F_\u9152\u9986\u9910\u996E\u533A"
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: Door_Shire_Restaurant-Kitchen
+    DestinationPosition: {x: 4.0492744, y: 1.262563, z: 0.49727806}
+    Position: {x: 4.1392746, y: 1.262563, z: 0.027278073}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: DoorElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 1
+    Door_CanPassCondition: <None>
+    Door_TargetScene: S_Shire_Kitchen
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: LeaveDoor_ShireRestaurant
+    DestinationPosition: {x: -3.9366586, y: 1.262563, z: 5.1216097}
+    Position: {x: -3.9056587, y: 1.262563, z: 6.12461}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: LeaveDoorElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: Door_Shire_Restaurant-Corridor
+    DestinationPosition: {x: 6.438042, y: 1.262563, z: 1.0874182}
+    Position: {x: 7.424042, y: 1.262563, z: 1.0874182}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: DoorElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 1
+    Door_CanPassCondition: <None>
+    Door_TargetScene: S_Shire_Corridor
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0

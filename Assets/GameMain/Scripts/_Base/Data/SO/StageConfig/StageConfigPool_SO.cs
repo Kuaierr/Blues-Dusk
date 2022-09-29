@@ -2,6 +2,7 @@ using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameKit;
 using UnityGameKit.Runtime;
 using Sirenix.OdinInspector;
 using System.IO;
@@ -14,7 +15,8 @@ public class StageConfigPool_SO : PoolBase_SO
     {
         foreach (var config in m_Configs)
         {
-            if (config.Id == name)
+            Log.Info(config.Id.Correction());
+            if (config.Id.Correction() == name.Correction())
             {
                 return config as StageConfig_SO;
             }
@@ -34,7 +36,7 @@ public class StageConfigPool_SO : PoolBase_SO
     public void LoadAllConfig()
     {
         m_Configs = new List<StageConfig_SO>();
-        foreach (string assetGuid in UnityEditor.AssetDatabase.FindAssets("t:StageConfig_SO", new string[] { "Assets/GameMain/Data/ElementConfig" }))
+        foreach (string assetGuid in UnityEditor.AssetDatabase.FindAssets("t:StageConfig_SO", new string[] { AssetUtility.ElementConfigPath + "/Configs" }))
         {
             string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(assetGuid);
             StageConfig_SO config = UnityEditor.AssetDatabase.LoadAssetAtPath<StageConfig_SO>(assetPath);
@@ -56,14 +58,13 @@ public class StageConfigPool_SO : PoolBase_SO
         {
             foreach (var config in m_Configs)
             {
-                string strData = JsonUtility.ToJson(config.ElementDatas, true);
-                string path = "Assets/GameMain/Data/ElementConfig/Json/" + config.name + ".json";
+                string strData = JsonUtility.ToJson(config, true);
+                string path = AssetUtility.ElementConfigPath + "/Json/" + config.name + ".json";
                 // Debug.Log(strData);
                 // TextAsset asset = new TextAsset(strData);
                 if (File.Exists(path))
                     File.Delete(path);
                 File.WriteAllText(path, strData);
-                // UnityEditor.AssetDatabase.CreateAsset(asset, "Assets/GameMain/Data/ElementConfig/Json/" + config.name + ".json");
             }
             // UnityEditor.AssetDatabase.SaveAssets();
             UnityEditor.AssetDatabase.Refresh();
@@ -77,7 +78,7 @@ public class StageConfigPool_SO : PoolBase_SO
             m_Configs = new List<StageConfig_SO>();
 
 
-        foreach (string assetGuid in UnityEditor.AssetDatabase.FindAssets("t:TextAsset", new string[] { "Assets/GameMain/Data/ElementConfig/Json" }))
+        foreach (string assetGuid in UnityEditor.AssetDatabase.FindAssets("t:TextAsset", new string[] { AssetUtility.ElementConfigPath + "/Json" }))
         {
             string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(assetGuid);
             TextAsset textAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);

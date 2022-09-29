@@ -118,9 +118,11 @@ public class ProcedureChangeScene : ProcedureBase
 
     private void OnSceneLoad()
     {
-        GameKitCenter.Element.Clear();
+        GameKitCenter.Element.ResetCache();
         GameKitCenter.Setting.Load();
         GameKitCenter.Event.FireNow(this, LoadSettingsEventArgs.Create(null));
+        GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
+
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();

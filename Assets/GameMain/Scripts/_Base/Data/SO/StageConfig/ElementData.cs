@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class ElementData
 {
     [LabelText("名称"), DisplayAsString] public string Name = null;
+    [LabelText("互动位置"), DisplayAsString] public Vector3 DestinationPosition;
     [LabelText("位置"), DisplayAsString] public Vector3 Position;
     [LabelText("方向"), DisplayAsString] public Vector3 Rotation;
     [LabelText("类型名"), DisplayAsString] public string ElementType;

@@ -283,11 +283,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34c4d6d64dddb41abe920627d8ae8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
   TargetScene: S_Apartment_Balcony
+  CanPassCondition: <None>
   CanPass: 1
   EnterTranform: {fileID: 1277670089}
   Dialog: 
@@ -706,11 +709,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34c4d6d64dddb41abe920627d8ae8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
   TargetScene: S_Apartment_Toilet
+  CanPassCondition: <None>
   CanPass: 1
   EnterTranform: {fileID: 1512270542}
   Dialog: 
@@ -846,12 +852,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ab547135199ff4a904a42cd139b5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
   CanPass: 1
   EnterTranform: {fileID: 0}
+  m_PossibleScenes: []
 --- !u!64 &1219049303
 MeshCollider:
   m_ObjectHideFlags: 0

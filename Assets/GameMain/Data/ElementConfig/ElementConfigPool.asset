@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ElementConfigPool
   m_EditorClassIdentifier: 
   m_Configs:
-  - {fileID: 11400000, guid: 0b95d3c1765ffe243875bb1d64123a0b, type: 2}
+  - {fileID: 11400000, guid: 7213c297121acd84b85967fba49c6de8, type: 2}

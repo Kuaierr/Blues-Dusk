@@ -35,12 +35,12 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
         FollowPlayer(transform);
     }
 
-    public void SetFocus(Vector3 position)
+    public void SetFocus(Vector3 position, bool isShrink = true)
     {
         FocusTransform.position = position;
         m_VirtualCamera.Follow = FocusTransform;
         StopAllCoroutines();
-        StartCoroutine(ShrinkProcess(0.75f * m_VirtualCamera.m_Lens.OrthographicSize, 2f));
+        StartCoroutine(FocusProcess(m_VirtualCamera.m_Lens.OrthographicSize, 2f, isShrink));
     }
 
     public void ResetFocus()
@@ -53,26 +53,49 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
         Log.Success("Reset Focus to {0}", m_CachedPlayerTransform.gameObject.name);
         FollowPlayer(m_CachedPlayerTransform);
         StopAllCoroutines();
-        StartCoroutine(EnlargeProcess(DefaultOrthographicSize, 2f));
+        StartCoroutine(ResetFocusProcess(DefaultOrthographicSize, 2f));
     }
 
-    IEnumerator ShrinkProcess(float size, float speed)
+    IEnumerator FocusProcess(float size, float speed, bool isShrink)
     {
-        while (m_VirtualCamera.m_Lens.OrthographicSize >= size)
+        if (isShrink)
         {
-            m_VirtualCamera.m_Lens.OrthographicSize -= speed * Time.deltaTime;
-            yield return null;
+            while (m_VirtualCamera.m_Lens.OrthographicSize >= 0.75f * size)
+            {
+                m_VirtualCamera.m_Lens.OrthographicSize -= speed * Time.deltaTime;
+                yield return null;
+            }
         }
-        Debug.Log("Shrink End.");
+        else
+        {
+            while (m_VirtualCamera.m_Lens.OrthographicSize <= 1.25f * size)
+            {
+                m_VirtualCamera.m_Lens.OrthographicSize += speed * Time.deltaTime;
+                yield return null;
+            }
+        }
+        Debug.Log("Focus End.");
     }
 
-    IEnumerator EnlargeProcess(float size, float speed)
+    IEnumerator ResetFocusProcess(float size, float speed)
     {
-        while (m_VirtualCamera.m_Lens.OrthographicSize <= size)
+        if (m_VirtualCamera.m_Lens.OrthographicSize >= size)
         {
-            m_VirtualCamera.m_Lens.OrthographicSize += speed * Time.deltaTime;
-            yield return null;
+            while (m_VirtualCamera.m_Lens.OrthographicSize >= size)
+            {
+                m_VirtualCamera.m_Lens.OrthographicSize -= speed * Time.deltaTime;
+                yield return null;
+            }
         }
-        Debug.Log("Enlarge End.");
+        else
+        {
+            while (m_VirtualCamera.m_Lens.OrthographicSize < size)
+            {
+                m_VirtualCamera.m_Lens.OrthographicSize += speed * Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        Debug.Log("Refocus End.");
     }
 }

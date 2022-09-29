@@ -2,6 +2,7 @@ using GameKit;
 
 public static class AssetUtility
 {
+    public static string ElementConfigPath = "Assets/GameMain/Data/ElementConfig";
     public static string GetFontAsset(string assetName)
     {
         return Utility.Text.Format("Assets/GameMain/Fonts/{0}.ttf", assetName);

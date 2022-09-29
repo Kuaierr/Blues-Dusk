@@ -320,6 +320,7 @@ public class UI_Dialog : UIFormBase
         if (nextNode.GetData<DialogDataNodeVariable>().IsFunctional)
         {
             nextNode = TryExecuteNodeFunction(nextNode);
+            return nextNode;
         }
         return nextNode;
     }
@@ -331,6 +332,13 @@ public class UI_Dialog : UIFormBase
         // GameKitCenter.Dialog.CurrentTree.Reset();
         DialogSystem.current.StopDialog(CurrentTree.Name);
         GameKitCenter.Dialog.CurrentTree = null;
+    }
+
+    public void RefreshDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
+    {
+        t_SpeakerName.text = string.Empty;
+        t_Contents.text = string.Empty;
+        SpeakerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
     public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
@@ -353,16 +361,19 @@ public class UI_Dialog : UIFormBase
             t_SpeakerName.text = data.Speaker;
         t_Contents.text = data.Contents;
         uI_SpeakerName.ToEason(data.Speaker != "伊森");
-        if (data.Speaker != ">>" && data.Speaker != "伊森" && data.Speaker != "")
+        if (data.Speaker != ">>" && data.Speaker != "")
         {
-            Character character = characterPool.GetData<Character>(data.Speaker.Correction());
-            if (m_CurrentCharacter != character)
+            if (data.Speaker != "伊森")
             {
-                m_CurrentCharacter = character;
-                SpeakerAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+                Character character = characterPool.GetData<Character>(data.Speaker.Correction());
+                if (m_CurrentCharacter != character)
+                {
+                    m_CurrentCharacter = character;
+                    SpeakerAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+                }
+                // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
+                uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
             }
-            // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
-            uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
             // character.animator.runtimeAnimatorController = charaAnimator;
         }
         else

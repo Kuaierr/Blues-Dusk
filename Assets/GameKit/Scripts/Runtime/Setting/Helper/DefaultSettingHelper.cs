@@ -17,7 +17,7 @@ namespace UnityGameKit.Runtime
             get
             {
                 if(!PlayerPrefs.HasKey("CurrentSaveDataIndex"))
-                    return Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, SettingFileName));
+                    return Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, "SaveData_00"  + SettingFileName));
 
                 string fileName = "SaveData_" + PlayerPrefs.GetInt("CurrentSaveDataIndex").ToString("00") + SettingFileName;
                 Debug.Log(Utility.IO.GetRegularPath(Path.Combine(Application.persistentDataPath, fileName)));

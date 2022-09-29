@@ -14,10 +14,17 @@ public class GameSettings : MonoSingletonBase<GameSettings>
 {
     private const string GamePrefix = "GameSettings";
     private const string ScenePrefix = "SceneSettings";
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
+    // }
+
     private void Start()
     {
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
+
 
     public void OnLoad(object sender, GameEventArgs e)
     {
@@ -93,9 +100,9 @@ public class GameSettings : MonoSingletonBase<GameSettings>
     }
 #if UNITY_EDITOR
     [Button("保存场景元素配置(Editor Only)")]
-    public static void EditorSaveElementConfig([ValueDropdown("GetDay"), LabelText("天数")] int day = 1, [ValueDropdown("GetStage"), LabelText("时间")] string stage = "早晨")
+    public static void EditorSaveElementConfig([ValueDropdown("GetDay"), LabelText("天数")] int day = 1, [ValueDropdown("GetStage"), LabelText("时间")] int stage = 1)
     {
-        string configName = string.Format("D{0}_{1}_{2}", day, stage, SceneManager.GetSceneAt(1).name);
+        string configName = string.Format("D{0}_{1}_{2}", day, stage, SceneManager.GetSceneAt(1).name.Replace("_","-"));
         GameElementBase[] elements = GameObject.FindObjectsOfType<GameElementBase>();
         StageConfig_SO config = ScriptableObject.CreateInstance<StageConfig_SO>();
 
@@ -107,11 +114,15 @@ public class GameSettings : MonoSingletonBase<GameSettings>
             data.ElementType = elements[i].GetType().ToString();
             data.Position = elements[i].transform.position;
             data.Rotation = elements[i].transform.rotation.eulerAngles;
-            if (UnityEditor.PrefabUtility.IsPartOfPrefabInstance(elements[i].gameObject) && elements[i].GetType() != typeof(CustomElement))
+            data.DestinationPosition = elements[i].InteractPosition;
+            if (UnityEditor.PrefabUtility.IsPartOfPrefabInstance(elements[i].gameObject))
             {
-                Debug.Log(elements[i].gameObject.name);
-                GameObject prefabAsset = UnityEditor.PrefabUtility.GetCorrespondingObjectFromOriginalSource(elements[i].gameObject);
-                data.Prefab = prefabAsset.GetComponent<GameElementBase>();
+                if (elements[i].GetType() == typeof(NPCElement) || elements[i].GetType() == typeof(CollectElement))
+                {
+                    Debug.Log(elements[i].gameObject.name);
+                    GameObject prefabAsset = UnityEditor.PrefabUtility.GetCorrespondingObjectFromOriginalSource(elements[i].gameObject);
+                    data.Prefab = prefabAsset.GetComponent<GameElementBase>();
+                }
             }
             if (elements[i].GetType() == typeof(NPCElement))
             {
@@ -137,9 +148,9 @@ public class GameSettings : MonoSingletonBase<GameSettings>
             config.AddData(data);
         }
 
-        if (!Directory.Exists("Assets/GameMain/Data/ElementConfig/"))
-            Directory.CreateDirectory("Assets/GameMain/Data/ElementConfig/");
-        string fullPath = "Assets/GameMain/Data/ElementConfig/" + configName + ".asset";
+        if (!Directory.Exists(AssetUtility.ElementConfigPath + "/Configs/"))
+            Directory.CreateDirectory(AssetUtility.ElementConfigPath + "/Configs/");
+        string fullPath = AssetUtility.ElementConfigPath + "/Configs/" + configName + ".asset";
         if (File.Exists(fullPath))
             UnityEditor.AssetDatabase.DeleteAsset(fullPath);
         UnityEditor.AssetDatabase.CreateAsset(config, fullPath);
@@ -186,14 +197,62 @@ public class GameSettings : MonoSingletonBase<GameSettings>
         }
     }
 
-#endif
-    public void LoadElementConfig(string id)
+    [Button("清空场景动态元素(Editor Only)")]
+    public void EditorClearAllDynamicElement()
     {
-        
+        Transform elementParent = GameObject.Find("Dynamic").transform;
+        List<GameObject> waitForDestroy = new List<GameObject>();
+        for (int j = 0; j < elementParent.childCount; j++)
+        {
+            waitForDestroy.Add(elementParent.GetChild(j).gameObject);
+        }
+
+        for (int j = 0; j < waitForDestroy.Count; j++)
+        {
+            DestroyImmediate(waitForDestroy[j]);
+        }
+    }
+
+#endif
+
+    public void LoadElementConfig(int day, int stage, string sceneName)
+    {
+        string configName = string.Format("{0}-{1}-{2}", day, stage, sceneName);
+        StageConfig_SO elementCongfig = GameKitCenter.Data.GetDataSO<StageConfigPool_SO>().GetData<StageConfig_SO>(configName);
+        if (elementCongfig == null)
+            return;
+
+        Transform elementParent = GameObject.Find("Dynamic").transform;
+        for (int j = 0; j < elementParent.childCount; j++)
+        {
+            Destroy(elementParent.GetChild(j).gameObject);
+        }
+
+        GameElementBase[] elements = GameObject.FindObjectsOfType<GameElementBase>();
+        foreach (var elementConfig in elementCongfig.GetAll())
+        {
+            if (elementConfig.Prefab == null)
+            {
+                for (int i = 0; i < elements.Length; i++)
+                {
+
+                    if (elements[i].Name == elementConfig.Name && elements[i].GetType().ToString() == elementConfig.ElementType)
+                    {
+                        ConfigToElemnt(elements[i], elementConfig);
+                    }
+                }
+            }
+            else
+            {
+                GameElementBase Instance = GameObject.Instantiate<GameElementBase>(elementConfig.Prefab, elementConfig.Position, elementConfig.Rotation.ToQuaternion(), elementParent);
+                ConfigToElemnt(Instance, elementConfig);
+            }
+        }
     }
 
     private static void ConfigToElemnt(GameElementBase elementBase, ElementData elementData)
     {
+        elementBase.InteractTrans.position = elementData.DestinationPosition;
         if (elementBase.GetType() == typeof(NPCElement))
         {
             ((NPCElement)elementBase).Dialog = elementData.NPC_Dialog;
@@ -227,6 +286,9 @@ public class GameSettings : MonoSingletonBase<GameSettings>
 
     public static IEnumerable GetStage()
     {
-        return new List<string>() { "早晨", "白日", "夜晚", "凌晨" };
+        for (int i = 1; i <= 4; i++)
+        {
+            yield return i;
+        }
     }
 }

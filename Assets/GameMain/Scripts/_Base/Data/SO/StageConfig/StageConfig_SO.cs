@@ -12,7 +12,7 @@ public class StageConfig_SO : ScriptableObject
 {
     [InfoBox("收集品实体和NPC实体采用生成策略，其余实体采用更新策略")]
     [SerializeField, ValueDropdown("GetDay"), LabelText("天数")] public int Day;
-    [SerializeField, ValueDropdown("GetStage"), LabelText("时间")] public string Stage;
+    [SerializeField, ValueDropdown("GetStage"), LabelText("时间")] public int Stage;
     [SerializeField, ValueDropdown("GetScenes"), LabelText("场景名称")] public string SceneName;
     [SerializeField, LabelText("加载实体数据")] public List<ElementData> ElementDatas;
 
@@ -24,7 +24,7 @@ public class StageConfig_SO : ScriptableObject
         }
     }
 
-    public void SetDayAndStage(int day, string stage, string sceneName)
+    public void SetDayAndStage(int day, int stage, string sceneName)
     {
         Day = day;
         Stage = stage;
@@ -71,7 +71,10 @@ public class StageConfig_SO : ScriptableObject
 
     private IEnumerable GetStage()
     {
-        return new List<string>() { "早晨", "白日", "夜晚", "凌晨" };
+        for (int i = 1; i <= 4; i++)
+        {
+            yield return i;
+        }
     }
 
     private IEnumerable GetScenes()
@@ -95,7 +98,7 @@ public class StageConfig_SO : ScriptableObject
         GameSettings.EditorLoadElementConfig(this);
     }
 
-    [Button("从场景同步")]
+    [Button("从场景保存")]
     public void SceneToConfig()
     {
         if (UnityEngine.SceneManagement.SceneManager.sceneCount < 2)

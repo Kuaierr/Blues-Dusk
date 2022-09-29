@@ -116,7 +116,7 @@ namespace UnityGameKit.Runtime
             }
         }
 
-        public void Clear()
+        public void ResetCache()
         {
             m_CachedInteractiveElement = null;
         }

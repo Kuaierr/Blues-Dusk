@@ -11,18 +11,18 @@ public abstract class GameElementBase : ElementBase
 {
     public UnityEvent OnInteractBegin;
     public UnityEvent OnInteractAfter;
-    private Transform m_InteractTrans;
+    public Transform InteractTrans;
     public Vector3 InteractPosition
     {
         get
         {
-            return m_InteractTrans.position;
+            return InteractTrans.position;
         }
     }
 
     public override void OnInit()
     {
-        m_InteractTrans = transform.Find("Destination");
+        InteractTrans = transform.Find("Destination");
         gameObject.layer = LayerMask.NameToLayer("Interactive");
         GameKitCenter.Event.Subscribe(SaveSettingsEventArgs.EventId, OnSave);
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
@@ -83,6 +83,11 @@ public abstract class GameElementBase : ElementBase
             Object destination = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>("Assets/GameMain/Elements/Utility/Destination.prefab");
             destination = UnityEditor.PrefabUtility.InstantiatePrefab(destination, this.transform);
             destination.name = "Destination";
+            InteractTrans = ((GameObject)destination).transform;
+        }
+        else
+        {
+            InteractTrans = this.transform.Find("Destination");
         }
 #endif
     }

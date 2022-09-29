@@ -111,7 +111,7 @@ public class DoorElement : SceneElementBase
 
     public void RefreshCondition()
     {
-        if (CanPassCondition != "<None>" || CanPassCondition != string.Empty)
+        if (CanPassCondition != "<None>" && CanPassCondition != string.Empty)
             CanPass = GameSettings.current.GetBool(CanPassCondition);
     }
 }

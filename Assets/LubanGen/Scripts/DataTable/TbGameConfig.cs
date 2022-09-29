@@ -66,6 +66,13 @@ public sealed partial class TbGameConfig
             return _data.WearTie;
         }
      } 
+     public bool D13TalkToZora
+     {
+        get
+        {
+            return _data.D13TalkToZora;
+        }
+     } 
 
     public void Resolve(Dictionary<string, object> _tables)
     {

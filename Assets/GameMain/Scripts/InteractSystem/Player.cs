@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private PlayerMovement m_Movement;
     public static Player Current;
     [SerializeField] private bool m_UpdateRotation = false;
+    
     private void Start()
     {
         m_Animator = GetComponent<Animator>();
@@ -53,21 +54,6 @@ public class Player : MonoBehaviour
         m_Animator.SetTrigger("Collect");
         m_Animator.OnComplete(callback: callback);
     }
-
-    // public bool TestNavigation(Vector3 targetPosition)
-    // {
-    //     if (m_NavMeshAgent.isOnNavMesh)
-    //     {
-    //         NavMeshHit navigationHit;
-    //         if (NavMesh.SamplePosition(targetPosition, out navigationHit, 15, m_NavMeshAgent.areaMask))
-    //             return m_NavMeshAgent.SetDestination(navigationHit.position);
-    //         return false;
-    //     }
-    //     else
-    //     {
-    //         return m_NavMeshAgent.Warp(warpPosition);
-    //     }
-    // }
 
     public void SetTransform(Transform trans)
     {
