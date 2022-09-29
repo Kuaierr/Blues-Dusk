@@ -16,13 +16,6 @@ namespace UnityGameKit.Editor
         private int m_SceneNameIndex;
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent content)
         {
-            if (EditorApplication.isPlaying)
-            {
-                EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
-                EditorGUILayout.TextField(string.Format("{0}: {1}", fieldInfo.Name, property.stringValue));
-                return;
-            }
-
             SceneAttribute attr = (attribute as SceneAttribute);
 
             List<string> m_TempSceneNames = new List<string>

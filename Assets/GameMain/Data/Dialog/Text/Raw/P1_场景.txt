@@ -31,22 +31,34 @@
 
 ：虽然已经戴了一个月，但还是觉得有些奇怪，但这里的的侍应生服饰就是如此。
 
-伊森：有点紧啊……
+[gcomplete-(GameSettings.WearTie)]伊森：有点紧啊……
 
 
 [title-诺阿催伊森快点]
 
-[sbranch-A] 诺阿：伊森！还有一刻钟客人就要来了！
+[name-CheckWearTie, gdivider-(GameSettings.WearTie) WearTie A]
 
-    [name-A1, linkfrom-A]伊森：稍等！（大声）
+[cdivider-(reponselound) LoundRes CheckResSlience, notuplink]
+
+[name-CheckResSlience, cdivider-(reponseslience) SlienceRes CheckWearTie, notuplink]
+
+[sbranch-LoundRes, notuplink] 诺阿：伊森，记着出来前戴上领带，不然卓拉又要发脾气了。
+
+[sbranch-SlienceRes, notuplink] 诺阿：伊森！快点戴上领结，咱们有活要干了。
+
+[sbranch-A, notuplink] 诺阿：伊森！还有一刻钟客人就要来了！
+
+    [name-A1, linkfrom-A, linkfrom-SlienceRes]伊森：稍等！（大声）
 
     诺阿：我等多久都没问题，可卓拉还有事要找你呢！（大声）
 
     诺阿：你也不想在<b>试用期</b>最后一天出岔子吧！（大声）
 
-    伊森：马上就来！（大声）
+    [ccomplete-(reponselound)]伊森：马上就来！（大声）
 
-    [name-A2, linkfrom-A] 伊森：（……再想想，还有什么需要的。）
+    [name-A2, linkfrom-A, linkfrom-LoundRes, ccomplete-(reponseslience)] 伊森：（……再想想，还有什么需要的。）
+
+[name-WearTie, notuplink]诺阿：看来你戴上领结了，出来吧！
 
 
 [title-与进门的诺阿交谈]

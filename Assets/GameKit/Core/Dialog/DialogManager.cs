@@ -149,17 +149,18 @@ namespace GameKit.Dialog
 
         public void StopDialog(string treeName, object userData = null)
         {
+            FinishDialogCompleteCallback(treeName, userData);
+            Utility.Debugger.Log(treeName);
             m_CachedCurrentTree.Reset();
-            FinishDialogCompleteCallback(m_CachedCurrentTreeName, userData);
         }
 
         public void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null)
         {
             Utility.Debugger.LogWarning("Get: " + treeName);
-            foreach (var item in m_DialogTrees)
-            {
-                Utility.Debugger.LogSuccess(item.Key);
-            }
+            // foreach (var item in m_DialogTrees)
+            // {
+            //     Utility.Debugger.LogSuccess(item.Key);
+            // }
 
             if (HasDialogTree(treeName))
             {

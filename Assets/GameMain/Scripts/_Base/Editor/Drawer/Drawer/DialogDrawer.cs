@@ -17,13 +17,10 @@ namespace UnityGameKit.Editor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent content)
         {
             DialogAttribute attr = (attribute as DialogAttribute);
-
             List<string> m_TempSceneNames = new List<string>
             {
                 CustomOptionName
             };
-
-
             TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/GameMain/Configs/DialogCollection.txt");
             string[] splits = textAsset.text.Split(',');
             for (int i = 0; i < splits.Length; i++)
@@ -33,29 +30,11 @@ namespace UnityGameKit.Editor
 
             m_SceneNames = m_TempSceneNames.ToArray();
             m_SceneNameIndex = 0;
-
-            // if (property.isArray)
-            // {
-            //     Debug.Log(property.arraySize);
-            //     for (int i = 0; i < property.arraySize; i++)
-            //     {
-            //         SerializedProperty singelProperty = property.GetArrayElementAtIndex(i);
-            //         Draw(singelProperty, m_TempSceneNames);
-            //     }
-            // }
-            // else
             Draw(property, m_TempSceneNames);
         }
 
         private void Draw(SerializedProperty serializedProperty, List<string> tempList)
         {
-            if (EditorApplication.isPlaying)
-            {
-                // EditorGUILayout.HelpBox("Disabled During runtime.", MessageType.Info);
-                EditorGUILayout.TagField(string.Format("{0}: {1}", fieldInfo.Name, serializedProperty.stringValue));
-                return;
-            }
-
             if (!string.IsNullOrEmpty(serializedProperty.stringValue))
             {
                 m_SceneNameIndex = tempList.IndexOf(serializedProperty.stringValue);

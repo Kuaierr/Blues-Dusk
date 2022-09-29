@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
@@ -221,11 +222,12 @@ namespace UnityGameKit.Runtime
                 transitionArgs.ManuallySetRemoveNames(m_CachedUnloadScenes);
             }
 
-            for (int i = 0; i < transitionArgs.RemoveNames.Count; i++)
-            {
-                m_SceneComponent.UnloadScene(transitionArgs.RemoveNames[i], transitionArgs);
-            }
+            StartCoroutine(RemoveSceneProcess(transitionArgs));
 
+            // for (int i = 0; i < transitionArgs.RemoveNames.Count; i++)
+            // {
+            //     m_SceneComponent.UnloadScene(transitionArgs.RemoveNames[i], transitionArgs);
+            // }
         }
 
         private void OnUnloadSceneSuccess(object sender, BaseEventArgs e)
@@ -351,6 +353,15 @@ namespace UnityGameKit.Runtime
         private void HideSwitchFader()
         {
             m_Switcher.gradienter.gameObject.SetActive(false);
+        }
+
+        IEnumerator RemoveSceneProcess(DoTransitionCompleteEventArgs transitionArgs)
+        {
+            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i < transitionArgs.RemoveNames.Count; i++)
+            {
+                m_SceneComponent.UnloadScene(transitionArgs.RemoveNames[i], transitionArgs);
+            }
         }
     }
 

@@ -260,7 +260,6 @@ Transform:
   - {fileID: 1448300508}
   - {fileID: 1273317538}
   - {fileID: 1946032819}
-  - {fileID: 1676749044}
   m_Father: {fileID: 875632168}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -631,16 +630,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34c4d6d64dddb41abe920627d8ae8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
   OutlineWidth: 3
   TargetScene: S_Shire_Kitchen
+  CanPassCondition: <None>
   CanPass: 1
   EnterTranform: {fileID: 1159419092}
   Dialog: 
   m_HasDialoged: 0
   m_CanRepeatDialog: 0
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!64 &1273317542
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1043,12 +1046,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ab547135199ff4a904a42cd139b5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
   OutlineWidth: 3
   CanPass: 1
   EnterTranform: {fileID: 1292186265}
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PossibleScenes: []
 --- !u!64 &1448300512
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1081,72 +1088,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!1001 &1676749043
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 164047812}
-    m_Modifications:
-    - target: {fileID: 7053811655491867680, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: Dialog
-      value: "(P1_\u573A\u666F)\u64E6\u62ED\u955C\u5B50"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.50335646
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053811655491867709, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-      propertyPath: m_Name
-      value: CustomTest
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
---- !u!4 &1676749044 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
-  m_PrefabInstance: {fileID: 1676749043}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1872715708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1307,16 +1248,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34c4d6d64dddb41abe920627d8ae8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
   OutlineWidth: 3
   TargetScene: S_Shire_Corridor
+  CanPassCondition: <None>
   CanPass: 1
   EnterTranform: {fileID: 1282948044}
   Dialog: 
   m_HasDialoged: 0
   m_CanRepeatDialog: 0
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!64 &1946032823
 MeshCollider:
   m_ObjectHideFlags: 0
