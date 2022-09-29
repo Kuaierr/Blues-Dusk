@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace UnityGameKit.Runtime
 {
-
     [DisallowMultipleComponent]
     [AddComponentMenu("GameKit/GameKit Setting Component")]
     public sealed class SettingComponent : GameKitComponent
@@ -21,10 +20,7 @@ namespace UnityGameKit.Runtime
 
         public int Count
         {
-            get
-            {
-                return m_SettingManager.Count;
-            }
+            get { return m_SettingManager.Count; }
         }
 
         protected override void Awake()
@@ -60,9 +56,10 @@ namespace UnityGameKit.Runtime
                 Log.Error("Load settings failure.");
             }
         }
-        public void Load()
+
+        public bool Load()
         {
-            m_SettingManager.Load();
+            return m_SettingManager.Load();
         }
 
         public void Save()
@@ -181,7 +178,7 @@ namespace UnityGameKit.Runtime
         }
 
         public void SetObject(string settingName, object obj)
-        { 
+        {
             m_SettingManager.SetObject(settingName, obj);
         }
     }

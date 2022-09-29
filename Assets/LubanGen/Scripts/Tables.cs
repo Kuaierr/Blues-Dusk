@@ -15,7 +15,6 @@ public sealed partial class Tables
 {
     public DataTable.TbItem TbItem {get; }
     public DataTable.TbCard TbCard {get; }
-    public DataTable.TbDefaultSetting TbDefaultSetting {get; }
     public DataTable.TbGameConfig TbGameConfig {get; }
     public DataTable.TbUIConfig TbUIConfig {get; }
     public DataTable.TbSceneConfig TbSceneConfig {get; }
@@ -29,8 +28,6 @@ public sealed partial class Tables
         tables.Add("DataTable.TbItem", TbItem);
         TbCard = new DataTable.TbCard(loader("datatable_tbcard")); 
         tables.Add("DataTable.TbCard", TbCard);
-        TbDefaultSetting = new DataTable.TbDefaultSetting(loader("datatable_tbdefaultsetting")); 
-        tables.Add("DataTable.TbDefaultSetting", TbDefaultSetting);
         TbGameConfig = new DataTable.TbGameConfig(loader("datatable_tbgameconfig")); 
         tables.Add("DataTable.TbGameConfig", TbGameConfig);
         TbUIConfig = new DataTable.TbUIConfig(loader("datatable_tbuiconfig")); 
@@ -41,7 +38,6 @@ public sealed partial class Tables
 
         TbItem.Resolve(tables); 
         TbCard.Resolve(tables); 
-        TbDefaultSetting.Resolve(tables); 
         TbGameConfig.Resolve(tables); 
         TbUIConfig.Resolve(tables); 
         TbSceneConfig.Resolve(tables); 
@@ -54,7 +50,6 @@ public sealed partial class Tables
     {
         TbItem.TranslateText(translator); 
         TbCard.TranslateText(translator); 
-        TbDefaultSetting.TranslateText(translator); 
         TbGameConfig.TranslateText(translator); 
         TbUIConfig.TranslateText(translator); 
         TbSceneConfig.TranslateText(translator); 

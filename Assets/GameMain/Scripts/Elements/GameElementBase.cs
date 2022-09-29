@@ -10,6 +10,7 @@ using UnityGameKit.Runtime;
 public abstract class GameElementBase : ElementBase
 {
     public UnityEvent OnInteractBegin;
+    public UnityEvent OnInteractAfter;
     private Transform m_InteractTrans;
     public Vector3 InteractPosition
     {
@@ -27,7 +28,8 @@ public abstract class GameElementBase : ElementBase
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         GameKitCenter.Element.RemoveElement(this);
         GameKitCenter.Event.Unsubscribe(SaveSettingsEventArgs.EventId, OnSave);
         GameKitCenter.Event.Unsubscribe(LoadSettingsEventArgs.EventId, OnLoad);

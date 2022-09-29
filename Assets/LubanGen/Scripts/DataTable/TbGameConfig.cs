@@ -52,18 +52,11 @@ public sealed partial class TbGameConfig
             return _data.CurrentDay;
         }
      } 
-     public int CurrentWeekday
+     public int CurrentStage
      {
         get
         {
-            return _data.CurrentWeekday;
-        }
-     } 
-     public int CurrentWeek
-     {
-        get
-        {
-            return _data.CurrentWeek;
+            return _data.CurrentStage;
         }
      } 
      public bool WearTie
