@@ -16,7 +16,11 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 		GameKitCenter.Event.Subscribe(ReFocusGameMenuEventArgs.EventId,OpenGameMenuUIForm);
 		//GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
 		OpenGameMenuUIForm(this, null);
+	}
 
+	public void OpenGameMenuUI()
+	{
+		OpenGameMenuUIForm(this, null);
 	}
 
 	private void OpenGameMenuUIForm(object sender, GameEventArgs e)
