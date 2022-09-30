@@ -39,20 +39,12 @@ public class ProcedureChangeScene : ProcedureBase
         // QuickCinemachineCamera.Clear();
         GameKitCenter.Event.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         GameKitCenter.Event.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
-
-        // 停止所有声音
-        // GameKitCenter.Sound.StopAllLoadingSounds();
-        // GameKitCenter.Sound.StopAllLoadedSounds();
-
-        // 隐藏所有实体
-        GameKitCenter.Entity.HideAllLoadingEntities();
-        GameKitCenter.Entity.HideAllLoadedEntities();
-
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();
 
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
+        // 如果提前加载了场景（只在编辑器下可能发生）
         if (!m_IsScenePreloaded)
         {
             GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));
@@ -69,11 +61,6 @@ public class ProcedureChangeScene : ProcedureBase
             GameKitCenter.Scheduler.AddPreloadedScene(AssetUtility.GetSceneAsset(sceneName));
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
             OnSceneLoad();
-        }
-        // m_BackgroundMusicId = drScene.BackgroundMusicId;
-        if (m_IsChangeSceneComplete)
-        {
-
         }
     }
 
@@ -119,10 +106,14 @@ public class ProcedureChangeScene : ProcedureBase
     private void OnSceneLoad()
     {
         GameKitCenter.Element.ResetCache();
+        // 加载Setting文件
         GameKitCenter.Setting.Load();
+        // 广播加载事件，各实体自定义加载内容
         GameKitCenter.Event.FireNow(this, LoadSettingsEventArgs.Create(null));
+        // 手动加载场景配置，根据：当前天数、当天阶段，当前场景
         GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
-
+        
+        // 尝试寻找进入新场景的可用坐标，如果没找到，使用默认坐标
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
@@ -130,21 +121,17 @@ public class ProcedureChangeScene : ProcedureBase
         if (targetTrans == null)
             return;
 
+        // 加载玩家对象
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
-            // Debug.Log(targetTrans.position);
+            // 注意：包含Navmesh Agent的实体必须在实例化时指定位置、方位和父对象
             GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
             m_Prototyper = realObj.GetComponent<Player>();
-            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
-            OnSceneLoadEnd();
+            // 镜头跟随玩家
+            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform); 
+            m_IsChangeSceneComplete = true;
         });
     }
-
-    private void OnSceneLoadEnd()
-    {
-        m_IsChangeSceneComplete = true;
-    }
-
     private void OnLoadSceneSuccess(object sender, BaseEventArgs e)
     {
         LoadSceneSuccessEventArgs args = (LoadSceneSuccessEventArgs)e;
@@ -169,12 +156,6 @@ public class ProcedureChangeScene : ProcedureBase
                 OnSceneLoad();
             }
         }
-
-        // if (m_BackgroundMusicId > 0)
-        // {
-        //     GameKitCenter.Sound.PlayMusic(m_BackgroundMusicId);
-        // }
-        // m_IsChangeSceneComplete = true;
     }
 
     private void OnLoadSceneFailure(object sender, BaseEventArgs e)
@@ -192,19 +173,7 @@ public class ProcedureChangeScene : ProcedureBase
     private void OnUnloadSceneSuccess(object sender, BaseEventArgs e)
     {
         UnloadSceneSuccessEventArgs ne = (UnloadSceneSuccessEventArgs)e;
-        // if (ne.UserData != this)
-        // {
-        //     return;
-        // }
-
         Log.Success("Load Scene '{0}' By Event.", ne.SceneAssetName);
-
-
-        // if (m_BackgroundMusicId > 0)
-        // {
-        //     GameKitCenter.Sound.PlayMusic(m_BackgroundMusicId);
-        // }
-        // m_IsChangeSceneComplete = true;
     }
 
     private void OnUnloadSceneFailure(object sender, BaseEventArgs e)

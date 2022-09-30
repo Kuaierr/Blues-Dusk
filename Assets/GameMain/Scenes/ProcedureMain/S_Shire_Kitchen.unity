@@ -210,7 +210,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7053811655491867680, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
       propertyPath: Dialog
-      value: "(P1_\u573A\u666F)\u64E6\u62ED\u955C\u5B50"
+      value: "(P1_\u573A\u666F)\u955C\u5B50"
       objectReference: {fileID: 0}
     - target: {fileID: 7053811655491867681, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
       propertyPath: m_RootOrder
@@ -536,7 +536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7053811655491867680, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
       propertyPath: Dialog
-      value: "(P1_\u573A\u666F)\u62FF\u8D77\u9886\u7ED3"
+      value: "(P1_\u573A\u666F)\u9886\u7ED3"
       objectReference: {fileID: 0}
     - target: {fileID: 7053811655491867680, guid: 78835c09def51364d8ae74f3eb29cbb7, type: 3}
       propertyPath: OnInteractAfter.m_PersistentCalls.m_Calls.Array.size
@@ -750,17 +750,17 @@ MonoBehaviour:
   OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractTrans: {fileID: 6746253258604348540}
   TargetScene: S_Shire_Restaurant
   CanPassCondition: GameSettings.WearTie
   CanPass: 1
   EnterTranform: {fileID: 6746253257542303091}
-  Dialog: "(P1_\u573A\u666F)\u8BFA\u963F\u50AC\u4F0A\u68EE\u5FEB\u70B9"
+  Dialog: "(P1_\u573A\u666F)\u95E8_\u9152\u9986\u53A8\u623F\u533A"
   m_HasDialoged: 0
   m_CanRepeatDialog: 0
-  OnInteractAfter:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!64 &343437080928606326
 MeshCollider:
   m_ObjectHideFlags: 0

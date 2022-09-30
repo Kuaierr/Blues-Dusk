@@ -38,7 +38,6 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 680d0783b128fa240b0347667c848e5e, type: 2}
   - {fileID: 11400000, guid: 82e8b06c5447e2a4aaefa6fc5951202a, type: 2}
-  - {fileID: 11400000, guid: 2ea106780190c5d4fad5a57105c2f6dd, type: 2}
   - {fileID: 11400000, guid: 14b3b52084b49c346af304c5a9426ad9, type: 2}
   - {fileID: 11400000, guid: 7b72ddaec876a224d84c20b5b19916fe, type: 2}
   - {fileID: 11400000, guid: 9f48ca2371250dd4a8616f5bbe944678, type: 2}

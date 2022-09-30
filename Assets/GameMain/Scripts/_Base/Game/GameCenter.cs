@@ -25,6 +25,8 @@ public class GameCenter : MonoSingletonBase<GameCenter>
         Log.Success("GameCenter Loaded");
         CurrentDay = GameKitCenter.Setting.GetInt("GameSettings.CurrentDay", 1);
         CurrentStage = GameKitCenter.Setting.GetInt("GameSettings.CurrentStage", 3);
+        // Log.Success(CurrentDay);
+        // Log.Success(CurrentStage);
     }
 
     public void OnSave(object sender, GameEventArgs e)

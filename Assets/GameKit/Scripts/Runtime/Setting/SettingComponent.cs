@@ -53,7 +53,7 @@ namespace UnityGameKit.Runtime
         {
             if (!m_SettingManager.Load())
             {
-                Log.Error("Load settings failure.");
+                Log.Warning("Load settings failure.");
             }
         }
 
