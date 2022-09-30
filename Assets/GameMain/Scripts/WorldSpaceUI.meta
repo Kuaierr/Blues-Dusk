@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/GameMain/Data/Dialog/Character/Characters/Chracter_糯米.asset.meta
+guid: 8c9baf1fe0e69094f8e0dfa2f5cb0c1a
+NativeFormatImporter:
+========
 guid: 5faff2961f847a647b9c26f10d175053
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> 8260a42d56d2eb13323efdca7b11f27ab1f0961f:Assets/GameMain/Scripts/WorldSpaceUI.meta
   externalObjects: {}
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

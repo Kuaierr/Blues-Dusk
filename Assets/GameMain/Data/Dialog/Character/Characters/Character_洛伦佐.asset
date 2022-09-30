@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d0ed17694105c43adcd00298bee7e5, type: 3}
   m_Name: "Character_\u6D1B\u4F26\u4F50"
   m_EditorClassIdentifier: 
-  idName: RKZ
+  idName: Valenzo
   displayName: "\u6D1B\u4F26\u4F50"
-  iconicColor: {r: 0, g: 0, b: 0, a: 0}
-  introduction: 
+  iconicColor: {r: 0.6698113, g: 0.09731218, b: 0.09731218, a: 0}
+  introduction: "\u4E09\u6D41\u5C0F\u8BF4\u5BB6\n"
   moods:
   - Name: Default
     avatar: {fileID: 21300002, guid: 8a9605cca7152fc4bbef9451d4171c96, type: 3}
