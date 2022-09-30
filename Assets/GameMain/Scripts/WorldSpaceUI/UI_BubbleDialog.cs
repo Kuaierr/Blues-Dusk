@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +11,8 @@ public class UI_BubbleDialog : MonoBehaviour
 {
     [SerializeField] private TMP_Text _content;
     private UnityAction<UI_BubbleDialog> onHide;
-    
+    private CanvasGroup _canvasGroup;
+
     [Space]
     public Camera worldCamera;
     public Camera canvasCamera;
@@ -20,23 +23,38 @@ public class UI_BubbleDialog : MonoBehaviour
     
     public UI_BubbleDialog OnInit(UnityAction<UI_BubbleDialog> callback)
     {
-        _content.text = "";
         Used = false;
+        _content.text = "";
+        _canvasGroup = GetComponent<CanvasGroup>();
 
         onHide += callback;
 
         return this;
     }
 
-    public void Show(string content,Transform target)
+    public async void Show(string content,Transform target)
     {
-        _content.text = content;
+        _canvasGroup.DOComplete();
+
         Target = target;
         Used = true;
-
-        //transform.rotation = Camera.main.transform.rotation;
         
+        StartCoroutine("TapContent", content);
         StartCoroutine("Follow");
+        
+        await _canvasGroup.DOFade(1, 0.5f).AsyncWaitForCompletion();
+    }
+
+    private IEnumerator TapContent(string content)
+    {
+        WaitForSeconds interval = new WaitForSeconds(0.1f);
+        StringBuilder result = new StringBuilder("");
+        foreach (char c in content)
+        {
+            result.Append(c);
+            _content.text = result.ToString();
+            yield return interval;
+        }
     }
 
     private IEnumerator Follow()
@@ -51,14 +69,18 @@ public class UI_BubbleDialog : MonoBehaviour
         Hide();
     }
 
-    public void Hide()
+    public async void Hide()
     {
+        _canvasGroup.DOKill();
+        await _canvasGroup.DOFade(0, 0.5f).AsyncWaitForCompletion();
+        
         //Info 从体验上来说，关闭可以延迟一些时间而非立刻关闭
         _content.text = "";
         Used = false;
         Target = null;
         
         StopCoroutine("Follow");
+        StopCoroutine("TapContent");
         onHide?.Invoke(this);
     }
     
