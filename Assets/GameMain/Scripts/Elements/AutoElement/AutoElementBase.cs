@@ -13,11 +13,11 @@ public abstract class AutoElementBase : GameElementBase
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Debug: " + other.name + " Enter " + this.name);
+        //Debug.Log("Debug: " + other.name + " Enter " + this.name);
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        Debug.Log("Debug: " + other.name + " Exit " + this.name);
+        //Debug.Log("Debug: " + other.name + " Exit " + this.name);
     }
 }

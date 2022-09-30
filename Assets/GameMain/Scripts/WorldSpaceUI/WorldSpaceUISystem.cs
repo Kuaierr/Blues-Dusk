@@ -8,7 +8,6 @@ public class WorldSpaceUISystem : MonoSingletonBase<WorldSpaceUISystem>
     [SerializeField] private UI_BubbleDialog _prefab;
     private Queue<UI_BubbleDialog> _bubbles = new Queue<UI_BubbleDialog>();
 
-
     public UI_BubbleDialog ShowBubbleUI(string content, Transform target)
     {
         var bubble = GetBubble();
