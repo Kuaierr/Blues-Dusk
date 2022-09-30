@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/GameMain/Models/Character/Nomi/P_Nomi_OL.prefab.meta
 guid: de8929b460b1626468230cbcbfaf7c38
 PrefabImporter:
+========
+guid: 92c5d97f7a6e43c42ae3c4dfcb435ff5
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 8260a42d56d2eb13323efdca7b11f27ab1f0961f:Assets/GameMain/Scripts/Elements/SceneElement.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

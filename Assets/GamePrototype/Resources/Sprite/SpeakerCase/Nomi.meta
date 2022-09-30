@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/GamePrototype/Resources/Sprite/SpeakerCase/Nomi.meta
 guid: a41c9251f58f11c44a24c1c6a46479c2
+========
+guid: 78378c62bbd1e804baa68706b37ad8b4
+>>>>>>>> 8260a42d56d2eb13323efdca7b11f27ab1f0961f:Assets/GameMain/Scripts/Elements/AutoElement.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
