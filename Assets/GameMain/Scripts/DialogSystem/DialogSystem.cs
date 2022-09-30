@@ -31,7 +31,5 @@ public class DialogSystem : MonoSingletonBase<DialogSystem>
         {
             GameKitCenter.UI.TryOpenUIForm("UI_Dialog", this);
         }
-
-
     }
 }
