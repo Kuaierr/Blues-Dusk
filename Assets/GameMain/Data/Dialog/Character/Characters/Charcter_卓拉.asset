@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idName: Zora
   displayName: "\u5353\u62C9"
-  iconicColor: {r: 0, g: 0, b: 0, a: 0}
+  iconicColor: {r: 0.98039216, g: 0.4664368, b: 0.37450984, a: 1}
   introduction: "\u590F\u5C14\u4E4B\u5BB6\u7684\u5973\u7ECF\u7406\uFF0C\u6709\u65F6\u4F1A\u70ED\u60C5\u8FC7\u5EA6\u3002"
   moods:
-  - Name: work_normal
+  - Name: Work_Normal
     avatar: {fileID: 21300000, guid: 84bb55843b393304593824354fa4383b, type: 3}
     half: {fileID: 21300000, guid: 84bb55843b393304593824354fa4383b, type: 3}
-  - Name: work_laugh
+  - Name: Work_Laugh
     avatar: {fileID: 21300000, guid: ed188093a03bb79469bd6cd24c0e3740, type: 3}
     half: {fileID: 21300000, guid: ed188093a03bb79469bd6cd24c0e3740, type: 3}
-  - Name: work_loss
-    avatar: {fileID: 21300000, guid: 4ee20e599cad18142b77e8b6eca6a45a, type: 3}
-    half: {fileID: 21300000, guid: 4ee20e599cad18142b77e8b6eca6a45a, type: 3}
-  - Name: work_doubt
-    avatar: {fileID: 21300000, guid: d002263222ac5234cb8eb013a0ec3788, type: 3}
-    half: {fileID: 21300000, guid: d002263222ac5234cb8eb013a0ec3788, type: 3}
-  - Name: work_anger
+  - Name: Work_Surprised
+    avatar: {fileID: 21300000, guid: e6b1f07e8a8817c40baee780601be173, type: 3}
+    half: {fileID: 21300000, guid: e6b1f07e8a8817c40baee780601be173, type: 3}
+  - Name: Work_Awkward
+    avatar: {fileID: 21300000, guid: 28654aaa394eb284b9b3d6f1a3909f43, type: 3}
+    half: {fileID: 21300000, guid: 28654aaa394eb284b9b3d6f1a3909f43, type: 3}
+  - Name: Work_Anger
     avatar: {fileID: 21300000, guid: f4d9f12b9a38ea94d9f9a6942cb28006, type: 3}
     half: {fileID: 21300000, guid: f4d9f12b9a38ea94d9f9a6942cb28006, type: 3}
-  - Name: work_thinking
-    avatar: {fileID: 21300000, guid: 81724a066e29a1c408a4f971f530cf5d, type: 3}
-    half: {fileID: 21300000, guid: 81724a066e29a1c408a4f971f530cf5d, type: 3}
+  - Name: Work_Complain
+    avatar: {fileID: 21300000, guid: e2680d52a58799846be2229195c6f330, type: 3}
+    half: {fileID: 21300000, guid: e2680d52a58799846be2229195c6f330, type: 3}

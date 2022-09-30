@@ -15,6 +15,9 @@ ModelImporter:
   - first:
       74: -998496362607748373
     second: An_LeftTurn90_01
+  - first:
+      74: -2252708828001226980
+    second: An_Idle_Normal_01
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -58,7 +61,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: An_Idle_noraml_01
+      name: An_Idle_Normal_01
       takeName: Take 001
       internalID: 0
       firstFrame: 1
