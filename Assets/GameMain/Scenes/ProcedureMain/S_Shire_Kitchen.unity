@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 577501516}
   - component: {fileID: 577501517}
   - component: {fileID: 577501518}
+  - component: {fileID: 577501519}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -440,6 +441,27 @@ MonoBehaviour:
   OnInteractAfter:
     m_PersistentCalls:
       m_Calls: []
+  InteractTrans: {fileID: 263247850}
+  content: Dialog Bubble
+--- !u!114 &577501519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577501515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d84b4bf9a12a4549a47256b7e318145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteractBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractTrans: {fileID: 263247850}
   content: Dialog Bubble
 --- !u!114 &824096175 stripped
 MonoBehaviour:
@@ -880,6 +902,7 @@ MonoBehaviour:
   OnInteractAfter:
     m_PersistentCalls:
       m_Calls: []
+  InteractTrans: {fileID: 6746253258604348540}
   TargetScene: S_Shire_Restaurant
   CanPassCondition: GameSettings.WearTie
   CanPass: 1

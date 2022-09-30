@@ -11,13 +11,26 @@ public abstract class AutoElementBase : GameElementBase
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Debug: " + other.name + " Enter " + this.name);
+        if (other.CompareTag("Bubble"))
+        {
+            OnBubbleTriggetEnter(other.transform);
+            //Debug.Log("Debug: " + other.name + " Enter " + this.name);
+            
+        }
+        
     }
 
-    protected virtual void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Debug: " + other.name + " Exit " + this.name);
+        if (other.CompareTag("Bubble"))
+        {
+            OnBubbleTriggetExit();
+            //Debug.Log("Debug: " + other.name + " Exit " + this.name);
+        }
     }
+
+    protected abstract void OnBubbleTriggetEnter(Transform target);
+    protected abstract void OnBubbleTriggetExit();
 }
