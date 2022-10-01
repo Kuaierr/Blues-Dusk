@@ -41,6 +41,7 @@ public class ProcedureChangeScene : ProcedureBase
         GameKitCenter.Event.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
         // 还原游戏速度
         GameKitCenter.Core.ResetNormalGameSpeed();
+        
 
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
@@ -109,10 +110,11 @@ public class ProcedureChangeScene : ProcedureBase
         // 加载Setting文件
         GameKitCenter.Setting.Load();
         // 广播加载事件，各实体自定义加载内容
-        GameKitCenter.Event.FireNow(this, LoadSettingsEventArgs.Create(null));
+        GameKitCenter.Event.Fire(this, LoadSettingsEventArgs.Create(null));
         // 手动加载场景配置，根据：当前天数、当天阶段，当前场景
-        GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
-        
+
+
+
         // 尝试寻找进入新场景的可用坐标，如果没找到，使用默认坐标
         Transform targetTrans = GetEnterTransform();
         if (targetTrans == null)
@@ -125,10 +127,11 @@ public class ProcedureChangeScene : ProcedureBase
         AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
             // 注意：包含Navmesh Agent的实体必须在实例化时指定位置、方位和父对象
+            GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
             GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
             m_Prototyper = realObj.GetComponent<Player>();
             // 镜头跟随玩家
-            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform); 
+            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
             m_IsChangeSceneComplete = true;
         });
     }

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ public class StageConfigPool_SO : PoolBase_SO
     {
         foreach (var config in m_Configs)
         {
+            Log.Info(config.Id.Correction());
+            Log.Info(name.Correction());
             if (config.Id.Correction() == name.Correction())
             {
                 return config as StageConfig_SO;
