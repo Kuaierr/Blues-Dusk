@@ -251,6 +251,7 @@ public class GameSettings : MonoSingletonBase<GameSettings>
 
     private static void ConfigToElemnt(GameElementBase elementBase, ElementData elementData)
     {
+        //bug 编译错误
         elementBase.InteractTrans.position = elementData.DestinationPosition;
         if (elementBase.GetType() == typeof(NPCElement))
         {

@@ -24,6 +24,8 @@ public class UI_MainMenuSystem : MonoBehaviour
 
     private void OnEnable()
     {
+        GetComponentInParent<Canvas>().worldCamera = Camera.current;
+    
         //TODO 如果没有存档，隐藏ContinueButton
         _continueButton.onClick.AddListener(ContinueLastGame);
         _newGameButton.onClick.AddListener(NewGame);
