@@ -49,7 +49,7 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (m_isTextShowing == false)
             {
