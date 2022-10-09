@@ -9,6 +9,7 @@ public class ProcedureMenu : ProcedureBase
 {
     private bool m_StartGame = false;
     // private MenuForm m_MenuForm = null;
+    private int m_CachedUid;
 
     public override bool UseNativeDialog
     {
@@ -30,15 +31,30 @@ public class ProcedureMenu : ProcedureBase
         GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
         m_StartGame = false;
-        // GameKitCenter.UI.OpenUIForm(UIFormId.MenuForm, this);
+
+        var uiFormInstance = GameKitCenter.UI.GetUIForm(m_CachedUid);
+        if (uiFormInstance == null)
+        {
+            var uiForm = GameKitCenter.UI.TryOpenUIForm("UI_MainMenu");
+            if (uiForm != null)
+                m_CachedUid = (int)uiForm;
+        }
+        else 
+            uiFormInstance.gameObject.SetActive(true);
+        
+        GameMenuSystem.current.CloseGameMenuUI();
     }
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
     {
         base.OnExit(procedureOwner, isShutdown);
 
+        
         GameKitCenter.Event.Unsubscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);
 
+        var uiFormInstance = GameKitCenter.UI.GetUIForm(m_CachedUid);
+        if(uiFormInstance != null)
+            uiFormInstance.gameObject.SetActive(false);
         // if (m_MenuForm != null)
         // {
         //     m_MenuForm.Close(isShutdown);

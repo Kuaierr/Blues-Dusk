@@ -4,7 +4,7 @@ using GameKit.QuickCode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_MainMenuSystem : MonoBehaviour
+public class UI_MainMenuSystem : UIFormBase
 {
     public Button _continueButton;
     public Button _newGameButton;
@@ -24,7 +24,7 @@ public class UI_MainMenuSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponentInParent<Canvas>().worldCamera = Camera.current;
+        //GetComponentInParent<Canvas>().worldCamera = Camera.current;
     
         //TODO 如果没有存档，隐藏ContinueButton
         _continueButton.onClick.AddListener(ContinueLastGame);

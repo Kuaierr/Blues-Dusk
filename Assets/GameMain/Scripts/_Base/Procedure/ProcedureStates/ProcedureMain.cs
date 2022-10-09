@@ -38,11 +38,15 @@ public class ProcedureMain : ProcedureBase
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
         base.OnEnter(procedureOwner);
+        
+        GameMenuSystem.current.OpenGameMenuUI();
     }
 
     protected override void OnExit(ProcedureOwner procedureOwner, bool isShutdown)
     {
         base.OnExit(procedureOwner, isShutdown);
+        
+        //TODO 这里需要关闭所有游戏UI 可不可以通过Group来统一关闭呢
     }
 
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)

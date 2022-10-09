@@ -6,7 +6,85 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
-    guid: 6d652a1357b896648a2614563c4ddace
+    path: Assets/GameMain/Scenes/Dynamic/S_Week.unity
+    guid: 19d5b3b4b4af2c04a87d7c162eccbff6
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Dynamic/S_Weekend.unity
+    guid: e71f150a1f7daa24db89a2af0599a442
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Main/S_LoadingScene.unity
+    guid: 2e86f317e4f1829459daac414a32a0f5
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+    guid: 89de9a6f8c9de114bbcdb8f9925ec730
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+    guid: 98716365d24a17d48a751cfea231800e
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity
+    guid: 9cbca5d5dd142194f921e9ca22341cde
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity
+    guid: e710050e4484ae848aec941406c2de20
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
+    guid: 660cd756353de1a40a31d22495c2017d
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity
+    guid: 1c10f9af8fa078f43b7cbc1064dda494
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Corridor.unity
+    guid: 2f60b3ee7dd3d1c4aac2f9c0c4cd06f4
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+    guid: d720a3d22758c08479819d9b64080182
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+    guid: 89f1acf370bce87428cff4fce9ea8d99
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
+    guid: 08bb37568095fcc46a8d1f5e702d3743
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity
+    guid: 51db12ad1e5768f4cada1532ce7aabae
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
+    guid: 975a1a08b0f9388498ee2e62bd7ec450
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+    guid: 96a6b3299dbf19948a73228c8906e2e2
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_DiceDev.unity
+    guid: e8f11323ca279954aa9884b5d5c94f70
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
+    guid: c1785b9931242724ab1f12523b9b2134
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
+    guid: 820d23f4e0af54e4094da59d1e543f11
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
+    guid: 8e4e33a6464c7a444a78bcc3a3bec880
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Timeline.unity
+    guid: 8353325767e7f79408ef1e707642650f
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+    guid: 5633db02310e3b54c94c43a2caf246d0
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Bar_Main.unity
+    guid: 2b9db6d4355c94f4ca09bf776d88528e
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Shire_Restaurant 2.unity
+    guid: 00a4dfdd253cf5c418d836829d01eda5
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Station.unity
+    guid: 2d2ace501e0d8b54e8e894c95e92d417
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Template.unity
+    guid: 8e2208c0c6953dd49922725d63d757da
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 82ad0f0119a9f3245ac7d6eba34afa08, type: 2}

@@ -66,7 +66,7 @@ public class UI_BubbleDialog : MonoBehaviour
             yield return 0;
         }
 
-        Hide();
+        //Hide();
     }
 
     public async void Hide()
