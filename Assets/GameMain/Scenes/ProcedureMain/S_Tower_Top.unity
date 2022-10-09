@@ -547,11 +547,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de34c4d6d64dddb41abe920627d8ae8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractTrans: {fileID: 798590666}
   TargetScene: S_Tower_Under
+  CanPassCondition: <None>
   CanPass: 1
   EnterTranform: {fileID: 1886232439}
   Dialog: 
