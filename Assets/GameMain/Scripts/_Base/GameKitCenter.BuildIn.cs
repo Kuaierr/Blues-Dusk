@@ -7,7 +7,6 @@ public partial class GameKitCenter : MonoBehaviour
     public static FsmComponent Fsm { get; private set; }
     public static ObjectPoolComponent ObjectPool { get; private set; }
     public static ProcedureComponent Procedure { get; private set; }
-    public static EntityComponent Entity { get; private set; }
     public static UIComponent UI { get; private set; }
     public static ElementComponent Element { get; private set; }
     public static EventComponent Event { get; private set; }
@@ -21,7 +20,6 @@ public partial class GameKitCenter : MonoBehaviour
         Fsm = GameKitComponentCenter.GetComponent<FsmComponent>();
         ObjectPool = GameKitComponentCenter.GetComponent<ObjectPoolComponent>();
         Procedure = GameKitComponentCenter.GetComponent<ProcedureComponent>();
-        Entity = GameKitComponentCenter.GetComponent<EntityComponent>();
         UI = GameKitComponentCenter.GetComponent<UIComponent>();
         Element = GameKitComponentCenter.GetComponent<ElementComponent>();
         Event = GameKitComponentCenter.GetComponent<EventComponent>();

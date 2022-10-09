@@ -1,3 +1,4 @@
+using System.Collections;
 using GameKit.Event;
 using GameKit;
 using UnityEngine;
@@ -12,19 +13,27 @@ public class GameCenter : MonoSingletonBase<GameCenter>
         base.Awake();
     }
 
-    private void Start()
+    void Start()
     {
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
         GameKitCenter.Event.Subscribe(SaveSettingsEventArgs.EventId, OnSave);
         GameKitCenter.Event.Subscribe(MoveToNextDayEventArgs.EventId, OnMoveToNextDay);
         GameKitCenter.Event.Subscribe(MoveToNextStageEventArgs.EventId, OnMoveToNextStage);
+        LoadDayAndStage();
+    }
+
+    public void LoadDayAndStage()
+    {
+        CurrentDay = GameKitCenter.Setting.GetInt("GameSettings.CurrentDay", 1);
+        CurrentStage = GameKitCenter.Setting.GetInt("GameSettings.CurrentStage", 3);
+        Log.Success(CurrentDay);
+        Log.Success(CurrentStage);
     }
 
     public void OnLoad(object sender, GameEventArgs e)
     {
         Log.Success("GameCenter Loaded");
-        CurrentDay = GameKitCenter.Setting.GetInt("GameSettings.CurrentDay", 1);
-        CurrentStage = GameKitCenter.Setting.GetInt("GameSettings.CurrentStage", 3);
+        LoadDayAndStage();
     }
 
     public void OnSave(object sender, GameEventArgs e)

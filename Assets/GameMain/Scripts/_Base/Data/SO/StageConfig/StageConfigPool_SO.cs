@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ using System.IO;
 [CreateAssetMenu(fileName = "StageConfigPool", menuName = "GameMain/StageConfigPool", order = 0)]
 public class StageConfigPool_SO : PoolBase_SO
 {
-    [SerializeField] private List<StageConfig_SO> m_Configs;
+    [SerializeField, OnValueChanged("LoadAllConfig")] private List<StageConfig_SO> m_Configs;
     public override StageConfig_SO GetData<StageConfig_SO>(string name)
     {
         foreach (var config in m_Configs)
         {
             Log.Info(config.Id.Correction());
+            Log.Info(name.Correction());
             if (config.Id.Correction() == name.Correction())
             {
                 return config as StageConfig_SO;
@@ -32,9 +34,11 @@ public class StageConfigPool_SO : PoolBase_SO
     }
 
 #if UNITY_EDITOR
+
     [Button("加载场景元素配置")]
     public void LoadAllConfig()
     {
+        Log.Success("加载场景元素配置");
         m_Configs = new List<StageConfig_SO>();
         foreach (string assetGuid in UnityEditor.AssetDatabase.FindAssets("t:StageConfig_SO", new string[] { AssetUtility.ElementConfigPath + "/Configs" }))
         {
@@ -47,6 +51,7 @@ public class StageConfigPool_SO : PoolBase_SO
     [Button("清空场景元素配置")]
     public void ClearAllConfig()
     {
+        Log.Success("清空场景元素配置");
         if (m_Configs != null)
             m_Configs.Clear();
     }
@@ -54,6 +59,7 @@ public class StageConfigPool_SO : PoolBase_SO
     [Button("保存配置为JSON")]
     public void SaveConfigToJson()
     {
+        Log.Success("保存配置为JSON");
         if (m_Configs != null)
         {
             foreach (var config in m_Configs)
@@ -71,7 +77,7 @@ public class StageConfigPool_SO : PoolBase_SO
         }
     }
 
-    [Button("从JSON中加载配置")]
+    [Button("从JSON中加载配置（暂未实现）")]
     public void LoadConfigFromJson()
     {
         if (m_Configs == null)

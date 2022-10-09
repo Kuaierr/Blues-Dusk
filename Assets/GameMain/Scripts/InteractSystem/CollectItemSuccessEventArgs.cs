@@ -1,6 +1,5 @@
 using GameKit;
 using GameKit.Event;
-using GameKit.Entity;
 using LubanConfig.DataTable;
 
 public class CollectItemSuccessEventArgs : GameEventArgs

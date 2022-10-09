@@ -29,6 +29,7 @@ public sealed class DefaultInventoryHelper : InventoryHelperBase
 
     private void SetItemCallback(IStock stock, InteractCallType callbackType, string callbackArg)
     {
+        //Info 这里是配置道具交互行为的地方
         switch (callbackType)
         {
             case InteractCallType.DIALOG:

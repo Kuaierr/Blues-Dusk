@@ -16,13 +16,13 @@ public class UI_SelectScene : UIFormBase
     private int m_CurrentIndex = 0;
     private int m_LastIndex = -1;
     private bool m_IsActive = false;
-    private List<UI_ScenePreview> m_ActiveScenePreviews;
+    [SerializeField] private List<UI_ScenePreview> m_ActiveScenePreviews;
 
     public void UpdateScenes(List<string> avaibleScenes)
     {
         if (avaibleScenes == null)
             return;
-
+        
         for (int i = 0; i < avaibleScenes.Count; i++)
         {
             for (int j = 0; j < m_ScenePreviews.Count; j++)
@@ -77,14 +77,14 @@ public class UI_SelectScene : UIFormBase
     {
         if (!m_IsActive)
             return;
-
+        
         base.OnUpdate(elapseSeconds, realElapseSeconds);
+        
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             m_LastIndex = m_CurrentIndex;
             m_CurrentIndex = m_CurrentIndex - 1 <= -1 ? (m_ActiveScenePreviews.Count - 1) : (m_CurrentIndex - 1);
             SelectScene(m_CurrentIndex);
-
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -115,6 +115,7 @@ public class UI_SelectScene : UIFormBase
 
     private void SelectScene(int index)
     {
+        Debug.Log("Debug: " + index);
         if (m_LastIndex >= 0)
             m_ActiveScenePreviews[m_LastIndex].UnSelected();
         if (index >= 0)

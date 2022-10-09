@@ -5,6 +5,7 @@
     "current_day": 1,
     "current_stage": 3,
     "wear_tie": false,
-    "d13_talk_to_zora": false
+    "d13_talk_to_zora": false,
+    "test": false
   }
 ]

@@ -47,7 +47,7 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
 
-        if (Input.GetKeyDown(KeyCode.Space) && !m_AllOptionLocked)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !m_AllOptionLocked)
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogTalkingState));
             fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);

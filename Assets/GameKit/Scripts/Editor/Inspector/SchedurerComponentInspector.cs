@@ -28,10 +28,10 @@ namespace UnityGameKit.Editor
                 m_ImportPathInfo.Draw();
                 m_ExportPathInfo.Draw();
                 EditorGUILayout.Space();
-                if (GUILayout.Button("Build Scenes to Multi-Scenes"))
-                {
-                    BuildScenes();
-                }
+                // if (GUILayout.Button("Build Scenes to Multi-Scenes"))
+                // {
+                //     BuildScenes();
+                // }
             }
             EditorGUI.EndDisabledGroup();
             serializedObject.ApplyModifiedProperties();
@@ -81,36 +81,36 @@ namespace UnityGameKit.Editor
             return sceneNameString;
         }
 
-        private void BuildScenes()
-        {
-            string importPath = serializedObject.FindProperty(ImportPath).stringValue;
-            string exportPath = serializedObject.FindProperty(ExportPath).stringValue;
-            foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { importPath }))
-            {
-                string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
-                string sceneName = Path.GetFileNameWithoutExtension(scenePath);
+        // private void BuildScenes()
+        // {
+        //     string importPath = serializedObject.FindProperty(ImportPath).stringValue;
+        //     string exportPath = serializedObject.FindProperty(ExportPath).stringValue;
+        //     foreach (string sceneGuid in AssetDatabase.FindAssets("t:Scene", new string[] { importPath }))
+        //     {
+        //         string scenePath = AssetDatabase.GUIDToAssetPath(sceneGuid);
+        //         string sceneName = Path.GetFileNameWithoutExtension(scenePath);
 
-                SceneSO scene = ScriptableObject.CreateInstance<SceneSO>();
-                scene.SceneName = sceneName;
-                scene.SceneType = 0;
-                string scenesPath = string.Format("{0}/{1}", exportPath, "Scenes");
-                if (!Directory.Exists(scenesPath))
-                    Directory.CreateDirectory(scenesPath);
-                scenesPath = string.Format("{0}/{1}.asset", scenesPath, scene.SceneName);
-                UnityEditor.AssetDatabase.DeleteAsset(scenesPath);
-                UnityEditor.AssetDatabase.CreateAsset(scene, scenesPath);
+        //         SceneSO scene = ScriptableObject.CreateInstance<SceneSO>();
+        //         scene.SceneName = sceneName;
+        //         scene.SceneType = 0;
+        //         string scenesPath = string.Format("{0}/{1}", exportPath, "Scenes");
+        //         if (!Directory.Exists(scenesPath))
+        //             Directory.CreateDirectory(scenesPath);
+        //         scenesPath = string.Format("{0}/{1}.asset", scenesPath, scene.SceneName);
+        //         UnityEditor.AssetDatabase.DeleteAsset(scenesPath);
+        //         UnityEditor.AssetDatabase.CreateAsset(scene, scenesPath);
                 
-                SceneCollectionSO sceneCollection = ScriptableObject.CreateInstance<SceneCollectionSO>();
-                sceneCollection.collections = new System.Collections.Generic.List<SceneSO>();
-                sceneCollection.collections.Add(scene);
-                string collectionsPath = string.Format("{0}/{1}", exportPath, "ScenesCollections");
-                if (!Directory.Exists(collectionsPath))
-                    Directory.CreateDirectory(collectionsPath);
-                collectionsPath = string.Format("{0}/{1}.asset", collectionsPath, scene.SceneName);
-                UnityEditor.AssetDatabase.DeleteAsset(collectionsPath);
-                UnityEditor.AssetDatabase.CreateAsset(sceneCollection, collectionsPath);
-            }
-            UnityEditor.AssetDatabase.Refresh();
-        }
+        //         SceneCollectionSO sceneCollection = ScriptableObject.CreateInstance<SceneCollectionSO>();
+        //         sceneCollection.collections = new System.Collections.Generic.List<SceneSO>();
+        //         sceneCollection.collections.Add(scene);
+        //         string collectionsPath = string.Format("{0}/{1}", exportPath, "ScenesCollections");
+        //         if (!Directory.Exists(collectionsPath))
+        //             Directory.CreateDirectory(collectionsPath);
+        //         collectionsPath = string.Format("{0}/{1}.asset", collectionsPath, scene.SceneName);
+        //         UnityEditor.AssetDatabase.DeleteAsset(collectionsPath);
+        //         UnityEditor.AssetDatabase.CreateAsset(sceneCollection, collectionsPath);
+        //     }
+        //     UnityEditor.AssetDatabase.Refresh();
+        // }
     }
 }

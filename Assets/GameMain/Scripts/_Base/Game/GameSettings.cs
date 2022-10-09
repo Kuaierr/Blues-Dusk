@@ -14,42 +14,41 @@ public class GameSettings : MonoSingletonBase<GameSettings>
 {
     private const string GamePrefix = "GameSettings";
     private const string ScenePrefix = "SceneSettings";
-    // protected override void Awake()
-    // {
-    //     base.Awake();
-    //     GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
-    // }
 
     private void Start()
     {
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
+    public void FirstTimeLoadSettings()
+    {
+        Log.Success("First Time Load Settings");
+        GameKitCenter.Setting.SetBool("GameSettings", true);
+        string[] configs = GameKitCenter.Data.GameConfigTable.Data.ToString().RemoveBrackets().RemoveEmptySpaceLine().RemoveLast().Split(',');
+        for (int i = 0; i < configs.Length; i++)
+        {
+            string[] pair = configs[i].Split(':');
+            string configName = pair[0];
+            string configValue = pair[1];
+            GameKitCenter.Setting.SetString(string.Format("{0}.{1}", GamePrefix, configName), configValue);
+        }
+
+        foreach (var config in GameKitCenter.Data.SceneConfigTable.DataList)
+        {
+            string configName = config.SceneAssetName.Correction();
+            string configValue = config.IsUnlocked.Correction();
+            Log.Warning(string.Format("{0}.{1}", ScenePrefix, configName) + " >> " + configValue);
+            GameKitCenter.Setting.SetString(string.Format("{0}.{1}", ScenePrefix, configName), configValue);
+        }
+    }
 
     public void OnLoad(object sender, GameEventArgs e)
     {
-        Log.Success("GameSettings Loaded");
         bool hasGameSettings = GameKitCenter.Setting.GetBool("GameSettings", false);
         // 如果之前没有存档，从默认配置中生成存档
         if (!hasGameSettings)
         {
-            GameKitCenter.Setting.SetBool("GameSettings", true);
-            string[] configs = GameKitCenter.Data.GameConfigTable.Data.ToString().RemoveBrackets().RemoveEmptySpaceLine().RemoveLast().Split(',');
-            for (int i = 0; i < configs.Length; i++)
-            {
-                string[] pair = configs[i].Split(':');
-                string configName = pair[0];
-                string configValue = pair[1];
-                GameKitCenter.Setting.SetString(string.Format("{0}.{1}", GamePrefix, configName), configValue);
-            }
-
-            foreach (var config in GameKitCenter.Data.SceneConfigTable.DataList)
-            {
-                string configName = config.SceneAssetName.Correction();
-                string configValue = config.IsUnlocked.Correction();
-                Log.Warning(string.Format("{0}.{1}", ScenePrefix, configName) + " >> " + configValue);
-                GameKitCenter.Setting.SetString(string.Format("{0}.{1}", ScenePrefix, configName), configValue);
-            }
+            FirstTimeLoadSettings();
         }
     }
 
@@ -102,7 +101,7 @@ public class GameSettings : MonoSingletonBase<GameSettings>
     [Button("保存场景元素配置(Editor Only)")]
     public static void EditorSaveElementConfig([ValueDropdown("GetDay"), LabelText("天数")] int day = 1, [ValueDropdown("GetStage"), LabelText("时间")] int stage = 1)
     {
-        string configName = string.Format("D{0}_{1}_{2}", day, stage, SceneManager.GetSceneAt(1).name.Replace("_","-"));
+        string configName = string.Format("D{0}_{1}_{2}", day, stage, SceneManager.GetSceneAt(1).name.Replace("_", "-"));
         GameElementBase[] elements = GameObject.FindObjectsOfType<GameElementBase>();
         StageConfig_SO config = ScriptableObject.CreateInstance<StageConfig_SO>();
 

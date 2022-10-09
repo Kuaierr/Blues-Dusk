@@ -17,28 +17,20 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     private int m_CurrentIndicatorIndex = 0;
     private int m_CachedActiveIndicatorNum = 0;
     private bool m_IsLocked;
+
     public TextMeshProUGUI Content
     {
-        get
-        {
-            return m_Content;
-        }
+        get { return m_Content; }
     }
 
     public int Index
     {
-        get
-        {
-            return m_Index;
-        }
+        get { return m_Index; }
     }
 
     public bool IsLocked
     {
-        get
-        {
-            return m_IsLocked;
-        }
+        get { return m_IsLocked; }
     }
 
     public void Init(UI_Response response)
@@ -57,7 +49,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
     {
         base.OnHide(callback);
         ResetOptionIndicator();
-        
+
         Unlock();
         //SetActive(true);
     }
@@ -74,12 +66,16 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        m_Response.OnOptionDown(this);
+        if(!m_IsLocked)
+            m_Response.OnOptionDown(this);
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        m_Response.OnOptionEnter(this);
+        if (!m_IsLocked)
+            m_Response.OnOptionEnter(this);
     }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         m_Response.OnOptionExit(this);

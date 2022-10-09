@@ -65,19 +65,7 @@ public class ProcedurePreload : ProcedureBase
 
     private void LoadFont(string fontName)
     {
-        // m_LoadedFlag.Add(Utility.Text.Format("Font.{0}", fontName), false);
-        // GameKitCenter.Resource.LoadAsset(AssetUtility.GetFontAsset(fontName), Constant.AssetPriority.FontAsset, new LoadAssetCallbacks(
-        //     (assetName, asset, duration, userData) =>
-        //     {
-        //         m_LoadedFlag[Utility.Text.Format("Font.{0}", fontName)] = true;
-        //         UGuiForm.SetMainFont((Font)asset);
-        //         Log.Info("Load font '{0}' OK.", fontName);
-        //     },
-
-        //     (assetName, status, errorMessage, userData) =>
-        //     {
-        //         Log.Error("Can not load font '{0}' from '{1}' with error message '{2}'.", fontName, assetName, errorMessage);
-        //     }));
+        
     }
 
     private void LoadDialog()

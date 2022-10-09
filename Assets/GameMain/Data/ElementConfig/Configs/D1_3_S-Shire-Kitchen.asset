@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6c842a2ca7f24eb52a1120d9ac9ba, type: 3}
+  m_Name: D1_3_S-Shire-Kitchen
+  m_EditorClassIdentifier: 
+  Day: 1
+  Stage: 3
+  SceneName: S_Shire_Kitchen
+  ElementDatas:
+  - Name: Mirror
+    DestinationPosition: {x: 2.131, y: 1.577, z: -0.45300007}
+    Position: {x: 2.131, y: 1.577, z: -1.633}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: CustomElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: "(P1_\u573A\u666F)\u955C\u5B50"
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: Tie
+    DestinationPosition: {x: 2.131, y: 1.577, z: 1.537}
+    Position: {x: 2.131, y: 1.577, z: 0.357}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: CustomElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: "(P1_\u573A\u666F)\u9886\u7ED3"
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: Door_Shire_Restaurant-Kitchen
+    DestinationPosition: {x: 0.14910641, y: 1.262563, z: 2.9888253}
+    Position: {x: 0.14910641, y: 1.262563, z: 3.6388254}
+    Rotation: {x: -0, y: 0, z: 0}
+    ElementType: DoorElement
+    Prefab: {fileID: 0}
+    NPC_Posture: 
+    NPC_Dialog: 
+    Item_Dialog: 
+    Door_CanPass: 1
+    Door_CanPassCondition: GameSettings.WearTie
+    Door_TargetScene: S_Shire_Restaurant
+    Custom_Dialog: 
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0

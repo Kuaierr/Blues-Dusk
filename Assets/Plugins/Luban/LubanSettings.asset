@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   before_gen: 
   after_gen: 
-  which_dll: Luban/Luban.ClientServer/Luban.ClientServer.exe
+  which_dll: Luban/Luban.ClientServer/Luban.ClientServer.dll
   tpl_path: Luban/Luban.ClientServer/Templates
   job: cfg --
   define_xml: Luban/Config/Defines/__root__.xml
@@ -22,7 +22,7 @@ MonoBehaviour:
   gen_types: 1028
   service: client
   output_data_dir: Assets/LubanGen/Datas/json
-  output_code_dir: Assets/LubanGen/Scripts/
+  output_code_dir: Assets/LubanGen/Scripts
   output_data_resources_list_file: 
   output_exclude_tags: 
   output_data_file_extension: 
