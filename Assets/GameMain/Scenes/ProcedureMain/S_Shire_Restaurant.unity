@@ -1131,7 +1131,11 @@ MonoBehaviour:
   InteractTrans: {fileID: 1130938827}
   CanPass: 1
   EnterTranform: {fileID: 1292186265}
-  m_PossibleScenes: []
+  m_PossibleScenes:
+  - S_Apartment_Living
+  - S_Shire_Restaurant
+  - S_Tower_Under
+  - S_Bookstore_Instore
 --- !u!64 &1448300512
 MeshCollider:
   m_ObjectHideFlags: 0

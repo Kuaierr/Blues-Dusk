@@ -9,14 +9,14 @@ public class LeaveDoorElement : SceneElementBase
 {
     public bool CanPass = true;
     public Transform EnterTranform;
-    [SerializeField] private List<string> m_PossibleScenes;
+    [SerializeField][Scene] private List<string> m_PossibleScenes = new List<string>();
     public override void OnInit()
     {
         base.OnInit();
         if (EnterTranform == null)
             EnterTranform = transform.Find("EnterTranformation");
 
-        m_PossibleScenes = new List<string>();
+        //m_PossibleScenes = new List<string>();
         // List<string> tmpScenes = new List<string>() { "S_Tower_Under", "S_Apartment_Living", "S_Bookstore_Instore", "S_Shire_Restaurant" };
         List<string> tmpScenes = new List<string>();
         for (int i = 0; i < tmpScenes.Count; i++)
