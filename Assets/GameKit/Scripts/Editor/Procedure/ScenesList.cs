@@ -20,6 +20,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_ProcedureMain_S_Apartment_Toilet_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity"); }
         [MenuItem("Scenes/S_Bookstore_Instore")]
         public static void Assets_GameMain_Scenes_ProcedureMain_S_Bookstore_Instore_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity"); }
+        [MenuItem("Scenes/S_Menu_Main")]
+        public static void Assets_GameMain_Scenes_ProcedureMain_S_Menu_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity"); }
         [MenuItem("Scenes/S_Shire_Backyard")]
         public static void Assets_GameMain_Scenes_ProcedureMain_S_Shire_Backyard_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity"); }
         [MenuItem("Scenes/S_Shire_Corridor")]
@@ -46,8 +48,6 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Interact_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity"); }
         [MenuItem("Scenes/Prototype_Inventory")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Inventory_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity"); }
-        [MenuItem("Scenes/Prototype_MainMenu")]
-        public static void Assets_GameMain_Scenes_Prototype_Prototype_MainMenu_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_MainMenu.unity"); }
         [MenuItem("Scenes/Prototype_Timeline")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Timeline_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Timeline.unity"); }
         [MenuItem("Scenes/Prototypr_PlayerController")]

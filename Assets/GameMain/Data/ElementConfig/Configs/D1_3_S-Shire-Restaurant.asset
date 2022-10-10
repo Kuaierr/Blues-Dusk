@@ -31,21 +31,12 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+<<<<<<< HEAD
   - Name: NPC_Zola
     DestinationPosition: {x: 0.81599975, y: 0.812, z: 3.46}
     Position: {x: 1.35, y: 0, z: 3.46}
     Rotation: {x: 0, y: 270, z: 0}
-    ElementType: NPCElement
-    Prefab: {fileID: 8263724039467737132, guid: a911866fe5bb46149821a6a0710e095a, type: 3}
-    NPC_Posture: <None>
-    NPC_Dialog: "(P1_\u573A\u666F)\u5353\u62C9_\u9152\u9986\u9910\u996E\u533A"
-    Item_Dialog: 
-    Door_CanPass: 0
-    Door_CanPassCondition: 
-    Door_TargetScene: 
-    Custom_Dialog: 
-    Custom_CanRepeatDialog: 0
-    Custom_HasDialoged: 0
+=======
   - Name: Coffee
     DestinationPosition: {x: 1.94, y: 1.732, z: 0.3899998}
     Position: {x: 1.94, y: 1.63, z: -0.79}
@@ -58,7 +49,23 @@ MonoBehaviour:
     Door_CanPass: 0
     Door_CanPassCondition: 
     Door_TargetScene: 
-    Custom_Dialog: "(P1_\u573A\u666F)\u4E0EXXX\u4E92\u52A8"
+    Custom_Dialog: "(P1_\u573A\u666F)\u9886\u7ED3"
+    Custom_CanRepeatDialog: 0
+    Custom_HasDialoged: 0
+  - Name: NPC_Noah
+    DestinationPosition: {x: -0.49, y: 1.04, z: 0.97400004}
+    Position: {x: -0.49, y: 0, z: 0.45}
+    Rotation: {x: -0, y: 0, z: 0}
+>>>>>>> dev
+    ElementType: NPCElement
+    Prefab: {fileID: 8263724039467737132, guid: a911866fe5bb46149821a6a0710e095a, type: 3}
+    NPC_Posture: <None>
+    NPC_Dialog: "(P1_\u573A\u666F)\u5353\u62C9_\u9152\u9986\u9910\u996E\u533A"
+    Item_Dialog: 
+    Door_CanPass: 0
+    Door_CanPassCondition: 
+    Door_TargetScene: 
+    Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
   - Name: Door_Shire_Restaurant-Kitchen

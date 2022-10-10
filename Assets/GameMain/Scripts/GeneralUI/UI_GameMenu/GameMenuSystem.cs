@@ -15,7 +15,7 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 		GameKitCenter.Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnGameMenuUIOpenSuccess);
 		GameKitCenter.Event.Subscribe(ReFocusGameMenuEventArgs.EventId,OpenGameMenuUIForm);
 		//GameKitCenter.UI.TryOpenUIForm("UI_GameMenu", this);
-		OpenGameMenuUIForm(this, null);
+		//OpenGameMenuUIForm(this, null);
 	}
 
 	public void OpenGameMenuUI()
@@ -23,11 +23,19 @@ public class GameMenuSystem : MonoSingletonBase<GameMenuSystem>
 		OpenGameMenuUIForm(this, null);
 	}
 
+	public void CloseGameMenuUI()
+	{
+		var uiFormInstance = GameKitCenter.UI.GetUIForm(m_CachedUiId);
+		if(uiFormInstance!=null)
+			uiFormInstance.gameObject.SetActive(false);
+	}
+
 	private void OpenGameMenuUIForm(object sender, GameEventArgs e)
 	{
 		var uiFormInstance = GameKitCenter.UI.GetUIForm(m_CachedUiId);
 		if (uiFormInstance != null)
 		{
+			uiFormInstance.gameObject.SetActive(true);
 			GameKitCenter.UI.RefocusUIForm(uiFormInstance);
 		}
 		else

@@ -210,7 +210,7 @@ Animator:
   m_GameObject: {fileID: 2355115633608419875}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f42f33cb155897344b1d082b6ceda1ba, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2e46a390e47c7a347b10256a23a18d80, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7d8ea7bd68bc67f4fa48ddcca7f0cd4b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -234,11 +234,14 @@ MonoBehaviour:
   OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractTrans: {fileID: 4207725304210138857}
   Dialog: 
-  AfterDialog: 
-  IsDisposable: 0
-  m_IsDialoged: 0
+  Posture: <None>
+  CanRepeatDialog: 0
+  m_HasDialoged: 0
 --- !u!64 &8619821371675003053
 MeshCollider:
   m_ObjectHideFlags: 0

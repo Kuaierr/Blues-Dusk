@@ -65,7 +65,7 @@ public class UI_BackpackInfo : UIFormChildBase
             interactButton.onClick.AddListener(Interact);
         }
     }
-
+    
     public void Purchase()
     {
         if (m_CachedStock != null)

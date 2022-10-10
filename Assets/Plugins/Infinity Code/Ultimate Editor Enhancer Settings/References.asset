@@ -17,6 +17,7 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
+<<<<<<< HEAD
   - name: Prototype_Dialog
     path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
   - name: GameKit_Launcher
@@ -25,6 +26,20 @@ MonoBehaviour:
     path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
   - name: DialogTest
     path: Assets/GameMain/Scenes/Prototype/DialogTest.unity
+=======
+  - name: S_Shire_Lounge
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
+  - name: S_Apartment_Living
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+  - name: S_Menu_Main
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
+  - name: S_Menu
+    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+  - name: S_Shire_Kitchen
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+>>>>>>> dev
   - name: S_Shire_Restaurant
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
   - name: S_Shire_Kitchen

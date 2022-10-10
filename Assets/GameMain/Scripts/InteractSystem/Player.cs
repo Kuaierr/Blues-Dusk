@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     private PlayerMovement m_Movement;
     public static Player Current;
     [SerializeField] private bool m_UpdateRotation = false;
+
+    [SerializeField] private Transform _camerFollower;
+    public Transform CameraFollower => _camerFollower;
     
     private void Start()
     {

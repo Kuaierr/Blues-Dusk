@@ -44,13 +44,17 @@ public class ProcedurePreload : ProcedureBase
 
         GameKitCenter.Scheduler.SetStartScene();
         procedureOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, GameKitCenter.Scheduler.StartScene);
+        procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU, GameKitCenter.Scheduler.StartScene == "S_Menu_Main");
+        
         if (GameKitCenter.Scheduler.MultiScene)
         {
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, true);
             AddressableManager.instance.CachedStartScene = GameKitCenter.Scheduler.StartScene;
         }
         else
+        {
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
+        }
         ChangeState<ProcedureChangeScene>(procedureOwner);
     }
 

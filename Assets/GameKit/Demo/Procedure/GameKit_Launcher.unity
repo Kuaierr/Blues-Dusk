@@ -356,7 +356,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575728146776113063, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: orthographic size
+<<<<<<< HEAD
       value: 1.832056
+=======
+      value: 2.035558
+>>>>>>> dev
       objectReference: {fileID: 0}
     - target: {fileID: 4575728146776113063, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -444,7 +448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944438453484055846, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: m_Lens.OrthographicSize
+<<<<<<< HEAD
       value: 1.832056
+=======
+      value: 2.035558
+>>>>>>> dev
       objectReference: {fileID: 0}
     - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: DefaultRotation.x
@@ -972,6 +980,8 @@ MonoBehaviour:
   m_CustomUIGroupHelper: {fileID: 0}
   m_UIGroups:
   - m_Name: Default
+    m_Depth: 0
+  - m_Name: System
     m_Depth: 0
   - m_Name: General
     m_Depth: 0
@@ -1655,7 +1665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActive: 0
   defaultSwitchType: 1
-  StartScene: S_Shire_Kitchen
+  StartScene: S_Menu_Main
   LoadScene: 
   m_ScenesPath: Assets/GameMain/ProcedureMain/
   m_MultiScenesPath: Assets/GameMain/

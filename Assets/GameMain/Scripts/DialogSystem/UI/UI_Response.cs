@@ -187,23 +187,19 @@ public class UI_Response : UIFormChildBase
 
     public void OnOptionEnter(UI_Option option)
     {
-        // Log.Warning("OnOptionEnter");
-        // m_LastIndex = m_CurrentIndex;
-        // m_CurrentIndex = option.Index;
-        // EmphasizeSelectedOption(m_CurrentIndex);
+        m_LastIndex = m_CurrentIndex;
+        m_CurrentIndex = option.Index;
+        EmphasizeSelectedOption(m_CurrentIndex);
     }
 
     public void OnOptionExit(UI_Option option)
     {
-        // Log.Warning("OnOptionExit");
-        // m_LastIndex = m_CurrentIndex;
-        // m_CurrentIndex = -1;
-        // EmphasizeSelectedOption(m_CurrentIndex);
+        option.SetEmphasize(false);
     }
 
     public void OnOptionDown(UI_Option option)
     {
-
+        //Info 直接交给状态机管理
     }
 
     private void EmphasizeSelectedOption(int index)
