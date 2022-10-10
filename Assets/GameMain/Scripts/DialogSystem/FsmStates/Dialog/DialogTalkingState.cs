@@ -146,6 +146,11 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.TryExecuteNodeFunction(GameKitCenter.Dialog.CurrentTree.CurrentNode);
         if (GameKitCenter.Dialog.CurrentTree.CurrentNode.IsBranch)
         {
+            foreach(var item in GameKitCenter.Dialog.CurrentTree.CurrentNode.GetAllChild())
+            {
+                Log.Warning(item);
+            }
+            
             // 如果下一个节点是选择节点，则先显示对话
             fsmMaster.UpdateDialogUI(GameKitCenter.Dialog.CurrentTree.CurrentNode);
             SetTextShowing();

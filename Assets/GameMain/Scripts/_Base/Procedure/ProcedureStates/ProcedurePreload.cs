@@ -75,6 +75,7 @@ public class ProcedurePreload : ProcedureBase
             for (int i = 0; i < assets.Count; i++)
             {
                 string path = AssetUtility.GetDialogAsset(assets[i].name);
+                Log.Info(assets[i].name);
                 GameKitCenter.Dialog.PreloadDialogAsset(assets[i].name, assets[i].text);
             }
         });

@@ -157,10 +157,10 @@ namespace GameKit.Dialog
         public void GetOrCreatetDialogTree(string treeName, string content = "", object userData = null)
         {
             Utility.Debugger.LogWarning("Get: " + treeName);
-            // foreach (var item in m_DialogTrees)
-            // {
-            //     Utility.Debugger.LogSuccess(item.Key);
-            // }
+            //foreach (var item in m_DialogTrees)
+            //{
+            //    Utility.Debugger.LogSuccess(item.Key);
+            //}
 
             if (HasDialogTree(treeName))
             {

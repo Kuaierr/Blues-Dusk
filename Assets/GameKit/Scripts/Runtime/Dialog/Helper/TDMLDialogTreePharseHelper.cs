@@ -157,7 +157,9 @@ namespace UnityGameKit.Runtime
 
             string nodeInfo = Regex.Match(text, @"(?i)(?<=\[)(.*)(?=\])").Value.Trim();
             string dialogInfo = text.Split(']').LastOrDefault();
+
             string[] split = dialogInfo.SafeSplit('：');
+
             if (split.Length == 2) // 普通节点
             {
                 string speaker = dialogInfo.Split('：').FirstOrDefault().Trim();
@@ -176,7 +178,7 @@ namespace UnityGameKit.Runtime
             }
             else
             {
-                Log.Fatal("Unsupport content symbol \':\', please replace it.");
+                Log.Fatal("Unsupport content symbol \':\', in {0}." ,node.ToString());
             }
 
             bool customLinking = true;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ElementConfigCreator
   m_EditorClassIdentifier: 
   ElementPool: {fileID: 11400000, guid: e7fbddff77f01904fb05c47199a228ea, type: 2}
-  CurrentConfig: {fileID: 0}
+  CurrentConfig: {fileID: 11400000, guid: 7213c297121acd84b85967fba49c6de8, type: 2}
   Day: 1
   Stage: 3
   SceneName: S_Shire_Restaurant

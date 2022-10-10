@@ -45,16 +45,18 @@ namespace UnityGameKit.Editor
                 }
             }
 
-            EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+            int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
+            if (selectedIndex != m_SceneNameIndex)
             {
-                int selectedIndex = EditorGUILayout.Popup(fieldInfo.Name, m_SceneNameIndex, m_SceneNames);
-                if (selectedIndex != m_SceneNameIndex)
-                {
-                    m_SceneNameIndex = selectedIndex;
-                    serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
-                }
+                m_SceneNameIndex = selectedIndex;
+                serializedProperty.stringValue = selectedIndex <= 0 ? null : m_SceneNames[selectedIndex];
             }
-            EditorGUI.EndDisabledGroup();
+
+            //EditorGUI.BeginDisabledGroup(EditorApplication.isPlayingOrWillChangePlaymode);
+            //{
+                
+            //}
+            //EditorGUI.EndDisabledGroup();
 
         }
     }

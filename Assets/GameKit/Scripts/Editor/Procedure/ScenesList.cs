@@ -34,6 +34,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_ProcedureMain_S_Tower_Top_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity"); }
         [MenuItem("Scenes/S_Tower_Under")]
         public static void Assets_GameMain_Scenes_ProcedureMain_S_Tower_Under_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity"); }
+        [MenuItem("Scenes/DialogTest")]
+        public static void Assets_GameMain_Scenes_Prototype_DialogTest_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/DialogTest.unity"); }
         [MenuItem("Scenes/Prototype_Dialog")]
         public static void Assets_GameMain_Scenes_Prototype_Prototype_Dialog_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity"); }
         [MenuItem("Scenes/Prototype_Dialog_DiceDev")]
@@ -52,8 +54,8 @@ namespace UnityGameKit.Editor
         public static void Assets_GameMain_Scenes_Prototype_Prototypr_PlayerController_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity"); }
         [MenuItem("Scenes/S_Bar_Main")]
         public static void Assets_GameMain_Scenes_S_Bar_Main_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Bar_Main.unity"); }
-        [MenuItem("Scenes/S_FengHospital")]
-        public static void Assets_GameMain_Scenes_S_FengHospital_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_FengHospital.unity"); }
+        [MenuItem("Scenes/S_Shire_Restaurant 2")]
+        public static void Assets_GameMain_Scenes_S_Shire_Restaurant_2_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Shire_Restaurant 2.unity"); }
         [MenuItem("Scenes/S_Station")]
         public static void Assets_GameMain_Scenes_S_Station_unity() { ScenesUpdate.OpenScene("Assets/GameMain/Scenes/S_Station.unity"); }
         [MenuItem("Scenes/S_Template")]
