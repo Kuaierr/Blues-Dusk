@@ -25,10 +25,12 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase, System.IClonea
         { if(!_json["wear_tie"].IsBoolean) { throw new SerializationException(); }  WearTie = _json["wear_tie"]; }
         { if(!_json["d13_talk_to_zora"].IsBoolean) { throw new SerializationException(); }  D13TalkToZora = _json["d13_talk_to_zora"]; }
         { if(!_json["test"].IsBoolean) { throw new SerializationException(); }  Test = _json["test"]; }
+        { if(!_json["p11_talk_to_owen"].IsBoolean) { throw new SerializationException(); }  P11TalkToOwen = _json["p11_talk_to_owen"]; }
+        { if(!_json["p11_talk_to_noah"].IsBoolean) { throw new SerializationException(); }  P11TalkToNoah = _json["p11_talk_to_noah"]; }
         PostInit();
     }
 
-    public GameConfig(bool is_david_dead, bool is_rebellion_start, int current_day, int current_stage, bool wear_tie, bool d13_talk_to_zora, bool test ) 
+    public GameConfig(bool is_david_dead, bool is_rebellion_start, int current_day, int current_stage, bool wear_tie, bool d13_talk_to_zora, bool test, bool p11_talk_to_owen, bool p11_talk_to_noah ) 
     {
         this.IsDavidDead = is_david_dead;
         this.IsRebellionStart = is_rebellion_start;
@@ -37,6 +39,8 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase, System.IClonea
         this.WearTie = wear_tie;
         this.D13TalkToZora = d13_talk_to_zora;
         this.Test = test;
+        this.P11TalkToOwen = p11_talk_to_owen;
+        this.P11TalkToNoah = p11_talk_to_noah;
         PostInit();
     }
 
@@ -52,6 +56,8 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase, System.IClonea
     public bool WearTie { get; private set; }
     public bool D13TalkToZora { get; private set; }
     public bool Test { get; private set; }
+    public bool P11TalkToOwen { get; private set; }
+    public bool P11TalkToNoah { get; private set; }
 
     public const int __ID__ = -2012855298;
     public override int GetTypeId() => __ID__;
@@ -75,12 +81,14 @@ public sealed partial class GameConfig :  Bright.Config.BeanBase, System.IClonea
         + "WearTie:" + WearTie + ","
         + "D13TalkToZora:" + D13TalkToZora + ","
         + "Test:" + Test + ","
+        + "P11TalkToOwen:" + P11TalkToOwen + ","
+        + "P11TalkToNoah:" + P11TalkToNoah + ","
         + "}";
     }
 
     public object Clone()
     {
-        return new GameConfig(this.IsDavidDead, this.IsRebellionStart, this.CurrentDay, this.CurrentStage, this.WearTie, this.D13TalkToZora, this.Test);
+        return new GameConfig(this.IsDavidDead, this.IsRebellionStart, this.CurrentDay, this.CurrentStage, this.WearTie, this.D13TalkToZora, this.Test, this.P11TalkToOwen, this.P11TalkToNoah);
     }
     
     partial void PostInit();

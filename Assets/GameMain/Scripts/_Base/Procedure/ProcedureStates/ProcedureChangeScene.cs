@@ -35,7 +35,14 @@ public class ProcedureChangeScene : ProcedureBase
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
         base.OnEnter(procedureOwner);
+        
         m_IsChangeSceneComplete = false;
+        
+        if(procedureOwner.HasData(ProcedureStateUtility.LOAD_MAIN_MENU))
+            m_ChangeToMenu = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU);
+        else 
+            m_ChangeToMenu = false;
+        
         // QuickCinemachineCamera.Clear();
         GameKitCenter.Event.Subscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         GameKitCenter.Event.Subscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
@@ -75,7 +82,7 @@ public class ProcedureChangeScene : ProcedureBase
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-
+        
         if (!m_IsChangeSceneComplete)
         {
             return;
@@ -101,7 +108,8 @@ public class ProcedureChangeScene : ProcedureBase
 
     public Transform GetDefaultTransform()
     {
-        return GameObject.Find("DefaultSpawnPoint").transform;
+        GameObject target = GameObject.Find("DefaultSpawnPoint");
+        return target ? target.transform : null;
     }
 
     private void OnSceneLoad()
@@ -113,7 +121,7 @@ public class ProcedureChangeScene : ProcedureBase
         GameKitCenter.Event.Fire(this, LoadSettingsEventArgs.Create(null));
         // 手动加载场景配置，根据：当前天数、当天阶段，当前场景
 
-
+        
 
         // 尝试寻找进入新场景的可用坐标，如果没找到，使用默认坐标
         Transform targetTrans = GetEnterTransform();
@@ -121,19 +129,24 @@ public class ProcedureChangeScene : ProcedureBase
             targetTrans = GetDefaultTransform();
 
         if (targetTrans == null)
-            return;
-
-        // 加载玩家对象
-        AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
         {
-            // 注意：包含Navmesh Agent的实体必须在实例化时指定位置、方位和父对象
-            GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
-            GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
-            m_Prototyper = realObj.GetComponent<Player>();
-            // 镜头跟随玩家
-            QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.transform);
             m_IsChangeSceneComplete = true;
-        });
+            return;
+        }
+        else
+        {
+            // 加载玩家对象
+            AddressableManager.instance.GetAssetAsyn(AssetUtility.GetElementAsset("Player_Ethan"), (GameObject obj) =>
+            {
+                // 注意：包含Navmesh Agent的实体必须在实例化时指定位置、方位和父对象
+                GameSettings.current.LoadElementConfig(GameCenter.current.CurrentDay, GameCenter.current.CurrentStage, UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).name);
+                GameObject realObj = GameObject.Instantiate(obj, targetTrans.position.IgnoreY(), targetTrans.rotation, GameKitCenter.Procedure.DynamicParent);
+                m_Prototyper = realObj.GetComponent<Player>();
+                // 镜头跟随玩家
+                QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.CameraFollower);
+                m_IsChangeSceneComplete = true;
+            });
+        }
     }
     private void OnLoadSceneSuccess(object sender, BaseEventArgs e)
     {

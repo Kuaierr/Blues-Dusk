@@ -9,6 +9,8 @@ public static class ProcedureExtension
 {    
     public static void ChangeSceneByDoor(this ProcedureComponent procedureComponent, string sceneName, string doorName)
     {
+        procedureComponent.SetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU,sceneName=="S_Menu_Main");
+        
         ProcedureMain changeScene = (ProcedureMain)procedureComponent.GetProcedure<ProcedureMain>();
         changeScene.SetNextSceneName(sceneName);
         procedureComponent.CachedDoorName = doorName;
@@ -17,6 +19,8 @@ public static class ProcedureExtension
 
     public static void ChangeSceneBySelect(this ProcedureComponent procedureComponent, string sceneName)
     {
+        procedureComponent.SetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU,sceneName=="S_Menu_Main");
+        
         ProcedureMain changeScene = (ProcedureMain)procedureComponent.GetProcedure<ProcedureMain>();
         changeScene.SetNextSceneName(sceneName);
         changeScene.ExternalChangeState<ProcedureChangeScene>();

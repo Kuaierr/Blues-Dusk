@@ -200,8 +200,6 @@ MonoBehaviour:
   - {fileID: 5418135722132071173}
   - {fileID: 286964716756161044}
   - {fileID: 1206343352490983450}
-  - {fileID: 5418135722966266217}
-  - {fileID: 5418135722170020734}
 --- !u!1 &286964717284989207
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,17 +376,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
   m_PrefabInstance: {fileID: 286964716412654663}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5418135722170020734 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
-  m_PrefabInstance: {fileID: 286964716412654663}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb7356bd194cfa4886b71c41e706094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &286964716643664956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -400,6 +387,10 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u590F\u5C14\u4E4B\u5BB6"
       objectReference: {fileID: 0}
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4303495818353656777, guid: 53453a6687acf6148a007379371b0007, type: 2}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -529,6 +520,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286964717284989200}
     m_Modifications:
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4303495818353656777, guid: 53453a6687acf6148a007379371b0007, type: 2}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -781,17 +776,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
   m_PrefabInstance: {fileID: 286964717746296400}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5418135722966266217 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
-  m_PrefabInstance: {fileID: 286964717746296400}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb7356bd194cfa4886b71c41e706094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5418135721976722733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -799,6 +783,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286964717284989200}
     m_Modifications:
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4303495818353656777, guid: 53453a6687acf6148a007379371b0007, type: 2}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -932,6 +920,10 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u8C2C\u8BBA\u4E66\u5E97"
       objectReference: {fileID: 0}
+    - target: {fileID: 269503711956925759, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4303495818353656777, guid: 53453a6687acf6148a007379371b0007, type: 2}
     - target: {fileID: 5245168922156902182, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1030,7 +1022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: SceneName
-      value: "\u706F\u5854"
+      value: "\u4E66\u5E97"
       objectReference: {fileID: 0}
     - target: {fileID: 5245168922156902201, guid: e7f8dcde7ac369f4094313d2216db93b, type: 3}
       propertyPath: SceneAssetName

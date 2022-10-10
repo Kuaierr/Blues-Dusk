@@ -29,7 +29,9 @@ public class ExportSceneInfoToXML : Editor {
                 //得到场景的名称
                 string name = S.path;
                 //打开这个场景
+#pragma warning disable 618
                 EditorApplication.OpenScene(name);
+#pragma warning restore 618
                 XmlElement scenes = xmlDoc.CreateElement("scenes");
                 scenes.SetAttribute("name", name);
                 foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))

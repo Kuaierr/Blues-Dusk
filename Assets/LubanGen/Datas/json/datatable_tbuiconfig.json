@@ -65,7 +65,14 @@
   {
     "id": 1006,
     "asset_name": "UI_SettingSystem",
-    "ui_group_name": "Default",
+    "ui_group_name": "System",
+    "allow_multi_instance": false,
+    "pause_covered_ui_form": false
+  },
+  {
+    "id": 1007,
+    "asset_name": "UI_MainMenu",
+    "ui_group_name": "System",
     "allow_multi_instance": false,
     "pause_covered_ui_form": false
   }

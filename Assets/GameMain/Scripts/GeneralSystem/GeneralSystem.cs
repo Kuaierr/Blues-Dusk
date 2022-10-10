@@ -47,7 +47,9 @@ public class GeneralSystem : MonoSingletonBase<GeneralSystem>
     {
         GameKitCenter.UI.TryOpenUIForm("UI_SelectScene", userData: typeof(UI_SelectScene));
 
-        m_CachedAvailiableScenes = availaibleScene;
+        foreach (string s in availaibleScene)
+            m_CachedAvailiableScenes.Add(s);
+        
         if (m_CachedUISelectScene != null)
         {
             m_CachedUISelectScene.Show();

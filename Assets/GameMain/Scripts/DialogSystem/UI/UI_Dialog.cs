@@ -347,12 +347,12 @@ public class UI_Dialog : UIFormBase
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         data.Speaker = data.Speaker.Correction();
         data.Contents = data.Contents.Correction();
-
+        
         // Log.Warning(data.Contents);
 
         if (node == null || data.Speaker == "Default")
             return;
-
+        
         if (data.Speaker == ">>" || data.Speaker == "")
             t_SpeakerName.text = "";
         else if (data.Speaker == "??")
@@ -440,6 +440,10 @@ public class UI_Dialog : UIFormBase
         // UnityGameKit.Runtime.StartDialogSuccessEventArgs ne = (UnityGameKit.Runtime.StartDialogSuccessEventArgs)e;
         // GameKitCenter.Dialog.CurrentTree = ne.DialogTree;
         // GameKitCenter.Dialog.CurrentTree.Reset();
+        SpeakerAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        SpeakerAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        m_CurrentCharacter = null;
+        
         OnResume();
     }
 

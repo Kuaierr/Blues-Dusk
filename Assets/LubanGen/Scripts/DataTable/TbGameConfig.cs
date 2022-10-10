@@ -80,6 +80,20 @@ public sealed partial class TbGameConfig
             return _data.Test;
         }
      } 
+     public bool P11TalkToOwen
+     {
+        get
+        {
+            return _data.P11TalkToOwen;
+        }
+     } 
+     public bool P11TalkToNoah
+     {
+        get
+        {
+            return _data.P11TalkToNoah;
+        }
+     } 
 
     public void Resolve(Dictionary<string, object> _tables)
     {

@@ -38,8 +38,9 @@ public class CustomElement : SceneElementBase
             if (eventArgs.AssetName == Dialog)
             {   
                 OnInteractAfter?.Invoke();
+                HasDialoged = true;
                 if (CanRepeatDialog)
-                    HasDialoged = true;
+                    HasDialoged = false;
             }
         }
     }
