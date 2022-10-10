@@ -20,8 +20,17 @@ public class UI_SelectScene : UIFormBase
 
     public void UpdateScenes(List<string> avaibleScenes)
     {
-        if (avaibleScenes == null)
+        if(avaibleScenes == null) return;
+        if (avaibleScenes.Count == 0)
+        {
+            for (int i = 0; i < m_ScenePreviews.Count; i++)
+            {
+                m_ActiveScenePreviews.Add(m_ScenePreviews[i].OnInit(i,SelectScene,OnConfirm));
+                m_ScenePreviews[i].Show();
+            }
+            
             return;
+        }
         
         for (int i = 0; i < avaibleScenes.Count; i++)
         {
@@ -38,7 +47,10 @@ public class UI_SelectScene : UIFormBase
         }
 
         if (m_ActiveScenePreviews.Count > 0)
-            m_ActiveScenePreviews[0].Selected();
+        {
+            //m_ActiveScenePreviews[0].Selected();
+            SelectScene(0);
+        }
     }
 
     protected override void OnInit(object userData)

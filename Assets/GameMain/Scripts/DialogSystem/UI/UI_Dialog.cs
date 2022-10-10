@@ -440,6 +440,9 @@ public class UI_Dialog : UIFormBase
         // UnityGameKit.Runtime.StartDialogSuccessEventArgs ne = (UnityGameKit.Runtime.StartDialogSuccessEventArgs)e;
         // GameKitCenter.Dialog.CurrentTree = ne.DialogTree;
         // GameKitCenter.Dialog.CurrentTree.Reset();
+        SpeakerAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        SpeakerAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        
         OnResume();
     }
 
