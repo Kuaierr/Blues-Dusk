@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityGameKit.Runtime;
@@ -17,6 +18,12 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
         base.Awake();
         DefaultOrthographicSize = m_VirtualCamera.m_Lens.OrthographicSize;
     }
+
+    private void OnDisable()
+    {
+        m_VirtualCamera.m_Lens.OrthographicSize = DefaultOrthographicSize;
+    }
+
     private bool FollowPlayer(Transform transform)
     {
         if (m_VirtualCamera == null)
@@ -65,6 +72,8 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
                 m_VirtualCamera.m_Lens.OrthographicSize -= speed * Time.deltaTime;
                 yield return null;
             }
+            
+            m_VirtualCamera.m_Lens.OrthographicSize = 0.75f * size;
         }
         else
         {
@@ -73,7 +82,10 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
                 m_VirtualCamera.m_Lens.OrthographicSize += speed * Time.deltaTime;
                 yield return null;
             }
+            
+            m_VirtualCamera.m_Lens.OrthographicSize = 1.25f * size;
         }
+        
         Debug.Log("Focus End.");
     }
 
@@ -95,6 +107,8 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
                 yield return null;
             }
         }
+
+        m_VirtualCamera.m_Lens.OrthographicSize = size;
 
         Debug.Log("Refocus End.");
     }

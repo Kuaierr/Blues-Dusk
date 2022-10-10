@@ -77,8 +77,8 @@ MonoBehaviour:
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
   - Name: LeaveDoor_ShireRestaurant
-    DestinationPosition: {x: -3.9366586, y: 1.262563, z: 5.1216097}
-    Position: {x: -3.9056587, y: 1.262563, z: 6.12461}
+    DestinationPosition: {x: -3.9366586, y: 1.262563, z: 5.4969997}
+    Position: {x: -3.9056587, y: 1.262563, z: 6.5}
     Rotation: {x: -0, y: 0, z: 0}
     ElementType: LeaveDoorElement
     Prefab: {fileID: 0}
