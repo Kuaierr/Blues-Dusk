@@ -526,7 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VirtualCamera: {fileID: 8944438453484055846}
   DefaultFollowPositionOffset: {x: 5, y: -7, z: -5}
-  DefaultRotation: {x: 0, y: 0, z: 0}
+  DefaultRotation: {x: 45, y: 135, z: 0}
   FocusTransform: {fileID: 8215688976417750196}
 --- !u!1 &8944438453801143924
 GameObject:

@@ -423,6 +423,14 @@ PrefabInstance:
       value: Cam
       objectReference: {fileID: 0}
     - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
+      propertyPath: DialogRotation.x
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
+      propertyPath: DialogRotation.y
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: DefaultRotation.x
       value: 45
       objectReference: {fileID: 0}
