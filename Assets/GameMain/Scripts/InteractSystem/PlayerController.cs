@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         layerMask = LayerMask.GetMask("Interactive") | LayerMask.GetMask("Navigation");
+        navMeshAgent.updateRotation = false; //禁用navmeshagent的旋转
     }
 
     //void Update()
@@ -74,35 +75,17 @@ public class PlayerController : MonoBehaviour
     //}
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("clicked");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Debug.Log("clicked");
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, FloorLayer))
-            {
-                SetDestination(hit.point);
-            }
-        }
+        //    if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, FloorLayer))
+        //    {
+        //        SetDestination(hit.point);
+        //    }
+        //}
         MoveCharacter();
-    }
-
-    private void HandleInput()
-    {
-        MoveToDestination();
-    }
-
-    private void MoveToDestination()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, FloorLayer))
-            {
-                SetDestination(hit.point);
-            }
-        }
     }
 
     private void MoveCharacter()
@@ -120,13 +103,17 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
-        MovementVector = (PathLocations[PathIndex]+(navMeshAgent.baseOffset * Vector3.up) - transform.position).normalized;
+        MovementVector = (PathLocations[PathIndex]+(navMeshAgent.baseOffset * Vector3.up) - transform.position).normalized;        
         
         TargetDirection = Vector3.Lerp(
             TargetDirection,
             MovementVector,
             Mathf.Clamp01(LerpTime * RotateSpeed * (1 - Smoothing))
         );
+
+        //平视方向
+        //Vector3 lookhorizonPoint = new Vector3(PathLocations[PathIndex].x, (navMeshAgent.baseOffset * Vector3.up).y, PathLocations[PathIndex].z);
+        //Vector3 lookDirection = lookhorizonPoint - transform.position;
 
         Vector3 lookDirection = MovementVector;
         if (lookDirection != Vector3.zero)
