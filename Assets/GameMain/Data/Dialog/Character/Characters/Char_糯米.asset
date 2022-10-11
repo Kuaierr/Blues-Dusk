@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d0ed17694105c43adcd00298bee7e5, type: 3}
+  m_Name: "Char_\u7CEF\u7C73"
+  m_EditorClassIdentifier: 
+  idName: Nomi
+  displayName: "\u7CEF\u7C73"
+  iconicColor: {r: 0.83921576, g: 0.7490196, b: 0.68235296, a: 1}
+  introduction: "\u5742\u672C\u5DE5\u4E1A\u5728\u96EA\u5D29\u9547\u7684\u5916\u52E4\u4EBA\u5458"
+  moods:
+  - Name: OL_Normal
+    avatar: {fileID: 21300000, guid: 799ce7f39bfa1c745848f473463ffaad, type: 3}
+    half: {fileID: 21300000, guid: 799ce7f39bfa1c745848f473463ffaad, type: 3}
+  - Name: OL_Laugh
+    avatar: {fileID: 21300000, guid: 064d3b54ce960fa44b224940c52073e3, type: 3}
+    half: {fileID: 21300000, guid: 064d3b54ce960fa44b224940c52073e3, type: 3}
+  - Name: OL_Loss
+    avatar: {fileID: 21300000, guid: 3012fee2655866a4b8a127630ed3d75a, type: 3}
+    half: {fileID: 21300000, guid: 3012fee2655866a4b8a127630ed3d75a, type: 3}
+  - Name: OL_Contempt
+    avatar: {fileID: 21300000, guid: 5bf4eb5734c301b429f495f0a0a6cd0c, type: 3}
+    half: {fileID: 21300000, guid: 5bf4eb5734c301b429f495f0a0a6cd0c, type: 3}
+  - Name: OL_Shy
+    avatar: {fileID: 21300000, guid: f5df09633cf520441a6d0fd06216c721, type: 3}
+    half: {fileID: 21300000, guid: f5df09633cf520441a6d0fd06216c721, type: 3}
