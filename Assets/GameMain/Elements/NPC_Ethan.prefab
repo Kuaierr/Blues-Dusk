@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  OutLineColor: {r: 0.31764707, g: 0.23137255, b: 0.92941177, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  OutLineColor: {r: 0.31764707, g: 0.23137255, b: 0.92941177, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
@@ -906,13 +906,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d2980e4d9398b449a4cec2bd42fc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractCallback:
+  OnInteractBegin:
     m_PersistentCalls:
       m_Calls: []
-  OutlineWidth: 3
+  OnInteractAfter:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractTrans: {fileID: 4236657297540700289}
   Dialog: 
-  AfterDialog: 
-  m_IsDialoged: 0
+  Posture: <None>
+  CanRepeatDialog: 0
+  m_HasDialoged: 0
 --- !u!64 &1788747554970199613
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1063,7 +1067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  OutLineColor: {r: 0.31764707, g: 0.23137255, b: 0.92941177, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
