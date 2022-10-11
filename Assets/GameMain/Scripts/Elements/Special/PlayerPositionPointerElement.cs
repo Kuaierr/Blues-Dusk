@@ -10,6 +10,11 @@ public class PlayerPositionPointerElement : ElementBase
 		_pointer = transform.GetChild(0).gameObject;
 		_pointer.SetActive(false);
 	}
+	
+	private void OnDestroy()
+	{
+		GameKitCenter.Element.RemoveElement(this);
+	}
 
 	public override void OnHighlightEnter()
 	{

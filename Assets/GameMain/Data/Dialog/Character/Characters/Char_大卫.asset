@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d0ed17694105c43adcd00298bee7e5, type: 3}
+  m_Name: "Char_\u5927\u536B"
+  m_EditorClassIdentifier: 
+  idName: David
+  displayName: "\u5927\u536B"
+  iconicColor: {r: 0.26666668, g: 0.2901961, b: 0.38823533, a: 1}
+  introduction: "\u8FD9\u4E2A\u4EBA\u662F\u5927\u536B"
+  moods:
+  - Name: Work_Normal
+    avatar: {fileID: 21300000, guid: 90d6bf884f48035458db166e21260d3e, type: 3}
+    half: {fileID: 0}
+  - Name: Work_Awkward
+    avatar: {fileID: 21300000, guid: 5cd212af24fe4c64d8a7cc4391b08366, type: 3}
+    half: {fileID: 21300000, guid: 28e5d38246362744f9f1d502cbb23010, type: 3}
+  - Name: Work_Laugh
+    avatar: {fileID: 21300000, guid: 03425ae65362d2d419097ea8d4a8bbde, type: 3}
+    half: {fileID: 21300000, guid: c8dc56cb670667545a6e64c71f0fe4e3, type: 3}
+  - Name: Work_Meditate
+    avatar: {fileID: 21300000, guid: a583b42e30edb8c4180dcecc5f5503c9, type: 3}
+    half: {fileID: 0}
+  - Name: Work_Surprised
+    avatar: {fileID: 21300000, guid: 0493b3a67bdbaf54e8cd51d34322141b, type: 3}
+    half: {fileID: 0}
+  - Name: Work_Wry
+    avatar: {fileID: 21300000, guid: 3061a6382240ccf4693dc813996b7199, type: 3}
+    half: {fileID: 0}
