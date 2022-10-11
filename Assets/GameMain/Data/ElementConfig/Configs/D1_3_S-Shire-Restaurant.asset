@@ -22,7 +22,7 @@ MonoBehaviour:
     Rotation: {x: -0, y: 0, z: 0}
     ElementType: NPCElement
     Prefab: {fileID: 377934222220900978, guid: 865da8ca1d0cca64888c2a5a7318a51f, type: 3}
-    NPC_Posture: <None>
+    NPC_Posture: 2
     NPC_Dialog: "(P1_\u573A\u666F)\u8BFA\u963F_\u9152\u9986\u9910\u996E\u533A"
     Item_Dialog: 
     Door_CanPass: 0
