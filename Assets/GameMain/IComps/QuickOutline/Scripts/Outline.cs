@@ -35,7 +35,7 @@ public class Outline : MonoBehaviour
         }
     }
 
-    public Color OutlineColor
+    /*public Color OutlineColor
     {
         get { return outlineColor; }
         set
@@ -43,7 +43,7 @@ public class Outline : MonoBehaviour
             outlineColor = value;
             needsUpdate = true;
         }
-    }
+    }*/
 
     public float OutlineWidth
     {
@@ -63,10 +63,9 @@ public class Outline : MonoBehaviour
 
     [SerializeField]
     private Mode outlineMode;
-
-    [SerializeField]
-    private Color DefaultColor = new Color((float)81/255, (float)59/255, (float)237/255);
-    private Color outlineColor;
+    
+    public Color OutLineColor = new Color((float)81/255, (float)59/255, (float)237/255);
+    private Color outlineColor = Color.white;
 
     [SerializeField, Range(0f, 10f)]
     private float outlineWidth = 2f;
@@ -92,7 +91,7 @@ public class Outline : MonoBehaviour
     void Awake()
     {
         //初始化描边颜色
-        outlineColor = DefaultColor;
+        outlineColor = OutLineColor;
         // Cache renderers
         renderers = GetComponentsInChildren<Renderer>();
 
