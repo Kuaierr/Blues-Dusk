@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 6ee6329b06ffbe944858122f29e5551c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ca68c4f3762e82b4695ac72425b66a6a, type: 2}
 --- !u!1001 &6221105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -982,11 +982,19 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: -2509730119719524873, guid: 58092d3699674c048af8c3bebf45b2ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -966204126061902051, guid: 58092d3699674c048af8c3bebf45b2ca, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -903415505802327448, guid: 58092d3699674c048af8c3bebf45b2ca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -384251247427882252, guid: 58092d3699674c048af8c3bebf45b2ca, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}

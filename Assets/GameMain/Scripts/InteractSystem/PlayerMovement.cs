@@ -93,7 +93,12 @@ public class PlayerMovement : MonoBehaviour
             Mathf.Clamp01(LerpTime * RotateSpeed * (1 - Smoothing))
         );
 
-        Vector3 lookDirection = MovementVector;
+        //平视方向
+        Vector3 lookhorizonPoint = new Vector3(PathLocations[PathIndex].x, (navMeshAgent.baseOffset * Vector3.up).y, PathLocations[PathIndex].z);
+        Vector3 lookDirection = lookhorizonPoint - new Vector3(transform.position.x, (navMeshAgent.baseOffset * Vector3.up).y,transform.position.z);
+
+        //Vector3 lookDirection = MovementVector;
+
         if (lookDirection != Vector3.zero)
         {
             transform.rotation = Quaternion.Lerp(
