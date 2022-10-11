@@ -56,8 +56,9 @@ public class Outline : MonoBehaviour {
   [SerializeField]
   private Mode outlineMode;
 
-  [SerializeField]
-  private Color outlineColor = Color.white;
+    [SerializeField]
+  private Color DefaultColor = new Color(81, 59, 237);
+  private Color outlineColor ;
 
   [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 2f;
@@ -81,7 +82,8 @@ public class Outline : MonoBehaviour {
   private bool needsUpdate;
 
   void Awake() {
-
+    //初始化描边颜色
+    outlineColor = DefaultColor;
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
