@@ -3,12 +3,14 @@ using System.Collections;
 using UnityEngine;
 using UnityGameKit.Runtime;
 using Cinemachine;
+using DG.Tweening;
 
 public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
 {
     public CinemachineVirtualCamera m_VirtualCamera;
     public Vector3 DefaultFollowPositionOffset;
     public Vector3 DefaultRotation;
+    public Vector3 DialogRotation;
     public Transform FocusTransform;
     private Transform m_CachedPlayerTransform;
     private float DefaultOrthographicSize = 3f;
@@ -50,6 +52,18 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
         StartCoroutine(FocusProcess(m_VirtualCamera.m_Lens.OrthographicSize, 2f, isShrink));
     }
 
+    public void SetDialogFocus(Vector3 position, bool isShrink = true)
+    {
+        FocusTransform.position = position;
+        m_VirtualCamera.Follow = FocusTransform;
+        
+        StopAllCoroutines();
+        m_VirtualCamera.transform.DOKill();
+        
+        StartCoroutine(FocusProcess(m_VirtualCamera.m_Lens.OrthographicSize, 2f, isShrink));
+        m_VirtualCamera.transform.DORotate(DialogRotation, 0.5f);
+    }
+
     public void ResetFocus()
     {
         if (m_CachedPlayerTransform == null)
@@ -60,7 +74,10 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
         Log.Success("Reset Focus to {0}", m_CachedPlayerTransform.gameObject.name);
         FollowPlayer(m_CachedPlayerTransform);
         StopAllCoroutines();
+        m_VirtualCamera.transform.DOKill();
+
         StartCoroutine(ResetFocusProcess(DefaultOrthographicSize, 2f));
+        m_VirtualCamera.transform.DORotate(DefaultRotation, 0.5f);
     }
 
     IEnumerator FocusProcess(float size, float speed, bool isShrink)

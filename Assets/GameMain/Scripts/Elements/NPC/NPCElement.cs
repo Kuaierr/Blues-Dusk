@@ -7,10 +7,15 @@ using LubanConfig.DataTable;
 [AddComponentMenu("BluesDusk/NPC")]
 public class NPCElement : NPCElementBase
 {
-    [Dialog] public string Dialog = "<None>";
+    [Dialog]
+    public string Dialog = "<None>";
+
     public string Posture = "<None>";
     public bool CanRepeatDialog = false;
-    [SerializeField] private bool m_HasDialoged;
+
+    [SerializeField]
+    private bool m_HasDialoged;
+
     public override void OnInit()
     {
         base.OnInit();
@@ -24,8 +29,9 @@ public class NPCElement : NPCElementBase
         {
             if (Dialog != "<None>")
             {
-                Vector3 middlePos = (Player.Current.transform.position + this.transform.position) / 2;
-                QuickCinemachineCamera.current.SetFocus(middlePos);
+                Vector3 middlePos = (Player.Current.CameraFollower.position + 
+                                     (this.transform.position + new Vector3(0, Player.Current.CameraFollower.position.y, 0))) / 2;
+                QuickCinemachineCamera.current.SetDialogFocus(middlePos);
                 DialogSystem.current.StartDialog(Dialog);
                 if (CanRepeatDialog)
                     m_HasDialoged = true;
@@ -33,8 +39,5 @@ public class NPCElement : NPCElementBase
         }
     }
 
-    private void LookAt(Transform transform)
-    {
-
-    }
+    private void LookAt(Transform transform) { }
 }
