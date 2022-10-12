@@ -17,16 +17,7 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
-<<<<<<< HEAD
-  - name: S_Shire_Restaurant
-    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
-=======
-  - name: GameKit_Launcher
-    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
-  - name: S_Shire_Kitchen
-    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
   - name: S_Menu_Main
     path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
->>>>>>> 954f30b313b0aa9fa69543451eb3555cbb8dde90
+  - name: GameKit_Launcher
+    path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
