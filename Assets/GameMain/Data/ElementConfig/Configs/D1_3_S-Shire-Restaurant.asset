@@ -31,6 +31,24 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: f4c88a097c23bbb449ea81fe1cf5158c, type: 2}
+          m_TargetAssemblyTypeName: GetDiceEvent_SO, Assembly-CSharp
+          m_MethodName: 
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - Name: Coffee
     DestinationPosition: {x: 1.94, y: 1.732, z: 0.3899998}
     Position: {x: 1.94, y: 1.63, z: -0.79}
@@ -46,6 +64,12 @@ MonoBehaviour:
     Custom_Dialog: "(P1_\u573A\u666F)\u9886\u7ED3"
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls: []
   - Name: NPC_Zola
     DestinationPosition: {x: 0.5059997, y: 0.812, z: -3.38}
     Position: {x: 1.04, y: 0, z: -3.38}
@@ -61,6 +85,12 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls: []
   - Name: Door_Shire_Restaurant-Kitchen
     DestinationPosition: {x: 4.0492744, y: 1.262563, z: 0.49727806}
     Position: {x: 4.1392746, y: 1.262563, z: 0.027278073}
@@ -76,6 +106,24 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: f4c88a097c23bbb449ea81fe1cf5158c, type: 2}
+          m_TargetAssemblyTypeName: GetDiceEvent_SO, Assembly-CSharp
+          m_MethodName: GetDice
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - Name: LeaveDoor_ShireRestaurant
     DestinationPosition: {x: -3.9366586, y: 1.262563, z: 5.4969997}
     Position: {x: -3.9056587, y: 1.262563, z: 6.5}
@@ -91,6 +139,12 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls: []
   - Name: Door_Shire_Restaurant-Corridor
     DestinationPosition: {x: 6.438042, y: 1.262563, z: 1.0874182}
     Position: {x: 7.424042, y: 1.262563, z: 1.0874182}
@@ -106,3 +160,9 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls: []

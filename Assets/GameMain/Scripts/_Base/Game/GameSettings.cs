@@ -114,6 +114,10 @@ public class GameSettings : MonoSingletonBase<GameSettings>
             data.Position = elements[i].transform.position;
             data.Rotation = elements[i].transform.rotation.eulerAngles;
             data.DestinationPosition = elements[i].InteractPosition;
+
+            data.onInteractBeginEvent = elements[i].OnInteractBegin;
+            data.onInteractAfterEvent = elements[i].OnInteractAfter;
+            
             if (UnityEditor.PrefabUtility.IsPartOfPrefabInstance(elements[i].gameObject))
             {
                 if (elements[i].GetType() == typeof(NPCElement) || elements[i].GetType() == typeof(CollectElement))
@@ -173,7 +177,6 @@ public class GameSettings : MonoSingletonBase<GameSettings>
             {
                 for (int i = 0; i < elements.Length; i++)
                 {
-
                     if (elements[i].Name == elementConfig.Name && elements[i].GetType().ToString() == elementConfig.ElementType)
                     {
                         // Debug.Log(elements[i].Name);
@@ -253,6 +256,10 @@ public class GameSettings : MonoSingletonBase<GameSettings>
     {
         //bug 编译错误
         elementBase.InteractTrans.position = elementData.DestinationPosition;
+
+        elementBase.OnInteractBegin = elementData.onInteractBeginEvent;
+        elementBase.OnInteractAfter = elementData.onInteractAfterEvent;
+        
         if (elementBase.GetType() == typeof(NPCElement))
         {
             ((NPCElement)elementBase).Dialog = elementData.NPC_Dialog;

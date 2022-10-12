@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class ElementData
@@ -32,6 +33,9 @@ public class ElementData
     public bool Custom_CanRepeatDialog = false;
     [ShowIf("@ElementType == \"CustomElement\""), LabelText("自定义实体-已对话")]
     public bool Custom_HasDialoged;
+
+    public UnityEvent onInteractBeginEvent;
+    public UnityEvent onInteractAfterEvent;
 
 #if UNITY_EDITOR
     private IEnumerable GetDialogs()
