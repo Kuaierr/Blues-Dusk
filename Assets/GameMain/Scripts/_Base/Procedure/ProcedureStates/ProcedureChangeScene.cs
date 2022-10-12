@@ -53,19 +53,20 @@ public class ProcedureChangeScene : ProcedureBase
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
         
+        Debug.Log("Debugger : " +  ProcedureStateUtility.NetxSceneTransitionType);
         // 如果提前加载了场景（只在编辑器下可能发生）
         if (!m_IsScenePreloaded) //Info 主要的加载场景逻辑
         {
             GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));  //保存进度
             GameKitCenter.Setting.Save();   //写入文件
-            if (GameKitCenter.Scheduler.MultiScene) //切换场景
+            if (GameKitCenter.Scheduler.MultiScene) //Info 切换场景 过场应该在这里改
             {
-                GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName));
+                GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName), ProcedureStateUtility.NetxSceneTransitionType);
             }
-            else //第一次加载场景时 -- 在总流程中是第一次进入主菜单
-                GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
+            else //第一次加载场景时 -- 在总流程中是第一次进入主菜单 -- 可以在这里播片头动画
+                GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName),ProcedureStateUtility.NetxSceneTransitionType, onSuccess: OnSceneLoad);
         }
-        else //Info 直接从特定场景开始时的逻辑
+        else //直接从特定场景开始时的逻辑
         {
             GameKitCenter.Scheduler.AddPreloadedScene(AssetUtility.GetSceneAsset(sceneName));
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
@@ -113,7 +114,7 @@ public class ProcedureChangeScene : ProcedureBase
         return target ? target.transform : null;
     }
 
-    private void OnSceneLoad()
+    private void OnSceneLoad() //Info 可以在这里插入控制过场的方法，通知过场动画加载已经完成，或是改为异步，将场景暂时挂起一段时间
     {
         GameKitCenter.Element.ResetCache();
         // 加载Setting文件

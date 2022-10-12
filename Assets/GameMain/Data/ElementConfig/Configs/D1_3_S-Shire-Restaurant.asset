@@ -37,16 +37,16 @@ MonoBehaviour:
     onInteractAfterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11400000, guid: f4c88a097c23bbb449ea81fe1cf5158c, type: 2}
-          m_TargetAssemblyTypeName: GetDiceEvent_SO, Assembly-CSharp
-          m_MethodName: 
-          m_Mode: 3
+        - m_Target: {fileID: 11400000, guid: 2c93abf5749f77244b1499bc0dc237fe, type: 2}
+          m_TargetAssemblyTypeName: GameSettingEvent_SO, Assembly-CSharp
+          m_MethodName: Debug
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: 1
             m_BoolArgument: 0
           m_CallState: 2
   - Name: Coffee
@@ -61,7 +61,7 @@ MonoBehaviour:
     Door_CanPass: 0
     Door_CanPassCondition: 
     Door_TargetScene: 
-    Custom_Dialog: "(P1_\u573A\u666F)\u9886\u7ED3"
+    Custom_Dialog: "(\u6D4B\u8BD5 1)nmsl"
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
     onInteractBeginEvent:

@@ -151,7 +151,7 @@ namespace UnityGameKit.Runtime
             m_CachedLoadScenes.Clear();
             m_CachedUnloadScenes.Clear();
             m_CachedLoadScenes.Add(loadName);
-            DoTransition(m_CachedLoadScenes, m_CachedUnloadScenes, switchType = SceneTransitionType.Fade);
+            DoTransition(m_CachedLoadScenes, m_CachedUnloadScenes, switchType);
         }
 
         public void DoTransition(List<string> loadNames, SceneTransitionType switchType = SceneTransitionType.Fade)
@@ -190,12 +190,12 @@ namespace UnityGameKit.Runtime
                 });
             }
             else if (switchType == SceneTransitionType.LoadingScene)
-            {
-                m_Switcher.gradienter.gameObject.SetActive(true);
-                m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
-                {
+            {   
+                m_Switcher.Loading.gameObject.SetActive(true);
+                //m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
+                //{
                     m_EventComponent.Fire(this, DoTransitionCompleteEventArgs.Create(loadNames, unloadNames, switchType, this));
-                }));
+                //}));
             }
         }
 
@@ -323,6 +323,10 @@ namespace UnityGameKit.Runtime
             {
                 m_Switcher.animator.SetTrigger("Undo");
                 m_Switcher.animator.OnComplete(1f, HideSwitchAnimator);
+            }
+            else if (switchType == SceneTransitionType.LoadingScene)
+            {
+                m_Switcher.Loading.gameObject.SetActive(false);
             }
         }
 

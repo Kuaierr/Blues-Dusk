@@ -8,5 +8,8 @@ namespace UnityGameKit.Runtime
         public Animator animator;
         public Transform swiper;
         public Image gradienter;
+
+        [Space]
+        public UI_Loading Loading;
     }
 }

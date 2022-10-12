@@ -18,6 +18,8 @@ namespace GameKit
         private Dictionary<string, AsyncOperationHandle> m_cachedHandles;
         public string CachedStartScene = string.Empty;
 
+        public float LoadingPrecent { get; private set; } = 0;
+
         public AddressableManager()
         {
             m_cachedHandles = new Dictionary<string, AsyncOperationHandle>();
@@ -41,7 +43,25 @@ namespace GameKit
             UnityAction onFail)
         {
             AsyncOperationHandle handle = Addressables.LoadSceneAsync(keyName, loadMode, activeOnLoad);
-            yield return handle;
+            //yield return handle;
+            float speed = 0.1f;
+            while (LoadingPrecent < 1)  //TODO 这个值需要让管理过场的脚本拿到，基于这个值进行计算
+            {
+                Debug.Log("Debugger_LoadingPrecent : " + LoadingPrecent);
+                if (handle.PercentComplete < 1)
+                {
+                    LoadingPrecent += Time.deltaTime * speed;
+                }
+                else
+                {
+                    LoadingPrecent += Time.deltaTime * speed * 2;
+                }
+                LoadingPrecent = handle.PercentComplete;
+                yield return 0;
+            }
+
+            LoadingPrecent = 0;
+            
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 onSuccess.Invoke();

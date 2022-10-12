@@ -40,8 +40,6 @@ public class CustomElement : SceneElementBase
         FinishDialogCompleteEventArgs eventArgs = (FinishDialogCompleteEventArgs)e;
         if (eventArgs.UserData == null)
             return;
-        Debug.Log("Debugger : " + eventArgs.AssetName + "\n" +
-                  Dialog);
         if (eventArgs.UserData.GetType() == typeof(DialogSystem))
         {
             if (eventArgs.AssetName == Dialog)
