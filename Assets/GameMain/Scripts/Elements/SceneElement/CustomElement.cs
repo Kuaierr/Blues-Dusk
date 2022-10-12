@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
@@ -17,6 +18,12 @@ public class CustomElement : SceneElementBase
         GameKitCenter.Event.Subscribe(FinishDialogCompleteEventArgs.EventId, OnDialogFinish);
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        GameKitCenter.Event.Unsubscribe(FinishDialogCompleteEventArgs.EventId,OnDialogFinish);
+    }
+
     public override void OnInteract()
     {
         if (Dialog != string.Empty && Dialog != "<None>" && !HasDialoged)
@@ -33,6 +40,8 @@ public class CustomElement : SceneElementBase
         FinishDialogCompleteEventArgs eventArgs = (FinishDialogCompleteEventArgs)e;
         if (eventArgs.UserData == null)
             return;
+        Debug.Log("Debugger : " + eventArgs.AssetName + "\n" +
+                  Dialog);
         if (eventArgs.UserData.GetType() == typeof(DialogSystem))
         {
             if (eventArgs.AssetName == Dialog)
@@ -44,4 +53,6 @@ public class CustomElement : SceneElementBase
             }
         }
     }
+    
+    
 }

@@ -52,19 +52,20 @@ public class ProcedureChangeScene : ProcedureBase
 
         string sceneName = procedureOwner.GetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME);
         m_IsScenePreloaded = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED);
+        
         // 如果提前加载了场景（只在编辑器下可能发生）
-        if (!m_IsScenePreloaded)
+        if (!m_IsScenePreloaded) //Info 主要的加载场景逻辑
         {
-            GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));
-            GameKitCenter.Setting.Save();
-            if (GameKitCenter.Scheduler.MultiScene)
+            GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));  //保存进度
+            GameKitCenter.Setting.Save();   //写入文件
+            if (GameKitCenter.Scheduler.MultiScene) //切换场景
             {
                 GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName));
             }
-            else
+            else //第一次加载场景时 -- 在总流程中是第一次进入主菜单
                 GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
         }
-        else
+        else //Info 直接从特定场景开始时的逻辑
         {
             GameKitCenter.Scheduler.AddPreloadedScene(AssetUtility.GetSceneAsset(sceneName));
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
@@ -128,7 +129,7 @@ public class ProcedureChangeScene : ProcedureBase
         if (targetTrans == null)
             targetTrans = GetDefaultTransform();
 
-        if (targetTrans == null)
+        if (targetTrans == null) //失败
         {
             m_IsChangeSceneComplete = true;
             return;

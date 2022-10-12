@@ -31,6 +31,24 @@ MonoBehaviour:
     Custom_Dialog: "(P1_\u573A\u666F)\u955C\u5B50"
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: f4c88a097c23bbb449ea81fe1cf5158c, type: 2}
+          m_TargetAssemblyTypeName: GetDiceEvent_SO, Assembly-CSharp
+          m_MethodName: GetDice
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - Name: Tie
     DestinationPosition: {x: 2.131, y: 1.577, z: 1.537}
     Position: {x: 2.131, y: 1.577, z: 0.357}
@@ -46,6 +64,36 @@ MonoBehaviour:
     Custom_Dialog: "(P1_\u573A\u666F)\u9886\u7ED3"
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 2c93abf5749f77244b1499bc0dc237fe, type: 2}
+          m_TargetAssemblyTypeName: GameSettingEvent_SO, Assembly-CSharp
+          m_MethodName: EnableGameSettingBool
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: GameSettings.WearTie
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 1a7eb6c3b56d7fd44afe31f969d0952d, type: 2}
+          m_TargetAssemblyTypeName: SetObjectActiveEvent_SO, Assembly-CSharp
+          m_MethodName: SetActiveFalse
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Tie
+            m_BoolArgument: 0
+          m_CallState: 2
   - Name: Door_Shire_Restaurant-Kitchen
     DestinationPosition: {x: 0.14910641, y: 1.262563, z: 2.9888253}
     Position: {x: 0.14910641, y: 1.262563, z: 3.6388254}
@@ -61,3 +109,9 @@ MonoBehaviour:
     Custom_Dialog: 
     Custom_CanRepeatDialog: 0
     Custom_HasDialoged: 0
+    onInteractBeginEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    onInteractAfterEvent:
+      m_PersistentCalls:
+        m_Calls: []
