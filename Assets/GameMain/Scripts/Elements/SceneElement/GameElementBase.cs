@@ -28,7 +28,7 @@ public abstract class GameElementBase : ElementBase
         GameKitCenter.Event.Subscribe(LoadSettingsEventArgs.EventId, OnLoad);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         GameKitCenter.Element.RemoveElement(this);
         GameKitCenter.Event.Unsubscribe(SaveSettingsEventArgs.EventId, OnSave);

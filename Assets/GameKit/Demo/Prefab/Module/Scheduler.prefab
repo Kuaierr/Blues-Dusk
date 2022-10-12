@@ -214,9 +214,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0343ecc97162f478c2cdedefdc6286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 0
   defaultSwitchType: 0
-  startScene: GameKitDemo_Main
-  loadingScene: GameKitDemo_Loading
+  StartScene: 
+  LoadScene: 
+  m_ScenesPath: Assets/GameMain/
+  m_MultiScenesPath: Assets/GameMain/
 --- !u!1 &8386063209126822211
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +397,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
 --- !u!114 &1452179007947083446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc505838702bf6f4b9be7b4f50d91ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
   animator: {fileID: 4492162314169309081}
   swiper: {fileID: 8386063209126822208}
   gradienter: {fileID: 8332828016912412492}

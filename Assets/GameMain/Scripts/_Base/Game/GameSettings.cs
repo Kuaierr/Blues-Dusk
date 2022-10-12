@@ -237,7 +237,6 @@ public class GameSettings : MonoSingletonBase<GameSettings>
             {
                 for (int i = 0; i < elements.Length; i++)
                 {
-
                     if (elements[i].Name == elementConfig.Name && elements[i].GetType().ToString() == elementConfig.ElementType)
                     {
                         ConfigToElemnt(elements[i], elementConfig);
@@ -252,6 +251,7 @@ public class GameSettings : MonoSingletonBase<GameSettings>
         }
     }
 
+    //Info 传入一个Element，从配置数据中同步信息
     private static void ConfigToElemnt(GameElementBase elementBase, ElementData elementData)
     {
         //bug 编译错误

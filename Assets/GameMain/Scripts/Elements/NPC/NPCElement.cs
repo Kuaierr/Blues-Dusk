@@ -1,4 +1,6 @@
+using System;
 using System.Reflection;
+using GameKit.Event;
 using UnityEngine;
 using UnityGameKit.Runtime;
 using LubanConfig.DataTable;
@@ -20,6 +22,14 @@ public class NPCElement : NPCElementBase
     {
         base.OnInit();
         m_HasDialoged = false;
+        
+        GameKitCenter.Event.Subscribe(FinishDialogCompleteEventArgs.EventId, OnFinishDialog);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        GameKitCenter.Event.Unsubscribe(FinishDialogCompleteEventArgs.EventId,OnFinishDialog);
     }
 
     public override void OnInteract()
@@ -35,6 +45,20 @@ public class NPCElement : NPCElementBase
                 DialogSystem.current.StartDialog(Dialog);
                 if (CanRepeatDialog)
                     m_HasDialoged = true;
+            }
+        }
+    }
+
+    private void OnFinishDialog(object sender, GameEventArgs e)
+    {
+        FinishDialogCompleteEventArgs eventArgs = (FinishDialogCompleteEventArgs)e;
+        if (eventArgs.UserData == null)
+            return;
+        if (eventArgs.UserData.GetType() == typeof(DialogSystem))
+        {
+            if (eventArgs.AssetName == Dialog)
+            {   
+                OnInteractAfter?.Invoke();
             }
         }
     }

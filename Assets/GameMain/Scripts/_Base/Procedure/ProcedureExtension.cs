@@ -6,7 +6,7 @@ using UnityGameKit.Runtime;
 using ProcedureOwner = GameKit.Fsm.IFsm<GameKit.Procedure.IProcedureManager>;
 
 public static class ProcedureExtension
-{    
+{ 
     public static void ChangeSceneByDoor(this ProcedureComponent procedureComponent, string sceneName, string doorName)
     {
         procedureComponent.SetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU,sceneName=="S_Menu_Main");
