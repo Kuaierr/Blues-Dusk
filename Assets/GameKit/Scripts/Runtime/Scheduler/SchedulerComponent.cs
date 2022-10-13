@@ -322,7 +322,7 @@ namespace UnityGameKit.Runtime
                     await Task.Yield();
                     break;
                 case SceneTransitionType.LoadingScene:
-                    float timer = UnityEngine.Random.Range(7, 10);
+                    float timer = UnityEngine.Random.Range(5f, 10f);
                     float time = 0;
                     while (timer > time)
                     {
@@ -346,8 +346,10 @@ namespace UnityGameKit.Runtime
             ReferencePool.Release(transitionArgs);
         }
 
-        private void UndoTransition(SceneTransitionType switchType)
+        private void UndoTransition(SceneTransitionType switchType) //BUG 异步停顿后 类型变为了Immediately，最好调查是在哪里改变的，或者直接根据各自的状态关闭
         {
+            Debug.Log("Debugger : " + switchType);
+            
             m_TransitionSequence.Kill();
             m_TransitionSequence = DOTween.Sequence();
             if (switchType == SceneTransitionType.Swipe)
@@ -372,6 +374,10 @@ namespace UnityGameKit.Runtime
             else
             {
                 m_Switcher.Loading.gameObject.SetActive(false);
+                
+                Log.Success("Fade");
+                m_Switcher.gradienter.SetAlpha(1f);
+                m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(0f, 5f).OnComplete(HideSwitchFader));
             }
         }
 

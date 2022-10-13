@@ -14,6 +14,9 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     private bool m_isTextShowing;
     private bool m_DialogStarted;
     private IDataNode m_SelectedChildNode;
+
+    private bool _waitForBranch = false;
+    
     public void Clear()
     {
 
@@ -49,6 +52,8 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
     protected override void OnUpdate(FsmInterface fsmOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
+
+        if (_waitForBranch) return;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (m_isTextShowing == false)
@@ -108,6 +113,18 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         while (m_isTextShowing == true)
             yield return null;
 
+        _waitForBranch = true;
+        
+        while (true)
+        {
+            if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+                break;
+            yield return 0;
+        }
+
+        _waitForBranch = false;
+        Debug.Log("Debugger : EnterBranch");
+        
         DialogDataNodeVariable tmpSonNodeData = GameKitCenter.Dialog.CurrentTree.CurrentNode.GetData<DialogDataNodeVariable>();
         fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
         if (tmpSonNodeData.IsDiceCheckBranch)
