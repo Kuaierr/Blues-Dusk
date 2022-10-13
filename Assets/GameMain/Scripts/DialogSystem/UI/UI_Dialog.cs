@@ -342,7 +342,7 @@ public class UI_Dialog : UIFormBase
     }
 
     public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
-    {
+    {   //Info 在这里修改对话时UI的显示情况
         TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         data.Speaker = data.Speaker.Correction();
@@ -373,6 +373,10 @@ public class UI_Dialog : UIFormBase
                 }
                 // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
                 uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
+            }
+            else
+            {
+                //Info 在这里填充伊森说话的情况 等待UI修改完后统一对接比较好
             }
             // character.animator.runtimeAnimatorController = charaAnimator;
         }

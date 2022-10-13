@@ -60,11 +60,12 @@ public class ProcedureMain : ProcedureBase
     }
 
     //Info 按理来说Menu中也需要同样的方法，但是此处直接设置了静态类中的常量，具有通用性，因此从Menu的加载不需要额外处理
-    public bool SetNextSceneName(string sceneName)
+    public bool SetNextSceneInfo(string sceneName, SceneTransitionType type)
     {
         if (m_CachedOwner != null)
         {
             m_CachedOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, sceneName);
+            ProcedureStateUtility.CurrentLoadingType = type;
             return true;
         }
         return false;

@@ -18,6 +18,8 @@ namespace GameKit
         private Dictionary<string, AsyncOperationHandle> m_cachedHandles;
         public string CachedStartScene = string.Empty;
 
+        public float LoadingPrecent { get; private set; } = 0;
+
         public AddressableManager()
         {
             m_cachedHandles = new Dictionary<string, AsyncOperationHandle>();
@@ -42,6 +44,23 @@ namespace GameKit
         {
             AsyncOperationHandle handle = Addressables.LoadSceneAsync(keyName, loadMode, activeOnLoad);
             yield return handle;
+            
+            /*float speed = 0.1f;
+            while (LoadingPrecent < 1)
+            {
+                if (handle.PercentComplete < 1)
+                {
+                    LoadingPrecent += Time.deltaTime * speed;
+                }
+                else
+                {
+                    LoadingPrecent += Time.deltaTime * speed * 2;
+                }
+                LoadingPrecent = handle.PercentComplete;
+                yield return 0;
+            }
+            LoadingPrecent = 0;*/
+            
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 onSuccess.Invoke();

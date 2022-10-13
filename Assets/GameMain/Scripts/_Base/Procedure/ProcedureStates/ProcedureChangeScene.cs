@@ -37,7 +37,7 @@ public class ProcedureChangeScene : ProcedureBase
         base.OnEnter(procedureOwner);
         
         m_IsChangeSceneComplete = false;
-        
+
         if(procedureOwner.HasData(ProcedureStateUtility.LOAD_MAIN_MENU))
             m_ChangeToMenu = procedureOwner.GetData<VarBoolean>(ProcedureStateUtility.LOAD_MAIN_MENU);
         else 
@@ -58,14 +58,14 @@ public class ProcedureChangeScene : ProcedureBase
         {
             GameKitCenter.Event.FireNow(this, SaveSettingsEventArgs.Create(null));  //保存进度
             GameKitCenter.Setting.Save();   //写入文件
-            if (GameKitCenter.Scheduler.MultiScene) //切换场景
+            if (GameKitCenter.Scheduler.MultiScene) //Info 切换场景 过场应该在这里改
             {
-                GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName));
+                GameKitCenter.Scheduler.DoTransition(AssetUtility.GetSceneAsset(sceneName), ProcedureStateUtility.CurrentLoadingType);
             }
-            else //第一次加载场景时 -- 在总流程中是第一次进入主菜单
-                GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName), onSuccess: OnSceneLoad);
+            else //第一次加载场景时 -- 在总流程中是第一次进入主菜单 -- 可以在这里播片头动画
+                GameKitCenter.Scheduler.LoadSceneAsyn(AssetUtility.GetSceneAsset(sceneName),ProcedureStateUtility.CurrentLoadingType, onSuccess: OnSceneLoad);
         }
-        else //Info 直接从特定场景开始时的逻辑
+        else //直接从特定场景开始时的逻辑
         {
             GameKitCenter.Scheduler.AddPreloadedScene(AssetUtility.GetSceneAsset(sceneName));
             procedureOwner.SetData<VarBoolean>(ProcedureStateUtility.IS_SCENE_PRELOADED, false);
@@ -77,6 +77,7 @@ public class ProcedureChangeScene : ProcedureBase
     {
         GameKitCenter.Event.Unsubscribe(LoadSceneSuccessEventArgs.EventId, OnLoadSceneSuccess);
         GameKitCenter.Event.Unsubscribe(LoadSceneFailureEventArgs.EventId, OnLoadSceneFailure);
+        
         base.OnExit(procedureOwner, isShutdown);
     }
 
@@ -113,7 +114,7 @@ public class ProcedureChangeScene : ProcedureBase
         return target ? target.transform : null;
     }
 
-    private void OnSceneLoad()
+    private async void OnSceneLoad() //Info 可以在这里插入控制过场的方法，通知过场动画加载已经完成，或是改为异步，将场景暂时挂起一段时间
     {
         GameKitCenter.Element.ResetCache();
         // 加载Setting文件
@@ -145,6 +146,7 @@ public class ProcedureChangeScene : ProcedureBase
                 m_Prototyper = realObj.GetComponent<Player>();
                 // 镜头跟随玩家
                 QuickCinemachineCamera.current.SetFollowPlayer(m_Prototyper.CameraFollower);
+                
                 m_IsChangeSceneComplete = true;
             });
         }
