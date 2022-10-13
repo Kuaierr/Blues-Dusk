@@ -9,6 +9,6 @@ public class UI_Loading : MonoBehaviour
 
 	public void UpdateLoadingPrecent(float precent)
 	{
-		loadingPrecent.text = precent.ToString("0.00") + "%";
+		loadingPrecent.text = ((int)(precent * 100)).ToString() + "%";
 	}
 }

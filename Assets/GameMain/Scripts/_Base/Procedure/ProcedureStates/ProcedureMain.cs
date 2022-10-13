@@ -65,7 +65,7 @@ public class ProcedureMain : ProcedureBase
         if (m_CachedOwner != null)
         {
             m_CachedOwner.SetData<VarString>(ProcedureStateUtility.NEXT_SCENE_NAME, sceneName);
-            ProcedureStateUtility.NetxSceneTransitionType = type;
+            ProcedureStateUtility.CurrentLoadingType = type;
             return true;
         }
         return false;

@@ -6,5 +6,5 @@ public static class ProcedureStateUtility
 
     public const string LOAD_MAIN_MENU = "LOAD_MAIN_MENU";
 
-    public static UnityGameKit.Runtime.SceneTransitionType NetxSceneTransitionType;
+    public static UnityGameKit.Runtime.SceneTransitionType CurrentLoadingType;
 }
