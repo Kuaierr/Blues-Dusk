@@ -17,26 +17,9 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
-<<<<<<< HEAD
-  - name: S_heya_toilet
-    path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
-  - name: UItest
-    path: Assets/GamePrototype/Scenes/UItest.unity
-  - name: S_Menu_Main
-    path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
-=======
->>>>>>> 45e31e860a0c37bc36cf0345c862584dbfc8299d
   - name: GameKit_Launcher
     path: Assets/GameKit/Demo/Procedure/GameKit_Launcher.unity
   - name: S_Shire_Kitchen
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
-  - name: S_Menu_Main
-    path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
-  - name: UItest
-    path: Assets/GamePrototype/Scenes/UItest.unity
   - name: S_Shire_Restaurant
     path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
-  - name: S_Menu
-    path: Assets/GameMain/Scenes/Main/S_Menu.unity
-  - name: S_heya_parlor
-    path: Assets/GamePrototype/Scenes/S_heya_parlor.unity

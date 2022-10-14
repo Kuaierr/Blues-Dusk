@@ -78,7 +78,7 @@ public class UI_Option : UIFormChildBase, IPointerDownHandler, IPointerEnterHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        m_Response.OnOptionExit(this);
+        //m_Response.OnOptionExit(this);
     }
 
     public void ShowDiceIndicator(IDialogOption option)

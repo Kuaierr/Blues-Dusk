@@ -148,6 +148,7 @@ public class UI_Response : UIFormChildBase
                 continue;
             m_ActiveUIOptions[i].Register(i);
             m_ActiveUIOptions[i].Show();
+            m_ActiveUIOptions[i].SetEmphasize(false);
             m_ActiveUIOptions[i].Content.text = m_CurrentOptions[i].Text;
         }
         EmphasizeFirst();
@@ -187,6 +188,7 @@ public class UI_Response : UIFormChildBase
 
     public void OnOptionEnter(UI_Option option)
     {
+        //Bug 鼠标移动太快时 会造成多个选项激活的情况
         m_LastIndex = m_CurrentIndex;
         m_CurrentIndex = option.Index;
         EmphasizeSelectedOption(m_CurrentIndex);
@@ -200,6 +202,7 @@ public class UI_Response : UIFormChildBase
     public void OnOptionDown(UI_Option option)
     {
         //Info 直接交给状态机管理
+        //Bug 不能直接交给状态机 表现有些奇怪
     }
 
     private void EmphasizeSelectedOption(int index)

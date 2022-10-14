@@ -49,6 +49,7 @@ public class DialogChoosingState : FsmState<UI_Dialog>, IReference
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !m_AllOptionLocked)
         {
+            //TODO 托管到UI_Dailog脚本中 传递给UI_Response
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogTalkingState));
             fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
             GameKitCenter.Dialog.CurrentTree.CurrentNode = fsmMaster.GetNextNode(GameKitCenter.Dialog.CurrentTree.CurrentNode, fsmMaster.uI_Response.CurIndex);

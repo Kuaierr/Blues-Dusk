@@ -102,6 +102,11 @@ public class UI_Dialog : UIFormBase
         m_IsDialoging = false;
         base.OnPause();
 
+        NPCAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        PlayerAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+
+        uI_SpeakerName.SetActive(false);
+
         ReFocusGameMenuEventArgs args = ReFocusGameMenuEventArgs.Create(this);
         GameKitCenter.Event.Fire(this, args);
     }
@@ -137,11 +142,16 @@ public class UI_Dialog : UIFormBase
     {
         uI_Response.gameObject.SetActive(true);
         uI_Response.Show(callback);
+
+        t_Contents.text = "";
+        t_Contents.gameObject.SetActive(false);
     }
 
     public void HideResponse(UnityAction callback = null)
     {
         uI_Response.Hide(callback);
+        
+        t_Contents.gameObject.SetActive(true);
     }
 
     public void AddTyperWriterListener(UnityAction onTypewriterStart, UnityAction onTextShowed)
@@ -351,7 +361,7 @@ public class UI_Dialog : UIFormBase
     }
 
     public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
-    { //Info 在这里修改对话时UI的显示情况
+    { 
         TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         data.Speaker = data.Speaker.Correction();
@@ -362,7 +372,7 @@ public class UI_Dialog : UIFormBase
         if (node == null || data.Speaker == "Default")
             return;
 
-        //Bug SpeakerName的动画没有正常播放
+        //Bug SpeakerName的动画没有正常播放 由于切换说话人物需要触发Show，处于On状态时无法触发
         if (data.Speaker == ">>" || data.Speaker == "")
             t_SpeakerName.text = "";
         else if (data.Speaker == "??")
