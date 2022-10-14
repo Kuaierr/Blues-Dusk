@@ -17,6 +17,8 @@ MonoBehaviour:
   _headerRules: []
   _quickAccessItems: []
   _sceneHistory:
+  - name: S_heya_toilet
+    path: Assets/GamePrototype/Scenes/S_heya_toilet.unity
   - name: UItest
     path: Assets/GamePrototype/Scenes/UItest.unity
   - name: S_Menu_Main
