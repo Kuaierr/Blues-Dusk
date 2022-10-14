@@ -204,7 +204,7 @@ namespace UnityGameKit.Runtime
             }
             else if (switchType == SceneTransitionType.LoadingScene)
             {
-                m_Switcher.Loading.gameObject.SetActive(true);
+                m_Switcher.loading.gameObject.SetActive(true);
                 //m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(1, 0.5f).OnComplete(() =>
                 //{
                 m_EventComponent.Fire(this,
@@ -329,11 +329,11 @@ namespace UnityGameKit.Runtime
                         await Task.Yield();
                         time += Time.deltaTime;
                         if (time > timer)
-                            m_Switcher.Loading.UpdateLoadingPrecent(1);
+                            m_Switcher.loading.UpdateLoadingPrecent(1);
                         else
-                            m_Switcher.Loading.UpdateLoadingPrecent(time / timer);
+                            m_Switcher.loading.UpdateLoadingPrecent(time / timer);
                     }
-                    m_Switcher.Loading.UpdateLoadingPrecent(1);
+                    m_Switcher.loading.UpdateLoadingPrecent(1);
                     break;
                 default:
                     await Task.Yield();
@@ -346,34 +346,38 @@ namespace UnityGameKit.Runtime
             ReferencePool.Release(transitionArgs);
         }
 
-        private void UndoTransition(SceneTransitionType switchType) //BUG 异步停顿后 类型变为了Immediately，最好调查是在哪里改变的，或者直接根据各自的状态关闭
+        private void UndoTransition(SceneTransitionType switchType) 
         {
             Debug.Log("Debugger : " + switchType);
             
             m_TransitionSequence.Kill();
             m_TransitionSequence = DOTween.Sequence();
-            if (switchType == SceneTransitionType.Swipe)
+            //if (switchType == SceneTransitionType.Swipe)
+            if (m_Switcher.Swipe)
             {
                 m_TransitionSequence.Append(m_Switcher.swiper.DOLocalMoveX(-2420f, 0.5f).OnComplete(HideSwitchSwiper));
             }
-            else if (switchType == SceneTransitionType.Fade)
+            //else if (switchType == SceneTransitionType.Fade)
+            else if (m_Switcher.Fade)
             {
                 Log.Success("Fade");
                 m_Switcher.gradienter.SetAlpha(1f);
                 m_TransitionSequence.Append(m_Switcher.gradienter.DOFade(0f, 5f).OnComplete(HideSwitchFader));
             }
-            else if (switchType == SceneTransitionType.Animation)
+            //else if (switchType == SceneTransitionType.Animation)
+            else if (m_Switcher.Animating)
             {
                 m_Switcher.animator.SetTrigger("Undo");
                 m_Switcher.animator.OnComplete(1f, HideSwitchAnimator);
             }
-            else if (switchType == SceneTransitionType.LoadingScene)
+            //else if (switchType == SceneTransitionType.LoadingScene)
+            else if (m_Switcher.Loading)
             {
-                m_Switcher.Loading.gameObject.SetActive(false);
+                m_Switcher.loading.gameObject.SetActive(false);
             }
             else
             {
-                m_Switcher.Loading.gameObject.SetActive(false);
+                m_Switcher.loading.gameObject.SetActive(false);
                 
                 Log.Success("Fade");
                 m_Switcher.gradienter.SetAlpha(1f);

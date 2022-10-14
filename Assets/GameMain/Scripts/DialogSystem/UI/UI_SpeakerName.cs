@@ -7,8 +7,8 @@ public class UI_SpeakerName : UIFormChildBase
         base.OnInit(parentDepth);
     }
 
-    public void ToEason(bool status)
+    public void SetActive(bool status)
     {
-        SetActive(status);
+        base.SetActive(status);
     }
 }
