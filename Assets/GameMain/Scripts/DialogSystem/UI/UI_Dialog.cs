@@ -17,59 +17,66 @@ using UnityGameKit.Runtime;
 public class UI_Dialog : UIFormBase
 {
     public CharacterPool characterPool;
-    public UI_Character uI_Character;
+
+    [Space]
+    [Header("Character Images")]
+    public UI_Character uI_NPCImage;
+
+    public UI_Character uI_PlayerImage;
+
+    [Space]
+    [Header("Child Components")]
     public UI_Response uI_Response;
-    public UI_Indicator uI_Indicator;
+
+    //public UI_Indicator uI_Indicator;
     public UI_SpeakerName uI_SpeakerName;
     public UI_DiceSystem uI_DiceSystem;
     public TextMeshProUGUI t_SpeakerName;
     public TextMeshProUGUI t_Contents;
+
+    [Space]
+    [Header("Animators")]
     public TextAnimatorPlayer TextAnimatorPlayer;
-    public Animator SpeakerAnimator;
+
+    public Animator NPCAnimator;
+    public Animator PlayerAnimator;
     public Animator EdgeAnimator;
 
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
     private bool m_IsDialoging = false;
+
     private bool m_IsShowingText = true;
+
     //private List<bool> m_CachedCheckResults = new List<bool>();
     private Dictionary<string, bool> m_CachedCheckResults = new Dictionary<string, bool>();
 
     public IDialogTree CurrentTree
     {
-        get
-        {
-            return GameKitCenter.Dialog.CurrentTree;
-        }
+        get { return GameKitCenter.Dialog.CurrentTree; }
     }
 
     public bool IsDialoging
     {
-        get
-        {
-            return m_IsDialoging;
-        }
+        get { return m_IsDialoging; }
     }
 
     public Animator DiceAnimator
     {
-        get
-        {
-            return uI_Response.DiceAnimator;
-        }
+        get { return uI_Response.DiceAnimator; }
     }
 
 
     #region Override
+
     protected override void OnInit(object userData)
     {
-
         base.OnInit(userData);
         CreateFsm();
         uI_Response.Init(Depth);
-        uI_Character.Init(Depth);
-        uI_Indicator.Init(Depth);
+        uI_NPCImage.Init(Depth);
+        //uI_Indicator.Init(Depth);
         characterPool = GameKitCenter.Data.GetDataSO<CharacterPool>();
         GameKitCenter.Event.Subscribe(UnityGameKit.Runtime.StartDialogSuccessEventArgs.EventId, OnStartDialogSuccess);
     }
@@ -123,6 +130,7 @@ public class UI_Dialog : UIFormBase
         base.OnUpdate(elapseSeconds, realElapseSeconds);
         uI_Response.OnUpdate();
     }
+
     #endregion
 
     public void ShowResponse(UnityAction callback = null)
@@ -180,6 +188,7 @@ public class UI_Dialog : UIFormBase
             Log.Warning("Cached Current Tree is Empty");
             return;
         }
+
         GameKitCenter.Dialog.CurrentTree.CurrentNode = GameKitCenter.Dialog.CurrentTree.GetChildNode(0);
     }
 
@@ -292,11 +301,9 @@ public class UI_Dialog : UIFormBase
             // 如果是全局条件的纯分支点
             if (tempDialogData.IsGlobalDivider)
             {
-
                 bool isComplete = true;
                 for (int j = 0; j < tempDialogData.GlobalDividerConditions.Count; j++)
                 {
-
                     if (!GameSettings.current.GetBool(tempDialogData.GlobalDividerConditions[j]))
                     {
                         isComplete = false;
@@ -322,6 +329,7 @@ public class UI_Dialog : UIFormBase
             nextNode = TryExecuteNodeFunction(nextNode);
             return nextNode;
         }
+
         return nextNode;
     }
 
@@ -338,29 +346,33 @@ public class UI_Dialog : UIFormBase
     {
         t_SpeakerName.text = string.Empty;
         t_Contents.text = string.Empty;
-        SpeakerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        NPCAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        PlayerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
     public void UpdateDialogUI(IDataNode node, bool useTypeWriter = true, UnityAction callback = null)
-    {   //Info 在这里修改对话时UI的显示情况
+    { //Info 在这里修改对话时UI的显示情况
         TextAnimatorPlayer.useTypeWriter = useTypeWriter;
         DialogDataNodeVariable data = node.GetData<DialogDataNodeVariable>();
         data.Speaker = data.Speaker.Correction();
         data.Contents = data.Contents.Correction();
-        
+
         // Log.Warning(data.Contents);
 
         if (node == null || data.Speaker == "Default")
             return;
-        
+
+        //Bug SpeakerName的动画没有正常播放
         if (data.Speaker == ">>" || data.Speaker == "")
             t_SpeakerName.text = "";
         else if (data.Speaker == "??")
             t_SpeakerName.text = "未知";
         else
             t_SpeakerName.text = data.Speaker;
+
         t_Contents.text = data.Contents;
-        uI_SpeakerName.ToEason(data.Speaker != "伊森");
+        uI_SpeakerName.SetActive(!(data.Speaker == ">>" || data.Speaker == ""));
+
         if (data.Speaker != ">>" && data.Speaker != "")
         {
             if (data.Speaker != "伊森")
@@ -369,20 +381,32 @@ public class UI_Dialog : UIFormBase
                 if (m_CurrentCharacter != character)
                 {
                     m_CurrentCharacter = character;
-                    SpeakerAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+                    NPCAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
                 }
+
                 // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
-                uI_Character.avatar.sprite = character.GetMood(data.MoodName).avatar;
+                uI_NPCImage.avatar.sprite = character.GetMood(data.MoodName).avatar;
             }
             else
             {
-                //Info 在这里填充伊森说话的情况 等待UI修改完后统一对接比较好
+                Character character = characterPool.GetData<Character>(data.Speaker.Correction());
+                if (m_CurrentCharacter != character)
+                {
+                    m_CurrentCharacter = character;
+                    PlayerAnimator.SetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+                }
+
+                // RuntimeAnimatorController charaAnimator = FindAnimator(character.idName);
+                uI_PlayerImage.avatar.sprite = character.GetMood(data.MoodName).avatar;
             }
             // character.animator.runtimeAnimatorController = charaAnimator;
         }
         else
         {
-            SpeakerAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+            NPCAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+            PlayerAnimator.SetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+
+            uI_SpeakerName.Animator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
         }
     }
 
@@ -429,14 +453,14 @@ public class UI_Dialog : UIFormBase
         base.InternalSetVisible(status);
         MasterAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
         EdgeAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
-        SpeakerAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+        NPCAnimator.SetTrigger(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
     }
 
     public void ForceVisibleOff()
     {
         MasterAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
         EdgeAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
-        SpeakerAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
+        NPCAnimator.SetTrigger(UIUtility.FORCE_OFF_ANIMATION_NAME);
     }
 
     private void OnStartDialogSuccess(object sender, BaseEventArgs e)
@@ -444,10 +468,12 @@ public class UI_Dialog : UIFormBase
         // UnityGameKit.Runtime.StartDialogSuccessEventArgs ne = (UnityGameKit.Runtime.StartDialogSuccessEventArgs)e;
         // GameKitCenter.Dialog.CurrentTree = ne.DialogTree;
         // GameKitCenter.Dialog.CurrentTree.Reset();
-        SpeakerAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
-        SpeakerAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        NPCAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        NPCAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
+        PlayerAnimator.ResetTrigger(UIUtility.HIDE_ANIMATION_NAME);
+        PlayerAnimator.ResetTrigger(UIUtility.SHOW_ANIMATION_NAME);
         m_CurrentCharacter = null;
-        
+
         OnResume();
     }
 
@@ -520,5 +546,4 @@ public class UI_Dialog : UIFormBase
     //     }
     //     return null;
     // }
-
 }

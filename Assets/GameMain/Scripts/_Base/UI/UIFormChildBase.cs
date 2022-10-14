@@ -91,6 +91,7 @@ public abstract class UIFormChildBase : UIBehaviour
                 m_Animator.SetTriggerOneTime(status ? UIUtility.FORCE_ON_ANIMATION_NAME : UIUtility.FORCE_OFF_ANIMATION_NAME);
             else
                 m_Animator.SetTriggerOneTime(status ? UIUtility.SHOW_ANIMATION_NAME : UIUtility.HIDE_ANIMATION_NAME);
+            
             return true;
         }
         return false;

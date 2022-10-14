@@ -12,8 +12,8 @@ using UnityEngine.UI;
 public class UI_DiceInfoDisplay : UIFormChildBase
 {
 	[SerializeField]
-	private CanvasGroup _canvas;
-	[Space]
+	private Animator _animator;
+	[Space][Header("Basic Elements")]
 	[SerializeField] 
 	private TMP_Text _diceName;
 	[SerializeField] 
@@ -21,8 +21,8 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	[Space]
 	[SerializeField]
 	private List<Image> _detailImages;
-
-	[Space(15)]
+	
+	[Space(15)][Header("Events")]
 	public DiceFaceEvent_SO onDiceMouseEnter;
 	public NoParameterEvent_SO onDiceMouseExit;
 
@@ -46,7 +46,7 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 
 	public void DisplayDiceInfo(UI_DiceData_SO data)
 	{ 
-		_canvas.DOComplete();
+		_animator.SetTrigger("Show");
 
 		_diceName.text = data.DiceName;
 		_diceType.text = data.type;
@@ -55,15 +55,10 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 		{
 			_detailImages[i].sprite = data.faceDatas[i].icon;
 		}
-		
-		_canvas.DOFade(1, 0.5f);
 	}
 
 	public void HideDiceInfo()
 	{
-		//updateinfo 不再需要 但考虑到信息表现不应该生硬的切换，增加动效时需要用到Hide方法
-		/*_canvas.DOKill();
-
-		_canvas.DOFade(0, 0.5f);*/
+		_animator.SetTrigger("Hide");
 	}
 }

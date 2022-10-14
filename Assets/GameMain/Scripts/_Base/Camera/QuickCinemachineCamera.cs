@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityGameKit.Runtime;
@@ -103,7 +102,7 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
             m_VirtualCamera.m_Lens.OrthographicSize = 1.25f * size;
         }
         
-        Debug.Log("Focus End.");
+        //Debug.Log("Focus End.");
     }
 
     IEnumerator ResetFocusProcess(float size, float speed)
@@ -127,6 +126,6 @@ public class QuickCinemachineCamera : MonoSingletonBase<QuickCinemachineCamera>
 
         m_VirtualCamera.m_Lens.OrthographicSize = size;
 
-        Debug.Log("Refocus End.");
+        //Debug.Log("Refocus End.");
     }
 }

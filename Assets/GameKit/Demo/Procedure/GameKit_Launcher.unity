@@ -7497,7 +7497,7 @@ MonoBehaviour:
   animator: {fileID: 5347485649798972879}
   swiper: {fileID: 2001408790}
   gradienter: {fileID: 559975638753983770}
-  Loading: {fileID: 4171597634546769458}
+  loading: {fileID: 4171597634546769458}
 --- !u!114 &7087541579644327878
 MonoBehaviour:
   m_ObjectHideFlags: 0
