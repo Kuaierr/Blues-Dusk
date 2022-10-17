@@ -85,6 +85,14 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         StopCoroutine("Rotate");
     }
 
+    public void InitAsRollingDice()
+    {
+        StopCoroutine("Rotate");
+        
+        _selectedMark.gameObject.SetActive(false);
+        _rb.isKinematic = false;
+    }
+
     private IEnumerator Rotate()
     {
         while (true)
@@ -95,9 +103,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     }
 
     //获取这个骰子的结果
-    public void ChangeToDiceMaskMaterial() => ChangeDiceMaterial(diceMaskMaterial);
+    /*public void ChangeToDiceMaskMaterial() => ChangeDiceMaterial(diceMaskMaterial);
 
-    public void ChangeToDiceUIMaterial() => ChangeDiceMaterial(diceUIMaterial);
+    public void ChangeToDiceUIMaterial() => ChangeDiceMaterial(diceUIMaterial);*/
 
     public UI_DiceFaceBase_SO GetResult()
     {
@@ -120,18 +128,18 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         StopCoroutine("Rotate");
 
         //TODO FixRange
-        Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
-        int force = Random.Range(25, 40);
+        Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-5f, -10f));
+        int force = Random.Range(1,2);
         _rb.velocity = dir * force;
         
-        //Info 闪念/消耗
+        //消耗闪念
         if (Data.consume)
         {
             GameKitCenter.Inventory.RemoveFromInventory("DiceInventory", 0, Data.DiceName, Data);
         }
     }
 
-    public void ResetTransform(RectTransform target)
+    /*public void ResetTransform(RectTransform target)
     {
         _rb.isKinematic = true;
         
@@ -147,9 +155,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         resetSequence.Append(dice.DOMove(transform.position, 0.5f));
         resetSequence.Insert(0, dice.DORotate(_finalRotation, 0.5f));
         //this.enabled = false;
-    }
+    }*/
 
-    private void ChangeDiceMaterial(Material mat)
+    /*private void ChangeDiceMaterial(Material mat)
     {
         foreach (UI_DiceFace face in faces)
             face.CurrentMaterial = mat;
@@ -159,7 +167,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         Texture diceTex = diceMat.material.mainTexture;
         diceMat.material = mat;
         diceMat.material.mainTexture = diceTex;
-    }
+    }*/
 
     #region DiceInfoDisplay
 

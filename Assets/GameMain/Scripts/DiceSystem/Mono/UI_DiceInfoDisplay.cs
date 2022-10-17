@@ -45,20 +45,19 @@ public class UI_DiceInfoDisplay : UIFormChildBase
 	}
 
 	public void DisplayDiceInfo(UI_DiceData_SO data)
-	{ 
-		_animator.SetTrigger("Show");
-
+	{
+		//_animator.SetTrigger("Show");
+		_animator.Play("SHOW");
+		
 		_diceName.text = data.DiceName;
 		_diceType.text = data.type;
 
 		for (int i = 0; i < 6; i++)
-		{
 			_detailImages[i].sprite = data.faceDatas[i].icon;
-		}
 	}
 
 	public void HideDiceInfo()
 	{
-		_animator.SetTrigger("Hide");
+		_animator.Play("HIDE");
 	}
 }

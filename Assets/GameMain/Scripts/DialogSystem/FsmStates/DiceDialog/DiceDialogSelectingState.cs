@@ -47,9 +47,9 @@ public class DiceDialogSelectingState : FsmState<UI_Dialog>, IReference
     private void FadeToRollingState()
     {
         Log.Info("Change to DialogAnimatingState");
-        /*fsmMaster.uI_Response.SetDiceActive(false);
+        fsmMaster.uI_Response.SetDiceActive(false);
         _fsm.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE,typeof(DiceDialogRollingState));
-        _fsm.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.AppraisalAnimator);*/
+        _fsm.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.AppraisalAnimator);
         
         ChangeState<DialogAnimatingState>(_fsm);
     }

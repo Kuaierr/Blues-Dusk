@@ -8,7 +8,7 @@ public class UI_DiceFace : MonoBehaviour
     
     private UI_DiceFaceBase_SO _data;
 
-    private MeshRenderer _meshRenderer;
+    /*private MeshRenderer _meshRenderer;
     private Texture _texture;
     
     public Material CurrentMaterial
@@ -23,7 +23,7 @@ public class UI_DiceFace : MonoBehaviour
     public Texture CurrentTexture
     {
         set => _meshRenderer.material.mainTexture = value;
-    }
+    }*/
 
     public void OnInit(UI_DiceFaceBase_SO faceBaseData)
     {
@@ -35,8 +35,9 @@ public class UI_DiceFace : MonoBehaviour
         
         _data = faceBaseData;
 
-        _meshRenderer = GetComponent<MeshRenderer>();
-        _texture = CurrentTexture = faceBaseData.icon.texture;
+        GetComponent<MeshRenderer>().material.mainTexture = faceBaseData.icon.texture;
+        /*_meshRenderer = GetComponent<MeshRenderer>();
+        _texture = CurrentTexture = faceBaseData.icon.texture;*/
     }
 
     public UI_DiceFaceBase_SO GetValue()
