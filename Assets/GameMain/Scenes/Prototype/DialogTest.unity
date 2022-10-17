@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  Dialog: "(P1_\u573A\u666F)\u8425\u4E1A\u4E2D\u4E0E\u6D1B\u4F26\u4F50\u5BF9\u8BDD"
+  Dialog: "(P1_\u573A\u666F)\u8425\u4E1A\u4E2D\u4E0E\u666E\u666E\u5BF9\u8BDD"
 --- !u!1 &220692938
 GameObject:
   m_ObjectHideFlags: 0

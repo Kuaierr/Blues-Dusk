@@ -33,6 +33,8 @@ public class ElementData
     public bool Custom_CanRepeatDialog = false;
     [ShowIf("@ElementType == \"CustomElement\""), LabelText("自定义实体-已对话")]
     public bool Custom_HasDialoged;
+    [ShowIf("@ElementType == \"EnterSceneDialogElement\""), LabelText("开场对话-是否对话过")]
+    public bool EnterSceneDialog_HasSpeaked;
 
     public UnityEvent onInteractBeginEvent;
     public UnityEvent onInteractAfterEvent;
