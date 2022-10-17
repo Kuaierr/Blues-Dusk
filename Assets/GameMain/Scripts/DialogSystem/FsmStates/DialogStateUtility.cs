@@ -10,4 +10,6 @@ public static class DialogStateUtility
     public const string CACHED_ANIMATOR_TRIGGER_NAME = "CACHED_ANIMATOR_TRIGGER_NAME";
     // 由 Dice Dialog Reseting 和 Dialog Talking 向 Dialog Choosing 传入
     public const string IS_DICE_CHOOSING = "IS_DICE_CHOOSING";
+
+    public static bool In_CHOOSING = false;
 }

@@ -72,6 +72,16 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
                 InterruptDialogDisplayCallback();
         }
 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE,typeof(DialogLogState));
+            fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME, UIUtility.SHOW_ANIMATION_NAME);
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.TalkHistoryAnimatior);
+            DialogStateUtility.In_CHOOSING = false;
+            
+            ChangeState<DialogAnimatingState>(fsmOwner);
+        }
+
         if (!fsmMaster.IsDialoging)
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogIdleState));
@@ -126,16 +136,17 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         Debug.Log("Debugger : EnterBranch");
         
         DialogDataNodeVariable tmpSonNodeData = GameKitCenter.Dialog.CurrentTree.CurrentNode.GetData<DialogDataNodeVariable>();
-        fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
         if (tmpSonNodeData.IsDiceCheckBranch)
         {
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DiceDialogSelectingState));
-            //TODO 更改这里的动画机 以适配新的对话逻辑
-            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_DiceSystem.diceAnimator);
+            fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME, UIUtility.SHOW_ANIMATION_NAME);
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.AppraisalAnimator);
             fsmMaster.UpdateOptionUI(isDiceCheck: true);
         }
         else
         {
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR, fsmMaster.uI_Response.MasterAnimator);
+            fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME, UIUtility.SHOW_ANIMATION_NAME);
             fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
             fsmMaster.UpdateOptionUI();
         }

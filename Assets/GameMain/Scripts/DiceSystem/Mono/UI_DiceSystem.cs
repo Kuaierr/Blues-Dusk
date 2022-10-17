@@ -19,7 +19,7 @@ public enum Dice_SuitType
 public class UI_DiceSystem : UIFormChildBase
 {
     [Header("Basic Elements")]
-    public Animator diceAnimator;
+    //public Animator diceAnimator;
 
     //在背包里的骰子
     private List<UI_Dice> _negativeDices = new List<UI_Dice>(); //这些骰子最初是遵循排列规则的
@@ -457,11 +457,11 @@ public class UI_DiceSystem : UIFormChildBase
     {
         while (true)
         {
-            if (diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name != ("An_DiceSystem_On"))
+            /*if (diceAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name != ("An_DiceSystem_On"))
             {
                 yield return 0;
                 continue;
-            }
+            }*/
 
             if (InputManager.instance.GetKeyDown(KeyCode.LeftShift))
                 OnStartKeyPressed();

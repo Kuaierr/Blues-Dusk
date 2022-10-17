@@ -167,4 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 7939422606448027233}
-  Core: {fileID: 0}
+  Core: {fileID: 7939422606448027233}

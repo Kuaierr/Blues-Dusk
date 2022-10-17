@@ -37,13 +37,15 @@ public class UI_Dialog : UIFormBase
     [Space]
     [Header("Animators")]
     public TextAnimatorPlayer TextAnimatorPlayer;
-
-    [Space]
-    public Animator AppraisalAnimator;
+    
     public Animator NPCAnimator;
     public Animator PlayerAnimator;
     public Animator EdgeAnimator;
 
+    [Header("   State Animators")]
+    public Animator TalkHistoryAnimatior;
+    public Animator AppraisalAnimator;
+    
     private Character m_CurrentCharacter;
     private IFsm<UI_Dialog> fsm;
     private List<FsmState<UI_Dialog>> stateList;
@@ -165,6 +167,8 @@ public class UI_Dialog : UIFormBase
         stateList.Add(new DialogChoosingState());
         stateList.Add(new DialogAnimatingState());
 
+        stateList.Add(new DialogLogState());
+        
         //可能不需要这么多状态
         stateList.Add(new DiceDialogSelectingState());
         //stateList.Add(new DiceDialogCheckingState());
@@ -186,6 +190,22 @@ public class UI_Dialog : UIFormBase
         GameKitCenter.Fsm.DestroyFsm(fsm);
         stateList.Clear();
         fsm = null;
+    }
+
+    public void ExitLogState()
+    {
+        DialogLogState state = null;
+        foreach (FsmState<UI_Dialog> fsmState in stateList)
+        {
+            state = fsmState as DialogLogState;
+            if(state!=null)
+                break;
+        }
+        
+        if(state != null)
+            state.Exit();
+        else 
+            Debug.LogError("Log State Not Found");
     }
 
     public void PassNode()
