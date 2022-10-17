@@ -38,6 +38,8 @@ public class UI_Dialog : UIFormBase
     [Header("Animators")]
     public TextAnimatorPlayer TextAnimatorPlayer;
 
+    [Space]
+    public Animator AppraisalAnimator;
     public Animator NPCAnimator;
     public Animator PlayerAnimator;
     public Animator EdgeAnimator;
@@ -60,11 +62,6 @@ public class UI_Dialog : UIFormBase
     public bool IsDialoging
     {
         get { return m_IsDialoging; }
-    }
-
-    public Animator DiceAnimator
-    {
-        get { return uI_Response.DiceAnimator; }
     }
 
 
