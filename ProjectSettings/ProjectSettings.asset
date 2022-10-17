@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Leap Frog
+  companyName: LEAP FROG
   productName: Blues Dusk
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -153,7 +153,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.LeapFrog.BluesDusk
+    Standalone: com.LEAPFROG.BluesDusk
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -599,7 +599,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: USE_ARTICY;TMP_PRESENT;USE_CINEMACHINE;USE_TIMELINE;USE_TWINE
+    1: ES3GLOBAL_DISABLED;USE_ARTICY;TMP_PRESENT;USE_CINEMACHINE;USE_TIMELINE;USE_TWINE;UEE;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
     13: USE_ARTICY;TMP_PRESENT;USE_CINEMACHINE;USE_TIMELINE;USE_TWINE
   additionalCompilerArguments: {}
   platformArchitecture: {}

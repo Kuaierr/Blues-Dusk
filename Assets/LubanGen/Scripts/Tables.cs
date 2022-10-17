@@ -14,36 +14,45 @@ namespace LubanConfig
 public sealed partial class Tables
 {
     public DataTable.TbItem TbItem {get; }
-    public DataTable.TbDice TbDice {get; }
     public DataTable.TbCard TbCard {get; }
-    public Global.TbGlobal TbGlobal {get; }
+    public DataTable.TbGameConfig TbGameConfig {get; }
+    public DataTable.TbUIConfig TbUIConfig {get; }
+    public DataTable.TbSceneConfig TbSceneConfig {get; }
+
+    public System.Collections.Generic.Dictionary<string, object> Table {get; private set;}
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
         TbItem = new DataTable.TbItem(loader("datatable_tbitem")); 
         tables.Add("DataTable.TbItem", TbItem);
-        TbDice = new DataTable.TbDice(loader("datatable_tbdice")); 
-        tables.Add("DataTable.TbDice", TbDice);
         TbCard = new DataTable.TbCard(loader("datatable_tbcard")); 
         tables.Add("DataTable.TbCard", TbCard);
-        TbGlobal = new Global.TbGlobal(loader("global_tbglobal")); 
-        tables.Add("Global.TbGlobal", TbGlobal);
+        TbGameConfig = new DataTable.TbGameConfig(loader("datatable_tbgameconfig")); 
+        tables.Add("DataTable.TbGameConfig", TbGameConfig);
+        TbUIConfig = new DataTable.TbUIConfig(loader("datatable_tbuiconfig")); 
+        tables.Add("DataTable.TbUIConfig", TbUIConfig);
+        TbSceneConfig = new DataTable.TbSceneConfig(loader("datatable_tbsceneconfig")); 
+        tables.Add("DataTable.TbSceneConfig", TbSceneConfig);
         PostInit();
 
         TbItem.Resolve(tables); 
-        TbDice.Resolve(tables); 
         TbCard.Resolve(tables); 
-        TbGlobal.Resolve(tables); 
+        TbGameConfig.Resolve(tables); 
+        TbUIConfig.Resolve(tables); 
+        TbSceneConfig.Resolve(tables); 
         PostResolve();
+
+        Table = new System.Collections.Generic.Dictionary<string, object>(tables);
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
         TbItem.TranslateText(translator); 
-        TbDice.TranslateText(translator); 
         TbCard.TranslateText(translator); 
-        TbGlobal.TranslateText(translator); 
+        TbGameConfig.TranslateText(translator); 
+        TbUIConfig.TranslateText(translator); 
+        TbSceneConfig.TranslateText(translator); 
     }
     
     partial void PostInit();

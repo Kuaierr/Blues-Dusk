@@ -1,0 +1,13 @@
+[
+  {
+    "is_david_dead": false,
+    "is_rebellion_start": false,
+    "current_day": 1,
+    "current_stage": 3,
+    "wear_tie": false,
+    "d13_talk_to_zora": false,
+    "test": false,
+    "p11_talk_to_owen": false,
+    "p11_talk_to_noah": false
+  }
+]

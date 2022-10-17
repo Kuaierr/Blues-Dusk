@@ -1,0 +1,482 @@
+fileFormatVersion: 2
+guid: f42f33cb155897344b1d082b6ceda1ba
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ma_Noah_Work
+    second: {fileID: 2100000, guid: fae5d86760e409c4ab4977e7aedf7cc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ma_Noah_Work1
+    second: {fileID: 2100000, guid: fae5d86760e409c4ab4977e7aedf7cc9, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Noah_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Noah_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint3
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint2
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint4
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: M_Noah_Work(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Noah_Work
+      parentName: M_Noah_Work(Clone)
+      position: {x: -0, y: 1.1512252, z: 0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Belt
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Apron
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Hair
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Body
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Tie
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Lower
+      parentName: M_Noah_Work
+      position: {x: -0, y: -1.1512252, z: -0.022866614}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Reference
+      parentName: M_Noah_Work(Clone)
+      position: {x: -0, y: -0.0033563066, z: 0.01884102}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Hips
+      parentName: Noah_Reference
+      position: {x: -0, y: 1.2938787, z: -0.01843869}
+      rotation: {x: 0.49116817, y: -0.5086785, z: -0.49116817, w: 0.5086785}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftUpLeg
+      parentName: Noah_Hips
+      position: {x: 0.031335883, y: 0.0013779162, z: 0.1049}
+      rotation: {x: -0.0009683526, y: -0.0000070434144, z: 0.99997306, w: -0.007273409}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftLeg
+      parentName: Noah_LeftUpLeg
+      position: {x: -0.470773, y: 2.7755576e-17, z: -2.7755576e-17}
+      rotation: {x: 0.00037323232, y: 0.0068174126, z: -0.042603306, w: 0.99906874}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftFoot
+      parentName: Noah_LeftLeg
+      position: {x: -0.65095544, y: -2.3418767e-17, z: 1.3877788e-17}
+      rotation: {x: -0.011976013, y: 0.017093154, z: 0.35355717, w: 0.93518007}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftToeBase
+      parentName: Noah_LeftFoot
+      position: {x: -0.15422894, y: 9.7144515e-17, z: -2.7755576e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightUpLeg
+      parentName: Noah_Hips
+      position: {x: 0.031335883, y: 0.0013779162, z: -0.1049}
+      rotation: {x: -0.000007043414, y: 0.00096835266, z: 0.0072734086, w: 0.9999731}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightLeg
+      parentName: Noah_RightUpLeg
+      position: {x: 0.470773, y: 0, z: 2.7755576e-17}
+      rotation: {x: 0.00037323232, y: 0.0068174126, z: -0.042603306, w: 0.99906874}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightFoot
+      parentName: Noah_RightLeg
+      position: {x: 0.65095544, y: 2.7755576e-17, z: -1.3877788e-17}
+      rotation: {x: -0.011976013, y: 0.017093154, z: 0.35355717, w: 0.93518007}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightToeBase
+      parentName: Noah_RightFoot
+      position: {x: 0.15422894, y: -1.3877788e-17, z: 2.7755576e-17}
+      rotation: {x: 0.000025417168, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Spine
+      parentName: Noah_Hips
+      position: {x: -0.10580906, y: -6.938894e-18, z: 0}
+      rotation: {x: 0, y: 0, z: 0.015212639, w: 0.9998843}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Spine1
+      parentName: Noah_Spine
+      position: {x: -0.21156913, y: -1.3877788e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.0061243353, w: 0.9999813}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftShoulder
+      parentName: Noah_Spine1
+      position: {x: -0.21446379, y: -0.0068667387, z: 0.08395229}
+      rotation: {x: -0.48652464, y: 0.5131216, z: 0.48652464, w: 0.5131216}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftArm
+      parentName: Noah_LeftShoulder
+      position: {x: -0.12592845, y: 2.220446e-16, z: 1.3877788e-17}
+      rotation: {x: 0.7069107, y: -0.007322325, z: 0.016649393, w: 0.70706886}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftForeArm
+      parentName: Noah_LeftArm
+      position: {x: -0.29054838, y: 6.938894e-18, z: -2.220446e-16}
+      rotation: {x: 0.00048701055, y: 0.0011011282, z: -0.03406812, w: 0.9994188}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_LeftHand
+      parentName: Noah_LeftForeArm
+      position: {x: -0.2540732, y: -1.3877788e-17, z: 4.440892e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint1
+      parentName: Noah_LeftHand
+      position: {x: -0.123501934, y: 0.008264311, z: -0.0064349105}
+      rotation: {x: 0.36036867, y: -0.60276663, z: 0.60838675, w: -0.36969233}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint3
+      parentName: Noah_LeftHand
+      position: {x: -0.07950145, y: 0.09182743, z: 0.002279522}
+      rotation: {x: -0.70707536, y: -0.017551731, z: 0.0066668238, w: 0.7068889}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightShoulder
+      parentName: Noah_Spine1
+      position: {x: -0.21446379, y: -0.0068667387, z: -0.08395229}
+      rotation: {x: 0.5131216, y: 0.48652464, z: -0.5131216, w: 0.48652464}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightArm
+      parentName: Noah_RightShoulder
+      position: {x: 0.12592845, y: -6.661338e-16, z: -6.938894e-18}
+      rotation: {x: 0.7069107, y: -0.007322325, z: 0.016649393, w: 0.70706886}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightForeArm
+      parentName: Noah_RightArm
+      position: {x: 0.29054838, y: 6.938894e-18, z: 2.220446e-16}
+      rotation: {x: 0.00048701055, y: 0.0011011282, z: -0.03406812, w: 0.9994188}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_RightHand
+      parentName: Noah_RightForeArm
+      position: {x: 0.2540732, y: 0, z: -4.440892e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint4
+      parentName: Noah_RightHand
+      position: {x: 0.07950145, y: -0.09182743, z: -0.002279522}
+      rotation: {x: -0.70707536, y: -0.017551731, z: 0.0066668238, w: 0.7068889}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: Noah_RightHand
+      position: {x: 0.123501934, y: -0.008264311, z: 0.0064349105}
+      rotation: {x: 0.36036867, y: -0.60276663, z: 0.60838675, w: -0.36969233}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Neck
+      parentName: Noah_Spine1
+      position: {x: -0.29496464, y: 1.3877788e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.0315117, w: 0.9995034}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Noah_Head
+      parentName: Noah_Neck
+      position: {x: -0.12277919, y: -2.0816682e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

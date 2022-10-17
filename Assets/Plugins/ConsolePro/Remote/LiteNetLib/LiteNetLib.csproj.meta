@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/GameMain/Models/Character/Valenzo.meta
+guid: 95af5d2abe48a484d815e8ef7133dcb0
+folderAsset: yes
+========
+guid: 0dcda9f071bab9b42907885364be1aeb
+>>>>>>>> f352fc917cde1a021c21fd2e13ee906d23f7ab53:Assets/Plugins/ConsolePro/Remote/LiteNetLib/LiteNetLib.csproj.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,18 @@
+[
+  {
+    "scene_asset_name": "S_Tower_Under",
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_Apartment_Living",
+    "is_unlocked": "True"
+  },
+  {
+    "scene_asset_name": "S_Bookstore_Instore",
+    "is_unlocked": "False"
+  },
+  {
+    "scene_asset_name": "S_Shire_Restaurant",
+    "is_unlocked": "True"
+  }
+]

@@ -6,76 +6,85 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GameKit/Procedure/Demo/GameKit_Launcher.unity
-    guid: 6d652a1357b896648a2614563c4ddace
+    path: Assets/GameMain/Scenes/Dynamic/S_Week.unity
+    guid: 19d5b3b4b4af2c04a87d7c162eccbff6
   - enabled: 1
-    path: Assets/GameKit/Fsm/Demo/GameKitDemo_Fsm.unity
-    guid: ae7d938e3adca114189e79418ebba3c9
+    path: Assets/GameMain/Scenes/Dynamic/S_Weekend.unity
+    guid: e71f150a1f7daa24db89a2af0599a442
   - enabled: 1
-    path: Assets/GameKit/ObjectPool/Demo/GameKitDemo_ObjectPool.unity
-    guid: 3273610c439890840869ea802c644948
+    path: Assets/GameMain/Scenes/Main/S_LoadingScene.unity
+    guid: 2e86f317e4f1829459daac414a32a0f5
   - enabled: 1
-    path: Assets/GameKit/Entity/Demo/Scenes/GameKitDemo_Entity.unity
-    guid: 9799b15dad5bceb4d884a56dea0a0033
+    path: Assets/GameMain/Scenes/Main/S_Menu.unity
+    guid: 89de9a6f8c9de114bbcdb8f9925ec730
   - enabled: 1
-    path: Assets/GameKit/Procedure/Demo/GameKitDemo_Loading.unity
-    guid: 4c32bf410cdaddf47a30a2cea5a300bc
-  - enabled: 1
-    path: Assets/GameKit/Procedure/Demo/GameKitDemo_Main.unity
-    guid: b9374986be6e4c8488c8121429dceaee
-  - enabled: 1
-    path: Assets/GameKit/QuickDev/UGUI/TabGroup/Demo/QuickDev_TabGroup.unity
-    guid: 2abebf3f9f5a3564780ebfc27ace7e36
-  - enabled: 1
-    path: Assets/GameKit/ReferencePool/Demo/GameKitDemo_ReferencePool.unity
-    guid: e77fb67325d69ac499816c9ff3a59ea2
-  - enabled: 1
-    path: Assets/GameMain/Scenes/GameMain.unity
-    guid: ebb0c91fdb096184383bbed902a7100b
-  - enabled: 1
-    path: Assets/GamePrototype/DialogSystem/Demo/Scenes/Prototype_Dialog.unity
-    guid: 021442483960e504fbd34ffd09172a60
-  - enabled: 1
-    path: Assets/GamePrototype/DialogSystem/Demo/Scenes/Prototype_Dialog_UI.unity
-    guid: 96a6b3299dbf19948a73228c8906e2e2
-  - enabled: 1
-    path: Assets/GamePrototype/DiceSystem/Scenes/Prototype_Dialog_UIandDice.unity
-    guid: c1785b9931242724ab1f12523b9b2134
-  - enabled: 1
-    path: Assets/GamePrototype/InventorySystem/Demo/Scenes/Prototype_Inventory.unity
-    guid: 8e4e33a6464c7a444a78bcc3a3bec880
-  - enabled: 1
-    path: Assets/GamePrototype/MovementSystem/Prototype_Interact.unity
-    guid: 820d23f4e0af54e4094da59d1e543f11
-  - enabled: 1
-    path: Assets/GamePrototype/SerializeSystem/Addressable/Scenes/Addressable.unity
-    guid: bd9f99d6e85ba00458d8b4171241cb8d
-  - enabled: 1
-    path: Assets/GamePrototype/Testing/Testing.unity
-    guid: 007a7bade03631b4982b001543a18cdf
-  - enabled: 1
-    path: Assets/GamePrototype/Universal/Arts/40-Simple Icons-Free/Scenes/Demo.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/GamePrototype/Universal/Arts/Prototype Kit 1/Demo.unity
-    guid: 735fe276cc5939143b680786166febc2
-  - enabled: 1
-    path: Assets/Resources/Model/AnimeGirls/Casual1/Demo.unity
-    guid: 2cae45722582e78408f2ad67a6e95179
-  - enabled: 1
-    path: Assets/Scenes/S_heya_parlor.unity
-    guid: c9247c4d242507a42a9a9dd04b2b1b21
-  - enabled: 1
-    path: Assets/Scenes/S_heya_toilet.unity
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Balcony.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/S_test.unity
-    guid: b687a4f5b26bb9441a4c2c11e75dc100
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Living.unity
+    guid: 98716365d24a17d48a751cfea231800e
   - enabled: 1
-    path: Assets/Tutorials/Attributes/Attributes.unity
-    guid: 622a6499ef8f90f4098763d861b3d4e2
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Apartment_Toilet.unity
+    guid: 9cbca5d5dd142194f921e9ca22341cde
   - enabled: 1
-    path: Assets/Tutorials/MyDotween/MyDotween.unity
-    guid: 9643525deaaf5a94f877d46d998128c1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Bookstore_Instore.unity
+    guid: e710050e4484ae848aec941406c2de20
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Menu_Main.unity
+    guid: 660cd756353de1a40a31d22495c2017d
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Backyard.unity
+    guid: 1c10f9af8fa078f43b7cbc1064dda494
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Corridor.unity
+    guid: 2f60b3ee7dd3d1c4aac2f9c0c4cd06f4
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Kitchen.unity
+    guid: d720a3d22758c08479819d9b64080182
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Lounge.unity
+    guid: 89f1acf370bce87428cff4fce9ea8d99
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Shire_Restaurant.unity
+    guid: 08bb37568095fcc46a8d1f5e702d3743
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Top.unity
+    guid: 51db12ad1e5768f4cada1532ce7aabae
+  - enabled: 1
+    path: Assets/GameMain/Scenes/ProcedureMain/S_Tower_Under.unity
+    guid: 975a1a08b0f9388498ee2e62bd7ec450
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog.unity
+    guid: 96a6b3299dbf19948a73228c8906e2e2
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_DiceDev.unity
+    guid: e8f11323ca279954aa9884b5d5c94f70
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Dialog_UIandDice.unity
+    guid: c1785b9931242724ab1f12523b9b2134
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Interact.unity
+    guid: 820d23f4e0af54e4094da59d1e543f11
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Inventory.unity
+    guid: 8e4e33a6464c7a444a78bcc3a3bec880
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototype_Timeline.unity
+    guid: 8353325767e7f79408ef1e707642650f
+  - enabled: 1
+    path: Assets/GameMain/Scenes/Prototype/Prototypr_PlayerController.unity
+    guid: 5633db02310e3b54c94c43a2caf246d0
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Bar_Main.unity
+    guid: 2b9db6d4355c94f4ca09bf776d88528e
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Shire_Restaurant 2.unity
+    guid: 00a4dfdd253cf5c418d836829d01eda5
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Station.unity
+    guid: 2d2ace501e0d8b54e8e894c95e92d417
+  - enabled: 1
+    path: Assets/GameMain/Scenes/S_Template.unity
+    guid: 8e2208c0c6953dd49922725d63d757da
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 82ad0f0119a9f3245ac7d6eba34afa08, type: 2}

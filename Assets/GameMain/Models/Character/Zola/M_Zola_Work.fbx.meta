@@ -1,0 +1,483 @@
+fileFormatVersion: 2
+guid: d3912741b390315438bd8f6fd0f90ad6
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ma_Zola_Work
+    second: {fileID: 2100000, guid: fa705e972a6bca74a9c83982545d46bf, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Zola_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Zola_Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint3
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint2
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: joint4
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: M_Zola_Work(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Zola_Work
+      parentName: M_Zola_Work(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Body
+      parentName: M_Zola_Work
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Hair
+      parentName: M_Zola_Work
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Hairband
+      parentName: M_Hair
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: M_Lower
+      parentName: M_Zola_Work
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Reference
+      parentName: M_Zola_Work(Clone)
+      position: {x: -0, y: 0.0005087033, z: -0.10186171}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Hips
+      parentName: Zola_Reference
+      position: {x: -1.6211686e-34, y: 1.2915957, z: 0.07956099}
+      rotation: {x: 0.5638132, y: -0.42674896, z: -0.5638132, w: 0.42674896}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftUpLeg
+      parentName: Zola_Hips
+      position: {x: -0.00039046857, y: -0.0014305498, z: 0.10416728}
+      rotation: {x: -0.004295435, y: -0.000557323, z: 0.99184686, w: -0.12736197}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftLeg
+      parentName: Zola_LeftUpLeg
+      position: {x: -0.4773747, y: -0.0006291068, z: -0.0000029547562}
+      rotation: {x: 0.00025223233, y: 0.0005145258, z: -0.026863324, w: 0.999639}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftFoot
+      parentName: Zola_LeftLeg
+      position: {x: -0.66414547, y: -0.0000000070915798, z: -0.0000001310183}
+      rotation: {x: -0.012354761, y: 0.027694348, z: 0.31741765, w: 0.9478009}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftToeBase
+      parentName: Zola_LeftFoot
+      position: {x: -0.1292811, y: 0.0000000035799617, z: -0.000000023519878}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightUpLeg
+      parentName: Zola_Hips
+      position: {x: -0.00039046857, y: -0.0014305498, z: -0.10416728}
+      rotation: {x: -0.00055733416, y: 0.0042955377, z: 0.12736243, w: 0.9918468}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightLeg
+      parentName: Zola_RightUpLeg
+      position: {x: 0.4773747, y: 0.0006286637, z: 0.0000030534245}
+      rotation: {x: 0.0002527669, y: 0.00051439385, z: -0.02686375, w: 0.999639}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightFoot
+      parentName: Zola_RightLeg
+      position: {x: 0.66414547, y: -0.00000004632916, z: 0.00000011203361}
+      rotation: {x: -0.012354761, y: 0.027694348, z: 0.31741765, w: 0.9478009}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightToeBase
+      parentName: Zola_RightFoot
+      position: {x: 0.1292811, y: -0.000000019951756, z: -0.000000062367675}
+      rotation: {x: 0.000024944615, y: 0.0000002553632, z: -6.369937e-12, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Spine
+      parentName: Zola_Hips
+      position: {x: -0.105001956, y: -0.0000000066133916, z: 3.637425e-33}
+      rotation: {x: 0, y: 0, z: 0.11744894, w: 0.99307895}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Spine1
+      parentName: Zola_Spine
+      position: {x: -0.101659775, y: -3.9939352e-10, z: -3.606451e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Spine2
+      parentName: Zola_Spine1
+      position: {x: -0.101659775, y: 5.312007e-10, z: -8.296039e-17}
+      rotation: {x: 0, y: 0, z: 0.096715525, w: 0.9953121}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftShoulder
+      parentName: Zola_Spine2
+      position: {x: -0.21194538, y: -0.015983181, z: 0.07387054}
+      rotation: {x: -0.4600079, y: 0.5370221, z: 0.4600079, w: 0.5370221}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftArm
+      parentName: Zola_LeftShoulder
+      position: {x: -0.11080581, y: 0, z: 4.8572257e-17}
+      rotation: {x: 0.7068874, y: 0.0013222856, z: -0.017611863, w: 0.7071056}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftForeArm
+      parentName: Zola_LeftArm
+      position: {x: -0.3637107, y: 0.0000010685186, z: 0.0000009488856}
+      rotation: {x: -0.000035634344, y: 0.013376212, z: -0.0036881526, w: 0.99990374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_LeftHand
+      parentName: Zola_LeftForeArm
+      position: {x: -0.226, y: -0.0000000068154207, z: 0.000000016301632}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint1
+      parentName: Zola_LeftHand
+      position: {x: -0.10305607, y: -0.012983855, z: -0.00031264548}
+      rotation: {x: -0.7070249, y: -0.013388256, z: 0.010762567, w: 0.70698005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint3
+      parentName: Zola_LeftHand
+      position: {x: -0.0713036, y: 0.07663007, z: -0.00019471465}
+      rotation: {x: -0.7070249, y: -0.013388256, z: 0.010762567, w: 0.70698005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightShoulder
+      parentName: Zola_Spine2
+      position: {x: -0.21194538, y: -0.015983181, z: -0.07387054}
+      rotation: {x: 0.5370221, y: 0.4600079, z: -0.5370221, w: 0.4600079}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightArm
+      parentName: Zola_RightShoulder
+      position: {x: 0.11080581, y: -0.00000011920929, z: 2.7755576e-17}
+      rotation: {x: 0.7068874, y: 0.0013223795, z: -0.017611848, w: 0.7071056}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightForeArm
+      parentName: Zola_RightArm
+      position: {x: 0.3637107, y: -0.0000010280788, z: -0.0000010120348}
+      rotation: {x: -0.00003563432, y: 0.013376132, z: -0.0036881287, w: 0.99990374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_RightHand
+      parentName: Zola_RightForeArm
+      position: {x: 0.22632945, y: 0.00000002126647, z: 0.000000013666712}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: Zola_RightHand
+      position: {x: 0.10272662, y: 0.012983861, z: 0.00031261335}
+      rotation: {x: -0.7070249, y: -0.013388256, z: 0.010762567, w: 0.70698005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint4
+      parentName: Zola_RightHand
+      position: {x: 0.07097415, y: -0.07663006, z: 0.00019468287}
+      rotation: {x: -0.7070249, y: -0.013388256, z: 0.010762567, w: 0.70698005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Neck
+      parentName: Zola_Spine2
+      position: {x: -0.29994962, y: -0.000000008604827, z: -2.4390298e-16}
+      rotation: {x: 0, y: -0, z: -0.078559674, w: 0.99690944}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Zola_Head
+      parentName: Zola_Neck
+      position: {x: -0.16501863, y: -0.0000000011766614, z: -2.1102841e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
