@@ -390,6 +390,7 @@ public class UI_Dialog : UIFormBase
             return;
 
         //Bug SpeakerName的动画没有正常播放 由于切换说话人物需要触发Show，处于On状态时无法触发
+        //通过Animator.Play("SHOW");
         if (data.Speaker == ">>" || data.Speaker == "")
             t_SpeakerName.text = "";
         else if (data.Speaker == "??")

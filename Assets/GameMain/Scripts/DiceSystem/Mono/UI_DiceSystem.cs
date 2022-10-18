@@ -25,7 +25,7 @@ public class UI_DiceSystem : UIFormChildBase
     private List<Transform> _sheets = new List<Transform>();
     private List<UI_CustomButton> _tabs = new List<UI_CustomButton>();
 
-    public Transform swapPos;
+    public List<Transform> swapPos;
         
     [Space]
     [SerializeField]
@@ -211,8 +211,9 @@ public class UI_DiceSystem : UIFormChildBase
 
     private void DiceSelected(UI_Dice dice)
     {
-        //TODO 随机坐标
-        UI_Dice clone = Instantiate(dice, swapPos).OnInit(dice.Data,-1,null,null);
+        Transform point = swapPos[Random.Range(0, swapPos.Count)];
+
+        UI_Dice clone = Instantiate(dice,point.position , Random.rotation, point).OnInit(dice.Data,-1,null,null);
         clone.InitAsRollingDice();
         _activedDices.Add(dice.Index,clone);
     }
@@ -287,7 +288,7 @@ public class UI_DiceSystem : UIFormChildBase
     public Dice_Result CaculateFinalResult()
     {
         Result.EffectsProcess();
-        Debug.Log(Result.ToString());
+        Debug.Log("Dialog : \n" + Result.ToString());
         return Result;
     }
 

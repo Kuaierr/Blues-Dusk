@@ -125,7 +125,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
         //TODO FixRange
         Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-5f, -10f));
-        int force = Random.Range(1,2);
+        int force = Random.Range(3,5);
         _rb.velocity = dir * force;
         
         //消耗闪念

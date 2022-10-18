@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityGameKit.Runtime;
 
 public class UI_SpeakerName : UIFormChildBase
 {
