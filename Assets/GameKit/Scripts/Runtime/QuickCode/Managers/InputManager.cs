@@ -31,7 +31,7 @@ namespace GameKit.QuickCode
             get
             {
                 if (IsActive)
-                    return Input.GetAxisRaw("Horizontal");
+                    return Input.GetAxis("Horizontal");
                 else
                     return 0;
             }
@@ -42,7 +42,7 @@ namespace GameKit.QuickCode
             get
             {
                 if (IsActive)
-                    return Input.GetAxisRaw("Vertical");
+                    return Input.GetAxis("Vertical");
                 else
                     return 0;
             }

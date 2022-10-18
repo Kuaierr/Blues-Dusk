@@ -44,12 +44,28 @@ public class Player : MonoBehaviour
     {
         // m_Animator.SetFloat("VelocityX", Mathf.Abs(m_NavMeshAgent.velocity.x));
         // m_Animator.SetFloat("VelocityY", Mathf.Abs(m_NavMeshAgent.velocity.y));
+        HandleInput();
+        m_Movement.OnUpdate();
+    }
 
+    private void HandleInput()
+    {
         if (InputManager.instance.GetWorldMouseButtonDown(0))
         {
             MoveToDestination();
         }
-        m_Movement.OnUpdate();
+        else if(InputManager.instance.Horizontal!=0 || InputManager.instance.Vertical != 0)
+        {
+            float x = InputManager.instance.Horizontal;
+            float y = InputManager.instance.Vertical;
+            Debug.Log("H:" + x + " " + "V: "+ y);
+            Vector3 moveDirection = new Vector3(-(x), 0,-(y));
+            Vector3 destination = moveDirection + transform.position;
+            //m_CachedTargetPos = destination;
+            //if (m_CachedTargetPos != this.transform.position)
+            m_Movement.SetDestination(destination);
+            m_Movement.SetPathIndex(1);
+        }
     }
 
     public void CollectItem(UnityAction callback)
@@ -67,6 +83,7 @@ public class Player : MonoBehaviour
         this.transform.rotation = trans.rotation;
     }
 
+    //mouse input
     private void MoveToDestination()
     {
         StopAllCoroutines();

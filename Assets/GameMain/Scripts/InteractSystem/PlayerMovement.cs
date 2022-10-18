@@ -24,8 +24,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     [Range(-1, 1)]
     public float SmoothingFactor = 0;
-    public Vector3[] PathLocations = new Vector3[0];
+    private Vector3[] PathLocations = new Vector3[0];
     private int PathIndex = 0;
+
+    public void SetPathIndex(int value)
+    {
+        PathIndex = value;
+    }
 
     [Header("Movement Config")]
     [SerializeField]
@@ -62,9 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnUpdate()
     {
-        MoveCharacter();
+            MoveCharacter();
     }
-
     private void MoveCharacter()
     {
         if (PathIndex >= PathLocations.Length)
@@ -126,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         navMeshAgent.ResetPath();
         NavMesh.CalculatePath(transform.position, position, navMeshAgent.areaMask, CurrentPath);
         Vector3[] wayPoints = CurrentPath.corners;
+        Debug.Log("waypoint count:" + wayPoints.Length);
         if (wayPoints.Length > 2)
         {
             Bezier[] beziers = new Bezier[wayPoints.Length - 1];
