@@ -133,7 +133,6 @@ public class DialogTalkingState : FsmState<UI_Dialog>, IReference
         }
 
         _waitForBranch = false;
-        Debug.Log("Debugger : EnterBranch");
         
         DialogDataNodeVariable tmpSonNodeData = GameKitCenter.Dialog.CurrentTree.CurrentNode.GetData<DialogDataNodeVariable>();
         if (tmpSonNodeData.IsDiceCheckBranch)

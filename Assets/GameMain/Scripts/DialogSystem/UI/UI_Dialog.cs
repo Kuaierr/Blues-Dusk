@@ -522,10 +522,10 @@ public class UI_Dialog : UIFormBase
         return uI_DiceSystem.CheckIfFinishRolling();
     }
 
-    public bool CheckIfFinishReseting()
+    /*public bool CheckIfFinishReseting()
     {
         return uI_DiceSystem.CheckIfFinishReseting();
-    }
+    }*/
 
     public void OnFinishRolling()
     {

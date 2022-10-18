@@ -10,10 +10,10 @@ public class UI_CustomButton : UI_CustomBase, IPointerEnterHandler, IPointerClic
 {
     public int Index { get; private set; }
 
-    public Sprite normalSprite;
-    public Sprite selectedSprite;
-    public Color normalColor = Color.white;
-    public Color selectedColor = Color.white;
+    [SerializeField] private Sprite _normalSprite;
+    [SerializeField] private Sprite _selectedSprite;
+    [SerializeField] private Color _normalColor = Color.white;
+    [SerializeField] private Color _selectedColor = Color.white;
 
     //public Sprite clickedSprite;
     private Image _image;
@@ -47,18 +47,18 @@ public class UI_CustomButton : UI_CustomBase, IPointerEnterHandler, IPointerClic
 
     public void OnSelected()
     {
-        if (selectedSprite != null)
-            _image.sprite = selectedSprite;
+        if (_selectedSprite != null)
+            _image.sprite = _selectedSprite;
 
-        _image.color = selectedColor;
+        _image.color = _selectedColor;
     }
 
     public void OnReleased()
     {
-        if (normalSprite != null)
-            _image.sprite = normalSprite;
+        if (_normalSprite != null)
+            _image.sprite = _normalSprite;
 
-        _image.color = normalColor;
+        _image.color = _normalColor;
     }
 
     public void OnPointerClick(PointerEventData eventData)

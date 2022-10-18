@@ -1,6 +1,7 @@
 using UnityEngine;
 using GameKit.Fsm;
 using GameKit;
+using GameKit.QuickCode;
 using UnityGameKit.Runtime;
 using FsmInterface = GameKit.Fsm.IFsm<UI_Dialog>;
 
@@ -34,10 +35,15 @@ public class DiceDialogResetingState : FsmState<UI_Dialog>, IReference
     {
         base.OnUpdate(fsmOwner, elapseSeconds, realElapseSeconds);
         
-        if(fsmMaster.CheckIfFinishReseting())
+        //if(fsmMaster.CheckIfFinishReseting())
+        if(InputManager.instance.GetKeyDown(KeyCode.W))
         {
             fsmOwner.SetData<VarBoolean>(DialogStateUtility.IS_DICE_CHOOSING, true);
-            ChangeState<DialogChoosingState>(fsmOwner);
+            fsmOwner.SetData<VarAnimator>(DialogStateUtility.CACHED_ANIMATOR,fsmMaster.AppraisalAnimator);
+            fsmOwner.SetData<VarType>(DialogStateUtility.CACHED_AFTER_ANIMATING_STATE, typeof(DialogChoosingState));
+            fsmOwner.SetData<VarString>(DialogStateUtility.CACHED_ANIMATOR_TRIGGER_NAME,UIUtility.HIDE_ANIMATION_NAME);
+
+            ChangeState<DialogAnimatingState>(fsmOwner);
         }
     }
 

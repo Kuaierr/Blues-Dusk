@@ -169,7 +169,7 @@ public class UI_DiceSystem : UIFormChildBase
     //不需要
     public void OnDiceClicked(UI_Dice dice)
     {
-        if (!_activedDices.ContainsValue(dice))
+        if (!_activedDices.ContainsKey(dice.Index))
         {
             DiceSelected(dice);
         }
@@ -212,14 +212,14 @@ public class UI_DiceSystem : UIFormChildBase
     private void DiceSelected(UI_Dice dice)
     {
         //TODO 随机坐标
-        UI_Dice clone = Instantiate(dice, swapPos);
+        UI_Dice clone = Instantiate(dice, swapPos).OnInit(dice.Data,-1,null,null);
         clone.InitAsRollingDice();
         _activedDices.Add(dice.Index,clone);
     }
 
     private void DiceUnSelected(UI_Dice dice)
     {
-        Destroy(_activedDices[dice.Index]);
+        Destroy(_activedDices[dice.Index].gameObject);
         _activedDices.Remove(dice.Index);
     }
 
@@ -235,14 +235,12 @@ public class UI_DiceSystem : UIFormChildBase
 
     public void RollActivedDices()
     {
-        //await Task.Delay(500);
-        //TODO 这一行完全可以直接在动画中控制
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         _currentDice = null;
 
         foreach (UI_Dice dice in _activedDices.Values)
         {
-            if (dice == null) continue;
+            //if (dice == null) continue;
             dice.Roll();
         }
 
@@ -261,7 +259,7 @@ public class UI_DiceSystem : UIFormChildBase
         return true;
     }
 
-    public bool CheckIfFinishReseting()
+    /*public bool CheckIfFinishReseting()
     {
         foreach (UI_Dice dice in _activedDices.Values)
         {
@@ -270,7 +268,7 @@ public class UI_DiceSystem : UIFormChildBase
         }
 
         return true;
-    }
+    }*/
 
     #endregion
 
