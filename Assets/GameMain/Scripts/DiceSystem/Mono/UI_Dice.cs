@@ -41,7 +41,6 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     public Dice_SuitType Result { get; private set; }
 
     public UI_DiceData_SO Data => diceData;
-    //public RectTransform RectTransform { get; private set; }
 
     public bool Stopped => _rb.velocity == Vector3.zero;
     private Vector3 _finalRotation;
@@ -50,9 +49,6 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     /// 用于确定在背包中的位置，是在所有骰子中的序号
     /// </summary>
     public int Index { get; private set; } = -1;
-
-    private Sequence resetSequence;
-    public bool IsComplete => !resetSequence.IsPlaying();
     
     public UI_Dice OnInit(UI_DiceData_SO data, int index, UnityAction<UI_Dice> onClickCallback, UnityAction<int> onSelectCallback)
     {
@@ -85,6 +81,15 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         StopCoroutine("Rotate");
     }
 
+    //目前托管给骰子的代码并不多，就不再拆分UI上的骰子和用来投的骰子
+    public void InitAsRollingDice()
+    {
+        StopCoroutine("Rotate");
+        
+        _selectedMark.gameObject.SetActive(false);
+        _rb.isKinematic = false;
+    }
+
     private IEnumerator Rotate()
     {
         while (true)
@@ -95,9 +100,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
     }
 
     //获取这个骰子的结果
-    public void ChangeToDiceMaskMaterial() => ChangeDiceMaterial(diceMaskMaterial);
+    /*public void ChangeToDiceMaskMaterial() => ChangeDiceMaterial(diceMaskMaterial);
 
-    public void ChangeToDiceUIMaterial() => ChangeDiceMaterial(diceUIMaterial);
+    public void ChangeToDiceUIMaterial() => ChangeDiceMaterial(diceUIMaterial);*/
 
     public UI_DiceFaceBase_SO GetResult()
     {
@@ -116,22 +121,21 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
 
     public void Roll()
     {
-        _rb.isKinematic = false;
-        StopCoroutine("Rotate");
+        //StopCoroutine("Rotate");
 
         //TODO FixRange
-        Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
-        int force = Random.Range(25, 40);
+        Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-5f, -10f));
+        int force = Random.Range(3,5);
         _rb.velocity = dir * force;
         
-        //Info 闪念/消耗
+        //消耗闪念
         if (Data.consume)
         {
             GameKitCenter.Inventory.RemoveFromInventory("DiceInventory", 0, Data.DiceName, Data);
         }
     }
 
-    public void ResetTransform(RectTransform target)
+    /*public void ResetTransform(RectTransform target)
     {
         _rb.isKinematic = true;
         
@@ -147,9 +151,9 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         resetSequence.Append(dice.DOMove(transform.position, 0.5f));
         resetSequence.Insert(0, dice.DORotate(_finalRotation, 0.5f));
         //this.enabled = false;
-    }
+    }*/
 
-    private void ChangeDiceMaterial(Material mat)
+    /*private void ChangeDiceMaterial(Material mat)
     {
         foreach (UI_DiceFace face in faces)
             face.CurrentMaterial = mat;
@@ -159,7 +163,7 @@ public class UI_Dice : UIData, IPointerEnterHandler, IPointerClickHandler, IPoin
         Texture diceTex = diceMat.material.mainTexture;
         diceMat.material = mat;
         diceMat.material.mainTexture = diceTex;
-    }
+    }*/
 
     #region DiceInfoDisplay
 

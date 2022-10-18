@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 8944438453484055846, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8944438453484055847, guid: 7d6b4b7cdef23464181607180368356e, type: 3}
       propertyPath: DialogRotation.x
       value: 23

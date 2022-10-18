@@ -254,8 +254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e4f0f7b9eea8b498a5bd14bd8e583c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 3936965911005375695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  selectedSprite: {fileID: 4739136875920000438, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalSprite: {fileID: 3936965911005375695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _selectedSprite: {fileID: 4739136875920000438, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &993841137074491206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,8 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e4f0f7b9eea8b498a5bd14bd8e583c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 8835811552207077880, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  selectedSprite: {fileID: -134078210552325949, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalSprite: {fileID: 8835811552207077880, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _selectedSprite: {fileID: -134078210552325949, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &993841137812626196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,8 +516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e4f0f7b9eea8b498a5bd14bd8e583c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 3444463884197001060, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
-  selectedSprite: {fileID: -3758175530029238695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalSprite: {fileID: 3444463884197001060, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _selectedSprite: {fileID: -3758175530029238695, guid: 54e0dfdc9d8a463479ec9527226222d9, type: 3}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &993841138329974584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,8 +617,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u4E0A\u5348 10:00"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 53453a6687acf6148a007379371b0007, type: 2}
-  m_sharedMaterial: {fileID: -1281335672025755325, guid: 53453a6687acf6148a007379371b0007, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b35ddd879d83ae34c96ff436008db1a7, type: 2}
+  m_sharedMaterial: {fileID: -5205213244842664266, guid: b35ddd879d83ae34c96ff436008db1a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
