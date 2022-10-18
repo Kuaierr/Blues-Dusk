@@ -257,7 +257,6 @@ public class CustomConfigUnit
 {
     /// <summary>
     /// 起配置作用
-    /// TODO 可以用静态常量，以统一字符串规格
     /// </summary>
     public string Key { get; private set; }
 
